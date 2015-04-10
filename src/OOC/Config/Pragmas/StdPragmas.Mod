@@ -1,0 +1,86 @@
+(* 	$Id: StdPragmas.Mod,v 1.16 2002/12/08 20:19:36 mva Exp $	 *)
+MODULE OOC:Config:Pragmas:StdPragmas;
+(*  Creates standard pragma variables with default values.
+    Copyright (C) 2001, 2002  Michael van Acken
+
+    This file is part of OOC.
+
+    OOC is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.  
+
+    OOC is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+    License for more details. 
+
+    You should have received a copy of the GNU General Public License
+    along with OOC. If not, write to the Free Software Foundation, 59
+    Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*)
+
+IMPORT
+  Config:Value:Boolean, Config:Value:Integer, Config:Value:String,
+  OOC:Config:Autoconf, OOC:Config:Pragmas;
+
+
+CONST
+  defaultWarnings = TRUE;
+  defaultAssertions = TRUE;
+  
+  defaultIndexCheck = TRUE;
+  defaultDerefCheck = TRUE;
+  defaultOverflowCheck = FALSE;
+  defaultCaseSelectCheck = TRUE;
+  defaultFunctionResultCheck = TRUE;
+  defaultTypeGuard = TRUE;
+  defaultConformantMode = FALSE;
+
+  defaultCompilerVersion* = Autoconf.compilerVersion;
+  defaultCompilerMajor = Autoconf.compilerMajor;
+  defaultCompilerMinor = Autoconf.compilerMinor;
+  
+  defaultTargetInteger = Autoconf.bitsTargetInteger;
+  defaultTargetAddress = Autoconf.bitsTargetAddress;
+  
+VAR
+  warnings-: Pragmas.Pragma;
+  assertions-: Pragmas.Pragma;
+  indexCheck-: Pragmas.Pragma;
+  derefCheck-: Pragmas.Pragma;
+  overflowCheck-: Pragmas.Pragma;
+  caseSelectCheck-: Pragmas.Pragma;
+  functionResultCheck-: Pragmas.Pragma;
+  typeGuard-: Pragmas.Pragma;
+  conformantMode-: Pragmas.Pragma;
+
+  compilerVersion-: Pragmas.Pragma;
+  compilerMajor-: Pragmas.Pragma;
+  compilerMinor-: Pragmas.Pragma;
+  
+  targetInteger-: Pragmas.Pragma;
+  targetAddress-: Pragmas.Pragma;
+
+
+PROCEDURE CreateVariables* (s: Pragmas.Section);
+  BEGIN
+    warnings := s. Set ("Warnings", Boolean.New (defaultWarnings));
+    assertions := s. Set ("Assertions", Boolean.New (defaultAssertions));
+    indexCheck := s. Set ("IndexCheck", Boolean.New (defaultIndexCheck));
+    derefCheck := s. Set ("DerefCheck", Boolean.New (defaultDerefCheck));
+    overflowCheck := s. Set ("OverflowCheck", Boolean.New (defaultOverflowCheck));
+    caseSelectCheck := s. Set ("CaseSelectCheck", Boolean.New (defaultCaseSelectCheck));
+    functionResultCheck := s. Set ("FunctResult", Boolean.New (defaultFunctionResultCheck));
+    typeGuard := s. Set ("TypeGuard", Boolean.New (defaultTypeGuard));
+    conformantMode := s. Set ("ConformantMode", Boolean.New (defaultConformantMode));
+
+    compilerVersion := s. Set ("COMPILER_VERSION", String.New (defaultCompilerVersion));
+    compilerMajor := s. Set ("COMPILER_MAJOR", Integer.New (defaultCompilerMajor));
+    compilerMinor := s. Set ("COMPILER_MINOR", Integer.New (defaultCompilerMinor));
+    
+    targetInteger := s. Set ("TARGET_INTEGER", Integer.New (defaultTargetInteger));
+    targetAddress := s. Set ("TARGET_ADDRESS", Integer.New (defaultTargetAddress));
+  END CreateVariables;
+
+END OOC:Config:Pragmas:StdPragmas.

@@ -1,0 +1,26 @@
+#include "OOC/Auxiliary/ParseModule.oh"
+#include "Msg.oh"
+#include "URI.oh"
+#include "OOC/Config.oh"
+#include "OOC/Scanner/InputBuffer.oh"
+#include "OOC/Scanner.oh"
+#include "OOC/Scanner/Builder/BasicList.oh"
+#include "OOC/Parser.oh"
+#include "OOC/AST/ExtTree.oh"
+#include "OOC/SymbolTable/Builder.oh"
+#include "OOC/AST/ExtTree/CreateSymTab.oh"
+#include "OOC/SymbolTable/CreateNamespace.oh"
+#include "OOC/Auxiliary/WriteSymbolFile.oh"
+#include "RT0.oh"
+#include "Language/String0.oh"
+
+/* run-time meta data */
+static RT0__ModuleDesc _mid;
+static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Auxiliary:ParseModule", (RT0__Struct[]) { NULL } };
+
+extern void OOC_OOC_Auxiliary_ParseModule_init0() {
+  RT0__RegisterModule(&_mid);
+  OOC_OOC_Auxiliary_ParseModule_init();
+}
+
+/* --- */

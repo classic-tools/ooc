@@ -1,0 +1,67 @@
+See file INSTALL for the list of software requirements and
+installation instructions.  See file PROBLEMS if installation turns
+out to be difficult.
+
+oo2c translates Oberon-2 source code into a variant of C supported by
+the gcc family of compilers.  It uses a variant of SSA for its
+intermediate representation, and performs common optimizations like
+common subexpression elimination, invariant code motion, constant
+propagation, algebraic transformations, and dead code removal.
+
+Operating system, architecture, and gcc combinations that are known to
+work:
+
+  Linux 2.4.19/i386/gcc 2.95.4 & 3.2.1
+  SunOS 5.6/sparc/gcc 2.95.2 (32 bit)
+  SunOS 5.8/sparcv9/gcc 3.2.1 (64 bit)
+
+
+Typical installation is quite simple:
+
+  tar xfvj oo2c_32-2.0.0.tar.bz2
+  cd oo2c_32-2.0.0
+  ./configure --prefix ~/mydir
+  make install
+
+More information is available in INSTALL.
+
+Building programs is simple as well:
+
+  mkdir /tmp/test
+  cd /tmp/test
+  mkdir src
+  cat >src/T.Mod
+    MODULE T;
+    IMPORT Out;
+    BEGIN
+    Out.String("Hello");Out.Ln;
+    END T.
+  ~/mydir/bin/oo2c --make T
+  
+And then `bin/T' should say `Hello'.  For more information, please
+refer to the man page of oo2c.
+
+I'm mostly interested to hear about installation problems, compiler
+bugs (hangs, crashes, wrong error messages or warnings, or missing
+error messages), and usability issues.  Please use Sourceforge
+
+  https://sourceforge.net/tracker/?atid=103539&group_id=3539
+
+to report bugs and include the version you are using in the summary
+line.  This ensures that bug reports are not lost, and provides a
+convenient central location to collect information about bugs.  Bug
+reports accompanied by patches fixing the problem at hand are very
+welcome.
+
+For miscompiled code, that is, correct input code that produces a
+broken binary, please try to create a small program that will
+reproduce the error.  Ideally this program is a single module with
+just enough lines of code to trigger the bug.  Send me this module,
+together with the information on how the bug manifests itself, how to
+trigger the bug, and the version of oo2c you are using.
+
+For input modules that hang or crash the compiler, please send me the
+module or modules that trigger the problem.  This does not need to be
+small.  Don't send me module fragments!
+
+-- Michael van Acken <mia@de.uu.net>

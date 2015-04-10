@@ -1,0 +1,27 @@
+#ifndef _MODULE_OOC_C_Naming_
+#define _MODULE_OOC_C_Naming_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "ADT/String.oh"
+#include "OOC/SymbolTable.oh"
+#define OOC_C_Naming__suffixPassPerRef "__ref"
+extern ADT_String__String OOC_C_Naming__NameOfDeclaration(OOC_SymbolTable__Declaration decl);
+extern ADT_String__String OOC_C_Naming__NameOfModuleInit(OOC_SymbolTable__Module m, OOC_CHAR8 rtWrapper);
+extern ADT_String__String OOC_C_Naming__NameOfLengthParam(OOC_SymbolTable__VarDecl param, OOC_INT32 dim);
+extern ADT_String__String OOC_C_Naming__NameOfTypeTagParam(OOC_SymbolTable__VarDecl param);
+extern ADT_String__String OOC_C_Naming__NameOfType(OOC_SymbolTable__Type type);
+extern ADT_String__String OOC_C_Naming__NameOfTypeDescriptor(OOC_SymbolTable__Type type);
+extern ADT_String__String OOC_C_Naming__NameOfTypeBoundIndex(OOC_SymbolTable__ProcDecl proc);
+extern ADT_String__String OOC_C_Naming__NameOfTypeBoundSignature(OOC_SymbolTable__ProcDecl proc);
+extern void OOC_OOC_C_Naming_init();
+extern void OOC_OOC_C_Naming_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_C_Naming__Buffer;
+extern RT0__StructDesc _td_OOC_C_Naming__1041;
+extern RT0__StructDesc _td_OOC_C_Naming__5216;
+extern RT0__StructDesc _td_OOC_C_Naming__6916;
+#endif /* _MODULE_OOC_C_Naming_ */
+
+/* --- */

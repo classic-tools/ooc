@@ -1,0 +1,16 @@
+#ifndef _MODULE_OOC_SSA_ConstProp_
+#define _MODULE_OOC_SSA_ConstProp_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "OOC/SSA.oh"
+extern void OOC_SSA_ConstProp__Transform(OOC_SSA__ProcBlock pb);
+extern void OOC_OOC_SSA_ConstProp_init();
+extern void OOC_OOC_SSA_ConstProp_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_SSA_ConstProp__Worklist;
+extern RT0__StructDesc _td_OOC_SSA_ConstProp__WorklistDesc;
+#endif /* _MODULE_OOC_SSA_ConstProp_ */
+
+/* --- */

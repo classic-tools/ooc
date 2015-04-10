@@ -1,0 +1,51 @@
+#ifndef _MODULE_OOC_Scanner_Builder_BasicList_
+#define _MODULE_OOC_Scanner_Builder_BasicList_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "OOC/Scanner/InputBuffer.oh"
+#include "OOC/Scanner/Symbol.oh"
+#include "OOC/Scanner/Builder.oh"
+typedef struct OOC_Scanner_Builder_BasicList__SymbolDesc *OOC_Scanner_Builder_BasicList__Symbol;
+typedef struct OOC_Scanner_Builder_BasicList__SymbolDesc {
+  OOC_Scanner_Builder_BasicList__Symbol next;
+  OOC_INT8 id;
+  OOC_CHAR8 __pad5;
+  OOC_CHAR8 __pad6;
+  OOC_CHAR8 __pad7;
+  OOC_Scanner_InputBuffer__CharArray str;
+  OOC_INT32 len;
+  OOC_INT32 pos;
+  OOC_INT32 line;
+  OOC_INT32 column;
+} OOC_Scanner_Builder_BasicList__SymbolDesc;
+typedef struct OOC_Scanner_Builder_BasicList__BuilderDesc *OOC_Scanner_Builder_BasicList__Builder;
+typedef struct OOC_Scanner_Builder_BasicList__BuilderDesc {
+  OOC_Scanner_InputBuffer__Buffer inputBuffer;
+  OOC_Config_Pragmas__History pragmaHistory;
+  OOC_Scanner_Builder_BasicList__Symbol head;
+  OOC_Scanner_Builder_BasicList__Symbol tail;
+  OOC_CHAR8 includeDocComments;
+} OOC_Scanner_Builder_BasicList__BuilderDesc;
+extern void OOC_Scanner_Builder_BasicList__Init(OOC_Scanner_Builder_BasicList__Builder b, OOC_Scanner_InputBuffer__Buffer buffer, OOC_CHAR8 includeDocComments);
+extern OOC_Scanner_Builder_BasicList__Builder OOC_Scanner_Builder_BasicList__New(OOC_Scanner_InputBuffer__Buffer buffer, OOC_CHAR8 includeDocComments);
+extern OOC_Scanner_Builder_BasicList__Symbol OOC_Scanner_Builder_BasicList__NewSymbol(OOC_Scanner_InputBuffer__CharArray str, OOC_INT32 len);
+extern OOC_Scanner_Builder_BasicList__Symbol OOC_Scanner_Builder_BasicList__CloneSymbol(OOC_Scanner_Builder_BasicList__Symbol old, const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
+extern void OOC_Scanner_Builder_BasicList__BuilderDesc_Clear(OOC_Scanner_Builder_BasicList__Builder b);
+#define _TBN_OOC_Scanner_Builder_BasicList__BuilderDesc_Clear 2
+typedef void (*_TBP_OOC_Scanner_Builder_BasicList__BuilderDesc_Clear)(OOC_Scanner_Builder_BasicList__Builder b);
+extern void OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol(OOC_Scanner_Builder_BasicList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
+#define _TBN_OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol 0
+typedef void (*_TBP_OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol)(OOC_Scanner_Builder_BasicList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
+extern void OOC_OOC_Scanner_Builder_BasicList_init();
+extern void OOC_OOC_Scanner_Builder_BasicList_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__Symbol;
+extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__SymbolDesc;
+extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__Builder;
+extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__BuilderDesc;
+extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__3311;
+#endif /* _MODULE_OOC_Scanner_Builder_BasicList_ */
+
+/* --- */

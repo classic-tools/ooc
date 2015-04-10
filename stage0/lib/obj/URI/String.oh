@@ -1,0 +1,24 @@
+#ifndef _MODULE_URI_String_
+#define _MODULE_URI_String_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "URI/CharClass.oh"
+typedef OOC_CHAR8 URI_String__String[];
+typedef OOC_CHAR8 *URI_String__StringPtr;
+typedef OOC_INT16 URI_String__Offset;
+extern URI_String__StringPtr URI_String__Extract(const URI_String__String str__ref, OOC_LEN str_0d, OOC_INT16 start, OOC_INT16 end);
+extern URI_String__StringPtr URI_String__Copy(const URI_String__String str__ref, OOC_LEN str_0d);
+extern URI_String__StringPtr URI_String__Unescape(URI_String__StringPtr str);
+extern void URI_String__AppendEscaped(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, const OOC_CHAR8 unreserved__ref[], OOC_LEN unreserved_0d, OOC_CHAR8 dest[], OOC_LEN dest_0d);
+extern void OOC_URI_String_init();
+extern void OOC_URI_String_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_URI_String__String;
+extern RT0__StructDesc _td_URI_String__StringPtr;
+extern RT0__StructDesc _td_URI_String__2817;
+extern RT0__StructDesc _td_URI_String__2868;
+#endif /* _MODULE_URI_String_ */
+
+/* --- */

@@ -1,0 +1,40 @@
+(* 	$Id: Assembler.Mod,v 1.6 2002/11/16 10:23:04 mva Exp $	 *)
+MODULE OOC:Config:Assembler;
+(*  Generates command lines for the assembler.
+    Copyright (C) 2002  Michael van Acken
+
+    This file is part of OOC.
+
+    OOC is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.  
+
+    OOC is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+    License for more details. 
+
+    You should have received a copy of the GNU General Public License
+    along with OOC. If not, write to the Free Software Foundation, 59
+    Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*)
+
+IMPORT
+  Strings, URI, URI:Scheme:File;
+
+
+PROCEDURE AssembleFileCmd* (in, out: URI.URI; VAR cmd: ARRAY OF CHAR);
+  VAR
+    str: ARRAY 2*1024 OF CHAR;
+  BEGIN
+    COPY ("as ", cmd);
+    
+    in(File.URI). GetPath (str);
+    Strings.Append (str, cmd);
+    Strings.Append (" -o ", cmd);
+    out(File.URI). GetPath (str);
+    Strings.Append (str, cmd);
+  END AssembleFileCmd;
+
+END OOC:Config:Assembler.

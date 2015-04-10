@@ -1,0 +1,45 @@
+#include "OOC/Config/Pragmas/StdPragmas.oh"
+#include "Config/Value/Boolean.oh"
+#include "Config/Value/Integer.oh"
+#include "Config/Value/String.oh"
+#include "OOC/Config/Autoconf.oh"
+#include "RT0.oh"
+#include "Language/String0.oh"
+#define OOC_Config_Pragmas_StdPragmas__defaultWarnings OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultAssertions OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultIndexCheck OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultDerefCheck OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultOverflowCheck OOC_FALSE
+#define OOC_Config_Pragmas_StdPragmas__defaultCaseSelectCheck OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultFunctionResultCheck OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultTypeGuard OOC_TRUE
+#define OOC_Config_Pragmas_StdPragmas__defaultConformantMode OOC_FALSE
+#define OOC_Config_Pragmas_StdPragmas__defaultCompilerMajor 2
+#define OOC_Config_Pragmas_StdPragmas__defaultCompilerMinor 0
+#define OOC_Config_Pragmas_StdPragmas__defaultTargetInteger 64
+#define OOC_Config_Pragmas_StdPragmas__defaultTargetAddress 32
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__warnings;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__assertions;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__indexCheck;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__derefCheck;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__overflowCheck;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__caseSelectCheck;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__functionResultCheck;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__typeGuard;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__conformantMode;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__compilerVersion;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__compilerMajor;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__compilerMinor;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__targetInteger;
+Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__targetAddress;
+
+/* run-time meta data */
+static RT0__ModuleDesc _mid;
+static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:Pragmas:StdPragmas", (RT0__Struct[]) { NULL } };
+
+extern void OOC_OOC_Config_Pragmas_StdPragmas_init0() {
+  RT0__RegisterModule(&_mid);
+  OOC_OOC_Config_Pragmas_StdPragmas_init();
+}
+
+/* --- */

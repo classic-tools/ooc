@@ -1,0 +1,124 @@
+#ifndef _MODULE_URI_Scheme_Hierarchical_
+#define _MODULE_URI_Scheme_Hierarchical_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "TextRider.oh"
+#include "URI.oh"
+#include "URI/Error.oh"
+typedef struct URI_Scheme_Hierarchical__ParameterDesc *URI_Scheme_Hierarchical__Parameter;
+typedef struct URI_Scheme_Hierarchical__ParameterDesc {
+  URI_Scheme_Hierarchical__Parameter next;
+  URI_String__StringPtr string;
+} URI_Scheme_Hierarchical__ParameterDesc;
+typedef struct URI_Scheme_Hierarchical__SegmentDesc *URI_Scheme_Hierarchical__Segment;
+typedef struct URI_Scheme_Hierarchical__SegmentDesc {
+  URI_Scheme_Hierarchical__Segment next;
+  URI_String__StringPtr string;
+  OOC_CHAR8 hasEscapes;
+  OOC_CHAR8 __pad9;
+  OOC_CHAR8 __pad10;
+  OOC_CHAR8 __pad11;
+  URI_Scheme_Hierarchical__Parameter paramList;
+} URI_Scheme_Hierarchical__SegmentDesc;
+typedef struct URI_Scheme_Hierarchical__GenericDesc *URI_Scheme_Hierarchical__Generic;
+typedef struct URI_Scheme_Hierarchical__GenericDesc {
+  URI_String__StringPtr schemeId;
+  URI__Authority authority;
+  URI__Query query;
+  URI_Scheme_Hierarchical__Segment pathList;
+  OOC_CHAR8 absolutePath;
+} URI_Scheme_Hierarchical__GenericDesc;
+extern void URI_Scheme_Hierarchical__InitParameter(URI_Scheme_Hierarchical__Parameter param, URI_String__StringPtr string);
+extern URI_Scheme_Hierarchical__Parameter URI_Scheme_Hierarchical__NewParameter(URI_String__StringPtr string);
+extern void URI_Scheme_Hierarchical__ParameterDesc_Copy(URI_Scheme_Hierarchical__Parameter param, URI_Scheme_Hierarchical__Parameter dest);
+#define _TBN_URI_Scheme_Hierarchical__ParameterDesc_Copy 2
+typedef void (*_TBP_URI_Scheme_Hierarchical__ParameterDesc_Copy)(URI_Scheme_Hierarchical__Parameter param, URI_Scheme_Hierarchical__Parameter dest);
+extern URI_Scheme_Hierarchical__Parameter URI_Scheme_Hierarchical__ParameterDesc_Clone(URI_Scheme_Hierarchical__Parameter param);
+#define _TBN_URI_Scheme_Hierarchical__ParameterDesc_Clone 1
+typedef URI_Scheme_Hierarchical__Parameter (*_TBP_URI_Scheme_Hierarchical__ParameterDesc_Clone)(URI_Scheme_Hierarchical__Parameter param);
+extern void URI_Scheme_Hierarchical__ParameterDesc_WriteXML(URI_Scheme_Hierarchical__Parameter param, TextRider__Writer w);
+#define _TBN_URI_Scheme_Hierarchical__ParameterDesc_WriteXML 3
+typedef void (*_TBP_URI_Scheme_Hierarchical__ParameterDesc_WriteXML)(URI_Scheme_Hierarchical__Parameter param, TextRider__Writer w);
+extern void URI_Scheme_Hierarchical__ParameterDesc_Append(URI_Scheme_Hierarchical__Parameter param, OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_URI_Scheme_Hierarchical__ParameterDesc_Append 0
+typedef void (*_TBP_URI_Scheme_Hierarchical__ParameterDesc_Append)(URI_Scheme_Hierarchical__Parameter param, OOC_CHAR8 str[], OOC_LEN str_0d);
+extern void URI_Scheme_Hierarchical__InitSegment(URI_Scheme_Hierarchical__Segment segm, URI_String__StringPtr string);
+extern URI_Scheme_Hierarchical__Segment URI_Scheme_Hierarchical__NewSegment(URI_String__StringPtr string);
+extern void URI_Scheme_Hierarchical__SegmentDesc_AppendParameter(URI_Scheme_Hierarchical__Segment segm, URI_Scheme_Hierarchical__Parameter param);
+#define _TBN_URI_Scheme_Hierarchical__SegmentDesc_AppendParameter 1
+typedef void (*_TBP_URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)(URI_Scheme_Hierarchical__Segment segm, URI_Scheme_Hierarchical__Parameter param);
+extern void URI_Scheme_Hierarchical__SegmentDesc_Copy(URI_Scheme_Hierarchical__Segment segm, URI_Scheme_Hierarchical__Segment dest);
+#define _TBN_URI_Scheme_Hierarchical__SegmentDesc_Copy 3
+typedef void (*_TBP_URI_Scheme_Hierarchical__SegmentDesc_Copy)(URI_Scheme_Hierarchical__Segment segm, URI_Scheme_Hierarchical__Segment dest);
+extern URI_Scheme_Hierarchical__Segment URI_Scheme_Hierarchical__SegmentDesc_Clone(URI_Scheme_Hierarchical__Segment segm);
+#define _TBN_URI_Scheme_Hierarchical__SegmentDesc_Clone 2
+typedef URI_Scheme_Hierarchical__Segment (*_TBP_URI_Scheme_Hierarchical__SegmentDesc_Clone)(URI_Scheme_Hierarchical__Segment segm);
+extern void URI_Scheme_Hierarchical__SegmentDesc_WriteXML(URI_Scheme_Hierarchical__Segment segm, TextRider__Writer w);
+#define _TBN_URI_Scheme_Hierarchical__SegmentDesc_WriteXML 4
+typedef void (*_TBP_URI_Scheme_Hierarchical__SegmentDesc_WriteXML)(URI_Scheme_Hierarchical__Segment segm, TextRider__Writer w);
+extern void URI_Scheme_Hierarchical__SegmentDesc_Append(URI_Scheme_Hierarchical__Segment segm, OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_URI_Scheme_Hierarchical__SegmentDesc_Append 0
+typedef void (*_TBP_URI_Scheme_Hierarchical__SegmentDesc_Append)(URI_Scheme_Hierarchical__Segment segm, OOC_CHAR8 str[], OOC_LEN str_0d);
+extern void URI_Scheme_Hierarchical__Init(URI_Scheme_Hierarchical__Generic uri, URI_String__StringPtr schemeId, URI__Authority authority, URI__Query query);
+extern URI_Scheme_Hierarchical__Generic URI_Scheme_Hierarchical__New(URI_String__StringPtr schemeId, URI__Authority authority, URI__Query query);
+extern void URI_Scheme_Hierarchical__GenericDesc_AppendSegment(URI_Scheme_Hierarchical__Generic uri, URI_Scheme_Hierarchical__Segment segm);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_AppendSegment 16
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_AppendSegment)(URI_Scheme_Hierarchical__Generic uri, URI_Scheme_Hierarchical__Segment segm);
+extern void URI_Scheme_Hierarchical__GenericDesc_RemoveSegment(URI_Scheme_Hierarchical__Generic uri, URI_Scheme_Hierarchical__Segment segm);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_RemoveSegment 17
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_RemoveSegment)(URI_Scheme_Hierarchical__Generic uri, URI_Scheme_Hierarchical__Segment segm);
+extern void URI_Scheme_Hierarchical__GenericDesc_StripSegments(URI_Scheme_Hierarchical__Generic uri, OOC_INT32 n);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_StripSegments 18
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_StripSegments)(URI_Scheme_Hierarchical__Generic uri, OOC_INT32 n);
+extern URI_Scheme_Hierarchical__Generic URI_Scheme_Hierarchical__GenericDesc_Clone(URI_Scheme_Hierarchical__Generic uri);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_Clone 1
+typedef URI_Scheme_Hierarchical__Generic (*_TBP_URI_Scheme_Hierarchical__GenericDesc_Clone)(URI_Scheme_Hierarchical__Generic uri);
+extern void URI_Scheme_Hierarchical__GenericDesc_Copy(URI_Scheme_Hierarchical__Generic uri, URI__URI dest);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_Copy 2
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_Copy)(URI_Scheme_Hierarchical__Generic uri, URI__URI dest);
+extern void URI_Scheme_Hierarchical__GenericDesc_ClearPath(URI_Scheme_Hierarchical__Generic uri);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_ClearPath 9
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_ClearPath)(URI_Scheme_Hierarchical__Generic uri);
+extern URI__Authority URI_Scheme_Hierarchical__GenericDesc_NewAuthority(URI_Scheme_Hierarchical__Generic uri);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_NewAuthority 10
+typedef URI__Authority (*_TBP_URI_Scheme_Hierarchical__GenericDesc_NewAuthority)(URI_Scheme_Hierarchical__Generic uri);
+extern URI__Query URI_Scheme_Hierarchical__GenericDesc_NewQuery(URI_Scheme_Hierarchical__Generic uri);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_NewQuery 11
+typedef URI__Query (*_TBP_URI_Scheme_Hierarchical__GenericDesc_NewQuery)(URI_Scheme_Hierarchical__Generic uri);
+extern Msg__Msg URI_Scheme_Hierarchical__GenericDesc_ParsePath(URI_Scheme_Hierarchical__Generic uri, URI_String__StringPtr str, OOC_CHAR8 absolute, OOC_INT16 offset);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_ParsePath 12
+typedef Msg__Msg (*_TBP_URI_Scheme_Hierarchical__GenericDesc_ParsePath)(URI_Scheme_Hierarchical__Generic uri, URI_String__StringPtr str, OOC_CHAR8 absolute, OOC_INT16 offset);
+extern void URI_Scheme_Hierarchical__GenericDesc_ResolveRelative(URI_Scheme_Hierarchical__Generic uri, URI__HierarchicalURI baseURI);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_ResolveRelative 13
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_ResolveRelative)(URI_Scheme_Hierarchical__Generic uri, URI__HierarchicalURI baseURI);
+extern URI_Scheme_Hierarchical__Generic URI_Scheme_Hierarchical__GenericDesc_MakeRelative(URI_Scheme_Hierarchical__Generic uri, URI__HierarchicalURI baseURI);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_MakeRelative 5
+typedef URI_Scheme_Hierarchical__Generic (*_TBP_URI_Scheme_Hierarchical__GenericDesc_MakeRelative)(URI_Scheme_Hierarchical__Generic uri, URI__HierarchicalURI baseURI);
+extern void URI_Scheme_Hierarchical__GenericDesc_WriteXML(URI_Scheme_Hierarchical__Generic uri, TextRider__Writer w);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_WriteXML 7
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_WriteXML)(URI_Scheme_Hierarchical__Generic uri, TextRider__Writer w);
+extern void URI_Scheme_Hierarchical__GenericDesc_AppendPath(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_AppendPath 8
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_AppendPath)(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+extern void URI_Scheme_Hierarchical__GenericDesc_GetString(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_URI_Scheme_Hierarchical__GenericDesc_GetString 4
+typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_GetString)(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+extern void OOC_URI_Scheme_Hierarchical_init();
+extern void OOC_URI_Scheme_Hierarchical_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__Parameter;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__ParameterDesc;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__Segment;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__SegmentDesc;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__Generic;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__GenericDesc;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__3460;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__5314;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__14103;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__15043;
+extern RT0__StructDesc _td_URI_Scheme_Hierarchical__15486;
+#endif /* _MODULE_URI_Scheme_Hierarchical_ */
+
+/* --- */

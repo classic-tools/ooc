@@ -1,0 +1,19 @@
+#ifndef _MODULE_Config_
+#define _MODULE_Config_
+
+#include "__typemap.h"
+#include "RT0.oh"
+typedef struct Config__ConfigDesc *Config__Config;
+typedef struct Config__ConfigDesc {
+  char __dummy;
+} Config__ConfigDesc;
+extern void Config__InitConfig(Config__Config config);
+extern void OOC_Config_init();
+extern void OOC_Config_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Config__Config;
+extern RT0__StructDesc _td_Config__ConfigDesc;
+#endif /* _MODULE_Config_ */
+
+/* --- */

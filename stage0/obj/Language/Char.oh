@@ -1,0 +1,60 @@
+#ifndef _MODULE_Language_Char_
+#define _MODULE_Language_Char_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "ADT/Object.oh"
+#include "ADT/String.oh"
+#include "Language.oh"
+typedef struct Language_Char__TypeDesc *Language_Char__Type;
+typedef struct Language_Char__TypeDesc {
+  char __dummy;
+} Language_Char__TypeDesc;
+typedef struct Language_Char__ValueDesc *Language_Char__Value;
+typedef struct Language_Char__ValueDesc {
+  Language__Type type;
+  OOC_INT32 value;
+} Language_Char__ValueDesc;
+extern Language_Char__Type Language_Char__type;
+extern Language_Char__Value Language_Char__New(OOC_INT32 value);
+extern OOC_CHAR8 Language_Char__ValueDesc_Equals(Language_Char__Value v, ADT_Object__Object y);
+#define _TBN_Language_Char__ValueDesc_Equals 1
+typedef OOC_CHAR8 (*_TBP_Language_Char__ValueDesc_Equals)(Language_Char__Value v, ADT_Object__Object y);
+extern OOC_INT32 Language_Char__ValueDesc_Compare(Language_Char__Value v, ADT_Object__Object y);
+#define _TBN_Language_Char__ValueDesc_Compare 6
+typedef OOC_INT32 (*_TBP_Language_Char__ValueDesc_Compare)(Language_Char__Value v, ADT_Object__Object y);
+extern OOC_INT32 Language_Char__ValueDesc_HashCode(Language_Char__Value v);
+#define _TBN_Language_Char__ValueDesc_HashCode 2
+typedef OOC_INT32 (*_TBP_Language_Char__ValueDesc_HashCode)(Language_Char__Value v);
+extern ADT_String__String Language_Char__ValueDesc_ToString(Language_Char__Value v);
+#define _TBN_Language_Char__ValueDesc_ToString 5
+typedef ADT_String__String (*_TBP_Language_Char__ValueDesc_ToString)(Language_Char__Value v);
+extern void Language_Char__ValueDesc_Store(Language_Char__Value v, ADT_Object__Writer w);
+#define _TBN_Language_Char__ValueDesc_Store 4
+typedef void (*_TBP_Language_Char__ValueDesc_Store)(Language_Char__Value v, ADT_Object__Writer w);
+extern void Language_Char__ValueDesc_Load(Language_Char__Value v, ADT_Object__Reader r);
+#define _TBN_Language_Char__ValueDesc_Load 3
+typedef void (*_TBP_Language_Char__ValueDesc_Load)(Language_Char__Value v, ADT_Object__Reader r);
+extern Language_Char__Value Language_Char__TypeDesc_Value(Language_Char__Type t, OOC_INT32 value);
+#define _TBN_Language_Char__TypeDesc_Value 7
+typedef Language_Char__Value (*_TBP_Language_Char__TypeDesc_Value)(Language_Char__Type t, OOC_INT32 value);
+extern Language_Char__Value Language_Char__TypeDesc_ValueOf(Language_Char__Type t, const OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_Language_Char__TypeDesc_ValueOf 6
+typedef Language_Char__Value (*_TBP_Language_Char__TypeDesc_ValueOf)(Language_Char__Type t, const OOC_CHAR8 str[], OOC_LEN str_0d);
+extern ADT_String__String Language_Char__TypeDesc_ToString(Language_Char__Type t);
+#define _TBN_Language_Char__TypeDesc_ToString 5
+typedef ADT_String__String (*_TBP_Language_Char__TypeDesc_ToString)(Language_Char__Type t);
+extern void OOC_Language_Char_init();
+extern void OOC_Language_Char_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Language_Char__Type;
+extern RT0__StructDesc _td_Language_Char__TypeDesc;
+extern RT0__StructDesc _td_Language_Char__Value;
+extern RT0__StructDesc _td_Language_Char__ValueDesc;
+extern RT0__StructDesc _td_Language_Char__1152;
+extern RT0__StructDesc _td_Language_Char__2556;
+extern RT0__StructDesc _td_Language_Char__2891;
+#endif /* _MODULE_Language_Char_ */
+
+/* --- */

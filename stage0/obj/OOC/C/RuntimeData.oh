@@ -1,0 +1,16 @@
+#ifndef _MODULE_OOC_C_RuntimeData_
+#define _MODULE_OOC_C_RuntimeData_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "OOC/SymbolTable.oh"
+#include "OOC/C/DeclWriter.oh"
+extern void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTable__Module symTab, OOC_CHAR8 writeHeader);
+extern void OOC_OOC_C_RuntimeData_init();
+extern void OOC_OOC_C_RuntimeData_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_C_RuntimeData__1731;
+#endif /* _MODULE_OOC_C_RuntimeData_ */
+
+/* --- */

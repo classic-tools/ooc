@@ -1,0 +1,19 @@
+#ifndef _MODULE_OOC_Auxiliary_ParseModule_
+#define _MODULE_OOC_Auxiliary_ParseModule_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "ADT/String.oh"
+#include "OOC/Config/Pragmas.oh"
+#include "OOC/Repository.oh"
+#include "OOC/Error.oh"
+#include "OOC/AST.oh"
+#include "OOC/SymbolTable.oh"
+extern void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 checkModuleName, OOC_CHAR8 createNamespace, OOC_CHAR8 writeSymbolFile, OOC_CHAR8 abortAfterImport, ADT_String__String libraryName, OOC_AST__Node *ast, OOC_SymbolTable__Module *symTab, OOC_Config_Pragmas__History *pragmaHistory, OOC_Error__List *errList);
+extern void OOC_OOC_Auxiliary_ParseModule_init();
+extern void OOC_OOC_Auxiliary_ParseModule_init0();
+
+/* run-time meta data */
+#endif /* _MODULE_OOC_Auxiliary_ParseModule_ */
+
+/* --- */

@@ -1,0 +1,48 @@
+#ifndef _MODULE_Ascii_
+#define _MODULE_Ascii_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#define Ascii__nul "\000"
+#define Ascii__soh "\001"
+#define Ascii__stx "\002"
+#define Ascii__etx "\003"
+#define Ascii__eot "\004"
+#define Ascii__enq "\005"
+#define Ascii__ack "\006"
+#define Ascii__bel "\007"
+#define Ascii__bs "\010"
+#define Ascii__ht "\011"
+#define Ascii__lf "\012"
+#define Ascii__vt "\013"
+#define Ascii__ff "\014"
+#define Ascii__cr "\015"
+#define Ascii__so "\016"
+#define Ascii__si "\017"
+#define Ascii__dle "\001"
+#define Ascii__dc1 "\021"
+#define Ascii__dc2 "\022"
+#define Ascii__dc3 "\023"
+#define Ascii__dc4 "\024"
+#define Ascii__nak "\025"
+#define Ascii__syn "\026"
+#define Ascii__etb "\027"
+#define Ascii__can "\030"
+#define Ascii__em "\031"
+#define Ascii__sub "\032"
+#define Ascii__esc "\033"
+#define Ascii__fs "\034"
+#define Ascii__gs "\035"
+#define Ascii__rs "\036"
+#define Ascii__us "\037"
+#define Ascii__del "\177"
+#define Ascii__sp " "
+#define Ascii__xon "\021"
+#define Ascii__xoff "\023"
+extern void OOC_Ascii_init();
+extern void OOC_Ascii_init0();
+
+/* run-time meta data */
+#endif /* _MODULE_Ascii_ */
+
+/* --- */

@@ -1,0 +1,159 @@
+#include "StdChannels.d"
+#include "__oo2c.h"
+
+static Msg__Msg StdChannels__GetError(OOC_INT32 code) {
+  register OOC_INT32 i0,i1;
+
+  i0 = (OOC_INT32)StdChannels__errorContext;
+  i1 = code;
+  i0 = (OOC_INT32)Msg__New((Msg__Context)i0, i1);
+  return (Msg__Msg)i0;
+  ;
+}
+
+OOC_INT32 StdChannels__WriterDesc_Pos(StdChannels__Writer w) {
+
+  return -2;
+  ;
+}
+
+void StdChannels__WriterDesc_SetPos(StdChannels__Writer w, OOC_INT32 newPos) {
+
+  return;
+  ;
+}
+
+void StdChannels__WriterDesc_WriteByte(StdChannels__Writer w, OOC_CHAR8 x) {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)w;
+  *(OOC_INT32*)((_check_pointer(i0, 2759))+8) = 1;
+  return;
+  ;
+}
+
+void StdChannels__WriterDesc_WriteBytes(StdChannels__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n) {
+  register OOC_INT32 i0,i1;
+
+  i0 = (OOC_INT32)w;
+  i1 = n;
+  *(OOC_INT32*)((_check_pointer(i0, 2896))+8) = i1;
+  return;
+  ;
+}
+
+OOC_INT32 StdChannels__NullChannelDesc_Length(StdChannels__NullChannel ch) {
+
+  return -1;
+  ;
+}
+
+void StdChannels__NullChannelDesc_GetModTime(StdChannels__NullChannel ch, struct Time__TimeStamp *mtime, RT0__Struct mtime__tag) {
+  register OOC_INT32 i0,i1;
+
+  i0 = (OOC_INT32)ch;
+  i1 = (OOC_INT32)StdChannels__GetError(12);
+  *(OOC_INT32*)(_check_pointer(i0, 3218)) = i1;
+  return;
+  ;
+}
+
+Channel__Reader StdChannels__NullChannelDesc_NewReader(StdChannels__NullChannel ch) {
+  register OOC_INT32 i0,i1;
+
+  i0 = (OOC_INT32)ch;
+  i1 = (OOC_INT32)StdChannels__GetError(9);
+  *(OOC_INT32*)(_check_pointer(i0, 3348)) = i1;
+  return (Channel__Reader)(OOC_INT32)0;
+  ;
+}
+
+Channel__Writer StdChannels__NullChannelDesc_NewWriter(StdChannels__NullChannel ch) {
+  register OOC_INT32 i0,i1;
+  StdChannels__Writer w;
+
+  i0 = (OOC_INT32)ch;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3518)))), Channel__ChannelDesc_ClearError)),Channel__ChannelDesc_ClearError)((Channel__Channel)i0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3542))+8);
+  i1 = i1==(OOC_INT32)0;
+  if (i1) goto l3;
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3743))+8);
+  return (Channel__Writer)i0;
+  goto l4;
+l3:
+  i1 = (OOC_INT32)RT0__NewObject(_td_StdChannels__Writer.baseTypes[0]);
+  w = (StdChannels__Writer)i1;
+  *(OOC_INT32*)(_check_pointer(i1, 3585)) = i0;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3606)))), Channel__WriterDesc_ClearError)),Channel__WriterDesc_ClearError)((Channel__Writer)i1);
+  *(OOC_UINT8*)((_check_pointer(i1, 3627))+12) = OOC_FALSE;
+  *(OOC_INT32*)((_check_pointer(i1, 3659))+8) = -1;
+  *(OOC_INT32*)((_check_pointer(i0, 3689))+8) = i1;
+  return (Channel__Writer)i1;
+l4:
+  _failed_function(3453); return 0;
+  ;
+}
+
+void StdChannels__NullChannelDesc_Flush(StdChannels__NullChannel ch) {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)ch;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3830)))), Channel__ChannelDesc_ClearError)),Channel__ChannelDesc_ClearError)((Channel__Channel)i0);
+  return;
+  ;
+}
+
+void StdChannels__NullChannelDesc_Close(StdChannels__NullChannel ch) {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)ch;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3909)))), Channel__ChannelDesc_ClearError)),Channel__ChannelDesc_ClearError)((Channel__Channel)i0);
+  return;
+  ;
+}
+
+static void StdChannels__Flush() {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)StdChannels__stdout;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3974)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i0);
+  i0 = (OOC_INT32)StdChannels__stderr;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3989)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i0);
+  return;
+  ;
+}
+
+void OOC_StdChannels_init(void) {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)RT0__NewObject(_td_StdChannels__ErrorContext.baseTypes[0]);
+  StdChannels__errorContext = (StdChannels__ErrorContext)i0;
+  Msg__InitContext((Msg__Context)i0, "OOC:Core:StdChannels", 21);
+  i0 = (OOC_INT32)RT0__NewObject(_td_PosixFileDescr__Channel.baseTypes[0]);
+  StdChannels__fd = (PosixFileDescr__Channel)i0;
+  PosixFileDescr__Init((PosixFileDescr__Channel)i0, 0, 0);
+  i0 = (OOC_INT32)StdChannels__fd;
+  StdChannels__stdin = (Channel__Channel)i0;
+  i0 = (OOC_INT32)RT0__NewObject(_td_PosixFileDescr__Channel.baseTypes[0]);
+  StdChannels__fd = (PosixFileDescr__Channel)i0;
+  PosixFileDescr__Init((PosixFileDescr__Channel)i0, 1, 1);
+  i0 = (OOC_INT32)StdChannels__fd;
+  StdChannels__stdout = (Channel__Channel)i0;
+  i0 = (OOC_INT32)RT0__NewObject(_td_PosixFileDescr__Channel.baseTypes[0]);
+  StdChannels__fd = (PosixFileDescr__Channel)i0;
+  PosixFileDescr__Init((PosixFileDescr__Channel)i0, 2, 1);
+  i0 = (OOC_INT32)StdChannels__fd;
+  StdChannels__stderr = (Channel__Channel)i0;
+  i0 = (OOC_INT32)RT0__NewObject(_td_StdChannels__NullChannel.baseTypes[0]);
+  StdChannels__null = (StdChannels__NullChannel)i0;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4464)))), Channel__ChannelDesc_ClearError)),Channel__ChannelDesc_ClearError)((Channel__Channel)i0);
+  i0 = (OOC_INT32)StdChannels__null;
+  *(OOC_UINT8*)((_check_pointer(i0, 4484))+4) = OOC_FALSE;
+  *(OOC_UINT8*)((_check_pointer(i0, 4511))+5) = OOC_TRUE;
+  *(OOC_UINT8*)((_check_pointer(i0, 4537))+6) = OOC_TRUE;
+  Termination__RegisterProc((Termination__Proc)(OOC_INT32)&StdChannels__Flush);
+  return;
+  ;
+}
+
+/* --- */

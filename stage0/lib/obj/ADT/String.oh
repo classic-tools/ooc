@@ -1,0 +1,109 @@
+#ifndef _MODULE_ADT_String_
+#define _MODULE_ADT_String_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "ADT/Object.oh"
+typedef OOC_CHAR8 ADT_String__CharArray[];
+typedef OOC_CHAR8 *ADT_String__CharArrayPtr;
+typedef struct ADT_String__StringDesc *ADT_String__String;
+typedef struct ADT_String__StringDesc {
+  OOC_INT32 length;
+  ADT_String__CharArrayPtr array;
+} ADT_String__StringDesc;
+typedef OOC_CHAR8 (*ADT_String__MapCharProc)(OOC_CHAR8 c);
+typedef ADT_String__String ADT_String__StringArray[];
+typedef ADT_String__String *ADT_String__StringArrayPtr;
+extern void ADT_String__InitRegion(ADT_String__String str, OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 pos, OOC_INT32 endPos);
+extern void ADT_String__Init(ADT_String__String str, OOC_CHAR8 source[], OOC_LEN source_0d);
+extern ADT_String__String ADT_String__StringDesc_Map(ADT_String__String str, ADT_String__MapCharProc p);
+#define _TBN_ADT_String__StringDesc_Map 19
+typedef ADT_String__String (*_TBP_ADT_String__StringDesc_Map)(ADT_String__String str, ADT_String__MapCharProc p);
+extern ADT_String__String ADT_String__New(const OOC_CHAR8 source[], OOC_LEN source_0d);
+extern ADT_String__String ADT_String__NewRegion(const OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 pos, OOC_INT32 endPos);
+extern ADT_String__String ADT_String__StringDesc_ToString(ADT_String__String str);
+#define _TBN_ADT_String__StringDesc_ToString 5
+typedef ADT_String__String (*_TBP_ADT_String__StringDesc_ToString)(ADT_String__String str);
+extern ADT_String__String ADT_String__StringDesc_Concat(ADT_String__String str, ADT_String__String source);
+#define _TBN_ADT_String__StringDesc_Concat 9
+typedef ADT_String__String (*_TBP_ADT_String__StringDesc_Concat)(ADT_String__String str, ADT_String__String source);
+extern OOC_CHAR8 ADT_String__StringDesc_GetChar(ADT_String__String str, OOC_INT32 pos);
+#define _TBN_ADT_String__StringDesc_GetChar 14
+typedef OOC_CHAR8 (*_TBP_ADT_String__StringDesc_GetChar)(ADT_String__String str, OOC_INT32 pos);
+extern void ADT_String__StringDesc_GetChars(ADT_String__String s, OOC_CHAR8 destination[], OOC_LEN destination_0d);
+#define _TBN_ADT_String__StringDesc_GetChars 15
+typedef void (*_TBP_ADT_String__StringDesc_GetChars)(ADT_String__String s, OOC_CHAR8 destination[], OOC_LEN destination_0d);
+extern void ADT_String__StringDesc_GetCharsRegion(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, OOC_CHAR8 destination[], OOC_LEN destination_0d, OOC_INT32 destPos);
+#define _TBN_ADT_String__StringDesc_GetCharsRegion 16
+typedef void (*_TBP_ADT_String__StringDesc_GetCharsRegion)(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, OOC_CHAR8 destination[], OOC_LEN destination_0d, OOC_INT32 destPos);
+extern ADT_String__String ADT_String__StringDesc_Extract(ADT_String__String str, OOC_INT32 startPos, OOC_INT32 numberToExtract);
+#define _TBN_ADT_String__StringDesc_Extract 11
+typedef ADT_String__String (*_TBP_ADT_String__StringDesc_Extract)(ADT_String__String str, OOC_INT32 startPos, OOC_INT32 numberToExtract);
+extern OOC_INT32 ADT_String__StringDesc_Size(ADT_String__String str);
+#define _TBN_ADT_String__StringDesc_Size 20
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_Size)(ADT_String__String str);
+extern OOC_INT32 ADT_String__StringDesc_IndexOf(ADT_String__String str, OOC_CHAR8 _char, OOC_INT32 pos);
+#define _TBN_ADT_String__StringDesc_IndexOf 17
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_IndexOf)(ADT_String__String str, OOC_CHAR8 _char, OOC_INT32 pos);
+extern OOC_INT32 ADT_String__StringDesc_LastIndexOf(ADT_String__String str, OOC_CHAR8 _char, OOC_INT32 endpos);
+#define _TBN_ADT_String__StringDesc_LastIndexOf 18
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_LastIndexOf)(ADT_String__String str, OOC_CHAR8 _char, OOC_INT32 endpos);
+extern OOC_INT8 ADT_String__StringDesc_Compare(ADT_String__String str, ADT_String__String source);
+#define _TBN_ADT_String__StringDesc_Compare 6
+typedef OOC_INT8 (*_TBP_ADT_String__StringDesc_Compare)(ADT_String__String str, ADT_String__String source);
+extern OOC_INT8 ADT_String__StringDesc_CompareRegionArray(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, const OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 srcPos);
+#define _TBN_ADT_String__StringDesc_CompareRegionArray 8
+typedef OOC_INT8 (*_TBP_ADT_String__StringDesc_CompareRegionArray)(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, const OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 srcPos);
+extern OOC_INT8 ADT_String__StringDesc_CompareRegion(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, ADT_String__String source, OOC_INT32 srcPos);
+#define _TBN_ADT_String__StringDesc_CompareRegion 7
+typedef OOC_INT8 (*_TBP_ADT_String__StringDesc_CompareRegion)(ADT_String__String str, OOC_INT32 pos, OOC_INT32 endPos, ADT_String__String source, OOC_INT32 srcPos);
+extern OOC_INT32 ADT_String__StringDesc_FindFirst(ADT_String__String str, ADT_String__String pattern, OOC_INT32 startPos);
+#define _TBN_ADT_String__StringDesc_FindFirst 12
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_FindFirst)(ADT_String__String str, ADT_String__String pattern, OOC_INT32 startPos);
+extern OOC_INT32 ADT_String__StringDesc_FindLast(ADT_String__String str, ADT_String__String pattern, OOC_INT32 startPos);
+#define _TBN_ADT_String__StringDesc_FindLast 13
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_FindLast)(ADT_String__String str, ADT_String__String pattern, OOC_INT32 startPos);
+extern OOC_CHAR8 ADT_String__StringDesc_StartsWith(ADT_String__String str, ADT_String__String prefix);
+#define _TBN_ADT_String__StringDesc_StartsWith 21
+typedef OOC_CHAR8 (*_TBP_ADT_String__StringDesc_StartsWith)(ADT_String__String str, ADT_String__String prefix);
+extern OOC_CHAR8 ADT_String__StringDesc_EndsWith(ADT_String__String str, ADT_String__String suffix);
+#define _TBN_ADT_String__StringDesc_EndsWith 10
+typedef OOC_CHAR8 (*_TBP_ADT_String__StringDesc_EndsWith)(ADT_String__String str, ADT_String__String suffix);
+extern OOC_CHAR8 ADT_String__ToUpper(OOC_CHAR8 c);
+extern OOC_CHAR8 ADT_String__ToLower(OOC_CHAR8 c);
+extern OOC_INT32 ADT_String__StringDesc_HashCode(ADT_String__String str);
+#define _TBN_ADT_String__StringDesc_HashCode 2
+typedef OOC_INT32 (*_TBP_ADT_String__StringDesc_HashCode)(ADT_String__String str);
+extern OOC_CHAR8 ADT_String__StringDesc_Equals(ADT_String__String str, ADT_Object__Object y);
+#define _TBN_ADT_String__StringDesc_Equals 1
+typedef OOC_CHAR8 (*_TBP_ADT_String__StringDesc_Equals)(ADT_String__String str, ADT_Object__Object y);
+extern void ADT_String__StringDesc_Load(ADT_String__String str, ADT_Object__Reader r);
+#define _TBN_ADT_String__StringDesc_Load 3
+typedef void (*_TBP_ADT_String__StringDesc_Load)(ADT_String__String str, ADT_Object__Reader r);
+extern void ADT_String__StringDesc_Store(ADT_String__String str, ADT_Object__Writer w);
+#define _TBN_ADT_String__StringDesc_Store 4
+typedef void (*_TBP_ADT_String__StringDesc_Store)(ADT_String__String str, ADT_Object__Writer w);
+extern void OOC_ADT_String_init();
+extern void OOC_ADT_String_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_ADT_String__CharArray;
+extern RT0__StructDesc _td_ADT_String__CharArrayPtr;
+extern RT0__StructDesc _td_ADT_String__String;
+extern RT0__StructDesc _td_ADT_String__StringDesc;
+extern RT0__StructDesc _td_ADT_String__StringArray;
+extern RT0__StructDesc _td_ADT_String__StringArrayPtr;
+extern RT0__StructDesc _td_ADT_String__1576;
+extern RT0__StructDesc _td_ADT_String__1625;
+extern RT0__StructDesc _td_ADT_String__2432;
+extern RT0__StructDesc _td_ADT_String__2481;
+extern RT0__StructDesc _td_ADT_String__3783;
+extern RT0__StructDesc _td_ADT_String__4197;
+extern RT0__StructDesc _td_ADT_String__4852;
+extern RT0__StructDesc _td_ADT_String__5112;
+extern RT0__StructDesc _td_ADT_String__6305;
+extern RT0__StructDesc _td_ADT_String__6753;
+extern RT0__StructDesc _td_ADT_String__9687;
+#endif /* _MODULE_ADT_String_ */
+
+/* --- */

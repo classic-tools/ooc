@@ -1,0 +1,15 @@
+#ifndef _MODULE_OS_ProcessManagement_
+#define _MODULE_OS_ProcessManagement_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "C.oh"
+extern OOC_INT32 OS_ProcessManagement__system(const OOC_CHAR8 command__ref[], OOC_LEN command_0d);
+extern void OOC_OS_ProcessManagement_init();
+extern void OOC_OS_ProcessManagement_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OS_ProcessManagement__1282;
+#endif /* _MODULE_OS_ProcessManagement_ */
+
+/* --- */

@@ -1,0 +1,23 @@
+#ifndef _MODULE_Language_String_
+#define _MODULE_Language_String_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Language.oh"
+typedef struct Language_String__ValueDesc *Language_String__Value;
+typedef struct Language_String__ValueDesc {
+  Language__Type type;
+} Language_String__ValueDesc;
+extern void Language_String__Init(Language_String__Value v, Language__Type type);
+extern OOC_INT32 Language_String__ValueDesc_Length(Language_String__Value v);
+#define _TBN_Language_String__ValueDesc_Length 7
+typedef OOC_INT32 (*_TBP_Language_String__ValueDesc_Length)(Language_String__Value v);
+extern void OOC_Language_String_init();
+extern void OOC_Language_String_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Language_String__Value;
+extern RT0__StructDesc _td_Language_String__ValueDesc;
+#endif /* _MODULE_Language_String_ */
+
+/* --- */

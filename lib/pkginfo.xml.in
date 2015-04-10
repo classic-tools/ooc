@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<package name="liboo2c">
+  <version current="0" revision="0" age="0"/>
+  
+  <pragmas>
+    <define name="LIB_HAVE_LIBXNET" type="boolean">@have_libxnet@</define>
+  </pragmas>
+  
+  <library name="oo2c" main-module="liboo2c">
+    <version current="0" revision="0" age="0"/>
+  </library>
+
+  <file-set source-dir="src">
+    <file name="__config.h" />
+    <file name="__typemap.h" />
+    <file name="__dynvar.h" />
+    <file name="__libc.h" />
+    <file name="__oo2c.h" />
+  </file-set>
+</package>
+

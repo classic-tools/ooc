@@ -1,0 +1,16 @@
+#ifndef _MODULE_OOC_Config_Assembler_
+#define _MODULE_OOC_Config_Assembler_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "URI.oh"
+extern void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
+extern void OOC_OOC_Config_Assembler_init();
+extern void OOC_OOC_Config_Assembler_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_Config_Assembler__1005;
+extern RT0__StructDesc _td_OOC_Config_Assembler__1036;
+#endif /* _MODULE_OOC_Config_Assembler_ */
+
+/* --- */

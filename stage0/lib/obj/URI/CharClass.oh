@@ -1,0 +1,46 @@
+#ifndef _MODULE_URI_CharClass_
+#define _MODULE_URI_CharClass_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#define URI_CharClass__unreservedPChar ":@&=+$,"
+#define URI_CharClass__unreservedUserinfo ";:&=+$,"
+#define URI_CharClass__reserved ";/?:@&=+$,[]"
+extern OOC_CHAR8 URI_CharClass__IsAlpha(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipAlpha(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__IsDigit(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipDigit(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__IsAlphaNum(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipAlphaNum(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__IsMember(OOC_CHAR8 ch, const OOC_CHAR8 set__ref[], OOC_LEN set_0d);
+extern OOC_CHAR8 URI_CharClass__IsReserved(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipReserved(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__IsMark(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipMark(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__IsUnreserved(OOC_CHAR8 ch);
+extern OOC_CHAR8 URI_CharClass__SkipUnreserved(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__SkipEscaped(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__SkipPChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__SkipURIC(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern OOC_CHAR8 URI_CharClass__SkipMember(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos, const OOC_CHAR8 set__ref[], OOC_LEN set_0d);
+extern OOC_CHAR8 URI_CharClass__SkipAuthChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
+extern void OOC_URI_CharClass_init();
+extern void OOC_URI_CharClass_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_URI_CharClass__2025;
+extern RT0__StructDesc _td_URI_CharClass__2359;
+extern RT0__StructDesc _td_URI_CharClass__2693;
+extern RT0__StructDesc _td_URI_CharClass__2857;
+extern RT0__StructDesc _td_URI_CharClass__3171;
+extern RT0__StructDesc _td_URI_CharClass__3568;
+extern RT0__StructDesc _td_URI_CharClass__3889;
+extern RT0__StructDesc _td_URI_CharClass__4054;
+extern RT0__StructDesc _td_URI_CharClass__4452;
+extern RT0__StructDesc _td_URI_CharClass__4717;
+extern RT0__StructDesc _td_URI_CharClass__4929;
+extern RT0__StructDesc _td_URI_CharClass__4990;
+extern RT0__StructDesc _td_URI_CharClass__5184;
+#endif /* _MODULE_URI_CharClass_ */
+
+/* --- */

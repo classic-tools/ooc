@@ -1,0 +1,25 @@
+#ifndef _MODULE_Config_Source_
+#define _MODULE_Config_Source_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Channel.oh"
+#include "Msg.oh"
+#include "Config/Parser.oh"
+typedef struct Config_Source__SourceDesc *Config_Source__Source;
+typedef struct Config_Source__SourceDesc {
+  char __dummy;
+} Config_Source__SourceDesc;
+extern void Config_Source__Init(Config_Source__Source src);
+extern void Config_Source__SourceDesc_Write(Config_Source__Source source, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+#define _TBN_Config_Source__SourceDesc_Write 0
+typedef void (*_TBP_Config_Source__SourceDesc_Write)(Config_Source__Source source, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+extern void OOC_Config_Source_init();
+extern void OOC_Config_Source_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Config_Source__Source;
+extern RT0__StructDesc _td_Config_Source__SourceDesc;
+#endif /* _MODULE_Config_Source_ */
+
+/* --- */

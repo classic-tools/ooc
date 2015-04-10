@@ -1,0 +1,43 @@
+#ifndef _MODULE_OS_Files_
+#define _MODULE_OS_Files_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Msg.oh"
+typedef Msg__Msg OS_Files__Result;
+typedef OOC_CHAR8 OS_Files__Path[];
+typedef OOC_INT32 OS_Files__Mode;
+typedef OOC_CHAR8 *OS_Files__Name;
+typedef OS_Files__Name *OS_Files__NameArray;
+#define OS_Files__done  0
+#define OS_Files__accessDenied 1
+#define OS_Files__fileExists 2
+#define OS_Files__writeError 3
+#define OS_Files__fileBusy 4
+#define OS_Files__noSuchFile 5
+#define OS_Files__defaultMode 511
+typedef struct OS_Files__ErrorContextDesc *OS_Files__ErrorContext;
+typedef struct OS_Files__ErrorContextDesc {
+  Msg__StringPtr id;
+} OS_Files__ErrorContextDesc;
+extern void OS_Files__ErrorContextDesc_GetTemplate(OS_Files__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
+#define _TBN_OS_Files__ErrorContextDesc_GetTemplate 0
+typedef void (*_TBP_OS_Files__ErrorContextDesc_GetTemplate)(OS_Files__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
+extern OS_Files__NameArray OS_Files__listdir(const OS_Files__Path path__ref, OOC_LEN path_0d, Msg__Msg *res);
+extern void OS_Files__mkdir(const OS_Files__Path path__ref, OOC_LEN path_0d, OOC_INT32 mode, Msg__Msg *res);
+extern void OS_Files__makedirs(const OS_Files__Path path__ref, OOC_LEN path_0d, OOC_INT32 mode, Msg__Msg *res);
+extern void OS_Files__remove(const OS_Files__Path path__ref, OOC_LEN path_0d, Msg__Msg *res);
+extern void OOC_OS_Files_init();
+extern void OOC_OS_Files_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OS_Files__Path;
+extern RT0__StructDesc _td_OS_Files__1365;
+extern RT0__StructDesc _td_OS_Files__Name;
+extern RT0__StructDesc _td_OS_Files__1406;
+extern RT0__StructDesc _td_OS_Files__NameArray;
+extern RT0__StructDesc _td_OS_Files__ErrorContext;
+extern RT0__StructDesc _td_OS_Files__ErrorContextDesc;
+#endif /* _MODULE_OS_Files_ */
+
+/* --- */

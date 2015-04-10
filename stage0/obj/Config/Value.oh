@@ -1,0 +1,72 @@
+#ifndef _MODULE_Config_Value_
+#define _MODULE_Config_Value_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Msg.oh"
+typedef OOC_CHAR8 Config_Value__Char;
+typedef OOC_CHAR8 Config_Value__String[];
+typedef OOC_CHAR8 *Config_Value__StringPtr;
+typedef struct Config_Value__ValueDesc *Config_Value__Value;
+typedef struct Config_Value__ValueDesc {
+  char __dummy;
+} Config_Value__ValueDesc;
+typedef OOC_CHAR8 *Config_Value__PrototypeName;
+typedef struct Config_Value__PrototypeDesc *Config_Value__Prototype;
+typedef struct Config_Value__PrototypeDesc {
+  Config_Value__Prototype next;
+  Config_Value__PrototypeName name;
+  Config_Value__Value prototype;
+} Config_Value__PrototypeDesc;
+typedef struct Config_Value__PrototypeListDesc *Config_Value__PrototypeList;
+typedef struct Config_Value__PrototypeListDesc {
+  Config_Value__Prototype head;
+} Config_Value__PrototypeListDesc;
+typedef struct Config_Value__ErrorContextDesc *Config_Value__ErrorContext;
+typedef struct Config_Value__ErrorContextDesc {
+  Msg__StringPtr id;
+} Config_Value__ErrorContextDesc;
+extern void Config_Value__ErrorContextDesc_WriteTemplate(Config_Value__ErrorContext ec, Msg__Msg msg, Msg__LString text, OOC_LEN text_0d, Msg__LString templ, OOC_LEN templ_0d);
+#define _TBN_Config_Value__ErrorContextDesc_WriteTemplate 1
+typedef void (*_TBP_Config_Value__ErrorContextDesc_WriteTemplate)(Config_Value__ErrorContext ec, Msg__Msg msg, Msg__LString text, OOC_LEN text_0d, Msg__LString templ, OOC_LEN templ_0d);
+extern void Config_Value__ValueDesc_StringToValue(Config_Value__Value v, const Config_Value__String str__ref, OOC_LEN str_0d, Msg__Msg *errMsg);
+#define _TBN_Config_Value__ValueDesc_StringToValue 2
+typedef void (*_TBP_Config_Value__ValueDesc_StringToValue)(Config_Value__Value v, const Config_Value__String str__ref, OOC_LEN str_0d, Msg__Msg *errMsg);
+extern void Config_Value__ValueDesc_ValueToString(Config_Value__Value v, Config_Value__String str, OOC_LEN str_0d);
+#define _TBN_Config_Value__ValueDesc_ValueToString 3
+typedef void (*_TBP_Config_Value__ValueDesc_ValueToString)(Config_Value__Value v, Config_Value__String str, OOC_LEN str_0d);
+extern Config_Value__Value Config_Value__ValueDesc_Clone(Config_Value__Value v);
+#define _TBN_Config_Value__ValueDesc_Clone 0
+typedef Config_Value__Value (*_TBP_Config_Value__ValueDesc_Clone)(Config_Value__Value v);
+extern void Config_Value__ValueDesc_DefiningModule(Config_Value__Value v, Config_Value__String str, OOC_LEN str_0d);
+#define _TBN_Config_Value__ValueDesc_DefiningModule 1
+typedef void (*_TBP_Config_Value__ValueDesc_DefiningModule)(Config_Value__Value v, Config_Value__String str, OOC_LEN str_0d);
+extern Config_Value__StringPtr Config_Value__GetStringPtr(Config_Value__String str, OOC_LEN str_0d);
+extern Config_Value__PrototypeList Config_Value__NewPrototypeList();
+extern void Config_Value__PrototypeListDesc_RegisterPrototype(Config_Value__PrototypeList tl, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value prototype);
+#define _TBN_Config_Value__PrototypeListDesc_RegisterPrototype 1
+typedef void (*_TBP_Config_Value__PrototypeListDesc_RegisterPrototype)(Config_Value__PrototypeList tl, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value prototype);
+extern Config_Value__Value Config_Value__PrototypeListDesc_GetClone(Config_Value__PrototypeList tl, const OOC_CHAR8 prototypeName__ref[], OOC_LEN prototypeName_0d);
+#define _TBN_Config_Value__PrototypeListDesc_GetClone 0
+typedef Config_Value__Value (*_TBP_Config_Value__PrototypeListDesc_GetClone)(Config_Value__PrototypeList tl, const OOC_CHAR8 prototypeName__ref[], OOC_LEN prototypeName_0d);
+extern void OOC_Config_Value_init();
+extern void OOC_Config_Value_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Config_Value__String;
+extern RT0__StructDesc _td_Config_Value__StringPtr;
+extern RT0__StructDesc _td_Config_Value__Value;
+extern RT0__StructDesc _td_Config_Value__ValueDesc;
+extern RT0__StructDesc _td_Config_Value__261;
+extern RT0__StructDesc _td_Config_Value__PrototypeName;
+extern RT0__StructDesc _td_Config_Value__Prototype;
+extern RT0__StructDesc _td_Config_Value__PrototypeDesc;
+extern RT0__StructDesc _td_Config_Value__PrototypeList;
+extern RT0__StructDesc _td_Config_Value__PrototypeListDesc;
+extern RT0__StructDesc _td_Config_Value__ErrorContext;
+extern RT0__StructDesc _td_Config_Value__ErrorContextDesc;
+extern RT0__StructDesc _td_Config_Value__1529;
+extern RT0__StructDesc _td_Config_Value__2155;
+#endif /* _MODULE_Config_Value_ */
+
+/* --- */

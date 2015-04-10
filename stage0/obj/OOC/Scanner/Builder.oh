@@ -1,0 +1,32 @@
+#ifndef _MODULE_OOC_Scanner_Builder_
+#define _MODULE_OOC_Scanner_Builder_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "OOC/Scanner/InputBuffer.oh"
+#include "OOC/Scanner/Symbol.oh"
+#include "OOC/Config/Pragmas.oh"
+typedef OOC_INT32 OOC_Scanner_Builder__Pos;
+typedef OOC_INT32 OOC_Scanner_Builder__Line;
+typedef OOC_INT32 OOC_Scanner_Builder__Column;
+typedef struct OOC_Scanner_Builder__BuilderDesc *OOC_Scanner_Builder__Builder;
+typedef struct OOC_Scanner_Builder__BuilderDesc {
+  OOC_Scanner_InputBuffer__Buffer inputBuffer;
+  OOC_Config_Pragmas__History pragmaHistory;
+} OOC_Scanner_Builder__BuilderDesc;
+extern void OOC_Scanner_Builder__Init(OOC_Scanner_Builder__Builder b, OOC_Scanner_InputBuffer__Buffer buffer);
+extern void OOC_Scanner_Builder__BuilderDesc_AddSymbol(OOC_Scanner_Builder__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
+#define _TBN_OOC_Scanner_Builder__BuilderDesc_AddSymbol 0
+typedef void (*_TBP_OOC_Scanner_Builder__BuilderDesc_AddSymbol)(OOC_Scanner_Builder__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
+extern void OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory(OOC_Scanner_Builder__Builder b, OOC_Config_Pragmas__History pragmaHistory);
+#define _TBN_OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory 1
+typedef void (*_TBP_OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory)(OOC_Scanner_Builder__Builder b, OOC_Config_Pragmas__History pragmaHistory);
+extern void OOC_OOC_Scanner_Builder_init();
+extern void OOC_OOC_Scanner_Builder_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_Scanner_Builder__Builder;
+extern RT0__StructDesc _td_OOC_Scanner_Builder__BuilderDesc;
+#endif /* _MODULE_OOC_Scanner_Builder_ */
+
+/* --- */

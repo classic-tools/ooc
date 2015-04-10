@@ -1,0 +1,34 @@
+#ifndef _MODULE_Config_Value_String_
+#define _MODULE_Config_Value_String_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Msg.oh"
+#include "Config/Value.oh"
+typedef Config_Value__StringPtr Config_Value_String__Type;
+typedef struct Config_Value_String__ValueDesc *Config_Value_String__Value;
+typedef struct Config_Value_String__ValueDesc {
+  Config_Value__StringPtr string;
+} Config_Value_String__ValueDesc;
+extern Config_Value_String__Value Config_Value_String__New(const Config_Value__String str__ref, OOC_LEN str_0d);
+extern void Config_Value_String__ValueDesc_StringToValue(Config_Value_String__Value v, const Config_Value__String str__ref, OOC_LEN str_0d, Msg__Msg *errMsg);
+#define _TBN_Config_Value_String__ValueDesc_StringToValue 2
+typedef void (*_TBP_Config_Value_String__ValueDesc_StringToValue)(Config_Value_String__Value v, const Config_Value__String str__ref, OOC_LEN str_0d, Msg__Msg *errMsg);
+extern void Config_Value_String__ValueDesc_ValueToString(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
+#define _TBN_Config_Value_String__ValueDesc_ValueToString 3
+typedef void (*_TBP_Config_Value_String__ValueDesc_ValueToString)(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
+extern Config_Value_String__Value Config_Value_String__ValueDesc_Clone(Config_Value_String__Value v);
+#define _TBN_Config_Value_String__ValueDesc_Clone 0
+typedef Config_Value_String__Value (*_TBP_Config_Value_String__ValueDesc_Clone)(Config_Value_String__Value v);
+extern void Config_Value_String__ValueDesc_DefiningModule(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
+#define _TBN_Config_Value_String__ValueDesc_DefiningModule 1
+typedef void (*_TBP_Config_Value_String__ValueDesc_DefiningModule)(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
+extern void OOC_Config_Value_String_init();
+extern void OOC_Config_Value_String_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_Config_Value_String__Value;
+extern RT0__StructDesc _td_Config_Value_String__ValueDesc;
+#endif /* _MODULE_Config_Value_String_ */
+
+/* --- */

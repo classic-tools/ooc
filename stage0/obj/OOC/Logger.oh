@@ -1,0 +1,38 @@
+#ifndef _MODULE_OOC_Logger_
+#define _MODULE_OOC_Logger_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "URI.oh"
+extern OOC_CHAR8 OOC_Logger__silence;
+extern void OOC_Logger__ReadFile(URI__URI uri);
+extern void OOC_Logger__ReadFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d);
+extern void OOC_Logger__WriteFile(URI__URI uri);
+extern void OOC_Logger__WriteFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d);
+extern void OOC_Logger__ShellCommand(const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
+extern void OOC_Logger__EnterMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, const OOC_CHAR8 module__ref[], OOC_LEN module_0d);
+extern OOC_CHAR8 OOC_Logger__ExitMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, const OOC_CHAR8 module__ref[], OOC_LEN module_0d, OOC_CHAR8 success);
+extern OOC_CHAR8 OOC_Logger__CachedMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, const OOC_CHAR8 module__ref[], OOC_LEN module_0d, OOC_CHAR8 success);
+extern void OOC_Logger__ExplainMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d);
+extern void OOC_Logger__ExplainFileMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d, URI__URI uri1, const OOC_CHAR8 s2__ref[], OOC_LEN s2_0d);
+extern void OOC_Logger__ExplainFilesMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d, URI__URI uri1, const OOC_CHAR8 s2__ref[], OOC_LEN s2_0d, URI__URI uri2, const OOC_CHAR8 s3__ref[], OOC_LEN s3_0d);
+extern void OOC_OOC_Logger_init();
+extern void OOC_OOC_Logger_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_Logger__276;
+extern RT0__StructDesc _td_OOC_Logger__670;
+extern RT0__StructDesc _td_OOC_Logger__1033;
+extern RT0__StructDesc _td_OOC_Logger__1222;
+extern RT0__StructDesc _td_OOC_Logger__1550;
+extern RT0__StructDesc _td_OOC_Logger__1826;
+extern RT0__StructDesc _td_OOC_Logger__2264;
+extern RT0__StructDesc _td_OOC_Logger__2681;
+extern RT0__StructDesc _td_OOC_Logger__2850;
+extern RT0__StructDesc _td_OOC_Logger__2911;
+extern RT0__StructDesc _td_OOC_Logger__3129;
+extern RT0__StructDesc _td_OOC_Logger__3191;
+extern RT0__StructDesc _td_OOC_Logger__3253;
+#endif /* _MODULE_OOC_Logger_ */
+
+/* --- */

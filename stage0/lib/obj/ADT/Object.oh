@@ -1,0 +1,110 @@
+#ifndef _MODULE_ADT_Object_
+#define _MODULE_ADT_Object_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "Channel.oh"
+#include "BinaryRider.oh"
+#include "Msg.oh"
+typedef struct ADT_Object__ObjectDesc *ADT_Object__Object;
+typedef ADT_Object__Object ADT_Object__ObjectArray[];
+typedef ADT_Object__Object *ADT_Object__ObjectArrayPtr;
+typedef struct ADT_Object__ObjectDesc {
+  char __dummy;
+} ADT_Object__ObjectDesc;
+typedef struct ADT_Object__ReaderDesc *ADT_Object__Reader;
+typedef struct ADT_Object__ReaderDesc {
+  Msg__Msg res;
+  OOC_INT8 byteOrder;
+  OOC_CHAR8 __pad5;
+  OOC_CHAR8 __pad6;
+  OOC_CHAR8 __pad7;
+  Channel__Reader byteReader;
+  Channel__Channel base;
+} ADT_Object__ReaderDesc;
+typedef struct ADT_Object__WriterDesc *ADT_Object__Writer;
+typedef struct ADT_Object__WriterDesc {
+  Msg__Msg res;
+  OOC_INT8 byteOrder;
+  OOC_CHAR8 __pad5;
+  OOC_CHAR8 __pad6;
+  OOC_CHAR8 __pad7;
+  Channel__Writer byteWriter;
+  Channel__Channel base;
+} ADT_Object__WriterDesc;
+typedef struct ADT_Object__StringDesc *ADT_Object__String;
+typedef struct ADT_Object__StringDesc {
+  char __dummy;
+} ADT_Object__StringDesc;
+#define ADT_Object__cancelled -1
+#define ADT_Object__versionMismatch -2
+#define ADT_Object__unknownType -3
+typedef struct ADT_Object__ErrorContextDesc *ADT_Object__ErrorContext;
+typedef struct ADT_Object__ErrorContextDesc {
+  Msg__StringPtr id;
+} ADT_Object__ErrorContextDesc;
+extern void ADT_Object__ErrorContextDesc_GetTemplate(ADT_Object__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
+#define _TBN_ADT_Object__ErrorContextDesc_GetTemplate 0
+typedef void (*_TBP_ADT_Object__ErrorContextDesc_GetTemplate)(ADT_Object__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
+extern void ADT_Object__Init(ADT_Object__Object obj);
+extern void ADT_Object__ObjectDesc_Destroy(ADT_Object__Object obj);
+#define _TBN_ADT_Object__ObjectDesc_Destroy 0
+typedef void (*_TBP_ADT_Object__ObjectDesc_Destroy)(ADT_Object__Object obj);
+extern ADT_Object__String ADT_Object__ObjectDesc_ToString(ADT_Object__Object obj);
+#define _TBN_ADT_Object__ObjectDesc_ToString 5
+typedef ADT_Object__String (*_TBP_ADT_Object__ObjectDesc_ToString)(ADT_Object__Object obj);
+extern OOC_CHAR8 ADT_Object__ObjectDesc_Equals(ADT_Object__Object x, ADT_Object__Object y);
+#define _TBN_ADT_Object__ObjectDesc_Equals 1
+typedef OOC_CHAR8 (*_TBP_ADT_Object__ObjectDesc_Equals)(ADT_Object__Object x, ADT_Object__Object y);
+extern OOC_INT32 ADT_Object__ObjectDesc_HashCode(ADT_Object__Object obj);
+#define _TBN_ADT_Object__ObjectDesc_HashCode 2
+typedef OOC_INT32 (*_TBP_ADT_Object__ObjectDesc_HashCode)(ADT_Object__Object obj);
+extern void ADT_Object__ObjectDesc_Store(ADT_Object__Object obj, ADT_Object__Writer w);
+#define _TBN_ADT_Object__ObjectDesc_Store 4
+typedef void (*_TBP_ADT_Object__ObjectDesc_Store)(ADT_Object__Object obj, ADT_Object__Writer w);
+extern void ADT_Object__ObjectDesc_Load(ADT_Object__Object obj, ADT_Object__Reader r);
+#define _TBN_ADT_Object__ObjectDesc_Load 3
+typedef void (*_TBP_ADT_Object__ObjectDesc_Load)(ADT_Object__Object obj, ADT_Object__Reader r);
+extern void ADT_Object__InitWriter(ADT_Object__Writer w, Channel__Channel ch);
+extern void ADT_Object__InitReader(ADT_Object__Reader r, Channel__Channel ch);
+extern void ADT_Object__WriterDesc_WriteObject(ADT_Object__Writer w, ADT_Object__Object obj);
+#define _TBN_ADT_Object__WriterDesc_WriteObject 19
+typedef void (*_TBP_ADT_Object__WriterDesc_WriteObject)(ADT_Object__Writer w, ADT_Object__Object obj);
+extern void ADT_Object__WriterDesc_WriteVersion(ADT_Object__Writer w, OOC_INT32 version);
+#define _TBN_ADT_Object__WriterDesc_WriteVersion 20
+typedef void (*_TBP_ADT_Object__WriterDesc_WriteVersion)(ADT_Object__Writer w, OOC_INT32 version);
+extern void ADT_Object__WriterDesc_Disconnect(ADT_Object__Writer w);
+#define _TBN_ADT_Object__WriterDesc_Disconnect 18
+typedef void (*_TBP_ADT_Object__WriterDesc_Disconnect)(ADT_Object__Writer w);
+extern void ADT_Object__ReaderDesc_ReadObject(ADT_Object__Reader r, ADT_Object__Object *obj);
+#define _TBN_ADT_Object__ReaderDesc_ReadObject 21
+typedef void (*_TBP_ADT_Object__ReaderDesc_ReadObject)(ADT_Object__Reader r, ADT_Object__Object *obj);
+extern void ADT_Object__ReaderDesc_ReadVersion(ADT_Object__Reader r, OOC_INT32 min, OOC_INT32 max, OOC_INT32 *version);
+#define _TBN_ADT_Object__ReaderDesc_ReadVersion 22
+typedef void (*_TBP_ADT_Object__ReaderDesc_ReadVersion)(ADT_Object__Reader r, OOC_INT32 min, OOC_INT32 max, OOC_INT32 *version);
+extern void ADT_Object__ReaderDesc_Cancel(ADT_Object__Reader r);
+#define _TBN_ADT_Object__ReaderDesc_Cancel 19
+typedef void (*_TBP_ADT_Object__ReaderDesc_Cancel)(ADT_Object__Reader r);
+extern void ADT_Object__ReaderDesc_Disconnect(ADT_Object__Reader r);
+#define _TBN_ADT_Object__ReaderDesc_Disconnect 20
+typedef void (*_TBP_ADT_Object__ReaderDesc_Disconnect)(ADT_Object__Reader r);
+extern void OOC_ADT_Object_init();
+extern void OOC_ADT_Object_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_ADT_Object__Object;
+extern RT0__StructDesc _td_ADT_Object__ObjectArray;
+extern RT0__StructDesc _td_ADT_Object__ObjectArrayPtr;
+extern RT0__StructDesc _td_ADT_Object__ObjectDesc;
+extern RT0__StructDesc _td_ADT_Object__Reader;
+extern RT0__StructDesc _td_ADT_Object__ReaderDesc;
+extern RT0__StructDesc _td_ADT_Object__Writer;
+extern RT0__StructDesc _td_ADT_Object__WriterDesc;
+extern RT0__StructDesc _td_ADT_Object__String;
+extern RT0__StructDesc _td_ADT_Object__StringDesc;
+extern RT0__StructDesc _td_ADT_Object__ErrorContext;
+extern RT0__StructDesc _td_ADT_Object__ErrorContextDesc;
+extern RT0__StructDesc _td_ADT_Object__5072;
+#endif /* _MODULE_ADT_Object_ */
+
+/* --- */

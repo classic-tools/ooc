@@ -1,0 +1,40 @@
+#ifndef _MODULE_URI_Scheme_Opaque_
+#define _MODULE_URI_Scheme_Opaque_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "TextRider.oh"
+#include "URI.oh"
+#include "URI/Error.oh"
+typedef struct URI_Scheme_Opaque__GenericDesc *URI_Scheme_Opaque__Generic;
+typedef struct URI_Scheme_Opaque__GenericDesc {
+  URI_String__StringPtr schemeId;
+  URI_String__StringPtr opaque;
+} URI_Scheme_Opaque__GenericDesc;
+extern void URI_Scheme_Opaque__Init(URI_Scheme_Opaque__Generic uri, URI_String__StringPtr schemeId, URI_String__StringPtr opaque);
+extern URI_Scheme_Opaque__Generic URI_Scheme_Opaque__New(URI_String__StringPtr schemeId, URI_String__StringPtr opaque);
+extern URI_Scheme_Opaque__Generic URI_Scheme_Opaque__GenericDesc_Clone(URI_Scheme_Opaque__Generic uri);
+#define _TBN_URI_Scheme_Opaque__GenericDesc_Clone 1
+typedef URI_Scheme_Opaque__Generic (*_TBP_URI_Scheme_Opaque__GenericDesc_Clone)(URI_Scheme_Opaque__Generic uri);
+extern void URI_Scheme_Opaque__GenericDesc_Copy(URI_Scheme_Opaque__Generic uri, URI__URI dest);
+#define _TBN_URI_Scheme_Opaque__GenericDesc_Copy 2
+typedef void (*_TBP_URI_Scheme_Opaque__GenericDesc_Copy)(URI_Scheme_Opaque__Generic uri, URI__URI dest);
+extern Msg__Msg URI_Scheme_Opaque__GenericDesc_ParseOpaquePart(URI_Scheme_Opaque__Generic uri, URI_String__StringPtr str, OOC_INT16 offset);
+#define _TBN_URI_Scheme_Opaque__GenericDesc_ParseOpaquePart 8
+typedef Msg__Msg (*_TBP_URI_Scheme_Opaque__GenericDesc_ParseOpaquePart)(URI_Scheme_Opaque__Generic uri, URI_String__StringPtr str, OOC_INT16 offset);
+extern void URI_Scheme_Opaque__GenericDesc_WriteXML(URI_Scheme_Opaque__Generic uri, TextRider__Writer w);
+#define _TBN_URI_Scheme_Opaque__GenericDesc_WriteXML 7
+typedef void (*_TBP_URI_Scheme_Opaque__GenericDesc_WriteXML)(URI_Scheme_Opaque__Generic uri, TextRider__Writer w);
+extern void URI_Scheme_Opaque__GenericDesc_GetString(URI_Scheme_Opaque__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+#define _TBN_URI_Scheme_Opaque__GenericDesc_GetString 4
+typedef void (*_TBP_URI_Scheme_Opaque__GenericDesc_GetString)(URI_Scheme_Opaque__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
+extern void OOC_URI_Scheme_Opaque_init();
+extern void OOC_URI_Scheme_Opaque_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_URI_Scheme_Opaque__Generic;
+extern RT0__StructDesc _td_URI_Scheme_Opaque__GenericDesc;
+extern RT0__StructDesc _td_URI_Scheme_Opaque__3081;
+#endif /* _MODULE_URI_Scheme_Opaque_ */
+
+/* --- */

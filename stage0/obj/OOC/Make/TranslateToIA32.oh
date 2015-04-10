@@ -1,0 +1,45 @@
+#ifndef _MODULE_OOC_Make_TranslateToIA32_
+#define _MODULE_OOC_Make_TranslateToIA32_
+
+#include "__typemap.h"
+#include "RT0.oh"
+#include "ADT/String.oh"
+#include "OOC/Error.oh"
+#include "OOC/Repository.oh"
+#include "OOC/IR.oh"
+#include "OOC/SymbolTable.oh"
+#include "OOC/IA32/Writer.oh"
+typedef struct OOC_Make_TranslateToIA32__TranslatorDesc *OOC_Make_TranslateToIA32__Translator;
+typedef struct OOC_Make_TranslateToIA32__TranslatorDesc {
+  OOC_IA32_Writer__Writer w;
+  OOC_Repository__Module module;
+  OOC_SymbolTable__Module symTab;
+  OOC_IR__ProcedureList procList;
+  OOC_INT32 currentProc;
+} OOC_Make_TranslateToIA32__TranslatorDesc;
+extern void OOC_Make_TranslateToIA32__InitTranslator(OOC_Make_TranslateToIA32__Translator t, OOC_Repository__Module module);
+extern void OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter(OOC_Make_TranslateToIA32__Translator t, OOC_IA32_Writer__Writer w, OOC_SymbolTable__Module symTab);
+#define _TBN_OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter 1
+typedef void (*_TBP_OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter)(OOC_Make_TranslateToIA32__Translator t, OOC_IA32_Writer__Writer w, OOC_SymbolTable__Module symTab);
+extern void OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList(OOC_Make_TranslateToIA32__Translator t, OOC_IR__ProcedureList procList);
+#define _TBN_OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList 0
+typedef void (*_TBP_OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList)(OOC_Make_TranslateToIA32__Translator t, OOC_IR__ProcedureList procList);
+extern void OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcBody(OOC_Make_TranslateToIA32__Translator t, OOC_IR__Procedure proc);
+#define _TBN_OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcBody 3
+typedef void (*_TBP_OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcBody)(OOC_Make_TranslateToIA32__Translator t, OOC_IR__Procedure proc);
+extern void OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure(OOC_Make_TranslateToIA32__Translator t, OOC_INT32 procIndex);
+#define _TBN_OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure 4
+typedef void (*_TBP_OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure)(OOC_Make_TranslateToIA32__Translator t, OOC_INT32 procIndex);
+extern void OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures(OOC_Make_TranslateToIA32__Translator t);
+#define _TBN_OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures 2
+typedef void (*_TBP_OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures)(OOC_Make_TranslateToIA32__Translator t);
+extern OOC_Error__List OOC_Make_TranslateToIA32__Run(OOC_Repository__Module m, ADT_String__String libraryName, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToIA32__Translator translator);
+extern void OOC_OOC_Make_TranslateToIA32_init();
+extern void OOC_OOC_Make_TranslateToIA32_init0();
+
+/* run-time meta data */
+extern RT0__StructDesc _td_OOC_Make_TranslateToIA32__Translator;
+extern RT0__StructDesc _td_OOC_Make_TranslateToIA32__TranslatorDesc;
+#endif /* _MODULE_OOC_Make_TranslateToIA32_ */
+
+/* --- */
