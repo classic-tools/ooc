@@ -200,8 +200,8 @@ extern void OOC_OOC_IR_XML_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IR_XML__Visitor;
 extern RT0__StructDesc _td_OOC_IR_XML__VisitorDesc;
-extern RT0__StructDesc _td_OOC_IR_XML__3491;
-extern RT0__StructDesc _td_OOC_IR_XML__7884;
+extern RT0__StructDesc _td_OOC_IR_XML__3484;
+extern RT0__StructDesc _td_OOC_IR_XML__7877;
 #endif /* _MODULE_OOC_IR_XML_ */
 
 /* --- */

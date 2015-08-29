@@ -1,4 +1,4 @@
-(* 	$Id: Object.Mod,v 1.25 2003/07/30 22:33:05 mva Exp $	 *)
+(* 	$Id: Object.Mod,v 1.26 2003/12/19 23:22:27 mva Exp $	 *)
 MODULE Object;
 (*  Low-level object and string implementation.
     Copyright (C) 2002,2003  Michael van Acken
@@ -235,7 +235,7 @@ PROCEDURE (x: Object) Equals*(y: Object): BOOLEAN;
 PROCEDURE (x: Object) HashCode*(): Hash;
 (**Returns a hash code value for the object.  This method is supported for the
    benefit of dictionaries such as those provided by
-   @omodule{*ADT:Dictionary}..
+   @omodule{*ADT:Dictionary}.
 
    The general contract of @oproc{Object.HashCode} is:
 

@@ -25,12 +25,12 @@ RT0__StructDesc _td_Object__String16 = { (RT0__Struct[]){&_td_Object__String16De
 RT0__StructDesc _td_Object__String16Desc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_Object__StringDesc,&_td_Object__String16Desc}, (void*[]){(void*)Object__StringDesc_ToString,(void*)Object__String16Desc_Equals,(void*)Object__String16Desc_HashCode,(void*)Object__StringDesc_Concat,(void*)Object__String16Desc_ToString8,(void*)Object__String16Desc_ToString16,(void*)Object__String16Desc_EqualsIgnoreCase,(void*)Object__String16Desc_Compare,(void*)Object__String16Desc_CharAt,(void*)Object__String16Desc_NextChar,(void*)Object__String16Desc_Substring,(void*)Object__String16Desc_Trim,(void*)Object__String16Desc_IndexOf,(void*)Object__String16Desc_LastIndexOf,(void*)Object__StringDesc_EndsWith,(void*)Object__StringDesc_StartsWith,(void*)Object__String16Desc_CharsUTF16}, NULL, &_mid, "String16Desc", 8, 2, 0, RT0__strRecord };
 RT0__StructDesc _td_Object__5738 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
 RT0__StructDesc _td_Object__6204 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 280, 280, 0, RT0__strArray };
-RT0__StructDesc _td_Object__11210 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_Object__11583 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_Object__12249 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_Object__12799 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_Object__14563 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, NULL, &_mid, NULL, 4, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_Object__15641 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, NULL, &_mid, NULL, 4, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__11209 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__11582 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__12248 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__12798 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__14562 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, NULL, &_mid, NULL, 4, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_Object__15640 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, NULL, &_mid, NULL, 4, 1, 0, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"Object", (RT0__Struct[]) { &_td_Object__Object, &_td_Object__ObjectArray, &_td_Object__ObjectArrayPtr, &_td_Object__ObjectDesc, &_td_Object__String, &_td_Object__StringArray, &_td_Object__StringArrayPtr, &_td_Object__StringDesc, &_td_Object__CharsLatin1, &_td_Object__CharsUTF16, &_td_Object__String8, &_td_Object__String8Desc, &_td_Object__String16, &_td_Object__String16Desc, NULL } };
 
 extern void OOC_Object_init0() {

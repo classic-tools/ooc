@@ -164,17 +164,17 @@ extern void OOC_OOC_Make_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make__ModuleInfo;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfoDesc;
-extern RT0__StructDesc _td_OOC_Make__1832;
-extern RT0__StructDesc _td_OOC_Make__1884;
-extern RT0__StructDesc _td_OOC_Make__2011;
+extern RT0__StructDesc _td_OOC_Make__1838;
+extern RT0__StructDesc _td_OOC_Make__1890;
+extern RT0__StructDesc _td_OOC_Make__2017;
 extern RT0__StructDesc _td_OOC_Make__ModuleList;
 extern RT0__StructDesc _td_OOC_Make__Rules;
 extern RT0__StructDesc _td_OOC_Make__RulesDesc;
-extern RT0__StructDesc _td_OOC_Make__3812;
-extern RT0__StructDesc _td_OOC_Make__3787;
+extern RT0__StructDesc _td_OOC_Make__3818;
+extern RT0__StructDesc _td_OOC_Make__3793;
 extern RT0__StructDesc _td_OOC_Make__ErrorContext;
 extern RT0__StructDesc _td_OOC_Make__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Make__4947;
+extern RT0__StructDesc _td_OOC_Make__4953;
 #endif /* _MODULE_OOC_Make_ */
 
 /* --- */
