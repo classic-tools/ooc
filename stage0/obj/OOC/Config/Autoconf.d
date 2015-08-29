@@ -1,4 +1,4 @@
-#include "OOC/Config/Autoconf.oh"
+#include <OOC/Config/Autoconf.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

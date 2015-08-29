@@ -1,11 +1,11 @@
 #ifndef _MODULE_OOC_C_Naming_
 #define _MODULE_OOC_C_Naming_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define OOC_C_Naming__suffixPassPerRef "__ref"
 extern Object__String OOC_C_Naming__NameOfDeclaration(OOC_SymbolTable__Declaration decl);
 extern Object__String OOC_C_Naming__NameOfModuleInit(OOC_SymbolTable__Module m, OOC_CHAR8 rtWrapper);

@@ -1,5 +1,5 @@
-#include "XML/DTD.d"
-#include "__oo2c.h"
+#include <XML/DTD.d>
+#include <__oo2c.h>
 
 void XML_DTD__InitDeclaration(XML_DTD__Declaration decl, XML_UnicodeBuffer__CharArray name) {
   register OOC_INT32 i0,i1;
@@ -1262,8 +1262,8 @@ XML_UnicodeBuffer__CharArray XML_DTD__GetString(OOC_CHAR16 string[], OOC_LEN str
   i1 = start;
   i0 = i0-i1;
   i2 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i0+1));
-  i3 = i0-1;
   s = (XML_UnicodeBuffer__CharArray)i2;
+  i3 = i0-1;
   i4 = 0<=i3;
   i = 0;
   if (!i4) goto l8;
@@ -1305,8 +1305,8 @@ XML_DTD__StringURI XML_DTD__GetStringURI(OOC_CHAR8 string[], OOC_LEN string_0d, 
   i1 = start;
   i0 = i0-i1;
   i2 = (OOC_INT32)RT0__NewObject(_td_XML_DTD__StringURI.baseTypes[0], (i0+1));
-  i3 = i0-1;
   s = (XML_DTD__StringURI)i2;
+  i3 = i0-1;
   i4 = 0<=i3;
   i = 0;
   if (!i4) goto l8;

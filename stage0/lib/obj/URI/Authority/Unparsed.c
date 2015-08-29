@@ -1,5 +1,5 @@
-#include "URI/Authority/Unparsed.d"
-#include "__oo2c.h"
+#include <URI/Authority/Unparsed.d>
+#include <__oo2c.h>
 
 void URI_Authority_Unparsed__Init(URI_Authority_Unparsed__Authority auth, URI_String__StringPtr unparsed) {
   register OOC_INT32 i0,i1;
@@ -61,16 +61,16 @@ Msg__Msg URI_Authority_Unparsed__AuthorityDesc_ParseAuthority(URI_Authority_Unpa
 
   i = 0;
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), 0);
   i1 = URI_CharClass__SkipAuthChar((void*)(_check_pointer(i0, 2344)), i1, (void*)(OOC_INT32)&i);
   if (!i1) goto l7;
 l2_loop:
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), 0);
   i1 = URI_CharClass__SkipAuthChar((void*)(_check_pointer(i0, 2344)), i1, (void*)(OOC_INT32)&i);
   if (i1) goto l2_loop;
 l7:
   i1 = _check_pointer(i0, 2369);
-  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
   i3 = i;
   i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 2369)));
   i1 = i1!=(OOC_CHAR8)'\000';

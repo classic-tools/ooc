@@ -1,6 +1,6 @@
-#include "OOC/Doc.oh"
-#include "CharClass.oh"
-#include "Strings.oh"
+#include <OOC/Doc.oh>
+#include <CharClass.oh>
+#include <Strings.oh>
 static void OOC_Doc__InitElement(OOC_Doc__Element e);
 static void OOC_Doc__InitInlineElement(OOC_Doc__InlineElement e);
 static void OOC_Doc__InitBlockElement(OOC_Doc__BlockElement e, OOC_CHAR8 padAfter);

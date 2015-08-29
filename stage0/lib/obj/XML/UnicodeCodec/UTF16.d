@@ -1,4 +1,4 @@
-#include "XML/UnicodeCodec/UTF16.oh"
+#include <XML/UnicodeCodec/UTF16.oh>
 XML_UnicodeCodec_UTF16__Factory XML_UnicodeCodec_UTF16__factory;
 XML_UnicodeCodec_UTF16__FactoryLE XML_UnicodeCodec_UTF16__factoryLE;
 XML_UnicodeCodec_UTF16__FactoryBE XML_UnicodeCodec_UTF16__factoryBE;

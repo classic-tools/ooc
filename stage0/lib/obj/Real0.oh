@@ -1,11 +1,11 @@
 #ifndef _MODULE_Real0_
 #define _MODULE_Real0_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ConvTypes.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ConvTypes.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 Real0__ConvResults;
 typedef OOC_INT8 Real0__ScanClass;
 typedef ConvTypes__ScanState Real0__ScanState;

@@ -1,5 +1,5 @@
-#include "StdChannels.d"
-#include "__oo2c.h"
+#include <StdChannels.d>
+#include <__oo2c.h>
 
 static Msg__Msg StdChannels__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;

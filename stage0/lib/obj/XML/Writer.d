@@ -1,9 +1,9 @@
-#include "XML/Writer.oh"
-#include "Ascii.oh"
-#include "Strings.oh"
-#include "LongStrings.oh"
-#include "IntStr.oh"
-#include "RealStr.oh"
+#include <XML/Writer.oh>
+#include <Ascii.oh>
+#include <Strings.oh>
+#include <LongStrings.oh>
+#include <IntStr.oh>
+#include <RealStr.oh>
 static XML_Writer__String XML_Writer__GetString(const OOC_CHAR16 str[], OOC_LEN str_0d);
 
 /* run-time meta data */

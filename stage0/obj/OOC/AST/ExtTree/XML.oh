@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_AST_ExtTree_XML_
 #define _MODULE_OOC_AST_ExtTree_XML_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "OOC/AST/ExtTree.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <OOC/AST/ExtTree.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern void OOC_AST_ExtTree_XML__Write(Channel__Writer cw, OOC_AST_ExtTree__Module m);
 extern void OOC_OOC_AST_ExtTree_XML_init();
 extern void OOC_OOC_AST_ExtTree_XML_init0();

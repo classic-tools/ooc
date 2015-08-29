@@ -1,5 +1,5 @@
-#include "URI/Query/Unparsed.d"
-#include "__oo2c.h"
+#include <URI/Query/Unparsed.d>
+#include <__oo2c.h>
 
 void URI_Query_Unparsed__Init(URI_Query_Unparsed__Query query, URI_String__StringPtr unparsed) {
   register OOC_INT32 i0,i1;
@@ -61,16 +61,16 @@ Msg__Msg URI_Query_Unparsed__QueryDesc_ParseQuery(URI_Query_Unparsed__Query quer
 
   i = 0;
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2309)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2309)), 0);
   i1 = URI_CharClass__SkipURIC((void*)(_check_pointer(i0, 2309)), i1, (void*)(OOC_INT32)&i);
   if (!i1) goto l7;
 l2_loop:
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2309)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2309)), 0);
   i1 = URI_CharClass__SkipURIC((void*)(_check_pointer(i0, 2309)), i1, (void*)(OOC_INT32)&i);
   if (i1) goto l2_loop;
 l7:
   i1 = _check_pointer(i0, 2334);
-  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
   i3 = i;
   i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 2334)));
   i1 = i1!=(OOC_CHAR8)'\000';

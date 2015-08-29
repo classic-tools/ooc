@@ -1,16 +1,16 @@
-#include "OOC/Auxiliary/ParseModule.oh"
-#include "Msg.oh"
-#include "URI.oh"
-#include "OOC/Config.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner.oh"
-#include "OOC/Scanner/Builder/BasicList.oh"
-#include "OOC/Parser.oh"
-#include "OOC/AST/ExtTree.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "OOC/AST/ExtTree/CreateSymTab.oh"
-#include "OOC/SymbolTable/CreateNamespace.oh"
-#include "OOC/Auxiliary/WriteSymbolFile.oh"
+#include <OOC/Auxiliary/ParseModule.oh>
+#include <Msg.oh>
+#include <URI.oh>
+#include <OOC/Config.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner.oh>
+#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/Parser.oh>
+#include <OOC/AST/ExtTree.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <OOC/AST/ExtTree/CreateSymTab.oh>
+#include <OOC/SymbolTable/CreateNamespace.oh>
+#include <OOC/Auxiliary/WriteSymbolFile.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

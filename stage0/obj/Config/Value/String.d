@@ -1,4 +1,4 @@
-#include "Config/Value/String.oh"
+#include <Config/Value/String.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

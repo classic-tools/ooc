@@ -1,5 +1,5 @@
-#include "OOC/Repository/FileSystem.d"
-#include "__oo2c.h"
+#include <OOC/Repository/FileSystem.d>
+#include <__oo2c.h>
 
 OOC_Repository_FileSystem__Repository OOC_Repository_FileSystem__New(OOC_Repository__Repository baseRep, URI__HierarchicalURI baseDir) {
   register OOC_INT32 i0,i1,i2,i3;

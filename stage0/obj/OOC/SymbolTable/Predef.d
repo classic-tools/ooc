@@ -1,7 +1,7 @@
-#include "OOC/SymbolTable/Predef.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "OOC/Config/Autoconf.oh"
+#include <OOC/SymbolTable/Predef.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <OOC/Config/Autoconf.oh>
 static Object_Boxed__Object OOC_SymbolTable_Predef__minConst[18];
 static Object_Boxed__Object OOC_SymbolTable_Predef__maxConst[18];
 OOC_SymbolTable__Name OOC_SymbolTable_Predef__nameStringModule;

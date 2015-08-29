@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/GetClass.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/GetClass.d>
+#include <__oo2c.h>
 
 OOC_SymbolTable__Name OOC_SymbolTable_GetClass__GetClass(OOC_SymbolTable__Item item) {
   register OOC_INT32 i0,i1;
@@ -29,14 +29,14 @@ OOC_SymbolTable__Name OOC_SymbolTable_GetClass__GetClass(OOC_SymbolTable__Item i
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1666))+16);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1672))+12);
       i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 1677)), (OOC_INT32)0);
-      Strings__FindNext("Init", 5, (void*)(_check_pointer(i1, 1677)), i2, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+      Strings__FindNext("Init", 5, (void*)(_check_pointer(i1, 1677)), i2, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
       i1 = found;
       if (i1) goto l3;
       i1=OOC_FALSE;
       goto l5;
 l3:
       i1 = pos;
-      i1 = i1==0;
+      i1 = i1==(OOC_INT32)0;
       
 l5:
       if (i1) goto l7;

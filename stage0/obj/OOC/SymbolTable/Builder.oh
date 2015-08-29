@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_SymbolTable_Builder_
 #define _MODULE_OOC_SymbolTable_Builder_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Object/Boxed.oh"
-#include "OOC/Doc.oh"
-#include "OOC/AST.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Object/Boxed.oh>
+#include <OOC/Doc.oh>
+#include <OOC/AST.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_SymbolTable_Builder__BuilderDesc *OOC_SymbolTable_Builder__Builder;
 typedef struct OOC_SymbolTable_Builder__BuilderDesc {
   OOC_INT8 _class;

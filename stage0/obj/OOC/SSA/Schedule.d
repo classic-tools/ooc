@@ -1,7 +1,7 @@
-#include "OOC/SSA/Schedule.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Blocker.oh"
+#include <OOC/SSA/Schedule.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Blocker.oh>
 static void OOC_SSA_Schedule__InitBlock(OOC_SSA_Schedule__Block b, OOC_SSA_Schedule__Block dominator);
 static void OOC_SSA_Schedule__RevertDomList(OOC_SSA_Schedule__Block b);
 static void OOC_SSA_Schedule__ClearJump(OOC_SSA_Schedule__Jump reference);

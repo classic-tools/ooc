@@ -1,16 +1,16 @@
 #ifndef _MODULE_Config_Section_Options_
 #define _MODULE_Config_Section_Options_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "XML/Locator.oh"
-#include "Config/Value.oh"
-#include "Config/Parser.oh"
-#include "Config/Section.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <XML/Locator.oh>
+#include <Config/Value.oh>
+#include <Config/Parser.oh>
+#include <Config/Section.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config_Section_Options__SectionDesc *Config_Section_Options__Section;
 typedef struct Config_Section_Options__OptionDesc *Config_Section_Options__Option;
 typedef struct Config_Section_Options__SectionDesc {

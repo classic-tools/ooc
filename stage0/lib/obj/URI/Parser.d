@@ -1,10 +1,10 @@
-#include "URI/Parser.oh"
-#include "Strings.oh"
-#include "URI/CharClass.oh"
-#include "URI/String.oh"
-#include "URI/Scheme/Hierarchical.oh"
-#include "URI/Scheme/Opaque.oh"
-#include "URI/Scheme/CurrentDoc.oh"
+#include <URI/Parser.oh>
+#include <Strings.oh>
+#include <URI/CharClass.oh>
+#include <URI/String.oh>
+#include <URI/Scheme/Hierarchical.oh>
+#include <URI/Scheme/Opaque.oh>
+#include <URI/Scheme/CurrentDoc.oh>
 #define URI_Parser__illegalSchemeChar 1
 #define URI_Parser__expectedHierarchicalPath 2
 #define URI_Parser__expectedOpaquePart 3

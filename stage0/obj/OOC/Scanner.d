@@ -1,7 +1,7 @@
-#include "OOC/Scanner.oh"
-#include "Ascii.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner/Pragma.oh"
+#include <OOC/Scanner.oh>
+#include <Ascii.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner/Pragma.oh>
 #define OOC_Scanner__sizeKWTable 128
 static OOC_Scanner_InputBuffer__CharArray OOC_Scanner__kwStr[128][2];
 static OOC_INT8 OOC_Scanner__kwSym[128][2];

@@ -1,5 +1,5 @@
-#include "OOC/SSA/Opcode.d"
-#include "__oo2c.h"
+#include <OOC/SSA/Opcode.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 OOC_SSA_Opcode__IsSigned(OOC_INT8 subclass) {
   register OOC_INT32 i0,i1;

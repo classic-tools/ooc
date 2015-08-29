@@ -1,18 +1,18 @@
-#include "Strings.d"
-#include "__oo2c.h"
+#include <Strings.d>
+#include <__oo2c.h>
 
 OOC_INT16 Strings__Length(const OOC_CHAR8 stringVal__ref[], OOC_LEN stringVal_0d) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(stringVal,OOC_CHAR8 ,stringVal_0d)
 
   OOC_INITIALIZE_VPAR(stringVal__ref,stringVal,OOC_CHAR8 ,stringVal_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal+(_check_index(0, stringVal_0d, OOC_UINT16, 2264)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal+(_check_index((OOC_INT32)0, stringVal_0d, OOC_UINT16, 2264)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l9;
 l3:
-  i0=0;
+  i0=(OOC_INT32)0;
 l4_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)stringVal+(_check_index(i0, stringVal_0d, OOC_UINT16, 2264)));
@@ -67,7 +67,7 @@ l3:
   numberToExtract = (destination_0d-1);
 l6:
   i0 = numberToExtract;
-  i1 = 0<i0;
+  i1 = (OOC_INT32)0<i0;
   if (i1) goto l9;
   i1=OOC_FALSE;
   goto l11;
@@ -78,11 +78,11 @@ l9:
   
 l11:
   if (i1) goto l13;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l23;
 l13:
   i1 = startPos;
-  i2=0;
+  i2=(OOC_INT32)0;
 l14_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i1+i2), source_0d, OOC_UINT16, 3989)));
   i4 = i2+1;
@@ -149,7 +149,7 @@ void Strings__Insert(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, OOC_INT16
   if (i4) goto l7;
   i0 = i2<=i0;
   if (i0) goto l5;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l20;
 l5:
   i0 = i3-i2;
@@ -177,9 +177,9 @@ l19:
   i0=i1;
 l20:
   i0 = i0-1;
-  i1 = 0<=i0;
+  i1 = (OOC_INT32)0<=i0;
   if (!i1) goto l28;
-  i1=0;
+  i1=(OOC_INT32)0;
 l23_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT16, 6877)));
   i4 = i1+1;
@@ -207,12 +207,12 @@ void Strings__Replace(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, OOC_INT1
   i1=OOC_FALSE;
   goto l7;
 l5:
-  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(0, source_0d, OOC_UINT16, 7793)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((OOC_INT32)0, source_0d, OOC_UINT16, 7793)));
   i1 = i1!=(OOC_CHAR8)'\000';
   
 l7:
   if (!i1) goto l19;
-  i1=0;
+  i1=(OOC_INT32)0;
 l9_loop:
   i2 = startPos;
   i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT16, 7845)));
@@ -247,12 +247,12 @@ void Strings__Append(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, OOC_CHAR8
   i2=OOC_FALSE;
   goto l5;
 l3:
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(0, source_0d, OOC_UINT16, 8203)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((OOC_INT32)0, source_0d, OOC_UINT16, 8203)));
   i2 = i2!=(OOC_CHAR8)'\000';
   
 l5:
   if (!i2) goto l17;
-  i2=0;
+  i2=(OOC_INT32)0;
 l8_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT16, 8255)));
   i4 = i0+1;
@@ -285,21 +285,21 @@ void Strings__Concat(const OOC_CHAR8 source1__ref[], OOC_LEN source1_0d, const O
 
   OOC_INITIALIZE_VPAR(source1__ref,source1,OOC_CHAR8 ,source1_0d)
   OOC_INITIALIZE_VPAR(source2__ref,source2,OOC_CHAR8 ,source2_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)source1+(_check_index(0, source1_0d, OOC_UINT16, 8681)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)source1+(_check_index((OOC_INT32)0, source1_0d, OOC_UINT16, 8681)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = 0<(destination_0d-1);
+  i0 = (OOC_INT32)0<(destination_0d-1);
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
   i0 = destination_0d-1;
-  i1=0;
+  i1=(OOC_INT32)0;
 l8_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)source1+(_check_index(i1, source1_0d, OOC_UINT16, 8752)));
   *(OOC_UINT8*)((OOC_INT32)destination+(_check_index(i1, destination_0d, OOC_UINT16, 8738))) = i2;
@@ -317,7 +317,7 @@ l13:
 l16:
   i0=i1;
 l17:
-  i1 = *(OOC_UINT8*)((OOC_INT32)source2+(_check_index(0, source2_0d, OOC_UINT16, 8859)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)source2+(_check_index((OOC_INT32)0, source2_0d, OOC_UINT16, 8859)));
   i1 = i1!=(OOC_CHAR8)'\000';
   if (i1) goto l20;
   i1=OOC_FALSE;
@@ -328,7 +328,7 @@ l20:
 l22:
   if (!i1) goto l34;
   i1 = destination_0d-1;
-  i2=0;
+  i2=(OOC_INT32)0;
 l25_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)source2+(_check_index(i2, source2_0d, OOC_UINT16, 8931)));
   *(OOC_UINT8*)((OOC_INT32)destination+(_check_index(i0, destination_0d, OOC_UINT16, 8917))) = i3;
@@ -439,22 +439,22 @@ OOC_INT8 Strings__Compare(const OOC_CHAR8 stringVal1__ref[], OOC_LEN stringVal1_
 
   OOC_INITIALIZE_VPAR(stringVal1__ref,stringVal1,OOC_CHAR8 ,stringVal1_0d)
   OOC_INITIALIZE_VPAR(stringVal2__ref,stringVal2,OOC_CHAR8 ,stringVal2_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 13187)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 13187)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 13210)));
-  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index(0, stringVal2_0d, OOC_UINT16, 13226)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 13210)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index((OOC_INT32)0, stringVal2_0d, OOC_UINT16, 13226)));
   i0 = i0==i1;
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
-  i0=0;
+  i0=(OOC_INT32)0;
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(i0, stringVal1_0d, OOC_UINT16, 13187)));
@@ -497,22 +497,22 @@ OOC_CHAR8 Strings__Equal(const OOC_CHAR8 stringVal1__ref[], OOC_LEN stringVal1_0
 
   OOC_INITIALIZE_VPAR(stringVal1__ref,stringVal1,OOC_CHAR8 ,stringVal1_0d)
   OOC_INITIALIZE_VPAR(stringVal2__ref,stringVal2,OOC_CHAR8 ,stringVal2_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 13719)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 13719)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 13742)));
-  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index(0, stringVal2_0d, OOC_UINT16, 13758)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 13742)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index((OOC_INT32)0, stringVal2_0d, OOC_UINT16, 13758)));
   i0 = i0==i1;
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
-  i0=0;
+  i0=(OOC_INT32)0;
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(i0, stringVal1_0d, OOC_UINT16, 13719)));
@@ -556,7 +556,7 @@ void Strings__FindNext(const OOC_CHAR8 pattern__ref[], OOC_LEN pattern_0d, const
   *patternFound = OOC_FALSE;
   goto l18;
 l3:
-  i0=0;
+  i0=(OOC_INT32)0;
 l4_loop:
   i1 = *(OOC_UINT8*)((OOC_INT32)pattern+(_check_index(i0, pattern_0d, OOC_UINT16, 14910)));
   i1 = i1==(OOC_CHAR8)'\000';
@@ -573,7 +573,7 @@ l4_loop:
 l10:
   i0 = (i1-i0)+1;
   startPos = i0;
-  i1=i0;i0=0;
+  i1=i0;i0=(OOC_INT32)0;
   goto l4_loop;
 l11:
   i1 = i1+1;
@@ -609,12 +609,12 @@ void Strings__FindPrev(const OOC_CHAR8 pattern__ref[], OOC_LEN pattern_0d, const
   startPos = i0;
 l3:
   i0 = startPos;
-  i0 = i0>=0;
+  i0 = i0>=(OOC_INT32)0;
   if (i0) goto l6;
   *patternFound = OOC_FALSE;
   goto l21;
 l6:
-  i0=0;
+  i0=(OOC_INT32)0;
 l7_loop:
   i1 = *(OOC_UINT8*)((OOC_INT32)pattern+(_check_index(i0, pattern_0d, OOC_UINT16, 17031)));
   i1 = i1==(OOC_CHAR8)'\000';
@@ -637,7 +637,7 @@ l14:
   goto l21;
 l15:
   startPos = ((i1-i0)-1);
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l7_loop;
 l19:
   i1 = startPos;
@@ -655,22 +655,22 @@ void Strings__FindDiff(const OOC_CHAR8 stringVal1__ref[], OOC_LEN stringVal1_0d,
 
   OOC_INITIALIZE_VPAR(stringVal1__ref,stringVal1,OOC_CHAR8 ,stringVal1_0d)
   OOC_INITIALIZE_VPAR(stringVal2__ref,stringVal2,OOC_CHAR8 ,stringVal2_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 18401)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 18401)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(0, stringVal1_0d, OOC_UINT16, 18424)));
-  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index(0, stringVal2_0d, OOC_UINT16, 18440)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index((OOC_INT32)0, stringVal1_0d, OOC_UINT16, 18424)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)stringVal2+(_check_index((OOC_INT32)0, stringVal2_0d, OOC_UINT16, 18440)));
   i0 = i0==i1;
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
-  i0=0;
+  i0=(OOC_INT32)0;
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)stringVal1+(_check_index(i0, stringVal1_0d, OOC_UINT16, 18401)));

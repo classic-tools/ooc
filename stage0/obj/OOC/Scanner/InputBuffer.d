@@ -1,4 +1,4 @@
-#include "OOC/Scanner/InputBuffer.oh"
+#include <OOC/Scanner/InputBuffer.oh>
 #define OOC_Scanner_InputBuffer__bytesPerRead 4096
 
 /* run-time meta data */

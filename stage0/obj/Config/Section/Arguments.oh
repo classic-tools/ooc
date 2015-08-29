@@ -1,16 +1,16 @@
 #ifndef _MODULE_Config_Section_Arguments_
 #define _MODULE_Config_Section_Arguments_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "XML/Locator.oh"
-#include "Config/Value.oh"
-#include "Config/Parser.oh"
-#include "Config/Section.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <XML/Locator.oh>
+#include <Config/Value.oh>
+#include <Config/Parser.oh>
+#include <Config/Section.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Config_Value__StringPtr Config_Section_Arguments__Argument;
 typedef Config_Value__StringPtr *Config_Section_Arguments__ArgumentArray;
 typedef struct Config_Section_Arguments__SectionDesc *Config_Section_Arguments__Section;

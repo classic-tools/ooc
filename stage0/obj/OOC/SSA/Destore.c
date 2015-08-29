@@ -1,5 +1,5 @@
-#include "OOC/SSA/Destore.d"
-#include "__oo2c.h"
+#include <OOC/SSA/Destore.d>
+#include <__oo2c.h>
 
 static OOC_CHAR8 OOC_SSA_Destore__IsLocalVariable(OOC_SSA__ProcBlock pb, OOC_SymbolTable__Declaration decl) {
   register OOC_INT32 i0,i1;
@@ -154,8 +154,8 @@ l7:
       i1 = (OOC_INT32)s;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7186))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7219));
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7229)))), &_td_OOC_SSA__DeclRefDesc, 7229)), 7237))+44);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7186))+4);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7229)))), &_td_OOC_SSA__DeclRefDesc, 7229)), 7237))+44);
       i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7203)))), ADT_Dictionary__DictionaryDesc_HasKey)),ADT_Dictionary__DictionaryDesc_HasKey)((ADT_Dictionary__Dictionary)i1, (Object__Object)i0);
       return (!i0);
 l8:
@@ -601,8 +601,8 @@ l4:
         i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 14905)))), OOC_SSA__InstrDesc_GetOpndClass)),OOC_SSA__InstrDesc_GetOpndClass)((OOC_SSA__Instr)i1, 5);
         i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14987)))), OOC_SSA__InstrDesc_GetOpndClass)),OOC_SSA__InstrDesc_GetOpndClass)((OOC_SSA__Instr)i0, 7);
         i2 = OOC_SSA_Aliasing__DesignatorAlias((OOC_SSA__Opnd)i2, (OOC_SSA__Opnd)i3);
-        i3 = i2==1;
         alias = i2;
+        i3 = i2==1;
         if (i3) goto l9;
         i2 = i2!=0;
         if (i2) goto l7;

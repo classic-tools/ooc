@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/TypeRules.oh"
-#include "OOC/SymbolTable/Builder.oh"
+#include <OOC/SymbolTable/TypeRules.oh>
+#include <OOC/SymbolTable/Builder.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

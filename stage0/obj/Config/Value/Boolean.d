@@ -1,5 +1,5 @@
-#include "Config/Value/Boolean.oh"
-#include "Strings.oh"
+#include <Config/Value/Boolean.oh>
+#include <Strings.oh>
 #define Config_Value_Boolean__invalidValue 1
 static Config_Value_Boolean__ErrorContext Config_Value_Boolean__booleanContext;
 

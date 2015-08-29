@@ -1,5 +1,5 @@
-#include "XML/UnicodeBuffer.d"
-#include "__oo2c.h"
+#include <XML/UnicodeBuffer.d>
+#include <__oo2c.h>
 
 static OOC_INT32 XML_UnicodeBuffer__AutodetectEnc(XML_UnicodeBuffer__Input input, OOC_CHAR8 enc[], OOC_LEN enc_0d) {
   register OOC_INT32 i0,i1,i2;
@@ -445,9 +445,9 @@ l11:
   i1 = *(OOC_INT32*)((_check_pointer(i0, 8672))+32);
   i1 = i1>=4096;
   if (!i1) goto l17;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 8786))+32);
-  i2 = *(OOC_INT32*)((_check_pointer(i0, 8768))+28);
-  i1 = i2-i1;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 8768))+28);
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 8786))+32);
+  i1 = i1-i2;
   len = i1;
   i2 = *(OOC_INT32*)((_check_pointer(i0, 8819))+32);
   i2 = i1<i2;
@@ -524,13 +524,13 @@ l28:
   i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10258))+20);
   i9 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10294));
   i8 = OOC_ARRAY_LENGTH((_check_pointer(i8, 10265)), (OOC_INT32)0);
-  i10 = *(OOC_INT32*)((_check_pointer(i0, 10236))+28);
-  i5 = *(OOC_INT32*)((_check_pointer(i5, 10165))+12);
+  i10 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10060))+12);
   i4 = *(OOC_INT32*)((_check_pointer(i4, 10136))+16);
-  i11 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10060))+12);
+  i5 = *(OOC_INT32*)((_check_pointer(i5, 10165))+12);
+  i11 = *(OOC_INT32*)((_check_pointer(i0, 10236))+28);
   i7 = OOC_ARRAY_LENGTH((_check_pointer(i7, 10210)), (OOC_INT32)0);
   i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 10098)), (OOC_INT32)0);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10067)))), XML_UnicodeCodec__CodecDesc_Decode)),XML_UnicodeCodec__CodecDesc_Decode)((XML_UnicodeCodec__Codec)i11, (void*)(_check_pointer(i2, 10098)), i3, i4, i5, (void*)(_check_pointer(i6, 10210)), i7, i10, (i8-1), (void*)((_check_pointer(i9, 10306))+16), (void*)((_check_pointer(i0, 10323))+28));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10067)))), XML_UnicodeCodec__CodecDesc_Decode)),XML_UnicodeCodec__CodecDesc_Decode)((XML_UnicodeCodec__Codec)i10, (void*)(_check_pointer(i2, 10098)), i3, i4, i5, (void*)(_check_pointer(i6, 10210)), i7, i11, (i8-1), (void*)((_check_pointer(i9, 10306))+16), (void*)((_check_pointer(i0, 10323))+28));
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10347))+20);
   i1 = _check_pointer(i1, 10354);
   i0 = *(OOC_INT32*)((_check_pointer(i0, 10357))+28);
@@ -745,11 +745,11 @@ l33:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14515))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14535))+24);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14604))+12);
-  i4 = *(OOC_INT32*)((_check_pointer(i0, 14622))+20);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14515))+4);
   i5 = *(OOC_INT32*)((_check_pointer(i0, 14563))+28);
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14515))+4);
+  i6 = *(OOC_INT32*)((_check_pointer(i0, 14622))+20);
   i7 = start;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 14522)))), XML_UnicodeCodec__CodecDesc_Encode)),XML_UnicodeCodec__CodecDesc_Encode)((XML_UnicodeCodec__Codec)i6, (void*)(_check_pointer(i2, 14550)), 8192, i7, i5, (void*)(_check_pointer(i3, 14616)), 8192, i4, 8192, (void*)(OOC_INT32)&start, (void*)((_check_pointer(i0, 14691))+20));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 14522)))), XML_UnicodeCodec__CodecDesc_Encode)),XML_UnicodeCodec__CodecDesc_Encode)((XML_UnicodeCodec__Codec)i4, (void*)(_check_pointer(i2, 14550)), 8192, i7, i5, (void*)(_check_pointer(i3, 14616)), 8192, i6, 8192, (void*)(OOC_INT32)&start, (void*)((_check_pointer(i0, 14691))+20));
   i0 = *(OOC_INT32*)((_check_pointer(i0, 14728))+28);
   i1 = start;
   _assert((i1==i0), 127, 14709);
@@ -942,9 +942,9 @@ l3:
   if (!i0) goto l6;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17579))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17602))+12);
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 17620))+20);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17579))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17586)))), XML_UnicodeCodec__CodecDesc_EncodeBOM)),XML_UnicodeCodec__CodecDesc_EncodeBOM)((XML_UnicodeCodec__Codec)i4, (void*)(_check_pointer(i2, 17614)), 8192, i3, 8192, (void*)((_check_pointer(i1, 17687))+20));
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17579))+4);
+  i4 = *(OOC_INT32*)((_check_pointer(i1, 17620))+20);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17586)))), XML_UnicodeCodec__CodecDesc_EncodeBOM)),XML_UnicodeCodec__CodecDesc_EncodeBOM)((XML_UnicodeCodec__Codec)i3, (void*)(_check_pointer(i2, 17614)), 8192, i4, 8192, (void*)((_check_pointer(i1, 17687))+20));
 l6:
   return;
   ;

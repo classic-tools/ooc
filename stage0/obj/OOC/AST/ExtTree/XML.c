@@ -1,5 +1,5 @@
-#include "OOC/AST/ExtTree/XML.d"
-#include "__oo2c.h"
+#include <OOC/AST/ExtTree/XML.d>
+#include <__oo2c.h>
 
 void OOC_AST_ExtTree_XML__Write(Channel__Writer cw, OOC_AST_ExtTree__Module m) {
   register OOC_INT32 i0,i1;

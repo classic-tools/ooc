@@ -1,13 +1,13 @@
 #ifndef _MODULE_URI_Query_Unparsed_
 #define _MODULE_URI_Query_Unparsed_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "TextRider.oh"
-#include "URI.oh"
-#include "URI/Error.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <TextRider.oh>
+#include <URI.oh>
+#include <URI/Error.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct URI_Query_Unparsed__QueryDesc *URI_Query_Unparsed__Query;
 typedef struct URI_Query_Unparsed__QueryDesc {
   URI_String__StringPtr unparsed;

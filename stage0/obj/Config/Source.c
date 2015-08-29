@@ -1,5 +1,5 @@
-#include "Config/Source.d"
-#include "__oo2c.h"
+#include <Config/Source.d>
+#include <__oo2c.h>
 
 void Config_Source__Init(Config_Source__Source src) {
 

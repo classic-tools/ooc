@@ -1,9 +1,9 @@
-#include "XML/Error.oh"
-#include "Ascii.oh"
-#include "Strings.oh"
-#include "TextRider.oh"
-#include "LongStrings.oh"
-#include "URI/Scheme/File.oh"
+#include <XML/Error.oh>
+#include <Ascii.oh>
+#include <Strings.oh>
+#include <TextRider.oh>
+#include <LongStrings.oh>
+#include <URI/Scheme/File.oh>
 OOC_INT32 XML_Error__errMsgLineBase;
 OOC_INT32 XML_Error__errMsgColumnBase;
 OOC_INT32 XML_Error__errMsgCharPosBase;

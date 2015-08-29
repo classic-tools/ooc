@@ -1,10 +1,10 @@
-#include "OOC/C/Naming.oh"
-#include "IntStr.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/Config.oh"
-#include "OOC/SymbolTable/Predef.oh"
+#include <OOC/C/Naming.oh>
+#include <IntStr.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/Config.oh>
+#include <OOC/SymbolTable/Predef.oh>
 typedef OOC_CHAR8 OOC_C_Naming__Buffer[2048];
 static ADT_Dictionary__Dictionary OOC_C_Naming__keywords;
 static Object__String OOC_C_Naming__rwPrefix;

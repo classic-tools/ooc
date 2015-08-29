@@ -1,10 +1,10 @@
 #ifndef _MODULE_OOC_SSA_IGraph_
 #define _MODULE_OOC_SSA_IGraph_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_UINT32 OOC_SSA_IGraph__SetType;
 typedef OOC_UINT32 *OOC_SSA_IGraph__BitMatrix;
 typedef OOC_INT32 OOC_SSA_IGraph__Color;

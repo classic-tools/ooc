@@ -1,10 +1,10 @@
-#include "XML/EntityResolver.oh"
-#include "LongStrings.oh"
-#include "Strings.oh"
-#include "URI/Parser.oh"
-#include "URI/CharClass.oh"
-#include "XML/UnicodeCodec.oh"
-#include "XML/UnicodeCodec/UTF8.oh"
+#include <XML/EntityResolver.oh>
+#include <LongStrings.oh>
+#include <Strings.oh>
+#include <URI/Parser.oh>
+#include <URI/CharClass.oh>
+#include <XML/UnicodeCodec.oh>
+#include <XML/UnicodeCodec/UTF8.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

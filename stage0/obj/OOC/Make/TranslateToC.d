@@ -1,21 +1,21 @@
-#include "OOC/Make/TranslateToC.oh"
-#include "Channel.oh"
-#include "StdChannels.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/Config.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "OOC/Auxiliary/ParseModule.oh"
-#include "OOC/Auxiliary/WriteSymbolFile.oh"
-#include "OOC/AST.oh"
-#include "OOC/AST/ExtTree.oh"
-#include "OOC/AST/ExtTree/CreateIR.oh"
-#include "OOC/AST/ExtTree/XML.oh"
-#include "OOC/IR/XML.oh"
-#include "OOC/IR/ConstFold.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Exports.oh"
-#include "OOC/C/ConvertDecl.oh"
-#include "OOC/C/RuntimeData.oh"
+#include <OOC/Make/TranslateToC.oh>
+#include <Channel.oh>
+#include <StdChannels.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/Config.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <OOC/Auxiliary/ParseModule.oh>
+#include <OOC/Auxiliary/WriteSymbolFile.oh>
+#include <OOC/AST.oh>
+#include <OOC/AST/ExtTree.oh>
+#include <OOC/AST/ExtTree/CreateIR.oh>
+#include <OOC/AST/ExtTree/XML.oh>
+#include <OOC/IR/XML.oh>
+#include <OOC/IR/ConstFold.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Exports.oh>
+#include <OOC/C/ConvertDecl.oh>
+#include <OOC/C/RuntimeData.oh>
 static void OOC_Make_TranslateToC__WriteModuleName(OOC_C_DeclWriter__Writer w, const OOC_CHAR8 prefix__ref[], OOC_LEN prefix_0d, OOC_Repository__Module module, const OOC_CHAR8 suffix__ref[], OOC_LEN suffix_0d, OOC_CHAR8 newline);
 static void OOC_Make_TranslateToC__WriteHeaderFile(OOC_C_DeclWriter__Writer w, OOC_Repository__Module m, OOC_SymbolTable__Module symTab, ADT_Dictionary__Dictionary exports);
 static void OOC_Make_TranslateToC__WriteDeclFile(OOC_C_DeclWriter__Writer w, OOC_Repository__Module m, OOC_SymbolTable__Module symTab, ADT_Dictionary__Dictionary exports);

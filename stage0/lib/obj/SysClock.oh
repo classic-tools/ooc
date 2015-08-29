@@ -1,10 +1,10 @@
 #ifndef _MODULE_SysClock_
 #define _MODULE_SysClock_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define SysClock__maxSecondParts 999
 #define SysClock__zoneMin -780
 #define SysClock__zoneMax 720

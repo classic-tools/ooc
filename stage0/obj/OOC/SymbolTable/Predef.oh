@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_SymbolTable_Predef_
 #define _MODULE_OOC_SymbolTable_Predef_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object/Boxed.oh"
-#include "Object/BigInt.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object/Boxed.oh>
+#include <Object/BigInt.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define OOC_SymbolTable_Predef__boolean 0
 #define OOC_SymbolTable_Predef__char 1
 #define OOC_SymbolTable_Predef__longchar 2

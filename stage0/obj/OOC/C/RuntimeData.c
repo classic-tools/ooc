@@ -1,5 +1,5 @@
-#include "OOC/C/RuntimeData.d"
-#include "__oo2c.h"
+#include <OOC/C/RuntimeData.d>
+#include <__oo2c.h>
 
 void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTable__Module symTab, OOC_CHAR8 writeHeader) {
   register OOC_INT32 i0,i1;

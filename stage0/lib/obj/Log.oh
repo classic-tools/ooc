@@ -1,13 +1,13 @@
 #ifndef _MODULE_Log_
 #define _MODULE_Log_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "StdChannels.oh"
-#include "TextRider.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <StdChannels.oh>
+#include <TextRider.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern TextRider__Writer Log__writer;
 extern OOC_CHAR8 Log__Done();
 extern void Log__ClearError();

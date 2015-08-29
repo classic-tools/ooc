@@ -1,5 +1,5 @@
-#include "URI/CharClass.d"
-#include "__oo2c.h"
+#include <URI/CharClass.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 URI_CharClass__IsAlpha(OOC_CHAR8 ch) {
   register OOC_INT32 i0,i1;
@@ -120,23 +120,23 @@ OOC_CHAR8 URI_CharClass__IsMember(OOC_CHAR8 ch, const OOC_CHAR8 set__ref[], OOC_
   OOC_ALLOCATE_VPAR(set,OOC_CHAR8 ,set_0d)
 
   OOC_INITIALIZE_VPAR(set__ref,set,OOC_CHAR8 ,set_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 2938)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 2938)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 2954)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 2954)));
   i1 = ch;
   i0 = i0!=i1;
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
   i0 = ch;
-  i1=0;
+  i1=(OOC_INT32)0;
 l8_loop:
   i1 = i1+1;
   i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 2938)));

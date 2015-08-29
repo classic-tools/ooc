@@ -1,13 +1,13 @@
 #ifndef _MODULE_IO_Memory_
 #define _MODULE_IO_Memory_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "Time.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <Time.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define IO_Memory__noLength -1
 #define IO_Memory__noPosition -2
 #define IO_Memory__done  0

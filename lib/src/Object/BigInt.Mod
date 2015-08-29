@@ -1,4 +1,4 @@
-(*	$Id: BigInt.Mod,v 1.3 2002/12/17 19:33:40 mva Exp $	*)
+(*	$Id: BigInt.Mod,v 1.4 2002/12/22 08:51:29 mva Exp $	*)
 MODULE Object:BigInt [OOC_EXTENSIONS];
 (*  Implements integer values of arbitrary magnitude.
     Copyright (C) 2002  Michael van Acken
@@ -195,6 +195,29 @@ PROCEDURE (a: BigInt) Copy*(): BigInt;
     S.MOVE(S.ADR(a.digit^),S.ADR(z.digit^),size*SIZE(Digit));
     RETURN z;
   END Copy;
+
+PROCEDURE (a: BigInt) HashCode*(): Object.Hash;
+  VAR
+    len, p: LONGINT;
+    x: Object.Hash;
+  BEGIN
+    len := ABS(a.size);
+    IF (len = 0) THEN
+      RETURN 0;
+    ELSE
+      x := ASH(a.digit[0], 7);
+      p := 0;
+      WHILE (p # len) DO
+<* PUSH; OverflowCheck := FALSE *>
+        x := S.VAL(Object.Hash, S.VAL(SET, 1000003*x) /
+                   S.VAL(SET, LONG(a.digit[p])));
+<* POP *>
+        INC(p);
+      END;
+      x := S.VAL(Object.Hash, S.VAL(SET,x) / S.VAL(SET,len));
+      RETURN x
+    END;
+  END HashCode;
 
 PROCEDURE (a: BigInt) Equals* (b: Object.Object): BOOLEAN;
   VAR

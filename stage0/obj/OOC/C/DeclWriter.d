@@ -1,12 +1,12 @@
-#include "OOC/C/DeclWriter.oh"
-#include "Err.oh"
-#include "Files.oh"
-#include "IntStr.oh"
-#include "Strings.oh"
-#include "Object/BigInt.oh"
-#include "IO/Memory.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
+#include <OOC/C/DeclWriter.oh>
+#include <Err.oh>
+#include <Files.oh>
+#include <IntStr.oh>
+#include <Strings.oh>
+#include <Object/BigInt.oh>
+#include <IO/Memory.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
 #define OOC_C_DeclWriter__lastBasicType 16
 #define OOC_C_DeclWriter__priName 0
 #define OOC_C_DeclWriter__priStruct 1
@@ -60,11 +60,11 @@ RT0__StructDesc _td_OOC_C_DeclWriter__9145 = { (RT0__Struct[]){&RT0__char}, NULL
 RT0__StructDesc _td_OOC_C_DeclWriter__9519 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_C_DeclWriter__11603 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_C_DeclWriter__12484 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__20072 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__20229 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__24027 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__29814 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__29852 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 4096, 4096, RT0__strArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__20167 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__20324 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__24122 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__29909 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__29947 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 4096, 4096, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:C:DeclWriter", (RT0__Struct[]) { &_td_OOC_C_DeclWriter__Type, &_td_OOC_C_DeclWriter__TypeDesc, &_td_OOC_C_DeclWriter__BasicType, &_td_OOC_C_DeclWriter__BasicTypeDesc, &_td_OOC_C_DeclWriter__Pointer, &_td_OOC_C_DeclWriter__PointerDesc, &_td_OOC_C_DeclWriter__Array, &_td_OOC_C_DeclWriter__ArrayDesc, &_td_OOC_C_DeclWriter__Function, &_td_OOC_C_DeclWriter__FunctionDesc, &_td_OOC_C_DeclWriter__Struct, &_td_OOC_C_DeclWriter__StructDesc, &_td_OOC_C_DeclWriter__TypeRef, &_td_OOC_C_DeclWriter__TypeRefDesc, &_td_OOC_C_DeclWriter__Declaration, &_td_OOC_C_DeclWriter__DeclarationDesc, &_td_OOC_C_DeclWriter__IncludeModule, &_td_OOC_C_DeclWriter__IncludeModuleDesc, &_td_OOC_C_DeclWriter__Define, &_td_OOC_C_DeclWriter__DefineDesc, &_td_OOC_C_DeclWriter__Writer, &_td_OOC_C_DeclWriter__WriterDesc, NULL } };
 
 extern void OOC_OOC_C_DeclWriter_init0() {

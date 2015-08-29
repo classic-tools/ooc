@@ -1,5 +1,5 @@
-#include "OOC/SSA/Allocator.d"
-#include "__oo2c.h"
+#include <OOC/SSA/Allocator.d>
+#include <__oo2c.h>
 
 static OOC_SSA_Allocator__RegisterFile OOC_SSA_Allocator__NewRegisterFile(OOC_INT8 registerType) {
   register OOC_INT32 i0,i1;
@@ -897,16 +897,16 @@ l16_loop:
       i5 = *(OOC_INT8*)(_check_pointer(i2, 18060));
       switch (i5) {
       case 4:
-        Strings__Insert("i", 2, 0, (void*)(OOC_INT32)str, 16);
+        Strings__Insert("i", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, 16);
         goto l23;
       case 5:
-        Strings__Insert("w", 2, 0, (void*)(OOC_INT32)str, 16);
+        Strings__Insert("w", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, 16);
         goto l23;
       case 13:
-        Strings__Insert("f", 2, 0, (void*)(OOC_INT32)str, 16);
+        Strings__Insert("f", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, 16);
         goto l23;
       case 14:
-        Strings__Insert("d", 2, 0, (void*)(OOC_INT32)str, 16);
+        Strings__Insert("d", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, 16);
         goto l23;
       default:
         _failed_case(i5, 18053);
@@ -1056,9 +1056,9 @@ l8:
           i0 = *(OOC_INT32*)(_check_pointer(i2, 20852));
           i1 = *(OOC_INT32*)((_check_pointer(i2, 20834))+4);
           _assert((i1<=i0), 127, 20824);
-          i0 = *(OOC_INT32*)(_check_pointer(i2, 20910));
-          i1 = *(OOC_INT32*)((_check_pointer(i2, 20893))+4);
-          i0 = i1==i0;
+          i0 = *(OOC_INT32*)((_check_pointer(i2, 20893))+4);
+          i1 = *(OOC_INT32*)(_check_pointer(i2, 20910));
+          i0 = i0==i1;
           if (!i0) goto l6;
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 20952))+8);
           live = (OOC_SSA_IGraph__Vector)i0;

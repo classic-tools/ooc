@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_Scanner_InputBuffer_
 #define _MODULE_OOC_Scanner_InputBuffer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "OOC/Error.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <OOC/Error.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR8 OOC_Scanner_InputBuffer__Char;
 typedef OOC_CHAR8 *OOC_Scanner_InputBuffer__CharArray;
 typedef OOC_INT32 OOC_Scanner_InputBuffer__CharPos;

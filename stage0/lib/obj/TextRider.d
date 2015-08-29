@@ -1,10 +1,10 @@
-#include "TextRider.oh"
-#include "Ascii.oh"
-#include "Strings.oh"
-#include "RealStr.oh"
-#include "IntStr.oh"
-#include "LRealConv.oh"
-#include "ConvTypes.oh"
+#include <TextRider.oh>
+#include <Ascii.oh>
+#include <Strings.oh>
+#include <RealStr.oh>
+#include <IntStr.oh>
+#include <LRealConv.oh>
+#include <ConvTypes.oh>
 #define TextRider__maxLookahead 2
 static TextRider__ErrorContext TextRider__errorContext;
 static Msg__Msg TextRider__GetError(OOC_INT32 code);

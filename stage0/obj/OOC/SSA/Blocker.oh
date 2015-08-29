@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_SSA_Blocker_
 #define _MODULE_OOC_SSA_Blocker_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ADT/Dictionary.oh"
-#include "Channel.oh"
-#include "OOC/SSA.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ADT/Dictionary.oh>
+#include <Channel.oh>
+#include <OOC/SSA.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_SSA_Blocker__ProxyDesc *OOC_SSA_Blocker__Proxy;
 typedef struct OOC_SSA_Blocker__RegionDesc *OOC_SSA_Blocker__Region;
 typedef struct OOC_SSA_Blocker__SelectDesc *OOC_SSA_Blocker__Select;

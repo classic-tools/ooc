@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/Exports.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/Exports.d>
+#include <__oo2c.h>
 
 ADT_Dictionary__Dictionary OOC_SymbolTable_Exports__GetExports(OOC_SymbolTable__Module module, OOC_CHAR8 forSymbolFile) {
   register OOC_INT32 i0;
@@ -124,8 +124,8 @@ l35:
               if (i0) goto l38;
               i0 = (OOC_INT32)module;
               i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2760))+40);
-              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2791))+32);
               i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2760))+40);
+              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2791))+32);
               i3 = (OOC_INT32)root;
               i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2764)))), OOC_SymbolTable__NamespaceDesc_IdentifyLocal)),OOC_SymbolTable__NamespaceDesc_IdentifyLocal)((OOC_SymbolTable__Namespace)i0, (OOC_SymbolTable__Item)i3, (OOC_SymbolTable__Name)i1, OOC_TRUE);
               

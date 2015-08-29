@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_Doc_
 #define _MODULE_OOC_Doc_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ADT/Storable.oh"
-#include "ADT/ArrayList.oh"
-#include "OOC/Doc/Decoration.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ADT/Storable.oh>
+#include <ADT/ArrayList.oh>
+#include <OOC/Doc/Decoration.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Doc__Position {
   OOC_INT32 _char;
   OOC_INT32 line;

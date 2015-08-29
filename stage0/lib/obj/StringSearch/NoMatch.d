@@ -1,4 +1,4 @@
-#include "StringSearch/NoMatch.oh"
+#include <StringSearch/NoMatch.oh>
 StringSearch_NoMatch__Factory StringSearch_NoMatch__factory;
 StringSearch_NoMatch__Matcher StringSearch_NoMatch__matcher;
 static void StringSearch_NoMatch__InitMatcher(StringSearch_NoMatch__Matcher matcher, Object__String8 pattern, OOC_UINT32 flags, OOC_INT32 groups);

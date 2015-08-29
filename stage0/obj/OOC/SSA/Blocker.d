@@ -1,10 +1,10 @@
-#include "OOC/SSA/Blocker.oh"
-#include "Object.oh"
-#include "Object/BigInt.oh"
-#include "ADT/Dictionary/IntValue.oh"
-#include "TextRider.oh"
-#include "OOC/SSA/DeadCodeElimination.oh"
-#include "OOC/SSA/Destore.oh"
+#include <OOC/SSA/Blocker.oh>
+#include <Object.oh>
+#include <Object/BigInt.oh>
+#include <ADT/Dictionary/IntValue.oh>
+#include <TextRider.oh>
+#include <OOC/SSA/DeadCodeElimination.oh>
+#include <OOC/SSA/Destore.oh>
 static void OOC_SSA_Blocker__InitProxy(OOC_SSA_Blocker__Proxy p, OOC_SSA__Instr instr);
 static OOC_SSA_Blocker__Proxy OOC_SSA_Blocker__NewProxy(OOC_SSA__Instr instr);
 static void OOC_SSA_Blocker__ClearMarkers(OOC_SSA_Blocker__Region r);

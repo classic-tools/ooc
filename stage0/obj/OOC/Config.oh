@@ -1,16 +1,16 @@
 #ifndef _MODULE_OOC_Config_
 #define _MODULE_OOC_Config_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Config/Value.oh"
-#include "Config/Section/Options.oh"
-#include "Config/Section/Arguments.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "OOC/Config/Repositories.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Config/Value.oh>
+#include <Config/Section/Options.oh>
+#include <Config/Section/Arguments.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <OOC/Config/Repositories.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern Config_Section_Options__Section OOC_Config__options;
 extern Config_Section_Arguments__Section OOC_Config__arguments;
 extern OOC_Config_Pragmas__Section OOC_Config__pragmas;

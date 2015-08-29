@@ -1,6 +1,6 @@
-#include "ADT/StringBuffer.oh"
-#include "IntStr.oh"
-#include "RealStr.oh"
+#include <ADT/StringBuffer.oh>
+#include <IntStr.oh>
+#include <RealStr.oh>
 static void ADT_StringBuffer__Init(ADT_StringBuffer__StringBuffer b, OOC_INT32 initialCapacity);
 static OOC_INT32 ADT_StringBuffer__Length(const OOC_CHAR8 data[], OOC_LEN data_0d);
 

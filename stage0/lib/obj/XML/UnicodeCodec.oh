@@ -1,10 +1,10 @@
 #ifndef _MODULE_XML_UnicodeCodec_
 #define _MODULE_XML_UnicodeCodec_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define XML_UnicodeCodec__decodeError "\/75"
 #define XML_UnicodeCodec__encodeError "?"
 #define XML_UnicodeCodec__byteOrderMark "\+77"

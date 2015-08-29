@@ -1,5 +1,5 @@
-#include "OOC/Repository.d"
-#include "__oo2c.h"
+#include <OOC/Repository.d>
+#include <__oo2c.h>
 
 void OOC_Repository__Init(OOC_Repository__Repository rep, OOC_Repository__Repository baseRep, URI__HierarchicalURI baseURI) {
   register OOC_INT32 i0,i1,i2;
@@ -656,13 +656,13 @@ l5:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20901)))), OOC_Repository__RepositoryDesc_GetDefaultSubdir)),OOC_Repository__RepositoryDesc_GetDefaultSubdir)((OOC_Repository__Repository)i1, 0, (void*)(OOC_INT32)subdir, 1024);
   _assert(((
   _cmp8((const void*)(OOC_INT32)subdir,(const void*)""))!=(OOC_INT32)0), 127, 21160);
-  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT16, 21216)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21216)));
   i2 = i2!=(OOC_CHAR8)'\000';
   if (i2) goto l8;
   i2=OOC_FALSE;
   goto l10;
 l8:
-  i2 = *(OOC_UINT8*)((OOC_INT32)subdir+(_check_index(0, 1024, OOC_UINT16, 21235)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)subdir+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21235)));
   i2 = i2!=(OOC_CHAR8)'\000';
   
 l10:
@@ -670,16 +670,16 @@ l10:
   i2=OOC_FALSE;
   goto l14;
 l12:
-  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT16, 21251)));
-  i3 = *(OOC_UINT8*)((OOC_INT32)subdir+(_check_index(0, 1024, OOC_UINT16, 21263)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21251)));
+  i3 = *(OOC_UINT8*)((OOC_INT32)subdir+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21263)));
   i2 = i2==i3;
   
 l14:
   if (i2) goto l16;
-  i2=0;
+  i2=(OOC_INT32)0;
   goto l30;
 l16:
-  i2=0;
+  i2=(OOC_INT32)0;
 l17_loop:
   i2 = i2+1;
   i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, 1024, OOC_UINT16, 21216)));
@@ -717,23 +717,23 @@ l35:
   i0=(OOC_INT32)0;
   goto l73;
 l37:
-  Strings__Delete((void*)(OOC_INT32)str, 1024, 0, (i2+1));
-  i = 0;
-  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT16, 21582)));
+  Strings__Delete((void*)(OOC_INT32)str, 1024, (OOC_INT32)0, (i2+1));
+  i = (OOC_INT32)0;
+  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21582)));
   i2 = i2!=(OOC_CHAR8)'\000';
   if (i2) goto l40;
   i2=OOC_FALSE;
   goto l42;
 l40:
-  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT16, 21598)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, 1024, OOC_UINT16, 21598)));
   i2 = i2!=(OOC_CHAR8)'.';
   
 l42:
   if (i2) goto l44;
-  i2=0;
+  i2=(OOC_INT32)0;
   goto l57;
 l44:
-  i2=0;
+  i2=(OOC_INT32)0;
 l45_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, 1024, OOC_UINT16, 21631)));
   i3 = i3==(OOC_CHAR8)'/';

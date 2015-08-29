@@ -1,9 +1,9 @@
-#include "Object/Boxed.oh"
-#include "IntStr.oh"
-#include "RealStr.oh"
-#include "LRealStr.oh"
-#include "Strings.oh"
-#include "ADT/StringBuffer.oh"
+#include <Object/Boxed.oh>
+#include <IntStr.oh>
+#include <RealStr.oh>
+#include <LRealStr.oh>
+#include <Strings.oh>
+#include <ADT/StringBuffer.oh>
 Object_Boxed__Boolean Object_Boxed__true;
 Object_Boxed__Boolean Object_Boxed__false;
 static Object__String Object_Boxed__trueString;

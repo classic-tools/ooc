@@ -1,5 +1,5 @@
-#include "Channel.oh"
-#include "Strings.oh"
+#include <Channel.oh>
+#include <Strings.oh>
 static Channel__ErrorContext Channel__errorContext;
 static Msg__Msg Channel__GetError(OOC_INT32 code);
 

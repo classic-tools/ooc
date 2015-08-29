@@ -1,5 +1,5 @@
-#include "ADT/StringBuffer.d"
-#include "__oo2c.h"
+#include <ADT/StringBuffer.d>
+#include <__oo2c.h>
 
 static void ADT_StringBuffer__Init(ADT_StringBuffer__StringBuffer b, OOC_INT32 initialCapacity) {
   register OOC_INT32 i0,i1;
@@ -686,8 +686,8 @@ l62_loop:
   i = i5;
   if (i6) goto l62_loop;
 l69:
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 9954));
   i2 = *(OOC_INT32*)((_check_pointer(i1, 9944))+4);
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 9954));
   *(OOC_INT32*)((_check_pointer(i1, 9944))+4) = (i2+i0);
   goto l71;
 l70:

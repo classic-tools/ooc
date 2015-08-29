@@ -1,15 +1,15 @@
 #ifndef _MODULE_Config_Source_Environment_
 #define _MODULE_Config_Source_Environment_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "Config/Value.oh"
-#include "Config/Source.oh"
-#include "Config/Parser.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <Config/Value.oh>
+#include <Config/Source.oh>
+#include <Config/Parser.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config_Source_Environment__VariableTemplateDesc *Config_Source_Environment__VariableTemplate;
 typedef struct Config_Source_Environment__VariableTemplateDesc {
   Config_Source_Environment__VariableTemplate next;
@@ -51,10 +51,10 @@ extern RT0__StructDesc _td_Config_Source_Environment__Command;
 extern RT0__StructDesc _td_Config_Source_Environment__CommandDesc;
 extern RT0__StructDesc _td_Config_Source_Environment__Environment;
 extern RT0__StructDesc _td_Config_Source_Environment__EnvironmentDesc;
-extern RT0__StructDesc _td_Config_Source_Environment__2109;
-extern RT0__StructDesc _td_Config_Source_Environment__2904;
-extern RT0__StructDesc _td_Config_Source_Environment__3878;
-extern RT0__StructDesc _td_Config_Source_Environment__3958;
+extern RT0__StructDesc _td_Config_Source_Environment__2060;
+extern RT0__StructDesc _td_Config_Source_Environment__2855;
+extern RT0__StructDesc _td_Config_Source_Environment__3738;
+extern RT0__StructDesc _td_Config_Source_Environment__3818;
 #endif /* _MODULE_Config_Source_Environment_ */
 
 /* --- */

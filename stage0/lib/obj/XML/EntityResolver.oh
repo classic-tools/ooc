@@ -1,13 +1,13 @@
 #ifndef _MODULE_XML_EntityResolver_
 #define _MODULE_XML_EntityResolver_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "URI.oh"
-#include "XML/DTD.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <URI.oh>
+#include <XML/DTD.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct XML_EntityResolver__ResolverDesc *XML_EntityResolver__Resolver;
 typedef struct XML_EntityResolver__ResolverDesc {
   char __dummy;

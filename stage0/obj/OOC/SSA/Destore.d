@@ -1,8 +1,8 @@
-#include "OOC/SSA/Destore.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Result.oh"
-#include "OOC/SSA/Aliasing.oh"
+#include <OOC/SSA/Destore.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Result.oh>
+#include <OOC/SSA/Aliasing.oh>
 typedef struct OOC_SSA_Destore__CacheEntryDesc *OOC_SSA_Destore__CacheEntry;
 typedef struct OOC_SSA_Destore__CacheEntryDesc {
   OOC_SSA_Destore__CacheEntry next;

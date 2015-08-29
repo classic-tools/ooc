@@ -1,17 +1,17 @@
 #ifndef _MODULE_OOC_Repository_FileSystem_
 #define _MODULE_OOC_Repository_FileSystem_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "TextRider.oh"
-#include "Time.oh"
-#include "URI.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Repository.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <TextRider.oh>
+#include <Time.oh>
+#include <URI.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Repository.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Repository_FileSystem__RepositoryDesc *OOC_Repository_FileSystem__Repository;
 typedef struct OOC_Repository_FileSystem__RepositoryDesc {
   OOC_Repository__Repository baseRep;

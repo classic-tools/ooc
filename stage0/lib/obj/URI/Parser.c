@@ -1,5 +1,5 @@
-#include "URI/Parser.d"
-#include "__oo2c.h"
+#include <URI/Parser.d>
+#include <__oo2c.h>
 
 URI__URI URI_Parser__NewURI(const URI_String__String str__ref, OOC_LEN str_0d, URI__HierarchicalURI baseURI, Msg__Msg *res) {
   register OOC_INT32 i0,i1,i2,i3,i4;
@@ -59,31 +59,31 @@ l10:
       i2 = i2!=(OOC_CHAR8)'\000';
       
 l12:
-      if (!i2) goto l27;
-l14_loop:
+      if (!i2) goto l26;
+l13_loop:
       i2 = i;
       i2 = i2+1;
       i = i2;
       i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2499)));
       i3 = i3!=(OOC_CHAR8)'?';
-      if (i3) goto l17;
+      if (i3) goto l16;
       i3=OOC_FALSE;
-      goto l19;
-l17:
+      goto l18;
+l16:
       i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2516)));
       i3 = i3!=(OOC_CHAR8)'#';
       
-l19:
-      if (i3) goto l21;
+l18:
+      if (i3) goto l20;
       i2=OOC_FALSE;
-      goto l23;
-l21:
+      goto l22;
+l20:
       i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2533)));
       i2 = i2!=(OOC_CHAR8)'\000';
       
-l23:
-      if (i2) goto l14_loop;
-l27:
+l22:
+      if (i2) goto l13_loop;
+l26:
       i2 = i;
       i2 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i1, i2);
       substr = (URI_String__StringPtr)i2;
@@ -105,13 +105,13 @@ l27:
 l3:
   schemeId = (URI_String__StringPtr)(OOC_INT32)0;
   protoURI = (URI__URI)(OOC_INT32)0;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 2890)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 2890)));
   i0 = i0!=(OOC_CHAR8)':';
   if (i0) goto l6;
   i0=OOC_FALSE;
   goto l8;
 l6:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 2907)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 2907)));
   i0 = i0!=(OOC_CHAR8)'/';
   
 l8:
@@ -119,7 +119,7 @@ l8:
   i0=OOC_FALSE;
   goto l12;
 l10:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 2934)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 2934)));
   i0 = i0!=(OOC_CHAR8)'?';
   
 l12:
@@ -127,7 +127,7 @@ l12:
   i0=OOC_FALSE;
   goto l16;
 l14:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 2951)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 2951)));
   i0 = i0!=(OOC_CHAR8)'#';
   
 l16:
@@ -135,15 +135,15 @@ l16:
   i0=OOC_FALSE;
   goto l20;
 l18:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 2968)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 2968)));
   i0 = i0!=(OOC_CHAR8)'\000';
   
 l20:
   if (i0) goto l22;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l44;
 l22:
-  i0=0;
+  i0=(OOC_INT32)0;
 l23_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2890)));
@@ -188,15 +188,15 @@ l44:
   i1=OOC_FALSE;
   goto l49;
 l47:
-  i1 = i0!=0;
+  i1 = i0!=(OOC_INT32)0;
   
 l49:
   if (i1) goto l51;
-  i = 0;
+  i = (OOC_INT32)0;
   goto l74;
 l51:
   endOfScheme = i0;
-  i = 0;
+  i = (OOC_INT32)0;
   i1 = URI_CharClass__SkipAlpha((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)&i);
   if (!i1) goto l69;
   i1 = URI_CharClass__SkipAlphaNum((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)&i);
@@ -226,7 +226,7 @@ l69:
   return (URI__URI)(OOC_INT32)0;
   goto l74;
 l72:
-  i0 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, 0, i1);
+  i0 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, (OOC_INT32)0, i1);
   i1 = i;
   schemeId = (URI_String__StringPtr)i0;
   i = (i1+1);
@@ -562,22 +562,22 @@ URI__Reference URI_Parser__NewReference(const URI_String__String str__ref, OOC_L
   URI_String__StringPtr substr;
 
   OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
-  i = 0;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 7694)));
+  i = (OOC_INT32)0;
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 7694)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 7710)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 7710)));
   i0 = i0!=(OOC_CHAR8)'#';
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
-  i0=0;
+  i0=(OOC_INT32)0;
 l8_loop:
   i0 = i0+1;
   i = i0;
@@ -612,9 +612,10 @@ l20:
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8085)))), URI__FragmentDesc_Clone)),URI__FragmentDesc_Clone)((URI__Fragment)i1);
   fragment = (URI__Fragment)i1;
   i3 = Strings__Length((void*)(OOC_INT32)str, str_0d);
-  i3 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, (i0+1), i3);
+  i0 = i0+1;
+  i3 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i0, i3);
   substr = (URI_String__StringPtr)i3;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8183)))), URI__FragmentDesc_ParseFragment)),URI__FragmentDesc_ParseFragment)((URI__Fragment)i1, (URI_String__StringPtr)i3, (i0+1));
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8183)))), URI__FragmentDesc_ParseFragment)),URI__FragmentDesc_ParseFragment)((URI__Fragment)i1, (URI_String__StringPtr)i3, i0);
   *res = (Msg__Msg)i0;
   i3 = i0==(OOC_INT32)0;
   if (i3) goto l25;

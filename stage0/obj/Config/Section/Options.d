@@ -1,8 +1,8 @@
-#include "Config/Section/Options.oh"
-#include "TextRider.oh"
-#include "LongStrings.oh"
-#include "XML/Builder.oh"
-#include "XML/DTD.oh"
+#include <Config/Section/Options.oh>
+#include <TextRider.oh>
+#include <LongStrings.oh>
+#include <XML/Builder.oh>
+#include <XML/DTD.oh>
 #define Config_Section_Options__invalidContent 1
 #define Config_Section_Options__invalidAttribute 2
 #define Config_Section_Options__requireNameAttribute 3

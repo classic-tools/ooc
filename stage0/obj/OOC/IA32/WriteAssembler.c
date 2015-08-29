@@ -1,5 +1,5 @@
-#include "OOC/IA32/WriteAssembler.d"
-#include "__oo2c.h"
+#include <OOC/IA32/WriteAssembler.d>
+#include <__oo2c.h>
 
 static void OOC_IA32_WriteAssembler__WriteInstrList(OOC_IA32_Writer__Writer w, OOC_SSA_Schedule__Block b) {
   register OOC_INT32 i0,i1;
@@ -48,7 +48,7 @@ l15:
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3328)))), &_td_Object__String8Desc, 3328)), 3336)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3328)))), &_td_Object__String8Desc, 3328)));
           chars = (Object__CharsLatin1)i0;
           _copy_8((const void*)(_check_pointer(i0, 3374)),(void*)(OOC_INT32)str,str_0d);
-          Strings__Insert("$", 2, 0, (void*)(OOC_INT32)str, str_0d);
+          Strings__Insert("$", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, str_0d);
           goto l32;
 l17:
           _assert(OOC_FALSE, 127, 3201);
@@ -71,7 +71,7 @@ l22:
           i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2922)))), Object__StringDesc_CharAt)),Object__StringDesc_CharAt)((Object__String)i0, 0);
           IntStr__IntToStr(i0, (void*)(OOC_INT32)str, str_0d);
 l23:
-          Strings__Insert("$", 2, 0, (void*)(OOC_INT32)str, str_0d);
+          Strings__Insert("$", 2, (OOC_INT32)0, (void*)(OOC_INT32)str, str_0d);
           goto l32;
 l25:
           i0 = *(OOC_UINT8*)(_check_pointer(i0, 2671));
@@ -440,7 +440,7 @@ l9:
 l10:
   i4 = *(OOC_INT32*)((_check_pointer(i2, 8663))+28);
   IntStr__IntToStr(i4, (void*)(OOC_INT32)lfe, 32);
-  Strings__Insert(".Lfe", 5, 0, (void*)(OOC_INT32)lfe, 32);
+  Strings__Insert(".Lfe", 5, (OOC_INT32)0, (void*)(OOC_INT32)lfe, 32);
   i4 = *(OOC_INT32*)((_check_pointer(i2, 8728))+28);
   *(OOC_INT32*)((_check_pointer(i2, 8728))+28) = (i4+1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8751)))), OOC_IA32_Writer__WriterDesc_Instr)),OOC_IA32_Writer__WriterDesc_Instr)((OOC_IA32_Writer__Writer)i1, ".align 4", 9);

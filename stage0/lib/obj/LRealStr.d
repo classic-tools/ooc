@@ -1,8 +1,8 @@
-#include "LRealStr.oh"
-#include "libc.oh"
-#include "LRealConv.oh"
-#include "Real0.oh"
-#include "Strings.oh"
+#include <LRealStr.oh>
+#include <libc.oh>
+#include <LRealConv.oh>
+#include <Real0.oh>
+#include <Strings.oh>
 #define LRealStr__prec 17
 
 /* run-time meta data */

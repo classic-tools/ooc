@@ -1,4 +1,4 @@
-(* 	$Id: Make.Mod,v 1.33 2002/12/20 09:13:39 mva Exp $	 *)
+(* 	$Id: Make.Mod,v 1.34 2002/12/22 16:35:25 mva Exp $	 *)
 MODULE OOC:Make;
 (*  Builds object files, libraries, binaries, and the like.
     Copyright (C) 2002  Michael van Acken
@@ -21,7 +21,6 @@ MODULE OOC:Make;
 *)
 
 IMPORT
-  <*IF COMPILER_MAJOR>=2 THEN*>RT0,<*END*>
   Channel, Files, Msg, Out, StdChannels, Strings, Time,
 
   Object, ADT:ArrayList, ADT:Dictionary, StringSearch,
@@ -523,10 +522,6 @@ PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN;
       END;
       r.WriteErrList(errList);
       
-<*IF COMPILER_MAJOR>=2 THEN*>
-      RT0.CollectGarbage;
-<*END*>
-
       mInfo.compiled := TRUE;
       mInfo.compileResult := success;
       RETURN Logger.ExitMake("CompileModule", module.name^, success);

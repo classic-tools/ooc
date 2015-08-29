@@ -1,5 +1,5 @@
-#include "XML/Builder.d"
-#include "__oo2c.h"
+#include <XML/Builder.d>
+#include <__oo2c.h>
 
 void XML_Builder__BuilderDesc_SetLocator(XML_Builder__Builder b, XML_Locator__Locator locator) {
 

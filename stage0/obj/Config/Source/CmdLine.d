@@ -1,8 +1,8 @@
-#include "Config/Source/CmdLine.oh"
-#include "CharClass.oh"
-#include "Strings.oh"
-#include "LongStrings.oh"
-#include "TextRider.oh"
+#include <Config/Source/CmdLine.oh>
+#include <CharClass.oh>
+#include <Strings.oh>
+#include <LongStrings.oh>
+#include <TextRider.oh>
 #define Config_Source_CmdLine__maxLenArgument 2048
 #define Config_Source_CmdLine__connectFailed 1
 #define Config_Source_CmdLine__junkAfterEnd 2

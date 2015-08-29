@@ -1,11 +1,11 @@
 #ifndef _MODULE_LRealStr_
 #define _MODULE_LRealStr_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ConvTypes.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ConvTypes.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 LRealStr__ConvResults;
 #define LRealStr__strAllRight 0
 #define LRealStr__strOutOfRange 1

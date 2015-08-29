@@ -1,6 +1,6 @@
-#include "OOC/SSA/DeadCodeElimination.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
+#include <OOC/SSA/DeadCodeElimination.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
 #define OOC_SSA_DeadCodeElimination__dead 0
 #define OOC_SSA_DeadCodeElimination__live 1
 static void OOC_SSA_DeadCodeElimination__MarkLive(OOC_SSA__Instr instr);

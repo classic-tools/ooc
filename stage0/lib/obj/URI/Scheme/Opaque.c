@@ -1,5 +1,5 @@
-#include "URI/Scheme/Opaque.d"
-#include "__oo2c.h"
+#include <URI/Scheme/Opaque.d>
+#include <__oo2c.h>
 
 void URI_Scheme_Opaque__Init(URI_Scheme_Opaque__Generic uri, URI_String__StringPtr schemeId, URI_String__StringPtr opaque) {
   register OOC_INT32 i0,i1;
@@ -67,7 +67,7 @@ static OOC_INT16 URI_Scheme_Opaque__IsValidOpaqueStr(const URI_String__String st
   i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 2007)));
   i0 = i0==(OOC_CHAR8)'/';
   if (i0) goto l14;
-  i = 0;
+  i = (OOC_INT32)0;
   i0 = URI_CharClass__SkipURIC((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)&i);
   if (!i0) goto l9;
 l4_loop:
@@ -84,7 +84,7 @@ l12:
   return -1;
   goto l15;
 l14:
-  return 0;
+  return (OOC_INT32)0;
 l15:
   _failed_function(1915); return 0;
   ;
@@ -97,8 +97,8 @@ Msg__Msg URI_Scheme_Opaque__GenericDesc_ParseOpaquePart(URI_Scheme_Opaque__Gener
   i0 = (OOC_INT32)str;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2388)), (OOC_INT32)0);
   i1 = URI_Scheme_Opaque__IsValidOpaqueStr((void*)(_check_pointer(i0, 2388)), i1);
-  i2 = i1<0;
   pos = i1;
+  i2 = i1<(OOC_INT32)0;
   if (i2) goto l3;
   i0 = offset;
   i2 = (OOC_INT32)URI_Scheme_Opaque__opaqueContext;

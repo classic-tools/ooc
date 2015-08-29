@@ -1,6 +1,6 @@
-#include "Config/Section.oh"
-#include "LongStrings.oh"
-#include "TextRider.oh"
+#include <Config/Section.oh>
+#include <LongStrings.oh>
+#include <TextRider.oh>
 #define Config_Section__invalidRootName 1
 #define Config_Section__invalidRootCharData 2
 #define Config_Section__unknownSection 3

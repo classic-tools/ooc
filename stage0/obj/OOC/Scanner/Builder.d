@@ -1,4 +1,4 @@
-#include "OOC/Scanner/Builder.oh"
+#include <OOC/Scanner/Builder.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

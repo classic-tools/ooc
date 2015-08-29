@@ -1,5 +1,5 @@
-#include "RealStr.d"
-#include "__oo2c.h"
+#include <RealStr.d>
+#include <__oo2c.h>
 
 void RealStr__StrToReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0d, OOC_REAL32 *real, OOC_INT8 *res) {
   register OOC_INT32 i0,i1;

@@ -1,5 +1,5 @@
-#include "OOC/Config/Pragmas.d"
-#include "__oo2c.h"
+#include <OOC/Config/Pragmas.d>
+#include <__oo2c.h>
 
 static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config_Value__PrototypeList prototypeList) {
   register OOC_INT32 i0,i1;
@@ -249,8 +249,8 @@ l3_loop:
       if (i6) goto l3_loop;
 l8:
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 5206))+8);
-      i0 = i0-1;
       i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 5214)), (OOC_INT32)0);
+      i0 = i0-1;
       i5 = i4<=i0;
       i = i4;
       if (!i5) goto l16;
@@ -371,8 +371,8 @@ void OOC_Config_Pragmas__HistoryDesc_Push(OOC_Config_Pragmas__History h) {
   i1 = i1==(OOC_INT32)0;
   if (i1) goto l14;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6902))+12);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6910)), (OOC_INT32)0);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 6882))+16);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6910)), (OOC_INT32)0);
   i1 = i2==i1;
   if (!i1) goto l15;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6941))+12);

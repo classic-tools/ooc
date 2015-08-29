@@ -1,26 +1,26 @@
-#include "OOC/Package.oh"
-#include "Files.oh"
-#include "IntStr.oh"
-#include "LongStrings.oh"
-#include "Out.oh"
-#include "StdChannels.oh"
-#include "Strings.oh"
-#include "ADT/StringBuffer.oh"
-#include "OS/Files.oh"
-#include "OS/ProcessManagement.oh"
-#include "URI.oh"
-#include "URI/Scheme/File.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "XML/Locator.oh"
-#include "XML/DTD.oh"
-#include "XML/Builder.oh"
-#include "XML/Writer.oh"
-#include "Config/Parser.oh"
-#include "Config/Value/String.oh"
-#include "Config/Value/Boolean.oh"
-#include "Config/Value/Integer.oh"
-#include "OOC/Logger.oh"
-#include "OOC/Config.oh"
+#include <OOC/Package.oh>
+#include <Files.oh>
+#include <IntStr.oh>
+#include <LongStrings.oh>
+#include <Out.oh>
+#include <StdChannels.oh>
+#include <Strings.oh>
+#include <ADT/StringBuffer.oh>
+#include <OS/Files.oh>
+#include <OS/ProcessManagement.oh>
+#include <URI.oh>
+#include <URI/Scheme/File.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <XML/Locator.oh>
+#include <XML/DTD.oh>
+#include <XML/Builder.oh>
+#include <XML/Writer.oh>
+#include <Config/Parser.oh>
+#include <Config/Value/String.oh>
+#include <Config/Value/Boolean.oh>
+#include <Config/Value/Integer.oh>
+#include <OOC/Logger.oh>
+#include <OOC/Config.oh>
 typedef OOC_CHAR8 OOC_Package__URIBuffer[1024];
 #define OOC_Package__rootPackage "package"
 #define OOC_Package__rootRepository "repository"
@@ -34,7 +34,7 @@ static Object__String OOC_Package__stringType;
 #define OOC_Package__invalidAttribute 3
 #define OOC_Package__junkAtEndOfElement 4
 #define OOC_Package__requireNameAttribute 5
-#define OOC_Package__requireVersionElement 6
+#define OOC_Package__requireVersionChild 6
 #define OOC_Package__requireCurrentAttribute 7
 #define OOC_Package__requireRevisionAttribute 8
 #define OOC_Package__requireMainModuleAttribute 9
@@ -87,27 +87,27 @@ RT0__StructDesc _td_OOC_Package__Repository = { (RT0__Struct[]){&_td_OOC_Package
 RT0__StructDesc _td_OOC_Package__RepositoryDesc = { (RT0__Struct[]){&_td_OOC_Repository__PkgInfoDesc,&_td_OOC_Package__RepositoryDesc}, (void*[]){(void*)OOC_Package__RepositoryDesc_MergePackage}, &_mid, "RepositoryDesc", 12, 1, RT0__strRecord };
 RT0__StructDesc _td_OOC_Package__ErrorContext = { (RT0__Struct[]){&_td_OOC_Package__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Package__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_XML_Error__ContextDesc,&_td_OOC_Package__ErrorContextDesc}, (void*[]){(void*)OOC_Package__ErrorContextDesc_GetTemplate,(void*)XML_Error__ContextDesc_SetString,(void*)XML_Error__ContextDesc_WriteTemplate}, &_mid, "ErrorContextDesc", 8, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Package__3038 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__8498 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__8487 = { (RT0__Struct[]){&_td_OOC_Package__8498}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Package__13835 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__13824 = { (RT0__Struct[]){&_td_OOC_Package__13835}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Package__14102 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__15373 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__18576 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__18778 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__28745 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__29461 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__31017 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__31129 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__31159 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__31795 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__34981 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36306 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36358 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36767 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__37341 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__37578 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__3036 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__8494 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__8483 = { (RT0__Struct[]){&_td_OOC_Package__8494}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Package__13831 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__13820 = { (RT0__Struct[]){&_td_OOC_Package__13831}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Package__14098 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__15369 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__18573 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__18775 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__28738 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__29454 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__31010 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__31122 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__31152 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_Package__31788 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__34974 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36299 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36351 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36760 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__37334 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__37571 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Package", (RT0__Struct[]) { &_td_OOC_Package__URIBuffer, &_td_OOC_Package__Version, &_td_OOC_Package__VersionDesc, &_td_OOC_Package__Executable, &_td_OOC_Package__ExecutableDesc, &_td_OOC_Package__Library, &_td_OOC_Package__LibraryDesc, &_td_OOC_Package__FileData, &_td_OOC_Package__FileDataDesc, &_td_OOC_Package__File, &_td_OOC_Package__FileDesc, &_td_OOC_Package__FileSet, &_td_OOC_Package__FileSetDesc, &_td_OOC_Package__KeyValue, &_td_OOC_Package__KeyValueDesc, &_td_OOC_Package__Package, &_td_OOC_Package__PackageDesc, &_td_OOC_Package__Repository, &_td_OOC_Package__RepositoryDesc, &_td_OOC_Package__ErrorContext, &_td_OOC_Package__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Package_init0() {
@@ -128,5 +128,4 @@ static void* _c9;
 static void* _c10;
 static void* _c11;
 static void* _c12;
-static void* _c13;
 /* --- */

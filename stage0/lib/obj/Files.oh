@@ -1,17 +1,17 @@
 #ifndef _MODULE_Files_
 #define _MODULE_Files_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "PosixFileDescr.oh"
-#include "Time.oh"
-#include "Termination.oh"
-#include "CharClass.oh"
-#include "LongStrings.oh"
-#include "Msg.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <PosixFileDescr.oh>
+#include <Time.oh>
+#include <Termination.oh>
+#include <CharClass.oh>
+#include <LongStrings.oh>
+#include <Msg.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Msg__Msg Files__Result;
 #define Files__noLength -1
 #define Files__noPosition -2

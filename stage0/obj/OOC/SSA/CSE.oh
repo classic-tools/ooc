@@ -1,11 +1,11 @@
 #ifndef _MODULE_OOC_SSA_CSE_
 #define _MODULE_OOC_SSA_CSE_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/SSA.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/SSA.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_SSA__Result *OOC_SSA_CSE__ResultList;
 typedef struct OOC_SSA_CSE__PartitionDesc *OOC_SSA_CSE__Partition;
 typedef OOC_SSA_CSE__Partition *OOC_SSA_CSE__ChildrenList;
@@ -36,8 +36,9 @@ extern RT0__StructDesc _td_OOC_SSA_CSE__Partition;
 extern RT0__StructDesc _td_OOC_SSA_CSE__1080;
 extern RT0__StructDesc _td_OOC_SSA_CSE__ChildrenList;
 extern RT0__StructDesc _td_OOC_SSA_CSE__PartitionDesc;
-extern RT0__StructDesc _td_OOC_SSA_CSE__4130;
-extern RT0__StructDesc _td_OOC_SSA_CSE__6062;
+extern RT0__StructDesc _td_OOC_SSA_CSE__4185;
+extern RT0__StructDesc _td_OOC_SSA_CSE__4169;
+extern RT0__StructDesc _td_OOC_SSA_CSE__6119;
 #endif /* _MODULE_OOC_SSA_CSE_ */
 
 /* --- */

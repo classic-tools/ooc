@@ -1,5 +1,5 @@
-#include "OOC/SSA/ConstProp.d"
-#include "__oo2c.h"
+#include <OOC/SSA/ConstProp.d>
+#include <__oo2c.h>
 
 static OOC_SSA__Const OOC_SSA_ConstProp__ComputeConst(OOC_SSA__ProcBlock pb, OOC_SSA__Instr instr) {
   register OOC_INT32 i0,i1,i2,i3;

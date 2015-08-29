@@ -1,9 +1,9 @@
 #ifndef _MODULE_Object_
 #define _MODULE_Object_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
 typedef OOC_INT32 Object__Hash;
 typedef struct Object__ObjectDesc *Object__Object;
 typedef Object__Object Object__ObjectArray[];

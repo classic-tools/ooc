@@ -1,7 +1,7 @@
-#include "ADT/Object/Storage.oh"
-#include "Strings.oh"
-#include "BinaryRider.oh"
-#include "Msg.oh"
+#include <ADT/Object/Storage.oh>
+#include <Strings.oh>
+#include <BinaryRider.oh>
+#include <Msg.oh>
 #define ADT_Object_Storage__pointerGap 4
 typedef struct ADT_Object_Storage__ErrorContextDesc *ADT_Object_Storage__ErrorContext;
 static ADT_Object_Storage__ErrorContext ADT_Object_Storage__errorContext;

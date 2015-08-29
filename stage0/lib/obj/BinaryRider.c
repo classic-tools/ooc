@@ -1,5 +1,5 @@
-#include "BinaryRider.d"
-#include "__oo2c.h"
+#include <BinaryRider.d>
+#include <__oo2c.h>
 
 static Msg__Msg BinaryRider__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;
@@ -531,8 +531,8 @@ void BinaryRider__ReaderDesc_ReadStr(BinaryRider__Reader r, Object__String *s) {
   len = i1;
   if (i2) goto l17;
   i2 = (OOC_INT32)RT0__NewObject(_td_BinaryRider__8641.baseTypes[0], i1);
-  i1 = i1-1;
   dynBuffer32 = (void*)i2;
+  i1 = i1-1;
   i3 = 0<=i1;
   i = 0;
   if (!i3) goto l16;
@@ -572,8 +572,8 @@ l25:
   goto l35;
 l27:
   i1 = i1-1;
-  i2 = i1<1024;
   len = i1;
+  i2 = i1<1024;
   if (i2) goto l30;
   i2 = (OOC_INT32)RT0__NewObject(_td_BinaryRider__8552.baseTypes[0], i1);
   dynBuffer8 = (void*)i2;

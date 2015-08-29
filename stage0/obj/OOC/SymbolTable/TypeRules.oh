@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_SymbolTable_TypeRules_
 #define _MODULE_OOC_SymbolTable_TypeRules_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsNamedType(OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsPredefType(OOC_SymbolTable__Type type, OOC_INT16 id);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsScalarType(OOC_SymbolTable__Type type);

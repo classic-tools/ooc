@@ -1,4 +1,4 @@
-#include "XML/Locator.oh"
+#include <XML/Locator.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

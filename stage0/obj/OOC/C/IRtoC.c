@@ -1,5 +1,5 @@
-#include "OOC/C/IRtoC.d"
-#include "__oo2c.h"
+#include <OOC/C/IRtoC.d>
+#include <__oo2c.h>
 
 static void OOC_C_IRtoC__Call(OOC_C_DeclWriter__Writer w, OOC_IR__Call statm) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;
@@ -230,9 +230,9 @@ l53:
   goto l56;
 l55:
   i1 = (OOC_INT32)w;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1747))+4);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1734))+8);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1716)))), OOC_C_DeclWriter__WriterDesc_WriteConst)),OOC_C_DeclWriter__WriterDesc_WriteConst)((OOC_C_DeclWriter__Writer)i1, (Object_Boxed__Object)i0, (OOC_SymbolTable__Type)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1734))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1747))+4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1716)))), OOC_C_DeclWriter__WriterDesc_WriteConst)),OOC_C_DeclWriter__WriterDesc_WriteConst)((OOC_C_DeclWriter__Writer)i1, (Object_Boxed__Object)i2, (OOC_SymbolTable__Type)i0);
 l56:
   return;
   ;

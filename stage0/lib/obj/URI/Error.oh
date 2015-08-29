@@ -1,12 +1,12 @@
 #ifndef _MODULE_URI_Error_
 #define _MODULE_URI_Error_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "URI/String.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <URI/String.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Msg__Msg URI_Error__Msg;
 typedef OOC_INT32 URI_Error__Code;
 typedef Msg__String URI_Error__String;

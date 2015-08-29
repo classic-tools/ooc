@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_Error_
 #define _MODULE_OOC_Error_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Msg__Msg OOC_Error__Msg;
 typedef OOC_INT32 OOC_Error__Code;
 typedef OOC_CHAR8 OOC_Error__Char;

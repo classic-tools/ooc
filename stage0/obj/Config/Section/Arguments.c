@@ -1,5 +1,5 @@
-#include "Config/Section/Arguments.d"
-#include "__oo2c.h"
+#include <Config/Section/Arguments.d>
+#include <__oo2c.h>
 
 void Config_Section_Arguments__ErrorContextDesc_GetTemplate(Config_Section_Arguments__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;

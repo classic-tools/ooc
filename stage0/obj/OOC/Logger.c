@@ -1,5 +1,5 @@
-#include "OOC/Logger.d"
-#include "__oo2c.h"
+#include <OOC/Logger.d>
+#include <__oo2c.h>
 
 static void OOC_Logger__WriteURI(URI__URI uri) {
   register OOC_INT32 i0,i1;

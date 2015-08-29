@@ -1,8 +1,8 @@
-#include "URI/Query/Unparsed.oh"
-#include "Strings.oh"
-#include "CharClass.oh"
-#include "URI/String.oh"
-#include "URI/CharClass.oh"
+#include <URI/Query/Unparsed.oh>
+#include <Strings.oh>
+#include <CharClass.oh>
+#include <URI/String.oh>
+#include <URI/CharClass.oh>
 #define URI_Query_Unparsed__illegalQueryChar 1
 static URI_Error__Context URI_Query_Unparsed__queryContext;
 

@@ -1,6 +1,6 @@
-#include "Config/Value/Integer.oh"
-#include "Strings.oh"
-#include "IntStr.oh"
+#include <Config/Value/Integer.oh>
+#include <Strings.oh>
+#include <IntStr.oh>
 #define Config_Value_Integer__strOutOfRange 1
 #define Config_Value_Integer__strWrongFormat 2
 #define Config_Value_Integer__strEmpty 3

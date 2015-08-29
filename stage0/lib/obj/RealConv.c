@@ -1,5 +1,5 @@
-#include "RealConv.d"
-#include "__oo2c.h"
+#include <RealConv.d>
+#include <__oo2c.h>
 
 void RealConv__ScanReal(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__ScanState *nextState) {
   register OOC_INT32 i0;
@@ -43,7 +43,7 @@ l9:
   i0 = sscanf(((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 2518))), "%f", (OOC_INT32)&value);
   i0 = i0==1;
   if (i0) goto l12;
-  return 0.0000000000000000;
+  return 0.0000000000000000f;
   goto l13;
 l12:
   f0 = value;

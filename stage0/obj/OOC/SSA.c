@@ -1,5 +1,5 @@
-#include "OOC/SSA.d"
-#include "__oo2c.h"
+#include <OOC/SSA.d>
+#include <__oo2c.h>
 
 void OOC_SSA__InitNode(OOC_SSA__Node n) {
 

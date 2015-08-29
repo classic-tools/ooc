@@ -1,5 +1,5 @@
-#include "IO/Memory.d"
-#include "__oo2c.h"
+#include <IO/Memory.d>
+#include <__oo2c.h>
 
 static Msg__Msg IO_Memory__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;
@@ -368,18 +368,18 @@ void IO_Memory__ReaderDesc_ReadBytes(IO_Memory__Reader r, OOC_CHAR8 x[], OOC_LEN
   i4 = *(OOC_INT32*)((_check_pointer(i1, 7495))+8);
   i3 = (i3+i2)<=i4;
   if (i3) goto l13;
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 7662))+8);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 7653))+16);
-  i2 = i3<i2;
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 7653))+16);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 7662))+8);
+  i2 = i2<i3;
   if (i2) goto l11;
   i1 = (OOC_INT32)IO_Memory__GetError(5);
   *(OOC_INT32*)((_check_pointer(i0, 7902))+4) = i1;
   *(OOC_INT32*)((_check_pointer(i0, 7945))+8) = 0;
   goto l19;
 l11:
-  i2 = *(OOC_INT32*)((_check_pointer(i0, 7703))+16);
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 7691))+8);
-  i2 = i3-i2;
+  i2 = *(OOC_INT32*)((_check_pointer(i1, 7691))+8);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 7703))+16);
+  i2 = i2-i3;
   n = i2;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7744))+20);
   i1 = _check_pointer(i1, 7750);
@@ -552,8 +552,8 @@ l10:
   *(OOC_INT32*)((_check_pointer(i0, 9393))+8) = 1;
   i2 = *(OOC_INT32*)((_check_pointer(i0, 9428))+16);
   *(OOC_INT32*)((_check_pointer(i0, 9428))+16) = (i2+1);
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 9458))+8);
   i0 = *(OOC_INT32*)((_check_pointer(i0, 9449))+16);
+  i2 = *(OOC_INT32*)((_check_pointer(i1, 9458))+8);
   i0 = i0>i2;
   if (!i0) goto l16;
   i0 = *(OOC_INT32*)((_check_pointer(i1, 9489))+8);
@@ -612,9 +612,9 @@ l12:
   i2 = *(OOC_INT32*)((_check_pointer(i0, 10234))+16);
   *(OOC_INT32*)((_check_pointer(i0, 10234))+16) = (i2+i1);
   i1 = (OOC_INT32)b;
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 10267))+8);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 10258))+16);
-  i2 = i3>i2;
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 10258))+16);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 10267))+8);
+  i2 = i2>i3;
   if (!i2) goto l20;
   i0 = *(OOC_INT32*)((_check_pointer(i0, 10306))+16);
   *(OOC_INT32*)((_check_pointer(i1, 10293))+8) = i0;
@@ -748,7 +748,7 @@ l8_loop:
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 12264))+8);
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 12270))+20);
   i5 = _check_pointer(i5, 12276);
-  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
   i5 = *(OOC_UINT8*)(i5+(_check_index(i1, i6, OOC_UINT32, 12276)));
   i5 = _type_cast_fast(OOC_UINT8, OOC_UINT8, i5);
   byte = i5;

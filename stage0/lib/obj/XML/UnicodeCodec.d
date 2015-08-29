@@ -1,5 +1,5 @@
-#include "XML/UnicodeCodec.oh"
-#include "Strings.oh"
+#include <XML/UnicodeCodec.oh>
+#include <Strings.oh>
 typedef struct XML_UnicodeCodec__NodeDesc *XML_UnicodeCodec__Node;
 typedef struct XML_UnicodeCodec__NodeDesc {
   XML_UnicodeCodec__Node next;

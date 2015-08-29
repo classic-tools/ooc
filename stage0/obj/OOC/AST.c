@@ -1,5 +1,5 @@
-#include "OOC/AST.d"
-#include "__oo2c.h"
+#include <OOC/AST.d>
+#include <__oo2c.h>
 
 void OOC_AST__InitNodeList(OOC_AST__NodeList nl) {
   register OOC_INT32 i0;

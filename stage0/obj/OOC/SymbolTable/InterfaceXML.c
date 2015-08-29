@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/InterfaceXML.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/InterfaceXML.d>
+#include <__oo2c.h>
 
 static URI__URI OOC_SymbolTable_InterfaceXML__GetSystemId(OOC_Config_Repositories__Section repositories) {
   register OOC_INT32 i0,i1;

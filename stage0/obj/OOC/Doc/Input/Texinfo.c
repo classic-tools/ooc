@@ -1,5 +1,5 @@
-#include "OOC/Doc/Input/Texinfo.d"
-#include "__oo2c.h"
+#include <OOC/Doc/Input/Texinfo.d>
+#include <__oo2c.h>
 
 void OOC_Doc_Input_Texinfo__ErrorContextDesc_GetTemplate(OOC_Doc_Input_Texinfo__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;
@@ -338,12 +338,13 @@ l3:
       i1 = (OOC_INT32)str;
       i2 = _check_pointer(i1, 7950);
       i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i2 = *(OOC_UINT8*)(i2+(_check_index((i0-1), i3, OOC_UINT32, 7950)));
+      i0 = i0-1;
+      i2 = *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 7950)));
       i2 = i2==(OOC_CHAR8)'\002';
       if (i2) goto l6;
       i1 = _check_pointer(i1, 8005);
       i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      i0 = *(OOC_UINT8*)(i1+(_check_index((i0-1), i2, OOC_UINT32, 8005)));
+      i0 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT32, 8005)));
       i0 = i0==(OOC_CHAR8)'\003';
       
       goto l9;
@@ -363,12 +364,13 @@ l11_loop:
 l14:
       i2 = _check_pointer(i0, 7950);
       i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i2 = *(OOC_UINT8*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 7950)));
+      i1 = i1-1;
+      i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 7950)));
       i2 = i2==(OOC_CHAR8)'\002';
       if (i2) goto l17;
       i2 = _check_pointer(i0, 8005);
       i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i1 = *(OOC_UINT8*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 8005)));
+      i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 8005)));
       i1 = i1==(OOC_CHAR8)'\003';
       
       goto l20;
@@ -1759,7 +1761,7 @@ l8:
               OOC_CHAR8 found;
               OOC_INT16 pos;
 
-              Strings__FindNext((void*)(OOC_INT32)pattern, pattern_0d, (void*)(OOC_INT32)string, string_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+              Strings__FindNext((void*)(OOC_INT32)pattern, pattern_0d, (void*)(OOC_INT32)string, string_0d, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
               i0 = found;
               if (i0) goto l3;
               return OOC_FALSE;
@@ -1767,9 +1769,9 @@ l8:
 l3:
               i0 = pos;
               i1 = i0-1;
-              i2 = 0<=i1;
+              i2 = (OOC_INT32)0<=i1;
               if (!i2) goto l14;
-              i2=0;
+              i2=(OOC_INT32)0;
 l6_loop:
               i3 = *(OOC_UINT8*)((OOC_INT32)string+(_check_index(i2, string_0d, OOC_UINT16, 24093)));
               i3 = i3>(OOC_CHAR8)' ';
@@ -2310,7 +2312,7 @@ static void OOC_Doc_Input_Texinfo__Init() {
       i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 31746))*4);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 31753))+1);
       i1 = i1==-1;
-      if (i1) goto l3;
+      if (i1) goto l4;
       Out__String("Module OOC:Doc:Input:Texinfo: Command id ", 42);
       Out__LongInt(i0, 0);
       Out__String(" for @", 7);
@@ -2320,8 +2322,8 @@ static void OOC_Doc_Input_Texinfo__Init() {
       Out__String((void*)((_check_pointer(i0, 32628))+2), 16);
       Out__Ln();
       _halt(1);
-      goto l10;
-l3:
+      goto l11;
+l4:
       switch (i0) {
       case 0 ... 2:
         i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 31844))*4);
@@ -2331,11 +2333,11 @@ l3:
         _assert((i0<127), 127, 31908);
         i1 = *(OOC_UINT8*)((OOC_INT32)name+(_check_index(0, name_0d, OOC_UINT8, 31961)));
         *(OOC_INT8*)((OOC_INT32)OOC_Doc_Input_Texinfo__class1+(_check_index(i1, 256, OOC_CHAR8, 31951))) = i0;
-        goto l9;
+        goto l10;
       case 3 ... 6:
         i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32042))*4);
         *(OOC_INT8*)((_check_pointer(i1, 32049))+1) = 2;
-        goto l9;
+        goto l10;
       case 7 ... 26:
         i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32112))*4);
         *(OOC_INT8*)((_check_pointer(i1, 32119))+1) = 3;
@@ -2343,22 +2345,22 @@ l3:
         *(OOC_INT8*)((_check_pointer(i1, 32157))+18) = 1;
         i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32189))*4);
         *(OOC_INT8*)((_check_pointer(i1, 32196))+19) = 1;
-        goto l9;
+        goto l10;
       case 27 ... 35:
         i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32261))*4);
         *(OOC_INT8*)((_check_pointer(i1, 32268))+1) = 4;
-        goto l9;
+        goto l10;
       default:
         _failed_case(i0, 31780);
-        goto l9;
+        goto l10;
       }
-l9:
+l10:
       i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32321))*4);
       _copy_8((const void*)(OOC_INT32)name,(void*)((_check_pointer(i1, 32328))+2),16);
       i0 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_Doc_Input_Texinfo__cmdList+(_check_index(i0, 36, OOC_UINT32, 32367))*4);
       _assert(((
       _cmp8((const void*)(OOC_INT32)name,(const void*)((_check_pointer(i0, 32374))+2)))==(OOC_INT32)0), 127, 32345);
-l10:
+l11:
       return;
       ;
     }

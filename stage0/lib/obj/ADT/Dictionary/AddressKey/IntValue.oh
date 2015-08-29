@@ -1,12 +1,12 @@
 #ifndef _MODULE_ADT_Dictionary_AddressKey_IntValue_
 #define _MODULE_ADT_Dictionary_AddressKey_IntValue_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "ADT/Storable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <ADT/Storable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT32 ADT_Dictionary_AddressKey_IntValue__Hash;
 typedef OOC_INT32 ADT_Dictionary_AddressKey_IntValue__Index;
 typedef Object__Object ADT_Dictionary_AddressKey_IntValue__Key;

@@ -1,5 +1,5 @@
-#include "OOC/C/ConvertDecl.d"
-#include "__oo2c.h"
+#include <OOC/C/ConvertDecl.d>
+#include <__oo2c.h>
 
 OOC_C_DeclWriter__Type OOC_C_ConvertDecl__ConvertType(OOC_C_DeclWriter__Writer w, OOC_SymbolTable__Type resolvedType, OOC_SymbolTable__Type type) {
   register OOC_INT32 i0,i1,i2,i3;
@@ -207,18 +207,18 @@ l21:
   i1 = *(OOC_UINT8*)((_check_pointer(i0, 7051))+32);
   if (i1) goto l24;
   i1 = (OOC_INT32)w;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7248))+40);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7229))+36);
-  i2 = (OOC_INT32)OOC_C_ConvertDecl__ConvertType((OOC_C_DeclWriter__Writer)i1, (OOC_SymbolTable__Type)i3, (OOC_SymbolTable__Type)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7229))+36);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7248))+40);
+  i2 = (OOC_INT32)OOC_C_ConvertDecl__ConvertType((OOC_C_DeclWriter__Writer)i1, (OOC_SymbolTable__Type)i2, (OOC_SymbolTable__Type)i3);
   i0 = *(OOC_INT32*)((_check_pointer(i0, 7275))+44);
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7197)))), OOC_C_DeclWriter__WriterDesc_NewArray)),OOC_C_DeclWriter__WriterDesc_NewArray)((OOC_C_DeclWriter__Writer)i1, (OOC_C_DeclWriter__Type)i2, i0);
   return (OOC_C_DeclWriter__Type)i0;
   goto l84;
 l24:
   i1 = (OOC_INT32)w;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7139))+40);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7120))+36);
-  i0 = (OOC_INT32)OOC_C_ConvertDecl__ConvertType((OOC_C_DeclWriter__Writer)i1, (OOC_SymbolTable__Type)i0, (OOC_SymbolTable__Type)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7120))+36);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7139))+40);
+  i0 = (OOC_INT32)OOC_C_ConvertDecl__ConvertType((OOC_C_DeclWriter__Writer)i1, (OOC_SymbolTable__Type)i2, (OOC_SymbolTable__Type)i0);
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7088)))), OOC_C_DeclWriter__WriterDesc_NewArray)),OOC_C_DeclWriter__WriterDesc_NewArray)((OOC_C_DeclWriter__Writer)i1, (OOC_C_DeclWriter__Type)i0, -1);
   return (OOC_C_DeclWriter__Type)i0;
   goto l84;
@@ -483,8 +483,8 @@ l39:
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9729))+44);
   i7 = (OOC_INT32)w;
   i5 = (OOC_INT32)OOC_C_ConvertDecl__ConvertType((OOC_C_DeclWriter__Writer)i7, (OOC_SymbolTable__Type)i5, (OOC_SymbolTable__Type)i6);
-  i2 = i2==3;
   ctype = (OOC_C_DeclWriter__Type)i5;
+  i2 = i2==3;
   if (i2) goto l42;
   i2=OOC_FALSE;
   goto l44;

@@ -1,10 +1,10 @@
 #ifndef _MODULE_Config_
 #define _MODULE_Config_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config__ConfigDesc *Config__Config;
 typedef struct Config__ConfigDesc {
   char __dummy;

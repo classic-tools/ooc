@@ -1,14 +1,14 @@
 #ifndef _MODULE_XML_UnicodeBuffer_
 #define _MODULE_XML_UnicodeBuffer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "XML/InputBuffer.oh"
-#include "XML/UnicodeCodec.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <XML/InputBuffer.oh>
+#include <XML/UnicodeCodec.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR16 XML_UnicodeBuffer__Char;
 typedef OOC_CHAR16 *XML_UnicodeBuffer__CharArray;
 typedef OOC_INT32 XML_UnicodeBuffer__CharPos;

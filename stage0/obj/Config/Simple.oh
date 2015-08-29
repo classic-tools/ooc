@@ -1,19 +1,19 @@
 #ifndef _MODULE_Config_Simple_
 #define _MODULE_Config_Simple_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Config.oh"
-#include "Config/Parser.oh"
-#include "Config/Source/Environment.oh"
-#include "Config/Source/CmdLine.oh"
-#include "Config/Value.oh"
-#include "Config/Section.oh"
-#include "Config/Section/Options.oh"
-#include "Config/Section/Arguments.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Config.oh>
+#include <Config/Parser.oh>
+#include <Config/Source/Environment.oh>
+#include <Config/Source/CmdLine.oh>
+#include <Config/Value.oh>
+#include <Config/Section.oh>
+#include <Config/Section/Options.oh>
+#include <Config/Section/Arguments.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config_Simple__ConfigDesc *Config_Simple__Config;
 typedef struct Config_Simple__ConfigDesc {
   Config_Value__StringPtr cfgFile;

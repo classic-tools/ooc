@@ -1,5 +1,5 @@
-#include "OOC/Scanner/Builder/BasicList.oh"
-#include "Strings.oh"
+#include <OOC/Scanner/Builder/BasicList.oh>
+#include <Strings.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

@@ -1,5 +1,5 @@
-#include "OS/Path.oh"
-#include "Strings.oh"
+#include <OS/Path.oh>
+#include <Strings.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

@@ -1,7 +1,7 @@
-#include "OOC/IR/XML.oh"
-#include "Object.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "OOC/SymbolTable.oh"
+#include <OOC/IR/XML.oh>
+#include <Object.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <OOC/SymbolTable.oh>
 static void OOC_IR_XML__InitVisitor(OOC_IR_XML__Visitor v, XML_Writer__Writer w);
 static OOC_IR_XML__Visitor OOC_IR_XML__NewVisitor(XML_Writer__Writer w);
 static void OOC_IR_XML__TypeAttr(XML_Writer__Writer w, OOC_SymbolTable__Type type);

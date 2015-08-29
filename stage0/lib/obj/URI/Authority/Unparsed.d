@@ -1,8 +1,8 @@
-#include "URI/Authority/Unparsed.oh"
-#include "Strings.oh"
-#include "CharClass.oh"
-#include "URI/String.oh"
-#include "URI/CharClass.oh"
+#include <URI/Authority/Unparsed.oh>
+#include <Strings.oh>
+#include <CharClass.oh>
+#include <URI/String.oh>
+#include <URI/CharClass.oh>
 #define URI_Authority_Unparsed__illegalAuthChar 1
 static URI_Error__Context URI_Authority_Unparsed__authContext;
 

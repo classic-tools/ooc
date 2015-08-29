@@ -1,5 +1,5 @@
-#include "StringSearch/NoMatch.d"
-#include "__oo2c.h"
+#include <StringSearch/NoMatch.d>
+#include <__oo2c.h>
 
 static void StringSearch_NoMatch__InitMatcher(StringSearch_NoMatch__Matcher matcher, Object__String8 pattern, OOC_UINT32 flags, OOC_INT32 groups) {
   register OOC_INT32 i0,i1,i2,i3;

@@ -1,5 +1,5 @@
-#include "Cse2.d"
-#include "__oo2c.h"
+#include <Cse2.d>
+#include <__oo2c.h>
 
 static void Cse2__F(Cse2__P p) {
   register OOC_INT32 i0,i1;
@@ -11,7 +11,7 @@ static void Cse2__F(Cse2__P p) {
   goto l5;
 l3:
   i1 = *(OOC_INT16*)i0;
-  i1 = i1!=0;
+  i1 = i1!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l7;

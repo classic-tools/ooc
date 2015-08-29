@@ -1,10 +1,10 @@
-#include "Config/Simple.oh"
-#include "ProgramArgs.oh"
-#include "IO/Memory.oh"
-#include "Config/Source.oh"
-#include "Config/Value/String.oh"
-#include "Config/Value/Integer.oh"
-#include "Config/Value/Boolean.oh"
+#include <Config/Simple.oh>
+#include <ProgramArgs.oh>
+#include <IO/Memory.oh>
+#include <Config/Source.oh>
+#include <Config/Value/String.oh>
+#include <Config/Value/Integer.oh>
+#include <Config/Value/Boolean.oh>
 #define Config_Simple__rootName "configuration"
 #define Config_Simple__bufferName "/#Config_Simple#"
 

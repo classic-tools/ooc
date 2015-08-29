@@ -1,4 +1,4 @@
-#include "Time.oh"
+#include <Time.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

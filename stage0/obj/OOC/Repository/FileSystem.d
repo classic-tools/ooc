@@ -1,14 +1,14 @@
-#include "OOC/Repository/FileSystem.oh"
-#include "Files.oh"
-#include "Strings.oh"
-#include "OS/Files.oh"
-#include "OS/Path.oh"
-#include "Object.oh"
-#include "URI/Parser.oh"
-#include "URI/Error.oh"
-#include "URI/Scheme/File.oh"
-#include "OOC/Logger.oh"
-#include "OOC/Error.oh"
+#include <OOC/Repository/FileSystem.oh>
+#include <Files.oh>
+#include <Strings.oh>
+#include <OS/Files.oh>
+#include <OS/Path.oh>
+#include <Object.oh>
+#include <URI/Parser.oh>
+#include <URI/Error.oh>
+#include <URI/Scheme/File.oh>
+#include <OOC/Logger.oh>
+#include <OOC/Error.oh>
 URI__HierarchicalURI OOC_Repository_FileSystem__baseURI;
 static void OOC_Repository_FileSystem__InitModule(OOC_Repository_FileSystem__Module m, OOC_Repository_FileSystem__Repository origin, const Msg__String name__ref, OOC_LEN name_0d, URI__HierarchicalURI srcFileOverride);
 static OOC_Repository_FileSystem__Module OOC_Repository_FileSystem__NewModule(OOC_Repository_FileSystem__Repository origin, const Msg__String name__ref, OOC_LEN name_0d, URI__HierarchicalURI srcFileOverride);

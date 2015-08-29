@@ -1,12 +1,12 @@
 #ifndef _MODULE_ADT_Dictionary_
 #define _MODULE_ADT_Dictionary_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ADT/Storable.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ADT/Storable.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT32 ADT_Dictionary__Hash;
 typedef OOC_INT32 ADT_Dictionary__Index;
 typedef Object__Object ADT_Dictionary__Key;

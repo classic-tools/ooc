@@ -1,5 +1,5 @@
-#include "OOC/Error.d"
-#include "__oo2c.h"
+#include <OOC/Error.d>
+#include <__oo2c.h>
 
 void OOC_Error__InitContext(OOC_Error__Context c, const Msg__String id__ref, OOC_LEN id_0d) {
   register OOC_INT32 i0;
@@ -222,8 +222,8 @@ l5:
       
 l7:
       if (!i3) goto l10;
-      i1 = *(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6899)))), &_td_Msg__IntAttributeDesc, 6899)), 6912))+8);
       i2 = *(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6839)))), &_td_Msg__IntAttributeDesc, 6839)), 6852))+8);
+      i1 = *(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6899)))), &_td_Msg__IntAttributeDesc, 6899)), 6912))+8);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6804)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "pos", 4, (i2-i1));
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6933)))), Msg__MsgDesc_GetText)),Msg__MsgDesc_GetText)((Msg__Msg)i0, (void*)(OOC_INT32)text, 8192);
       i1 = (OOC_INT32)attrPos;

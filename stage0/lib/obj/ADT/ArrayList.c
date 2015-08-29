@@ -1,5 +1,5 @@
-#include "ADT/ArrayList.d"
-#include "__oo2c.h"
+#include <ADT/ArrayList.d>
+#include <__oo2c.h>
 
 static ADT_ArrayList__Array ADT_ArrayList__CreateArray(OOC_INT32 size, ADT_ArrayList__ArrayList old) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
@@ -196,7 +196,7 @@ l4:
 }
 
 void ADT_ArrayList__ArrayListDesc_Insert(ADT_ArrayList__ArrayList l, OOC_INT32 index, Object__Object obj) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
   OOC_INT32 i;
 
   i0 = (OOC_INT32)l;
@@ -221,15 +221,17 @@ l6_loop:
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4500));
   i3 = _check_pointer(i3, 4507);
   i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-  i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4517));
-  i5 = _check_pointer(i5, 4524);
-  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
-  i5 = (OOC_INT32)*(OOC_INT32*)(i5+(_check_index(i1, i6, OOC_UINT32, 4524))*4);
-  *(OOC_INT32*)(i3+(_check_index((i1+1), i4, OOC_UINT32, 4507))*4) = i5;
-  i1 = i1+1;
-  i3 = i1<=i2;
-  i = i1;
-  if (i3) goto l6_loop;
+  i5 = i1+1;
+  i6 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4517));
+  i6 = _check_pointer(i6, 4524);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+  i1 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i1, i7, OOC_UINT32, 4524))*4);
+  *(OOC_INT32*)(i3+(_check_index(i5, i4, OOC_UINT32, 4507))*4) = i1;
+  i1 = i5<=i2;
+  i = i5;
+  if (!i1) goto l11;
+  i1=i5;
+  goto l6_loop;
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4542));
   i1 = _check_pointer(i1, 4549);

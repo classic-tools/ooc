@@ -1,5 +1,5 @@
-#include "OOC/SSA/IGraph.d"
-#include "__oo2c.h"
+#include <OOC/SSA/IGraph.d>
+#include <__oo2c.h>
 
 void OOC_SSA_IGraph__GraphDesc_Clear(OOC_SSA_IGraph__Graph g) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
@@ -168,33 +168,35 @@ l8:
 }
 
 void OOC_SSA_IGraph__GraphDesc_AddToLive(OOC_SSA_IGraph__Graph g, OOC_INT32 res, OOC_SSA_IGraph__Vector live) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5;
 
   i0 = (OOC_INT32)g;
   i1 = res;
   i2 = (OOC_INT32)live;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4216)))), OOC_SSA_IGraph__GraphDesc_Interfere)),OOC_SSA_IGraph__GraphDesc_Interfere)((OOC_SSA_IGraph__Graph)i0, i1, (OOC_SSA_IGraph__Vector)i2);
   i0 = _check_pointer(i2, 4255);
-  i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+  i3 = i1>>5;
+  i4 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i2 = _check_pointer(i2, 4255);
-  i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-  i2 = *(OOC_UINT32*)(i2+(_check_index((i1>>5), i4, OOC_UINT32, 4255))*4);
-  *(OOC_UINT32*)(i0+(_check_index((i1>>5), i3, OOC_UINT32, 4255))*4) = (_set_bit(i2,(_mod(i1,32))));
+  i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+  i2 = *(OOC_UINT32*)(i2+(_check_index(i3, i5, OOC_UINT32, 4255))*4);
+  *(OOC_UINT32*)(i0+(_check_index(i3, i4, OOC_UINT32, 4255))*4) = (_set_bit(i2,(_mod(i1,32))));
   return;
   ;
 }
 
 void OOC_SSA_IGraph__GraphDesc_RemoveFromLive(OOC_SSA_IGraph__Graph g, OOC_INT32 res, OOC_SSA_IGraph__Vector live) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5;
 
   i0 = (OOC_INT32)live;
   i1 = _check_pointer(i0, 4463);
   i2 = res;
-  i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i3 = i2>>5;
+  i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i0 = _check_pointer(i0, 4463);
-  i4 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-  i0 = *(OOC_UINT32*)(i0+(_check_index((i2>>5), i4, OOC_UINT32, 4463))*4);
-  *(OOC_UINT32*)(i1+(_check_index((i2>>5), i3, OOC_UINT32, 4463))*4) = (_clear_bit(i0,(_mod(i2,32))));
+  i5 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+  i0 = *(OOC_UINT32*)(i0+(_check_index(i3, i5, OOC_UINT32, 4463))*4);
+  *(OOC_UINT32*)(i1+(_check_index(i3, i4, OOC_UINT32, 4463))*4) = (_clear_bit(i0,(_mod(i2,32))));
   return;
   ;
 }
@@ -259,7 +261,7 @@ l11:
 }
 
 void OOC_SSA_IGraph__GraphDesc_SymmetricMatrix(OOC_SSA_IGraph__Graph g) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14;
   OOC_SSA_IGraph__BitMatrix m;
   OOC_INT32 y;
   OOC_INT32 x;
@@ -278,58 +280,57 @@ l3_loop:
   i3 = i3-1;
   i4 = 0<=i3;
   i5 = _mod(i2,32);
+  i6 = i2>>5;
   x = 0;
   if (!i4) goto l18;
-  i4 = i2>>5;
-  i6 = i2>>5;
-  i7 = i2>>5;
-  i8=0;
+  i4=0;
 l6_loop:
-  i9 = _check_pointer(i0, 5876);
-  i10 = OOC_ARRAY_LENGTH(i9, 1);
-  i11 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
-  i9 = *(OOC_UINT32*)((i9+((_check_index(i2, i11, OOC_UINT32, 5876))*(4*i10)))+(_check_index((i8>>5), i10, OOC_UINT32, 5878))*4);
-  i10 = _mod(i8,32);
-  i9 = _in(i10,i9);
-  if (i9) goto l12;
-  i9 = _check_pointer(i0, 5998);
-  i11 = OOC_ARRAY_LENGTH(i9, 1);
-  i12 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
-  i9 = *(OOC_UINT32*)((i9+((_check_index(i8, i12, OOC_UINT32, 5998))*(4*i11)))+(_check_index(i4, i11, OOC_UINT32, 6000))*4);
-  i9 = _in(i5,i9);
-  if (!i9) goto l13;
-  i9 = _check_pointer(i0, 6090);
-  i11 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
-  i12 = OOC_ARRAY_LENGTH(i9, 1);
-  i13 = _check_pointer(i0, 6090);
-  i14 = OOC_ARRAY_LENGTH(i13, 1);
-  i15 = OOC_ARRAY_LENGTH(i13, (OOC_INT32)0);
-  i13 = *(OOC_UINT32*)((i13+((_check_index(i2, i15, OOC_UINT32, 6090))*(4*i14)))+(_check_index((i8>>5), i14, OOC_UINT32, 6092))*4);
-  *(OOC_UINT32*)((i9+((_check_index(i2, i11, OOC_UINT32, 6090))*(4*i12)))+(_check_index((i8>>5), i12, OOC_UINT32, 6092))*4) = (_set_bit(i13,i10));
-  goto l13;
-l12:
-  i9 = _check_pointer(i0, 5921);
-  i10 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
-  i11 = OOC_ARRAY_LENGTH(i9, 1);
-  i12 = _check_pointer(i0, 5921);
+  i7 = _check_pointer(i0, 5876);
+  i8 = OOC_ARRAY_LENGTH(i7, 1);
+  i9 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+  i10 = i4>>5;
+  i7 = *(OOC_UINT32*)((i7+((_check_index(i2, i9, OOC_UINT32, 5876))*(4*i8)))+(_check_index(i10, i8, OOC_UINT32, 5878))*4);
+  i8 = _mod(i4,32);
+  i7 = _in(i8,i7);
+  if (i7) goto l12;
+  i7 = _check_pointer(i0, 5998);
+  i9 = OOC_ARRAY_LENGTH(i7, 1);
+  i11 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+  i7 = *(OOC_UINT32*)((i7+((_check_index(i4, i11, OOC_UINT32, 5998))*(4*i9)))+(_check_index(i6, i9, OOC_UINT32, 6000))*4);
+  i7 = _in(i5,i7);
+  if (!i7) goto l13;
+  i7 = _check_pointer(i0, 6090);
+  i9 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+  i11 = OOC_ARRAY_LENGTH(i7, 1);
+  i12 = _check_pointer(i0, 6090);
   i13 = OOC_ARRAY_LENGTH(i12, 1);
   i14 = OOC_ARRAY_LENGTH(i12, (OOC_INT32)0);
-  i12 = *(OOC_UINT32*)((i12+((_check_index(i8, i14, OOC_UINT32, 5921))*(4*i13)))+(_check_index(i6, i13, OOC_UINT32, 5923))*4);
-  *(OOC_UINT32*)((i9+((_check_index(i8, i10, OOC_UINT32, 5921))*(4*i11)))+(_check_index(i7, i11, OOC_UINT32, 5923))*4) = (_set_bit(i12,i5));
+  i12 = *(OOC_UINT32*)((i12+((_check_index(i2, i14, OOC_UINT32, 6090))*(4*i13)))+(_check_index(i10, i13, OOC_UINT32, 6092))*4);
+  *(OOC_UINT32*)((i7+((_check_index(i2, i9, OOC_UINT32, 6090))*(4*i11)))+(_check_index(i10, i11, OOC_UINT32, 6092))*4) = (_set_bit(i12,i8));
+  goto l13;
+l12:
+  i7 = _check_pointer(i0, 5921);
+  i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+  i9 = OOC_ARRAY_LENGTH(i7, 1);
+  i10 = _check_pointer(i0, 5921);
+  i11 = OOC_ARRAY_LENGTH(i10, 1);
+  i12 = OOC_ARRAY_LENGTH(i10, (OOC_INT32)0);
+  i10 = *(OOC_UINT32*)((i10+((_check_index(i4, i12, OOC_UINT32, 5921))*(4*i11)))+(_check_index(i6, i11, OOC_UINT32, 5923))*4);
+  *(OOC_UINT32*)((i7+((_check_index(i4, i8, OOC_UINT32, 5921))*(4*i9)))+(_check_index(i6, i9, OOC_UINT32, 5923))*4) = (_set_bit(i10,i5));
 l13:
-  i8 = i8+1;
-  i9 = i8<=i3;
-  x = i8;
-  if (i9) goto l6_loop;
+  i4 = i4+1;
+  i7 = i4<=i3;
+  x = i4;
+  if (i7) goto l6_loop;
 l18:
   i3 = _check_pointer(i0, 6194);
   i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-  i6 = OOC_ARRAY_LENGTH(i3, 1);
-  i7 = _check_pointer(i0, 6194);
-  i8 = OOC_ARRAY_LENGTH(i7, 1);
-  i9 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
-  i7 = *(OOC_UINT32*)((i7+((_check_index(i2, i9, OOC_UINT32, 6194))*(4*i8)))+(_check_index((i2>>5), i8, OOC_UINT32, 6196))*4);
-  *(OOC_UINT32*)((i3+((_check_index(i2, i4, OOC_UINT32, 6194))*(4*i6)))+(_check_index((i2>>5), i6, OOC_UINT32, 6196))*4) = (_clear_bit(i7,i5));
+  i7 = OOC_ARRAY_LENGTH(i3, 1);
+  i8 = _check_pointer(i0, 6194);
+  i9 = OOC_ARRAY_LENGTH(i8, 1);
+  i10 = OOC_ARRAY_LENGTH(i8, (OOC_INT32)0);
+  i8 = *(OOC_UINT32*)((i8+((_check_index(i2, i10, OOC_UINT32, 6194))*(4*i9)))+(_check_index(i6, i9, OOC_UINT32, 6196))*4);
+  *(OOC_UINT32*)((i3+((_check_index(i2, i4, OOC_UINT32, 6194))*(4*i7)))+(_check_index(i6, i7, OOC_UINT32, 6196))*4) = (_clear_bit(i8,i5));
   i2 = i2+1;
   i3 = i2<=i1;
   y = i2;

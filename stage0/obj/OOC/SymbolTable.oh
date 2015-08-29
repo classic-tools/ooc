@@ -1,19 +1,19 @@
 #ifndef _MODULE_OOC_SymbolTable_
 #define _MODULE_OOC_SymbolTable_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "Object/Boxed.oh"
-#include "ADT/Storable.oh"
-#include "ADT/Dictionary.oh"
-#include "URI.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner/Builder.oh"
-#include "OOC/Doc.oh"
-#include "OOC/AST.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <Object/Boxed.oh>
+#include <ADT/Storable.oh>
+#include <ADT/Dictionary.oh>
+#include <URI.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner/Builder.oh>
+#include <OOC/Doc.oh>
+#include <OOC/AST.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_SymbolTable__NameString;
 typedef OOC_INT32 OOC_SymbolTable__ModulePos;
 typedef OOC_INT32 OOC_SymbolTable__ModuleLine;

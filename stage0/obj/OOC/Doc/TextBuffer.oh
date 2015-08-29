@@ -1,11 +1,11 @@
 #ifndef _MODULE_OOC_Doc_TextBuffer_
 #define _MODULE_OOC_Doc_TextBuffer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Doc.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Doc.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Doc_TextBuffer__BufferDesc *OOC_Doc_TextBuffer__Buffer;
 typedef struct OOC_Doc_TextBuffer__BufferDesc {
   OOC_Scanner_InputBuffer__CharArray str;

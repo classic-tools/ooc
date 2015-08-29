@@ -1,13 +1,13 @@
 #ifndef _MODULE_Out_
 #define _MODULE_Out_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "StdChannels.oh"
-#include "TextRider.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <StdChannels.oh>
+#include <TextRider.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern TextRider__Writer Out__writer;
 extern OOC_CHAR8 Out__Done();
 extern void Out__ClearError();

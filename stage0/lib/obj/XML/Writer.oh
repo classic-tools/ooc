@@ -1,15 +1,15 @@
 #ifndef _MODULE_XML_Writer_
 #define _MODULE_XML_Writer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Object.oh"
-#include "URI.oh"
-#include "XML/UnicodeCodec.oh"
-#include "XML/UnicodeBuffer.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Object.oh>
+#include <URI.oh>
+#include <XML/UnicodeCodec.oh>
+#include <XML/UnicodeBuffer.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR16 XML_Writer__Char;
 typedef OOC_CHAR16 *XML_Writer__String;
 typedef struct {

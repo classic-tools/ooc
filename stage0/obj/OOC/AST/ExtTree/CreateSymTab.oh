@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_AST_ExtTree_CreateSymTab_
 #define _MODULE_OOC_AST_ExtTree_CreateSymTab_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "URI.oh"
-#include "OOC/AST.oh"
-#include "OOC/AST/ExtTree.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <URI.oh>
+#include <OOC/AST.oh>
+#include <OOC/AST/ExtTree.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_AST_ExtTree_CreateSymTab__VisitorDesc *OOC_AST_ExtTree_CreateSymTab__Visitor;
 typedef struct OOC_AST_ExtTree_CreateSymTab__VisitorDesc {
   OOC_SymbolTable_Builder__Builder stb;

@@ -1,5 +1,5 @@
-#include "XML/UnicodeCodec.d"
-#include "__oo2c.h"
+#include <XML/UnicodeCodec.d>
+#include <__oo2c.h>
 
 void XML_UnicodeCodec__Init(XML_UnicodeCodec__Codec codec, OOC_INT8 bom) {
   register OOC_INT32 i0,i1;

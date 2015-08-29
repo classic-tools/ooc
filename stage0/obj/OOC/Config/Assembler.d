@@ -1,6 +1,6 @@
-#include "OOC/Config/Assembler.oh"
-#include "Strings.oh"
-#include "URI/Scheme/File.oh"
+#include <OOC/Config/Assembler.oh>
+#include <Strings.oh>
+#include <URI/Scheme/File.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

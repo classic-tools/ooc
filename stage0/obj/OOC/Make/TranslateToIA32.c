@@ -1,5 +1,5 @@
-#include "OOC/Make/TranslateToIA32.d"
-#include "__oo2c.h"
+#include <OOC/Make/TranslateToIA32.d>
+#include <__oo2c.h>
 
 void OOC_Make_TranslateToIA32__InitTranslator(OOC_Make_TranslateToIA32__Translator t, OOC_Repository__Module module) {
   register OOC_INT32 i0,i1;

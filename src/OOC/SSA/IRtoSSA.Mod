@@ -1,4 +1,4 @@
-(* 	$Id: IRtoSSA.Mod,v 1.108 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: IRtoSSA.Mod,v 1.109 2002/12/21 09:18:44 mva Exp $	 *)
 MODULE OOC:SSA:IRtoSSA;
 (*  Converts the IR of a procedure into its SSA representation.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -945,7 +945,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       IF (assert. predicate = NIL) THEN
         instr := AddException (pb, assert. sym, Opcode.halt, Opcode.scNone);
         instr. AddOpnd (pb. GetConstInt (assert. code), Opnd.arg);
-      ELSE
+      ELSIF ~assert.disabled THEN
         predicate := Expression (assert. predicate);
         instr := AddException (pb, assert. sym, Opcode.assert, Opcode.scNone);
         instr. AddOpnd (predicate, Opnd.arg);

@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_IA32_WriteAssembler_
 #define _MODULE_OOC_IA32_WriteAssembler_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "StringSearch.oh"
-#include "OOC/Repository.oh"
-#include "OOC/IR.oh"
-#include "OOC/Make/TranslateToIA32.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <StringSearch.oh>
+#include <OOC/Repository.oh>
+#include <OOC/IR.oh>
+#include <OOC/Make/TranslateToIA32.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc *OOC_IA32_WriteAssembler__Translator;
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc {
   OOC_IA32_Writer__Writer w;

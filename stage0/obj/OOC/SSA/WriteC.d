@@ -1,25 +1,25 @@
-#include "OOC/SSA/WriteC.oh"
-#include "IntStr.oh"
-#include "Out.oh"
-#include "StdChannels.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "Object/Boxed.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/IRtoSSA.oh"
-#include "OOC/SSA/XML.oh"
-#include "OOC/SSA/DeadCodeElimination.oh"
-#include "OOC/SSA/Destore.oh"
-#include "OOC/SSA/CSE.oh"
-#include "OOC/SSA/Algebraic.oh"
-#include "OOC/SSA/ConstProp.oh"
-#include "OOC/SSA/Allocator.oh"
-#include "OOC/C/ConvertDecl.oh"
-#include "OOC/C/Naming.oh"
+#include <OOC/SSA/WriteC.oh>
+#include <IntStr.oh>
+#include <Out.oh>
+#include <StdChannels.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <Object/Boxed.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/IRtoSSA.oh>
+#include <OOC/SSA/XML.oh>
+#include <OOC/SSA/DeadCodeElimination.oh>
+#include <OOC/SSA/Destore.oh>
+#include <OOC/SSA/CSE.oh>
+#include <OOC/SSA/Algebraic.oh>
+#include <OOC/SSA/ConstProp.oh>
+#include <OOC/SSA/Allocator.oh>
+#include <OOC/C/ConvertDecl.oh>
+#include <OOC/C/Naming.oh>
 #define OOC_SSA_WriteC__enableDebugOutput OOC_FALSE
 #define OOC_SSA_WriteC__prefixPreloadVar "_c"
 static OOC_SSA_WriteC__Visitor OOC_SSA_WriteC__NewVisitor();
@@ -49,7 +49,7 @@ RT0__StructDesc _td_OOC_SSA_WriteC__22240 = { (RT0__Struct[]){&RT0__char}, NULL,
 RT0__StructDesc _td_OOC_SSA_WriteC__22444 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_SSA_WriteC__22737 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_SSA_WriteC__36754 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_SSA_WriteC__47411 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SSA_WriteC__47440 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SSA:WriteC", (RT0__Struct[]) { &_td_OOC_SSA_WriteC__RegisterSwap, &_td_OOC_SSA_WriteC__SwapArray, &_td_OOC_SSA_WriteC__Translator, &_td_OOC_SSA_WriteC__TranslatorDesc, &_td_OOC_SSA_WriteC__Writer, &_td_OOC_SSA_WriteC__WriterDesc, &_td_OOC_SSA_WriteC__Visitor, &_td_OOC_SSA_WriteC__VisitorDesc, NULL } };
 
 extern void OOC_OOC_SSA_WriteC_init0() {

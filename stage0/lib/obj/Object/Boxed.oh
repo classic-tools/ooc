@@ -1,12 +1,12 @@
 #ifndef _MODULE_Object_Boxed_
 #define _MODULE_Object_Boxed_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "ADT/Storable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <ADT/Storable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Object_Boxed__ObjectDesc *Object_Boxed__Object;
 typedef struct Object_Boxed__ObjectDesc {
   char __dummy;

@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/Namespace.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
+#include <OOC/SymbolTable/Namespace.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
 #define OOC_SymbolTable_Namespace__multipleDeclForName 1
 #define OOC_SymbolTable_Namespace__multipleMemberForName 2
 #define OOC_SymbolTable_Namespace__definedForBaseType 3

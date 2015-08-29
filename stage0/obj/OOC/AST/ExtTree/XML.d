@@ -1,10 +1,10 @@
-#include "OOC/AST/ExtTree/XML.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/AST.oh"
-#include "XML/Writer.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "OOC/Doc.oh"
-#include "OOC/Doc/Output/XML.oh"
+#include <OOC/AST/ExtTree/XML.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/AST.oh>
+#include <XML/Writer.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <OOC/Doc.oh>
+#include <OOC/Doc/Output/XML.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

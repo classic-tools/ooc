@@ -1,5 +1,5 @@
-#include "URI/Scheme/CurrentDoc.oh"
-#include "CharClass.oh"
+#include <URI/Scheme/CurrentDoc.oh>
+#include <CharClass.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

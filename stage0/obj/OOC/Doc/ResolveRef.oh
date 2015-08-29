@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_Doc_ResolveRef_
 #define _MODULE_OOC_Doc_ResolveRef_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Doc_ResolveRef__ErrorContextDesc *OOC_Doc_ResolveRef__ErrorContext;
 typedef struct OOC_Doc_ResolveRef__ErrorContextDesc {
   Msg__StringPtr id;

@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_Make_TranslateToC_
 #define _MODULE_OOC_Make_TranslateToC_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/Repository.oh"
-#include "OOC/IR.oh"
-#include "OOC/C/DeclWriter.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/Repository.oh>
+#include <OOC/IR.oh>
+#include <OOC/C/DeclWriter.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Make_TranslateToC__TranslatorDesc *OOC_Make_TranslateToC__Translator;
 typedef struct OOC_Make_TranslateToC__TranslatorDesc {
   OOC_C_DeclWriter__Writer w;

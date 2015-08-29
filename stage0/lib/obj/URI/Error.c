@@ -1,5 +1,5 @@
-#include "URI/Error.d"
-#include "__oo2c.h"
+#include <URI/Error.d>
+#include <__oo2c.h>
 
 void URI_Error__ContextDesc_GetTemplate(URI_Error__Context context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1,i2,i3;
@@ -14,9 +14,9 @@ void URI_Error__ContextDesc_GetTemplate(URI_Error__Context context, Msg__Msg msg
   i1=OOC_FALSE;
   goto l5;
 l3:
-  i1 = *(OOC_INT32*)((_check_pointer(i2, 1529))+8);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
-  i1 = i3!=i1;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 1529))+8);
+  i1 = i1!=i3;
   
 l5:
   if (!i1) goto l17;

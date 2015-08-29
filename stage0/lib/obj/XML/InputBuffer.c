@@ -1,5 +1,5 @@
-#include "XML/InputBuffer.d"
-#include "__oo2c.h"
+#include <XML/InputBuffer.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 XML_InputBuffer__BufferDesc_NextBlock(XML_InputBuffer__Buffer b) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;
@@ -26,9 +26,9 @@ OOC_CHAR8 XML_InputBuffer__BufferDesc_NextBlock(XML_InputBuffer__Buffer b) {
   i1 = *(OOC_INT32*)((_check_pointer(i0, 3019))+16);
   i1 = i1>=4096;
   if (!i1) goto l8;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 3135))+16);
-  i2 = *(OOC_INT32*)((_check_pointer(i0, 3118))+12);
-  i1 = i2-i1;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 3118))+12);
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 3135))+16);
+  i1 = i1-i2;
   len = i1;
   i2 = *(OOC_INT32*)((_check_pointer(i0, 3169))+16);
   i2 = i1<i2;
@@ -94,8 +94,8 @@ l16:
   i1 = i1==0;
   if (i1) goto l19;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4649));
-  i1 = *(OOC_INT32*)((_check_pointer(i1, 4652))+8);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 4633))+12);
+  i1 = *(OOC_INT32*)((_check_pointer(i1, 4652))+8);
   *(OOC_INT32*)((_check_pointer(i0, 4633))+12) = (i2+i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4675))+4);
   i1 = _check_pointer(i1, 4682);
@@ -127,8 +127,8 @@ l21:
   if (!i1) goto l24;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2833))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2853));
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2856))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2833))+20);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2856))+4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2842)))), Msg__MsgListDesc_Append)),Msg__MsgListDesc_Append)((Msg__MsgList)i3, (Msg__Msg)i2);
 l24:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2889))+4);

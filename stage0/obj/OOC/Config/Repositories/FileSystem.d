@@ -1,11 +1,11 @@
-#include "OOC/Config/Repositories/FileSystem.oh"
-#include "LongStrings.oh"
-#include "Strings.oh"
-#include "URI.oh"
-#include "URI/Parser.oh"
-#include "XML/DTD.oh"
-#include "XML/Builder.oh"
-#include "OOC/Repository/FileSystem.oh"
+#include <OOC/Config/Repositories/FileSystem.oh>
+#include <LongStrings.oh>
+#include <Strings.oh>
+#include <URI.oh>
+#include <URI/Parser.oh>
+#include <XML/DTD.oh>
+#include <XML/Builder.oh>
+#include <OOC/Repository/FileSystem.oh>
 #define OOC_Config_Repositories_FileSystem__invalidAttribute 1
 #define OOC_Config_Repositories_FileSystem__requireCharDataContent 2
 #define OOC_Config_Repositories_FileSystem__invalidURI 3

@@ -1,9 +1,9 @@
-#include "OOC/SSA/XML.oh"
-#include "Object.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Result.oh"
-#include "OOC/SSA/Opnd.oh"
+#include <OOC/SSA/XML.oh>
+#include <Object.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Result.oh>
+#include <OOC/SSA/Opnd.oh>
 static OOC_CHAR8 OOC_SSA_XML__Omit(OOC_SSA__Instr instr);
 
 /* run-time meta data */

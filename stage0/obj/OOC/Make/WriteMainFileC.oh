@@ -1,22 +1,22 @@
 #ifndef _MODULE_OOC_Make_WriteMainFileC_
 #define _MODULE_OOC_Make_WriteMainFileC_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/Repository.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/Repository.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern void OOC_Make_WriteMainFileC__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Msg__Msg *res);
 extern void OOC_OOC_Make_WriteMainFileC_init();
 extern void OOC_OOC_Make_WriteMainFileC_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1062;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1279;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1387;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1422;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1822;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1074;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1291;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1399;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1434;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileC__1834;
 #endif /* _MODULE_OOC_Make_WriteMainFileC_ */
 
 /* --- */

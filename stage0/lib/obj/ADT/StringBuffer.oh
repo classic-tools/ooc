@@ -1,11 +1,11 @@
 #ifndef _MODULE_ADT_StringBuffer_
 #define _MODULE_ADT_StringBuffer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR8 *ADT_StringBuffer__CharsLatin1;
 typedef OOC_CHAR32 *ADT_StringBuffer__CharsUCS4;
 typedef struct ADT_StringBuffer__StringBufferDesc *ADT_StringBuffer__StringBuffer;

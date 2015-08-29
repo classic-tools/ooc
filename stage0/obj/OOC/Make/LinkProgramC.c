@@ -1,8 +1,8 @@
-#include "OOC/Make/LinkProgramC.d"
-#include "__oo2c.h"
+#include <OOC/Make/LinkProgramC.d>
+#include <__oo2c.h>
 
 static Object__StringArrayPtr OOC_Make_LinkProgramC__GetExternalLibs(const OOC_Repository__Module moduleList__ref[], OOC_LEN moduleList_0d, Object__String thisLibrary) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
   OOC_ALLOCATE_VPAR(moduleList,OOC_Repository__Module ,moduleList_0d)
   ADT_Dictionary__Dictionary libDeps;
   ADT_Dictionary__Dictionary option;
@@ -196,102 +196,100 @@ l8:
   i1 = 0<=i0;
   i = 0;
   if (!i1) goto l36;
-  i1=0;
+  i2=0;
 l3_loop:
-  i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i1, moduleList_0d, OOC_UINT32, 3817))*4);
-  i1 = OOC_Make_LinkProgramC__GetExternalLibs_IncludeModule((OOC_Repository__Module)i1);
-  if (!i1) goto l31;
-  i1 = i;
-  i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i1, moduleList_0d, OOC_UINT32, 3926))*4);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3929))+12);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3936))+56);
-  linkDirective = (OOC_SymbolTable__LinkDirective)i1;
-  i2 = i1!=(OOC_INT32)0;
+  i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i2, moduleList_0d, OOC_UINT32, 3817))*4);
+  i2 = OOC_Make_LinkProgramC__GetExternalLibs_IncludeModule((OOC_Repository__Module)i2);
   if (!i2) goto l31;
+  i2 = i;
+  i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i2, moduleList_0d, OOC_UINT32, 3926))*4);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3929))+12);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3936))+56);
+  linkDirective = (OOC_SymbolTable__LinkDirective)i2;
+  i3 = i2!=(OOC_INT32)0;
+  if (!i3) goto l31;
 l8_loop:
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4020)))), &_td_OOC_SymbolTable__LinkLibDesc);
-  if (!i2) goto l25;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4086))+4);
-  i1 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_GetDepArray((Object__String)i1);
-  depArray = (ADT_ArrayList__ArrayList)i1;
-  i2 = (OOC_INT32)linkDirective;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4144))+8);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4157)), (OOC_INT32)0);
-  i3 = i3-1;
-  i4 = 0<=i3;
+  i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4020)))), &_td_OOC_SymbolTable__LinkLibDesc);
+  if (!i3) goto l25;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4086))+4);
+  i2 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_GetDepArray((Object__String)i2);
+  depArray = (ADT_ArrayList__ArrayList)i2;
+  i3 = (OOC_INT32)linkDirective;
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4144))+8);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 4157)), (OOC_INT32)0);
+  i4 = i4-1;
+  i5 = 0<=i4;
   j = 0;
-  if (!i4) goto l18;
-  i4=0;
+  if (!i5) goto l18;
+  i5=0;
 l13_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4208))+8);
-  i5 = _check_pointer(i5, 4221);
-  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
-  i4 = (OOC_INT32)*(OOC_INT32*)(i5+(_check_index(i4, i6, OOC_UINT32, 4221))*4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4187)))), ADT_ArrayList__ArrayListDesc_Append)),ADT_ArrayList__ArrayListDesc_Append)((ADT_ArrayList__ArrayList)i1, (Object__Object)i4);
-  i4 = j;
-  i4 = i4+1;
-  i5 = i4<=i3;
-  j = i4;
-  if (i5) goto l13_loop;
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4208))+8);
+  i6 = _check_pointer(i6, 4221);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+  i5 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 4221))*4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4187)))), ADT_ArrayList__ArrayListDesc_Append)),ADT_ArrayList__ArrayListDesc_Append)((ADT_ArrayList__ArrayList)i2, (Object__Object)i5);
+  i5 = j;
+  i5 = i5+1;
+  i6 = i5<=i4;
+  j = i5;
+  if (i6) goto l13_loop;
 l18:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4284))+4);
-  i1 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_Option((Object__String)i1);
-  prev = (Object__String)i1;
-  i1 = (OOC_INT32)linkDirective;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4328))+12);
-  i2 = i2!=(OOC_INT32)0;
-  if (!i2) goto l21;
-  i2 = (OOC_INT32)OOC_Make_LinkProgramC__space;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4413))+12);
-  i1 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_LookupValue((Object__String)i1);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4380)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i2, (Object__String)i1);
-  _new = (Object__String)i1;
-  i2 = (OOC_INT32)option;
-  i3 = (OOC_INT32)linkDirective;
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4468))+4);
-  i5 = (OOC_INT32)prev;
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4485)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i1, (Object__String)i5);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4450)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i2, (Object__Object)i4, (Object__Object)i1);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4543))+4);
-  i1 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_Option((Object__String)i1);
-  prev = (Object__String)i1;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4284))+4);
+  i2 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_Option((Object__String)i2);
+  prev = (Object__String)i2;
+  i2 = (OOC_INT32)linkDirective;
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4328))+12);
+  i3 = i3!=(OOC_INT32)0;
+  if (!i3) goto l21;
+  i3 = (OOC_INT32)OOC_Make_LinkProgramC__space;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4413))+12);
+  i2 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_LookupValue((Object__String)i2);
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 4380)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i3, (Object__String)i2);
+  _new = (Object__String)i2;
+  i3 = (OOC_INT32)option;
+  i4 = (OOC_INT32)linkDirective;
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 4468))+4);
+  i6 = (OOC_INT32)prev;
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4485)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i2, (Object__String)i6);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 4450)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i3, (Object__Object)i5, (Object__Object)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 4543))+4);
+  i2 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_Option((Object__String)i2);
+  prev = (Object__String)i2;
 l21:
-  i1 = (OOC_INT32)linkDirective;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4618))+16);
-  i2 = i2!=(OOC_INT32)0;
-  if (!i2) goto l25;
-  i2 = (OOC_INT32)OOC_Make_LinkProgramC__space;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4703))+16);
-  i1 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_LookupValue((Object__String)i1);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4670)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i2, (Object__String)i1);
-  _new = (Object__String)i1;
-  i2 = (OOC_INT32)option;
-  i3 = (OOC_INT32)linkDirective;
-  i4 = (OOC_INT32)prev;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4758))+4);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 4776)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i4, (Object__String)i1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4740)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i2, (Object__Object)i3, (Object__Object)i1);
+  i2 = (OOC_INT32)linkDirective;
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4618))+16);
+  i3 = i3!=(OOC_INT32)0;
+  if (!i3) goto l25;
+  i3 = (OOC_INT32)OOC_Make_LinkProgramC__space;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4703))+16);
+  i2 = (OOC_INT32)OOC_Make_LinkProgramC__GetExternalLibs_LookupValue((Object__String)i2);
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 4670)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i3, (Object__String)i2);
+  _new = (Object__String)i2;
+  i3 = (OOC_INT32)option;
+  i4 = (OOC_INT32)linkDirective;
+  i5 = (OOC_INT32)prev;
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 4758))+4);
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 4776)))), Object__StringDesc_Concat)),Object__StringDesc_Concat)((Object__String)i5, (Object__String)i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 4740)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i3, (Object__Object)i4, (Object__Object)i2);
 l25:
-  i1 = (OOC_INT32)linkDirective;
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4915));
-  linkDirective = (OOC_SymbolTable__LinkDirective)i1;
-  i2 = i1!=(OOC_INT32)0;
-  if (i2) goto l8_loop;
+  i2 = (OOC_INT32)linkDirective;
+  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 4915));
+  linkDirective = (OOC_SymbolTable__LinkDirective)i2;
+  i3 = i2!=(OOC_INT32)0;
+  if (i3) goto l8_loop;
 l31:
-  i1 = i;
-  i1 = i1+1;
-  i2 = i1<=i0;
-  i = i1;
-  if (i2) goto l3_loop;
+  i2 = i;
+  i2 = i2+1;
+  i3 = i2<=i0;
+  i = i2;
+  if (i3) goto l3_loop;
 l36:
-  i0 = (OOC_INT32)libDeps;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5200)))), ADT_Dictionary__DictionaryDesc_Size)),ADT_Dictionary__DictionaryDesc_Size)((ADT_Dictionary__Dictionary)i0);
-  extLibs = (Object__StringArrayPtr)((OOC_INT32)RT0__NewObject(_td_Object__StringArrayPtr.baseTypes[0], i0));
-  i0 = (OOC_INT32)ADT_Dictionary__New();
-  visited = (ADT_Dictionary__Dictionary)i0;
-  i0 = moduleList_0d-1;
+  i2 = (OOC_INT32)libDeps;
+  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5200)))), ADT_Dictionary__DictionaryDesc_Size)),ADT_Dictionary__DictionaryDesc_Size)((ADT_Dictionary__Dictionary)i2);
+  extLibs = (Object__StringArrayPtr)((OOC_INT32)RT0__NewObject(_td_Object__StringArrayPtr.baseTypes[0], i2));
+  i2 = (OOC_INT32)ADT_Dictionary__New();
+  visited = (ADT_Dictionary__Dictionary)i2;
   j = 0;
-  i1 = 0<=i0;
   i = 0;
   if (!i1) goto l58;
   i1=0;
@@ -478,8 +476,8 @@ l43:
   extLibs = (Object__StringArrayPtr)i0;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 8869)), (OOC_INT32)0);
   i1 = i1-1;
-  i2 = i1>=0;
   i = i1;
+  i2 = i1>=0;
   if (!i2) goto l51;
 l46_loop:
   i2 = _check_pointer(i0, 8912);
@@ -533,6 +531,7 @@ l60:
 void OOC_OOC_Make_LinkProgramC_init(void) {
   register OOC_INT32 i0;
   _c0 = Object__NewLatin1Region(" -l", 4, (OOC_INT32)0, 3);
+  _c1 = Object__NewLatin1Char((OOC_CHAR8)' ');
 
   i0 = (OOC_INT32)Object__emptyString;
   OOC_Make_LinkProgramC__empty = (Object__String)i0;

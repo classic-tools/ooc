@@ -1,9 +1,9 @@
-#include "OOC/IA32/Writer.oh"
-#include "Ascii.oh"
-#include "Files.oh"
-#include "IntStr.oh"
-#include "Strings.oh"
-#include "Object.oh"
+#include <OOC/IA32/Writer.oh>
+#include <Ascii.oh>
+#include <Files.oh>
+#include <IntStr.oh>
+#include <Strings.oh>
+#include <Object.oh>
 static void OOC_IA32_Writer__InitWriter(OOC_IA32_Writer__Writer w, Channel__Channel ch);
 
 /* run-time meta data */

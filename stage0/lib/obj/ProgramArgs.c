@@ -1,5 +1,5 @@
-#include "ProgramArgs.d"
-#include "__oo2c.h"
+#include <ProgramArgs.d>
+#include <__oo2c.h>
 
 static Msg__Msg ProgramArgs__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;

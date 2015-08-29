@@ -1,5 +1,5 @@
-#include "URI.d"
-#include "__oo2c.h"
+#include <URI.d>
+#include <__oo2c.h>
 
 void URI__ErrorContextDesc_GetTemplate(URI__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0;
@@ -341,9 +341,9 @@ URI__URI URI__HierarchicalURIDesc_MakeRelative(URI__HierarchicalURI uri, URI__Hi
   i1 = (
   _cmp8((const void*)(_check_pointer(i1, 17438)),(const void*)(_check_pointer(i3, 17459))))!=(OOC_INT32)0;
   if (i1) goto l15;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17596))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17567))+4);
-  i1 = (i3==(OOC_INT32)0)!=(i1==(OOC_INT32)0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17567))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17596))+4);
+  i1 = (i1==(OOC_INT32)0)!=(i3==(OOC_INT32)0);
   if (i1) goto l13;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17934))+4);
   i1 = i1!=(OOC_INT32)0;

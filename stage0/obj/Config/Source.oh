@@ -1,13 +1,13 @@
 #ifndef _MODULE_Config_Source_
 #define _MODULE_Config_Source_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "Config/Parser.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <Config/Parser.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config_Source__SourceDesc *Config_Source__Source;
 typedef struct Config_Source__SourceDesc {
   char __dummy;

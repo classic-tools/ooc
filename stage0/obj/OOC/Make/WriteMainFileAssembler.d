@@ -1,8 +1,8 @@
-#include "OOC/Make/WriteMainFileAssembler.oh"
-#include "Ascii.oh"
-#include "Channel.oh"
-#include "Files.oh"
-#include "TextRider.oh"
+#include <OOC/Make/WriteMainFileAssembler.oh>
+#include <Ascii.oh>
+#include <Channel.oh>
+#include <Files.oh>
+#include <TextRider.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

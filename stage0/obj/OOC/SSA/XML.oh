@@ -1,16 +1,16 @@
 #ifndef _MODULE_OOC_SSA_XML_
 #define _MODULE_OOC_SSA_XML_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "ADT/Dictionary/IntValue.oh"
-#include "ADT/StringBuffer.oh"
-#include "XML/Writer.oh"
-#include "OOC/SSA.oh"
-#include "OOC/SSA/Schedule.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <ADT/Dictionary/IntValue.oh>
+#include <ADT/StringBuffer.oh>
+#include <XML/Writer.oh>
+#include <OOC/SSA.oh>
+#include <OOC/SSA/Schedule.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_SSA_XML__WriterDesc *OOC_SSA_XML__Writer;
 typedef struct OOC_SSA_XML__WriterDesc {
   XML_UnicodeCodec__Factory codecFactory;

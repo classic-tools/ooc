@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/TypeRules.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/TypeRules.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 OOC_SymbolTable_TypeRules__IsNamedType(OOC_SymbolTable__Type type) {
   register OOC_INT32 i0;
@@ -841,9 +841,9 @@ l9:
   i1=OOC_FALSE;
   goto l13;
 l11:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14129))+36);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14106))+36);
-  i1 = OOC_SymbolTable_TypeRules__SameType((OOC_SymbolTable__Type)i3, (OOC_SymbolTable__Type)i1);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14106))+36);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14129))+36);
+  i1 = OOC_SymbolTable_TypeRules__SameType((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i3);
   i1 = !i1;
   
 l13:
@@ -861,13 +861,13 @@ l19:
   i1=OOC_FALSE;
   goto l27;
 l21:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14296))+36);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14273))+36);
-  i1 = OOC_SymbolTable_TypeRules__SameType((OOC_SymbolTable__Type)i3, (OOC_SymbolTable__Type)i1);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14273))+36);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14296))+36);
+  i1 = OOC_SymbolTable_TypeRules__SameType((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i3);
   if (i1) goto l24;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14372))+36);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14349))+36);
-  i1 = OOC_SymbolTable_TypeRules__IsExtensionOf((OOC_SymbolTable__Type)i3, (OOC_SymbolTable__Type)i1);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 14349))+36);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14372))+36);
+  i1 = OOC_SymbolTable_TypeRules__IsExtensionOf((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i3);
   
   goto l25;
 l24:
@@ -1349,8 +1349,8 @@ l60:
   i1 = _check_pointer(i1, 21064);
   i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(12, i3, OOC_UINT8, 21064))*4);
-  i1 = *(OOC_INT16*)((_check_pointer(i1, 21076))+28);
   i2 = *(OOC_INT32*)((_check_pointer(i2, 21016))+24);
+  i1 = *(OOC_INT16*)((_check_pointer(i1, 21076))+28);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20975)))), OOC_SymbolTable__TypeDesc_SetSize)),OOC_SymbolTable__TypeDesc_SetSize)((OOC_SymbolTable__Type)i0, i2, i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21138))+32);
   i1 = i1!=(OOC_INT32)0;
@@ -1386,8 +1386,8 @@ l73:
   i1 = _check_pointer(i1, 20683);
   i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(12, i3, OOC_UINT8, 20683))*4);
-  i1 = *(OOC_INT16*)((_check_pointer(i1, 20695))+28);
   i2 = *(OOC_INT32*)((_check_pointer(i2, 20635))+24);
+  i1 = *(OOC_INT16*)((_check_pointer(i1, 20695))+28);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20594)))), OOC_SymbolTable__TypeDesc_SetSize)),OOC_SymbolTable__TypeDesc_SetSize)((OOC_SymbolTable__Type)i0, i2, i1);
 l75:
   return;

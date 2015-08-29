@@ -1,5 +1,5 @@
-#include "OOC/Auxiliary/ParseModule.d"
-#include "__oo2c.h"
+#include <OOC/Auxiliary/ParseModule.d>
+#include <__oo2c.h>
 
 void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 checkModuleName, OOC_CHAR8 createNamespace, OOC_CHAR8 writeSymbolFile, OOC_CHAR8 abortAfterImport, Object__String libraryName, OOC_AST__Node *ast, OOC_SymbolTable__Module *symTab, OOC_Config_Pragmas__History *pragmaHistory, OOC_Error__List *errList) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;

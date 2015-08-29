@@ -1,5 +1,5 @@
-#include "XML/Locator.d"
-#include "__oo2c.h"
+#include <XML/Locator.d>
+#include <__oo2c.h>
 
 Msg__Msg XML_Locator__ErrorListenerDesc_Error(XML_Locator__ErrorListener el, XML_Error__Context context, OOC_INT32 code, OOC_CHAR8 fatalError, const struct XML_Locator__Position *pos__ref) {
   OOC_ALLOCATE_VPAR(pos,XML_Locator__Position ,1)

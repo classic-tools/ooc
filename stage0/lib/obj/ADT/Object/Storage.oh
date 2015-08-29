@@ -1,14 +1,14 @@
 #ifndef _MODULE_ADT_Object_Storage_
 #define _MODULE_ADT_Object_Storage_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "ADT/Storable.oh"
-#include "ADT/Dictionary/AddressKey/IntValue.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <ADT/Storable.oh>
+#include <ADT/Dictionary/AddressKey/IntValue.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define ADT_Object_Storage__done  0
 typedef struct {
   RT0__Name module;

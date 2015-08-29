@@ -1,5 +1,5 @@
-#include "Config/Value/Integer.d"
-#include "__oo2c.h"
+#include <Config/Value/Integer.d>
+#include <__oo2c.h>
 
 void Config_Value_Integer__ErrorContextDesc_GetTemplate(Config_Value_Integer__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;
@@ -49,21 +49,21 @@ void Config_Value_Integer__ValueDesc_StringToValue(Config_Value_Integer__Value v
   OOC_INT8 res;
 
   OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 1285)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 1285)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 1301)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 1301)));
   i0 = i0<=(OOC_CHAR8)' ';
   
 l5:
   if (i0) goto l7;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l17;
 l7:
-  i0=0;
+  i0=(OOC_INT32)0;
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 1285)));
@@ -78,11 +78,11 @@ l11:
 l13:
   if (i1) goto l8_loop;
 l17:
-  Strings__Delete((void*)(OOC_INT32)str, str_0d, 0, i0);
+  Strings__Delete((void*)(OOC_INT32)str, str_0d, (OOC_INT32)0, i0);
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   len = i0;
-  i1 = i0>0;
   i = i0;
+  i1 = i0>(OOC_INT32)0;
   if (i1) goto l20;
   i1=OOC_FALSE;
   goto l22;
@@ -99,7 +99,7 @@ l24:
 l25_loop:
   i1 = i1-1;
   i = i1;
-  i2 = i1>0;
+  i2 = i1>(OOC_INT32)0;
   if (i2) goto l28;
   i2=OOC_FALSE;
   goto l30;

@@ -1,15 +1,15 @@
 #ifndef _MODULE_Config_Section_
 #define _MODULE_Config_Section_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "XML/Error.oh"
-#include "XML/Locator.oh"
-#include "Config/Parser.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <XML/Error.oh>
+#include <XML/Locator.oh>
+#include <Config/Parser.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct Config_Section__SectionDesc *Config_Section__Section;
 typedef struct Config_Section__SectionDesc {
   XML_UnicodeBuffer__CharArray name;

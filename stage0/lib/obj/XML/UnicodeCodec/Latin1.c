@@ -1,5 +1,5 @@
-#include "XML/UnicodeCodec/Latin1.d"
-#include "__oo2c.h"
+#include <XML/UnicodeCodec/Latin1.d>
+#include <__oo2c.h>
 
 static void XML_UnicodeCodec_Latin1__Init(XML_UnicodeCodec_Latin1__Codec codec, OOC_INT8 bom) {
   register OOC_INT32 i0,i1;
@@ -165,8 +165,8 @@ l43:
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 2990))*2);
   *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT32, 2970))) = i1;
 l44:
-  i0 = i0+1;
   i1 = i2+1;
+  i0 = i0+1;
   
 l45:
   *sourceDone = i0;

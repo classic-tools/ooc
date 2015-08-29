@@ -1,13 +1,13 @@
 #ifndef _MODULE_XML_Builder_
 #define _MODULE_XML_Builder_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "URI.oh"
-#include "XML/DTD.oh"
-#include "XML/Locator.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <URI.oh>
+#include <XML/DTD.oh>
+#include <XML/Locator.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct XML_Builder__BuilderDesc *XML_Builder__Builder;
 typedef struct XML_Builder__BuilderDesc {
   char __dummy;

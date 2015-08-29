@@ -1,5 +1,5 @@
-#include "OOC/Doc/Output/XML.d"
-#include "__oo2c.h"
+#include <OOC/Doc/Output/XML.d>
+#include <__oo2c.h>
 
 void OOC_Doc_Output_XML__WriteOberonDoc(XML_Writer__Writer w, OOC_Doc__Document document, OOC_SymbolTable__Module localModule, ADT_Dictionary__Dictionary rewriteMap, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary moduleDict) {
   register OOC_INT32 i0,i1,i2;

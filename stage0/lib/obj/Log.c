@@ -1,5 +1,5 @@
-#include "Log.d"
-#include "__oo2c.h"
+#include <Log.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 Log__Done() {
   register OOC_INT32 i0;

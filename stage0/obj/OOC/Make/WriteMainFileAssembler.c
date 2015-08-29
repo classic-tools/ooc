@@ -1,5 +1,5 @@
-#include "OOC/Make/WriteMainFileAssembler.d"
-#include "__oo2c.h"
+#include <OOC/Make/WriteMainFileAssembler.d>
+#include <__oo2c.h>
 
 void OOC_Make_WriteMainFileAssembler__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Msg__Msg *res) {
   register OOC_INT32 i0,i1;

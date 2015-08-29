@@ -1,10 +1,10 @@
 #ifndef _MODULE_Strings_
 #define _MODULE_Strings_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 Strings__CompareResults;
 #define Strings__less -1
 #define Strings__equal 0

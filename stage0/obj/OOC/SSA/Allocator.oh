@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_SSA_Allocator_
 #define _MODULE_OOC_SSA_Allocator_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/SSA.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Schedule.oh"
-#include "OOC/C/DeclWriter.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/SSA.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Schedule.oh>
+#include <OOC/C/DeclWriter.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef ADT_Dictionary__Dictionary OOC_SSA_Allocator__State;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc *OOC_SSA_Allocator__BlockInfo;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc {

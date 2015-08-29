@@ -1,5 +1,5 @@
-#include "OOC/SSA/Algebraic.d"
-#include "__oo2c.h"
+#include <OOC/SSA/Algebraic.d>
+#include <__oo2c.h>
 
 static OOC_INT32 OOC_SSA_Algebraic__IsPowerOf2(Object_BigInt__BigInt value) {
   register OOC_INT32 i0,i1,i2,i3;
@@ -239,15 +239,15 @@ l18:
         if (!i0) goto l50;
         i0 = (OOC_INT32)instr;
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4798))+24);
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4808))+8);
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4781))+24);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4808))+8);
         OOC_SSA_Algebraic__Transform_InspectInstr_ReplaceIndexed((OOC_SSA__Instr)i0, (OOC_SSA__Opnd)i2, (OOC_SSA__Opnd)i1);
         goto l50;
 l12:
         i0 = (OOC_INT32)instr;
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4605))+24);
-        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4632))+24);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4615))+8);
+        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4632))+24);
         OOC_SSA_Algebraic__Transform_InspectInstr_ReplaceIndexed((OOC_SSA__Instr)i0, (OOC_SSA__Opnd)i1, (OOC_SSA__Opnd)i2);
         goto l50;
 l14:

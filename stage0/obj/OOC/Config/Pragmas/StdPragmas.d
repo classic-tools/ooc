@@ -1,8 +1,8 @@
-#include "OOC/Config/Pragmas/StdPragmas.oh"
-#include "Config/Value/Boolean.oh"
-#include "Config/Value/Integer.oh"
-#include "Config/Value/String.oh"
-#include "OOC/Config/Autoconf.oh"
+#include <OOC/Config/Pragmas/StdPragmas.oh>
+#include <Config/Value/Boolean.oh>
+#include <Config/Value/Integer.oh>
+#include <Config/Value/String.oh>
+#include <OOC/Config/Autoconf.oh>
 #define OOC_Config_Pragmas_StdPragmas__defaultWarnings OOC_TRUE
 #define OOC_Config_Pragmas_StdPragmas__defaultAssertions OOC_TRUE
 #define OOC_Config_Pragmas_StdPragmas__defaultIndexCheck OOC_TRUE

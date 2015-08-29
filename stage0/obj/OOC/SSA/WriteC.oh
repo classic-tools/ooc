@@ -1,20 +1,20 @@
 #ifndef _MODULE_OOC_SSA_WriteC_
 #define _MODULE_OOC_SSA_WriteC_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "StringSearch.oh"
-#include "ADT/Dictionary.oh"
-#include "ADT/ArrayList.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/IR.oh"
-#include "OOC/IR/VisitAll.oh"
-#include "OOC/SSA.oh"
-#include "OOC/SSA/Schedule.oh"
-#include "OOC/C/DeclWriter.oh"
-#include "OOC/Make/TranslateToC.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <StringSearch.oh>
+#include <ADT/Dictionary.oh>
+#include <ADT/ArrayList.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/IR.oh>
+#include <OOC/IR/VisitAll.oh>
+#include <OOC/SSA.oh>
+#include <OOC/SSA/Schedule.oh>
+#include <OOC/C/DeclWriter.oh>
+#include <OOC/Make/TranslateToC.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_SSA_WriteC__RegisterSwap {
   Object__String source;
   Object__String dest;
@@ -129,7 +129,7 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__22240;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__22444;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__22737;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__36754;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__47411;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__47440;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

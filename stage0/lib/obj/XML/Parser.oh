@@ -1,21 +1,21 @@
 #ifndef _MODULE_XML_Parser_
 #define _MODULE_XML_Parser_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "URI.oh"
-#include "XML/UnicodeCodec.oh"
-#include "XML/Locator.oh"
-#include "XML/EntityResolver.oh"
-#include "XML/UnicodeCodec/UTF8.oh"
-#include "XML/UnicodeBuffer.oh"
-#include "XML/Error.oh"
-#include "XML/DTD.oh"
-#include "XML/Builder.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <URI.oh>
+#include <XML/UnicodeCodec.oh>
+#include <XML/Locator.oh>
+#include <XML/EntityResolver.oh>
+#include <XML/UnicodeCodec/UTF8.oh>
+#include <XML/UnicodeBuffer.oh>
+#include <XML/Error.oh>
+#include <XML/DTD.oh>
+#include <XML/Builder.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct XML_Parser__PEInfo {
   XML_UnicodeBuffer__CharArray oldChars;
   OOC_INT32 oldCPos;

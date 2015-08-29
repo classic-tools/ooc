@@ -1,14 +1,14 @@
 #ifndef _MODULE_ADT_Storable_
 #define _MODULE_ADT_Storable_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "BinaryRider.oh"
-#include "Msg.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <BinaryRider.oh>
+#include <Msg.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct ADT_Storable__ObjectDesc *ADT_Storable__Object;
 typedef struct ADT_Storable__ObjectDesc {
   char __dummy;

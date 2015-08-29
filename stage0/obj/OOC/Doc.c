@@ -1,5 +1,5 @@
-#include "OOC/Doc.d"
-#include "__oo2c.h"
+#include <OOC/Doc.d>
+#include <__oo2c.h>
 
 void OOC_Doc__SetPosition(struct OOC_Doc__Position *pos, RT0__Struct pos__tag, OOC_INT32 _char, OOC_INT32 line, OOC_INT32 column) {
   register OOC_INT32 i0;
@@ -207,21 +207,21 @@ static void OOC_Doc__NoPadLastElement(OOC_Doc__BlockElement list) {
 
   i0 = (OOC_INT32)list;
   i1 = i0!=(OOC_INT32)0;
-  if (!i1) goto l11;
+  if (!i1) goto l10;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9074))+12);
   i0 = i0!=(OOC_INT32)0;
-  if (!i0) goto l10;
-l5_loop:
+  if (!i0) goto l9;
+l4_loop:
   i0 = (OOC_INT32)list;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9116))+12);
   list = (OOC_Doc__BlockElement)i0;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9074))+12);
   i0 = i0!=(OOC_INT32)0;
-  if (i0) goto l5_loop;
-l10:
+  if (i0) goto l4_loop;
+l9:
   i0 = (OOC_INT32)list;
   *(OOC_UINT8*)((_check_pointer(i0, 9149))+16) = OOC_FALSE;
-l11:
+l10:
   return;
   ;
 }
@@ -794,7 +794,7 @@ l17:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15121))+16);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15121))+16);
   i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 15129)), (OOC_INT32)0);
-  Strings__Delete((void*)(_check_pointer(i2, 15129)), i0, 0, i1);
+  Strings__Delete((void*)(_check_pointer(i2, 15129)), i0, (OOC_INT32)0, i1);
   return;
   ;
 }
@@ -2065,18 +2065,18 @@ static OOC_Doc__InlineElement OOC_Doc__ExtractSummary(OOC_Doc__BlockElement bloc
 l3_loop:
           i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 32379)));
           i1 = i1==(OOC_CHAR8)'.';
+          i0 = i0+1;
           if (i1) goto l6;
           i1=OOC_FALSE;
           goto l8;
 l6:
-          i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT32, 32396)));
+          i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 32396)));
           i1 = i1==(OOC_CHAR8)' ';
           
 l8:
           if (!i1) goto l10;
-          return (i0+1);
+          return i0;
 l10:
-          i0 = i0+1;
           i = i0;
           i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 32349)));
           i1 = i1!=(OOC_CHAR8)'\000';

@@ -1,10 +1,10 @@
 #ifndef _MODULE_URI_CharClass_
 #define _MODULE_URI_CharClass_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define URI_CharClass__unreservedPChar ":@&=+$,"
 #define URI_CharClass__unreservedUserinfo ";:&=+$,"
 #define URI_CharClass__reserved ";/?:@&=+$,[]"

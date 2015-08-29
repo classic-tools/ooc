@@ -1,13 +1,13 @@
 #ifndef _MODULE_Object_BigInt_
 #define _MODULE_Object_BigInt_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "Object/Boxed.oh"
-#include "ADT/Storable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <Object/Boxed.oh>
+#include <ADT/Storable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT16 Object_BigInt__Digit;
 typedef struct Object_BigInt__BigIntDesc *Object_BigInt__BigInt;
 typedef OOC_INT16 *Object_BigInt__DigitArray;
@@ -21,6 +21,9 @@ extern Object_BigInt__BigInt Object_BigInt__NewInt(OOC_INT32 _int);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Copy(Object_BigInt__BigInt a);
 #define _TBN_Object_BigInt__BigIntDesc_Copy 9
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Copy)(Object_BigInt__BigInt a);
+extern OOC_INT32 Object_BigInt__BigIntDesc_HashCode(Object_BigInt__BigInt a);
+#define _TBN_Object_BigInt__BigIntDesc_HashCode 1
+typedef OOC_INT32 (*_TBP_Object_BigInt__BigIntDesc_HashCode)(Object_BigInt__BigInt a);
 extern OOC_CHAR8 Object_BigInt__BigIntDesc_Equals(Object_BigInt__BigInt a, Object__Object b);
 #define _TBN_Object_BigInt__BigIntDesc_Equals 0
 typedef OOC_CHAR8 (*_TBP_Object_BigInt__BigIntDesc_Equals)(Object_BigInt__BigInt a, Object__Object b);
@@ -96,12 +99,12 @@ extern RT0__StructDesc _td_Object_BigInt__1476;
 extern RT0__StructDesc _td_Object_BigInt__DigitArray;
 extern RT0__StructDesc _td_Object_BigInt__BigIntDesc;
 extern RT0__StructDesc _td_Object_BigInt__2147;
-extern RT0__StructDesc _td_Object_BigInt__10785;
-extern RT0__StructDesc _td_Object_BigInt__10836;
-extern RT0__StructDesc _td_Object_BigInt__16354;
-extern RT0__StructDesc _td_Object_BigInt__16343;
-extern RT0__StructDesc _td_Object_BigInt__19226;
-extern RT0__StructDesc _td_Object_BigInt__20377;
+extern RT0__StructDesc _td_Object_BigInt__11310;
+extern RT0__StructDesc _td_Object_BigInt__11361;
+extern RT0__StructDesc _td_Object_BigInt__16879;
+extern RT0__StructDesc _td_Object_BigInt__16868;
+extern RT0__StructDesc _td_Object_BigInt__19751;
+extern RT0__StructDesc _td_Object_BigInt__20902;
 #endif /* _MODULE_Object_BigInt_ */
 
 /* --- */

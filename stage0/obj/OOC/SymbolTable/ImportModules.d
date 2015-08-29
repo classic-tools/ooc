@@ -1,7 +1,7 @@
-#include "OOC/SymbolTable/ImportModules.oh"
-#include "Msg.oh"
-#include "OOC/Config.oh"
-#include "OOC/Repository.oh"
+#include <OOC/SymbolTable/ImportModules.oh>
+#include <Msg.oh>
+#include <OOC/Config.oh>
+#include <OOC/Repository.oh>
 #define OOC_SymbolTable_ImportModules__noSuchModule 1
 #define OOC_SymbolTable_ImportModules__readErrorSymbolFile 2
 static OOC_SymbolTable_ImportModules__ErrorContext OOC_SymbolTable_ImportModules__importModulesContext;

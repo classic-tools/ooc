@@ -1,11 +1,11 @@
 #ifndef _MODULE_StringSearch_
 #define _MODULE_StringSearch_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_UINT32 StringSearch__Flags;
 #define StringSearch__ignoreCase 0
 #define StringSearch__copyString 1

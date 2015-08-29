@@ -1,5 +1,5 @@
-#include "OOC/Parser.d"
-#include "__oo2c.h"
+#include <OOC/Parser.d>
+#include <__oo2c.h>
 
 void OOC_Parser__ErrorContextDesc_GetTemplate(OOC_Parser__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;
@@ -751,7 +751,7 @@ l22:
 
 
           i0 = OOC_Parser__Module_Flags_Ident("OOC_EXTENSIONS", 15);
-          if (i0) goto l32;
+          if (i0) goto l31;
           i0 = OOC_Parser__Module_Flags_Ident("INTERFACE", 10);
           i0 = !i0;
           if (i0) goto l5;
@@ -776,8 +776,8 @@ l9:
           i1 = (OOC_INT32)sym;
           i1 = *(OOC_INT8*)((_check_pointer(i1, 16974))+4);
           i1 = i1==19;
-          if (!i1) goto l17;
-l12_loop:
+          if (!i1) goto l16;
+l11_loop:
           i1 = (OOC_INT32)OOC_Parser__Module_CheckSym(19);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17021)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
           i1 = (OOC_INT32)OOC_Parser__Module_CheckSym(43);
@@ -785,51 +785,51 @@ l12_loop:
           i1 = (OOC_INT32)sym;
           i1 = *(OOC_INT8*)((_check_pointer(i1, 16974))+4);
           i1 = i1==19;
-          if (i1) goto l12_loop;
-l17:
+          if (i1) goto l11_loop;
+l16:
           i0 = (OOC_INT32)sym;
           i0 = *(OOC_INT8*)((_check_pointer(i0, 17158))+4);
           i0 = i0==44;
-          if (i0) goto l20;
+          if (i0) goto l19;
           semicolon = (OOC_AST__Node)(OOC_INT32)0;
           link = (OOC_AST__Node)(OOC_INT32)0;
           linkSections = (OOC_AST__NodeList)(OOC_INT32)0;
           end = (OOC_AST__Node)(OOC_INT32)0;
           i0=(OOC_INT32)0;
-          goto l31;
-l20:
+          goto l30;
+l19:
           i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(44);
           semicolon = (OOC_AST__Node)i0;
           i0 = OOC_Parser__Module_Flags_Ident("LINK", 5);
-          if (i0) goto l23;
+          if (i0) goto l22;
           i0 = (OOC_INT32)sym;
           OOC_Parser__Module_Err(16, (OOC_Scanner_Builder_BasicList__Symbol)i0);
           link = (OOC_AST__Node)(OOC_INT32)0;
-          goto l24;
-l23:
+          goto l23;
+l22:
           i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(43);
           link = (OOC_AST__Node)i0;
-l24:
+l23:
           i0 = (OOC_INT32)ast;
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17452)))), OOC_AST__BuilderDesc_NewNodeList)),OOC_AST__BuilderDesc_NewNodeList)((OOC_AST__Builder)i0);
           linkSections = (OOC_AST__NodeList)i0;
-l25_loop:
+l24_loop:
           i0 = (OOC_INT32)linkSections;
           i1 = (OOC_INT32)OOC_Parser__Module_Flags_ModuleFlags_LinkSection();
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17512)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
           i0 = (OOC_INT32)sym;
           i0 = *(OOC_INT8*)((_check_pointer(i0, 17559))+4);
           i0 = i0==44;
-          if (!i0) goto l30;
+          if (!i0) goto l29;
           i0 = (OOC_INT32)linkSections;
           i1 = (OOC_INT32)OOC_Parser__Module_CheckSym(44);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17617)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
-          goto l25_loop;
-l30:
+          goto l24_loop;
+l29:
           i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(46);
           end = (OOC_AST__Node)i0;
           
-l31:
+l30:
           i1 = (OOC_INT32)ast;
           i2 = (OOC_INT32)external;
           i3 = (OOC_INT32)callConv;
@@ -839,11 +839,11 @@ l31:
           i7 = (OOC_INT32)linkSections;
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 17944)))), OOC_AST__BuilderDesc_ModuleFlags)),OOC_AST__BuilderDesc_ModuleFlags)((OOC_AST__Builder)i1, (OOC_AST__Node)i2, (OOC_AST__Node)i3, (OOC_AST__NodeList)i4, (OOC_AST__Node)i5, (OOC_AST__Node)i6, (OOC_AST__NodeList)i7, (OOC_AST__Node)i0);
           return (OOC_AST__Node)i0;
-          goto l33;
-l32:
+          goto l32;
+l31:
           i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(43);
           return (OOC_AST__Node)i0;
-l33:
+l32:
           _failed_function(13572); return 0;
           ;
         }
@@ -1277,14 +1277,14 @@ l4:
                       i1 = (OOC_INT32)sym;
                       i1 = *(OOC_INT8*)((_check_pointer(i1, 25545))+4);
                       i1 = i1!=24;
-                      if (!i1) goto l11;
+                      if (!i1) goto l10;
                       i1 = (OOC_INT32)OOC_Parser__Module_Expr_SimpleExpr_Term_Factor_Set_Element();
                       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 25599)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
                       i0 = (OOC_INT32)sym;
                       i0 = *(OOC_INT8*)((_check_pointer(i0, 25647))+4);
                       i0 = i0==19;
-                      if (!i0) goto l11;
-l5_loop:
+                      if (!i0) goto l10;
+l4_loop:
                       i0 = (OOC_INT32)elementList;
                       i1 = (OOC_INT32)OOC_Parser__Module_CheckSym(19);
                       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 25700)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
@@ -1293,8 +1293,8 @@ l5_loop:
                       i0 = (OOC_INT32)sym;
                       i0 = *(OOC_INT8*)((_check_pointer(i0, 25647))+4);
                       i0 = i0==19;
-                      if (i0) goto l5_loop;
-l11:
+                      if (i0) goto l4_loop;
+l10:
                       i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(24);
                       rBrace = (OOC_AST__Node)i0;
                       i1 = (OOC_INT32)ast;
@@ -1487,8 +1487,8 @@ l11:
           i1 = i1<=8;
           
 l13:
-          if (!i1) goto l25;
-l16_loop:
+          if (!i1) goto l24;
+l15_loop:
           i0 = (OOC_INT32)sym;
           i0 = *(OOC_INT8*)((_check_pointer(i0, 28277))+4);
           i0 = (OOC_INT32)OOC_Parser__Module_CheckSym(i0);
@@ -1503,16 +1503,16 @@ l16_loop:
           i1 = (OOC_INT32)sym;
           i2 = *(OOC_INT8*)((_check_pointer(i1, 28214))+4);
           i2 = 6<=i2;
-          if (i2) goto l19;
+          if (i2) goto l18;
           i1=OOC_FALSE;
-          goto l21;
-l19:
+          goto l20;
+l18:
           i1 = *(OOC_INT8*)((_check_pointer(i1, 28226))+4);
           i1 = i1<=8;
           
-l21:
-          if (i1) goto l16_loop;
-l25:
+l20:
+          if (i1) goto l15_loop;
+l24:
           return (OOC_AST__Node)i0;
           ;
         }

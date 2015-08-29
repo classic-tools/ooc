@@ -1,11 +1,11 @@
 #ifndef _MODULE_OOC_Logger_
 #define _MODULE_OOC_Logger_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "URI.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <URI.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern OOC_CHAR8 OOC_Logger__silence;
 extern void OOC_Logger__ReadFile(URI__URI uri);
 extern void OOC_Logger__ReadFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d);

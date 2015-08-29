@@ -1,14 +1,14 @@
-#include "OOC/IR.oh"
-#include "Log.oh"
-#include "ADT/ArrayList.oh"
-#include "ADT/StringBuffer.oh"
-#include "Config/Value.oh"
-#include "Config/Value/Boolean.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/Config/Pragmas/StdPragmas.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
-#include "OOC/SymbolTable/Namespace.oh"
-#include "OOC/SymbolTable/CreateNamespace.oh"
+#include <OOC/IR.oh>
+#include <Log.oh>
+#include <ADT/ArrayList.oh>
+#include <ADT/StringBuffer.oh>
+#include <Config/Value.oh>
+#include <Config/Value/Boolean.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/Config/Pragmas/StdPragmas.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
+#include <OOC/SymbolTable/Namespace.oh>
+#include <OOC/SymbolTable/CreateNamespace.oh>
 #define OOC_IR__undeclaredIdent 1
 #define OOC_IR__expectedIdent 2
 #define OOC_IR__numberOutOfRange 3

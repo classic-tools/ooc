@@ -1,9 +1,9 @@
-#include "XML/Parser.oh"
-#include "Out.oh"
-#include "Ascii.oh"
-#include "LongStrings.oh"
-#include "URI/Scheme/File.oh"
-#include "XML/UnicodeCodec/UTF16.oh"
+#include <XML/Parser.oh>
+#include <Out.oh>
+#include <Ascii.oh>
+#include <LongStrings.oh>
+#include <URI/Scheme/File.oh>
+#include <XML/UnicodeCodec/UTF16.oh>
 #define XML_Parser__tabWidth 8
 #define XML_Parser__initNameList 8
 #define XML_Parser__incrNameList 8

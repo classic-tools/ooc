@@ -1,8 +1,8 @@
-#include "OOC/Doc/Decoration.oh"
-#include "Ascii.oh"
-#include "CharClass.oh"
-#include "Strings.oh"
-#include "OOC/Scanner.oh"
+#include <OOC/Doc/Decoration.oh>
+#include <Ascii.oh>
+#include <CharClass.oh>
+#include <Strings.oh>
+#include <OOC/Scanner.oh>
 typedef struct OOC_Doc_Decoration__DotLineIndentDesc *OOC_Doc_Decoration__DotLineIndent;
 typedef struct OOC_Doc_Decoration__DotLineIndentDesc {
   OOC_INT32 indent;

@@ -1,5 +1,5 @@
-#include "OOC/IA32/RuntimeData.d"
-#include "__oo2c.h"
+#include <OOC/IA32/RuntimeData.d>
+#include <__oo2c.h>
 
 void OOC_IA32_RuntimeData__Write(OOC_IA32_Writer__Writer w, OOC_SymbolTable__Module symTab) {
   register OOC_INT32 i0;

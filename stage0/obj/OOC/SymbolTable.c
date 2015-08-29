@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable.d>
+#include <__oo2c.h>
 
 void OOC_SymbolTable__InitNamespace(OOC_SymbolTable__Namespace ns) {
 
@@ -324,15 +324,15 @@ OOC_SymbolTable__Module OOC_SymbolTable__ItemDesc_Module(OOC_SymbolTable__Item i
   i0 = (OOC_INT32)item;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40122))+4);
   i0 = i0!=(OOC_INT32)0;
-  if (!i0) goto l8;
-l3_loop:
+  if (!i0) goto l7;
+l2_loop:
   i0 = (OOC_INT32)item;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40159))+4);
   item = (OOC_SymbolTable__Item)i0;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40122))+4);
   i0 = i0!=(OOC_INT32)0;
-  if (i0) goto l3_loop;
-l8:
+  if (i0) goto l2_loop;
+l7:
   i0 = (OOC_INT32)item;
   return (OOC_SymbolTable__Module)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40193)))), &_td_OOC_SymbolTable__ModuleDesc, 40193));
   ;
@@ -462,8 +462,8 @@ l33:
   i1=1;
   goto l36;
 l35:
-  id = 0;
-  i1=0;
+  id = (OOC_INT32)0;
+  i1=(OOC_INT32)0;
 l36:
   i2 = (OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__Flag.baseTypes[0]);
   fl = (OOC_SymbolTable__Flag)i2;

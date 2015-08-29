@@ -1,4 +1,4 @@
-#include "RT0.oh"
+#include <RT0.oh>
 extern void OOC_RT0_init0(void);
 extern void OOC_Object_init0(void);
 extern void OOC_Ascii_init0(void);

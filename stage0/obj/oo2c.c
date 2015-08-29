@@ -1,5 +1,5 @@
-#include "oo2c.d"
-#include "__oo2c.h"
+#include <oo2c.d>
+#include <__oo2c.h>
 
 static void oo2c__NewConfig() {
   register OOC_INT32 i0;
@@ -334,13 +334,14 @@ l38:
 l42:
           i3 = i2==0;
           if (i3) goto l49;
-          i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7902)))), Object__StringDesc_CharAt)),Object__StringDesc_CharAt)((Object__String)i0, (i2-1));
-          i3 = i3==(OOC_CHAR8)'/';
-          if (i3) goto l47;
+          i3 = i2-1;
+          i4 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7902)))), Object__StringDesc_CharAt)),Object__StringDesc_CharAt)((Object__String)i0, i3);
+          i4 = i4==(OOC_CHAR8)'/';
+          if (i4) goto l47;
           i3=OOC_FALSE;
           goto l51;
 l47:
-          i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7939)))), Object__StringDesc_CharAt)),Object__StringDesc_CharAt)((Object__String)i1, (i2-1));
+          i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7939)))), Object__StringDesc_CharAt)),Object__StringDesc_CharAt)((Object__String)i1, i3);
           i3 = i3==(OOC_CHAR8)'/';
           
           goto l51;
@@ -1543,7 +1544,7 @@ l103:
   goto l108;
 l105:
   Out__String("oo2c/gcc ", 10);
-  Out__String("2.0.1", 6);
+  Out__String("2.0.2", 6);
   Out__Ln();
   _halt((OOC_INT32)0);
   goto l108;

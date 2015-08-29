@@ -1,5 +1,5 @@
-#include "Log.oh"
-#include "RT0.oh"
+#include <Log.oh>
+#include <RT0.oh>
 TextRider__Writer Log__writer;
 static void Log__HexAdr(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_INT32 adr);
 

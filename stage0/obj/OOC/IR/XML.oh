@@ -1,13 +1,13 @@
 #ifndef _MODULE_OOC_IR_XML_
 #define _MODULE_OOC_IR_XML_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "XML/Writer.oh"
-#include "OOC/IR.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <XML/Writer.oh>
+#include <OOC/IR.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_IR_XML__VisitorDesc *OOC_IR_XML__Visitor;
 typedef struct OOC_IR_XML__VisitorDesc {
   XML_Writer__Writer w;

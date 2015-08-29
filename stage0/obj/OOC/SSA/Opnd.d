@@ -1,5 +1,5 @@
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Result.oh"
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Result.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

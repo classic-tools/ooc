@@ -1,9 +1,9 @@
-#include "OOC/SymbolTable.oh"
-#include "Msg.oh"
-#include "Strings.oh"
-#include "ADT/ArrayList.oh"
-#include "URI/Parser.oh"
-#include "URI/Scheme/File.oh"
+#include <OOC/SymbolTable.oh>
+#include <Msg.oh>
+#include <Strings.oh>
+#include <ADT/ArrayList.oh>
+#include <URI/Parser.oh>
+#include <URI/Scheme/File.oh>
 static OOC_SymbolTable__Position OOC_SymbolTable__importPosition;
 OOC_SymbolTable__PredefType *OOC_SymbolTable__predefIdToType;
 static URI__HierarchicalURI OOC_SymbolTable__emptyBaseURI;

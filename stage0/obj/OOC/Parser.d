@@ -1,9 +1,9 @@
-#include "OOC/Parser.oh"
-#include "Msg.oh"
-#include "Strings.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/Doc.oh"
-#include "OOC/Doc/Input/Texinfo.oh"
+#include <OOC/Parser.oh>
+#include <Msg.oh>
+#include <Strings.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/Doc.oh>
+#include <OOC/Doc/Input/Texinfo.oh>
 #define OOC_Parser__trailingJunk 1
 #define OOC_Parser__expectKeyword 2
 #define OOC_Parser__expectSymbol 3

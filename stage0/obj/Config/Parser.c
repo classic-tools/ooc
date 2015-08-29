@@ -1,5 +1,5 @@
-#include "Config/Parser.d"
-#include "__oo2c.h"
+#include <Config/Parser.d>
+#include <__oo2c.h>
 
 static void Config_Parser__InitBuilder(Config_Parser__Builder b) {
   register OOC_INT32 i0;
@@ -228,8 +228,8 @@ void Config_Parser__BuilderDesc_Characters(Config_Parser__Builder b, XML_DTD__St
   i1 = i1-i2;
   len = i1;
   i3 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i1+1));
-  i4 = i1-1;
   ptr = (XML_UnicodeBuffer__CharArray)i3;
+  i4 = i1-1;
   i5 = 0<=i4;
   i = 0;
   if (!i5) goto l10;

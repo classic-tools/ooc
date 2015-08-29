@@ -1,5 +1,5 @@
-#include "XML/Writer.d"
-#include "__oo2c.h"
+#include <XML/Writer.d>
+#include <__oo2c.h>
 
 void XML_Writer__Init(XML_Writer__Writer w, Channel__Writer writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 writeBOM, OOC_INT32 indentLevel) {
   register OOC_INT32 i0,i1,i2,i3;

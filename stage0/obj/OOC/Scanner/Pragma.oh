@@ -1,16 +1,16 @@
 #ifndef _MODULE_OOC_Scanner_Pragma_
 #define _MODULE_OOC_Scanner_Pragma_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/Scanner/Builder.oh"
-#include "OOC/Scanner/Builder/BasicList.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/Scanner/Builder.oh>
+#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 OOC_Scanner_Pragma__InputMode;
 #define OOC_Scanner_Pragma__inputText 0
 #define OOC_Scanner_Pragma__inputPragma 1
@@ -56,7 +56,7 @@ extern RT0__StructDesc _td_OOC_Scanner_Pragma__ConditionStackDesc;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__State;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContext;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Scanner_Pragma__3218;
+extern RT0__StructDesc _td_OOC_Scanner_Pragma__3166;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ParsePragma_Value;
 #endif /* _MODULE_OOC_Scanner_Pragma_ */
 

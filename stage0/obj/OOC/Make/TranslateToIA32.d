@@ -1,21 +1,21 @@
-#include "OOC/Make/TranslateToIA32.oh"
-#include "Ascii.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "StdChannels.oh"
-#include "Object.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "OOC/Auxiliary/ParseModule.oh"
-#include "OOC/Auxiliary/WriteSymbolFile.oh"
-#include "OOC/AST.oh"
-#include "OOC/AST/ExtTree.oh"
-#include "OOC/AST/ExtTree/CreateIR.oh"
-#include "OOC/AST/ExtTree/XML.oh"
-#include "OOC/IR/XML.oh"
-#include "OOC/IR/ConstFold.oh"
-#include "OOC/SymbolTable/Exports.oh"
-#include "OOC/IA32/RuntimeData.oh"
+#include <OOC/Make/TranslateToIA32.oh>
+#include <Ascii.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <StdChannels.oh>
+#include <Object.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <OOC/Auxiliary/ParseModule.oh>
+#include <OOC/Auxiliary/WriteSymbolFile.oh>
+#include <OOC/AST.oh>
+#include <OOC/AST/ExtTree.oh>
+#include <OOC/AST/ExtTree/CreateIR.oh>
+#include <OOC/AST/ExtTree/XML.oh>
+#include <OOC/IR/XML.oh>
+#include <OOC/IR/ConstFold.oh>
+#include <OOC/SymbolTable/Exports.oh>
+#include <OOC/IA32/RuntimeData.oh>
 static void OOC_Make_TranslateToIA32__WriteCodeFile(OOC_IA32_Writer__Writer w, OOC_Repository__Module m, OOC_SymbolTable__Module symTab, OOC_IR__Module moduleIR, OOC_Make_TranslateToIA32__Translator translator);
 
 /* run-time meta data */

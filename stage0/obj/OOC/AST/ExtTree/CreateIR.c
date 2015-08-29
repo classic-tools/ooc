@@ -1,5 +1,5 @@
-#include "OOC/AST/ExtTree/CreateIR.d"
-#include "__oo2c.h"
+#include <OOC/AST/ExtTree/CreateIR.d>
+#include <__oo2c.h>
 
 OOC_IR__Module OOC_AST_ExtTree_CreateIR__CreateIR(OOC_AST_ExtTree__Module module, OOC_SymbolTable__Module symTab, OOC_IR__Builder b) {
   register OOC_INT32 i0,i1;
@@ -222,8 +222,8 @@ l6:
       i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(0, i3, OOC_UINT8, 4395))*4);
       i2 = (OOC_INT32)OOC_AST_ExtTree_CreateIR__CreateIR_Range((OOC_AST_ExtTree__Node)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4407)))), &_td_OOC_AST_ExtTree__NodeDesc, 4407)), OOC_TRUE);
-      i1 = i1-1;
       result = (OOC_IR__Expression)i2;
+      i1 = i1-1;
       i3 = 1<=i1;
       i = 1;
       if (i3) goto l5;
@@ -1128,8 +1128,8 @@ l71:
       i1 = i2!=i1;
       if (!i1) goto l82;
       i1 = (OOC_INT32)RT0__NewObject(_td_OOC_IR__StatementSeq.baseTypes[0], i2);
-      i2 = i2-1;
       copy = (OOC_IR__StatementSeq)i1;
+      i2 = i2-1;
       i3 = 0<=i2;
       i = 0;
       if (!i3) goto l81;

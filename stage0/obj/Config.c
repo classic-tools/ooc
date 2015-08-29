@@ -1,5 +1,5 @@
-#include "Config.d"
-#include "__oo2c.h"
+#include <Config.d>
+#include <__oo2c.h>
 
 void Config__InitConfig(Config__Config config) {
 

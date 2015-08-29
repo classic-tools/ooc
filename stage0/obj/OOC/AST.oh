@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_AST_
 #define _MODULE_OOC_AST_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Doc.oh"
-#include "OOC/Scanner/Builder/BasicList.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Doc.oh>
+#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_AST__Name;
 typedef struct OOC_AST__NodeDesc *OOC_AST__Node;
 typedef struct OOC_AST__NodeDesc {

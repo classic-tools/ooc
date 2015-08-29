@@ -1,5 +1,5 @@
-#include "OOC/Scanner/Symbol.d"
-#include "__oo2c.h"
+#include <OOC/Scanner/Symbol.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 OOC_Scanner_Symbol__IsKeyword(OOC_INT8 id) {
   register OOC_INT32 i0,i1;

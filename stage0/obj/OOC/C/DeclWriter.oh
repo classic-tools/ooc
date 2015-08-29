@@ -1,19 +1,19 @@
 #ifndef _MODULE_OOC_C_DeclWriter_
 #define _MODULE_OOC_C_DeclWriter_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "TextRider.oh"
-#include "Object.oh"
-#include "Object/Boxed.oh"
-#include "ADT/ArrayList.oh"
-#include "URI.oh"
-#include "OOC/Repository.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <TextRider.oh>
+#include <Object.oh>
+#include <Object/Boxed.oh>
+#include <ADT/ArrayList.oh>
+#include <URI.oh>
+#include <OOC/Repository.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 OOC_C_DeclWriter__TypeQualifier;
 #define OOC_C_DeclWriter__tqNone 0
 #define OOC_C_DeclWriter__tqConst 1
@@ -321,11 +321,11 @@ extern RT0__StructDesc _td_OOC_C_DeclWriter__9145;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__9519;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__11603;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__12484;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__20072;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__20229;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__24027;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__29814;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__29852;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__20167;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__20324;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__24122;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__29909;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__29947;
 #endif /* _MODULE_OOC_C_DeclWriter_ */
 
 /* --- */

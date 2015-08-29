@@ -1,8 +1,8 @@
-#include "OOC/Config/Pragmas.oh"
-#include "Config/Parser.oh"
-#include "Config/Value/String.oh"
-#include "Config/Value/Integer.oh"
-#include "Config/Value/Boolean.oh"
+#include <OOC/Config/Pragmas.oh>
+#include <Config/Parser.oh>
+#include <Config/Value/String.oh>
+#include <Config/Value/Integer.oh>
+#include <Config/Value/Boolean.oh>
 static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config_Value__PrototypeList prototypeList);
 static void OOC_Config_Pragmas__InitHistory(OOC_Config_Pragmas__History h, OOC_Config_Pragmas__Section startVariables);
 static Config_Value__Value OOC_Config_Pragmas__GetValue(OOC_Config_Pragmas__History h, OOC_Config_Pragmas__Variable var, OOC_INT32 charPos);

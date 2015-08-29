@@ -1,15 +1,15 @@
 #ifndef _MODULE_TextRider_
 #define _MODULE_TextRider_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "CharClass.oh"
-#include "LRealStr.oh"
-#include "Msg.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <CharClass.oh>
+#include <LRealStr.oh>
+#include <Msg.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define TextRider__done  0
 #define TextRider__invalidFormat 8
 #define TextRider__valueOutOfRange 1

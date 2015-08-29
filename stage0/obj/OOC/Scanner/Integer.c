@@ -1,5 +1,5 @@
-#include "OOC/Scanner/Integer.d"
-#include "__oo2c.h"
+#include <OOC/Scanner/Integer.d>
+#include <__oo2c.h>
 
 void OOC_Scanner_Integer__ErrorContextDesc_GetTemplate(OOC_Scanner_Integer__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;

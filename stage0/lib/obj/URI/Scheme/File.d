@@ -1,10 +1,10 @@
-#include "URI/Scheme/File.oh"
-#include "Msg.oh"
-#include "Strings.oh"
-#include "OS/ProcessParameters.oh"
-#include "URI/CharClass.oh"
-#include "URI/String.oh"
-#include "URI/Parser.oh"
+#include <URI/Scheme/File.oh>
+#include <Msg.oh>
+#include <Strings.oh>
+#include <OS/ProcessParameters.oh>
+#include <URI/CharClass.oh>
+#include <URI/String.oh>
+#include <URI/Parser.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

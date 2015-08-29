@@ -1,5 +1,5 @@
-#include "OOC/Config/Repositories.d"
-#include "__oo2c.h"
+#include <OOC/Config/Repositories.d>
+#include <__oo2c.h>
 
 void OOC_Config_Repositories__ErrorContextDesc_GetTemplate(OOC_Config_Repositories__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;
@@ -394,8 +394,8 @@ l39:
   return (OOC_Repository__Module)i0;
   goto l70;
 l40:
-  i = 0;
   i0 = (OOC_INT32)s;
+  i = 0;
   i1 = *(OOC_INT32*)((_check_pointer(i0, 7423))+12);
   i1 = 0!=i1;
   if (i1) goto l43;
@@ -533,23 +533,23 @@ l3:
   i0 = OOC_Config_Repositories__SectionDesc_GetIncludePaths_Select((OOC_Repository__Repository)i0);
   
 l5:
-  if (!i0) goto l16;
-l7_loop:
+  if (!i0) goto l15;
+l6_loop:
   i0 = c;
   c = (i0+1);
   i0 = (OOC_INT32)rep;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9860));
   rep = (OOC_Repository__Repository)i0;
   i1 = i0!=(OOC_INT32)0;
-  if (i1) goto l10;
+  if (i1) goto l9;
   i0=OOC_FALSE;
-  goto l12;
-l10:
+  goto l11;
+l9:
   i0 = OOC_Config_Repositories__SectionDesc_GetIncludePaths_Select((OOC_Repository__Repository)i0);
   
-l12:
-  if (i0) goto l7_loop;
-l16:
+l11:
+  if (i0) goto l6_loop;
+l15:
   i0 = c;
   result = (Object__StringArrayPtr)((OOC_INT32)RT0__NewObject(_td_Object__StringArrayPtr.baseTypes[0], i0));
   c = 0;
@@ -557,11 +557,11 @@ l16:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9929))+4);
   rep = (OOC_Repository__Repository)i0;
   i1 = i0!=(OOC_INT32)0;
-  if (!i1) goto l27;
-l19_loop:
+  if (!i1) goto l26;
+l18_loop:
   i0 = OOC_Config_Repositories__SectionDesc_GetIncludePaths_Select((OOC_Repository__Repository)i0);
   i1 = (OOC_INT32)rep;
-  if (!i0) goto l22;
+  if (!i0) goto l21;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10019)))), &_td_OOC_Repository_FileSystem__RepositoryDesc, 10019)), 10030))+12);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10019)))), &_td_OOC_Repository_FileSystem__RepositoryDesc, 10019)), 10030))+12);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10052)))), &_td_URI_Scheme_File__URIDesc, 10052)), 10056)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10052)))), &_td_URI_Scheme_File__URIDesc, 10052)), (void*)(OOC_INT32)str, 1024);
@@ -574,12 +574,12 @@ l19_loop:
   i4 = (OOC_INT32)Object__NewLatin1((void*)(OOC_INT32)str, 1024);
   *(OOC_INT32*)(i0+(_check_index(i3, i2, OOC_UINT32, 10197))*4) = i4;
   c = (i3+1);
-l22:
+l21:
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 10271));
   rep = (OOC_Repository__Repository)i0;
   i1 = i0!=(OOC_INT32)0;
-  if (i1) goto l19_loop;
-l27:
+  if (i1) goto l18_loop;
+l26:
   i0 = (OOC_INT32)result;
   return (Object__StringArrayPtr)i0;
   ;

@@ -1,7 +1,7 @@
-#include "OOC/SymbolTable/Exports.oh"
-#include "Log.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "OOC/Doc.oh"
+#include <OOC/SymbolTable/Exports.oh>
+#include <Log.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <OOC/Doc.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

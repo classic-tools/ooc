@@ -1,12 +1,12 @@
 #ifndef _MODULE_URI_Scheme_CurrentDoc_
 #define _MODULE_URI_Scheme_CurrentDoc_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "TextRider.oh"
-#include "URI.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <TextRider.oh>
+#include <URI.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct URI_Scheme_CurrentDoc__CurrentDocDesc *URI_Scheme_CurrentDoc__CurrentDoc;
 typedef struct URI_Scheme_CurrentDoc__CurrentDocDesc {
   URI_String__StringPtr schemeId;

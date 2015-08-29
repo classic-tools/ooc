@@ -1,18 +1,18 @@
 #ifndef _MODULE_OOC_Package_
 #define _MODULE_OOC_Package_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Object.oh"
-#include "ADT/ArrayList.oh"
-#include "XML/Error.oh"
-#include "Config/Value.oh"
-#include "Config/Section/Options.oh"
-#include "OOC/Error.oh"
-#include "OOC/Repository.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Object.oh>
+#include <ADT/ArrayList.oh>
+#include <XML/Error.oh>
+#include <Config/Value.oh>
+#include <Config/Section/Options.oh>
+#include <OOC/Error.oh>
+#include <OOC/Repository.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Package__VersionDesc *OOC_Package__Version;
 typedef struct OOC_Package__VersionDesc {
   OOC_INT32 current;
@@ -119,27 +119,27 @@ extern RT0__StructDesc _td_OOC_Package__Repository;
 extern RT0__StructDesc _td_OOC_Package__RepositoryDesc;
 extern RT0__StructDesc _td_OOC_Package__ErrorContext;
 extern RT0__StructDesc _td_OOC_Package__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Package__3038;
-extern RT0__StructDesc _td_OOC_Package__8498;
-extern RT0__StructDesc _td_OOC_Package__8487;
-extern RT0__StructDesc _td_OOC_Package__13835;
-extern RT0__StructDesc _td_OOC_Package__13824;
-extern RT0__StructDesc _td_OOC_Package__14102;
-extern RT0__StructDesc _td_OOC_Package__15373;
-extern RT0__StructDesc _td_OOC_Package__18576;
-extern RT0__StructDesc _td_OOC_Package__18778;
-extern RT0__StructDesc _td_OOC_Package__28745;
-extern RT0__StructDesc _td_OOC_Package__29461;
-extern RT0__StructDesc _td_OOC_Package__31017;
-extern RT0__StructDesc _td_OOC_Package__31129;
-extern RT0__StructDesc _td_OOC_Package__31159;
-extern RT0__StructDesc _td_OOC_Package__31795;
-extern RT0__StructDesc _td_OOC_Package__34981;
-extern RT0__StructDesc _td_OOC_Package__36306;
-extern RT0__StructDesc _td_OOC_Package__36358;
-extern RT0__StructDesc _td_OOC_Package__36767;
-extern RT0__StructDesc _td_OOC_Package__37341;
-extern RT0__StructDesc _td_OOC_Package__37578;
+extern RT0__StructDesc _td_OOC_Package__3036;
+extern RT0__StructDesc _td_OOC_Package__8494;
+extern RT0__StructDesc _td_OOC_Package__8483;
+extern RT0__StructDesc _td_OOC_Package__13831;
+extern RT0__StructDesc _td_OOC_Package__13820;
+extern RT0__StructDesc _td_OOC_Package__14098;
+extern RT0__StructDesc _td_OOC_Package__15369;
+extern RT0__StructDesc _td_OOC_Package__18573;
+extern RT0__StructDesc _td_OOC_Package__18775;
+extern RT0__StructDesc _td_OOC_Package__28738;
+extern RT0__StructDesc _td_OOC_Package__29454;
+extern RT0__StructDesc _td_OOC_Package__31010;
+extern RT0__StructDesc _td_OOC_Package__31122;
+extern RT0__StructDesc _td_OOC_Package__31152;
+extern RT0__StructDesc _td_OOC_Package__31788;
+extern RT0__StructDesc _td_OOC_Package__34974;
+extern RT0__StructDesc _td_OOC_Package__36299;
+extern RT0__StructDesc _td_OOC_Package__36351;
+extern RT0__StructDesc _td_OOC_Package__36760;
+extern RT0__StructDesc _td_OOC_Package__37334;
+extern RT0__StructDesc _td_OOC_Package__37571;
 #endif /* _MODULE_OOC_Package_ */
 
 /* --- */

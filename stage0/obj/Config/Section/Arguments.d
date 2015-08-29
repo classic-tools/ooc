@@ -1,7 +1,7 @@
-#include "Config/Section/Arguments.oh"
-#include "TextRider.oh"
-#include "LongStrings.oh"
-#include "XML/Builder.oh"
+#include <Config/Section/Arguments.oh>
+#include <TextRider.oh>
+#include <LongStrings.oh>
+#include <XML/Builder.oh>
 #define Config_Section_Arguments__invalidContent 1
 #define Config_Section_Arguments__invalidAttribute 2
 #define Config_Section_Arguments__requireCharDataContent 5

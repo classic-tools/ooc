@@ -1,11 +1,11 @@
-#include "OOC/SymbolTable/CreateNamespace.oh"
-#include "Msg.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/SymbolTable/Namespace.oh"
-#include "OOC/SymbolTable/Builder.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "OOC/SymbolTable/ImportModules.oh"
-#include "OOC/Doc/ResolveRef.oh"
+#include <OOC/SymbolTable/CreateNamespace.oh>
+#include <Msg.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/SymbolTable/Namespace.oh>
+#include <OOC/SymbolTable/Builder.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SymbolTable/ImportModules.oh>
+#include <OOC/Doc/ResolveRef.oh>
 #define OOC_SymbolTable_CreateNamespace__undeclaredIdent 1
 #define OOC_SymbolTable_CreateNamespace__notTypeName 2
 #define OOC_SymbolTable_CreateNamespace__illegalRecordBase 3

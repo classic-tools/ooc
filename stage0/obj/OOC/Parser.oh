@@ -1,13 +1,13 @@
 #ifndef _MODULE_OOC_Parser_
 #define _MODULE_OOC_Parser_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/Scanner/Builder/BasicList.oh"
-#include "OOC/AST.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/AST.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define OOC_Parser__enableFlags 0
 #define OOC_Parser__enableMultiPartIdent 1
 #define OOC_Parser__enableRestParam 2

@@ -1,13 +1,13 @@
 #ifndef _MODULE_BinaryRider_
 #define _MODULE_BinaryRider_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Object.oh"
-#include "Msg.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Object.oh>
+#include <Msg.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define BinaryRider__done  0
 #define BinaryRider__invalidFormat 8
 #define BinaryRider__readAfterEnd 5

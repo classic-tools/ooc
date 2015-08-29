@@ -1,5 +1,5 @@
-#include "ADT/Dictionary/AddressKey/IntValue.d"
-#include "__oo2c.h"
+#include <ADT/Dictionary/AddressKey/IntValue.d>
+#include <__oo2c.h>
 
 void ADT_Dictionary_AddressKey_IntValue__Init(ADT_Dictionary_AddressKey_IntValue__Dictionary dict) {
   register OOC_INT32 i0;
@@ -307,8 +307,8 @@ l9:
   i3 = *(OOC_INT32*)((OOC_INT32)ADT_Dictionary_AddressKey_IntValue__polys+(_check_index(i3, 29, OOC_UINT32, 8753))*4);
   newPoly = i3;
   i5 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary_AddressKey_IntValue__Table.baseTypes[0], i4);
-  i6 = i4-1;
   newTable = (ADT_Dictionary_AddressKey_IntValue__Table)i5;
+  i6 = i4-1;
   i7 = 0<=i6;
   i = 0;
   if (!i7) goto l17;
@@ -332,8 +332,8 @@ l17:
   *(OOC_INT32*)((_check_pointer(i0, 9013))+12) = i3;
   *(OOC_INT32*)((_check_pointer(i0, 9040))+16) = i5;
   *(OOC_INT32*)(_check_pointer(i0, 9069)) = 0;
-  i1 = i1-1;
   *(OOC_INT32*)((_check_pointer(i0, 9090))+4) = 0;
+  i1 = i1-1;
   i3 = 0<=i1;
   i = 0;
   if (!i3) goto l28;

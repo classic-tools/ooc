@@ -1,5 +1,5 @@
-#include "URI/Scheme/CurrentDoc.d"
-#include "__oo2c.h"
+#include <URI/Scheme/CurrentDoc.d>
+#include <__oo2c.h>
 
 void URI_Scheme_CurrentDoc__Init(URI_Scheme_CurrentDoc__CurrentDoc uri) {
   register OOC_INT32 i0;

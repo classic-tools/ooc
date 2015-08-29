@@ -1,5 +1,5 @@
-#include "ADT/Object/Storage.d"
-#include "__oo2c.h"
+#include <ADT/Object/Storage.d>
+#include <__oo2c.h>
 
 static Msg__Msg ADT_Object_Storage__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;
@@ -468,7 +468,7 @@ void ADT_Object_Storage__WriterDesc_WriteObject(ADT_Object_Storage__Writer w, AD
       i = -1;
       i0 = (OOC_INT32)w;
       i1 = *(OOC_INT32*)((_check_pointer(i0, 9256))+24);
-      i2 = (OOC_INT32)0!=i1;
+      i2 = 0!=i1;
       j = i1;
       if (i2) goto l3;
       i2=i1;i1=-1;
@@ -557,8 +557,8 @@ l30:
       goto l52;
 l32:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9768))+20);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 9780)), (OOC_INT32)0);
       i3 = *(OOC_INT32*)((_check_pointer(i0, 9746))+24);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 9780)), (OOC_INT32)0);
       i1 = i3==i1;
       if (!i1) goto l43;
       i1 = *(OOC_INT32*)((_check_pointer(i0, 9810))+24);
@@ -648,9 +648,9 @@ l5:
   i2 = *(OOC_INT32*)((_check_pointer(i1, 10726))+16);
   *(OOC_INT32*)((_check_pointer(i1, 10726))+16) = (i2+1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10750))+28);
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 10772))+16);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10750))+28);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10759)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i4, (Object__Object)i0, i3);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10750))+28);
+  i4 = *(OOC_INT32*)((_check_pointer(i1, 10772))+16);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10759)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i3, (Object__Object)i0, i4);
   i2 = *(OOC_INT32*)((_check_pointer(i1, 10809))+16);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10796)))), BinaryRider__WriterDesc_WriteNum)),BinaryRider__WriterDesc_WriteNum)((BinaryRider__Writer)i1, i2);
   i0 = (OOC_INT32)RT0__TypeOf((void*)i0);

@@ -1,13 +1,13 @@
-#include "OOC/SSA/Allocator.oh"
-#include "Log.oh"
-#include "IntStr.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "ADT/ArrayList.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Result.oh"
-#include "OOC/SSA/IGraph.oh"
-#include "OOC/SymbolTable/Predef.oh"
+#include <OOC/SSA/Allocator.oh>
+#include <Log.oh>
+#include <IntStr.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <ADT/ArrayList.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Result.oh>
+#include <OOC/SSA/IGraph.oh>
+#include <OOC/SymbolTable/Predef.oh>
 typedef OOC_SSA_Schedule__Block *OOC_SSA_Allocator__BlockList;
 typedef Object__String *OOC_SSA_Allocator__NameArray;
 typedef struct OOC_SSA_Allocator__RegisterFileDesc *OOC_SSA_Allocator__RegisterFile;

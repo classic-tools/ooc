@@ -1,18 +1,18 @@
 #ifndef _MODULE_Config_Parser_
 #define _MODULE_Config_Parser_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "XML/EntityResolver.oh"
-#include "XML/Builder.oh"
-#include "XML/DTD.oh"
-#include "XML/Error.oh"
-#include "XML/Locator.oh"
-#include "XML/Parser.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <XML/EntityResolver.oh>
+#include <XML/Builder.oh>
+#include <XML/DTD.oh>
+#include <XML/Error.oh>
+#include <XML/Locator.oh>
+#include <XML/Parser.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR16 Config_Parser__Char;
 typedef OOC_CHAR16 Config_Parser__String[];
 typedef XML_UnicodeBuffer__CharArray Config_Parser__StringPtr;

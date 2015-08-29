@@ -1,10 +1,10 @@
-#include "OOC/SSA/ConstProp.oh"
-#include "Object/Boxed.oh"
-#include "Object/BigInt.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Result.oh"
-#include "OOC/SSA/DeadCodeElimination.oh"
+#include <OOC/SSA/ConstProp.oh>
+#include <Object/Boxed.oh>
+#include <Object/BigInt.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Result.oh>
+#include <OOC/SSA/DeadCodeElimination.oh>
 typedef struct OOC_SSA_ConstProp__WorklistDesc *OOC_SSA_ConstProp__Worklist;
 typedef struct OOC_SSA_ConstProp__WorklistDesc {
   OOC_SSA_ConstProp__Worklist next;

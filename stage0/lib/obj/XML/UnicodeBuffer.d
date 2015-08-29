@@ -1,6 +1,6 @@
-#include "XML/UnicodeBuffer.oh"
-#include "Strings.oh"
-#include "LongStrings.oh"
+#include <XML/UnicodeBuffer.oh>
+#include <Strings.oh>
+#include <LongStrings.oh>
 #define XML_UnicodeBuffer__charsPerRead 4096
 #define XML_UnicodeBuffer__offsetSizeOfBuffer 32
 #define XML_UnicodeBuffer__sizeOutputByteBuffer 8192

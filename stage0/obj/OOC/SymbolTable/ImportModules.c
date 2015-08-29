@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/ImportModules.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/ImportModules.d>
+#include <__oo2c.h>
 
 void OOC_SymbolTable_ImportModules__ErrorContextDesc_GetTemplate(OOC_SymbolTable_ImportModules__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;

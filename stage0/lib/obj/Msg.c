@@ -1,5 +1,5 @@
-#include "Msg.d"
-#include "__oo2c.h"
+#include <Msg.d>
+#include <__oo2c.h>
 
 void Msg__InitContext(Msg__Context context, const Msg__String id__ref, OOC_LEN id_0d) {
   register OOC_INT32 i0,i1;
@@ -196,9 +196,9 @@ void Msg__MsgDesc_GetLText(Msg__Msg msg, Msg__LString text, OOC_LEN text_0d) {
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11983))+4);
   _copy_8to16((const void*)(_check_pointer(i2, 11989)),(void*)(OOC_INT32)attrName,131);
-  LongStrings__Insert(((OOC_CHAR16[]){36,123,0}), 3, 0, (void*)(OOC_INT32)attrName, 131);
+  LongStrings__Insert(((OOC_CHAR16[]){36,123,0}), 3, (OOC_INT32)0, (void*)(OOC_INT32)attrName, 131);
   LongStrings__Append(((OOC_CHAR16[]){125,0}), 2, (void*)(OOC_INT32)attrName, 131);
-  LongStrings__FindNext((void*)(OOC_INT32)attrName, 131, (void*)(OOC_INT32)text, text_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+  LongStrings__FindNext((void*)(OOC_INT32)attrName, 131, (void*)(OOC_INT32)text, text_0d, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
   i2 = found;
   if (!i2) goto l10;
 l5_loop:
@@ -220,7 +220,7 @@ l10:
   i2 = i1!=(OOC_INT32)0;
   if (i2) goto l3_loop;
 l15:
-  LongStrings__FindNext(((OOC_CHAR16[]){36,123,77,83,71,95,67,79,78,84,69,88,84,125,0}), 15, (void*)(OOC_INT32)text, text_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+  LongStrings__FindNext(((OOC_CHAR16[]){36,123,77,83,71,95,67,79,78,84,69,88,84,125,0}), 15, (void*)(OOC_INT32)text, text_0d, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
   i1 = found;
   if (!i1) goto l18;
   i1 = pos;
@@ -231,7 +231,7 @@ l15:
   i1 = pos;
   LongStrings__Insert((void*)(OOC_INT32)insert, 16384, i1, (void*)(OOC_INT32)text, text_0d);
 l18:
-  LongStrings__FindNext(((OOC_CHAR16[]){36,123,77,83,71,95,67,79,68,69,125,0}), 12, (void*)(OOC_INT32)text, text_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+  LongStrings__FindNext(((OOC_CHAR16[]){36,123,77,83,71,95,67,79,68,69,125,0}), 12, (void*)(OOC_INT32)text, text_0d, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
   i1 = found;
   if (!i1) goto l21;
   i1 = pos;

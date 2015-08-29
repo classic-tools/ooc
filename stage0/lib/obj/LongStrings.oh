@@ -1,10 +1,10 @@
 #ifndef _MODULE_LongStrings_
 #define _MODULE_LongStrings_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 LongStrings__CompareResults;
 #define LongStrings__less -1
 #define LongStrings__equal 0

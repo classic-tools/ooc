@@ -1,13 +1,13 @@
-#include "OOC/SymbolTable/InterfaceDescr.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "ADT/ArrayList.oh"
-#include "XML/Writer.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "OOC/Repository.oh"
-#include "OOC/SymbolTable/GetClass.oh"
-#include "OOC/SymbolTable/Namespace.oh"
-#include "OOC/Doc/Output/XML.oh"
+#include <OOC/SymbolTable/InterfaceDescr.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <ADT/ArrayList.oh>
+#include <XML/Writer.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <OOC/Repository.oh>
+#include <OOC/SymbolTable/GetClass.oh>
+#include <OOC/SymbolTable/Namespace.oh>
+#include <OOC/Doc/Output/XML.oh>
 #define OOC_SymbolTable_InterfaceDescr__dtdPackageName "OOC"
 #define OOC_SymbolTable_InterfaceDescr__dtdResourcePath "xml/interface-description.dtd"
 static URI__URI OOC_SymbolTable_InterfaceDescr__dtdSystemId;

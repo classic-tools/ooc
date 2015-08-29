@@ -1,5 +1,5 @@
-#include "OOC/IA32/RuntimeData.oh"
-#include "Object.oh"
+#include <OOC/IA32/RuntimeData.oh>
+#include <Object.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

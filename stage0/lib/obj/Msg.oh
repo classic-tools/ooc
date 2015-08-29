@@ -1,11 +1,11 @@
 #ifndef _MODULE_Msg_
 #define _MODULE_Msg_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "CharClass.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <CharClass.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define Msg__sizeAttrName 127
 #define Msg__sizeAttrReplacement 16383
 typedef OOC_CHAR8 Msg__Char;

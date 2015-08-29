@@ -1,5 +1,5 @@
-#include "OOC/Scanner.d"
-#include "__oo2c.h"
+#include <OOC/Scanner.d>
+#include <__oo2c.h>
 
 void OOC_Scanner__ErrorContextDesc_GetTemplate(OOC_Scanner__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;
@@ -294,16 +294,17 @@ l21:
       i1=0;
 l1_loop:
       i2 = ch;
-      i3 = (_mod(i2,16))<10;
-      if (i3) goto l4;
-      i3 = _check_pointer(i0, 8419);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-      *(OOC_UINT8*)(i3+(_check_index(i1, i4, OOC_UINT32, 8419))) = ((_mod(i2,16))+55);
+      i3 = _mod(i2,16);
+      i4 = i3<10;
+      if (i4) goto l4;
+      i4 = _check_pointer(i0, 8419);
+      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      *(OOC_UINT8*)(i4+(_check_index(i1, i5, OOC_UINT32, 8419))) = (i3+55);
       goto l5;
 l4:
-      i3 = _check_pointer(i0, 8360);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-      *(OOC_UINT8*)(i3+(_check_index(i1, i4, OOC_UINT32, 8360))) = ((_mod(i2,16))+48);
+      i4 = _check_pointer(i0, 8360);
+      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      *(OOC_UINT8*)(i4+(_check_index(i1, i5, OOC_UINT32, 8360))) = (i3+48);
 l5:
       i2 = i2>>4;
       ch = i2;
@@ -1590,15 +1591,15 @@ static void OOC_Scanner__InitKeywords() {
       OOC_Scanner_InputBuffer__CharArray str;
 
       OOC_INITIALIZE_VPAR(ident__ref,ident,OOC_CHAR8 ,ident_0d)
-      sum = 0;
-      i = 0;
-      i0 = *(OOC_UINT8*)((OOC_INT32)ident+(_check_index(0, ident_0d, OOC_UINT16, 22110)));
+      sum = (OOC_INT32)0;
+      i = (OOC_INT32)0;
+      i0 = *(OOC_UINT8*)((OOC_INT32)ident+(_check_index((OOC_INT32)0, ident_0d, OOC_UINT16, 22110)));
       i0 = i0!=(OOC_CHAR8)'\000';
       if (i0) goto l3;
-      i0=0;i1=0;
+      i0=(OOC_INT32)0;i1=(OOC_INT32)0;
       goto l9;
 l3:
-      i0=0;i1=0;
+      i0=(OOC_INT32)0;i1=(OOC_INT32)0;
 l4_loop:
       i2 = *(OOC_UINT8*)((OOC_INT32)ident+(_check_index(i1, ident_0d, OOC_UINT16, 22151)));
       i0 = i0+i2;

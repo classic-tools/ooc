@@ -1,7 +1,7 @@
-#include "Msg.oh"
-#include "Strings.oh"
-#include "LongStrings.oh"
-#include "IntStr.oh"
+#include <Msg.oh>
+#include <Strings.oh>
+#include <LongStrings.oh>
+#include <IntStr.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

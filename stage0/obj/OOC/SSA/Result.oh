@@ -1,10 +1,10 @@
 #ifndef _MODULE_OOC_SSA_Result_
 #define _MODULE_OOC_SSA_Result_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 OOC_SSA_Result__Class;
 #define OOC_SSA_Result__void -2
 #define OOC_SSA_Result__primary -1

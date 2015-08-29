@@ -1,5 +1,5 @@
-#include "OOC/Scanner/Builder/BasicList.d"
-#include "__oo2c.h"
+#include <OOC/Scanner/Builder/BasicList.d>
+#include <__oo2c.h>
 
 void OOC_Scanner_Builder_BasicList__Init(OOC_Scanner_Builder_BasicList__Builder b, OOC_Scanner_InputBuffer__Buffer buffer, OOC_CHAR8 includeDocComments) {
   register OOC_INT32 i0,i1;

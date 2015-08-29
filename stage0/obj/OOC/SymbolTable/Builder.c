@@ -1,5 +1,5 @@
-#include "OOC/SymbolTable/Builder.d"
-#include "__oo2c.h"
+#include <OOC/SymbolTable/Builder.d>
+#include <__oo2c.h>
 
 void OOC_SymbolTable_Builder__Init(OOC_SymbolTable_Builder__Builder b) {
   register OOC_INT32 i0;
@@ -609,9 +609,9 @@ l15:
       i1 = i1!=(OOC_INT32)0;
       if (i1) goto l19;
       i1 = (OOC_INT32)item;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15556))+16);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15502))+4);
-      i0 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_HasTypeBoundProcedures((OOC_SymbolTable__Item)i1, (OOC_SymbolTable__Name)i2, (OOC_SymbolTable__Name)i0);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15502))+4);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15556))+16);
+      i0 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_HasTypeBoundProcedures((OOC_SymbolTable__Item)i2, (OOC_SymbolTable__Name)i1, (OOC_SymbolTable__Name)i0);
       
       goto l23;
 l19:
@@ -636,14 +636,14 @@ l23:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15735))+12);
       i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 15722)), (OOC_INT32)0);
       i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 15740)), (OOC_INT32)0);
-      Strings__FindNext((void*)(_check_pointer(i2, 15722)), i3, (void*)(_check_pointer(i4, 15740)), i1, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+      Strings__FindNext((void*)(_check_pointer(i2, 15722)), i3, (void*)(_check_pointer(i4, 15740)), i1, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
       i1 = found;
       if (i1) goto l29;
       i1=OOC_FALSE;
       goto l31;
 l29:
       i1 = pos;
-      i1 = i1==0;
+      i1 = i1==(OOC_INT32)0;
       
 l31:
       if (!i1) goto l37;
@@ -692,7 +692,7 @@ l46:
           i2 = prefix;
           if (!i2) goto l4;
           i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 16686)), (OOC_INT32)0);
-          Strings__Insert("-", 2, 0, (void*)(_check_pointer(i1, 16686)), i2);
+          Strings__Insert("-", 2, (OOC_INT32)0, (void*)(_check_pointer(i1, 16686)), i2);
 l4:
           OOC_SymbolTable__InitName((OOC_SymbolTable__Name)i0, (OOC_Scanner_InputBuffer__CharArray)i1, 0, 0, 0);
           return (OOC_SymbolTable__Name)i0;

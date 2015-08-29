@@ -1,12 +1,12 @@
 #ifndef _MODULE_OOC_Config_Pragmas_
 #define _MODULE_OOC_Config_Pragmas_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Config/Value.oh"
-#include "Config/Section/Options.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Config/Value.oh>
+#include <Config/Section/Options.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Config_Section_Options__Option OOC_Config_Pragmas__Pragma;
 typedef struct OOC_Config_Pragmas__SectionDesc *OOC_Config_Pragmas__Section;
 typedef struct OOC_Config_Pragmas__SectionDesc {

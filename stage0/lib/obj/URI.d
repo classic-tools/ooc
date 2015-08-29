@@ -1,6 +1,6 @@
-#include "URI.oh"
-#include "Strings.oh"
-#include "CharClass.oh"
+#include <URI.oh>
+#include <Strings.oh>
+#include <CharClass.oh>
 typedef struct URI__ListDesc *URI__List;
 typedef struct URI__ListDesc {
   URI__List next;

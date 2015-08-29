@@ -1,7 +1,7 @@
-#include "OOC/Doc/Output/XML.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
+#include <OOC/Doc/Output/XML.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

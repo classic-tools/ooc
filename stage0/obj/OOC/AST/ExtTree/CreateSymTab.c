@@ -1,5 +1,5 @@
-#include "OOC/AST/ExtTree/CreateSymTab.d"
-#include "__oo2c.h"
+#include <OOC/AST/ExtTree/CreateSymTab.d>
+#include <__oo2c.h>
 
 OOC_SymbolTable__Name OOC_AST_ExtTree_CreateSymTab__GetName(OOC_AST__Node node) {
   register OOC_INT32 i0,i1,i2,i3,i4;
@@ -155,8 +155,8 @@ l27:
 l30:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3892))+4);
   i1 = OOC_AST_ExtTree_CreateSymTab__EndOfType((OOC_AST__Node)i1);
-  i2 = i1==-1;
   end = i1;
+  i2 = i1==-1;
   if (i2) goto l33;
   return i1;
   goto l48;
@@ -1262,13 +1262,13 @@ void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitArrayType(OOC_AST_ExtTree_Cr
   i2 = (OOC_INT32)v;
   if (i1) goto l3;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 18337));
-  i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18387));
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18355))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18355))+4);
+  i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18387));
   i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 18337));
-  i3 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetPosition((OOC_AST__Node)i3);
+  i4 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetPosition((OOC_AST__Node)i4);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18462))+16);
   i6 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetType((OOC_AST_ExtTree_CreateSymTab__Visitor)i2, (OOC_AST__Node)i6);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18342)))), OOC_SymbolTable_Builder__BuilderDesc_NewArray)),OOC_SymbolTable_Builder__BuilderDesc_NewArray)((OOC_SymbolTable_Builder__Builder)i5, (OOC_SymbolTable__Item)i4, (OOC_SymbolTable__Position)i3, OOC_TRUE, (OOC_AST__Node)(OOC_INT32)0, (OOC_SymbolTable__Type)i6);
+  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18342)))), OOC_SymbolTable_Builder__BuilderDesc_NewArray)),OOC_SymbolTable_Builder__BuilderDesc_NewArray)((OOC_SymbolTable_Builder__Builder)i5, (OOC_SymbolTable__Item)i3, (OOC_SymbolTable__Position)i4, OOC_TRUE, (OOC_AST__Node)(OOC_INT32)0, (OOC_SymbolTable__Type)i6);
   array = (OOC_SymbolTable__Array)i1;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18503))+4);
   OOC_AST_ExtTree_CreateSymTab__AddFlags((OOC_SymbolTable__Item)i1, (OOC_AST_ExtTree__Flags)i0);
@@ -1281,8 +1281,8 @@ l3:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17867))+8);
   i3 = *(OOC_INT32*)(_check_pointer(i3, 17877));
   i3 = i3-1;
-  i4 = i3>=0;
   i = i3;
+  i4 = i3>=0;
   if (i4) goto l6;
   i0=i1;
   goto l16;

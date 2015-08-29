@@ -1,7 +1,7 @@
-#include "StdChannels.oh"
-#include "PosixFileDescr.oh"
-#include "Termination.oh"
-#include "Msg.oh"
+#include <StdChannels.oh>
+#include <PosixFileDescr.oh>
+#include <Termination.oh>
+#include <Msg.oh>
 Channel__Channel StdChannels__stdin;
 Channel__Channel StdChannels__stdout;
 Channel__Channel StdChannels__stderr;

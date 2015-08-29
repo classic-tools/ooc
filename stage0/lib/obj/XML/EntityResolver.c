@@ -1,5 +1,5 @@
-#include "XML/EntityResolver.d"
-#include "__oo2c.h"
+#include <XML/EntityResolver.d>
+#include <__oo2c.h>
 
 XML_DTD__StringURI XML_EntityResolver__NormalizeURI(XML_UnicodeBuffer__CharArray uri) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;
@@ -34,8 +34,8 @@ l4:
   len16 = i1;
   i2 = (OOC_INT32)XML_UnicodeCodec_UTF8__factory;
   i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1920)))), XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)),XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)((XML_UnicodeCodec_UTF8__Factory)i2);
-  i3 = i1!=0;
   codec = (XML_UnicodeCodec__Codec)i2;
+  i3 = i1!=(OOC_INT32)0;
   if (i3) goto l3;
   _copy_8((const void*)"",(void*)(OOC_INT32)str8,8192);
   goto l7;
@@ -54,14 +54,14 @@ l6:
   i0 = destDone;
   *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT32, 2309))) = (OOC_CHAR8)'\000';
 l7:
-  i = 0;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(0, 8192, OOC_UINT16, 2497)));
+  i = (OOC_INT32)0;
+  i0 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index((OOC_INT32)0, 8192, OOC_UINT16, 2497)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l10;
-  i0=0;
+  i0=(OOC_INT32)0;
   goto l36;
 l10:
-  i0=0;
+  i0=(OOC_INT32)0;
 l11_loop:
   i1 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2524)));
   i1 = i1>=(OOC_CHAR8)'\200';

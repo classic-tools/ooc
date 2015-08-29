@@ -1,16 +1,16 @@
-#include "OOC/Doc/Input/Texinfo.oh"
-#include "Ascii.oh"
-#include "CharClass.oh"
-#include "Out.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "TextRider.oh"
-#include "StdChannels.oh"
-#include "Strings.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner.oh"
-#include "OOC/Doc/Decoration.oh"
-#include "OOC/Doc/TextBuffer.oh"
+#include <OOC/Doc/Input/Texinfo.oh>
+#include <Ascii.oh>
+#include <CharClass.oh>
+#include <Out.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <TextRider.oh>
+#include <StdChannels.oh>
+#include <Strings.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner.oh>
+#include <OOC/Doc/Decoration.oh>
+#include <OOC/Doc/TextBuffer.oh>
 typedef OOC_INT8 OOC_Doc_Input_Texinfo__Id;
 #define OOC_Doc_Input_Texinfo__class1Low 0
 #define OOC_Doc_Input_Texinfo__cmdAtGlyph 0

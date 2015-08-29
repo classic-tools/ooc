@@ -1,10 +1,10 @@
-#include "OOC/SymbolTable/InterfaceXML.oh"
-#include "XML/Writer.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
-#include "OOC/Repository.oh"
-#include "OOC/SymbolTable/GetClass.oh"
-#include "OOC/SymbolTable/Exports.oh"
-#include "OOC/Doc/Output/XML.oh"
+#include <OOC/SymbolTable/InterfaceXML.oh>
+#include <XML/Writer.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
+#include <OOC/Repository.oh>
+#include <OOC/SymbolTable/GetClass.oh>
+#include <OOC/SymbolTable/Exports.oh>
+#include <OOC/Doc/Output/XML.oh>
 #define OOC_SymbolTable_InterfaceXML__dtdPackageName "OOC"
 #define OOC_SymbolTable_InterfaceXML__dtdResourcePath "xml/module-interface.dtd"
 static URI__URI OOC_SymbolTable_InterfaceXML__dtdSystemId;

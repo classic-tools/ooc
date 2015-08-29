@@ -1,11 +1,11 @@
-#include "OOC/Config.oh"
-#include "RT0.oh"
-#include "Config/Value/String.oh"
-#include "Config/Source/CmdLine.oh"
-#include "Config/Simple.oh"
-#include "OOC/Config/Pragmas/StdPragmas.oh"
-#include "OOC/Config/Autoconf.oh"
-#include "OOC/Config/Repositories/FileSystem.oh"
+#include <OOC/Config.oh>
+#include <RT0.oh>
+#include <Config/Value/String.oh>
+#include <Config/Source/CmdLine.oh>
+#include <Config/Simple.oh>
+#include <OOC/Config/Pragmas/StdPragmas.oh>
+#include <OOC/Config/Autoconf.oh>
+#include <OOC/Config/Repositories/FileSystem.oh>
 Config_Section_Options__Section OOC_Config__options;
 static Config_Source_CmdLine__CmdLine OOC_Config__cmdLine;
 Config_Section_Arguments__Section OOC_Config__arguments;

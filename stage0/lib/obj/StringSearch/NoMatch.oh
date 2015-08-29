@@ -1,12 +1,12 @@
 #ifndef _MODULE_StringSearch_NoMatch_
 #define _MODULE_StringSearch_NoMatch_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Object.oh"
-#include "StringSearch.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Object.oh>
+#include <StringSearch.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct StringSearch_NoMatch__FactoryDesc *StringSearch_NoMatch__Factory;
 typedef struct StringSearch_NoMatch__FactoryDesc {
   char __dummy;

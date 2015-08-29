@@ -1,5 +1,5 @@
-#include "OOC/Scanner/Builder.d"
-#include "__oo2c.h"
+#include <OOC/Scanner/Builder.d>
+#include <__oo2c.h>
 
 void OOC_Scanner_Builder__Init(OOC_Scanner_Builder__Builder b, OOC_Scanner_InputBuffer__Buffer buffer) {
   register OOC_INT32 i0,i1;

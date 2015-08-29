@@ -1,10 +1,10 @@
-#include "OOC/Doc/ResolveRef.oh"
-#include "Msg.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "ADT/Dictionary.oh"
-#include "OOC/Doc.oh"
-#include "OOC/SymbolTable/Exports.oh"
+#include <OOC/Doc/ResolveRef.oh>
+#include <Msg.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <ADT/Dictionary.oh>
+#include <OOC/Doc.oh>
+#include <OOC/SymbolTable/Exports.oh>
 #define OOC_Doc_ResolveRef__refEmpty 0
 #define OOC_Doc_ResolveRef__refHasMarkup 1
 #define OOC_Doc_ResolveRef__invalidCharacter 2

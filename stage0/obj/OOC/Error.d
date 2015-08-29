@@ -1,7 +1,7 @@
-#include "OOC/Error.oh"
-#include "TextRider.oh"
-#include "LongStrings.oh"
-#include "CharClass.oh"
+#include <OOC/Error.oh>
+#include <TextRider.oh>
+#include <LongStrings.oh>
+#include <CharClass.oh>
 OOC_INT8 OOC_Error__style;
 OOC_INT32 OOC_Error__minErrorDistance;
 #define OOC_Error__posAttr "pos"

@@ -1,4 +1,4 @@
-#include "RT0.oh"
+#include <RT0.oh>
 struct RT0__StructDesc RT0__boolean;
 struct RT0__StructDesc RT0__char;
 struct RT0__StructDesc RT0__longchar;

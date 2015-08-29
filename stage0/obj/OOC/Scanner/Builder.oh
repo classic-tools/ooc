@@ -1,13 +1,13 @@
 #ifndef _MODULE_OOC_Scanner_Builder_
 #define _MODULE_OOC_Scanner_Builder_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT32 OOC_Scanner_Builder__Pos;
 typedef OOC_INT32 OOC_Scanner_Builder__Line;
 typedef OOC_INT32 OOC_Scanner_Builder__Column;

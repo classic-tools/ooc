@@ -1,6 +1,6 @@
-#include "OOC/SSA/Aliasing.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
+#include <OOC/SSA/Aliasing.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

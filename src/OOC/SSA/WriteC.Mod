@@ -1,4 +1,4 @@
-(* 	$Id: WriteC.Mod,v 1.145 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: WriteC.Mod,v 1.146 2002/12/21 09:21:49 mva Exp $	 *)
 MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to plain C.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -1578,13 +1578,14 @@ PROCEDURE (w: Writer) WriteBlocks (domRoot: Schedule.Block);
 PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
   VAR
     pb: SSA.ProcBlock;
-    enter: SSA.Instr;
+    enter, instr: SSA.Instr;
     s: SSA.Result;
     domRoot: Schedule.Block;
     registerMap: Dictionary.Dictionary;
     w: Writer;
     writeProc: BOOLEAN;
     destore: Destore.State;
+    oldSize: LONGINT;
 
   PROCEDURE Write (pre, post: ARRAY OF CHAR);
     BEGIN
@@ -1749,7 +1750,21 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     w := NewWriter (t, t. w, pb, registerMap);
     WriteLocalDecl (t, w, pb);
     IF proc.decl.IsModuleBody() THEN
+      (* pick up any preloaded-var instructions in the module body, so that
+         we can write them out at the beginning of the init function *)
+      oldSize := t.preloadedVars.Size();
+      instr := pb.instrList;
+      WHILE (instr # NIL) DO
+        IF (instr.opcode = Opcode.preloadedVar) THEN
+          t.preloadedVars.Append(instr);
+        END;
+        instr := instr.nextInstr;
+      END;
+      
       InitPreloadedVars(t.preloadedVars);
+
+      (* now undo the changes we caused to t.preloadedVars *)
+      t.preloadedVars.RemoveRange(oldSize, t.preloadedVars.Size());
     END;
     t. WriteNestedProcedures();          (* up call *)
     

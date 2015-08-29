@@ -1,10 +1,10 @@
-#include "URI/Scheme/Hierarchical.oh"
-#include "Strings.oh"
-#include "CharClass.oh"
-#include "URI/String.oh"
-#include "URI/CharClass.oh"
-#include "URI/Authority/Unparsed.oh"
-#include "URI/Query/Unparsed.oh"
+#include <URI/Scheme/Hierarchical.oh>
+#include <Strings.oh>
+#include <CharClass.oh>
+#include <URI/String.oh>
+#include <URI/CharClass.oh>
+#include <URI/Authority/Unparsed.oh>
+#include <URI/Query/Unparsed.oh>
 #define URI_Scheme_Hierarchical__illegalPathChar 1
 static URI_Error__Context URI_Scheme_Hierarchical__pathContext;
 

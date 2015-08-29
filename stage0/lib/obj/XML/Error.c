@@ -1,5 +1,5 @@
-#include "XML/Error.d"
-#include "__oo2c.h"
+#include <XML/Error.d>
+#include <__oo2c.h>
 
 void XML_Error__InitContext(XML_Error__Context c, const Msg__String id__ref, OOC_LEN id_0d) {
   register OOC_INT32 i0;
@@ -46,7 +46,7 @@ l3:
   _copy_16((const void*)((OOC_CHAR16[]){0}),(void*)(OOC_INT32)templ,templ_0d);
 l4:
   LongStrings__Append((void*)(OOC_INT32)msgText, msgText_0d, (void*)(OOC_INT32)templ, templ_0d);
-  LongStrings__Insert(((OOC_CHAR16[]){108,105,110,101,61,36,123,108,105,110,101,125,44,32,99,111,108,117,109,110,61,36,123,99,111,108,117,109,110,125,10,36,123,99,104,97,114,125,58,32,0}), 41, 0, (void*)(OOC_INT32)templ, templ_0d);
+  LongStrings__Insert(((OOC_CHAR16[]){108,105,110,101,61,36,123,108,105,110,101,125,44,32,99,111,108,117,109,110,61,36,123,99,111,108,117,109,110,125,10,36,123,99,104,97,114,125,58,32,0}), 41, (OOC_INT32)0, (void*)(OOC_INT32)templ, templ_0d);
   return;
   ;
 }
@@ -64,8 +64,8 @@ void XML_Error__ContextDesc_GetTemplate(XML_Error__Context context, Msg__Msg msg
   goto l5;
 l3:
   i2 = (OOC_INT32)msg;
-  i2 = *(OOC_INT32*)((_check_pointer(i2, 3323))+8);
   i3 = *(OOC_INT32*)((_check_pointer(i1, 3311))+4);
+  i2 = *(OOC_INT32*)((_check_pointer(i2, 3323))+8);
   i2 = i3!=i2;
   
 l5:
@@ -197,7 +197,7 @@ void XML_Error__ListDesc_Write(XML_Error__List errList, Channel__Channel ch) {
 
       OOC_INITIALIZE_VPAR(pattern__ref,pattern,OOC_CHAR8 ,pattern_0d)
       OOC_INITIALIZE_VPAR(repl__ref,repl,OOC_CHAR8 ,repl_0d)
-      Strings__FindNext((void*)(OOC_INT32)pattern, pattern_0d, (void*)(OOC_INT32)text, text_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+      Strings__FindNext((void*)(OOC_INT32)pattern, pattern_0d, (void*)(OOC_INT32)text, text_0d, (OOC_INT32)0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
       i0 = found;
       if (!i0) goto l8;
 l3_loop:
@@ -350,7 +350,7 @@ l24:
   Strings__Extract((void*)(OOC_INT32)text, 8192, 0, 5, (void*)(OOC_INT32)repl1, 1024);
   Strings__Capitalize((void*)(OOC_INT32)repl1, 1024);
   i2 = (
-  _cmp8((const void*)(OOC_INT32)repl1,(const void*)"FILE:"))==(OOC_INT32)0;
+  _cmp8((const void*)(OOC_INT32)repl1,(const void*)"FILE:"))==0;
   if (!i2) goto l30;
   Strings__Delete((void*)(OOC_INT32)text, 8192, 0, 5);
 l30:

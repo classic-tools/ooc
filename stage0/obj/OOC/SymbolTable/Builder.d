@@ -1,8 +1,8 @@
-#include "OOC/SymbolTable/Builder.oh"
-#include "Out.oh"
-#include "Strings.oh"
-#include "ADT/Storable.oh"
-#include "ADT/Object/Storage.oh"
+#include <OOC/SymbolTable/Builder.oh>
+#include <Out.oh>
+#include <Strings.oh>
+#include <ADT/Storable.oh>
+#include <ADT/Object/Storage.oh>
 OOC_SymbolTable_Builder__AutoImport *OOC_SymbolTable_Builder__autoImport;
 OOC_INT8 OOC_SymbolTable_Builder__doAutoImport;
 OOC_CHAR8 OOC_SymbolTable_Builder__magicNumber[5];

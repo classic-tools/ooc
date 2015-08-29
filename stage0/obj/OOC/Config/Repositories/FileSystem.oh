@@ -1,16 +1,16 @@
 #ifndef _MODULE_OOC_Config_Repositories_FileSystem_
 #define _MODULE_OOC_Config_Repositories_FileSystem_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "XML/Locator.oh"
-#include "Config/Parser.oh"
-#include "Config/Section.oh"
-#include "OOC/Config/Repositories.oh"
-#include "OOC/Repository.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <XML/Locator.oh>
+#include <Config/Parser.oh>
+#include <Config/Section.oh>
+#include <OOC/Config/Repositories.oh>
+#include <OOC/Repository.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_Config_Repositories_FileSystem__RepositoryEntryDesc *OOC_Config_Repositories_FileSystem__RepositoryEntry;
 typedef struct OOC_Config_Repositories_FileSystem__RepositoryEntryDesc {
   OOC_Config_Repositories__RepositoryEntry next;

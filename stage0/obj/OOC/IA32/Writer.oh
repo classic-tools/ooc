@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_IA32_Writer_
 #define _MODULE_OOC_IA32_Writer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "TextRider.oh"
-#include "Object/Boxed.oh"
-#include "ADT/Dictionary.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <TextRider.oh>
+#include <Object/Boxed.oh>
+#include <ADT/Dictionary.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct OOC_IA32_Writer__WriterDesc *OOC_IA32_Writer__Writer;
 typedef struct OOC_IA32_Writer__WriterDesc {
   Channel__Channel ch;

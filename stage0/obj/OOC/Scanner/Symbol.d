@@ -1,4 +1,4 @@
-#include "OOC/Scanner/Symbol.oh"
+#include <OOC/Scanner/Symbol.oh>
 #define OOC_Scanner_Symbol__addOnSymbols 78
 OOC_CHAR8 OOC_Scanner_Symbol__name[78][13];
 OOC_CHAR8 OOC_Scanner_Symbol__representation[78][10];

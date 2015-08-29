@@ -1,9 +1,9 @@
-#include "OOC/IR/ConstFold.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "OOC/SymbolTable/TypeRules.oh"
-#include "Object.oh"
-#include "Object/BigInt.oh"
+#include <OOC/IR/ConstFold.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
+#include <Object.oh>
+#include <Object/BigInt.oh>
 #define OOC_IR_ConstFold__foldReals OOC_FALSE
 static void OOC_IR_ConstFold__InitConstFold(OOC_IR_ConstFold__ConstFold c);
 static OOC_SymbolTable__Type OOC_IR_ConstFold__SmallestType(Object_Boxed__Object value);

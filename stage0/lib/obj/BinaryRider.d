@@ -1,5 +1,5 @@
-#include "BinaryRider.oh"
-#include "Strings.oh"
+#include <BinaryRider.oh>
+#include <Strings.oh>
 static OOC_INT8 BinaryRider__systemByteOrder;
 typedef struct BinaryRider__ErrorContextDesc *BinaryRider__ErrorContext;
 static BinaryRider__ErrorContext BinaryRider__errorContext;

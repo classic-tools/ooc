@@ -1,5 +1,5 @@
-#include "OOC/AST/ExtTree.d"
-#include "__oo2c.h"
+#include <OOC/AST/ExtTree.d>
+#include <__oo2c.h>
 
 void OOC_AST_ExtTree__NodeDesc_Accept(OOC_AST_ExtTree__Node node, OOC_AST_ExtTree__Visitor v) {
 

@@ -1,5 +1,5 @@
-#include "OOC/IR/ConstFold.d"
-#include "__oo2c.h"
+#include <OOC/IR/ConstFold.d>
+#include <__oo2c.h>
 
 static void OOC_IR_ConstFold__InitConstFold(OOC_IR_ConstFold__ConstFold c) {
   register OOC_INT32 i0;
@@ -85,7 +85,7 @@ OOC_IR__Const OOC_IR_ConstFold__ConstFoldDesc_BooleanConst(OOC_IR_ConstFold__Con
   i2 = (OOC_INT32)op;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2446));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2426));
-  i3 = (OOC_INT32)OOC_SymbolTable_Predef__GetType(0);
+  i3 = (OOC_INT32)OOC_SymbolTable_Predef__GetType((OOC_INT32)0);
   i4 = value;
   i4 = (OOC_INT32)Object_Boxed__NewBoolean(i4);
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2434)))), OOC_IR__BuilderDesc_NewConst)),OOC_IR__BuilderDesc_NewConst)((OOC_IR__Builder)i0, (OOC_Scanner_Builder_BasicList__Symbol)i2, (OOC_SymbolTable__Type)i3, (Object_Boxed__Object)i4);

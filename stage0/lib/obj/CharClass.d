@@ -1,5 +1,5 @@
-#include "CharClass.oh"
-#include "Ascii.oh"
+#include <CharClass.oh>
+#include <Ascii.oh>
 OOC_CHAR8 CharClass__systemEol[3];
 
 /* run-time meta data */

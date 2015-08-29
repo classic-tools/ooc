@@ -1,10 +1,10 @@
 #ifndef _MODULE_C_
 #define _MODULE_C_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR8 C__char;
 typedef OOC_INT8 C__signedchar;
 typedef OOC_INT16 C__shortint;

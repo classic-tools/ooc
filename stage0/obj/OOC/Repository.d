@@ -1,8 +1,8 @@
-#include "OOC/Repository.oh"
-#include "Strings.oh"
-#include "OS/Path.oh"
-#include "OOC/Logger.oh"
-#include "OOC/SymbolTable/Builder.oh"
+#include <OOC/Repository.oh>
+#include <Strings.oh>
+#include <OS/Path.oh>
+#include <OOC/Logger.oh>
+#include <OOC/SymbolTable/Builder.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

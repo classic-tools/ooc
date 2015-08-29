@@ -1,4 +1,4 @@
-#include "ADT/Dictionary/IntValue.oh"
+#include <ADT/Dictionary/IntValue.oh>
 typedef OOC_UINT32 ADT_Dictionary_IntValue__HSet;
 typedef struct ADT_Dictionary_IntValue__DummyDesc *ADT_Dictionary_IntValue__Dummy;
 typedef struct ADT_Dictionary_IntValue__DummyDesc {

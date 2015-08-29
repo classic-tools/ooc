@@ -1,4 +1,4 @@
-#include "ADT/Dictionary.oh"
+#include <ADT/Dictionary.oh>
 typedef OOC_UINT32 ADT_Dictionary__HSet;
 static ADT_Dictionary__Dummy ADT_Dictionary__dummy;
 #define ADT_Dictionary__minSize 4

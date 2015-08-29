@@ -1,13 +1,13 @@
 #ifndef _MODULE_XML_DTD_
 #define _MODULE_XML_DTD_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "URI.oh"
-#include "XML/UnicodeCodec.oh"
-#include "XML/UnicodeBuffer.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <URI.oh>
+#include <XML/UnicodeCodec.oh>
+#include <XML/UnicodeBuffer.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR16 XML_DTD__Char;
 typedef XML_UnicodeBuffer__CharArray XML_DTD__String;
 typedef OOC_CHAR16 XML_DTD__StringVar[];

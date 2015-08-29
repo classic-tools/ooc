@@ -1,9 +1,9 @@
-#include "OOC/C/RuntimeData.oh"
-#include "TextRider.oh"
-#include "ADT/ArrayList.oh"
-#include "OOC/Config.oh"
-#include "OOC/SymbolTable/Namespace.oh"
-#include "OOC/C/Naming.oh"
+#include <OOC/C/RuntimeData.oh>
+#include <TextRider.oh>
+#include <ADT/ArrayList.oh>
+#include <OOC/Config.oh>
+#include <OOC/SymbolTable/Namespace.oh>
+#include <OOC/C/Naming.oh>
 #define OOC_C_RuntimeData__structTypeDesc "RT0__StructDesc"
 
 /* run-time meta data */

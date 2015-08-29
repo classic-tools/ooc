@@ -1,25 +1,25 @@
-#include "OOC/IA32/WriteAssembler.oh"
-#include "Ascii.oh"
-#include "IntStr.oh"
-#include "Log.oh"
-#include "Out.oh"
-#include "StdChannels.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "Object/Boxed.oh"
-#include "Object/BigInt.oh"
-#include "OOC/SymbolTable.oh"
-#include "OOC/SymbolTable/Predef.oh"
-#include "OOC/SSA.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
-#include "OOC/SSA/Schedule.oh"
-#include "OOC/C/Naming.oh"
-#include "OOC/IA32/Writer.oh"
-#include "OOC/SSA/IRtoSSA.oh"
-#include "OOC/SSA/XML.oh"
-#include "OOC/SSA/DeadCodeElimination.oh"
-#include "OOC/SSA/Destore.oh"
+#include <OOC/IA32/WriteAssembler.oh>
+#include <Ascii.oh>
+#include <IntStr.oh>
+#include <Log.oh>
+#include <Out.oh>
+#include <StdChannels.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <Object/Boxed.oh>
+#include <Object/BigInt.oh>
+#include <OOC/SymbolTable.oh>
+#include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SSA.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
+#include <OOC/SSA/Schedule.oh>
+#include <OOC/C/Naming.oh>
+#include <OOC/IA32/Writer.oh>
+#include <OOC/SSA/IRtoSSA.oh>
+#include <OOC/SSA/XML.oh>
+#include <OOC/SSA/DeadCodeElimination.oh>
+#include <OOC/SSA/Destore.oh>
 typedef OOC_CHAR8 OOC_IA32_WriteAssembler__Buffer[256];
 static void OOC_IA32_WriteAssembler__WriteInstrList(OOC_IA32_Writer__Writer w, OOC_SSA_Schedule__Block b);
 static void OOC_IA32_WriteAssembler__WriteBlocks(OOC_IA32_Writer__Writer w, OOC_SSA_Schedule__Block domRoot);

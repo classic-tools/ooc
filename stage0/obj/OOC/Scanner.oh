@@ -1,14 +1,14 @@
 #ifndef _MODULE_OOC_Scanner_
 #define _MODULE_OOC_Scanner_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/Error.oh"
-#include "OOC/Scanner/Symbol.oh"
-#include "OOC/Scanner/Builder.oh"
-#include "OOC/Config/Pragmas.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/Error.oh>
+#include <OOC/Scanner/Symbol.oh>
+#include <OOC/Scanner/Builder.oh>
+#include <OOC/Config/Pragmas.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define OOC_Scanner__enableIdentUnderscore 0
 #define OOC_Scanner__enableThreeDots 1
 #define OOC_Scanner__enablePragmaSymbols 2

@@ -1,19 +1,19 @@
 #ifndef _MODULE_OOC_Repository_
 #define _MODULE_OOC_Repository_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Channel.oh"
-#include "TextRider.oh"
-#include "Time.oh"
-#include "Object.oh"
-#include "ADT/ArrayList.oh"
-#include "URI.oh"
-#include "OOC/Scanner/InputBuffer.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Channel.oh>
+#include <TextRider.oh>
+#include <Time.oh>
+#include <Object.oh>
+#include <ADT/ArrayList.oh>
+#include <URI.oh>
+#include <OOC/Scanner/InputBuffer.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 #define OOC_Repository__headerSuffix ".oh"
 typedef OOC_CHAR8 OOC_Repository__URIBuffer[1024];
 typedef struct OOC_Repository__PkgInfoDesc *OOC_Repository__PkgInfo;

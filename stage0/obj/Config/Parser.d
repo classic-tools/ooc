@@ -1,6 +1,6 @@
-#include "Config/Parser.oh"
-#include "LongStrings.oh"
-#include "XML/UnicodeCodec/Latin1.oh"
+#include <Config/Parser.oh>
+#include <LongStrings.oh>
+#include <XML/UnicodeCodec/Latin1.oh>
 static void Config_Parser__InitBuilder(Config_Parser__Builder b);
 static Config_Parser__Builder Config_Parser__NewBuilder();
 static void Config_Parser__InitNode(Config_Parser__Node node, Config_Parser__Element parent, XML_Locator__Locator l, struct XML_Locator__Position *pos, RT0__Struct pos__tag);

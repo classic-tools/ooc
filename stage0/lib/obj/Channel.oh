@@ -1,12 +1,12 @@
 #ifndef _MODULE_Channel_
 #define _MODULE_Channel_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Time.oh"
-#include "Msg.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Time.oh>
+#include <Msg.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Msg__Msg Channel__Result;
 #define Channel__noLength -1
 #define Channel__noPosition -2

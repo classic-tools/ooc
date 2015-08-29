@@ -1,16 +1,16 @@
 #ifndef _MODULE_PosixFileDescr_
 #define _MODULE_PosixFileDescr_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "C.oh"
-#include "Time.oh"
-#include "CharClass.oh"
-#include "Channel.oh"
-#include "Msg.oh"
-#include "LongStrings.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <C.oh>
+#include <Time.oh>
+#include <CharClass.oh>
+#include <Channel.oh>
+#include <Msg.oh>
+#include <LongStrings.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Msg__Msg PosixFileDescr__Result;
 #define PosixFileDescr__noLength -1
 #define PosixFileDescr__noPosition -2

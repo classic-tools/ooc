@@ -1,13 +1,13 @@
 #ifndef _MODULE_URI_Scheme_Hierarchical_
 #define _MODULE_URI_Scheme_Hierarchical_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "TextRider.oh"
-#include "URI.oh"
-#include "URI/Error.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <TextRider.oh>
+#include <URI.oh>
+#include <URI/Error.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct URI_Scheme_Hierarchical__ParameterDesc *URI_Scheme_Hierarchical__Parameter;
 typedef struct URI_Scheme_Hierarchical__ParameterDesc {
   URI_Scheme_Hierarchical__Parameter next;

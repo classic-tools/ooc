@@ -1,4 +1,4 @@
-#include "XML/InputBuffer.oh"
+#include <XML/InputBuffer.oh>
 #define XML_InputBuffer__bytesPerRead 4096
 static void XML_InputBuffer__Init(XML_InputBuffer__Buffer b, OOC_CHAR8 _new, Channel__Reader reader, Msg__MsgList errList);
 

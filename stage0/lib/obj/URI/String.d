@@ -1,5 +1,5 @@
-#include "URI/String.oh"
-#include "Strings.oh"
+#include <URI/String.oh>
+#include <Strings.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

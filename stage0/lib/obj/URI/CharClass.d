@@ -1,4 +1,4 @@
-#include "URI/CharClass.oh"
+#include <URI/CharClass.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

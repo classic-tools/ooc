@@ -1,5 +1,5 @@
-#include "OOC/Doc/TextBuffer.d"
-#include "__oo2c.h"
+#include <OOC/Doc/TextBuffer.d>
+#include <__oo2c.h>
 
 OOC_Doc_TextBuffer__Buffer OOC_Doc_TextBuffer__New() {
   register OOC_INT32 i0,i1,i2;
@@ -266,8 +266,8 @@ l25:
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 3290));
   i3 = _check_pointer(i3, 3295);
   i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-  *(OOC_UINT8*)(i3+(_check_index((i1+1), i4, OOC_UINT32, 3295))) = (OOC_CHAR8)' ';
   i1 = i1+1;
+  *(OOC_UINT8*)(i3+(_check_index(i1, i4, OOC_UINT32, 3295))) = (OOC_CHAR8)' ';
   
 l29:
   i0 = i0+1;

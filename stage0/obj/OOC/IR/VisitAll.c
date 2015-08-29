@@ -1,5 +1,5 @@
-#include "OOC/IR/VisitAll.d"
-#include "__oo2c.h"
+#include <OOC/IR/VisitAll.d>
+#include <__oo2c.h>
 
 void OOC_IR_VisitAll__InitVisitor(OOC_IR_VisitAll__Visitor v) {
   register OOC_INT32 i0;

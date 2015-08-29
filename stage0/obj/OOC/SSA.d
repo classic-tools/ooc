@@ -1,6 +1,6 @@
-#include "OOC/SSA.oh"
-#include "Log.oh"
-#include "OOC/SymbolTable/Predef.oh"
+#include <OOC/SSA.oh>
+#include <Log.oh>
+#include <OOC/SymbolTable/Predef.oh>
 Object_BigInt__BigInt OOC_SSA__nil;
 static void OOC_SSA__SetUse(OOC_SSA__Result arg, OOC_SSA__Opnd opnd);
 static void OOC_SSA__DeleteUse(OOC_SSA__Opnd opnd);

@@ -1,10 +1,10 @@
-#include "OOC/Config/CCompiler.oh"
-#include "Strings.oh"
-#include "Object.oh"
-#include "URI/Scheme/File.oh"
-#include "Config/Value/String.oh"
-#include "OOC/Config.oh"
-#include "OOC/Repository.oh"
+#include <OOC/Config/CCompiler.oh>
+#include <Strings.oh>
+#include <Object.oh>
+#include <URI/Scheme/File.oh>
+#include <Config/Value/String.oh>
+#include <OOC/Config.oh>
+#include <OOC/Repository.oh>
 static Config_Section_Options__Option OOC_Config_CCompiler__cc;
 static Config_Section_Options__Option OOC_Config_CCompiler__cppflags;
 static Config_Section_Options__Option OOC_Config_CCompiler__cflags;

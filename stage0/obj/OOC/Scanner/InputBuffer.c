@@ -1,5 +1,5 @@
-#include "OOC/Scanner/InputBuffer.d"
-#include "__oo2c.h"
+#include <OOC/Scanner/InputBuffer.d>
+#include <__oo2c.h>
 
 OOC_CHAR8 OOC_Scanner_InputBuffer__BufferDesc_NextBlock(OOC_Scanner_InputBuffer__Buffer b) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;
@@ -26,9 +26,9 @@ OOC_CHAR8 OOC_Scanner_InputBuffer__BufferDesc_NextBlock(OOC_Scanner_InputBuffer_
   i1 = *(OOC_INT32*)((_check_pointer(i0, 3997))+16);
   i1 = i1>=4096;
   if (!i1) goto l8;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 4113))+16);
-  i2 = *(OOC_INT32*)((_check_pointer(i0, 4096))+12);
-  i1 = i2-i1;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 4096))+12);
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 4113))+16);
+  i1 = i1-i2;
   len = i1;
   i2 = *(OOC_INT32*)((_check_pointer(i0, 4147))+16);
   i2 = i1<i2;
@@ -94,8 +94,8 @@ l16:
   i1 = i1==0;
   if (i1) goto l19;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5627));
-  i1 = *(OOC_INT32*)((_check_pointer(i1, 5630))+8);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 5611))+12);
+  i1 = *(OOC_INT32*)((_check_pointer(i1, 5630))+8);
   *(OOC_INT32*)((_check_pointer(i0, 5611))+12) = (i2+i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5653))+4);
   i1 = _check_pointer(i1, 5660);
@@ -127,8 +127,8 @@ l21:
   if (!i1) goto l24;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3811))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3831));
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3834))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3811))+20);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3834))+4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3820)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i3, (Msg__Msg)i2);
 l24:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3867))+4);

@@ -1,5 +1,5 @@
-#include "Config/Simple.d"
-#include "__oo2c.h"
+#include <Config/Simple.d>
+#include <__oo2c.h>
 
 void Config_Simple__Init(Config_Simple__Config config, const OOC_CHAR8 defaultConfigFile__ref[], OOC_LEN defaultConfigFile_0d) {
   register OOC_INT32 i0,i1,i2,i3;
@@ -45,13 +45,13 @@ l4:
   i1 = (OOC_INT32)Config_Section__NewSectionList();
   *(OOC_INT32*)((_check_pointer(i0, 1774))+32) = i1;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1853))+24);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1840)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i3, (Config_Section__Section)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1853))+24);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1840)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1901))+28);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1888)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i3, (Config_Section__Section)i2);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1901))+28);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1888)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
   *(OOC_INT32*)((_check_pointer(i0, 1930))+36) = (OOC_INT32)0;
   return;
   ;
@@ -207,9 +207,9 @@ l6:
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4925))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4906))+4);
-  i2 = i3!=i2;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4906))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4925))+4);
+  i2 = i2!=i3;
   
 l13:
   if (!i2) goto l25;

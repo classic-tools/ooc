@@ -1,12 +1,12 @@
 #ifndef _MODULE_Config_Value_Integer_
 #define _MODULE_Config_Value_Integer_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "Config/Value.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <Config/Value.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT32 Config_Value_Integer__Type;
 typedef struct Config_Value_Integer__ValueDesc *Config_Value_Integer__Value;
 typedef struct Config_Value_Integer__ValueDesc {

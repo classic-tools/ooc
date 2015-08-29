@@ -1,11 +1,11 @@
 #ifndef _MODULE_Config_Value_
 #define _MODULE_Config_Value_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Msg.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Msg.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_CHAR8 Config_Value__Char;
 typedef OOC_CHAR8 Config_Value__String[];
 typedef OOC_CHAR8 *Config_Value__StringPtr;

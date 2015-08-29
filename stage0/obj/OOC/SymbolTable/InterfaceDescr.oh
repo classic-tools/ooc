@@ -1,15 +1,15 @@
 #ifndef _MODULE_OOC_SymbolTable_InterfaceDescr_
 #define _MODULE_OOC_SymbolTable_InterfaceDescr_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "ADT/Dictionary.oh"
-#include "URI.oh"
-#include "OOC/Config/Repositories.oh"
-#include "OOC/SymbolTable.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <ADT/Dictionary.oh>
+#include <URI.oh>
+#include <OOC/Config/Repositories.oh>
+#include <OOC/SymbolTable.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern void OOC_SymbolTable_InterfaceDescr__Write(Channel__Writer cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary extensionDict);
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init();
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init0();

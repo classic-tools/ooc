@@ -1,5 +1,5 @@
-#include "IntConv.oh"
-#include "CharClass.oh"
+#include <IntConv.oh>
+#include <CharClass.oh>
 static ConvTypes__ScanState IntConv__W;
 static ConvTypes__ScanState IntConv__S;
 static ConvTypes__ScanState IntConv__SI;

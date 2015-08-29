@@ -1,11 +1,11 @@
 #ifndef _MODULE_OOC_SSA_Aliasing_
 #define _MODULE_OOC_SSA_Aliasing_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "OOC/SSA.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <OOC/SSA.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 OOC_SSA_Aliasing__Id;
 #define OOC_SSA_Aliasing__noAliasing 0
 #define OOC_SSA_Aliasing__completelyCovered 1

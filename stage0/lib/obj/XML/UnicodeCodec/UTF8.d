@@ -1,4 +1,4 @@
-#include "XML/UnicodeCodec/UTF8.oh"
+#include <XML/UnicodeCodec/UTF8.oh>
 XML_UnicodeCodec_UTF8__Factory XML_UnicodeCodec_UTF8__factory;
 static void XML_UnicodeCodec_UTF8__Init(XML_UnicodeCodec_UTF8__Codec codec, OOC_INT8 bom);
 static XML_UnicodeCodec_UTF8__Codec XML_UnicodeCodec_UTF8__New(OOC_INT8 bom);

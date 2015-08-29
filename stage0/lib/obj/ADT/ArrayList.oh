@@ -1,12 +1,12 @@
 #ifndef _MODULE_ADT_ArrayList_
 #define _MODULE_ADT_ArrayList_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "ADT/Storable.oh"
-#include "Object.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <ADT/Storable.oh>
+#include <Object.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef Object__Object *ADT_ArrayList__Array;
 typedef struct ADT_ArrayList__ArrayListDesc *ADT_ArrayList__ArrayList;
 typedef struct ADT_ArrayList__ArrayListDesc {

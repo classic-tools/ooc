@@ -1,5 +1,5 @@
-#include "OOC/IR/XML.d"
-#include "__oo2c.h"
+#include <OOC/IR/XML.d>
+#include <__oo2c.h>
 
 static void OOC_IR_XML__InitVisitor(OOC_IR_XML__Visitor v, XML_Writer__Writer w) {
   register OOC_INT32 i0,i1;

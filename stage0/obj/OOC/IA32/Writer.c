@@ -1,5 +1,5 @@
-#include "OOC/IA32/Writer.d"
-#include "__oo2c.h"
+#include <OOC/IA32/Writer.d>
+#include <__oo2c.h>
 
 static void OOC_IA32_Writer__InitWriter(OOC_IA32_Writer__Writer w, Channel__Channel ch) {
   register OOC_INT32 i0,i1;

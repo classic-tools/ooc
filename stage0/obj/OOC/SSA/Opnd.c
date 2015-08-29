@@ -1,5 +1,5 @@
-#include "OOC/SSA/Opnd.d"
-#include "__oo2c.h"
+#include <OOC/SSA/Opnd.d>
+#include <__oo2c.h>
 
 void OOC_SSA_Opnd__GetName(OOC_INT8 _class, OOC_CHAR8 name[], OOC_LEN name_0d) {
   register OOC_INT32 i0;

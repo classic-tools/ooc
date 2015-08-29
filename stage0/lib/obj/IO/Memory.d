@@ -1,5 +1,5 @@
-#include "IO/Memory.oh"
-#include "Strings.oh"
+#include <IO/Memory.oh>
+#include <Strings.oh>
 #define IO_Memory__slack 32
 static IO_Memory__File IO_Memory__fileList;
 static IO_Memory__ErrorContext IO_Memory__errorContext;

@@ -1,5 +1,5 @@
-#include "Object.oh"
-#include "RT0.oh"
+#include <Object.oh>
+#include <RT0.oh>
 Object__String Object__emptyString;
 static Object__String8 Object__NewString8(OOC_INT32 source, OOC_INT32 length);
 static Object__String32 Object__NewString32(OOC_INT32 source, OOC_INT32 length);

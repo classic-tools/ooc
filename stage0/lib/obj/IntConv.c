@@ -1,5 +1,5 @@
-#include "IntConv.d"
-#include "__oo2c.h"
+#include <IntConv.d>
+#include <__oo2c.h>
 
 static void IntConv__WState(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__ScanState *nextState) {
   register OOC_INT32 i0;
@@ -130,13 +130,13 @@ l16:
 
 
   OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
-  index = 0;
+  index = (OOC_INT32)0;
   prev = 0;
   i0 = (OOC_INT32)IntConv__SI;
   state = (ConvTypes__ScanState)i0;
   positive = OOC_TRUE;
   start = -1;
-  i0=0;i1=0;
+  i0=(OOC_INT32)0;i1=0;
 l1_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5816)));
   ch = i2;
@@ -153,7 +153,7 @@ l1_loop:
     i1 = i2==(OOC_CHAR8)'+';
     if (i1) goto l16;
     i1 = start;
-    i1 = i1<0;
+    i1 = i1<(OOC_INT32)0;
     if (i1) goto l11;
     i1=OOC_FALSE;
     goto l13;
@@ -261,10 +261,10 @@ OOC_INT32 IntConv__ValueInt(const OOC_CHAR8 str__ref[], OOC_LEN str_0d) {
   return 0;
   goto l47;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 7156)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 7156)));
   i0 = i0<(OOC_CHAR8)'0';
   if (i0) goto l6;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 7174)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 7174)));
   i0 = i0>(OOC_CHAR8)'9';
   
   goto l8;
@@ -272,10 +272,10 @@ l6:
   i0=OOC_TRUE;
 l8:
   if (i0) goto l10;
-  i0=OOC_TRUE;i1=0;
+  i0=OOC_TRUE;i1=(OOC_INT32)0;
   goto l25;
 l10:
-  i0=0;i1=OOC_TRUE;
+  i0=(OOC_INT32)0;i1=OOC_TRUE;
 l11_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 7235)));
   i2 = i2==(OOC_CHAR8)'-';

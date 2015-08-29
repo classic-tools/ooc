@@ -1,12 +1,12 @@
 #ifndef _MODULE_StdChannels_
 #define _MODULE_StdChannels_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "Channel.oh"
-#include "Time.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <Channel.oh>
+#include <Time.oh>
+#include <RT0.oh>
+#include <Object.oh>
 extern Channel__Channel StdChannels__stdin;
 extern Channel__Channel StdChannels__stdout;
 extern Channel__Channel StdChannels__stderr;

@@ -1,8 +1,8 @@
-#include "OOC/SSA/Algebraic.oh"
-#include "Object/Boxed.oh"
-#include "Object/BigInt.oh"
-#include "OOC/SSA/Opcode.oh"
-#include "OOC/SSA/Opnd.oh"
+#include <OOC/SSA/Algebraic.oh>
+#include <Object/Boxed.oh>
+#include <Object/BigInt.oh>
+#include <OOC/SSA/Opcode.oh>
+#include <OOC/SSA/Opnd.oh>
 typedef struct OOC_SSA_Algebraic__WorklistDesc *OOC_SSA_Algebraic__Worklist;
 typedef struct OOC_SSA_Algebraic__WorklistDesc {
   OOC_SSA_Algebraic__Worklist next;

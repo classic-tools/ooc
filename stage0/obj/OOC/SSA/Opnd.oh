@@ -1,10 +1,10 @@
 #ifndef _MODULE_OOC_SSA_Opnd_
 #define _MODULE_OOC_SSA_Opnd_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef OOC_INT8 OOC_SSA_Opnd__Class;
 #define OOC_SSA_Opnd__arg 1
 #define OOC_SSA_Opnd__store 2

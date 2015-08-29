@@ -1,11 +1,11 @@
 #ifndef _MODULE_XML_UnicodeCodec_Latin1_
 #define _MODULE_XML_UnicodeCodec_Latin1_
 
-#include "__typemap.h"
-#include "RT0.oh"
-#include "XML/UnicodeCodec.oh"
-#include "RT0.oh"
-#include "Object.oh"
+#include <__typemap.h>
+#include <RT0.oh>
+#include <XML/UnicodeCodec.oh>
+#include <RT0.oh>
+#include <Object.oh>
 typedef struct XML_UnicodeCodec_Latin1__CodecDesc *XML_UnicodeCodec_Latin1__Codec;
 typedef struct XML_UnicodeCodec_Latin1__CodecDesc {
   OOC_INT32 invalidChars;

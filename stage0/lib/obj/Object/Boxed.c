@@ -1,5 +1,5 @@
-#include "Object/Boxed.d"
-#include "__oo2c.h"
+#include <Object/Boxed.d>
+#include <__oo2c.h>
 
 Object__String Object_Boxed__ObjectDesc_ToString(Object_Boxed__Object v) {
 
@@ -646,9 +646,9 @@ Object__String Object_Boxed__StringDesc_ToString(Object_Boxed__String v) {
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9958));
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9958));
   i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9965)))), Object__StringDesc_IndexOf)),Object__StringDesc_IndexOf)((Object__String)i2, (OOC_CHAR8)'"', 0);
-  i2 = i1<0;
   i = i1;
-  if (i2) goto l3;
+  i1 = i1<0;
+  if (i1) goto l3;
   _copy_8((const void*)"\047",(void*)(OOC_INT32)delim,2);
   goto l4;
 l3:

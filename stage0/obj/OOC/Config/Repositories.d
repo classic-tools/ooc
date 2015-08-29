@@ -1,9 +1,9 @@
-#include "OOC/Config/Repositories.oh"
-#include "Strings.oh"
-#include "TextRider.oh"
-#include "LongStrings.oh"
-#include "URI/Scheme/File.oh"
-#include "OOC/Repository/FileSystem.oh"
+#include <OOC/Config/Repositories.oh>
+#include <Strings.oh>
+#include <TextRider.oh>
+#include <LongStrings.oh>
+#include <URI/Scheme/File.oh>
+#include <OOC/Repository/FileSystem.oh>
 #define OOC_Config_Repositories__invalidContent 1
 #define OOC_Config_Repositories__invalidAttribute 2
 #define OOC_Config_Repositories__requireEmpty 3
