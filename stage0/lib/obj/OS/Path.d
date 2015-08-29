@@ -1,7 +1,7 @@
 static void* _c0;
 static void* _c1;
 #include <OS/Path.oh>
-#define OS_Path__sep "/"
+#define OS_Path__sep (OOC_CHAR8)'/'
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

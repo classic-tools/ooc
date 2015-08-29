@@ -360,7 +360,7 @@ l4:
   ;
 }
 
-void Config__SetPrototype(Config__PrototypeMap map, Object__String name, Config__Variable prototype) {
+void Config__SetPrototype(ADT_Dictionary__Dictionary map, Object__String name, Config__Variable prototype) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)map;
@@ -371,7 +371,7 @@ void Config__SetPrototype(Config__PrototypeMap map, Object__String name, Config_
   ;
 }
 
-Config__Variable Config__GetClone(Config__PrototypeMap map, Object__String prototypeName) {
+Config__Variable Config__GetClone(ADT_Dictionary__Dictionary map, Object__String prototypeName) {
   register OOC_INT32 i0,i1;
   Config__Variable ptr;
 

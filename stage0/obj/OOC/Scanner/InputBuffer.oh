@@ -11,7 +11,7 @@
 typedef OOC_CHAR8 OOC_Scanner_InputBuffer__Char;
 typedef OOC_CHAR8 *OOC_Scanner_InputBuffer__CharArray;
 typedef OOC_INT32 OOC_Scanner_InputBuffer__CharPos;
-#define OOC_Scanner_InputBuffer__markerEOB "\000"
+#define OOC_Scanner_InputBuffer__markerEOB (OOC_CHAR8)'\000'
 typedef struct OOC_Scanner_InputBuffer__BufferDesc *OOC_Scanner_InputBuffer__Buffer;
 typedef struct OOC_Scanner_InputBuffer__BufferDesc {
   IO__ByteChannel r;

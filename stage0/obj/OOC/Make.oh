@@ -34,7 +34,7 @@ typedef struct OOC_Make__RulesDesc {
   OOC_Repository__Repository localRepository;
   OOC_Make__ModuleList imports;
   ADT_Dictionary__Dictionary mInfo;
-  OOC_SymbolTable__ExtensionDict extensionDict;
+  ADT_Dictionary__Dictionary extensionDict;
   OOC_CHAR8 runCreateNamespace;
   OOC_CHAR8 __pad33;
   OOC_CHAR8 __pad34;
@@ -82,9 +82,9 @@ typedef void (*_TBP_OOC_Make__RulesDesc_SetForceUpdate)(OOC_Make__Rules r, OOC_C
 extern OOC_CHAR8 OOC_Make__RulesDesc_UsageTracking(OOC_Make__Rules r, Object__String extIdent);
 #define _TBN_OOC_Make__RulesDesc_UsageTracking 5
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UsageTracking)(OOC_Make__Rules r, Object__String extIdent);
-extern void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, OOC_SymbolTable__ExtensionDict dict);
+extern void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, ADT_Dictionary__Dictionary dict);
 #define _TBN_OOC_Make__RulesDesc_SetExtensionDict 6
-typedef void (*_TBP_OOC_Make__RulesDesc_SetExtensionDict)(OOC_Make__Rules r, OOC_SymbolTable__ExtensionDict dict);
+typedef void (*_TBP_OOC_Make__RulesDesc_SetExtensionDict)(OOC_Make__Rules r, ADT_Dictionary__Dictionary dict);
 extern OOC_CHAR8 OOC_Make__RulesDesc_CheckAllImports(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_CheckAllImports 7
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_CheckAllImports)(OOC_Make__Rules r, OOC_Repository__Module module);

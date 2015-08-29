@@ -10,7 +10,7 @@
 typedef OOC_INT8 Real0__ConvResults;
 typedef OOC_INT8 Real0__ScanClass;
 typedef ConvTypes__ScanState Real0__ScanState;
-#define Real0__expChar "E"
+#define Real0__expChar (OOC_CHAR8)'E'
 extern ConvTypes__ScanState Real0__RS;
 extern ConvTypes__ScanState Real0__P;
 extern ConvTypes__ScanState Real0__F;

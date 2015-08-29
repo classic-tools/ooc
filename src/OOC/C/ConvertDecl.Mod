@@ -1,4 +1,24 @@
+(* 	$Id: ConvertDecl.Mod,v 1.66 2003/10/06 18:26:34 mva Exp $	 *)
 MODULE OOC:C:ConvertDecl;
+(*  Translate Oberon-2 declarations to their C counterparts.
+    Copyright (C) 2001-2003  Michael van Acken
+
+    This file is part of OOC.
+
+    OOC is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.  
+
+    OOC is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+    License for more details. 
+
+    You should have received a copy of the GNU General Public License
+    along with OOC. If not, write to the Free Software Foundation, 59
+    Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*)
 
 IMPORT
   Object, Object:BigInt,
@@ -152,6 +172,13 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
         END
 
       | type: Sym.TypeName DO
+        IF (resolvedType IS Sym.QualType) THEN
+          (* avoid running into the default part below if the type name is
+             a parametric record type, or we may refer to the struct name
+             too early *)
+          resolvedType := resolvedType(Sym.QualType).baseType;
+        END;
+        
         WITH resolvedType: Sym.PredefType DO
           RETURN ConvertType (w, resolvedType, resolvedType);
         | resolvedType: Sym.Record DO
@@ -268,7 +295,7 @@ PROCEDURE ConvertDecl (w: DeclWriter.Writer;
       
     | item: Sym.ConstDecl DO
       RETURN w. NewDefine (Naming.NameOfDeclaration (item),
-                           item. value);
+                           item. value, item. type);
       
     | item: Sym.VarDecl DO
       tq := DeclWriter.tqNone;
@@ -365,7 +392,7 @@ PROCEDURE ConvertSymTab* (w: DeclWriter.Writer; m: Repository.Module;
         d: DeclWriter.Declaration;
       BEGIN
         d := w. NewDefine (Naming.NameOfTypeBoundIndex (proc),
-                           BigInt.NewInt(proc. tbProcIndex));
+                           BigInt.NewInt(proc. tbProcIndex), NIL);
         w. AddDeclaration (d);
 
         d := w. NewDeclaration (Naming.NameOfTypeBoundSignature (proc),

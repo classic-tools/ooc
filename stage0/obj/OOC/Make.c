@@ -123,7 +123,7 @@ OOC_CHAR8 OOC_Make__RulesDesc_UsageTracking(OOC_Make__Rules r, Object__String ex
   ;
 }
 
-void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, OOC_SymbolTable__ExtensionDict dict) {
+void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, ADT_Dictionary__Dictionary dict) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)r;

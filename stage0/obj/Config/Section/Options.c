@@ -47,7 +47,7 @@ l12:
   ;
 }
 
-void Config_Section_Options__Init(Config_Section_Options__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config__PrototypeMap typeMap) {
+void Config_Section_Options__Init(Config_Section_Options__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, ADT_Dictionary__Dictionary typeMap) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(id,OOC_CHAR16 ,id_0d)
 
@@ -61,7 +61,7 @@ void Config_Section_Options__Init(Config_Section_Options__Section s, const Confi
   ;
 }
 
-Config_Section_Options__Section Config_Section_Options__New(const Config_Parser__String sectionName__ref, OOC_LEN sectionName_0d, Config__PrototypeMap typeMap) {
+Config_Section_Options__Section Config_Section_Options__New(const Config_Parser__String sectionName__ref, OOC_LEN sectionName_0d, ADT_Dictionary__Dictionary typeMap) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(sectionName,OOC_CHAR16 ,sectionName_0d)
 

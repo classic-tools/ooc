@@ -13,7 +13,7 @@ typedef struct OOC_Config_Pragmas__SectionDesc *OOC_Config_Pragmas__Section;
 typedef struct OOC_Config_Pragmas__SectionDesc {
   XML_UnicodeBuffer__CharArray name;
   Config_Section_Options__Option optionList;
-  Config__PrototypeMap typeMap;
+  ADT_Dictionary__Dictionary typeMap;
 } OOC_Config_Pragmas__SectionDesc;
 typedef OOC_INT32 OOC_Config_Pragmas__CharPos;
 typedef struct OOC_Config_Pragmas__VariableDesc *OOC_Config_Pragmas__Variable;

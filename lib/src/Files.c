@@ -1,4 +1,4 @@
-/*	$Id: Files.c,v 1.7 2003/03/16 16:28:59 mva Exp $	*/
+/*	$Id: Files.c,v 1.8 2003/10/05 14:30:52 mva Exp $	*/
 /*  Access to files and file attributes.
     Copyright (C) 1997-2000, 2002  Michael van Acken
 
@@ -132,7 +132,7 @@ void Files__ErrorContextDesc_GetTemplate (Files__ErrorContext context,
     _copy_8to16(str, templ, templ_0d);
     if (msg->attribList) {
       Msg__Attribute attr;
-      OOC_CHAR16 eol[2] = {(OOC_CHAR16)CharClass__eol[0], (OOC_CHAR16)0};
+      OOC_CHAR16 eol[2] = {(OOC_CHAR16)CharClass__eol, (OOC_CHAR16)0};
       OOC_CHAR16 str16[Msg__sizeAttrName+1];
       
       /*LongStrings__Append(eol, 2, templ, templ_0d);*/

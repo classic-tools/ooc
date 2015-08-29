@@ -73,8 +73,8 @@ typedef Object__String (*_TBP_Config__StringVarDesc_ToString)(Config__StringVar 
 extern Config__StringVar Config__StringVarDesc_Clone(Config__StringVar v);
 #define _TBN_Config__StringVarDesc_Clone 4
 typedef Config__StringVar (*_TBP_Config__StringVarDesc_Clone)(Config__StringVar v);
-extern void Config__SetPrototype(Config__PrototypeMap map, Object__String name, Config__Variable prototype);
-extern Config__Variable Config__GetClone(Config__PrototypeMap map, Object__String prototypeName);
+extern void Config__SetPrototype(ADT_Dictionary__Dictionary map, Object__String name, Config__Variable prototype);
+extern Config__Variable Config__GetClone(ADT_Dictionary__Dictionary map, Object__String prototypeName);
 extern void OOC_Config_init(void);
 extern void OOC_Config_init0(void);
 

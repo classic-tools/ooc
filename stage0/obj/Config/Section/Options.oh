@@ -17,7 +17,7 @@ typedef struct Config_Section_Options__OptionDesc *Config_Section_Options__Optio
 typedef struct Config_Section_Options__SectionDesc {
   XML_UnicodeBuffer__CharArray name;
   Config_Section_Options__Option optionList;
-  Config__PrototypeMap typeMap;
+  ADT_Dictionary__Dictionary typeMap;
 } Config_Section_Options__SectionDesc;
 typedef struct Config_Section_Options__OptionDesc {
   Config_Section_Options__Option next;
@@ -32,8 +32,8 @@ typedef struct Config_Section_Options__ErrorContextDesc {
 extern void Config_Section_Options__ErrorContextDesc_GetTemplate(Config_Section_Options__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_Config_Section_Options__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_Config_Section_Options__ErrorContextDesc_GetTemplate)(Config_Section_Options__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-extern void Config_Section_Options__Init(Config_Section_Options__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config__PrototypeMap typeMap);
-extern Config_Section_Options__Section Config_Section_Options__New(const Config_Parser__String sectionName__ref, OOC_LEN sectionName_0d, Config__PrototypeMap typeMap);
+extern void Config_Section_Options__Init(Config_Section_Options__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, ADT_Dictionary__Dictionary typeMap);
+extern Config_Section_Options__Section Config_Section_Options__New(const Config_Parser__String sectionName__ref, OOC_LEN sectionName_0d, ADT_Dictionary__Dictionary typeMap);
 extern void Config_Section_Options__OptionDesc_Set(Config_Section_Options__Option opt, Config__Variable value);
 #define _TBN_Config_Section_Options__OptionDesc_Set 0
 typedef void (*_TBP_Config_Section_Options__OptionDesc_Set)(Config_Section_Options__Option opt, Config__Variable value);

@@ -1,4 +1,4 @@
-(* 	$Id: ooef.Mod,v 1.6 2003/05/18 14:08:58 mva Exp $	 *)
+(* 	$Id: ooef.Mod,v 1.7 2003/10/06 17:41:07 mva Exp $	 *)
 MODULE ooef;  
 (*  Filter to convert error messages emitted by oo2c into other formats.
     Copyright (C) 1995-1999, 2002, 2003  Michael van Acken
@@ -532,7 +532,7 @@ PROCEDURE TranslateArgs (VAR file: ARRAY OF CHAR; VAR pos: LONGINT): BOOLEAN;
 
 PROCEDURE WriteHelp;
   BEGIN
-    Out.String ("Usage: oo2c ... | ooef [option]"); Out.Ln;
+    Out.String ("Usage: oo2c --error-style char-pos ... | ooef [option]"); Out.Ln;
     Out.String ("       ooef [option] <module> <pos>"); Out.Ln;
     Out.String ("Options: "); Out.Ln;
     Out.String ("--context, -c   Print errors in source text context (default)."); Out.Ln;

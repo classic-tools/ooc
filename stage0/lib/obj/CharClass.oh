@@ -6,7 +6,7 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-#define CharClass__eol "\012"
+#define CharClass__eol (OOC_CHAR8)'\012'
 extern OOC_CHAR8 CharClass__systemEol[3];
 extern OOC_CHAR8 CharClass__IsNumeric(OOC_CHAR8 ch);
 extern OOC_CHAR8 CharClass__IsLetter(OOC_CHAR8 ch);

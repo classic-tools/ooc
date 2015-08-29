@@ -4,7 +4,7 @@ static void* _c2;
 static void* _c3;
 #include <OOC/Config/Pragmas.oh>
 #include <Config/Parser.oh>
-static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config__PrototypeMap prototypeMap);
+static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, ADT_Dictionary__Dictionary prototypeMap);
 static void OOC_Config_Pragmas__InitHistory(OOC_Config_Pragmas__History h, OOC_Config_Pragmas__Section startVariables);
 static Config__Variable OOC_Config_Pragmas__GetValue(OOC_Config_Pragmas__History h, OOC_Config_Pragmas__Variable var, OOC_INT32 charPos);
 static void OOC_Config_Pragmas__LastCharPos(OOC_Config_Pragmas__History h, OOC_INT32 charPos);

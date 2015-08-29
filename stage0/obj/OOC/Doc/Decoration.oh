@@ -9,8 +9,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_Doc_Decoration__String;
-#define OOC_Doc_Decoration__removedSpace "\002"
-#define OOC_Doc_Decoration__removedTab "\003"
+#define OOC_Doc_Decoration__removedSpace (OOC_CHAR8)'\002'
+#define OOC_Doc_Decoration__removedTab (OOC_CHAR8)'\003'
 typedef struct OOC_Doc_Decoration__DecorationDesc *OOC_Doc_Decoration__Decoration;
 typedef struct OOC_Doc_Decoration__DecorationDesc {
   OOC_INT32 indent;

@@ -11,10 +11,10 @@ typedef Object__ObjectArray *Object__ObjectArrayPtr;
 typedef struct Object__ObjectDesc {
   char __dummy;
 } Object__ObjectDesc;
-#define Object__surrogateLow "\ê00"
-#define Object__surrogateHigh "\†00"
-#define Object__surrogateEnd "\∞00"
-#define Object__surrogateLimit "\000\†00"
+#define Object__surrogateLow (OOC_CHAR16)55296
+#define Object__surrogateHigh (OOC_CHAR16)56320
+#define Object__surrogateEnd (OOC_CHAR16)57344
+#define Object__surrogateLimit (OOC_CHAR32)65536
 typedef struct Object__StringDesc *Object__String;
 typedef Object__String Object__StringArray[];
 typedef Object__String *Object__StringArrayPtr;

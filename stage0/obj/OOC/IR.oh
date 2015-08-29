@@ -1477,10 +1477,10 @@ extern RT0__StructDesc _td_OOC_IR__ErrorContext;
 extern RT0__StructDesc _td_OOC_IR__ErrorContextDesc;
 extern RT0__StructDesc _td_OOC_IR__40358;
 extern RT0__StructDesc _td_OOC_IR__40566;
-extern RT0__StructDesc _td_OOC_IR__48183;
-extern RT0__StructDesc _td_OOC_IR__51049;
-extern RT0__StructDesc _td_OOC_IR__61136;
-extern RT0__StructDesc _td_OOC_IR__61501;
+extern RT0__StructDesc _td_OOC_IR__48180;
+extern RT0__StructDesc _td_OOC_IR__51046;
+extern RT0__StructDesc _td_OOC_IR__61133;
+extern RT0__StructDesc _td_OOC_IR__61498;
 #endif /* _MODULE_OOC_IR_ */
 
 /* --- */

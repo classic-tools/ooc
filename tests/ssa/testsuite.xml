@@ -17,7 +17,7 @@
   generic53 generic54 generic55 generic56 generic57 generic58">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; rot4">-->
+  select ="&SetupTestCasesWithOut; generic66 generic67 generic68 generic69">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
   select ="&SetupTestCasesWithOut; vtable1 vtable2 vtable4 vtable3 vtable5 generic1 generic41 generic45">-->
@@ -1334,6 +1334,10 @@
       A concrete extension of an <code>ABSTRACT</code> record does not
       define an inherited abstract type-bound procedure.
     </test>
+    <test id="abstract10" type="reject" file="Abstract10.Mod">
+      Trying to call the function variant of <code>NEW</code> with an
+      <code>ABSTRACT</code> record base type.
+    </test>
   </testcases>
   
   <testcases profile="OOC2 Development: Generics Extension"
@@ -1580,6 +1584,22 @@
     <test id="generic65" type="run" file="Generic65.Mod"
           output="Generic65.Ref">
       Type test where the right hand side is a qualified type.
+    </test>
+    <test id="generic66" type="reject" file="Generic66.Mod">
+      Using an undefined name as a type argument.
+    </test>
+    <test id="generic67" type="reject" file="Generic67.Mod">
+      Using an undefined parametric type in the receiver of a
+      type-bound procedure.
+    </test>
+    <test id="generic68" type="run" file="Generic68.Mod">
+      Regression test for <code>oo2c</code>: Don't reference the
+      record type before it has been declared.
+    </test>
+    <test id="generic69" type="run" file="Generic69.Mod"
+          output="Generic69.Ref">
+      Regression test for <code>oo2c</code>: Don't drop inherited
+      type-bound procedures if the record base type is parametric.
     </test>
   </testcases>
 
@@ -2177,13 +2197,13 @@
         msg="This type cannot be used as a record base type"/>
 
     <reject-info id="abstract1" pos="r: %R"
-        msg="Cannot create an instance an abstract type"/>
+        msg="Cannot create instance of abstract type"/>
     <reject-info id="abstract2" pos="r: %R"
-        msg="Cannot create an instance an abstract type"/>
+        msg="Cannot create instance of abstract type"/>
     <reject-info id="abstract3" pos="OF %R"
-        msg="Cannot create an instance an abstract type"/>
+        msg="Cannot create instance of abstract type"/>
     <reject-info id="abstract4" pos="NEW(%p)"
-        msg="Cannot create an instance an abstract type"/>
+        msg="Cannot create instance of abstract type"/>
     <reject-info id="abstract5" pos="[ABSTRACT] %P"
         msg="Receiver type is not abstract"/>
     <reject-info id="abstract6" pos="%PROCEDURE (p: P)"
@@ -2194,6 +2214,8 @@
         msg="Abstract procedure must be exported"/>
     <reject-info id="abstract9" pos="R1 = %RECORD"
         msg="Inherited procedure `Proc' is still abstract"/>
+    <reject-info id="abstract10" pos="NEW(%P)"
+        msg="Cannot create instance of abstract type"/>
 
     <reject-info id="generic5" pos="A: %Array"
         msg="Invalid type bound"/>
@@ -2257,6 +2279,10 @@
         msg="The base record type has no type parameters"/>
     <reject-info id="generic59" pos="r: %R(T)"
         msg="The base record type has no type parameters"/>
+    <reject-info id="generic66" pos="%Karamba"
+        msg="Undeclared identifier"/>
+    <reject-info id="generic67" pos="%Karamba"
+        msg="Undeclared identifier"/>
 
     <reject-info id="align2" pos=", %ALIGN2"
         msg="This modifier flag has no effect here"/>

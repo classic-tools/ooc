@@ -13,9 +13,9 @@
 typedef OOC_CHAR16 XML_UnicodeBuffer__Char;
 typedef OOC_CHAR16 *XML_UnicodeBuffer__CharArray;
 typedef OOC_INT32 XML_UnicodeBuffer__CharPos;
-#define XML_UnicodeBuffer__markerEOB "\/76"
-#define XML_UnicodeBuffer__markerEOD "\/77"
-#define XML_UnicodeBuffer__markerError "\/75"
+#define XML_UnicodeBuffer__markerEOB (OOC_CHAR16)65534
+#define XML_UnicodeBuffer__markerEOD (OOC_CHAR16)65535
+#define XML_UnicodeBuffer__markerError (OOC_CHAR16)65533
 typedef struct XML_UnicodeBuffer__InputDesc *XML_UnicodeBuffer__Input;
 typedef struct XML_UnicodeBuffer__InputDesc {
   XML_InputBuffer__Buffer byteBuffer;

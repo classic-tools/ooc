@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.66 2003/09/30 17:40:47 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.69 2003/10/06 18:57:52 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -123,7 +123,7 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
     | modifierFlagWithoutEffect:
       t := "This modifier flag has no effect here"
     | cannotCreateInstance:
-      t := "Cannot create an instance an abstract type"
+      t := "Cannot create instance of abstract type"
     | abstractProcForConcreteRecord:
       t := "Receiver type is not abstract"
     | abstractProcNotExported:
@@ -650,12 +650,32 @@ RAISES IO.Error;
         class: Sym.Record;
         ptr: Sym.Item;
         count: LONGINT;
+
+      PROCEDURE FixupAliasDecl(formalPars: Sym.FormalPars);
+        VAR
+          ptr: Sym.Item;
+        BEGIN
+          ptr := formalPars.nestedItems;
+          WHILE (ptr # NIL) DO
+            WITH ptr: Sym.TypeDecl DO
+              IF (ptr.type = NIL) THEN
+                ptr.type := receiver.type;
+                ptr.srcCodeType := receiver.srcCodeType;
+              END;
+            ELSE
+              (* ignore *)
+            END;
+            ptr := ptr.nextNested;
+          END;
+        END FixupAliasDecl;
+      
       BEGIN
         receiver.SetType(GetTypeByName(receiver.type, contextOfUse, FALSE,
                                        FALSE, errList));
         class := procDecl.Class();
         IF (class = NIL) THEN
           (* some previous error prevents the class lookup: bail out *)
+          FixupAliasDecl(procDecl.formalPars);
           RETURN;
         END;
         procDecl.formalPars.SetTypePars(class.typePars);
@@ -668,18 +688,7 @@ RAISES IO.Error;
             (* finish the type alias declarations by assigning them the type
                of the receiver; this gets rid of a NIL pointer that may trip
                up later stages *)
-            ptr := procDecl.formalPars.nestedItems;
-            WHILE (ptr # NIL) DO
-              WITH ptr: Sym.TypeDecl DO
-                IF (ptr.type = NIL) THEN
-                  ptr.type := receiver.type;
-                  ptr.srcCodeType := receiver.srcCodeType;
-                END;
-              ELSE
-                (* ignore *)
-              END;
-              ptr := ptr.nextNested;
-            END;
+            FixupAliasDecl(procDecl.formalPars);
           END;
         ELSE
           count := 0;
@@ -1070,6 +1079,7 @@ RAISES IO.Error;
         i: LONGINT;
         proc: Sym.ProcDecl;
         baseRecord : Sym.Record;
+        type: Sym.Type;
 
       PROCEDURE AllocateTBProcIndices(record: Sym.Record);
       (* When this procedure is done, all type-bound procedures of the record
@@ -1106,11 +1116,11 @@ RAISES IO.Error;
       
       BEGIN
         IF (record. tbProcCount = -1) THEN
-          IF (record. baseType = NIL) OR 
-             ~(record. baseType IS Sym.Record) THEN
+          IF (record. baseType = NIL) OR ~TR.IsRecord(record.baseType) THEN
             record. tbProcCount := 0
           ELSE
-            baseRecord := record. baseType(Sym.Record);
+            type := record.baseType.Deparam();
+            baseRecord := type(Sym.Record);
             CheckRecord (baseRecord);
             record. tbProcCount := baseRecord. tbProcCount;
             IF record. isVtable # baseRecord. isVtable THEN
@@ -1374,10 +1384,11 @@ RAISES IO.Error;
           END;
 
         | item: Sym.Record DO
-          IF (item.baseType # NIL) &
-             (item.baseType IS Sym.Record) &
-             item.baseType(Sym.Record).isUncheckedException THEN
-            item.isUncheckedException := TRUE;
+          IF (item.baseType # NIL) & TR.IsRecord(item.baseType) THEN
+            type := item.baseType.Deparam();
+            IF type(Sym.Record).isUncheckedException THEN
+              item.isUncheckedException := TRUE;
+            END;
           END;
           
         | item: Sym.VarDecl DO

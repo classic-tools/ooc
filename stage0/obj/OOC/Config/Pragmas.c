@@ -2,7 +2,7 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config__PrototypeMap prototypeMap) {
+static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, ADT_Dictionary__Dictionary prototypeMap) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(id,OOC_CHAR16 ,id_0d)
 

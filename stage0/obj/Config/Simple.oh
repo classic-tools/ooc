@@ -22,7 +22,7 @@ typedef struct Config_Simple__ConfigDesc {
   Config_Source_CmdLine__OptionTemplate cfgFileCmdLineOption;
   Config_Source_Environment__Environment envVars;
   Config_Source_CmdLine__CmdLine cmdLine;
-  Config__PrototypeMap typeMap;
+  ADT_Dictionary__Dictionary typeMap;
   Config_Section_Options__Section options;
   Config_Section_Arguments__Section arguments;
   Config_Section__SectionList sectionList;

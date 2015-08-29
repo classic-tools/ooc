@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.267 2003/09/30 17:40:48 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.270 2003/10/06 17:43:06 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -1365,7 +1365,7 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
     | noTypeTag:
       t := "This variable has no type tag"
     | cannotCreateInstance:
-      t := "Cannot create an instance an abstract type"
+      t := "Cannot create instance of abstract type"
     | abstractWithBegin:
       t := "Abstract procedure cannot have a BEGIN part"
     | abstractSuperCall:
@@ -5527,11 +5527,13 @@ PROCEDURE (b: Builder) NewQualType*(type: Expression;
         b.ErrSym(tooFewTypeArgs, rParen);
       ELSE
         FOR i := 0 TO LEN(params^)-1 DO
-          t := arguments[i](TypeRef).qualType;
-          IF (t # NIL) & TR.IsExtensionOf(t, params[i].bound) THEN
-            Sym.InitTypeRef(qualType(Sym.QualType).arguments[i], t);
-          ELSE
-            b.ErrSym(notExtensionOfBound, arguments[i].sym);
+          IF (arguments[i] IS TypeRef) THEN
+            t := arguments[i](TypeRef).qualType;
+            IF (t # NIL) & TR.IsExtensionOf(t, params[i].bound) THEN
+              Sym.InitTypeRef(qualType(Sym.QualType).arguments[i], t);
+            ELSE
+              b.ErrSym(notExtensionOfBound, arguments[i].sym);
+            END;
           END;
         END;
       END;
@@ -6062,6 +6064,11 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
       | Predef.new:
         type := arguments[0].type.Deparam();
         IF (type = b.typeType) THEN
+          type := arguments[0](TypeRef).qualType;
+          IF TR.IsPointer(type) &
+             ~TR.VariableInstance(TR.PointerBaseType(type)) THEN
+            b.ErrSym(cannotCreateInstance, arguments[0].sym);
+          END;
           RETURN b.NewConstructor(design.sym, arguments[0],
                                   StripFirst(arguments),
                                   context, endOfArgsSym);

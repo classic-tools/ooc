@@ -1,4 +1,4 @@
-(* 	$Id: PThread.Mod,v 1.6 2003/08/14 21:19:43 mva Exp $	 *)
+(* 	$Id: PThread.Mod,v 1.7 2003/10/02 08:00:48 mva Exp $	 *)
 MODULE Thread:PThread [FOREIGN "C"; LINK LIB "pthread"; FILE "PThread.c" END];
 (*  Interface for ths POSIX threads library.
     Copyright (C) 2003  Michael van Acken
@@ -32,7 +32,7 @@ IMPORT
 TYPE
   Error* = POINTER TO ErrorDesc;
   ErrorDesc = RECORD
-    (Exception.ExceptionDesc)
+    (Exception.CheckedDesc)
     errorCode-: LONGINT;
   END;
 

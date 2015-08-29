@@ -11,7 +11,7 @@
 typedef OOC_CHAR8 XML_InputBuffer__Char;
 typedef OOC_CHAR8 *XML_InputBuffer__CharArray;
 typedef OOC_INT32 XML_InputBuffer__CharPos;
-#define XML_InputBuffer__markerEOB "\000"
+#define XML_InputBuffer__markerEOB (OOC_CHAR8)'\000'
 typedef struct XML_InputBuffer__BufferDesc *XML_InputBuffer__Buffer;
 typedef struct XML_InputBuffer__BufferDesc {
   IO__ByteChannel r;

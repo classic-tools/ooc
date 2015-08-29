@@ -80,15 +80,15 @@ extern void OOC_RT0_init0(void);
 extern RT0__StructDesc _td_RT0__Name;
 extern RT0__StructDesc _td_RT0__Module;
 extern RT0__StructDesc _td_RT0__Struct;
-extern RT0__StructDesc _td_RT0__5996;
-extern RT0__StructDesc _td_RT0__6216;
-extern RT0__StructDesc _td_RT0__6410;
+extern RT0__StructDesc _td_RT0__6138;
+extern RT0__StructDesc _td_RT0__6358;
+extern RT0__StructDesc _td_RT0__6552;
 extern RT0__StructDesc _td_RT0__ModuleDesc;
-extern RT0__StructDesc _td_RT0__8187;
-extern RT0__StructDesc _td_RT0__8867;
-extern RT0__StructDesc _td_RT0__8793;
-extern RT0__StructDesc _td_RT0__11859;
-extern RT0__StructDesc _td_RT0__12065;
+extern RT0__StructDesc _td_RT0__8329;
+extern RT0__StructDesc _td_RT0__9009;
+extern RT0__StructDesc _td_RT0__8935;
+extern RT0__StructDesc _td_RT0__12001;
+extern RT0__StructDesc _td_RT0__12207;
 #endif /* _MODULE_RT0_ */
 
 /* --- */

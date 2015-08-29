@@ -38,7 +38,7 @@ typedef struct OOC_SymbolTable_Builder__AutoImportDesc {
   OOC_SymbolTable_Builder__Name module;
   OOC_SymbolTable_Builder__Name *exclude;
 } OOC_SymbolTable_Builder__AutoImportDesc;
-#define OOC_SymbolTable_Builder__prefixAutoImport "-"
+#define OOC_SymbolTable_Builder__prefixAutoImport (OOC_CHAR8)'-'
 #define OOC_SymbolTable_Builder__stringModule "Object"
 #define OOC_SymbolTable_Builder__stringModuleC "Object"
 #define OOC_SymbolTable_Builder__noAutoImport 0

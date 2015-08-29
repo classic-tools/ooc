@@ -21,7 +21,7 @@ l4:
   ;
 }
 
-void OOC_SymbolTable_InterfaceDescr__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, OOC_SymbolTable__ExtensionDict extensionDict) {
+void OOC_SymbolTable_InterfaceDescr__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary extensionDict) {
   register OOC_INT32 i0,i1,i2,i3;
   ADT_Dictionary__Dictionary moduleDict;
   ADT_Dictionary__Dictionary declDict;
