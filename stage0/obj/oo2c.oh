@@ -10,7 +10,7 @@ extern void OOC_oo2c_init(void);
 extern void OOC_oo2c_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_oo2c__5365;
+extern RT0__StructDesc _td_oo2c__5870;
 #endif /* _MODULE_oo2c_ */
 
 /* --- */

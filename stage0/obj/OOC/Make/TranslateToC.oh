@@ -7,6 +7,7 @@
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
 #include <OOC/IR.oh>
+#include <OOC/SymbolTable/Uses.oh>
 #include <OOC/C/DeclWriter.oh>
 #include <RT0.oh>
 #include <Object.oh>
@@ -37,16 +38,16 @@ typedef void (*_TBP_OOC_Make_TranslateToC__TranslatorDesc_WriteProcedure)(OOC_Ma
 extern void OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures(OOC_Make_TranslateToC__Translator t);
 #define _TBN_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures 3
 typedef void (*_TBP_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures)(OOC_Make_TranslateToC__Translator t);
-extern OOC_Error__List OOC_Make_TranslateToC__Run(OOC_Repository__Module m, Object__String libraryName, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToC__Translator translator);
+extern OOC_Error__List OOC_Make_TranslateToC__Run(OOC_Repository__Module m, Object__String libraryName, OOC_CHAR8 analysisOnly, OOC_SymbolTable_Uses__Uses uses, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToC__Translator translator);
 extern void OOC_OOC_Make_TranslateToC_init(void);
 extern void OOC_OOC_Make_TranslateToC_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4386;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4463;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4512;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4390;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4467;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4516;
 #endif /* _MODULE_OOC_Make_TranslateToC_ */
 
 /* --- */

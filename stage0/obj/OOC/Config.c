@@ -9,7 +9,7 @@ Config_Section_Options__Option OOC_Config__AddOption(const OOC_CHAR8 name__ref[]
   OOC_INITIALIZE_VPAR(name__ref,name,OOC_CHAR8 ,name_0d)
   i0 = (OOC_INT32)OOC_Config__options;
   i1 = (OOC_INT32)init;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 953)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, (void*)(OOC_INT32)name, name_0d, (Config_Value__Value)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 932)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, (void*)(OOC_INT32)name, name_0d, (Config_Value__Value)i1);
   return (Config_Section_Options__Option)i0;
   ;
 }
@@ -35,34 +35,34 @@ static void OOC_Config__InitConfig(const OOC_CHAR8 defaultConfigFile__ref[], OOC
   OOC_INITIALIZE_VPAR(defaultConfigFile__ref,defaultConfigFile,OOC_CHAR8 ,defaultConfigFile_0d)
   i0 = (OOC_INT32)Config_Simple__New((void*)(OOC_INT32)defaultConfigFile, defaultConfigFile_0d);
   OOC_Config__config = (Config_Simple__Config)i0;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1527))+16);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1506))+16);
   OOC_Config__cmdLine = (Config_Source_CmdLine__CmdLine)i1;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1561))+28);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1540))+28);
   OOC_Config__arguments = (Config_Section_Arguments__Section)i1;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1595))+24);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1574))+24);
   OOC_Config__options = (Config_Section_Options__Section)i0;
   i1 = (OOC_INT32)Config_Value_String__New((void*)(OOC_INT32)defaultConfigFile, defaultConfigFile_0d);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1632)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, "config-file", 12, (Config_Value__Value)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1611)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, "config-file", 12, (Config_Value__Value)i1);
   configFile = (Config_Section_Options__Option)i0;
   i0 = (OOC_INT32)OOC_Config__config;
   i1 = (OOC_INT32)OOC_Config__cmdLine;
   i1 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_AddOptionTemplate((Config_Source_CmdLine__CmdLine)i1, "--config", 9, "<option><set name=\047config-file\047>$1</set></option>", 50);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1729)))), Config_Simple__ConfigDesc_ConfigFileCmdLineOption)),Config_Simple__ConfigDesc_ConfigFileCmdLineOption)((Config_Simple__Config)i0, (Config_Source_CmdLine__OptionTemplate)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1708)))), Config_Simple__ConfigDesc_ConfigFileCmdLineOption)),Config_Simple__ConfigDesc_ConfigFileCmdLineOption)((Config_Simple__Config)i0, (Config_Source_CmdLine__OptionTemplate)i1);
   i0 = (OOC_INT32)OOC_Config__config;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1894))+12);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1873))+12);
   i1 = (OOC_INT32)Config_Source_Environment__EnvironmentDesc_AddVariableTemplate((Config_Source_Environment__Environment)i1, "OO2CRC", 7, "<option><set name=\047config-file\047>$1</set></option>", 50);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1869)))), Config_Simple__ConfigDesc_ConfigFileEnvVar)),Config_Simple__ConfigDesc_ConfigFileEnvVar)((Config_Simple__Config)i0, (Config_Source_Environment__VariableTemplate)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1848)))), Config_Simple__ConfigDesc_ConfigFileEnvVar)),Config_Simple__ConfigDesc_ConfigFileEnvVar)((Config_Simple__Config)i0, (Config_Source_Environment__VariableTemplate)i1);
   i0 = (OOC_INT32)OOC_Config_Pragmas__New();
   OOC_Config__pragmas = (OOC_Config_Pragmas__Section)i0;
   i1 = (OOC_INT32)OOC_Config__config;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2048))+32);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2027))+32);
   Config_Section__SectionListDesc_Add((Config_Section__SectionList)i1, (Config_Section__Section)i0);
   i0 = (OOC_INT32)OOC_Config__pragmas;
-  OOC_Config_Pragmas_StdPragmas__CreateVariables((OOC_Config_Pragmas__Section)i0);
+  OOC_Config_StdPragmas__CreateVariables((OOC_Config_Pragmas__Section)i0);
   i0 = (OOC_INT32)OOC_Config_Repositories__New();
   OOC_Config__repositories = (OOC_Config_Repositories__Section)i0;
   i1 = (OOC_INT32)OOC_Config__config;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2170))+32);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2149))+32);
   Config_Section__SectionListDesc_Add((Config_Section__SectionList)i1, (Config_Section__Section)i0);
   i0 = (OOC_INT32)Config_Value_String__New("xsltproc", 9);
   i0 = (OOC_INT32)OOC_Config__AddOption("xsltproc", 9, (Config_Value__Value)i0);
@@ -77,7 +77,7 @@ void OOC_Config__Read(Msg__MsgList errList) {
 
   i0 = (OOC_INT32)OOC_Config__config;
   i1 = (OOC_INT32)errList;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2462)))), Config_Simple__ConfigDesc_Read)),Config_Simple__ConfigDesc_Read)((Config_Simple__Config)i0, (Msg__MsgList)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2441)))), Config_Simple__ConfigDesc_Read)),Config_Simple__ConfigDesc_Read)((Config_Simple__Config)i0, (Msg__MsgList)i1);
   return;
   ;
 }
@@ -86,10 +86,10 @@ OOC_CHAR8 OOC_Config__HaveXsltProc(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)OOC_Config__xsltproc;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2557))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2571)))), &_td_Config_Value_String__ValueDesc, 2571)), 2577));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2536))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2550)))), &_td_Config_Value_String__ValueDesc, 2550)), 2556));
   return ((
-  _cmp8((const void*)(_check_pointer(i0, 2584)),(const void*)"no"))!=0);
+  _cmp8((const void*)(_check_pointer(i0, 2563)),(const void*)"no"))!=0);
   ;
 }
 

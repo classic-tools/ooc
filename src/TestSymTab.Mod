@@ -1,7 +1,7 @@
 MODULE TestSymTab;
 
 IMPORT
-  StdChannels, Out, Err, Msg, IO, URI,
+  StdChannels, Out, Err, IO, URI,
   Config:Section:Arguments, OOC:Config, 
   Config:Section:Options, IntegerValue := Config:Value:Integer,
   BooleanValue := Config:Value:Boolean, OOC:Config:Pragmas,
@@ -47,7 +47,8 @@ PROCEDURE NewRules(): Rules;
     RETURN r;
   END NewRules;
 
-PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN
+PROCEDURE (r: Rules) CompileModule*(module: Rep.Module;
+                                    analysisOnly: BOOLEAN): BOOLEAN
 RAISES IO.Error;
   VAR
     ast: AST.Node;
@@ -55,7 +56,7 @@ RAISES IO.Error;
     errList: Error.List;
     pragmaHistory: Pragmas.History;
   BEGIN
-    ParseModule.ParseModule (module, FALSE, TRUE, TRUE, FALSE, NIL,
+    ParseModule.ParseModule (module, FALSE, TRUE, TRUE, FALSE, NIL, NIL,
                              ast, symTab, pragmaHistory, errList);
     (* symbol file is written by the `ParseModule' function *)
     r.WriteErrList(errList);
@@ -70,23 +71,18 @@ RAISES IO.Error;
     ast: AST.Node;
     symTab: Sym.Module;
     errList: Error.List;
-    res: Msg.Msg;
     outputChannel: IO.ByteChannel;
     outputURI: URI.HierarchicalURI;
     pragmaHistory: Pragmas.History;
   BEGIN
     IF r.Update(m, Rep.modSymbolFile) THEN
-      ParseModule.ParseModule (m, FALSE, r.resolve, FALSE, FALSE, NIL,
+      ParseModule.ParseModule (m, FALSE, r.resolve, FALSE, FALSE, NIL, NIL,
                                ast, symTab, pragmaHistory, errList);
       IF (errList. msgCount = 0) THEN
         outputURI := m. GetURI (Rep.modSymbolTableXML, FALSE);
         outputChannel := m. GetOutputChannel (Rep.modSymbolTableXML, FALSE);
-        IF (outputChannel = NIL) THEN
-          errList. Append (res)
-        ELSE
-          XML.Write (outputChannel, symTab);
-          outputChannel. Close;
-        END
+        XML.Write (outputChannel, symTab);
+        outputChannel. Close;
       END;
       IF (errList.msgCount # 0) THEN
         errList.Write(StdChannels.stderr);      

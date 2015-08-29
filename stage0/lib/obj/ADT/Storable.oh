@@ -39,7 +39,7 @@ typedef struct ADT_Storable__TypeErrorDesc {
   OOC_PTR backtrace[21];
   OOC_INT32 backtraceSize;
 } ADT_Storable__TypeErrorDesc;
-extern void ADT_Storable__RaiseTypeError(Object__String msg);
+extern void NORETURN ADT_Storable__RaiseTypeError(Object__String msg) NORETURN2;
 extern void ADT_Storable__Init(ADT_Storable__Object obj);
 extern void ADT_Storable__ObjectDesc_Destroy(ADT_Storable__Object obj);
 #define _TBN_ADT_Storable__ObjectDesc_Destroy 3

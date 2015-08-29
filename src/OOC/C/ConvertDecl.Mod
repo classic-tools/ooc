@@ -1,9 +1,9 @@
 MODULE OOC:C:ConvertDecl;
 
 IMPORT
-  Object, Object:BigInt, ADT:Dictionary,
+  Object, Object:BigInt,
   OOC:Repository, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
-  OOC:C:Naming, OOC:C:DeclWriter;
+  TR := OOC:SymbolTable:TypeRules, OOC:C:Naming, OOC:C:DeclWriter;
 
 
 CONST
@@ -88,10 +88,12 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
       IF (type = NIL) THEN
         RETURN 0;
       ELSE
+        type := type.Deparam();
         offset := AddFields (struct, type(Sym.Record). baseType);
         ptr := type(Sym.Record). nestedItems;
         WHILE (ptr # NIL) DO
           WITH ptr: Sym.FieldDecl DO
+            TR.AllocateType(ptr.type);
             FOR i := offset TO ptr. offset-1 DO
               struct. AddPadding (w, i);
             END;
@@ -181,8 +183,8 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
         fct.SetNoReturn(type.noReturn);
         ptr := type. nestedItems;
         WHILE (ptr # NIL) DO
-          WITH ptr: Sym.Declaration DO   (* this pics up receiver and params *)
-            ConvertParam (fct, ptr(Sym.VarDecl))
+          WITH ptr: Sym.VarDecl DO   (* this pics up receiver and params *)
+            ConvertParam (fct, ptr)
           ELSE                     (* ignore non-declarations *)
           END;
           ptr := ptr. nextNested
@@ -209,7 +211,13 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
         END;
         struct := w. NewStruct (type. isUnion, name);
         dummy := AddFields (struct, type);
-        RETURN struct
+        RETURN struct;
+
+      | type: Sym.TypeVar DO
+        RETURN ConvertType(w, type.bound, type);
+
+      | type: Sym.QualType DO
+        RETURN ConvertType(w, type.baseType, type.srcCodeBaseType);
       END
     END
   END ConvertType;
@@ -237,7 +245,7 @@ PROCEDURE ConvertDecl (w: DeclWriter.Writer;
       | modeWriteFctDef:
         IF (item. parent IS Sym.ProcDecl) THEN
           sc := DeclWriter.scAuto; (* definition of nested function *)
-        ELSIF (item. exportMark = Sym.nameNotExported) & ~item.isTypeBound THEN
+        ELSIF (item.exportMark=Sym.nameNotExported) & ~item.IsTypeBound() THEN
           sc := DeclWriter.scStatic
         ELSE
           sc := DeclWriter.scAuto
@@ -319,7 +327,7 @@ PROCEDURE ConvertDecl (w: DeclWriter.Writer;
   END ConvertDecl;
 
 PROCEDURE ConvertSymTab* (w: DeclWriter.Writer; m: Repository.Module;
-                          symTab: Sym.Module; exports: Dictionary.Dictionary;
+                          symTab: Sym.Module; exports: Sym.Exports;
                           writeExported: BOOLEAN);
 (**Translates all declarations of the module to C.  The C declarations are
    emitted to the writer object @oparam{w}.  The parameter @oparam{m}
@@ -392,7 +400,7 @@ PROCEDURE ConvertSymTab* (w: DeclWriter.Writer; m: Repository.Module;
                      RealMath.Mod.  *)
                   w. AddDeclaration (decl);
                   IF (ptr IS Sym.ProcDecl) &
-                     ptr(Sym.ProcDecl). isTypeBound THEN
+                     ptr(Sym.ProcDecl).IsTypeBound() THEN
                     AddTypeBoundHelpers (w, ptr(Sym.ProcDecl));
                   END;
                 END;

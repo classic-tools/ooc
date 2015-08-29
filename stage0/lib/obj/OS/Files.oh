@@ -37,9 +37,9 @@ extern void OOC_OS_Files_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OS_Files__Path;
-extern RT0__StructDesc _td_OS_Files__1434;
+extern RT0__StructDesc _td_OS_Files__1433;
 extern RT0__StructDesc _td_OS_Files__Name;
-extern RT0__StructDesc _td_OS_Files__1475;
+extern RT0__StructDesc _td_OS_Files__1474;
 extern RT0__StructDesc _td_OS_Files__NameArray;
 extern RT0__StructDesc _td_OS_Files__ErrorContext;
 extern RT0__StructDesc _td_OS_Files__ErrorContextDesc;

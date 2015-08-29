@@ -1,4 +1,4 @@
-(* 	$Id: InterfaceDescr.Mod,v 1.14 2003/03/11 22:08:40 mva Exp $	 *)
+(* 	$Id: InterfaceDescr.Mod,v 1.18 2003/05/12 07:56:46 mva Exp $	 *)
 MODULE OOC:SymbolTable:InterfaceDescr;
 (*  Writes a description of a module's interface as XML.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
@@ -34,7 +34,11 @@ CONST
 
 VAR
   dtdSystemId: URI.URI;
-
+  absoluteDtdSystemId*: BOOLEAN;
+  (**If @code{TRUE} (which is the default), then write the system ID of the
+     XML interface description document as an absolute path.  Otherwise,
+     write a relative one.  *)
+  
 PROCEDURE GetSystemId (repositories: Repositories.Section): URI.URI;
   BEGIN
     IF (dtdSystemId = NIL) THEN
@@ -129,7 +133,7 @@ RAISES IO.Error;
         DocXML.WriteOberonDoc (w, decl. docString, module,
                                NIL, repositories, moduleDict)
       
-      ELSIF (decl IS Sym.ProcDecl) & decl(Sym.ProcDecl). isTypeBound THEN
+      ELSIF (decl IS Sym.ProcDecl) & decl(Sym.ProcDecl).IsTypeBound() THEN
         (* this is a type-bound procedure without a description; see if it is a
            redefinition of a procedure that does have a description and use
            this one  *)
@@ -199,6 +203,7 @@ RAISES IO.Error;
         href: ARRAY 2*1024 OF CHAR;
         import: Sym.Import;
         repModule: Repository.Module;
+        id: Sym.NameString;
       BEGIN
         WITH type: Sym.TypeName DO
           w. StartTag ("type-name", FALSE);
@@ -216,18 +221,24 @@ RAISES IO.Error;
           
           IF (type. module # NIL) OR
              (resolvedType = NIL) OR ~(resolvedType IS Sym.PredefType) THEN
-            IF (type. module # NIL) THEN
-              import := type. GetImport();
-              COPY (import. externalSymTab. name. str^, href);
-              repModule := repositories. GetModule (import. externalSymTab. name. str^);
-              IF (repModule # NIL) THEN
-                moduleDict. Set (repModule, NIL)
-              END
+            IF (resolvedType IS Sym.TypeVar) THEN
+              id := resolvedType.namingDecl.GetId();
+              COPY ("#", href);
+              Strings.Append(id^, href);
             ELSE
-              COPY ("", href);
+              IF (type. module # NIL) THEN
+                import := type. GetImport();
+                COPY (import. externalSymTab. name. str^, href);
+                repModule := repositories. GetModule (import. externalSymTab. name. str^);
+                IF (repModule # NIL) THEN
+                  moduleDict. Set (repModule, NIL)
+                END
+              ELSE
+                COPY ("", href);
+              END;
+              Strings.Append ("#", href);
+              Strings.Append (type. ident. str^, href);
             END;
-            Strings.Append ("#", href);
-            Strings.Append (type. ident. str^, href);
             w. AttrStringLatin1 ("href", href)
           END;
           w. EndTag
@@ -276,7 +287,18 @@ RAISES IO.Error;
             END;
             w.EndTag;
           END;
-          w. EndTag
+          w. EndTag;
+
+        | type: Sym.QualType DO
+          w.StartTag("qualified-type", FALSE);
+          WriteType("type", type.srcCodeBaseType, type.baseType);
+          w.StartTag("type-arguments", FALSE);
+          FOR j := 0 TO LEN(type.arguments^)-1 DO
+            WriteTypeComponent(type.arguments[j].srcCodeType,
+                               type.arguments[j].type);
+          END;
+          w.EndTag();
+          w.EndTag();
         END
       END WriteTypeComponent;
 
@@ -301,6 +323,45 @@ RAISES IO.Error;
           WriteBaseDefinitions (class, name)
         END
       END WriteBaseDefinitions;
+
+    PROCEDURE WriteAliasList(receiver: Sym.VarDecl);
+      VAR
+        id: Sym.NameString;
+        i: Sym.Item;
+      BEGIN
+        w.StartTag("type-alias-list", FALSE);
+        i := receiver.parent(Sym.FormalPars).nestedItems;
+        WHILE (i # NIL) DO
+          WITH i: Sym.TypeDecl DO
+            w.StartTag("type-alias", FALSE);
+            w.AttrStringLatin1("name", i.name.str^);
+            id := i.GetId();
+            w. AttrStringLatin1 ("id", id^);
+            w.EndTag();
+          ELSE
+            (* ignore *)
+          END;
+          i := i. nextNested
+        END;
+        w.EndTag();
+      END WriteAliasList;
+    
+    PROCEDURE WriteTypePars(typePars: Sym.TypePars);
+      VAR
+        i: Sym.Item;
+      BEGIN
+        w.StartTag("type-parameters", FALSE);
+        i := typePars.nestedItems;
+        WHILE (i # NIL) DO
+          WITH i: Sym.TypeDecl DO
+            WriteItem(i);
+          ELSE
+            (* ignore *)
+          END;
+          i := i. nextNested
+        END;
+        w.EndTag();
+      END WriteTypePars;
     
     BEGIN
       IF (item # NIL) THEN
@@ -346,7 +407,15 @@ RAISES IO.Error;
         | item: Sym.TypeDecl DO
           StartDecl ("type-decl", item);
           DeclDocString (item);
-          WriteType ("type", item. srcCodeType, item. type);
+          IF (item.type IS Sym.TypeVar) THEN  (* is type parameter *)
+            WriteType ("type", item.type(Sym.TypeVar).srcCodeBound,
+                       item.type(Sym.TypeVar).bound);
+          ELSE
+            WriteType ("type", item. srcCodeType, item. type);
+          END;
+          IF item.HasTypeParameters() THEN
+            WriteTypePars(item.type.typePars);
+          END;
           w. EndTag
           
         | item: Sym.VarDecl DO
@@ -363,6 +432,9 @@ RAISES IO.Error;
           END;
           DeclDocString (item);
           WriteType ("type", item. srcCodeType, item. type);
+          IF item.hasAliasList THEN
+            WriteAliasList(item);
+          END;
           w. EndTag
           
         | item: Sym.FieldDecl DO
@@ -381,7 +453,7 @@ RAISES IO.Error;
             StartDecl ("procedure", item);
             DeclDocString (item);
             WriteTypeComponent (item. formalPars, item. formalPars);
-            IF item. isTypeBound THEN
+            IF item.IsTypeBound() THEN
               WriteBaseDefinitions (item. Class(), item. name)
             END;
             w. EndTag
@@ -532,7 +604,7 @@ RAISES IO.Error;
     w. WriteTextDecl ("1.0", "no");
     w. NewLine;
     w. Write8 ("<!DOCTYPE interface-description SYSTEM '");
-    w. WriteURI (GetSystemId (repositories), FALSE);
+    w. WriteURI (GetSystemId (repositories), absoluteDtdSystemId);
     w. Write8 ("'>");
 (*    Sym.Prune (module, Exports.GetExports (module)); (* ... *)*)
     (* note: prune doesn't work if not-exported declarations are targets
@@ -568,5 +640,6 @@ RAISES IO.Error;
   END Write;
 
 BEGIN
-  dtdSystemId := NIL
+  dtdSystemId := NIL;
+  absoluteDtdSystemId := TRUE;
 END OOC:SymbolTable:InterfaceDescr.

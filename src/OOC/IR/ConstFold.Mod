@@ -1,4 +1,4 @@
-(* 	$Id: ConstFold.Mod,v 1.74 2003/02/01 18:12:08 mva Exp $	 *)
+(* 	$Id: ConstFold.Mod,v 1.75 2003/05/04 19:15:20 mva Exp $	 *)
 MODULE OOC:IR:ConstFold;
 (*  Constant folding on IR expressions.
     Copyright (C) 2002, 2003  Stewart Greenhill, Michael van Acken
@@ -144,6 +144,10 @@ PROCEDURE (c: ConstFold) VisitLen* (len: IR.Len);
     c.result := c.builder.NewConst(len.sym, Predef.GetType(Predef.lengthType), 
       BigInt.NewInt(length));
   END VisitLen;
+
+PROCEDURE (c: ConstFold) VisitConstructor* (cons: IR.Constructor);
+  BEGIN
+  END VisitConstructor;
 
 PROCEDURE (c: ConstFold) VisitDeref* (deref: IR.Deref);
   BEGIN

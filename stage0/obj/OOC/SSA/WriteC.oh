@@ -61,10 +61,10 @@ typedef struct OOC_SSA_WriteC__VisitorDesc {
   ADT_Dictionary__Dictionary nonLocalAccess;
 } OOC_SSA_WriteC__VisitorDesc;
 extern void OOC_SSA_WriteC__VisitorDesc_VisitProcedure(OOC_SSA_WriteC__Visitor v, OOC_IR__Procedure procedure);
-#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitProcedure 37
+#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitProcedure 38
 typedef void (*_TBP_OOC_SSA_WriteC__VisitorDesc_VisitProcedure)(OOC_SSA_WriteC__Visitor v, OOC_IR__Procedure procedure);
 extern void OOC_SSA_WriteC__VisitorDesc_VisitVar(OOC_SSA_WriteC__Visitor v, OOC_IR__Var var);
-#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitVar 55
+#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitVar 56
 typedef void (*_TBP_OOC_SSA_WriteC__VisitorDesc_VisitVar)(OOC_SSA_WriteC__Visitor v, OOC_IR__Var var);
 extern void OOC_SSA_WriteC__WriterDesc_ClearSwapData(OOC_SSA_WriteC__Writer w);
 #define _TBN_OOC_SSA_WriteC__WriterDesc_ClearSwapData 28
@@ -131,13 +131,13 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__Visitor;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__VisitorDesc;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__6091;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__7131;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__21925;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__23424;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__23627;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__24638;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__24931;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__39023;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__51659;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__21988;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23487;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23690;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24701;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24994;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__39086;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__51854;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

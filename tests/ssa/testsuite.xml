@@ -4,19 +4,20 @@
 
 <testsuite-ext profile="Test Suite for Translation Patterns">
 
-<!--<testsuite-ext
-  profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; opSet1 opSet2 opSet3 opSet4 opSet5 opSet6 opSet7">-->
+<!--<testsuite-ext profile="Test Suite for Translation Patterns"
+  select ="&SetupTestCasesWithOut; generic1 generic2 generic3 generic4
+  generic5 generic6 generic7 generic8 generic9 generic10 generic11
+  generic12 generic13 generic14 generic15 generic16 generic17
+  generic18 generic19 generic20 generic21 generic22 generic23
+  generic24 generic25 generic26 generic27 generic28 generic29
+  generic30 generic31 generic32 generic33 generic34 generic35
+  generic36 generic37 generic38 generic39 generic40 generic41
+  generic42 generic43 generic44 generic45 generic46 generic47
+  generic48 generic48 generic49 generic50 generic52
+  generic53 generic54 generic55">-->
 
-<!--<testsuite-ext
-  profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; undef26">-->
-<!--<testsuite-ext
-  profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; undef1 undef2 undef3 undef4 undef5
-  undef6 undef7 undef8 undef9 undef10 undef11 undef12 undef13 
-  undef14 undef15 undef16 undef17 undef18 undef19
-  undef20 undef21 undef22 undef23 undef24 undef25 undef26">-->
+<!--<testsuite-ext profile="Test Suite for Translation Patterns"
+  select ="&SetupTestCasesWithOut; generic1 generic15">-->
 
   &TestSetupWithOut;
     
@@ -894,6 +895,9 @@
       The called type-bound procedure is not exported by
       <code>TBProc1.Mod</code>.
     </test>
+    <test id="tbproc9" type="reject" file="TBProc9.Mod">
+      Super call to a different procedure.
+    </test>
 
     
     <test id="nestedproc1" type="run"
@@ -1212,7 +1216,6 @@
       <code>NO_COPY</code> is used for a value parameter of type
       <code>LONGINT</code>.
     </test>
-    <!-- read-only restrictions currently disabled
     <test id="noCopy4" type="reject" file="NoCopy4.Mod">
       Trying to asssign to an element of a <code>NO_COPY</code> array
       parameter.
@@ -1225,7 +1228,6 @@
       Trying pass an element of an <code>NO_COPY</code> array to a
       <code>VAR</code> parameter.
     </test>
-    -->
 
     <test id="nilCompat1" type="reject" file="NilCompat1.Mod">
       <code>NIL_COMPAT</code> is used for a variable.
@@ -1307,6 +1309,214 @@
     </test>
   </testcases>
   
+  <testcases profile="OOC2 Development: Generics Extension"
+    default-lang="OOC O2">
+    <test id="generic1" type="accept" file="Generic1.Mod">
+      Generics syntax: declaration of parameterized types, declaration
+      of variables using a parameterized type.  This module also
+      exports some types that are used in later tests.
+    </test>
+    <test id="generic2" type="accept" file="Generic2.Mod">
+      Parametric types derived from arrays.
+    </test>
+    <test id="generic3" type="accept" file="Generic3.Mod">
+      Declarations and instances of parametric record types.
+    </test>
+    <test id="generic4" type="accept" file="Generic4.Mod">
+      Extending a parametric record type.
+    </test>
+    <test id="generic5" type="reject" file="Generic5.Mod">
+      Type bound is not a record pointer.
+    </test>
+    <test id="generic6" type="reject" file="Generic6.Mod">
+      Reference to type variable after its enclosing type
+      declaration.
+    </test>
+    <test id="generic7" type="reject" file="Generic7.Mod">
+      Reference to type variable that only exists in the base type.
+    </test>
+    <test id="generic8" type="reject" file="Generic8.Mod">
+      Base type of qualified type is not parametric.
+    </test>
+    <test id="generic9" type="reject" file="Generic9.Mod">
+      Qualified type with too few arguments.
+    </test>
+    <test id="generic10" type="reject" file="Generic10.Mod">
+      Qualified type with too many arguments.
+    </test>
+    <test id="generic11" type="reject" file="Generic11.Mod">
+      Type argument is not an extension of the type bound.
+    </test>
+    <test id="generic12" type="reject" file="Generic12.Mod">
+      Type argument is a type variable whose bound is not an extension
+      of the type bound.
+    </test>
+    <test id="generic13" type="reject" file="Generic13.Mod">
+      Pointer base type is a type variable.
+    </test>
+    <test id="generic14" type="reject" file="Generic14.Mod">
+      Procedure with a receiver of pointer type refers to a type
+      variable of the pointer's base type.
+    </test>
+    <test id="generic15" type="reject" file="Generic15.Mod">
+      Type-bound procedure refers to a type variable of the record
+      using a qualified identifier.
+    </test>
+    <test id="generic16" type="accept" file="Generic16.Mod">
+      Checks the things one can do with variables whose type is a type
+      variable.
+    </test>
+    <test id="generic17" type="reject" file="Generic17.Mod">
+      If the left hand side of an assignment is a variable type, the
+      right hand side must be of the same type.
+    </test>
+    <test id="generic18" type="reject" file="Generic18.Mod">
+      Cannot use a type variable in a type guard.
+    </test>
+    <test id="generic19" type="reject" file="Generic19.Mod">
+      Cannot use a type variable in a type test.
+    </test>
+    <test id="generic20" type="reject" file="Generic20.Mod">
+      Cannot use <code>NEW</code> on a variable based on a type
+      variable.
+    </test>
+
+    <test id="generic21" type="accept" file="Generic21.Mod">
+      Pathological parametric type: the base type is the type variable
+      itself.  Not sure if this makes much sense, but it is certainly
+      a border case.
+    </test>
+    <test id="generic22" type="reject" file="Generic22.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic23" type="reject" file="Generic23.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic24" type="accept" file="Generic24.Mod">
+      Function result of a type-bound procedure may refer to a type
+      parameter of the class.  A receiver variable's type is
+      implicitly qualified by the type parameters of the class,
+      <em>not</em> their bounds.  <code>NIL</code> is compatible with
+      a qualified type if it is compatible with its base type.
+    </test>
+    <test id="generic25" type="accept" file="Generic25.Mod">
+      Traversing a field select, a pointer deref, and an array index
+      operation to get to a variable that uses a type parameter.
+    </test>
+    <test id="generic26" type="reject" file="Generic26.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic27" type="reject" file="Generic27.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic28" type="reject" file="Generic28.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic29" type="accept" file="Generic29.Mod">
+      Calling a type-bound procedure on a parametric type.  The
+      receiver is a pointer type.
+    </test>
+    <test id="generic30" type="reject" file="Generic30.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic31" type="reject" file="Generic31.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic32" type="accept" file="Generic32.Mod">
+      Calling a type-bound procedure on a parametric type.  The
+      receiver is a record type.
+    </test>
+    <test id="generic33" type="reject" file="Generic33.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic34" type="reject" file="Generic34.Mod">
+      Invalid assignment to qualified type variable.
+    </test>
+    <test id="generic35" type="accept" file="Generic35.Mod">
+      Redefining a type-bound procedure on a parametric type.
+    </test>
+    <test id="generic36" type="accept" file="Generic36.Mod">
+      Arguments of a parametric type without parameter list default to
+      the bounds of the type parameters.
+    </test>
+    <test id="generic37" type="accept" file="Generic37.Mod">
+      Calling <code>NEW</code> on a variable of parametric type.
+    </test>
+    <test id="generic38" type="accept" file="Generic38.Mod">
+      The argument of a qualified type can be another qualified type.
+      Qualified types can be used as part of formal parameters.
+    </test>
+    <test id="generic39" type="accept" file="Generic39.Mod">
+      Retrieving a generic value from the generic receiver parameter
+      and returning it.
+    </test>
+    <test id="generic40" type="accept" file="Generic40.Mod">
+      Type guards, type tests, and <code>WITH</code> statements with
+      parametric types.
+    </test>
+    <test id="generic41" type="accept" file="Generic41.Mod">
+      Special properties of type-bound procedure `<code>INIT</code>':
+      called procedure is derived from the <em>static</em> type of the
+      receiver value, formal parameters must <em>not</em> match the
+      parameters from the base type, and the procedure must be
+      exported.
+    </test>
+    <test id="generic42" type="accept" file="Generic42.Mod">
+      Calling constructor on a record pointer type without an
+      <code>INIT</code> procedure.
+    </test>
+    <test id="generic43" type="reject" file="Generic43.Mod">
+      Calling constructor on a record pointer type without an
+      <code>INIT</code> procedure with a non-empty argument list.
+    </test>
+    <test id="generic44" type="reject" file="Generic44.Mod">
+      Calling constructor on a non-record pointer type.
+    </test>
+    <test id="generic45" type="run"
+          file="Generic45.Mod" output="Generic45.Ref">
+      Calling constructor with <code>INIT</code> procedure.
+    </test>
+    <test id="generic46" type="reject" file="Generic46.Mod">
+      In a type guard, the compiler must be able to derive the type
+      arguments of the reference type from the static type of the
+      variable.
+    </test>
+    <test id="generic47" type="accept" file="Generic47.Mod">
+      Parametric types may appear somewhere in a designator, even if
+      the top-level variable is a normal type.
+    </test>
+    <test id="generic48" type="accept" file="Generic48.Mod">
+      Qualified type with a qualified identifier as argument.
+    </test>
+    <test id="generic49" type="accept" file="Generic49.Mod">
+      With a qualified type as array element type, the code generator
+      needs to take properties like element size and alignment from
+      the qualified type's base type.
+    </test>
+    <test id="generic50" type="run"
+          file="Generic50.Mod" output="Generic50.Ref">
+      Calling a type-bound procedure on a type variable is like
+      calling it on the variable's type bound.
+    </test>
+    <!-- generic51 is in tests/ssa-c-output/ -->
+    <test id="generic52" type="accept" file="Generic52.Mod">
+      Qualified pointer typs and type variables are assignment
+      compatible to <code>SYSTEM.PTR</code>.
+    </test>
+    <test id="generic53" type="accept" file="Generic53.Mod">
+      Receiver declaration introduces type aliases for the 
+      type parameters of the base record type.
+    </test>
+    <test id="generic54" type="reject" file="Generic54.Mod">
+      One type alias name must be given in the receiver for every type
+      parameter of the base record type.
+    </test>
+    <test id="generic55" type="reject" file="Generic55.Mod">
+      If the base record type is not parametric, no list of alias
+      names must be present.
+    </test>
+  </testcases>
+
   <testcases profile="Tests for Warnings" default-lang="OOC O2">
     <test id="undef1" type="accept" file="Undef1.Mod">
       Trivial example of reading an uninitialized scalar variable.
@@ -1416,6 +1626,43 @@
       (Note: There is currently no way to check that warning is
       <em>not</em> produced.)
     </test>
+    <test id="undef27" type="accept" file="Undef27.Mod">
+      Analysis should show that <code>Q</code> cannot return, and that
+      code after a call to it is unreachable.
+    </test>
+
+    <test id="deprecated1" type="accept" file="Deprecated1.Mod">
+      Contains examples for all types of declarations that can have a
+      <code>DEPRECATED</code> flag.
+    </test>
+    <test id="deprecated2" type="accept" file="Deprecated2.Mod">
+      Defines a <code>DEPRECATED</code> module.
+    </test>
+    <test id="deprecated3" type="accept" file="Deprecated3.Mod">
+      Calling a <code>DEPRECATED</code> procedure.
+    </test>
+    <test id="deprecated4" type="accept" file="Deprecated4.Mod">
+      Using a variable from a <code>DEPRECATED</code> module.
+    </test>
+    <test id="deprecated5" type="accept" file="Deprecated5.Mod">
+      Using a <code>DEPRECATED</code> constant.
+    </test>
+    <test id="deprecated6" type="accept" file="Deprecated6.Mod">
+      Using a <code>DEPRECATED</code> variable.
+    </test>
+    <test id="deprecated7" type="accept" file="Deprecated7.Mod">
+      Using a <code>DEPRECATED</code> type.
+    </test>
+    <test id="deprecated8" type="accept" file="Deprecated8.Mod">
+      Using a <code>DEPRECATED</code> record field.
+    </test>
+    <test id="deprecated9" type="accept" file="Deprecated9.Mod">
+      Using a <code>DEPRECATED</code> type-bound procedure.
+    </test>
+    <test id="deprecated10" type="accept" file="Deprecated10.Mod">
+      Using a type-bound procedure that redefines a
+      <code>DEPRECATED</code> procedure.
+    </test>
   </testcases>
   
   <testcases profile="Regression Tests for OOC Bugs" default-lang="OOC O2">
@@ -1446,20 +1693,20 @@
     <reject-info id="assign2" pos="r%. TBProc :=" msg="This must be a variable"/>
     <reject-info id="assign3" pos="AssignRO.%x :=" msg="This variable is read-only"/>
     <reject-info id="assign4" pos="AssignRO.y. %a :=" msg="This variable is read-only"/>
-    <reject-info id="assign5" pos="x %:= INTEGER" msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign6" pos="x %:= Out" msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign7" pos="a %:= b" msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign8" pos="x %:= NIL" msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign9" pos='x %:= "123"' msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign10" pos='p %:= P;' msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign11" pos='p %:= P;' msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign12" pos='p %:= P;' msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign13" pos='p %:= P;' msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="assign14" pos='p %:= P;' msg="Type of expression is not compatible with variable type"/>
+    <reject-info id="assign5" pos="x %:= INTEGER" msg="Expression not compatible with variable type `INTEGER'"/>
+    <reject-info id="assign6" pos="x %:= Out" msg="Expression not compatible with variable type `INTEGER'"/>
+    <reject-info id="assign7" pos="a %:= b" msg="Expression not compatible with variable type `ARRAY'"/>
+    <reject-info id="assign8" pos="x %:= NIL" msg="Expression not compatible with variable type `LONGINT'"/>
+    <reject-info id="assign9" pos='x %:= "123"' msg="Expression not compatible with variable type `ARRAY'"/>
+    <reject-info id="assign10" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
+    <reject-info id="assign11" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
+    <reject-info id="assign12" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
+    <reject-info id="assign13" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
+    <reject-info id="assign14" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
         
     <reject-info id="return1" pos="RETURN %123" msg="RETURN must not provide a result value"/>
     <reject-info id="return2" pos="%RETURN" msg="RETURN must provide a result value"/>
-    <reject-info id="return3" pos="RETURN %128;" msg="Type of expression is not compatible with variable type"/>
+    <reject-info id="return3" pos="RETURN %128;" msg="Expression not compatible with variable type `SHORTINT'"/>
     <reject-info id="return4" pos="RETURN %123" msg="RETURN must not provide a result value"/>
 
     <reject-info id="proc1" pos="%x(" msg="This must be a procedure designator"/>
@@ -1467,13 +1714,18 @@
     <reject-info id="proc3" pos="P(123%)" msg="Too few arguments"/>
     <reject-info id="proc4" pos="%P;" msg="Too few arguments"/>
     <reject-info id="proc5" pos="P(1, 2, %3);" msg="Too many arguments"/>
-    <reject-info id="proc6" pos="P(%128);" msg="Type of actual parameter is not compatible with formal type"/>
+    <reject-info id="proc6" pos="P(%128);"
+      msg="Argument not compatible with formal type `SHORTINT'"/>
     <reject-info id="proc7" pos="P(%1);" msg="This must be a variable"/>
     <reject-info id="proc8" pos="P(AssignRO.%x);" msg="This variable is read-only"/>
-    <reject-info id="proc9" pos="P(%x);" msg="Type of actual parameter is not compatible with formal type"/>
-    <reject-info id="proc10" pos="P(%x);" msg="Type of actual parameter is not compatible with formal type"/>
-    <reject-info id="proc11" pos="P(%x);" msg="Actual parameter not compatible with formal VAR parameter"/>
-    <reject-info id="proc12" pos="P(%x);" msg="Actual parameter not compatible with formal VAR parameter"/>
+    <reject-info id="proc9" pos="P(%x);"
+      msg="Argument not compatible with formal type `ARRAY'"/>
+    <reject-info id="proc10" pos="P(%x);"
+      msg="Argument not compatible with formal type `ARRAY'"/>
+    <reject-info id="proc11" pos="P(%x);"
+      msg="Argument not compatible with formal VAR parameter `ARRAY'"/>
+    <reject-info id="proc12" pos="P(%x);"
+      msg="Argument not compatible with formal VAR parameter `ARRAY'"/>
     <reject-info id="function8" pos=":= %P(" msg="This is not a function procedure"/>
 
     <reject-info id="if4" pos="IF %b THEN" msg="Expression must be of type BOOLEAN"/>
@@ -1484,8 +1736,8 @@
     <reject-info id="for1" pos="a%[0]" msg="Expected symbol `:='"/>
     <reject-info id="for2" pos="FOR %T :=" msg="This must be a variable"/>
     <reject-info id="for3" pos="FOR %x :=" msg="Expression must be of integer type"/>
-    <reject-info id="for4" pos=":= %128" msg="Type of expression is not compatible with variable type"/>
-    <reject-info id="for5" pos="TO %128 DO" msg="Type of expression is not compatible with variable type"/>
+    <reject-info id="for4" pos=":= %128" msg="Expression not compatible with variable type `SHORTINT'"/>
+    <reject-info id="for5" pos="TO %128 DO" msg="Expression not compatible with variable type `SHORTINT'"/>
     <reject-info id="for6" pos="BY %128 DO" msg="Step value not in type of loop variable"/>
     <reject-info id="for7" pos="BY %y DO" msg="Expression is not constant"/>
     <reject-info id="for8" pos="BY %0 DO" msg="Step value must not be zero"/>
@@ -1522,6 +1774,7 @@
       msg="This variable has no dynamic type"/>
     
     <reject-info id="tbproc8" pos="p. %Proc" msg="Undeclared identifier"/>
+    <reject-info id="tbproc9" pos="p.%Proc" msg="Cross procedure super call"/>
 
     <reject-info id="inc2" pos="INC(%x,1)"
       msg="Expression must be of integer type"/>
@@ -1698,19 +1951,19 @@
     <reject-info id="opExprCompat8" pos=" %="
         msg="Incompatible types for operator"/>
     <reject-info id="opExprCompat9" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `SHORTINT'"/>
     <reject-info id="opExprCompat10" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `INTEGER'"/>
     <reject-info id="opExprCompat11" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `LONGINT'"/>
     <reject-info id="opExprCompat12" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `REAL'"/>
     <reject-info id="opExprCompat13" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `INTEGER'"/>
     <reject-info id="opExprCompat14" pos=" %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `REAL'"/>
     <reject-info id="opString4" pos=" c %:="
-        msg="Type of expression is not compatible with variable type"/>
+        msg="Expression not compatible with variable type `CHAR'"/>
     <reject-info id="opTypeGuard2" pos=" a(%INTEGER)"
         msg="Type must be an extension of the left operand's type"/>
     <reject-info id="opTypeGuard3" pos=" a(%C)"
@@ -1764,21 +2017,19 @@
         msg="Invalid modifier flag"/>
     <reject-info id="noCopy3" pos="a[%NO_COPY]"
         msg="Invalid modifier flag"/>
-    <!-- disabled for now 
     <reject-info id="noCopy4" pos="  %a[0]"
         msg="This parameter is read-only"/>
     <reject-info id="noCopy5" pos="F(%a)"
         msg="This parameter is read-only"/>
     <reject-info id="noCopy6" pos="F(%a[0])"
         msg="This parameter is read-only"/>
-    -->
 
     <reject-info id="nilCompat1" pos="a[%NIL_COMPAT]"
         msg="Invalid modifier flag"/>
     <reject-info id="nilCompat2" pos="a[%NIL_COMPAT]"
         msg="Invalid modifier flag"/>
     <reject-info id="nilCompat4" pos="P1(%NIL)"
-        msg="Actual parameter not compatible with formal VAR parameter"/>
+        msg="Argument not compatible with formal VAR parameter `ARRAY'"/>
 
     <reject-info id="noLengthInfo2" pos="ARRAY[%NO_LENGTH_INFO]"
         msg="Invalid modifier flag"/>
@@ -1813,6 +2064,67 @@
         msg="Abstract procedure must be exported"/>
     <reject-info id="abstract9" pos="R1 = %RECORD"
         msg="Inherited procedure `Proc' is still abstract"/>
+
+    <reject-info id="generic5" pos="A: %Array"
+        msg="Invalid type bound"/>
+    <reject-info id="generic6" pos="x: %A"
+        msg="Undeclared identifier"/>
+    <reject-info id="generic7" pos="x: %B"
+        msg="Undeclared identifier"/>
+    <reject-info id="generic8" pos="%R()"
+        msg="This is not a parametric type"/>
+    <reject-info id="generic9" pos="%R()"
+        msg="Too few type arguments"/>
+    <reject-info id="generic10" pos="G.Object, %G.Object"
+        msg="Too many type arguments"/>
+    <reject-info id="generic11" pos="R(%G.Object)"
+        msg="This is not an extension of the type bound"/>
+    <reject-info id="generic12" pos="R1(%C)"
+        msg="This is not an extension of the type bound"/>
+    <reject-info id="generic13" pos="POINTER TO %B"
+        msg="Illegal pointer base type"/>
+    <reject-info id="generic14" pos=": %A"
+        msg="Undeclared identifier"/>
+    <reject-info id="generic15" pos="%R2.D"
+        msg="This is not a module name"/>
+    <reject-info id="generic17" pos="v %:= a;"
+        msg="Expression not compatible with variable type `Base'"/>
+    <reject-info id="generic18" pos="a(%Base)"
+        msg="Type test requires static type instance"/>
+    <reject-info id="generic19" pos="v IS %Base"
+        msg="Type test requires static type instance"/>
+    <reject-info id="generic20" pos="NEW(%v)"
+        msg="This must be a pointer variable"/>
+    <reject-info id="generic22" pos="o3 %:= o1"
+        msg="Expression not compatible with variable type `Generic1.A1'"/>
+    <reject-info id="generic23" pos="o3 %:= o1"
+        msg="Expression not compatible with variable type `Generic1.A1'"/>
+    <reject-info id="generic26" pos=" %:= o1"
+        msg="Expression not compatible with variable type `Generic1.A1'"/>
+    <reject-info id="generic27" pos=" %:= o1"
+        msg="Expression not compatible with variable type `Generic1.A1'"/>
+    <reject-info id="generic28" pos=" %:= o1"
+        msg="Expression not compatible with variable type `Generic1.A1'"/>
+    <reject-info id="generic30" pos="(%o1)"
+        msg="Argument not compatible with formal type `Generic1.A1'"/>
+    <reject-info id="generic31" pos="(%o1)"
+        msg="Argument not compatible with formal type `Generic1.A1'"/>
+    <reject-info id="generic33" pos="(%o1)"
+        msg="Argument not compatible with formal type `Generic1.A1'"/>
+    <reject-info id="generic34" pos="(%o1)"
+        msg="Argument not compatible with formal type `Generic1.A1'"/>
+    <warning-info id="generic40" pos="l3(%List"
+        msg="Warning: Redundant type test"/>
+    <reject-info id="generic43" pos=", %123)"
+        msg="Too many arguments"/>
+    <reject-info id="generic44" pos=":= NEW(%List"
+        msg="Not a record pointer type"/>
+    <reject-info id="generic46" pos="o1(%List("
+        msg="Type must be an extension of the left operand's type"/>
+    <reject-info id="generic54" pos="(a: %A)"
+        msg="The base record type has 2 type parameter(s)"/>
+    <reject-info id="generic55" pos="(a: %A())"
+        msg="The base record type has no type parameters"/>
 
     <warning-info id="undef1" pos="x := %y;"
         msg="Warning: Undefined variable"/>
@@ -1854,5 +2166,24 @@
         msg="Warning: Callee may read undefined variable `x'"/>
     <warning-info id="undef23" pos="RETURN %x"
         msg="Warning: Variable may be undefined"/>
+    <warning-info id="undef27" pos="%RETURN"
+        msg="Warning: Unreachable code"/>
+
+    <warning-info id="deprecated3" pos="D.%Proc"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated4" pos="%D.x"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated5" pos="D.%const"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated6" pos="D.%var"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated7" pos="D.%Record"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated8" pos="record.%field"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated9" pos="a.%TBProc"
+        msg="Warning: Use of deprecated object"/>
+    <warning-info id="deprecated10" pos="b.%TBProc"
+        msg="Warning: Use of deprecated object"/>
   </processor-info>
 </testsuite-ext>

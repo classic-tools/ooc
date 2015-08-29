@@ -2,7 +2,7 @@
 #include <Log.oh>
 #include <Object/BigInt.oh>
 #include <OOC/Scanner/Symbol.oh>
-#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/Scanner/BasicList.oh>
 #include <OOC/SymbolTable/TypeRules.oh>
 #include <OOC/SymbolTable/Predef.oh>
 

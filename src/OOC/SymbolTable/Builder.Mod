@@ -1,4 +1,4 @@
-(* 	$Id: Builder.Mod,v 1.34 2003/04/12 14:06:29 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.45 2003/05/11 13:56:32 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
     Copyright (C) 2000-2003  Michael van Acken
@@ -134,16 +134,32 @@ PROCEDURE (b: Builder) NewConstDecl* (parent: Sym.Item; name: Sym.Name;
   END NewConstDecl;
 
 PROCEDURE (b: Builder) NewTypeDecl* (parent: Sym.Item; name: Sym.Name;
-                                 visibleFrom: Sym.ModulePos;
-                                 exportMark: Sym.ExportMark;
-                                 docString: Doc.Document;
-                                 type: Sym.Type): Sym.TypeDecl;
+                                     visibleFrom: Sym.ModulePos;
+                                     exportMark: Sym.ExportMark;
+                                     docString: Doc.Document;
+                                     type: Sym.Type;
+                                     isTypeParameter: BOOLEAN): Sym.TypeDecl;
   VAR
     t: Sym.TypeDecl;
+    
+  PROCEDURE NewTypeVar(bound: Sym.Type; parent: Sym.Item): Sym.TypeVar;
+    VAR
+      tv: Sym.TypeVar;
+    BEGIN
+      NEW(tv);
+      Sym.InitTypeVar(tv, parent, type.position, bound);
+      tv.SetNamingDecl(t);
+      RETURN tv;
+    END NewTypeVar;
+  
   BEGIN
     NEW (t);
-    Sym.InitTypeDecl (t, parent, name, visibleFrom, exportMark, docString, type);
-    IF (type. namingDecl = NIL) THEN
+    IF isTypeParameter THEN
+      type := NewTypeVar(type, parent);
+    END;
+    Sym.InitTypeDecl (t, parent, name, visibleFrom, exportMark,
+                      docString, type, isTypeParameter);
+    IF (type # NIL) & (type.namingDecl = NIL) THEN
       type. SetNamingDecl (t);
     END;
     RETURN t
@@ -206,14 +222,15 @@ PROCEDURE (b: Builder) NewProcDecl* (parent: Sym.Item; name: Sym.Name;
                                      visibleFrom: Sym.ModulePos;
                                      exportMark: Sym.ExportMark;
                                      docString: Doc.Document;
-                                     isTypeBound, isForwardDecl: BOOLEAN;
+                                     procClass: SHORTINT;
+                                     isForwardDecl: BOOLEAN;
                                      procAST: AST.Node): Sym.ProcDecl;
   VAR
     procDecl: Sym.ProcDecl;
   BEGIN
     NEW (procDecl);
     Sym.InitProcDecl (procDecl, parent, name, visibleFrom, exportMark, 
-                       docString, isTypeBound, isForwardDecl, procAST);
+                       docString, procClass, isForwardDecl, procAST);
     RETURN procDecl
   END NewProcDecl;
 
@@ -296,6 +313,28 @@ PROCEDURE (b: Builder) NewPointer* (parent: Sym.Item;
     RETURN ptr
   END NewPointer;
 
+PROCEDURE (b: Builder) NewTypePars* (parent: Sym.Item): Sym.TypePars;
+  VAR
+    typePars: Sym.TypePars;
+  BEGIN
+    NEW (typePars);
+    Sym.InitTypePars(typePars, parent);
+    RETURN typePars
+  END NewTypePars;
+
+PROCEDURE (b: Builder) NewQualType* (parent: Sym.Item;
+                                     position: Sym.Position;
+                                     baseType: Sym.Type;
+                                     arguments: Sym.TypeRefArray): Sym.QualType;
+  VAR
+    qualType: Sym.QualType;
+  BEGIN
+    NEW (qualType);
+    Sym.InitQualType(qualType, parent, position, baseType, arguments);
+    EvalContext(b, qualType);
+    RETURN qualType
+  END NewQualType;
+
 PROCEDURE (b: Builder) NewExceptionName*(parent: Sym.Item;
                                          type: Sym.Type): Sym.ExceptionName;
   VAR
@@ -307,13 +346,12 @@ PROCEDURE (b: Builder) NewExceptionName*(parent: Sym.Item;
   END NewExceptionName;
 
 PROCEDURE (b: Builder) NewFormalPars* (parent: Sym.Item;
-                                       position: Sym.Position;
-                                       resultType: Sym.Type): Sym.FormalPars;
+                                       position: Sym.Position): Sym.FormalPars;
   VAR
     fpars: Sym.FormalPars;
   BEGIN
     NEW (fpars);
-    Sym.InitFormalPars (fpars, parent, position, resultType);
+    Sym.InitFormalPars (fpars, parent, position);
     EvalContext(b, fpars);
     RETURN fpars
   END NewFormalPars;
@@ -336,8 +374,8 @@ PROCEDURE (b: Builder) NewModule* (name: Sym.Name; docString: Doc.Document;
     COPY (Sym.declModuleBody, str^);
     Sym.InitName (bodyName, str, -1, -1, -1);
     bodyDecl := b. NewProcDecl (NIL, bodyName, 0, Sym.nameNotExported,
-                                NIL, FALSE, FALSE, NIL);
-    bodyDecl. formalPars := b. NewFormalPars(bodyDecl, name, NIL);
+                                NIL, Sym.standardProc, FALSE, NIL);
+    bodyDecl. formalPars := b. NewFormalPars(bodyDecl, name);
     NEW (bodyDecl. formalPars. params, 0);
     NEW (bodyDecl. formalPars. raises, 0);
     
@@ -350,37 +388,42 @@ PROCEDURE (b: Builder) NewModule* (name: Sym.Name; docString: Doc.Document;
 
 PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
   PROCEDURE CollectFormalPars (item: Sym.Item);
-  (* Sets the field @ofield{Sym.FormalPars.params} for
-     all formal parameter definitions under @oparam{item}.  *)
+  (* Sets the field @ofield{Sym.FormalPars.params} for all formal parameter
+     definitions under @oparam{item}.  Strictly speaking, this is not necessary
+     for the compiler proper because @omodule{*OOC:SymbolTable:CreateNamespace}
+     is already doing this.  For the sake of tools that do not run
+     CreateNamespace, we repeat the process here.  *)
     VAR
       ptr: Sym.Item;
       c: LONGINT;
     BEGIN
       IF (item # NIL) THEN
         WITH item: Sym.FormalPars DO
-          c := 0;
-          ptr := item. nestedItems;
-          WHILE (ptr # NIL) DO
-            IF (ptr IS Sym.VarDecl) & 
-               ptr(Sym.VarDecl). isParameter &
-               ~ptr(Sym.VarDecl). isReceiver THEN
-              INC (c)
+          IF (item.params = NIL) THEN
+            c := 0;
+            ptr := item. nestedItems;
+            WHILE (ptr # NIL) DO
+              IF (ptr IS Sym.VarDecl) & 
+                 ptr(Sym.VarDecl). isParameter &
+                 ~ptr(Sym.VarDecl). isReceiver THEN
+                INC (c)
+              END;
+              ptr := ptr. nextNested
             END;
-            ptr := ptr. nextNested
+            
+            NEW (item. params, c);
+            c := 0;
+            ptr := item. nestedItems;
+            WHILE (ptr # NIL) DO
+              IF (ptr IS Sym.VarDecl) &
+                 ptr(Sym.VarDecl). isParameter &
+                 ~ptr(Sym.VarDecl). isReceiver THEN
+                item. params[c] := ptr(Sym.VarDecl);
+                INC (c)
+              END;
+              ptr := ptr. nextNested
+            END;
           END;
-          
-          NEW (item. params, c);
-          c := 0;
-          ptr := item. nestedItems;
-          WHILE (ptr # NIL) DO
-            IF (ptr IS Sym.VarDecl) &
-               ptr(Sym.VarDecl). isParameter &
-               ~ptr(Sym.VarDecl). isReceiver THEN
-              item. params[c] := ptr(Sym.VarDecl);
-              INC (c)
-            END;
-            ptr := ptr. nextNested
-          END
         ELSE
         END;
         
@@ -443,7 +486,7 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
         ptr := scope. nestedItems;
         WHILE (ptr # NIL) DO
           WITH ptr: Sym.ProcDecl DO
-            IF ptr. isTypeBound &
+            IF ptr.IsTypeBound() &
                (SameType (record, ptr.formalPars.receiver.srcCodeType) OR
                 (pointer # NIL) &
                 SameType (pointer, ptr.formalPars.receiver.srcCodeType)) THEN
@@ -615,7 +658,7 @@ PROCEDURE N (str: ARRAY OF CHAR): Name;
 
 BEGIN
   doAutoImport := noAutoImport;
-  magicNumber := "OOC5";
+  magicNumber := "OOC6";
   
   NEW(autoImport, 3);
   NEW(autoImport[0]);

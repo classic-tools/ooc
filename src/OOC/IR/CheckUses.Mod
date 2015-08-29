@@ -1,4 +1,4 @@
-(* 	$Id: CheckUses.Mod,v 1.14 2003/04/14 19:20:55 mva Exp $	 *)
+(* 	$Id: CheckUses.Mod,v 1.18 2003/05/04 12:03:02 mva Exp $	 *)
 MODULE OOC:IR:CheckUses;
 (*  Warn about uninitialized variables and unreachable code, 
     Copyright (C) 2003  Michael van Acken, Stewart Greenhill
@@ -23,10 +23,10 @@ MODULE OOC:IR:CheckUses;
 IMPORT
   Object, Object:Boxed, ADT:Dictionary, DictInt := ADT:Dictionary:IntValue,
   ADT:ArrayList, Config:Value, Config:Value:Boolean, Msg,
-  OOC:Config:Pragmas, OOC:Config:Pragmas:StdPragmas,
+  OOC:Config:Pragmas, OOC:Config:StdPragmas,
   Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules,
   OOC:SymbolTable:Predef,
-  OOC:Error, OOC:Scanner:Builder:BasicList, OOC:IR, OOC:IR:VisitAll;
+  OOC:Error, OOC:Scanner:BasicList, OOC:IR, OOC:IR:VisitAll;
 
 
 (* Some notes on the dataflow analysis of this module:
@@ -531,6 +531,7 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
     k: Object.ObjectArrayPtr;
     callee: Sym.ProcDecl;
     varDecl: Sym.VarDecl;
+    type: Sym.Type;
   BEGIN
     oldMode := v.mode;
     call.design.Accept(v);
@@ -655,7 +656,8 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
     END;
     
     v.mode := oldMode;
-    IF call.design.type(Sym.FormalPars).noReturn THEN
+    type := call.design.type.Deparam();
+    IF type(Sym.FormalPars).noReturn THEN
       v.def.Unreachable();
     END;
   END VisitCall;
@@ -732,7 +734,8 @@ PROCEDURE CheckUses*(module: IR.Module; moduleDecl: Sym.Module;
             test := prevGuards.array[i](IR.TypeTest);
             IF (test.expr(IR.Var).decl = localTest.expr(IR.Var).decl) &
                TR.IsExtensionOf(localTest.referenceType,
-                                test.referenceType) THEN
+                                test.referenceType) &
+               (v.pass = passEmitWarnings) THEN
               WarnSym(errList, pragmaHistory, localTest.sym, deadTypeTest);
             END;
           END;
@@ -897,7 +900,7 @@ PROCEDURE CheckUses*(module: IR.Module; moduleDecl: Sym.Module;
           CheckStatm(statmSeq[i]);
           INC(i);
         END;
-        IF (i # LEN(statmSeq^)) THEN
+        IF (i # LEN(statmSeq^)) & (v.pass = passEmitWarnings) THEN
           WarnSym(errList, pragmaHistory, statmSeq[i].sym, unreachableCode);
         END;
       END;
@@ -956,6 +959,14 @@ PROCEDURE CheckUses*(module: IR.Module; moduleDecl: Sym.Module;
           nonlocalWrites := TRUE;
           pd.SetWriteFlag(item, doesWrite);
         END;
+      END;
+
+      IF def.unreachable &                 (* no path to end of proc *)
+         ~localProc.formalPars.noReturn &  (* not marked as NO_RETURN *)
+         (~localProc.IsTypeBound() OR      (* normal procedure *)
+          localProc.notRedefined) THEN 
+        localProc.formalPars.noReturn := TRUE;
+        pd.updatedInOut := TRUE;
       END;
     END SetWriteFlags;
 

@@ -27,9 +27,9 @@ extern void OOC_OOC_Config_init(void);
 extern void OOC_OOC_Config_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Config__723;
-extern RT0__StructDesc _td_OOC_Config__1033;
-extern RT0__StructDesc _td_OOC_Config__1398;
+extern RT0__StructDesc _td_OOC_Config__702;
+extern RT0__StructDesc _td_OOC_Config__1012;
+extern RT0__StructDesc _td_OOC_Config__1377;
 #endif /* _MODULE_OOC_Config_ */
 
 /* --- */

@@ -21,7 +21,6 @@
 #define OOC_Parser__illegalFactor 15
 #define OOC_Parser__invalidFlag 16
 #define OOC_Parser__expectExternalKW 17
-#define OOC_Parser__expectLinkSection 18
 #define OOC_Parser__fileNameMismatch 19
 static OOC_Parser__ErrorContext OOC_Parser__parserContext;
 
@@ -29,10 +28,10 @@ static OOC_Parser__ErrorContext OOC_Parser__parserContext;
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Parser__ErrorContext = { (RT0__Struct[]){&_td_OOC_Parser__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Parser__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Parser__ErrorContextDesc}, (void*[]){(void*)OOC_Parser__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Parser__3068 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Parser__7617 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Parser__7641 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Parser__12305 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Parser__3178 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Parser__7667 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Parser__7691 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Parser__12330 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Parser", (RT0__Struct[]) { &_td_OOC_Parser__ErrorContext, &_td_OOC_Parser__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Parser_init0() {

@@ -10,7 +10,7 @@ void ADT_Storable__RaiseTypeError(Object__String msg) {
   e = (ADT_Storable__TypeError)i0;
   IO__InitError((IO__Error)i0, (Object__String)((OOC_INT32)_c0));
   Exception__Raise((void*)i0);
-  return;
+  
   ;
 }
 

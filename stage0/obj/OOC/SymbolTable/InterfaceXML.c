@@ -130,9 +130,9 @@ l4:
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3596)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){98,97,115,101,45,99,108,97,115,115,0}), 11, 0u);
               i0 = (OOC_INT32)w;
               i1 = (OOC_INT32)baseType;
-              i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3902))+52);
+              i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3902))+56);
               i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3913))+12);
-              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3902))+52);
+              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3902))+56);
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 3913))+12);
               i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3918)), 0);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3865)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){99,108,97,115,115,0}), 6, (void*)(_check_pointer(i2, 3918)), i3);
@@ -160,10 +160,10 @@ l4:
               i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4263))+4);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4209)))), XML_Writer__WriterDesc_AttrURI)),XML_Writer__WriterDesc_AttrURI)((XML_Writer__Writer)i2, ((OOC_CHAR16[]){114,101,112,111,115,105,116,111,114,121,45,98,97,115,101,0}), 16, (URI__URI)i0, 0u);
 l3:
-              i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4329))+32);
+              i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4329))+36);
               i0 = i0!=(OOC_INT32)0;
               if (!i0) goto l6;
-              i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4388))+32);
+              i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4388))+36);
               OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteTypeComponent_WriteBaseClass((OOC_SymbolTable__Record)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4403)))), &_td_OOC_SymbolTable__RecordDesc, 4403)));
 l6:
               i0 = (OOC_INT32)w;
@@ -189,20 +189,20 @@ l6:
 l11:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6000)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){102,111,114,109,97,108,45,112,97,114,97,109,101,116,101,114,115,0}), 18, 0u);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6059))+32);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6059))+36);
           i1 = i1!=(OOC_INT32)0;
           if (!i1) goto l14;
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6109))+32);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6109))+36);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem((OOC_SymbolTable__Item)i1);
 l14:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6170))+44);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6170))+48);
           j = 0;
           i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6178)), 0);
           i2 = 0<i1;
           if (!i2) goto l22;
           i2=0;
 l17_loop:
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6213))+44);
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6213))+48);
           i3 = _check_pointer(i3, 6221);
           i4 = OOC_ARRAY_LENGTH(i3, 0);
           i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 6221))*4);
@@ -212,27 +212,27 @@ l17_loop:
           i3 = i2<i1;
           if (i3) goto l17_loop;
 l22:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6259))+40);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6259))+44);
           i1 = i1!=(OOC_INT32)0;
           if (!i1) goto l25;
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6358))+36);
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6333))+40);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6358))+40);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6333))+44);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("result-type", 12, (OOC_SymbolTable__Type)i2, (OOC_SymbolTable__Type)i1);
 l25:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6409))+52);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6409))+56);
           i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6416)), 0);
           i1 = i1!=0;
           if (!i1) goto l36;
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6442)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){114,97,105,115,101,115,0}), 7, 0u);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6504))+52);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6504))+56);
           j = 0;
           i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6511)), 0);
           i2 = 0<i1;
           if (!i2) goto l35;
           i2=0;
 l30_loop:
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6547))+52);
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6547))+56);
           i3 = _check_pointer(i3, 6554);
           i4 = OOC_ARRAY_LENGTH(i3, 0);
           i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 6554))*4);
@@ -252,13 +252,13 @@ l38:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5486)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){114,101,99,111,114,100,0}), 7, 0u);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_ClassAttr((OOC_SymbolTable__Item)i0);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5562))+36);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5562))+40);
           i1 = i1!=(OOC_INT32)0;
           if (!i1) goto l41;
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5655))+32);
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5632))+36);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5655))+36);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5632))+40);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("base-type", 10, (OOC_SymbolTable__Type)i2, (OOC_SymbolTable__Type)i1);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5700))+32);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5700))+36);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteTypeComponent_WriteBaseClass((OOC_SymbolTable__Record)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5715)))), &_td_OOC_SymbolTable__RecordDesc, 5715)));
 l41:
           i0 = (OOC_INT32)type;
@@ -282,7 +282,7 @@ l52:
 l54:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5195)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){97,114,114,97,121,0}), 6, 0u);
-          i1 = *(OOC_UINT8*)((_check_pointer(i0, 5242))+32);
+          i1 = *(OOC_UINT8*)((_check_pointer(i0, 5242))+36);
           i1 = !i1;
           if (!i1) goto l57;
           i1 = (OOC_INT32)w;
@@ -290,8 +290,8 @@ l54:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5317)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i1);
 l57:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5382))+40);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5408))+36);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5382))+44);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5408))+40);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("element-type", 13, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
           i0 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5435)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -300,8 +300,8 @@ l59:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4998)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){112,111,105,110,116,101,114,0}), 8, 0u);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_ClassAttr((OOC_SymbolTable__Item)i0);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5098))+36);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5121))+32);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5098))+40);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5121))+36);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("pointer-base", 13, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
           i0 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5145)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -309,7 +309,7 @@ l59:
 l61:
           i1 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4540)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){116,121,112,101,45,110,97,109,101,0}), 10, 0u);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4591))+32);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4591))+36);
           i1 = i1!=(OOC_INT32)0;
           if (i1) goto l71;
           i1 = (OOC_INT32)resolvedType;
@@ -334,17 +334,17 @@ l68:
           goto l72;
 l71:
           i1 = (OOC_INT32)w;
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4659))+32);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4659))+36);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4667))+12);
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4659))+32);
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4659))+36);
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4667))+12);
           i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4672)), 0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4625)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i2, 4672)), i3);
 l72:
           i1 = (OOC_INT32)w;
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4919))+36);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4919))+40);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4926))+12);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4919))+36);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4919))+40);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4926))+12);
           i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4931)), 0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4887)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){110,97,109,101,0}), 5, (void*)(_check_pointer(i2, 4931)), i0);
@@ -397,7 +397,7 @@ l73:
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("exception", 10, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
       goto l65;
 l20:
-      i1 = *(OOC_UINT8*)((_check_pointer(i0, 9138))+41);
+      i1 = *(OOC_UINT8*)((_check_pointer(i0, 9138))+45);
       i1 = !i1;
       if (!i1) goto l65;
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_StartDecl("procedure", 10, (OOC_SymbolTable__Declaration)i0);
@@ -406,8 +406,8 @@ l20:
       i0 = (OOC_INT32)item;
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_DeclDocString((OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9302))+56);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9320))+56);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9302))+60);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9320))+60);
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteTypeComponent((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
       i0 = (OOC_INT32)w;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9348)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -417,16 +417,16 @@ l25:
       i0 = (OOC_INT32)item;
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_DeclDocString((OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9031))+44);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9050))+40);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9031))+48);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9050))+44);
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("type", 5, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
       i0 = (OOC_INT32)w;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9070)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
       goto l65;
 l27:
-      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8414))+49);
+      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8414))+53);
       if (i1) goto l34;
-      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8491))+48);
+      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8491))+52);
       if (i1) goto l32;
       _copy_8((const void*)"var-decl",(void*)(OOC_INT32)element,32);
       goto l35;
@@ -438,16 +438,16 @@ l34:
 l35:
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_StartDecl((void*)(OOC_INT32)element, 32, (OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
-      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8668))+48);
+      i1 = *(OOC_UINT8*)((_check_pointer(i0, 8668))+52);
       if (!i1) goto l38;
       i1 = (OOC_INT32)w;
-      i2 = *(OOC_UINT8*)((_check_pointer(i0, 8738))+50);
+      i2 = *(OOC_UINT8*)((_check_pointer(i0, 8738))+55);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8700)))), XML_Writer__WriterDesc_AttrBool)),XML_Writer__WriterDesc_AttrBool)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){118,97,114,105,97,98,108,101,45,112,97,114,97,109,101,116,101,114,0}), 19, i2);
 l38:
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_DeclDocString((OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8832))+44);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8851))+40);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8832))+48);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8851))+44);
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("type", 5, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
       i0 = (OOC_INT32)w;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8871)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -457,8 +457,8 @@ l40:
       i0 = (OOC_INT32)item;
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_DeclDocString((OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8307))+44);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8326))+40);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8307))+48);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8326))+44);
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_WriteType("type", 5, (OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0);
       i0 = (OOC_INT32)w;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8346)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -476,15 +476,15 @@ l44:
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_StartDecl("import-decl", 12, (OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)w;
       i1 = (OOC_INT32)item;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7651))+40);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7651))+44);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7663))+12);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7651))+40);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7651))+44);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 7663))+12);
       i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 7668)), 0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7617)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i2, 7668)), i3);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7731))+40);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7731))+44);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7743))+12);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7731))+40);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7731))+44);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7743))+12);
       i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 7748)), 0);
       i3 = (OOC_INT32)repositories;
@@ -558,7 +558,7 @@ l65:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9788)))), XML_UnicodeBuffer__OutputDesc_Write8)),XML_UnicodeBuffer__OutputDesc_Write8)((XML_UnicodeBuffer__Output)i0, "\047>", 3);
   i0 = (OOC_INT32)module;
   i1 = (OOC_INT32)OOC_SymbolTable_Exports__GetExports((OOC_SymbolTable__Module)i0, 0u);
-  OOC_SymbolTable__Prune((OOC_SymbolTable__Module)i0, (ADT_Dictionary__Dictionary)i1);
+  OOC_SymbolTable__Prune((OOC_SymbolTable__Module)i0, (ADT_Dictionary_AddressKey__Dictionary)i1);
   OOC_SymbolTable_InterfaceXML__Write_WriteItem((OOC_SymbolTable__Item)i0);
   i0 = (OOC_INT32)w;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9894)))), XML_Writer__WriterDesc_EndOfText)),XML_Writer__WriterDesc_EndOfText)((XML_Writer__Writer)i0);

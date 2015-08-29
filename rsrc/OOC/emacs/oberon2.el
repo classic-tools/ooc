@@ -1,6 +1,6 @@
 ;;; oberon2.el --- major mode for Oberon-2 editing and compilation
 
-;; Copyright (C) 1995-2002  Michael van Acken  <acken@informatik.uni-kl.de>
+;; Copyright (C) 1995-2003  Michael van Acken  <acken@informatik.uni-kl.de>
 ;; 
 ;; Version: 2.0, requires Emacs 21.2
 
@@ -55,11 +55,11 @@ Used by command \\[o2-make].")
   "*Command called with module name to generate the module's exported definition
 from its symbol file.")
 
-(defvar o2-list-uses-command "oocn -v --uses "
+(defvar o2-list-uses-command "oo2c --uses "
   "*Command called with declaration and module name to list all uses of the
 declaration in all modules imported by the given module.")
 
-(defvar o2-moddef-command "oocn -d "
+(defvar o2-moddef-command "oob -x "
   "*Command called with module name to extract the module's exported definition
 from its source code.")
 
@@ -680,7 +680,7 @@ flag) will be copied from the exisiting definition of the procedure <name> for t
 
 ;;; Here starts the code for the modified outline functions:
 
-(defconst o2-proc-regexp "\\([ \t]*\\)PROCEDURE[ \t]*\\(\\([-*+]\\|([a-zA-Z0-9 \t:]+)\\)[ \t]*\\)?\\(\\[[^\\]*\\][ \t]*\\)?"
+(defconst o2-proc-regexp "\\([ \t]*\\)PROCEDURE[ \t]*\\(\\([-*+]\\|([a-zA-Z0-9 \t:(,)]+)\\)[ \t]*\\)?\\(\\[[^\\]*\\][ \t]*\\)?"
 ;; Ugly. This should match any procedure header (including type-bound 
 ;; procedures) until just before the actual procedure name.  It won't
 ;; match a procedure forward declaration!
@@ -1588,7 +1588,7 @@ and move to the source code position that caused it."
 ;; comments are placed between the keyword PROCEDURE and the procedure name.
 (defun o2-beg-proc-re (&optional proc-name force-tb)
   (if proc-name
-      (concat "\\<PROCEDURE\\s-*\\((\\([a-zA-Z0-9 \t:]+\\))\\s-*\\)"
+      (concat "\\<PROCEDURE\\s-*\\((\\([a-zA-Z0-9 \t:(,)]+\\))\\s-*\\)"
 	      (if force-tb "" "?")
 	      o2-system-flags-re "\\s-*\\(" proc-name "\\>\\)")
     (o2-beg-proc-re o2-ident-re force-tb)))
@@ -1875,7 +1875,7 @@ procedure is part of the region."
       ;; keyword list before make-regexp: "RECORD\\|ARRAY\\|OF\\|POINTER\\|TO\\|BEGIN\\|END\\|FOR\\|BY\\|IF\\|THEN\\|ELSE\\|ELSIF\\|CASE\\|WHILE\\|DO\\|MODULE\\|FROM\\|RETURN\\|IMPORT\\|VAR\\|LOOP\\|UNTIL\\|OR\\|DIV\\|MOD\\|EXIT\\|IN\\|IS\\|REPEAT\\|WITH\\|TRY\\|CATCH\\|RAISES\\|CONST\\|TYPE\\|PROCEDURE"
       "ARRAY\\|B\\(EGIN\\|Y\\)\\|C\\(ASE\\|ONST\\|ATCH\\)\\|D\\(IV\\|O\\)\\|E\\(LS\\(E\\|IF\\)\\|ND\\|XIT\\)\\|F\\(OR\\|ROM\\)\\|I\\([FNS]\\|MPORT\\)\\|LOOP\\|MOD\\(\\|ULE\\)\\|O[FR]\\|P\\(OINTER\\|ROCEDURE\\)\\|R\\(AISES\\|E\\(CORD\\|PEAT\\|TURN\\)\\)\\|T\\(HEN\\|O\\|RY\\|YPE\\)\\|UNTIL\\|VAR\\|W\\(HILE\\|ITH\\)")
      (o2-proc-header
-      "\\<\\(PROCEDURE\\)\\s-*\\((\\([a-zA-Z0-9 	:]+\\))\\s-*\\)?\\(\\[.*\\]\\)?\\s-*\\(\\<[a-zA-Z_][a-zA-Z_0-9]*\\>\\>\\)")
+      "\\<\\(PROCEDURE\\)\\s-*\\((\\([a-zA-Z0-9 	:(,)]+\\))\\s-*\\)?\\(\\[.*\\]\\)?\\s-*\\(\\<[a-zA-Z_][a-zA-Z_0-9]*\\>\\>\\)")
      (o2-module-header
       "\\<\\(MODULE\\)\\s-+\\([a-zA-Z0-9_]+\\)\\>"))
   
@@ -1905,7 +1905,7 @@ procedure is part of the region."
     oberon-2-font-lock-keywords-2
     ;; Fontify exported identifiers as bold text
     (list
-     '("\\(\\<[a-zA-Z_][a-zA-Z_0-9]*\\)\\s-*[-*]\\s-*[=:,]"
+     '("\\(\\<[a-zA-Z_][a-zA-Z_0-9]*\\)\\s-*[-*]\\s-*[(=:,]"
        1 o2-font-lock-export-face prepend)
      '("PROCEDURE.*\\(\\<[a-zA-Z_][a-zA-Z_0-9]*\\)\\s-*\\*\\s-*[(;[]"
        1 o2-font-lock-export-face prepend)))))

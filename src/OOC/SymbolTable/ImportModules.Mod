@@ -1,4 +1,4 @@
-(* 	$Id: ImportModules.Mod,v 1.10 2003/01/31 13:34:15 mva Exp $	 *)
+(* 	$Id: ImportModules.Mod,v 1.12 2003/05/11 14:52:54 mva Exp $	 *)
 MODULE OOC:SymbolTable:ImportModules;
 (*  Retrieve exported symbol data for imported modules.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken

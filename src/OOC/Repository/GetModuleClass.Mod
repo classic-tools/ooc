@@ -1,4 +1,4 @@
-(* 	$Id: GetModuleClass.Mod,v 1.2 2002/07/09 19:22:03 mva Exp $	 *)
+(* 	$Id: GetModuleClass.Mod,v 1.3 2003/04/16 10:32:36 mva Exp $	 *)
 MODULE OOC:Repository:GetModuleClass;
 (*  Determine the list of modules imported by a given module.
     Copyright (C) 2002  Michael van Acken
@@ -24,7 +24,7 @@ MODULE OOC:Repository:GetModuleClass;
 IMPORT
   Msg,
   OOC:Config, Rep := OOC:Repository, OOC:Error, OOC:Scanner:InputBuffer, 
-  OOC:Scanner, OOC:Scanner:Builder:BasicList,
+  OOC:Scanner, OOC:Scanner:BasicList,
   OOC:Parser, OOC:AST, OOC:AST:ExtTree, Sym := OOC:SymbolTable;
   
 

@@ -23,8 +23,8 @@ extern void OOC_OOC_C_Naming_init0(void);
 extern RT0__StructDesc _td_OOC_C_Naming__Buffer;
 extern RT0__StructDesc _td_OOC_C_Naming__1017;
 extern RT0__StructDesc _td_OOC_C_Naming__4360;
-extern RT0__StructDesc _td_OOC_C_Naming__5039;
-extern RT0__StructDesc _td_OOC_C_Naming__6690;
+extern RT0__StructDesc _td_OOC_C_Naming__5300;
+extern RT0__StructDesc _td_OOC_C_Naming__6979;
 #endif /* _MODULE_OOC_C_Naming_ */
 
 /* --- */

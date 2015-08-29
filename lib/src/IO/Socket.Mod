@@ -1,9 +1,7 @@
-(*	$Id: Socket.Mod,v 1.6 2003/04/04 07:59:30 sgreenhill Exp $	*)
+(*	$Id: Socket.Mod,v 1.7 2003/05/12 03:56:36 sgreenhill Exp $	*)
 MODULE IO:Socket [FOREIGN "C"; LINK FILE "Socket.c"
-  <* IF TARGET_OS="Win32" THEN *> ; LIB "wsock32" <* END *>
+  <* IF HAVE_LIB_WSOCK32 THEN *> ; LIB "wsock32" <* END *>
   END];
-(* 
-MODULE IO:Socket [FOREIGN "C"; LINK FILE "Socket.c" END]; *)
 (*  Server and client sockets for TCP streams.
     Copyright (C) 2003  Michael van Acken
 

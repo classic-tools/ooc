@@ -3,7 +3,7 @@
 #include <OOC/Config.oh>
 #include <OOC/Scanner/InputBuffer.oh>
 #include <OOC/Scanner.oh>
-#include <OOC/Scanner/Builder/BasicList.oh>
+#include <OOC/Scanner/BasicList.oh>
 #include <OOC/Parser.oh>
 #include <OOC/AST/ExtTree.oh>
 #include <OOC/SymbolTable/Builder.oh>

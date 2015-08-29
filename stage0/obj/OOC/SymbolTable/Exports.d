@@ -2,6 +2,7 @@
 #include <Log.oh>
 #include <OOC/SymbolTable/Builder.oh>
 #include <OOC/Doc.oh>
+#include <ADT/Dictionary/AddressKey.oh>
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

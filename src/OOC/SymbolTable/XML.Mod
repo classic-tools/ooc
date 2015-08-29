@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.9 2003/02/02 17:58:38 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.15 2003/05/06 22:00:01 mva Exp $	 *)
 MODULE OOC:SymbolTable:XML;
 (*  Converts symbol table to XML document.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
@@ -22,6 +22,7 @@ MODULE OOC:SymbolTable:XML;
 
 IMPORT
   Strings, Object, IO, XML:Writer, XML:UnicodeCodec:Latin1,
+  Dictionary := ADT:Dictionary:IntValue, 
   Sym := OOC:SymbolTable, OOC:SymbolTable:GetClass,
   DocXML := OOC:Doc:Output:XML;
 
@@ -58,6 +59,7 @@ RAISES IO.Error;
     w: Writer.Writer;
     counter: LONGINT;
     items: POINTER TO ARRAY OF Sym.Item;
+    floatingItems: Dictionary.Dictionary;
     
   PROCEDURE CountItems (item: Sym.Item): LONGINT;
     VAR
@@ -96,10 +98,17 @@ RAISES IO.Error;
       i: LONGINT;
     BEGIN
       i := 0;
-      WHILE (items[i] # item) DO
+      WHILE (i # LEN(items^)) & (items[i] # item) DO
         INC (i)
       END;
-      RETURN i
+      IF (i = LEN(items^)) THEN
+        IF ~floatingItems.HasKey(item) THEN
+          floatingItems.Set(item, -(floatingItems.Size()+1));
+        END;
+        RETURN floatingItems.Get(item);
+      ELSE
+        RETURN i;
+      END;
     END Id;
   
   
@@ -219,6 +228,7 @@ RAISES IO.Error;
             element := "field_decl"
           | item: Sym.PredefProc DO
             element := "predef_proc"
+          | item: Sym.Redirect DO
           END;
           
           StartTag (element, Id (item));
@@ -253,13 +263,16 @@ RAISES IO.Error;
           | item: Sym.Import DO
             NameAttributes (item. moduleName, "imported_module_")
           | item: Sym.ProcDecl DO
-            AttribBool ("", "is_type_bound", item. isTypeBound);
+            AttribBool ("", "is_type_bound", item.IsTypeBound());
             AttribBool ("", "is_forward_decl", item. isForwardDecl);
-            IF item. isTypeBound THEN
+            IF item.IsTypeBound() THEN
               AttribInt ("", "tb_proc_index", item. tbProcIndex)
             END
           | item: Sym.ConstDecl DO
           | item: Sym.TypeDecl DO
+            IF item.isTypeParameter THEN
+              AttribBool("", "is_type_parameter", item.isTypeParameter);
+            END;
             AttribTypeId ("", "type_id", item. type)
           | item: Sym.VarDecl DO
             AttribBool ("", "is_parameter", item. isParameter);
@@ -270,11 +283,19 @@ RAISES IO.Error;
             AttribTypeId ("", "type_id", item. type)
           | item: Sym.PredefProc DO
             (* FIXME... what to write here? *)
+          | item: Sym.Redirect DO
+            AttribString ("", "module", item.module.str^);
+            AttribString ("", "name", item.name.str^);
           END;
           
           IF (item. docString # NIL) THEN
             DocXML.WriteOberonDoc (w, item. docString, module, NIL, NIL, NIL)
           END;
+          WriteNested (item);
+          w. EndTag
+          
+        | item: Sym.TypePars DO
+          StartTag ("type_pars", Id (item));
           WriteNested (item);
           w. EndTag
           
@@ -291,11 +312,18 @@ RAISES IO.Error;
             element := "procedure_type"
           | item: Sym.PredefType DO
             element := "predef_type"
+          | item: Sym.TypeVar DO
+            element := "type_var"
+          | item: Sym.QualType DO
+            element := "qual_type"
           END;
           StartTag (element, Id (item));
 
           IF ~(item IS Sym.PredefType) THEN
             PositionAttributes (item. position, "");
+          END;
+          IF (item.typePars # NIL) THEN
+            AttribInt("", "type_pars_id", Id(item.typePars));
           END;
           ClassAttributes (item);
           WITH item: Sym.TypeName DO
@@ -329,10 +357,19 @@ RAISES IO.Error;
             END
           | item: Sym.PredefType DO
             (* FIXME... what to write here? *)
+          | item: Sym.TypeVar DO
+            AttribTypeId ("", "bound_id", item. bound)
+          | item: Sym.QualType DO
+            AttribTypeId ("", "base_type_id", item. baseType);
           END;
           
           WriteNested (item);
-          w. EndTag
+          w. EndTag;
+              
+        | item: Sym.ExceptionName DO
+          StartTag ("exception_name", Id (item));
+          AttribTypeId ("", "type_id", item. type);
+          w. EndTag;
         END
       END
     END WriteItem;
@@ -345,6 +382,7 @@ RAISES IO.Error;
     NEW (items, CountItems (module));
     StoreId (module, counter);
     ASSERT (counter = LEN (items^));
+    floatingItems := Dictionary.New();
     
     WriteItem (module);
     w. EndOfText

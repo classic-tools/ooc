@@ -44,13 +44,11 @@ extern void OOC_URI_Scheme_File_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Scheme_File__URI;
 extern RT0__StructDesc _td_URI_Scheme_File__URIDesc;
-extern RT0__StructDesc _td_URI_Scheme_File__4824;
-extern RT0__StructDesc _td_URI_Scheme_File__4936;
-extern RT0__StructDesc _td_URI_Scheme_File__5037;
-extern RT0__StructDesc _td_URI_Scheme_File__5667;
-extern RT0__StructDesc _td_URI_Scheme_File__6633;
-extern RT0__StructDesc _td_URI_Scheme_File__7196;
-extern RT0__StructDesc _td_URI_Scheme_File__7388;
+extern RT0__StructDesc _td_URI_Scheme_File__2214;
+extern RT0__StructDesc _td_URI_Scheme_File__2873;
+extern RT0__StructDesc _td_URI_Scheme_File__3839;
+extern RT0__StructDesc _td_URI_Scheme_File__4407;
+extern RT0__StructDesc _td_URI_Scheme_File__4599;
 #endif /* _MODULE_URI_Scheme_File_ */
 
 /* --- */

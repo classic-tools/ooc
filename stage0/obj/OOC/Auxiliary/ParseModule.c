@@ -2,26 +2,26 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 checkModuleName, OOC_CHAR8 createNamespace, OOC_CHAR8 writeSymbolFile, OOC_CHAR8 abortAfterImport, Object__String libraryName, OOC_AST__Node *ast, OOC_SymbolTable__Module *symTab, OOC_Config_Pragmas__History *pragmaHistory, OOC_Error__List *errList) {
+void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 checkModuleName, OOC_CHAR8 createNamespace, OOC_CHAR8 writeSymbolFile, OOC_CHAR8 abortAfterImport, Object__String libraryName, OOC_SymbolTable_Uses__Uses uses, OOC_AST__Node *ast, OOC_SymbolTable__Module *symTab, OOC_Config_Pragmas__History *pragmaHistory, OOC_Error__List *errList) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
   OOC_Scanner_InputBuffer__Buffer inputBuffer;
   URI__URI uri;
   OOC_Repository__URIBuffer uriStr;
-  OOC_Scanner_Builder_BasicList__Builder scannerBuilder;
+  OOC_Scanner_BasicList__Builder scannerBuilder;
   OOC_UINT32 scannerFlags;
   OOC_AST_ExtTree__Builder astBuilder;
   OOC_UINT32 parserFlags;
   OOC_SymbolTable_Builder__Builder stb;
 
   i0 = (OOC_INT32)m;
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1820)))), OOC_Repository__ModuleDesc_GetInputBuffer)),OOC_Repository__ModuleDesc_GetInputBuffer)((OOC_Repository__Module)i0);
+  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1875)))), OOC_Repository__ModuleDesc_GetInputBuffer)),OOC_Repository__ModuleDesc_GetInputBuffer)((OOC_Repository__Module)i0);
   inputBuffer = (OOC_Scanner_InputBuffer__Buffer)i1;
   i2 = i1==(OOC_INT32)0;
   if (i2) goto l34;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2107))+20);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2162))+20);
   *errList = (OOC_Error__List)i2;
-  i3 = (OOC_INT32)OOC_Scanner_Builder_BasicList__New((OOC_Scanner_InputBuffer__Buffer)i1, 1u);
-  scannerBuilder = (OOC_Scanner_Builder_BasicList__Builder)i3;
+  i3 = (OOC_INT32)OOC_Scanner_BasicList__New((OOC_Scanner_InputBuffer__Buffer)i1, 1u);
+  scannerBuilder = (OOC_Scanner_BasicList__Builder)i3;
   scannerFlags = 31u;
   i4 = abortAfterImport;
   if (i4) goto l5;
@@ -35,7 +35,7 @@ l6:
   i6 = (OOC_INT32)OOC_Config__pragmas;
   OOC_Scanner__ScanInput((OOC_Scanner_Builder__Builder)i3, (OOC_Config_Pragmas__Section)i6, i5);
   OOC_Scanner_InputBuffer__BufferDesc_Close((OOC_Scanner_InputBuffer__Buffer)i1);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2452))+4);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2507))+4);
   *pragmaHistory = (OOC_Config_Pragmas__History)i1;
   *ast = (OOC_AST__Node)(OOC_INT32)0;
   i1 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
@@ -47,22 +47,22 @@ l9:
   astBuilder = (OOC_AST_ExtTree__Builder)i1;
   i5 = checkModuleName;
   if (!i5) goto l12;
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2634))+4);
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2634))+4);
-  i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 2640)), 0);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2616)))), OOC_AST__BuilderDesc_SetModuleName)),OOC_AST__BuilderDesc_SetModuleName)((OOC_AST__Builder)i1, (void*)(_check_pointer(i5, 2640)), i6);
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2689))+4);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2689))+4);
+  i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 2695)), 0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2671)))), OOC_AST__BuilderDesc_SetModuleName)),OOC_AST__BuilderDesc_SetModuleName)((OOC_AST__Builder)i1, (void*)(_check_pointer(i5, 2695)), i6);
 l12:
-  parserFlags = (-17u);
+  parserFlags = (-33u);
   if (i4) goto l15;
-  i4=(-17u);
+  i4=(-33u);
   goto l16;
 l15:
-  i4 = _clear_bit((_set_bit((-17u),4)),3);
+  i4 = _clear_bit((_set_bit((-33u),5)),3);
   parserFlags = i4;
   
 l16:
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2894))+8);
-  i1 = (OOC_INT32)OOC_Parser__Module((OOC_Scanner_Builder_BasicList__Symbol)i3, (OOC_AST__Builder)i1, (OOC_Error__List)i2, i4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2949))+8);
+  i1 = (OOC_INT32)OOC_Parser__Module((OOC_Scanner_BasicList__Symbol)i3, (OOC_AST__Builder)i1, (OOC_Error__List)i2, i4);
   *ast = (OOC_AST__Node)i1;
   
 l17:
@@ -71,9 +71,9 @@ l17:
   if (!i3) goto l35;
   i3 = (OOC_INT32)OOC_SymbolTable_Builder__New();
   stb = (OOC_SymbolTable_Builder__Builder)i3;
-  i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3143)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 0u);
-  i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3201));
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 3209))+4);
+  i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3198)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 0u);
+  i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3256));
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 3264))+4);
   i6 = (OOC_INT32)libraryName;
   i1 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__CreateSymTab((OOC_AST__Node)i1, (OOC_SymbolTable_Builder__Builder)i3, (Object__String)i6, (URI__HierarchicalURI)i4, (URI__HierarchicalURI)i5);
   *symTab = (OOC_SymbolTable__Module)i1;
@@ -81,7 +81,8 @@ l17:
   if (!i3) goto l35;
   i3 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (!i3) goto l24;
-  OOC_SymbolTable_CreateNamespace__CreateNamespace((OOC_SymbolTable__Module)i1, (OOC_Error__List)i2);
+  i3 = (OOC_INT32)uses;
+  OOC_SymbolTable_CreateNamespace__CreateNamespace((OOC_SymbolTable__Module)i1, (OOC_SymbolTable_Uses__Uses)i3, (OOC_Error__List)i2);
 l24:
   i3 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (i3) goto l27;
@@ -98,9 +99,9 @@ l34:
   *ast = (OOC_AST__Node)(OOC_INT32)0;
   *symTab = (OOC_SymbolTable__Module)(OOC_INT32)0;
   *pragmaHistory = (OOC_Config_Pragmas__History)(OOC_INT32)0;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1953)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 1u);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2008)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 1u);
   uri = (URI__URI)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2007)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)uriStr, 1024);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2062)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)uriStr, 1024);
   i0 = (OOC_INT32)OOC_Error__NewList((void*)(OOC_INT32)uriStr, 1024);
   *errList = (OOC_Error__List)i0;
 l35:

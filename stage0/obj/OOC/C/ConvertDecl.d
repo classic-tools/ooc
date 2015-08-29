@@ -2,6 +2,7 @@
 #include <Object.oh>
 #include <Object/BigInt.oh>
 #include <OOC/SymbolTable/Predef.oh>
+#include <OOC/SymbolTable/TypeRules.oh>
 #include <OOC/C/Naming.oh>
 #define OOC_C_ConvertDecl__modeWriteExported 0
 #define OOC_C_ConvertDecl__modeWritePrivate 1

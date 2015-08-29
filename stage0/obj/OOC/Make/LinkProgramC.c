@@ -104,13 +104,13 @@ l15:
 
       i0 = (OOC_INT32)module;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2619))+12);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2626))+48);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2626))+52);
       i1 = i1==(OOC_INT32)0;
       if (i1) goto l3;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2665))+12);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2672))+48);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2672))+52);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2665))+12);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2672))+48);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2672))+52);
       i2 = (OOC_INT32)thisLibrary;
       i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2684)))), Object__StringDesc_Equals)),Object__StringDesc_Equals)((Object__String)i0, (Object__Object)i2);
       
@@ -199,7 +199,7 @@ l3_loop:
   i1 = i;
   i1 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i1, moduleList_0d, OOC_UINT32, 3925))*4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3928))+12);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3935))+56);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3935))+60);
   linkDirective = (OOC_SymbolTable__LinkDirective)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l31;
@@ -294,7 +294,7 @@ l39_loop:
   i0 = i;
   i0 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)moduleList+(_check_index(i0, moduleList_0d, OOC_UINT32, 5435))*4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5438))+12);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5445))+56);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5445))+60);
   linkDirective = (OOC_SymbolTable__LinkDirective)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l53;
@@ -373,7 +373,7 @@ l7_loop:
   _assert((i6==4), 127, 6913);
   i6 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i5, imports_0d, OOC_UINT32, 7002))*4);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7005))+12);
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7012))+48);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7012))+52);
   libraryName = (Object__String)i6;
   i7 = i6!=(OOC_INT32)0;
   if (i7) goto l10;
@@ -404,7 +404,7 @@ l17:
   if (!i6) goto l21;
   i6 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i5, imports_0d, OOC_UINT32, 7318))*4);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7321))+12);
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7328))+48);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7328))+52);
   ADT_Dictionary__DictionaryDesc_Set((ADT_Dictionary__Dictionary)i1, (Object__Object)i6, (Object__Object)(OOC_INT32)0);
   i6 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i5, imports_0d, OOC_UINT32, 7389))*4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7374)))), ADT_ArrayList__ArrayListDesc_Append)),ADT_ArrayList__ArrayListDesc_Append)((ADT_ArrayList__ArrayList)i2, (Object__Object)i6);
@@ -438,7 +438,7 @@ l32_loop:
   if (i5) goto l35;
   Strings__Append(" -l", 4, (void*)(OOC_INT32)str, 16384);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8456))+12);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8463))+48);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8463))+52);
   i4 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 8483)))), &_td_Object__String8Desc, 8483)));
   chars = (Object__CharsLatin1)i4;
   i5 = OOC_ARRAY_LENGTH((_check_pointer(i4, 8535)), 0);

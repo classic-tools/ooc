@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.213 2003/04/12 14:06:29 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.242 2003/05/11 15:13:45 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -22,14 +22,14 @@ MODULE OOC:IR [OOC_EXTENSIONS];
 
 IMPORT
 Log,
-  Msg, Object, Object:Boxed, Object:BigInt,
+  Msg, Object, Object:Boxed, Object:BigInt, Strings,
   ADT:ArrayList, ADT:StringBuffer,
   Config:Value, BooleanValue := Config:Value:Boolean, 
-  Id := OOC:Scanner:Symbol, OOC:Scanner:Builder:BasicList, OOC:Error,
-  OOC:Config:Pragmas, OOC:Config:Pragmas:StdPragmas,
+  Id := OOC:Scanner:Symbol, OOC:Scanner:BasicList, OOC:Error,
+  OOC:Config:Pragmas, OOC:Config:StdPragmas,
   OOC:AST, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Namespace,
-  OOC:SymbolTable:CreateNamespace;
+  OOC:SymbolTable:CreateNamespace, OOC:SymbolTable:Uses;
 
 (**Some rules regarding the intermediate representation (short ``IR''):
 
@@ -410,13 +410,31 @@ TYPE
   END;
   
 TYPE
+  Constructor* = POINTER TO ConstructorDesc;
+  NewObject* = POINTER TO NewObjectDesc;
+  Call* = POINTER TO CallDesc;
+  ConstructorDesc = RECORD
+  (**Combination of @code{NEW} and a call to a initialization function.  The
+     result of this operation is the initialized pointer.  The new object's
+     pointer value not stored in a public place before the initialization is
+     completed.  *)
+    (OperatorDesc)
+    alloc-: NewObject;
+    (**The call to @otype{NewObject} that creates the object on the heap.  *)
+    init-: Call;
+    (**Call to the @samp{INIT} method.  If there is no such method, then this
+       field is @code{NIL}.  Otherwise, it is a regular @otype{Call} with a
+       receiver argument of @code{NIL}.  The back-end must replace the receiver
+       with the result of @ofield{alloc}.  *)
+  END;
+  
+TYPE
   Deref* = POINTER TO DerefDesc;
   DerefDesc = RECORD
     (OperatorDesc)
     (**The deref operator takes a pointer value and returns the referenced
        value.  *)
     pointer-: Expression;
-    derefType-: Sym.Type;
     checkPointer-: BOOLEAN;
     (**If @code{TRUE}, then a run-time error should be reported if the
        pointer value is @code{NIL}.  *)
@@ -482,7 +500,6 @@ TYPE
   END;
 
 TYPE
-  NewObject* = POINTER TO NewObjectDesc;
   NewObjectDesc = RECORD
     (**Allocates a new object on the heap and returns a pointer to it.
        The type of the new pointer value is stored in @ofield{type}.  *)
@@ -529,9 +546,6 @@ TYPE
     checkPointer-: BOOLEAN;
     (**If @code{TRUE}, then a run-time error should be reported if the
        receiver value is @code{NIL}.  *)
-    
-    recordType-: Sym.Record;
-    (**The record type of which the type-bound procedure is called.  *)
     
     tbProc-: Sym.ProcDecl;
     (**The static procedure that is referenced by the call's designator
@@ -653,7 +667,7 @@ TYPE
        where @samp{P} is some @samp{POINTER TO R}.  *)
     (OperatorDesc)
     expr-: Expression;
-    referenceType-: Sym.Record;
+    referenceType-: Sym.Type;  (* record or qualified record *)
     checkPointer-: BOOLEAN;
     (**If @code{TRUE}, then a run-time error should be reported if the
        left side of the type test is @code{NIL}.  *)
@@ -716,6 +730,14 @@ TYPE
 TYPE
   TypeRefDesc = RECORD
     (ReferenceDesc)
+    qualType-: Sym.Type;
+    (**For non-parametric types, this field is a reference to the type of the
+       referenced type declaration.  In this case it is a shortcut for
+       @samp{decl(Sym.TypeDecl).type}.  For parametric types, it is a reference
+       to an instance of @otype{Sym.QualType} whose base type is
+       @samp{decl(Sym.TypeDecl).type}.  The instance is private to to IR; that
+       is, it is not part of the symbol table and its @ofield{Sym.Type.parent}
+       is @code{NIL}.  *)
   END;
 
 TYPE
@@ -767,7 +789,6 @@ TYPE
   END;
   
 TYPE
-  Call* = POINTER TO CallDesc;
   CallDesc = RECORD
     (**Calls to normal functions and procedures are mapped to this class.  It
        is not used to represent calls to type-bound procedures, nor to
@@ -1038,6 +1059,7 @@ TYPE
     pragmaHistory: Pragmas.History;
     errList: Error.List;
     constFold- : ConstFold;
+    uses: Uses.Uses;
     
     errorExpr-: Const;
     (**This value is returned if there is no real value because of an error.
@@ -1147,6 +1169,13 @@ CONST
   moduleUnhandledException = 64;
   unreachableGuard = 65;
   untriggeredCatch = 66;
+  notTypeInstance = 67;
+  crossProcSuperCall = 68;
+  notParametricType = 69;           (* used as in CreateNamespace *)
+  tooFewTypeArgs = 70;              (* used as in CreateNamespace *)
+  tooManyTypeArgs = 71;             (* used as in CreateNamespace *)
+  notExtensionOfBound = 72;         (* used as in CreateNamespace *)
+  notRecordPointerType = 73;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -1236,9 +1265,9 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
     | exprByRef:
       t := "Expression may not be passed by reference"
     | incompatibleActualParam:
-      t := "Type of actual parameter is not compatible with formal type"
+      t := "Argument not compatible with formal type `${name}'"
     | incompatibleAssignment:
-      t := "Type of expression is not compatible with variable type"
+      t := "Expression not compatible with variable type `${name}'"
     | wrongNumberOfArguments:
       t := "Wrong number of arguments"
     | invalidIntegerConst:
@@ -1292,7 +1321,7 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
     | tooManyArguments:
       t := "Too many arguments"
     | notVarParCompatible:
-      t := "Actual parameter not compatible with formal VAR parameter"
+      t := "Argument not compatible with formal VAR parameter `${name}'"
     | redirectFailed:
       t := "Internal error: Name redirection failed"
     | readOnlyParameter:
@@ -1345,6 +1374,20 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := Error.warningPrefix+"Unreachable guard"
     | untriggeredCatch:
       t := Error.warningPrefix+"Type matches none of the raised exceptions"
+    | notTypeInstance:
+      t := "Type test requires static type instance"
+    | crossProcSuperCall:
+      t := "Cross procedure super call"
+    | notParametricType:
+      t := "This is not a parametric type"
+    | tooFewTypeArgs:
+      t := "Too few type arguments"
+    | tooManyTypeArgs:
+      t := "Too many type arguments"
+    | notExtensionOfBound:
+      t := "This is not an extension of the type bound"
+    | notRecordPointerType:
+      t := "Not a record pointer type"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
@@ -1415,6 +1458,47 @@ PROCEDURE (b: Builder) ErrSym* (code: Error.Code; sym: Symbol);
     b. lastError := e;
   END ErrSym;
 
+PROCEDURE (b: Builder) SetNameToType(type: Sym.Type);
+(* For the most recent error message, set the attribute `name' to the type name
+   of `type', if one is available.  *)
+  VAR
+    module: Sym.Module;
+    name: ARRAY 256 OF CHAR;
+  BEGIN
+    IF (type.namingDecl # NIL) THEN
+      module := type.namingDecl.Module();
+      IF (module.name.str[0] = "#") OR (type IS Sym.TypeVar) THEN
+        (* predefined type names have no module name, and for type variables
+           the module name is of no importance *)
+        name := "";
+      ELSE
+        COPY(module.name.str^, name);
+        Strings.Append(".", name);
+      END;
+      Strings.Append(type.namingDecl.name.str^, name);
+    ELSE
+      type := type.Deparam();
+      WITH type: Sym.TypeName DO
+        COPY(type.module.str^, name);
+        Strings.Append(".", name);
+        Strings.Append(type.ident.str^, name);
+      | type: Sym.Pointer DO
+        name := "POINTER";
+      | type: Sym.FormalPars DO
+        name := "PROCEDURE";
+      | type: Sym.Array DO
+        name := "ARRAY";
+      | type: Sym.Record DO
+        name := "RECORD";
+      | type: Sym.TypeVar DO
+        name := "TYPE_VAR";
+      | type: Sym.PredefType DO
+        name := "unknown";
+      END;
+    END;
+    b.lastError.SetStringAttrib("name", Msg.GetStringPtr(name));
+  END SetNameToType;
+
 PROCEDURE GetPragmaValue (b: Builder; pragma: Pragmas.Pragma; charPos: Pragmas.CharPos): BOOLEAN;
   VAR
     value: Value.Value;
@@ -1473,16 +1557,29 @@ PROCEDURE (b: Builder) GetName* (sym: Symbol): Sym.Name;
     RETURN name
   END GetName;
 
+PROCEDURE (b: Builder) GetName2* (sym: Symbol; str: ARRAY OF CHAR): Sym.Name;
+  VAR
+    name: Sym.Name;
+    s: Sym.NameString;
+  BEGIN
+    NEW(s, Strings.Length(str)+1);
+    COPY(str, s^);
+    
+    NEW (name);
+    Sym.InitName (name, s, sym. pos, sym. line, sym. column);
+    RETURN name
+  END GetName2;
+
 PROCEDURE (b: Builder) AssertType* (expr: Expression): Sym.Type;
 (**Generates an error if @oparam{expr} is not a type name.  In this case,
    result is @code{NIL}.  Otherwise, the type to which the expression refers is
    returned.  *)
   BEGIN
     WITH expr: TypeRef DO
-      RETURN expr. decl(Sym.TypeDecl). type;
+      RETURN expr.qualType;
     ELSE  (* not a type: report error *)
-      b. ErrSym (notTypeExpression, expr. sym);
-      RETURN expr. type;
+      b.ErrSym(notTypeExpression, expr.sym);
+      RETURN expr.type;
     END;
   END AssertType;
 
@@ -1515,8 +1612,17 @@ PROCEDURE ^ (b: Builder) NewCopyString* (sym: Symbol; source, dest, maxLength: E
 PROCEDURE ^ (b: Builder) NewCall* (design: Expression;
                                    arguments: ExpressionList;
                                    isFunctionCall: BOOLEAN;
+                                   context: Sym.Item;
                                    endOfArgsSym: Symbol): Expression;
 
+PROCEDURE ^ (b: Builder) NewNewObject (sym: Symbol; type: Sym.Type;
+                                       args: ExpressionList): NewObject;
+  
+PROCEDURE ^ (b: Builder) NewSelectProc (sym: Symbol; receiver: Expression;
+                                        recordType: Sym.Type;
+                                        tbProc: Sym.ProcDecl;
+                                        tbProcSym: Symbol;
+                                        isStaticCall: BOOLEAN): SelectProc;
 PROCEDURE ^ (b: Builder) Widen (VAR expr: Expression; type: Sym.Type): BOOLEAN;
 
 PROCEDURE (b : Builder) CheckFunctionOp(expr : Expression; op : Symbol);
@@ -2236,26 +2342,101 @@ PROCEDURE (op: Concat) Accept* (v: Visitor);
     v. VisitConcat (op)
   END Accept;
 
+(* Operator Class: Constructor
+   ------------------------------------------------------------------------ *)
+
+PROCEDURE InitConstructor (cons: Constructor; sym: Symbol;
+                           alloc: NewObject; init: Call);
+  BEGIN
+    InitOperator(cons, sym, alloc.type);
+    cons.alloc := alloc;
+    cons.init := init;
+  END InitConstructor;
+
+PROCEDURE (b: Builder) NewConstructor* (sym: Symbol; type: Expression;
+                                        arguments: ExpressionList;
+                                        context: Sym.Item;
+                                        endOfArgsSym: Symbol): Expression;
+  VAR
+    cons: Constructor;
+    consType, ptr, qualRecord: Sym.Type;
+    consClass: Sym.Record;
+    n: Sym.Name;
+    initDecl: Sym.Declaration;
+    expr, pseudoDesign: Expression;
+    init: Call;
+  BEGIN
+    (* determine class instance *)
+    IF ~(type IS TypeRef) OR ~TR.IsRecordPointer(type(TypeRef).qualType) THEN
+      RETURN b.ErrExpr(notRecordPointerType, type.sym);
+    END;
+    consType := type(TypeRef).qualType;
+    ptr := TR.PointerBaseType(consType);
+    qualRecord := consType.Closure(ptr);
+    ptr := ptr.Deparam();
+    consClass := ptr(Sym.Record);
+    
+    (* find out if an INIT method exists *)
+    n := b.GetName2(sym, Predef.initMethod);
+    initDecl := consClass.ns.Identify(context, n, FALSE);
+    Uses.Mark(initDecl, b.uses, n);
+    init := NIL;
+    IF (initDecl = NIL) OR ~(initDecl IS Sym.ProcDecl) THEN
+      IF (LEN(arguments^) # 0) THEN
+        RETURN b.ErrExpr(tooManyArguments, arguments[0].sym);
+      END;
+    ELSE
+      pseudoDesign := b.NewNil(sym);
+      pseudoDesign := b.NewSelectProc(sym, pseudoDesign, qualRecord,
+                                      initDecl(Sym.ProcDecl), sym, TRUE);
+      expr := b.NewCall(pseudoDesign, arguments, FALSE, context, endOfArgsSym);
+      IF (expr IS Call) THEN
+        init := expr(Call);
+      END;
+    END;
+         
+    NEW (cons);
+    InitConstructor (cons, sym, b.NewNewObject(sym, Sym.Expand(consType), NIL),
+                     init);
+    RETURN cons;
+  END NewConstructor;
+
+PROCEDURE (v: Visitor) [ABSTRACT] VisitConstructor* (cons: Constructor);
+  END VisitConstructor;
+
+PROCEDURE (cons: Constructor) Accept* (v: Visitor);
+  BEGIN
+    v. VisitConstructor (cons)
+  END Accept;
+
 (* Operator Class: Deref
    ------------------------------------------------------------------------ *)
 
 PROCEDURE InitDeref (d: Deref; sym: Symbol; pointer: Expression;
                      checkPointer: BOOLEAN);
+  VAR
+    baseType: Sym.Type;
   BEGIN
-    InitOperator (d, sym, pointer. type(Sym.Pointer). baseType);
+    (* determine pointer base type *)
+    baseType := pointer.type.Deparam();
+    baseType := baseType.Bound();
+    baseType := baseType(Sym.Pointer).baseType;
+    
+    InitOperator (d, sym, pointer.type.Closure(baseType));
     d. pointer := pointer;
-    d. derefType := pointer. type(Sym.Pointer). baseType;
     d. checkPointer := checkPointer;
-    ASSERT ((d. derefType IS Sym.Record) OR (d. derefType IS Sym.Array));
   END InitDeref;
 
 PROCEDURE (b: Builder) NewDeref* (sym: Symbol; design: Expression): Expression;
   VAR
     i: Deref;
+    type: Sym.Type;
+    class: Sym.Record;
   BEGIN
     WITH design: SelectProc DO (* super call of type-bound procedure *)
-      design. tbProc := design. recordType. ns(Namespace.Extended).
-          GetSuperProcByIndex (design. tbProc. tbProcIndex);
+      class := design.tbProc.Class();
+      design. tbProc := class.ns(Namespace.Extended).
+          GetSuperProcByIndex(design.tbProc.tbProcIndex);
       IF design.isSuperCall THEN
         RETURN b.ErrExpr(duplicateSuperCall, sym);
       ELSIF (design.tbProc = NIL) THEN
@@ -2272,7 +2453,8 @@ PROCEDURE (b: Builder) NewDeref* (sym: Symbol; design: Expression): Expression;
 
     ELSE
       b.CheckFunctionOp(design, sym);
-      IF ~(design.type IS Sym.Pointer) THEN
+      type := design.type.Deparam();
+      IF ~(type.Bound() IS Sym.Pointer) THEN
         RETURN b.ErrExpr(notPointer, design.sym);
       ELSE
         NEW (i);
@@ -2322,8 +2504,14 @@ PROCEDURE (entier: Entier) Accept* (v: Visitor);
 
 PROCEDURE InitIndex (i: Index; sym: Symbol; array, index: Expression;
                      checkIndex: BOOLEAN);
+  VAR
+    elementType: Sym.Type;
   BEGIN
-    InitOperator (i, sym, array. type(Sym.Array). elementType);
+    (* determine pointer base type *)
+    elementType := array.type.Deparam();
+    elementType := elementType(Sym.Array).elementType;
+    
+    InitOperator (i, sym, array.type.Closure(elementType));
     i.array := array;
     i.index := index;
     i.checkIndex := checkIndex;
@@ -2332,19 +2520,23 @@ PROCEDURE InitIndex (i: Index; sym: Symbol; array, index: Expression;
 PROCEDURE (b: Builder) NewIndex* (sym: Symbol; array, index: Expression): Expression;
   VAR
     i: Index;
-    a : Sym.Array; idx : LONGINT;
+    a: Sym.Array;
+    idx: LONGINT;
     checkIndex: BOOLEAN;
+    type: Sym.Type;
   BEGIN
     checkIndex := GetPragmaValue (b, StdPragmas.indexCheck, sym. pos);
     
     b.CheckFunctionOp(array, sym);
-    IF (array. type IS Sym.Pointer) THEN
+    type := array.type.Deparam();
+    IF (type IS Sym.Pointer) THEN
       array := b. NewDeref (sym, array);
+      type := array.type.Deparam();
     END;
-    IF ~(array. type IS Sym.Array) THEN
+    IF ~(type IS Sym.Array) THEN
       RETURN b. ErrExpr (notArray, sym);
     ELSE
-      a := array.type(Sym.Array);
+      a := type(Sym.Array);
       checkIndex := checkIndex & a.hasLengthInfo;
       index := b.AssertInteger(index);
       IF index IS Const THEN
@@ -2390,8 +2582,9 @@ PROCEDURE (b: Builder) NewLen* (sym: Symbol; array: Expression;
     len: Len;
     variant: Variant;
     arrayVariable: Expression;
+    type: Sym.Type;
   BEGIN
-    IF ~(array.type IS Sym.Array) & ~TR.IsStringConst(array.type) THEN
+    IF ~TR.IsArray(array.type) & ~TR.IsStringConst(array.type) THEN
       b.ErrSym(notArray, array.sym);
       RETURN b.errorExpr;
     END;
@@ -2403,11 +2596,12 @@ PROCEDURE (b: Builder) NewLen* (sym: Symbol; array: Expression;
       arrayVariable := arrayVariable(Index). array;
       INC (dim);
     END;
-    
-    IF (arrayVariable. type IS Sym.PredefType) THEN
+
+    type := arrayVariable.type.Deparam();
+    IF (type IS Sym.PredefType) THEN
       variant := lenStringConst
-    ELSIF (arrayVariable. type IS Sym.Array) &
-          (dim >= arrayVariable. type(Sym.Array). GetOpenDimensions()) THEN
+    ELSIF (type IS Sym.Array) &
+          (dim >= type(Sym.Array). GetOpenDimensions()) THEN
       variant := lenFixedArray
     ELSIF (arrayVariable IS Var) THEN
       variant := lenOpenArrayParam;
@@ -2416,7 +2610,7 @@ PROCEDURE (b: Builder) NewLen* (sym: Symbol; array: Expression;
     END;
     
     IF ((variant = lenOpenArrayHeap) OR (variant = lenOpenArrayHeap)) &
-       ~arrayVariable.type(Sym.Array).hasLengthInfo THEN
+       ~type(Sym.Array).hasLengthInfo THEN
       RETURN b. ErrExpr (noLengthInfo, array.sym);
     END;
     
@@ -2497,7 +2691,7 @@ PROCEDURE InitNewObject (new: NewObject; sym: Symbol; type: Sym.Type;
   END InitNewObject;
 
 PROCEDURE (b: Builder) NewNewObject (sym: Symbol; type: Sym.Type;
-                                     args: ExpressionList): Expression;
+                                     args: ExpressionList): NewObject;
   VAR
     new: NewObject;
     length: ExpressionList;
@@ -2582,8 +2776,17 @@ PROCEDURE (odd: Odd) Accept* (v: Visitor);
 
 PROCEDURE InitSelectField (sf: SelectField; sym: Symbol; record: Expression;
                            field: Sym.FieldDecl; fieldSym: Symbol);
+  VAR
+    recordType, ptr: Sym.Type;
   BEGIN
-    InitOperator (sf, sym, field. type);
+    (* determine the record type that defines `field' *)
+    recordType := record.type;
+    WHILE (recordType.Deparam() # field.parent) DO
+      ptr := recordType.Deparam();
+      recordType := recordType.Closure(ptr(Sym.Record).baseType);
+    END;
+    
+    InitOperator (sf, sym, recordType.Closure(field.type));
     sf.record := record;
     sf.field := field;
     sf.fieldSym := fieldSym;
@@ -2612,13 +2815,22 @@ PROCEDURE (sf: SelectField) Accept* (v: Visitor);
 
 PROCEDURE InitSelectProc (sp: SelectProc; sym: Symbol; receiver: Expression;
                           checkPointer: BOOLEAN;
-                          recordType: Sym.Record; tbProc: Sym.ProcDecl;
+                          recordType: Sym.Type; tbProc: Sym.ProcDecl;
                           tbProcSym: Symbol; isStaticCall: BOOLEAN);
+  VAR
+    baseRecord, class, ptr: Sym.Type;
   BEGIN
-    InitOperator (sp, sym, tbProc. formalPars);
+    (* determine the record type that defines `tbProc' *)
+    class := tbProc.Class();
+    baseRecord := recordType;
+    WHILE (baseRecord.Deparam() # class) DO
+      ptr := baseRecord.Deparam();
+      baseRecord := baseRecord.Closure(ptr(Sym.Record).baseType);
+    END;
+
+    InitOperator (sp, sym, baseRecord.Closure(tbProc.formalPars));
     sp. receiver := receiver;
     sp. checkPointer := checkPointer;
-    sp. recordType := recordType;
     sp. tbProc := tbProc;
     sp. tbProcSym := tbProcSym;
     sp. isStaticCall := isStaticCall;
@@ -2626,7 +2838,7 @@ PROCEDURE InitSelectProc (sp: SelectProc; sym: Symbol; receiver: Expression;
   END InitSelectProc;
 
 PROCEDURE (b: Builder) NewSelectProc (sym: Symbol; receiver: Expression;
-                                      recordType: Sym.Record;
+                                      recordType: Sym.Type;
                                       tbProc: Sym.ProcDecl;
                                       tbProcSym: Symbol;
                                       isStaticCall: BOOLEAN): SelectProc;
@@ -2913,14 +3125,14 @@ PROCEDURE (b: Builder) Widen (VAR expr: Expression; type: Sym.Type): BOOLEAN;
     IF TR.SameType(type, expr. type) THEN (* Case 0a *)
       (* Case 0a: a < b if a and b are the same type. *)
       RETURN TRUE;
-      
+
     ELSIF (expr. type IS Sym.FormalPars) THEN (* Case 0b *)
       (* Case 0b: a < b if a and b are procedures with matching parameter
          lists *)
       RETURN (type IS Sym.FormalPars) &
           TR.FormalParamsMatch (type(Sym.FormalPars),
                                  expr. type(Sym.FormalPars), FALSE);
-      
+
     ELSIF TR.IncludesType(type, expr. type) THEN
       (* Case 1: a < b if the type of 'b' includes the type of 'a'. This
          handles numeric and character inclusion. *)
@@ -2937,8 +3149,7 @@ PROCEDURE (b: Builder) Widen (VAR expr: Expression; type: Sym.Type): BOOLEAN;
       (* Case 4: NIL < procedure value *)
       RETURN TRUE;
       
-    ELSIF (expr. type IS Sym.Pointer) &
-          TR.IsPredefType (type, Predef.ptr) THEN
+    ELSIF TR.IsPointer(expr.type) & TR.IsPredefType(type, Predef.ptr) THEN
       (* Case 5: pointer value < SYSTEM.PTR *)
       RETURN TRUE;
       
@@ -2999,7 +3210,12 @@ PROCEDURE (b: Builder) WidenForAssign (VAR expr: Expression;
   
   BEGIN
     oldExpr := expr;
-    IF IsPredefType (type, Predef.byte) &
+    IF (type IS Sym.TypeVar) &
+       ~((type = expr.type) OR IsPredefType (expr.type, Predef.nil)) THEN
+      (* Generics extension: instances of type variables are only assignment
+         compatible to variables of the same type variable *)
+      RETURN FALSE;
+    ELSIF IsPredefType (type, Predef.byte) &
          TR.IsByteCompatible (expr. type) OR
        b. Widen (expr, type) & LengthOk () THEN
       RETURN TRUE;
@@ -3066,6 +3282,7 @@ PROCEDURE MakeAssignmentCompatible (b: Builder; sym: Symbol;
   BEGIN
     IF ~b. WidenForAssign (expr, type) & (expr # b.errorExpr) THEN
       b.ErrSym(incompatibleAssignment, sym);
+      b.SetNameToType(type);
     END;
   END MakeAssignmentCompatible;
 
@@ -3081,9 +3298,10 @@ PROCEDURE InitTypeTag (tag: TypeTag; sym: Symbol; design: Expression);
 PROCEDURE (b: Builder) NewTypeTag (sym: Symbol; design: Expression): Expression;
   VAR
     tag: TypeTag;
+    type: Sym.Type;
   BEGIN
-    IF ~(design.type IS Sym.Record) OR
-       ~design.type(Sym.Record).hasDescriptor THEN
+    type := design.type.Deparam();
+    IF ~(type IS Sym.Record) OR ~type(Sym.Record).hasDescriptor THEN
       b.ErrSym(noTypeTag, design.sym);
     END;
     
@@ -3104,7 +3322,7 @@ PROCEDURE (tag: TypeTag) Accept* (v: Visitor);
    ------------------------------------------------------------------------ *)
 
 PROCEDURE InitTypeTest (test: TypeTest; sym: Symbol;
-                        expr: Expression; referenceType: Sym.Record;
+                        expr: Expression; referenceType: Sym.Type;
                         checkPointer: BOOLEAN;
                         origExpr: Expression; origType: TypeRef);
   BEGIN
@@ -3128,13 +3346,15 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
     VAR
       type: Sym.Type;
     BEGIN
-      type := expr.type;
+      type := expr.type.Deparam();
       WITH type: Sym.Record DO
         RETURN ~(expr IS Var) OR
             (expr(Var).decl(Sym.VarDecl).isVarParam &
              expr(Var).decl(Sym.VarDecl).supplementArgs);
       | type: Sym.Pointer DO
-        RETURN (type.baseType IS Sym.Record) & ~type.isStatic;
+        RETURN TR.IsRecord(type.baseType) & ~type.isStatic;
+      | type: Sym.TypeVar DO
+        RETURN TRUE;  (* because the bound is always a record pointer *)
       ELSE
         RETURN FALSE;
       END;
@@ -3144,7 +3364,9 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
     refType := b. AssertType (referenceType);
     IF (refType = NIL) THEN
       RETURN b. errorExpr;
-    ELSIF ~TR.IsExtensionOf (refType, expr. type) THEN
+    ELSIF (refType IS Sym.TypeVar) THEN
+      RETURN b.ErrExpr(notTypeInstance, referenceType.sym);
+    ELSIF ~TR.IsInducedExtensionOf(Sym.Expand(refType), expr.type, TRUE) THEN
       RETURN b. ErrExpr (notExtensionOfLHS, referenceType. sym);
     ELSIF ~HasDynamicType(expr) THEN
       (* The test for TR.IsExtensionOf restricts the type of the variable to
@@ -3152,7 +3374,7 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
          a dynamic type that can differ from its static one.  *)
       RETURN b. ErrExpr (noDynamicType, expr.sym);
     ELSE
-      IF TR.SameType(refType, expr.type) THEN
+      IF TR.SameType(Sym.Expand(refType), expr.type) THEN
         b.WarnSym(redundantTypeTest, referenceType.sym);
       END;
       
@@ -3160,8 +3382,8 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
       checkPointer := GetPragmaValue (b, StdPragmas.derefCheck, sym. pos);
       IF (expr IS Deref) THEN
         expr := expr(Deref). pointer;
-      ELSIF (expr. type IS Sym.Pointer) THEN
-        refType := refType(Sym.Pointer). baseType;
+      ELSIF (expr.type IS Sym.Pointer) OR (expr.type IS Sym.TypeVar) THEN
+        refType := TR.PointerBaseType(refType);
       END;
       NEW (test);
       IF (referenceType IS TypeRef) THEN
@@ -3169,8 +3391,7 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
       ELSE
         typeRef := NIL;
       END;
-      InitTypeTest (test, sym, expr, refType(Sym.Record), checkPointer,
-                    origExpr, typeRef);
+      InitTypeTest(test, sym, expr, refType, checkPointer, origExpr, typeRef);
       RETURN test;
     END;
   END NewTypeTest;
@@ -3203,14 +3424,14 @@ VAR
   guard : TypeGuard;
   test : Expression;
 BEGIN
-  guardType := ref. decl(Sym.TypeDecl). type;
+  guardType := ref.qualType;
   b.CheckFunctionOp(design, sym);
   test := b.NewTypeTest(sym, design, ref);
   IF test IS TypeTest THEN
     NEW(guard);
-    InitTypeGuard(guard, sym, guardType, test(TypeTest),
-                GetPragmaValue (b, StdPragmas.derefCheck, sym. pos),
-                GetPragmaValue (b, StdPragmas.typeGuard, sym. pos));
+    InitTypeGuard(guard, sym, Sym.Expand(guardType), test(TypeTest),
+                  GetPragmaValue(b, StdPragmas.derefCheck, sym.pos),
+                  GetPragmaValue(b, StdPragmas.typeGuard, sym.pos));
     RETURN guard;
   ELSE
     RETURN test;
@@ -3317,17 +3538,32 @@ PROCEDURE (procRef: ProcedureRef) Accept* (v: Visitor);
    ------------------------------------------------------------------------ *)
 
 PROCEDURE InitTypeRef (typeRef: TypeRef; name: Symbol; type: Sym.Type;
-                       decl: Sym.TypeDecl);
+                       decl: Sym.TypeDecl; qualType: Sym.Type);
   BEGIN
-    InitReference (typeRef, name, type, decl);
+    InitReference(typeRef, name, type, decl);
+    typeRef.qualType := qualType;
   END InitTypeRef;
 
 PROCEDURE (b: Builder) NewTypeRef (name: Symbol; decl: Sym.TypeDecl): TypeRef;
   VAR
     typeRef: TypeRef;
+    qualType: Sym.Type;
+    arguments: Sym.TypeRefArray;
+    i: LONGINT;
   BEGIN
-    NEW (typeRef);
-    InitTypeRef (typeRef, name, b. typeType, decl);
+    qualType := decl.type;
+    IF (qualType.typePars # NIL) & ~(qualType IS Sym.TypeVar) THEN
+      (* add argument list default to the bounds of the parameters *)
+      NEW(arguments, LEN(qualType.typePars.params^));
+      FOR i := 0 TO LEN(arguments^)-1 DO
+        Sym.InitTypeRef(arguments[i], qualType.typePars.params[i].bound);
+      END;
+      qualType := Sym.NewQualType(NIL, qualType.position, qualType,
+                                  arguments);
+    END;
+    
+    NEW(typeRef);
+    InitTypeRef(typeRef, name, b.typeType, decl, qualType);
     RETURN typeRef
   END NewTypeRef;
 
@@ -3351,9 +3587,52 @@ PROCEDURE InitVar (var: Var; name: Symbol; type: Sym.Type;
 PROCEDURE (b: Builder) NewVar* (name: Symbol; decl: Sym.VarDecl): Var;
   VAR
     var: Var;
+    type: Sym.Type;
+    args: Sym.TypeRefArray;
+    i, j: LONGINT;
+    params: Sym.TypeVarArray;
+    recordArgs: Sym.TypeRefArray;
   BEGIN
     NEW (var);
-    InitVar (var, name, decl. type, decl);
+    IF decl.isReceiver & (decl.type.typePars # NIL) THEN
+      (* when accessing the receiver variable of a type-bound procedure, then
+         this variable is implicitly qualified by the type parameters of the
+         class type, _not_ by the bounds of the type variables *)
+      NEW(args, LEN(decl.type.typePars.params^));
+      IF (decl.type IS Sym.Pointer) &
+         (decl.type(Sym.Pointer).baseType IS Sym.QualType) THEN
+        (* the pointer type declaration's parameter list may not correspond
+           one-to-one with the one of the qualified record type; if possible,
+           insert as the top-level type argument a value that maps the type
+           variable onto itself in the qualified record type *)
+        params := decl.type(Sym.Pointer).
+            baseType(Sym.QualType).baseType(Sym.Record).typePars.params;
+        recordArgs := decl.type(Sym.Pointer).baseType(Sym.QualType).arguments;
+        FOR i := 0 TO LEN(args^)-1 DO
+          j := 0;
+          WHILE (j # LEN(recordArgs^)) &
+                (recordArgs[j].type # decl.type.typePars.params[i]) DO
+            INC(j);
+          END;
+          IF (j = LEN(recordArgs^)) THEN
+            Sym.InitTypeRef(args[i], decl.type.typePars.params[i]);
+          ELSE
+            Sym.InitTypeRef(args[i], params[j]);
+          END;
+        END;
+      ELSE
+        params := decl.type.typePars.params;
+        FOR i := 0 TO LEN(args^)-1 DO
+          Sym.InitTypeRef(args[i], params[i]);
+        END;
+      END;
+
+      type := Sym.NewTypeClosure(decl.type.position, decl.type,
+                                 decl.type.typePars.params, args);
+    ELSE
+      type := Sym.Expand(decl.type);
+    END;
+    InitVar (var, name, Sym.Expand(type), decl);
     RETURN var
   END NewVar;
 
@@ -3518,11 +3797,13 @@ PROCEDURE (ao: AssignOp) Accept* (v: Visitor);
 
 PROCEDURE InitCall (call: Call; design: Expression; arguments: ExpressionList;
                     formalPars: Sym.VarDeclArray);
+  VAR
+    resultType: Sym.Type;
   BEGIN
     InitStatement (call, design. sym);
-    IF (design. type(Sym.FormalPars). resultType # NIL) THEN
-      (* fix result type for function calls *)
-      call. type := design. type(Sym.FormalPars). resultType
+    resultType := Sym.Expand(TR.FunctionResultType(design.type));
+    IF (resultType # NIL) THEN (* fix result type for function calls *)
+      call.type := resultType;
     END;
     call. design := design;
     call. arguments := arguments;
@@ -4303,6 +4584,9 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
           FOR i := 0 TO LEN(expr.strings^)-1 DO
             CheckExpr(expr.strings[i]);
           END;
+        | expr: Constructor DO
+          CheckExpr(expr.alloc);
+          CheckExpr(expr.init);
         | expr: ChangeElement DO
           CheckExpr(expr.set);
           CheckExpr(expr.element);
@@ -4334,6 +4618,10 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
         | expr: SelectField DO
           CheckExpr(expr.record);
         | expr: SelectProc DO
+          IF expr.isSuperCall &
+             (expr.tbProc.name.str^ # procDecl.name.str^) THEN
+            b.ErrSym(crossProcSuperCall, expr.tbProcSym);
+          END;
           CheckExpr(expr.receiver);
         | expr: SetMember DO
           CheckExpr(expr.element);
@@ -4369,6 +4657,7 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
         oldLoop: LoopStatm;
         oldEnclTryLastLoop: LONGINT;
         fpars: Sym.FormalPars;
+        type: Sym.Type;
       BEGIN
         WITH statm: Assert DO
           CheckExpr(statm.predicate);
@@ -4380,8 +4669,9 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
           FOR i := 0 TO LEN(statm.arguments^)-1 DO
             CheckExpr(statm.arguments[i]);
           END;
-          
-          fpars := statm.design.type(Sym.FormalPars);
+
+          type := statm.design.type.Deparam();
+          fpars := type(Sym.FormalPars);
           FOR i := 0 TO LEN(fpars.raises^)-1 DO
             CheckException(fpars.raises[i].type, statm.sym);
           END;
@@ -4449,7 +4739,7 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
               b. ErrSym (returnWithoutResult, statm. sym);
             ELSE
               MakeAssignmentCompatible (b, statm. result. sym, statm. result,
-                                        procDecl. formalPars. resultType);
+                                        Sym.Expand(procDecl.formalPars.resultType));
             END;
           END;
           statm. popExceptionContext := enclosingTry;
@@ -4621,9 +4911,10 @@ PROCEDURE (b: Builder) NewModule* (sym: Symbol; name: Name; decl: Sym.Module;
         IF (item.usageCount = 0) &
            (item.exportMark = Sym.nameNotExported) &
            (~(item IS Sym.VarDecl) OR ~item(Sym.VarDecl).isParameter) &
+           (~(item IS Sym.TypeDecl) OR ~(item.parent IS Sym.FormalPars)) &
            (~(item IS Sym.ProcDecl) OR
             ~(item(Sym.ProcDecl).isForwardDecl OR
-              item(Sym.ProcDecl).isTypeBound)) THEN
+              item(Sym.ProcDecl).IsTypeBound())) THEN
           b.WarnName(unusedDeclaration, item.name);
         END;
       ELSE  (* ignore *)
@@ -4705,12 +4996,18 @@ PROCEDURE (m: Module) Destroy*;
             E(n.right);
           | n: Concat DO
             EList(n.strings);
+          | n: Constructor DO
+            expr := n.alloc;
+            E(expr);
+            n.alloc := NIL;
+            expr := n.init;
+            E(expr);
+            n.init := NIL;
           | n: ChangeElement DO
             E(n.set);
             E(n.element);
           | n: Deref DO
             E(n.pointer);
-            n.derefType := NIL;
           | n: Entier DO
             E(n.operand);
           | n: Index DO
@@ -4736,7 +5033,6 @@ PROCEDURE (m: Module) Destroy*;
             n.fieldSym := NIL;
           | n: SelectProc DO
             E(n.receiver);
-            n.recordType := NIL;
             n.tbProc := NIL;
             n.tbProcSym := NIL;
           | n: SetMember DO
@@ -4904,7 +5200,7 @@ END InitConstFold;
 (* Class: Builder
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitBuilder* (b: Builder; module: Sym.Module;
+PROCEDURE InitBuilder* (b: Builder; module: Sym.Module; uses: Uses.Uses;
                         pragmaHistory: Pragmas.History; errList: Error.List;
                         fold : ConstFold);
   VAR
@@ -4939,9 +5235,10 @@ PROCEDURE InitBuilder* (b: Builder; module: Sym.Module;
     b. moduleType := NewModuleType (NIL, NIL);
     b. lastError := NIL;
     b. constFold := fold;
+    b. uses := uses;
     fold. builder := b;
 
-    string := CreateNamespace.ResolveQualident(module.ns, module,
+    string := CreateNamespace.ResolveQualident(module.ns, module, uses,
                                                Predef.nameStringModule,
                                                Predef.nameStringType);
     IF (string = NIL) THEN
@@ -4951,13 +5248,14 @@ PROCEDURE InitBuilder* (b: Builder; module: Sym.Module;
     END;
   END InitBuilder;
 
-PROCEDURE NewBuilder* (module: Sym.Module; pragmaHistory: Pragmas.History;
+PROCEDURE NewBuilder* (module: Sym.Module; uses: Uses.Uses;
+                       pragmaHistory: Pragmas.History;
                        errList: Error.List; constFold: ConstFold): Builder;
   VAR
     b: Builder;
   BEGIN
     NEW (b);
-    InitBuilder (b, module, pragmaHistory, errList, constFold);
+    InitBuilder (b, module, uses, pragmaHistory, errList, constFold);
     RETURN b
   END NewBuilder;
 
@@ -5000,13 +5298,15 @@ PROCEDURE (b: Builder) NewIdentRef* (baseNS, ns: Sym.Namespace;
     decl: Sym.Declaration;
     varRef: Var;
     redirModule: Sym.Item;
+    n: Sym.Name;
   BEGIN
     IF (name. id = Id.ident) THEN
-      decl := ns. Identify (context, b. GetName (name), FALSE);
+      n := b.GetName(name);
+      decl := ns. Identify (context, n, FALSE);
       IF (decl = NIL) THEN
         b. ErrSym (undeclaredIdent, name)
       ELSE
-        decl.IncrUsageCount();
+        Uses.Mark(decl, b.uses, n);
         WITH decl: Sym.ConstDecl DO
           RETURN NewConst (name, decl. type, decl. value)
         | decl: Sym.VarDecl DO
@@ -5054,35 +5354,84 @@ PROCEDURE (b: Builder) NewQualident* (baseNS: Sym.Namespace;
     RETURN b. NewIdentRef (baseNS, modref. decl(Sym.Module). ns, context, name)
   END NewQualident;
 
+PROCEDURE (b: Builder) NewTypeVar* (baseNS: Sym.Namespace;
+                                    typeRef: TypeRef; context: Sym.Item; 
+                                    name: Symbol): Expression;
+  VAR
+    type: Sym.Type;
+  BEGIN
+    type := typeRef.decl(Sym.TypeDecl).type;
+    IF (type.typePars = NIL) THEN
+      RETURN b.ErrExpr(undeclaredIdent, name);
+    ELSE
+      RETURN b.NewIdentRef(baseNS, type.typePars.ns, context, name);
+    END;
+  END NewTypeVar;
+
+PROCEDURE (b: Builder) NewQualType*(type: Expression;
+                                    arguments: ExpressionList;
+                                    rParen: Symbol): Expression;
+  VAR
+    qualType, t: Sym.Type;
+    params: Sym.TypeVarArray;
+    i: LONGINT;
+  BEGIN
+    qualType := b.AssertType(type);
+    IF (qualType.parent = NIL) THEN
+      params := qualType(Sym.QualType).baseType.typePars.params;
+      IF (LEN(params^) < LEN(arguments^)) THEN
+        b.ErrSym(tooManyTypeArgs, arguments[LEN(params^)].sym);
+      ELSIF (LEN(params^) > LEN(arguments^)) THEN
+        b.ErrSym(tooFewTypeArgs, rParen);
+      ELSE
+        FOR i := 0 TO LEN(params^)-1 DO
+          t := arguments[i](TypeRef).qualType;
+          IF TR.IsExtensionOf(t, params[i].bound) THEN
+            Sym.InitTypeRef(qualType(Sym.QualType).arguments[i], t);
+          ELSE
+            b.ErrSym(notExtensionOfBound, arguments[i].sym);
+          END;
+        END;
+      END;
+    ELSE
+      b.ErrSym(notParametricType, type.sym);
+    END;
+    RETURN type;
+  END NewQualType;
+
 PROCEDURE (b: Builder) NewSelect* (sym: Symbol; var: Expression;
                                    context: Sym.Item; name: Symbol): Expression;
 (**Resolves a field or type-bound procedure selector.  *)
   VAR
     varRef: Expression;
     decl: Sym.Declaration;
+    procDecl: Sym.ProcDecl;
+    n: Sym.Name;
+    type: Sym.Type;
   BEGIN
     b.CheckFunctionOp(var, sym);
-    IF (var. type IS Sym.Pointer) THEN
+    IF (var.type.Bound() IS Sym.Pointer) OR
+       (var.type.Deparam() IS Sym.Pointer) THEN
       varRef := b. NewDeref (sym, var);
     ELSE
       varRef := var;
     END;
-    
-    IF varRef. type IS Sym.Record THEN
-      decl := varRef. type(Sym.Record). ns. Identify
-          (context, b. GetName (name), FALSE);
-      IF (decl # NIL) THEN
-        decl.IncrUsageCount();
-      END;
+
+    type := varRef.type.Deparam();
+    IF type IS Sym.Record THEN
+      n := b.GetName(name);
+      decl := type(Sym.Record).ns.Identify(context, n, FALSE);
+      Uses.Mark(decl, b.uses, n);
       
       IF decl = NIL THEN
         RETURN b.ErrExpr(undeclaredIdent, name);
       ELSIF (decl IS Sym.FieldDecl) THEN
         RETURN b. NewSelectField (sym, varRef, decl(Sym.FieldDecl), name);
       ELSIF (decl IS Sym.ProcDecl) THEN
-        RETURN b. NewSelectProc (sym, var, varRef. type(Sym.Record),
-                                 decl(Sym.ProcDecl), name,
-                                 decl(Sym.ProcDecl).notRedefined);
+        procDecl := decl(Sym.ProcDecl);
+        RETURN b. NewSelectProc (sym, var, varRef.type, procDecl, name,
+                                 (procDecl.procClass = Sym.staticMethod) OR
+                                 procDecl.notRedefined);
       ELSE
         ASSERT (FALSE);
       END;
@@ -5262,8 +5611,11 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
         result := b.NewCompare(sym, left, right);
         
       ELSIF (id IN {Id.eql, Id.neq})
-            & (isBoolean OR isSet OR (leftType = nil) OR (right.type = nil)
-               OR (leftType IS Sym.Pointer) OR (leftType IS Sym.FormalPars)) THEN
+            & (isBoolean OR isSet OR
+               (leftType = nil) OR (right.type = nil) OR
+               (leftType IS Sym.Pointer) OR
+               (leftType IS Sym.TypeVar) OR
+               (leftType IS Sym.FormalPars)) THEN
         result := b.NewCompare(sym, left, right);
       ELSE
         result := b.ErrExpr(invalidOpType, sym);
@@ -5291,10 +5643,11 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
     END;
   END NewOperator;
 
- PROCEDURE (b: Builder) NewCall* (design: Expression;
-                                  arguments: ExpressionList;
-                                  isFunctionCall: BOOLEAN;
-                                  endOfArgsSym: Symbol): Expression;
+PROCEDURE (b: Builder) NewCall* (design: Expression;
+                                 arguments: ExpressionList;
+                                 isFunctionCall: BOOLEAN;
+                                 context: Sym.Item;
+                                 endOfArgsSym: Symbol): Expression;
   VAR
     call: Call;
     targetType: Sym.PredefId;
@@ -5308,69 +5661,87 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
  
   PROCEDURE MakeParameterCompatible (b: Builder; sym: Symbol;
                                      VAR arg: Expression;
-                                     fpar: Sym.VarDecl);
+                                     fpar: Sym.VarDecl; fparType: Sym.Type);
   (**Takes an expression @oparam{arg} and a formal parameter declaration
      @oparam{fpar}, and tries to make the expression's value compatible to the
      formal parameter.  If this is not possible, an error is reported.  *)
     VAR
       ok: BOOLEAN;
+      argType: Sym.Type;
     BEGIN
-      IF fpar.permitArgumentNIL & TR.IsPredefType(arg.type, Predef.nil) THEN
-        (* the flag NIL_COMPATH is set for the formal parameter, and the
+      argType := arg.type;
+
+      IF fpar.isReceiver THEN
+        argType := argType.Deparam();
+        fparType := fparType.Deparam();
+      END;
+      
+      IF fpar.permitArgumentNIL & TR.IsPredefType(argType, Predef.nil) THEN
+        (* the flag NIL_COMPAT is set for the formal parameter, and the
            actual parameter is NIL: accept *)
         
       ELSIF fpar. isVarParam THEN        (* variable parameter *)
         b. AssertVar (arg);
 
-        IF fpar. isReceiver & (arg. type IS Sym.Pointer) THEN
+        IF fpar.isReceiver & (argType IS Sym.Pointer) THEN
           (* receiver is a VAR record, argument a pointer: add deref *)
-          arg := b. NewDeref (arg. sym, arg);
+          arg := b.NewDeref (arg.sym, arg);
+          argType := arg.type.Deparam();
         END;
         
-        IF TR.SameType (fpar. type, arg. type) OR
-           IsPredefType (fpar. type, Predef.byte) &
-             TR.IsByteCompatible (arg. type) OR
-           TR.IsOpenArrayType (fpar. type) &
-             IsPredefType (fpar.type(Sym.Array).elementType, Predef.byte) THEN
+        IF TR.SameType (fparType, argType) OR
+           IsPredefType (fparType, Predef.byte) &
+             TR.IsByteCompatible (argType) OR
+           TR.IsOpenArrayType (fparType) &
+             IsPredefType (fparType(Sym.Array).elementType, Predef.byte) THEN
           (* same type, or passing a CHAR or SHORTINT to a BYTE, or passing
              anything to an ARRAY OF BYTE: argument is compatible to formal
              parameter *)
-        ELSIF (fpar. type IS Sym.Record) THEN
-          IF ~TR.IsExtensionOf (arg. type, fpar. type) THEN
+        ELSIF (fparType IS Sym.Record) THEN
+          IF ~TR.IsExtensionOfNoParams(argType, fparType) THEN
             (* formal parameter is record, and the argument type is not
                an extension of the record type *)
             b. ErrSym (notVarParCompatible, arg. sym);
+            b.SetNameToType(fparType);
           END;
-        ELSIF TR.IsOpenArrayType (fpar. type) THEN
-          IF ~TR.IsArrayCompatible (arg. type, fpar. type) THEN
+        ELSIF TR.IsOpenArrayType (fparType) THEN
+          IF ~TR.IsArrayCompatible (argType, fparType) THEN
             (* formal parameter is open array, and the argument type is not
                array compatible to it *)
             b. ErrSym (notVarParCompatible, arg. sym);
+            b.SetNameToType(fparType);
           END;
         ELSE                             (* not compatible *)
           b. ErrSym (notVarParCompatible, arg. sym);
+          b.SetNameToType(fparType);
         END;
         
       ELSE                               (* value parameter *)
-        IF TR.IsOpenArrayType (fpar. type) THEN
+        IF TR.IsOpenArrayType (fparType) THEN
           (* Note: The language report only treats VAR parameters of type
              ARRAY OF BYTE as special.  We extend this to value parameters
              as well, in order to be able to tighten the read-only checks
              on NO_COPY parameters.  *)
-          ok := TR.IsArrayCompatible (arg. type, fpar. type) OR
-              IsPredefType(fpar.type(Sym.Array).elementType, Predef.byte) OR
-              b. Widen (arg, fpar. type);  (* do string promotion *)
+          ok := TR.IsArrayCompatible (argType, fparType) OR
+              IsPredefType(fparType(Sym.Array).elementType, Predef.byte) OR
+              b. Widen (arg, fparType);  (* do string promotion *)
+        ELSIF fpar.isReceiver &
+              TR.IsExtensionOfNoParams(argType, fparType) THEN
+          (* receiver argument is handled specially in a call, because the
+             type parameters are of no importance if the class is parametric *)
+          ok := TRUE;
         ELSE
-          ok := b. WidenForAssign (arg, fpar. type);
+          ok := b. WidenForAssign (arg, fparType);
         END;
         IF ~ok THEN
           b.ErrSym(incompatibleActualParam, arg. sym);
+          b.SetNameToType(fparType);
         END;
       END;
     END MakeParameterCompatible;
   
   PROCEDURE TransformArgs (sym, endOfArgsSym: Symbol;
-                           formalPars: Sym.FormalPars;
+                           formalParsClosure: Sym.Type;
                            receiver: Expression;
                            VAR arguments: ExpressionList;
                            VAR argFormalPars: Sym.VarDeclArray);
@@ -5383,9 +5754,10 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
     VAR
       newArgs, newFPars: ArrayList.ArrayList;
       i, fparIndex, argIndex: LONGINT;
-      fparType: Sym.Type;
+      fparType, argType: Sym.Type;
       fpar: Sym.VarDecl;
       arg: Expression;
+      formalPars: Sym.FormalPars;
 
     PROCEDURE Dimensions (type: Sym.Type): LONGINT;
       BEGIN
@@ -5409,6 +5781,8 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
         argIndex := 0;
         fparIndex := 0;
       END;
+      fparType := formalParsClosure.Deparam();
+      formalPars := fparType(Sym.FormalPars);
       WHILE (fparIndex # LEN (formalPars. params^)) &
             (argIndex # LEN (arguments^)) DO
         IF (argIndex = -1) THEN
@@ -5418,7 +5792,8 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
           fpar := formalPars. params[fparIndex];
           arg := arguments[argIndex];
         END;
-        MakeParameterCompatible (b, arg. sym, arg, fpar);
+        MakeParameterCompatible (b, arg. sym, arg, fpar,
+                                 formalParsClosure.Closure(fpar.type));
         
         IF fpar.isPassPerReference &
            ~TR.IsPredefType(arg.type, Predef.nil) THEN
@@ -5433,16 +5808,17 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
         newFPars. Append (fpar);
 
         IF fpar. supplementArgs THEN
-          fparType := fpar. type;
+          argType := arg.type.Deparam();
+          fparType := fpar.type.Deparam();
           WITH fparType: Sym.Array DO
             IF IsPredefType (fparType. elementType, Predef.byte) THEN
               (* passing a value to an ARRAY OF BYTE: the length argument
                  is the size of the passed value *)
               newArgs. Append (b. NewConst (arg. sym,
                                             Predef.GetType (Predef.lengthType),
-                                            BigInt.NewInt(arg. type. size)));
+                                            BigInt.NewInt(argType.size)));
               newFPars. Append (NIL);
-            ELSIF (Dimensions (arg.type) >= fparType. GetOpenDimensions()) THEN
+            ELSIF (Dimensions (argType) >= fparType. GetOpenDimensions()) THEN
               (* only try to add the lengths if there are enough dimensions
                  in the argument; otherwise, MakeParameterCompatible should
                  have written out an error message for us *)
@@ -5504,6 +5880,18 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
         RETURN TRUE;
       END;
     END CheckNumberOfArguments;
+
+  PROCEDURE StripFirst(exprList: ExpressionList): ExpressionList;
+    VAR
+      newList: ExpressionList;
+      i: LONGINT;
+    BEGIN
+      NEW(newList, LEN(exprList^)-1);
+      FOR i := 1 TO LEN(exprList^)-1 DO
+        newList[i-1] := exprList[i];
+      END;
+      RETURN newList;
+    END StripFirst;
   
   BEGIN
     WITH design: PredefProc DO
@@ -5535,15 +5923,20 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
                                  b. NewLen (design. sym, arguments[1], 0));
         
       | Predef.new:
-        IF (arguments[0]. type IS Sym.Pointer) THEN
+        type := arguments[0].type.Deparam();
+        IF (type = b.typeType) THEN
+          RETURN b.NewConstructor(design.sym, arguments[0],
+                                  StripFirst(arguments),
+                                  context, endOfArgsSym);
+        ELSIF (type IS Sym.Pointer) THEN
           b.AssertVar(arguments[0]);
-          type := arguments[0]. type(Sym.Pointer). baseType;
+          type := type(Sym.Pointer).baseType;
           IF (type IS Sym.Array) THEN
-            dim := 1+arguments[0].type(Sym.Pointer).baseType(Sym.Array).GetOpenDimensions();
+            dim := 1+type(Sym.Array).GetOpenDimensions();
             IF CheckNumberOfArguments (dim, dim) THEN
               RETURN b. NewAssignment
-                  (design. sym, arguments[0],
-                   b. NewNewObject (design.sym, arguments[0].type, arguments));
+                  (design.sym, arguments[0],
+                   b.NewNewObject(design.sym, arguments[0].type, arguments));
             END;
           ELSE (* (type IS Sym.Record) *)
             IF ~TR.VariableInstance(type) THEN
@@ -5551,8 +5944,8 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
             END;
             IF CheckNumberOfArguments (1, 1) THEN
               RETURN b. NewAssignment
-                  (design. sym, arguments[0],
-                   b. NewNewObject (design. sym, arguments[0].type, NIL));
+                  (design.sym, arguments[0],
+                   b.NewNewObject(design.sym, arguments[0].type, NIL));
             END;
           END;
         ELSE
@@ -5607,7 +6000,8 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
                                     arguments[0]. type. ArrayDimensions());
         END;
         
-        IF ~(arguments[0]. type IS Sym.Array) THEN
+        IF ~TR.IsArray(arguments[0].type) THEN
+          (* no string const allowed here *)
           b. ErrSym (notArray, arguments[0]. sym);
         END;
         
@@ -5769,32 +6163,35 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
     ELSE
       IF (design = b. errorExpr) THEN
         RETURN b. errorExpr;        (* fall through for errors in designator *)
-      ELSIF TR.IsValidReceiverType(design.type) 
-        & (LEN(arguments^) = 1) & (arguments[0] IS TypeRef) THEN
+      ELSIF (TR.IsValidReceiverType(design.type) OR
+             (design.type IS Sym.TypeVar)) &
+            (LEN(arguments^) = 1) & (arguments[0] IS TypeRef) THEN
         RETURN b.NewTypeGuard(arguments[0]. sym, design,
                               arguments[0](TypeRef));
-      ELSIF ~(design. type IS Sym.FormalPars) THEN
+      ELSIF (design.type = b.typeType) THEN
+        RETURN b.NewQualType(design, arguments, endOfArgsSym);
+      ELSIF ~(design.type.Deparam() IS Sym.FormalPars) THEN
         RETURN b. ErrExpr (notProcedure, design. sym);
-      ELSIF isFunctionCall &
-            (design. type(Sym.FormalPars). resultType = NIL) THEN
-        RETURN b. ErrExpr (notFunctionProcedure, design. sym);
-      ELSIF ~isFunctionCall &
-            (design. type(Sym.FormalPars). resultType # NIL) THEN
-        RETURN b. ErrExpr (isFunctionProcedure, design. sym);
       ELSE
-        NEW (call);
-        IF (design IS SelectProc) THEN
-          receiver := design(SelectProc). receiver;
+        type := design.type.Deparam();
+        IF isFunctionCall & (type(Sym.FormalPars).resultType = NIL) THEN
+          RETURN b. ErrExpr (notFunctionProcedure, design. sym);
+        ELSIF ~isFunctionCall & (type(Sym.FormalPars).resultType # NIL) THEN
+          RETURN b. ErrExpr (isFunctionProcedure, design. sym);
         ELSE
-          receiver := NIL;
+          NEW (call);
+          IF (design IS SelectProc) THEN
+            receiver := design(SelectProc). receiver;
+          ELSE
+            receiver := NIL;
+          END;
+          TransformArgs(design.sym, endOfArgsSym, design.type,
+                        receiver, arguments, formalPars);
+          InitCall (call, design, arguments, formalPars);
+          RETURN call;
         END;
-        TransformArgs (design. sym, endOfArgsSym,
-                       design. type(Sym.FormalPars),
-                       receiver, arguments, formalPars);
-        InitCall (call, design, arguments, formalPars);
-        RETURN call;
       END;
-    END
+    END;
   END NewCall;
 
 BEGIN

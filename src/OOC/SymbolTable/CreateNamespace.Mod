@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.27 2003/04/12 14:06:29 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.50 2003/05/11 14:52:54 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -21,8 +21,8 @@ MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Msg, IO, ADT:Dictionary, OOC:Error, Sym := OOC:SymbolTable,
-  OOC:SymbolTable:Namespace,
+  Msg, IO, ADT:ArrayList, ADT:Dictionary, OOC:Error, Sym := OOC:SymbolTable,
+  OOC:SymbolTable:Namespace, OOC:SymbolTable:Uses,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Builder,
   OOC:SymbolTable:Predef, OOC:SymbolTable:ImportModules, OOC:Doc:ResolveRef;
 
@@ -54,6 +54,13 @@ CONST
   procedureStillAbstract = 24;
   atMostOneLinkFile = 25;
   notException = 26;
+  invalidTypeBound = 27;
+  notParametricType = 28;
+  tooFewTypeArgs = 29;
+  tooManyTypeArgs = 30;
+  notExtensionOfBound = 31;
+  tooFewTypeAliases = 32;
+  cannotDefineTypeAliases = 33;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -123,12 +130,27 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "Module must provide at most one LINK FILE directive"
     | notException:
       t := "Type is not an extension of `Exception.Exception'"
+    | invalidTypeBound:
+      t := "Invalid type bound"
+    | notParametricType:
+      t := "This is not a parametric type"
+    | tooFewTypeArgs:
+      t := "Too few type arguments"
+    | tooManyTypeArgs:
+      t := "Too many type arguments"
+    | notExtensionOfBound:
+      t := "This is not an extension of the type bound"
+    | tooFewTypeAliases:
+      t := "The base record type has ${count} type parameter(s)"
+    | cannotDefineTypeAliases:
+      t := "The base record type has no type parameters"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
 
 
 PROCEDURE ResolveQualident* (ns: Sym.Namespace; contextOfUse: Sym.Item;
+                             uses: Uses.Uses;
                              module, ident: Sym.Name): Sym.Declaration;
   VAR
     m, decl: Sym.Declaration;
@@ -137,17 +159,16 @@ PROCEDURE ResolveQualident* (ns: Sym.Namespace; contextOfUse: Sym.Item;
     IF (m = NIL) OR ~(m IS Sym.Import) THEN
       RETURN NIL;
     ELSE
-      m.IncrUsageCount();
+      Uses.Mark(m, uses, module);
       ns := m(Sym.Import).externalSymTab.ns;
     END;
     decl := ns.Identify(contextOfUse, ident, FALSE);
-    IF (decl # NIL) THEN
-      decl.IncrUsageCount();
-    END;
+    Uses.Mark(decl, uses, ident);
     RETURN decl;
   END ResolveQualident;
 
 PROCEDURE CreateNamespace* (root: Sym.Module;
+                            uses: Uses.Uses;
                             errList: Error.List)
 RAISES IO.Error;
 (**Populates the namespaces of the symbol table @oparam{root} and performs
@@ -159,10 +180,15 @@ RAISES IO.Error;
    @omodule{TR}.  Any errors are reported to the error list @oparam{errList}.
    After successful completion of this procedure, the symbol table
    @oparam{root} can be used to resolve any using occurences of names within
-   the module's source code.  *)
+   the module's source code.
+
+   If @oparam{uses} is not @code{NIL}, then declarations are registered with
+   this object, and it is notified for references to module and type names.  *)
   VAR
     lastError: Error.Msg;
     visited, privateRecords: Dictionary.Dictionary;
+    unpatchedQualTypes: ArrayList.ArrayList;
+    i: LONGINT;
     
   PROCEDURE SetErrPos(err: Error.Msg; pos: Sym.Position);
     VAR
@@ -222,9 +248,7 @@ RAISES IO.Error;
               (* for each of the imported modules: create namespace information
                  and resolve any reference commands in embedded documentation
                  strings *)
-              CreateNamespace (ptr. externalSymTab, errList);
-(*              ResolveRef.Resolve (ptr. externalSymTab, repositories, errList)
-... moved to end of CreateNamespace *)
+              CreateNamespace (ptr. externalSymTab, NIL, errList);
             END
           ELSE
           END;
@@ -244,21 +268,37 @@ RAISES IO.Error;
      @emph{not} included in the namespace mapping.
 
      This procedure also adds all record types to @ovar{privateRecords}.  *)
+    CONST
+      namespaceNested = 0;
+      namespaceExtended = 1;
     VAR
       ptr: Sym.Item;
 
-    PROCEDURE Assemble (item: Sym.Item; nested: BOOLEAN): Sym.Namespace;
+    PROCEDURE Assemble (item: Sym.Item; nsType: SHORTINT): Sym.Namespace;
       VAR
         ptr: Sym.Item;
         c: LONGINT;
         da: Sym.DeclarationArray;
 
-      PROCEDURE IsDeclaration (item: Sym.Item): BOOLEAN;
+      PROCEDURE IsDeclaration (x: Sym.Item): BOOLEAN;
         BEGIN
-          WITH item: Sym.ProcDecl DO
-            RETURN ~(item. isTypeBound OR item. isForwardDecl)
+          WITH x: Sym.ProcDecl DO
+            RETURN ~(x.IsTypeBound() OR x. isForwardDecl)
+          | x: Sym.TypeDecl DO
+            IF (x.type = NIL) THEN
+              (* this is an alias type introduced by a receiver; such a
+                 declaration is only added to the namespace of the formal
+                 parameters, _not_ to that of the procedure *)
+              RETURN (item IS Sym.FormalPars);
+            ELSE
+              RETURN TRUE;
+            END;
+          | x: Sym.VarDecl DO
+            (* formal parameters are added to the namespace of the procedure,
+               but _not_ to the namespace of the FormalPars object *)
+            RETURN ~x.isParameter OR ~(item IS Sym.FormalPars);
           ELSE
-            RETURN (item IS Sym.Declaration)
+            RETURN (x IS Sym.Declaration)
           END
         END IsDeclaration;
       
@@ -293,8 +333,7 @@ RAISES IO.Error;
           END;
           ptr := ptr. nextNested
         END;
-        IF (item IS Sym.ProcDecl) (*&
-           (item(Sym.ProcDecl). visibleFrom >= 0) ... *) THEN
+        IF (item IS Sym.ProcDecl) THEN
           (* add formal parameters, but only if the module is not an imported
              symbol file; otherwise, due to the missing visibility information,
              identification of parameter types may wrongly take a parameter
@@ -319,8 +358,7 @@ RAISES IO.Error;
           END;
           ptr := ptr. nextNested
         END;
-        IF (item IS Sym.ProcDecl) (*&     (* add formal parameters *)
-           (item(Sym.ProcDecl). visibleFrom >= 0)...*) THEN
+        IF (item IS Sym.ProcDecl) THEN    (* add formal parameters *)
           ptr := item(Sym.ProcDecl). formalPars. nestedItems;
           WHILE (ptr # NIL) DO
             IF IsDeclaration (ptr) THEN
@@ -333,11 +371,10 @@ RAISES IO.Error;
 
         (* sort array *)
         Quicksort (da, 0, c-1);
-        
-        IF nested THEN
-          RETURN Namespace.NewNested (da, c)
-        ELSE
-          RETURN Namespace.NewExtended (da, c)
+
+        CASE nsType OF
+        | namespaceNested  : RETURN Namespace.NewNested(da, c);
+        | namespaceExtended: RETURN Namespace.NewExtended(da, c);
         END
       END Assemble;
 
@@ -350,12 +387,16 @@ RAISES IO.Error;
         END;
 
         WITH item: Sym.Module DO
-          item. SetNamespace (Assemble (item, TRUE))
+          item. SetNamespace (Assemble (item, namespaceNested))
         | item: Sym.ProcDecl DO
-          item. SetNamespace (Assemble (item, TRUE))
+          item. SetNamespace (Assemble (item, namespaceNested))
         | item: Sym.Record DO
-          item. SetNamespace (Assemble (item, FALSE));
+          item. SetNamespace (Assemble (item, namespaceExtended));
           privateRecords.Set(item, NIL);
+        | item: Sym.TypePars DO
+          item. SetNamespace (Assemble (item, namespaceNested));
+        | item: Sym.FormalPars DO
+          item. SetNamespace (Assemble (item, namespaceNested));
         ELSE  (* no other item is associated with a namespace *)
         END
       END
@@ -397,6 +438,18 @@ RAISES IO.Error;
      Note: Record namespaces are @emph{not} completed by this procedure.  *)
     VAR
       ptr: Sym.Item;
+
+    PROCEDURE SetEnclosingParent(ns: Namespace.Nested; parent: Sym.Item);
+      BEGIN
+        IF (parent IS Sym.Module) THEN
+          ns.SetEnclosingNamespace
+              (parent(Sym.Module).ns(Namespace.Namespace));
+        ELSIF (parent IS Sym.ProcDecl) THEN
+          ns.SetEnclosingNamespace
+              (parent(Sym.ProcDecl).ns(Namespace.Namespace));
+        END
+      END SetEnclosingParent;
+    
     BEGIN
       IF (item # NIL) THEN
         WITH item: Sym.Module DO
@@ -405,19 +458,21 @@ RAISES IO.Error;
               SetEnclosingNamespace (predefModule. ns(Namespace.Namespace))
           END
         | item: Sym.ProcDecl DO
-          IF (item. parent IS Sym.Module) THEN
-            item. ns(Namespace.Nested). 
-              SetEnclosingNamespace (item. parent(Sym.Module). 
-                                       ns(Namespace.Namespace))
-          ELSIF (item. parent IS Sym.ProcDecl) THEN
-            item. ns(Namespace.Nested). 
-              SetEnclosingNamespace (item. parent(Sym.ProcDecl). 
-                                       ns(Namespace.Namespace))
-          END
+          item.ns(Namespace.Nested).SetEnclosingNamespace
+              (item.formalPars.ns(Namespace.Namespace));
+        | item: Sym.TypePars DO
+          SetEnclosingParent(item.ns(Namespace.Nested), item. parent);
+        | item: Sym.FormalPars DO
+          IF (item.parent IS Sym.ProcDecl) &
+             (item.parent(Sym.ProcDecl).formalPars = item) THEN
+            SetEnclosingParent(item.ns(Namespace.Nested), item.parent.parent);
+          ELSE  (* procedure type definition *)
+            SetEnclosingParent(item.ns(Namespace.Nested), item.parent);
+          END;
         ELSE  (* no other item is associated with a namespace *)
         END;      
 
-        (* decend into nested objects *)
+        (* descend into nested objects *)
         ptr := item. nestedItems;
         WHILE (ptr # NIL) DO
           ConnectNamespaces (ptr, predefModule, errList);
@@ -427,35 +482,46 @@ RAISES IO.Error;
     END ConnectNamespaces;
   
   PROCEDURE ResolveTypeNames (item: Sym.Item; contextOfUse: Sym.Item;
+                              unpatchedQualTypes: ArrayList.ArrayList;
                               errList: Error.List);
   (* Replaces all type names in @oparam{item} with a reference to the 
      indicated type.  Names are resolved in the context of the procedure
      (or module) @oparam{contextOfUse}.  Restrictions placed on the base
-     type of a record are checked.  *)
+     type of a record are checked.
+
+     Any qualified type instance @otype{Sym.QualType} added for a reference to
+     a parametric type without a argument list @samp{<@dots{}>} is put into
+     @oparam{unpatchedQualTypes} for later fixup.  *)
     VAR
       ptr: Sym.Item;
-      i: LONGINT;
+      i, typeDeclCount: LONGINT;
+      typePars: Sym.TypePars;
       
     PROCEDURE GetTypeByName (typeName: Sym.Type; contextOfUse: Sym.Item; 
-                      extendedSearch: BOOLEAN; errList: Error.List): Sym.Type;
+                             extendedSearch: BOOLEAN;
+                             addQualTypeDefaults: BOOLEAN;
+                             errList: Error.List): Sym.Type;
     (**Resolves type name @oparam{typeName}, within the context of procedure
        (or module) @oparam{contextOfUse}.  With @oparam{extendedSearch} set to
        @code{TRUE} and the standard search failing, perform an extended search
        in the local namespace that ignores the range visibility of
-       declarations.  This is used to resolve names used as pointer base
-       types.  *)
+       declarations.  This is used to resolve names used as pointer base types.
+
+       With @oparam{addQualTypeDefaults}, a reference to a parametric type is
+       converted into an instance of @otype{Sym.QualType}, using the parameter
+       bounds as arguments.  *)
       VAR
         item, itemRedir: Sym.Declaration;
         ns: Sym.Namespace;
+        type: Sym.Type;
+        qt: Sym.QualType;
       BEGIN
         WITH typeName: Sym.TypeName DO
           ns := contextOfUse. Namespace();
           IF (typeName. module # NIL) THEN
             (* resolve module name to get to external namespace *)
             item := ns. Identify (contextOfUse, typeName. module, FALSE);
-            IF (item # NIL) THEN
-              item.IncrUsageCount();
-            END;
+            Uses.Mark(item, uses, typeName.module);
             IF (item = NIL) THEN
               Err (undeclaredModule, typeName);
               RETURN typeName
@@ -470,6 +536,13 @@ RAISES IO.Error;
           item := ns. Identify (contextOfUse, typeName. ident, FALSE);
           IF (item = NIL) & extendedSearch THEN
             item := ns. IdentifyLocal (contextOfUse, typeName. ident, TRUE);
+            IF (item = NIL) & (contextOfUse IS Sym.TypePars) THEN
+              (* with parametric types, the local namespace may contain just
+                 the formal parameter names; compensate by going one level
+                 higher *)
+              item := ns(Namespace.Nested).nestedIn.IdentifyLocal
+                  (contextOfUse, typeName. ident, TRUE);
+            END;
           END;
 
           IF (item = NIL) THEN
@@ -478,11 +551,11 @@ RAISES IO.Error;
           ELSE
             (* if the type name refers to a name redirection, then resolve the
                redirection and continue with the resulting symbol table entry  *)
-            item.IncrUsageCount();
+            Uses.Mark(item, uses, typeName.ident);
             itemRedir := item;
             WITH itemRedir: Sym.Redirect DO
               item := ResolveQualident(contextOfUse.Namespace(), contextOfUse,
-                                       itemRedir.module, itemRedir.ident);
+                                      uses, itemRedir.module, itemRedir.ident);
               IF (item = NIL) THEN
                 Err (undeclaredIdent, typeName);
                 RETURN typeName;
@@ -494,65 +567,214 @@ RAISES IO.Error;
               Err (notTypeName, typeName);
               RETURN typeName
             ELSE
-              RETURN item(Sym.TypeDecl). type
+              type := item(Sym.TypeDecl).type;
+              IF addQualTypeDefaults & (type.typePars # NIL) &
+                 ~(type IS Sym.TypeVar) THEN
+                NEW(qt);
+                Sym.InitQualType(qt, NIL, type.position, type, NIL);
+                unpatchedQualTypes.Append(qt);
+                RETURN qt;
+              ELSE
+                RETURN type;
+              END;
             END
-          END
+          END;
+          
+        | typeName: Sym.QualType DO
+          typeName.baseType := GetTypeByName(typeName.baseType, contextOfUse,
+                                             extendedSearch, FALSE, errList);
+          RETURN typeName;
+          
         ELSE
           RETURN typeName
         END
       END GetTypeByName;
 
+    PROCEDURE CollectFormalPars (item: Sym.FormalPars);
+    (* Sets the field @ofield{Sym.FormalPars.params}.  Doing this here means
+       we can omit this field from the symbol file, eliminating a few bytes
+       of redundancy.  *)
+      VAR
+        ptr: Sym.Item;
+        c: LONGINT;
+      BEGIN
+        c := 0;
+        ptr := item.nestedItems;
+        WHILE (ptr # NIL) DO
+          IF (ptr IS Sym.VarDecl) & 
+             ptr(Sym.VarDecl).isParameter &
+             ~ptr(Sym.VarDecl).isReceiver THEN
+            INC(c);
+          END;
+          ptr := ptr.nextNested
+        END;
+        
+        NEW(item.params, c);
+        c := 0;
+        ptr := item.nestedItems;
+        WHILE (ptr # NIL) DO
+          IF (ptr IS Sym.VarDecl) &
+             ptr(Sym.VarDecl).isParameter &
+             ~ptr(Sym.VarDecl).isReceiver THEN
+            item.params[c] := ptr(Sym.VarDecl);
+            INC(c);
+          END;
+          ptr := ptr.nextNested
+        END;
+      END CollectFormalPars;
+
+    PROCEDURE ResolverReceiver(procDecl: Sym.ProcDecl;
+                               receiver: Sym.VarDecl);
+      VAR
+        class: Sym.Record;
+        ptr: Sym.Item;
+        count: LONGINT;
+      BEGIN
+        receiver.SetType(GetTypeByName(receiver.type, contextOfUse, FALSE,
+                                       FALSE, errList));
+        class := procDecl.Class();
+        procDecl.formalPars.SetTypePars(class.typePars);
+        (*item.formalPars.SetTypePars(receiver.type.typePars);*)
+
+        count := 0;
+        ptr := procDecl.formalPars.nestedItems;
+        WHILE (ptr # NIL) DO
+          WITH ptr: Sym.TypeDecl DO
+            IF (ptr.type = NIL) THEN
+              (* unfinished alias declaration: fixup type reference; if this
+                 is read from the symbol file, the `ptr.type' is alread set *)
+              ptr.type := class.typePars.params[count];
+              ptr.srcCodeType := ptr.type;
+            END;
+            INC(count);
+          ELSE
+            (* ignore *)
+          END;
+          ptr := ptr.nextNested;
+        END;
+
+        IF (class.typePars = NIL) THEN
+          IF receiver.hasAliasList THEN
+            ErrType(cannotDefineTypeAliases, receiver.srcCodeType);
+          END;
+        ELSE
+          IF ~receiver.hasAliasList OR
+             (count # LEN(class.typePars.params^)) THEN
+            ErrType(tooFewTypeAliases, receiver.srcCodeType);
+            lastError.SetIntAttrib("count", LEN(class.typePars.params^));
+          END;
+        END;
+      END ResolverReceiver;
+    
     BEGIN
       IF (item # NIL) THEN
         WITH item: Sym.TypeDecl DO
-          item. type := GetTypeByName (item. type, contextOfUse, FALSE, errList)
+          IF (item.type.typePars # NIL) & (item.type.typePars.ns # NIL) THEN
+            typePars := item.type.typePars;
+            item.type := GetTypeByName(item.type, item.type.typePars,
+                                       FALSE, TRUE, errList);
+            item.type.SetTypePars(typePars);  (* transfer parameter list *)
+          ELSE
+            item.type := GetTypeByName(item.type, contextOfUse,
+                                       FALSE, TRUE, errList);
+          END;
           
         | item: Sym.VarDecl DO
-          item. SetType (GetTypeByName (item. type, contextOfUse, FALSE, errList));
+          IF ~item.isReceiver THEN
+            item.SetType(GetTypeByName(item.type, contextOfUse,
+                                       FALSE, TRUE, errList));
+          END;
           
         | item: Sym.FieldDecl DO
-          item. type := GetTypeByName (item. type, contextOfUse, FALSE, errList)
+          item. type := GetTypeByName (item. type, contextOfUse,
+                                       FALSE, TRUE, errList);
           
         | item: Sym.Pointer DO
-          item. baseType := GetTypeByName (item. baseType,
-                                           contextOfUse, TRUE, errList)
+          item. baseType := GetTypeByName (item. baseType, contextOfUse,
+                                           TRUE, TRUE, errList);
+              
         | item: Sym.FormalPars DO
           IF (item. resultType # NIL) THEN
-            item. resultType := GetTypeByName (item. resultType,
-                                               contextOfUse, FALSE, errList)
+            item. resultType := GetTypeByName (item. resultType, contextOfUse,
+                                               FALSE, TRUE, errList)
           END;
           IF (item.raises # NIL) THEN
             FOR i := 0 TO LEN(item.raises^)-1 DO
               item.raises[i].type := GetTypeByName
-                  (item.raises[i].type, contextOfUse, FALSE, errList);
+                  (item.raises[i].type, contextOfUse, FALSE, FALSE, errList);
             END;
           END;
           
         | item: Sym.Array DO
-          item. elementType := GetTypeByName (item. elementType,
-                                              contextOfUse, FALSE, errList)
+          item. elementType := GetTypeByName (item. elementType, contextOfUse,
+                                              FALSE, TRUE, errList);
+          
         | item: Sym.Record DO
           IF (item. baseType # NIL) THEN
             item.baseType := GetTypeByName (item.baseType, contextOfUse,
-                                            FALSE, errList);
+                                            FALSE, TRUE, errList);
           END
         
+        | item: Sym.QualType DO
+          (* don't look up baseType; the interpretation of this name depends
+             on the context of use, i.e., pointer base or not *)
+          FOR i := 0 TO LEN(item.arguments^)-1 DO
+            item.arguments[i].type :=
+                GetTypeByName(item.arguments[i].srcCodeType, contextOfUse,
+                              FALSE, TRUE, errList);
+          END;
+
+        | item: Sym.TypeVar DO
+          item.bound := GetTypeByName(item.bound, contextOfUse,
+                                      FALSE, TRUE, errList);
+          
+          
         (* scope objects: fix context of use for using 
            occurences of identifiers *)
         | item: Sym.Module DO
           contextOfUse := item
         | item: Sym.ProcDecl DO
+          IF (item.formalPars # NIL) & (item.formalPars.receiver # NIL) THEN
+            ResolverReceiver(item, item.formalPars.receiver);
+          END;
           contextOfUse := item
+        | item: Sym.TypePars DO
+          ASSERT(item.ns # NIL);
+          contextOfUse := item;
         ELSE  (* ignore any other kind items *)
         END;
         
         (* decend into nested objects *)
+        typeDeclCount := 0;
         ptr := item. nestedItems;
         WHILE (ptr # NIL) DO
-          ResolveTypeNames (ptr, contextOfUse, errList);
+          ResolveTypeNames (ptr, contextOfUse, unpatchedQualTypes, errList);
+          IF (ptr IS Sym.TypeDecl) THEN
+            INC(typeDeclCount);
+          END;
           ptr := ptr. nextNested
-        END
-      END
+        END;
+
+        (* with the children completed, we can do some post processing *)
+        WITH item: Sym.TypePars DO
+          (* create and initialize TypePars.params *)
+          NEW(item.params, typeDeclCount);
+          typeDeclCount := 0;
+          ptr := item.nestedItems;
+          WHILE (ptr # NIL) DO
+            IF (ptr IS Sym.TypeDecl) THEN
+              item.params[typeDeclCount] := ptr(Sym.TypeDecl).type(Sym.TypeVar);
+              INC(typeDeclCount);
+            END;
+            ptr := ptr.nextNested;
+          END;
+          
+        | item: Sym.FormalPars DO
+          CollectFormalPars(item);
+        ELSE
+          (* ignore *)
+        END;
+      END;
     END ResolveTypeNames;
   
   PROCEDURE CheckTypeRestrictions (item: Sym.Item; errList: Error.List);
@@ -563,6 +785,8 @@ RAISES IO.Error;
       type: Sym.Type;
       record: Sym.Record;
       i: LONGINT;
+      ns: Sym.Namespace;
+      typePars: Sym.TypePars;
     
     PROCEDURE CheckOpenArray (type, srcCodeType: Sym.Type);
       BEGIN
@@ -577,6 +801,23 @@ RAISES IO.Error;
           ErrType(cannotCreateInstance, srcCodeType);
         END;
       END CheckInstance;
+
+    PROCEDURE CheckTypePars(typePars: Sym.TypePars);
+      VAR
+        ptr: Sym.Item;
+      BEGIN
+        ptr := typePars.nestedItems;
+        WHILE (ptr # NIL) DO
+          WITH ptr: Sym.TypeDecl DO
+            IF ~TR.IsValidTypeBound(ptr.type(Sym.TypeVar).bound) THEN
+              ErrType(invalidTypeBound, ptr.srcCodeType);
+            END;
+          ELSE
+            (* ignore *)
+          END;
+          ptr := ptr.nextNested;
+        END;
+      END CheckTypePars;
     
     BEGIN
       IF (item # NIL) THEN
@@ -605,7 +846,7 @@ RAISES IO.Error;
           CheckInstance(item.type, item.srcCodeType);
 
         | item: Sym.ProcDecl DO
-          IF item.isTypeBound & item.isAbstract THEN
+          IF item.IsTypeBound() & item.isAbstract THEN
             record := item.Class();
             IF (record # NIL) & ~record.isAbstract THEN
               ErrDecl(abstractProcForConcreteRecord, item, errList);
@@ -647,14 +888,43 @@ RAISES IO.Error;
           IF (item.baseType # NIL) THEN
             type := item.baseType;
             IF TR.IsValidRecordBaseType(type) THEN
-              item.ns(Namespace.Extended). 
-                  SetBaseNamespace(type(Sym.Record).ns(Namespace.Namespace));
+              ns := type.Namespace();
+              item.ns(Namespace.Extended).SetBaseNamespace
+                  (ns(Namespace.Namespace));
             ELSE
-              Err (illegalRecordBase, item.srcCodeBaseType(Sym.TypeName))
+              type := item.srcCodeBaseType;
+              IF (type IS Sym.QualType) THEN
+                type := type(Sym.QualType).srcCodeBaseType;
+              END;
+              Err (illegalRecordBase, type(Sym.TypeName))
             END
           END
-          
+
+        | item: Sym.QualType DO
+          typePars := item.baseType.typePars;
+          IF (typePars = NIL) THEN
+            ErrType(notParametricType, item.srcCodeBaseType);
+          ELSIF (LEN(typePars.params^) < LEN(item.arguments^)) THEN
+            ErrType(tooManyTypeArgs,
+                    item.arguments[LEN(typePars.params^)].srcCodeType);
+          ELSIF (LEN(typePars.params^) > LEN(item.arguments^)) THEN
+            ErrType(tooFewTypeArgs, item.srcCodeBaseType);
+          ELSE
+            FOR i := 0 TO LEN(typePars.params^)-1 DO
+              type := item.arguments[i].type;
+              IF (type IS Sym.TypeVar) THEN
+                type := type(Sym.TypeVar).bound;
+              END;
+              IF ~TR.IsExtensionOf(type, typePars.params[i].bound) THEN
+                ErrType(notExtensionOfBound, item.arguments[i].srcCodeType);
+              END;
+            END;
+          END;
         ELSE  (* ignore any other kind of items *)
+        END;
+
+        IF (item IS Sym.Type) & (item(Sym.Type).typePars # NIL) THEN
+          CheckTypePars(item(Sym.Type).typePars);
         END;
         
         (* descend into nested objects *)
@@ -669,17 +939,15 @@ RAISES IO.Error;
   PROCEDURE InsertTypeBoundProcs (module: Sym.Module; errList: Error.List);
   (* Adds type-bound procedures to the namespace of their record base type.  *)
     VAR
-      ptr, record: Sym.Item;
+      ptr: Sym.Item;
+      record: Sym.Record;
     BEGIN
       ptr := root. nestedItems;
       WHILE (ptr # NIL) DO
         WITH ptr: Sym.ProcDecl DO
-          IF ptr. isTypeBound & ~ptr. isForwardDecl THEN
-            record := ptr. formalPars. receiver. type;
-            IF (record IS Sym.Pointer) THEN
-              record := record(Sym.Pointer). baseType
-            END;
-            WITH record: Sym.Record DO
+          IF ptr.IsTypeBound() & ~ptr. isForwardDecl THEN
+            record := ptr.Class();
+            IF (record # NIL) THEN
               record. ns(Namespace.Extended). InsertTBProc (ptr, errList);
               IF (ptr.name.pos >= 0) &  (* don't overwrite imported flag *)
                  ((ptr.exportMark = Sym.nameNotExported) OR
@@ -691,7 +959,6 @@ RAISES IO.Error;
                    local module *)
                 ptr.notRedefined := TRUE;
               END;
-            ELSE  (* receiver is malformed in some way *)
             END
           END
         ELSE
@@ -714,7 +981,7 @@ RAISES IO.Error;
         IF (item IS Sym.ProcDecl) & item(Sym.ProcDecl). isForwardDecl THEN
           forward := item(Sym.ProcDecl);
           
-          IF forward. isTypeBound THEN
+          IF forward.IsTypeBound() THEN
             class := forward. Class();
             ns := class. Namespace();
             def := ns. IdentifyLocal (forward. parent, forward. name, TRUE)
@@ -770,7 +1037,8 @@ RAISES IO.Error;
             CheckRecord (record. baseType(Sym.Record));
             record. tbProcCount := record. baseType(Sym.Record). tbProcCount
           END;
-          record.ns(Namespace.Extended).CheckRestrictions (record, errList);
+          record.ns(Namespace.Extended).CheckRestrictions (record, uses,
+                                                           errList);
 
           IF errList.NoErrors() & ~record.isAbstract THEN
             (* Check that no abstract procedure remain.  Only do this if the
@@ -841,7 +1109,35 @@ RAISES IO.Error;
           
           flag := item.flagList;
           WHILE (flag # NIL) DO
-            WITH item: Sym.VarDecl DO
+            WITH item: Sym.Module DO
+              CASE flag.id OF
+              | Sym.flagOOCExtensions:
+                (* has no effect *)
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+              
+            | item: Sym.ProcDecl DO
+              CASE flag.id OF
+              | Sym.flagAbstract:
+                SetFlag(item.isAbstract, TRUE);
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+              
+            | item: Sym.ConstDecl DO
+              CASE flag.id OF
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+              
+            | item: Sym.VarDecl DO
               CASE flag.id OF
               | Sym.flagNoCopy:
                 IF ~item.isParameter OR
@@ -861,6 +1157,24 @@ RAISES IO.Error;
                 ELSE
                   SetFlag(item.permitArgumentNIL, TRUE);
                 END;
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+              
+            | item: Sym.FieldDecl DO
+              CASE flag.id OF
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+              
+            | item: Sym.TypeDecl DO
+              CASE flag.id OF
+              | Sym.flagDeprecated:
+                SetFlag(item.deprecated, TRUE);
               ELSE
                 InvalidFlag(flag, invalidModifierFlag);
               END;
@@ -912,14 +1226,6 @@ RAISES IO.Error;
                 InvalidFlag(flag, invalidModifierFlag);
               END;
               
-            | item: Sym.ProcDecl DO
-              CASE flag.id OF
-              | Sym.flagAbstract:
-                SetFlag(item.isAbstract, TRUE);
-              ELSE
-                InvalidFlag(flag, invalidModifierFlag);
-              END;
-              
             ELSE
               InvalidFlag(flag, invalidModifierFlag);
             END;
@@ -967,7 +1273,7 @@ RAISES IO.Error;
         ELSE  (* ignore *)
         END;
         
-        (* decend into nested objects *)
+        (* descend into nested objects *)
         ptr := item. nestedItems;
         WHILE (ptr # NIL) DO
           ResolveModifierFlags (ptr, errList);
@@ -988,6 +1294,163 @@ RAISES IO.Error;
         END;
       END;
     END LinkFileSections;
+
+  PROCEDURE PropagateTypeVars(item: Sym.Item);
+  (* For every type that uses a type variable in its definition, create an
+     entry `Type.typePars' listing all used type variables.  *)
+    VAR
+      ptr: Sym.Item;
+
+    PROCEDURE Propagate(type, srcCodeType: Sym.Type);
+      VAR
+        tv: Sym.TypeVarArray;
+        i: LONGINT;
+        ptr: Sym.Item;
+        
+      PROCEDURE MergePars(type: Sym.Type; typeVars: Sym.TypeVarArray);
+        (* pre: `typeVars' holds only unique variables *)
+        VAR
+          tp: Sym.TypePars;
+          oldVars, tv: Sym.TypeVarArray;
+          i, j, new: LONGINT;
+        BEGIN
+          IF (type.typePars = NIL) THEN  (* use without change *)
+            NEW(tp);
+            Sym.InitTypePars(tp, type.parent);
+            tp.params := typeVars;
+            type.SetTypePars(tp);
+          ELSE                           (* merge with existing list *)
+            oldVars := type.typePars.params;
+            new := 0;
+            i := 0;
+            WHILE (i # LEN(typeVars^)) DO
+              j := 0;
+              WHILE (j # LEN(oldVars^)) & (oldVars[j] # typeVars[i]) DO
+                INC(j);
+              END;
+              IF (j = LEN(oldVars^)) THEN  (* no match in old variables *)
+                typeVars[new] := typeVars[i];
+                INC(new);
+              END;
+              INC(i);
+            END;
+
+            IF (new # 0) THEN
+              NEW(tv, LEN(oldVars^)+new);
+              FOR i := 0 TO LEN(oldVars^)-1 DO
+                tv[i] := oldVars[i];
+              END;
+              FOR i := 0 TO new-1 DO
+                tv[LEN(oldVars^)+i] := typeVars[i];
+              END;
+              type.typePars.params := tv;
+            END;
+          END;
+        END MergePars;
+
+      PROCEDURE Merge(type, baseType: Sym.Type);
+        BEGIN
+          IF (baseType.typePars # NIL) THEN
+            MergePars(type, baseType.typePars.params);
+          END;
+        END Merge;
+
+      PROCEDURE MergeVarDecl(type: Sym.Type; varDecl: Sym.VarDecl);
+        BEGIN
+          Propagate(varDecl.type, varDecl.srcCodeType);
+          Merge(type, varDecl.type);
+        END MergeVarDecl;
+      
+      BEGIN
+        IF (type # NIL) & ((type = srcCodeType) OR (type IS Sym.TypeVar)) THEN
+          (* don't follow type names, because visibility of type variables
+             does not span multiple type declarations *)
+          WITH type: Sym.TypeVar DO
+            IF (type.typePars = NIL) THEN
+              NEW(tv, 1);
+              tv[0] := type;
+              MergePars(type, tv);
+            END;
+            
+          | type: Sym.PredefType DO
+            (* ignore *)
+
+          | type: Sym.Pointer DO
+            Propagate(type.baseType, type.srcCodeBaseType);
+            Merge(type, type.baseType);
+
+          | type: Sym.FormalPars DO
+            (* do not propagate unbound variables from the receiver type: they
+               are of no interest in the "outside" view, and always qualified
+               in the "inside" view *)
+            FOR i := 0 TO LEN(type.params^)-1 DO
+              MergeVarDecl(type, type.params[i]);
+            END;
+            
+          | type: Sym.Array DO
+            Propagate(type.elementType, type.srcCodeElementType);
+            Merge(type, type.elementType);
+
+          | type: Sym.Record DO
+            IF (type.baseType # NIL) THEN
+              Propagate(type.baseType, type.srcCodeBaseType);
+              Merge(type, type.baseType);
+            END;
+            ptr := type.nestedItems;
+            WHILE (ptr # NIL) DO
+              WITH ptr: Sym.FieldDecl DO
+                Propagate(ptr.type, ptr.srcCodeType);
+                Merge(type, ptr.type);
+              ELSE
+                (* ignore *)
+              END;
+              ptr := ptr.nextNested;
+            END;
+
+          | type: Sym.QualType DO
+            (* no variables are propagated out of the unqualified base type *)
+            FOR i := 0 TO LEN(type.arguments^)-1 DO
+              Propagate(type.arguments[i].type, type.arguments[i].srcCodeType);
+              Merge(type, type.arguments[i].type);
+            END;
+
+          | type: Sym.TypeName DO
+            (* ignore *)
+          END;
+        END;
+      END Propagate;
+    
+    BEGIN
+      WITH item: Sym.TypeDecl DO
+        Propagate(item.type, item.srcCodeType);
+      | item: Sym.ProcDecl DO
+        IF item.IsTypeBound() THEN
+          Propagate(item.formalPars, item.formalPars);
+        END;
+      ELSE
+        (* ignore *)
+      END;
+
+      (* descend into nested objects *)
+      ptr := item.nestedItems;
+      WHILE (ptr # NIL) DO
+        PropagateTypeVars(ptr);
+        ptr := ptr.nextNested;
+      END;
+    END PropagateTypeVars;
+
+  PROCEDURE PatchQualType(qualType: Sym.QualType);
+    VAR
+      params: Sym.TypeVarArray;
+      i: LONGINT;
+    BEGIN
+      params := qualType.baseType.typePars.params;
+      
+      NEW(qualType.arguments, LEN(params^));
+      FOR i := 0 TO LEN(params^)-1 DO
+        Sym.InitTypeRef(qualType.arguments[i], params[i].bound);
+      END;
+    END PatchQualType;
   
   BEGIN
     ASSERT (errList # NIL);
@@ -998,6 +1461,10 @@ RAISES IO.Error;
         ErrDecl(atMostOneLinkFile, root, errList);
       END;
     ELSE
+    END;
+
+    IF (uses # NIL) THEN
+      uses.StartModule(root, errList);
     END;
     
     (* The declarations of a module are resolved in a multi-pass process.
@@ -1015,30 +1482,34 @@ RAISES IO.Error;
       RETURN
     END;
     
-    (* first pass: create namespace objects for module, procedures, and
-       records (excluding any type-bound procedures and procedure 
+    (* first pass: create namespace objects for module, procedures, records,
+       and parametric type (excluding any type-bound procedures and procedure 
        forward declarations) *)
     privateRecords := Dictionary.New();
     PopulateNamespace (root);
     
-    (* second pass: check local uniqueness constraint for module, procedure, 
-       and record namespaces; note: for records, this checks only a small
-       part of the restrictions placed on their namespaces *)
+    (* second pass: check local uniqueness constraint for module, procedure,
+       record, and parametric type namespaces; note: for records, this checks
+       only a small part of the restrictions placed on their namespaces  *)
     CheckLocalUniqueness (root, errList);
     
-    (* third pass: connect namespace links; the namespaces of procedures are
-       nested into the enclosing procedure/module *)
+    (* third pass: connect namespace links; the namespaces of procedures and
+       parametric types are nested into the enclosing procedure/module  *)
     ConnectNamespaces (root, predefModule, errList);
     
     
-    (* here holds: module and procedure namespaces can be searched for
-                   declarations, ignoring procedure forward declarations *)
+    (* here holds: module, procedure, and parametric type namespaces can be
+       searched for declarations, ignoring procedure forward declarations  *)
     
     
     (* fourth pass: resolve type names in declarations, and fix up namespaces
        for record types *)
-    ResolveTypeNames (root, NIL, errList);
-
+    unpatchedQualTypes := ArrayList.New(4);
+    ResolveTypeNames (root, NIL, unpatchedQualTypes, errList);
+    FOR i := 0 TO unpatchedQualTypes.size-1 DO
+      PatchQualType(unpatchedQualTypes.array[i](Sym.QualType));
+    END;
+    
     (* CAUTION: Some type names may not have been resolved successfully
        past this point.  Check for instances of Sym.TypeName before assuming
        that the types are valid.  *)
@@ -1074,7 +1545,12 @@ RAISES IO.Error;
     (* here holds: any namespace (module, procedure, or record) can be
        searched and is guaranteed to deliver the correct results *)
     
-    (* nineth pass: check namespace restrictions imposed on extended
+    (* nineth pass: propagate type variables upward in the tree of
+       constructors, so that every type that has a type variable somewhere has
+       a non-NIL field `type.typePars'  *)
+    PropagateTypeVars(root);
+    
+    (* tenth pass: check namespace restrictions imposed on extended
        records and assign indexes to type-bound procedures; fix notRedefined
        for type-bound procedures that are redefined in the local module *)
     IF errList.NoErrors() THEN
@@ -1082,8 +1558,13 @@ RAISES IO.Error;
          function cannot operate properly; only run it if we are clean *)
       CheckExtendedRecords (root, errList);
     END;
+    (*XML.Write(StdChannels.stdout, root);*)
     
-    ResolveRef.Resolve (root, errList)
+    ResolveRef.Resolve (root, errList);
+    
+    IF (uses # NIL) & errList.NoErrors() THEN
+      uses.RegisterSymTab(root);
+    END;
   END CreateNamespace;
 
 (*PROCEDURE CreateNamespaceRec*(root: Sym.Module;
@@ -1118,8 +1599,8 @@ PROCEDURE Init* ();
     predef := Predef.CreatePredef (stb);
     system := Predef.CreateSYSTEM (stb);
     TRY
-      CreateNamespace (predef, Error.NewList (""));
-      CreateNamespace (system, Error.NewList(""));
+      CreateNamespace (predef, NIL, Error.NewList (""));
+      CreateNamespace (system, NIL, Error.NewList(""));
     CATCH IO.Error:
       (* cannot happen *)
     END;

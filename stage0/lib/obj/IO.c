@@ -28,7 +28,7 @@ void IO__RaiseFormatError(Object__String msg) {
   i0 = (OOC_INT32)msg;
   i0 = (OOC_INT32)IO__NewFormatError((Object__String)i0);
   Exception__Raise((void*)i0);
-  return;
+  
   ;
 }
 
@@ -40,7 +40,7 @@ void IO__RaiseNotImplemented(void) {
   e = (IO__NotImplemented)i0;
   IO__InitError((IO__Error)i0, (Object__String)(OOC_INT32)0);
   Exception__Raise((void*)i0);
-  return;
+  
   ;
 }
 

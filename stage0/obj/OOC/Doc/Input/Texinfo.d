@@ -106,7 +106,7 @@ static OOC_Scanner_InputBuffer__CharArray OOC_Doc_Input_Texinfo__emptyString;
 #define OOC_Doc_Input_Texinfo__expectedMarkupCommand 12
 #define OOC_Doc_Input_Texinfo__invalidEnumStart 13
 static OOC_Doc_Input_Texinfo__ErrorContext OOC_Doc_Input_Texinfo__texinfoContext;
-static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray str, OOC_Error__List errList);
+static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray str, OOC_Error__List errList);
 static void OOC_Doc_Input_Texinfo__WriteTokens(Channel__Channel ch, OOC_Doc_Input_Texinfo__Token t);
 static void OOC_Doc_Input_Texinfo__Init(void);
 
@@ -114,25 +114,25 @@ static void OOC_Doc_Input_Texinfo__Init(void);
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__Command = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__CommandDesc}, NULL, &_mid, "Command", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__CommandDesc = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__CommandDesc}, (void*[]){}, &_mid, "CommandDesc", 20, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3273 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3265 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__Token = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__TokenDesc}, NULL, &_mid, "Token", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__TokenDesc = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__TokenDesc}, (void*[]){}, &_mid, "TokenDesc", 24, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3635 = { (RT0__Struct[]){&RT0__shortint}, NULL, &_mid, NULL, 256, 256, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3669 = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__Command}, NULL, &_mid, NULL, 152, 38, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3627 = { (RT0__Struct[]){&RT0__shortint}, NULL, &_mid, NULL, 256, 256, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3661 = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__Command}, NULL, &_mid, NULL, 152, 38, RT0__strArray };
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__ErrorContext = { (RT0__Struct[]){&_td_OOC_Doc_Input_Texinfo__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Doc_Input_Texinfo__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Doc_Input_Texinfo__ErrorContextDesc}, (void*[]){(void*)OOC_Doc_Input_Texinfo__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__4325 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__5715 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__7244 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__11976 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__15640 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17831 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17974 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__24053 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__25539 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__27328 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__30665 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_Input_Texinfo__34275 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__4317 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__5707 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__7236 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__11968 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__15632 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17823 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17966 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__24045 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__25531 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__27320 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__30657 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Input_Texinfo__34267 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Doc:Input:Texinfo", (RT0__Struct[]) { &_td_OOC_Doc_Input_Texinfo__Command, &_td_OOC_Doc_Input_Texinfo__CommandDesc, &_td_OOC_Doc_Input_Texinfo__Token, &_td_OOC_Doc_Input_Texinfo__TokenDesc, &_td_OOC_Doc_Input_Texinfo__ErrorContext, &_td_OOC_Doc_Input_Texinfo__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Doc_Input_Texinfo_init0() {

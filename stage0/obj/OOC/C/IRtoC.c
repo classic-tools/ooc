@@ -208,7 +208,7 @@ l47:
 l49:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2233))+12);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2240))+4);
-  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2251)))), &_td_OOC_SymbolTable__PredefTypeDesc, 2251)), 2262))+32);
+  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2251)))), &_td_OOC_SymbolTable__PredefTypeDesc, 2251)), 2262))+36);
   _assert((i1==13), 127, 2221);
   i1 = (OOC_INT32)w;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2313))+12);

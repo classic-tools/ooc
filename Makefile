@@ -54,8 +54,8 @@ main-clean: test-cleanall
 	for i in lib/sym lib/obj lib/bin lib/oocdoc; do rm -Rf ${top_builddir}/$$i; done
 	rm -f src/XML oo2c
 	for i in ${test_programs}; do rm -f $$i; done
-	-cd stage0 && rm -f *.o */*.o */*/*.o */*/*/*.o */*/*/*/*.o */*/*/*/*/*.o
-	rm -Rf stage0/oo2c stage1 stage2 tests/lib-TestCompile tests/lib-oo2c gmon.out
+	-${MAKE} -C stage0 -f Makefile.ext clean
+	rm -Rf stage1 stage2 tests/lib-TestCompile tests/lib-oo2c gmon.out
 	${MAKE} -C tests/hostess-ooc1 test-clean
 	${MAKE} -C tests/benchmark clean
 
@@ -95,12 +95,12 @@ configure: configure.ac lib/src/__config.h.in
 ### variables is best done by the make utility itself.  This rule puts the
 ### expanded values into the OOC configuration file oo2crc.xml.
 $(OOC_DEV_ROOT)/rsrc/OOC/oo2crc.xml: $(OOC_DEV_ROOT)/rsrc/OOC/oo2crc.xml.mk $(OOC_DEV_ROOT)/Makefile.config
-	sed -e 's:%libdir%:$(libdir):g' \
-	    -e 's:%oocdir%:$(oocdir):g' \
-	    -e 's:%bindir%:$(bindir):g' \
-	    -e 's:%INSTALL%:$(INSTALL):g' \
-	    -e 's:%INSTALL_PROGRAM%:$(INSTALL_PROGRAM):g' \
-	    -e 's:%INSTALL_DATA%:$(INSTALL_DATA):g' \
+	sed -e 's?%libdir%?$(libdir)?g' \
+	    -e 's?%oocdir%?$(oocdir)?g' \
+	    -e 's?%bindir%?$(bindir)?g' \
+	    -e 's?%INSTALL%?$(INSTALL)?g' \
+	    -e 's?%INSTALL_PROGRAM%?$(INSTALL_PROGRAM)?g' \
+	    -e 's?%INSTALL_DATA%?$(INSTALL_DATA)?g' \
 		$(OOC_DEV_ROOT)/rsrc/OOC/oo2crc.xml.mk >$(OOC_DEV_ROOT)/rsrc/OOC/oo2crc.xml
 rsrc/OOC/oo2crc.xml: $(OOC_DEV_ROOT)/rsrc/OOC/oo2crc.xml
 
@@ -140,7 +140,7 @@ dist64:
 
 ### Create initial compiler executable from distributed C sources.
 stage0/oo2c:
-	${MAKE} -C stage0 -f Makefile.ext oo2c
+	${MAKE} -C stage0 -f Makefile.ext setup-src oo2c
 
 ### Build library from core modules using the initial compiler executable.
 lib/obj/liboo2c.la: $(BOOTSTRAP_COMPILER) $(OOC_DEV_ROOT)/oo2crc-install.xml

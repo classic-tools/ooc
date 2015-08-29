@@ -1,7 +1,7 @@
-(* 	$Id: Parser.Mod,v 1.8 2002/12/29 14:33:43 mva Exp $	 *)
+(* 	$Id: Parser.Mod,v 1.20 2003/05/11 13:56:33 mva Exp $	 *)
 MODULE OOC:Parser;
 (*  Parses an Oberon-2 module and creates an abstract syntax tree.
-    Copyright (C) 1999-2002  Michael van Acken
+    Copyright (C) 1999-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -22,7 +22,7 @@ MODULE OOC:Parser;
 
 IMPORT
   Msg, Strings,
-  OOC:Error, OOC:Scanner:Symbol, OOC:Scanner:Builder:BasicList, OOC:AST,
+  OOC:Error, OOC:Scanner:Symbol, OOC:Scanner:BasicList, OOC:AST,
   OOC:Doc, OOC:Doc:Input:Texinfo;
 
 
@@ -46,7 +46,9 @@ CONST
      (@oproc{AST.Builder.IdentDef}, or @oproc{AST.Builder.ModuleIdent})
      of the preceding declaration for any documentation comment
      encountered in the symbol list.  *)
-  onlyParseImport* = 4;
+  enableTypeParams* = 4;
+  (**If set, the a type declaration may include a list of type parameters.  *)
+  onlyParseImport* = 5;
   (**If set, stop parsing right after the import list.  Otherwise, parse
      the whole module.  *)
   enableAll* = {MIN(SET)..MAX(SET)}-{onlyParseImport};
@@ -71,7 +73,7 @@ CONST
   illegalFactor = 15;
   invalidFlag = 16;
   expectExternalKW = 17;
-  expectLinkSection = 18;
+  (*expectLinkSection = 18;  unused *)
   fileNameMismatch = 19;
   
 TYPE
@@ -123,8 +125,6 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "Invalid flag"
     | expectExternalKW:
       t := "Expected keyword `INTERFACE' or `FOREIGN'"
-    | expectLinkSection:
-      t := "Expected link section"
     | fileNameMismatch:
       t := "Module name does not match access path `${name}'"
     END;
@@ -269,7 +269,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       NextSym;
       RETURN node
     END CheckSym;
-  
+
   PROCEDURE MultiPartIdent (VAR name: AST.Name): AST.Node;
   (* Reads multi-part identifier, if these are enabled, and a simple identifer
      otherwise.  In any case, the result is an instance of
@@ -319,7 +319,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     END MultiPartIdent;
   
   PROCEDURE Flags (context: SHORTINT): AST.Node;
-  (* Reads a list of system flags.  Currently defunct. ... *)
+  (* Reads a list of system flags.  *)
     VAR
       counter: LONGINT;
       lBrak, rBrak: AST.Node;
@@ -396,9 +396,9 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         
         BEGIN
           (*S: LinkSection =
-            S:   "FILE" string [Options] |
-            S:   "OBJ" string |
-            S:   "LIB" string ["(" string {"," string} ")"] [Options].
+            S:   [ "FILE" string [Options] |
+            S:     "OBJ" string |
+            S:      "LIB" string ["(" string {"," string} ")"] [Options] ].
             S: Options = "ADD_OPTION" ident ["," ident].  *)
           IF Ident ("FILE") THEN
             kw := CheckSym (Symbol.ident);
@@ -434,16 +434,18 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
             RETURN ast. LinkLibFlag (kw, string, lParen, dependences, rParen,
                                     addOptions, addIdent1, addComma, addIdent2)
           ELSE
-            Err (expectLinkSection, sym);
             RETURN NIL
           END
         END LinkSection;
       
       BEGIN
-        (*S: ModuleFlags = "OOC_EXTENSIONS" |
+        (*S: ModuleFlags = "OOC_EXTENSIONS" | "DEPRECATED" |
           S:   ("INTERFACE"|"FOREIGN") string {"," ident}
           S:   [";" "LINK" LinkSection {";" LinkSection} "END".  *)
         IF Ident ("OOC_EXTENSIONS") THEN
+          RETURN CheckSym (Symbol.ident)
+        ELSIF Ident("DEPRECATED") THEN
+          (* FIXME... this approach works only if a single flag is present *)
           RETURN CheckSym (Symbol.ident)
         ELSE
           IF ~Ident("INTERFACE") & ~Ident("FOREIGN") THEN
@@ -622,10 +624,68 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
   
   PROCEDURE ^ Expr (): AST.Node;
   
+  PROCEDURE Qualident (): AST.Node;
+    VAR
+      module, period, ident: AST.Node;
+    BEGIN
+      (*S: Qualident = ident ["." ident].  *)
+      module := CheckSym (Symbol.ident);
+      IF (sym. id = Symbol.period) THEN
+        period := CheckSym (Symbol.period);
+        ident := CheckSym (Symbol.ident);
+        RETURN ast. Operator (module, period, ident)
+      ELSE
+        RETURN module
+      END
+    END Qualident;
+  
+  PROCEDURE QualType(): AST.Node;
+    VAR
+      type, left, right: AST.Node;
+      list: AST.NodeList;
+    BEGIN
+      (*S: QualType = Qualident ["(" [QualType {"," QualType}] ")"] *)
+      type :=  Qualident();
+      IF (sym.id = Symbol.lParen) & (enableTypeParams IN parseOptions) THEN
+        left := CheckSym(Symbol.lParen);
+        list := ast.NewNodeList();
+        IF (sym.id # Symbol.rParen) THEN
+          list.Append(QualType());
+          WHILE (sym.id = Symbol.comma) DO
+            list.Append(CheckSym(Symbol.comma));
+            list.Append(QualType());
+          END
+        END;
+        right := CheckSym(Symbol.rParen);
+        RETURN ast.QualType(type, left, list, right);
+      ELSE
+        RETURN type;
+      END;
+    END QualType;
+  
   PROCEDURE Designator (): AST.Node;
     VAR
       x, y, op, left, right: AST.Node;
       list: AST.NodeList;
+
+    PROCEDURE Call(design: AST.Node): AST.Node;
+      VAR
+        left, right: AST.Node;
+        list: AST.NodeList;
+      BEGIN
+        left := CheckSym (Symbol.lParen);
+        list := ast. NewNodeList();
+        IF (sym. id # Symbol.rParen) THEN
+          list. Append (Expr());
+          WHILE (sym. id = Symbol.comma) DO
+            list. Append (CheckSym (Symbol.comma));
+            list. Append (Expr())
+          END
+        END;
+        right := CheckSym (Symbol.rParen);
+        RETURN ast. FunctionCall (design, left, list, right)
+      END Call;
+    
     BEGIN
       (*S: Designator = ident { "." ident | "^" | 
         S:                      "[" Expr {"," Expr} "]" | 
@@ -651,22 +711,12 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
           right := CheckSym (Symbol.rBrak);
           x := ast. ArrayIndex (x, left, list, right)
         | Symbol.lParen:
-          left := CheckSym (Symbol.lParen);
-          list := ast. NewNodeList();
-          IF (sym. id # Symbol.rParen) THEN
-            list. Append (Expr());
-            WHILE (sym. id = Symbol.comma) DO
-              list. Append (CheckSym (Symbol.comma));
-              list. Append (Expr())
-            END
-          END;
-          right := CheckSym (Symbol.rParen);
-          x := ast. FunctionCall (x, left, list, right)
+          x := Call(x);
         ELSE
           EXIT
         END
       END;
-      RETURN x
+      RETURN x;
     END Designator;
   
   PROCEDURE Expr (): AST.Node;
@@ -797,21 +847,6 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       RETURN x
     END Expr;
 
-  PROCEDURE Qualident (): AST.Node;
-    VAR
-      module, period, ident: AST.Node;
-    BEGIN
-      (*S: Qualident = ident ["." ident].  *)
-      module := CheckSym (Symbol.ident);
-      IF (sym. id = Symbol.period) THEN
-        period := CheckSym (Symbol.period);
-        ident := CheckSym (Symbol.ident);
-        RETURN ast. Operator (module, period, ident)
-      ELSE
-        RETURN module
-      END
-    END Qualident;
-  
   PROCEDURE ^ Type (level: LONGINT): AST.Node;
   
   PROCEDURE FormalPars (): AST.Node;
@@ -852,7 +887,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     BEGIN
       (*S: FormalPars = Flags 
         S:              [ "(" [FPSection {";" FPSection} [";" "..."] ] ")"
-        S:                [":" Qualident]
+        S:                [":" QualType]
         S:                ["RAISES" Qualident {"," Qualident}] ].  *)
       oldLastIdentDef := lastIdentDef;
       flags := Flags (AST.flagsProcType);
@@ -879,7 +914,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         rParen := CheckSym (Symbol.rParen);
         IF (sym. id = Symbol.colon) THEN
           colon := CheckSym (Symbol.colon);
-          result := Qualident()
+          result := QualType()
         ELSE
           colon := NIL;
           result := NIL
@@ -913,6 +948,55 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       RETURN ast. FormalPars (flags, lParen, fpSections, rParen,
                               colon, result, raises, raisesList);
     END FormalPars;
+  
+  PROCEDURE TypePars(): AST.Node;
+    VAR
+      lParen, rParen, oldLastIdentDef: AST.Node;
+      tpSections: AST.NodeList;
+    
+    PROCEDURE TPSection (): AST.Node;
+      VAR
+        colon, type, ident: AST.Node;
+        tpList: AST.NodeList;
+        dummy: AST.Name;
+      BEGIN
+        (*S: TPSection = ident {"," ident} ":" Qualident.  *)
+        tpList := ast.NewNodeList();
+        LOOP
+          ident := IdentDef(0, FALSE, TRUE, dummy);
+          lastIdentDef := ident;
+          tpList.Append (ident);
+          IF (sym. id = Symbol.comma) THEN
+            tpList.Append(CheckSym(Symbol.comma));
+          ELSE
+            EXIT;
+          END
+        END;
+        colon := CheckSym(Symbol.colon);
+        type := Qualident();
+        (*type := Type(MIN(LONGINT));*)
+        RETURN ast.TPSection(tpList, colon, type);
+      END TPSection;
+    
+    BEGIN  (* pre: (sym.id = Symbol.lParen) *)
+      (*S: TypePars = "(" [TPSection {";" TPSection} ] ")".  *)
+      oldLastIdentDef := lastIdentDef;
+      lParen := CheckSym(Symbol.lParen);
+      tpSections := ast.NewNodeList();
+      IF (sym.id = Symbol.ident) THEN
+        LOOP
+          tpSections.Append(TPSection());
+          IF (sym.id = Symbol.semicolon) THEN
+            tpSections.Append(CheckSym(Symbol.semicolon));
+          ELSE
+            EXIT;
+          END
+        END
+      END;
+      rParen := CheckSym(Symbol.rParen);
+      lastIdentDef := oldLastIdentDef;
+      RETURN ast.TypePars(lParen, tpSections, rParen);
+    END TypePars;
   
   PROCEDURE Type (level: LONGINT): AST.Node;
     VAR
@@ -953,10 +1037,11 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
           identList: AST.NodeList;
           dummy: AST.Name;
         BEGIN  (* pre: sym. id = Symbol.ident *)
-          (*S: FieldList = IdentDef {"," IdentDef} ":" Type.  *)
+          (*S: FieldList = IdentDef Flags {"," IdentDef Flags } ":" Type.  *)
           identList := ast. NewNodeList();
           LOOP
             identList. Append (IdentDef (level, FALSE, FALSE, dummy));
+            identList. Append (Flags (AST.flagsField));
             IF (sym. id = Symbol.comma) THEN
               identList. Append (CheckSym (Symbol.comma))
             ELSE
@@ -969,13 +1054,13 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         END FieldList;
       
       BEGIN
-        (*S: RecordType = "RECORD" Flags ["("Qualident")"] 
+        (*S: RecordType = "RECORD" Flags ["("QualType")"] 
           S:              [FieldList] {";" [FieldList]} "END".  *)
         record := CheckSym (Symbol.record);
         flags := Flags (AST.flagsRecordType);
         IF (sym. id = Symbol.lParen) THEN
           lParen := CheckSym (Symbol.lParen);
-          qualident := Qualident();
+          qualident := QualType();
           rParen := CheckSym (Symbol.rParen)
         ELSE
           lParen := NIL;
@@ -1021,12 +1106,12 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         formalPars := FormalPars();
         RETURN ast. ProcType (procedure, formalPars)
       END ProcType;
-    
+
     BEGIN
-      (*S: Type = Qualident|ArrayType|RecordType|PointerType|ProcType.  *)
+      (*S: Type = QualType|ArrayType|RecordType|PointerType|ProcType.  *)
       CASE sym. id OF
       | Symbol.ident:
-        type :=  Qualident()
+        type :=  QualType();
       | Symbol.array:
         type :=  ArrayType()
       | Symbol.record:
@@ -1063,31 +1148,38 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     PROCEDURE DeclSeq(): AST.NodeList;
       VAR
         nl: AST.NodeList;
-
+        
       PROCEDURE ConstDecl(): AST.Node;
         VAR
-          identDef, equal, expr, scolon: AST.Node;
+          identDef, flags, equal, expr, scolon: AST.Node;
           dummy: AST.Name;
         BEGIN  (* pre: (sym. id = Symbol.ident) *)
-          (*S: ConstDecl = IdentDef "=" Expr ";".  *)
+          (*S: ConstDecl = IdentDef Flags "=" Expr ";".  *)
           identDef := IdentDef (level, TRUE, FALSE, dummy);
+          flags := Flags(AST.flagsConstDecl);
           equal := CheckSym (Symbol.eql);
           expr := Expr();
           scolon := CheckSym (Symbol.semicolon);
-          RETURN ast. ConstDecl (identDef, equal, expr, scolon)
+          RETURN ast. ConstDecl (identDef, flags, equal, expr, scolon)
         END ConstDecl;
 
       PROCEDURE TypeDecl (): AST.Node;
         VAR
-          identDef, equal, type, scolon: AST.Node;
+          identDef, flags, typePars, equal, type, scolon: AST.Node;
           dummy: AST.Name;
         BEGIN  (* pre: (sym. id = Symbol.ident) *)
-          (*S: TypeDecl = IdentDef "=" Type ";".  *)
+          (*S: TypeDecl = IdentDef Flags [TypePars] "=" Type ";".  *)
           identDef := IdentDef (level, TRUE, FALSE, dummy);
+          flags := Flags(AST.flagsTypeDecl);
+          IF (sym.id = Symbol.lParen) & (enableTypeParams IN parseOptions) THEN
+            typePars := TypePars();
+          ELSE
+            typePars := NIL;
+          END;
           equal := CheckSym (Symbol.eql);
           type := Type (level);
           scolon := CheckSym (Symbol.semicolon);
-          RETURN ast. TypeDecl (identDef, equal, type, scolon)
+          RETURN ast. TypeDecl (identDef, flags, typePars, equal, type, scolon)
         END TypeDecl;
 
       PROCEDURE VarDecl (): AST.Node;
@@ -1124,10 +1216,33 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         
         PROCEDURE Receiver (): AST.Node;
           VAR
-            lParen, var, ident, colon, type, rParen: AST.Node;
+            lParen, var, ident, colon, type, rParen,
+                lParenAlias, rParenAlias: AST.Node;
+            aliasList: AST.NodeList;
             dummy: AST.Name;
+
+          PROCEDURE AliasList(VAR lParen: AST.Node;
+                              VAR aliasList: AST.NodeList;
+                              VAR rParen: AST.Node);
+            BEGIN  (* pre: sym.id=lParen *)
+              lParen := CheckSym (Symbol.lParen);
+              aliasList := ast.NewNodeList();
+              IF (sym.id = Symbol.ident) THEN
+                LOOP
+                  aliasList.Append(CheckSym(Symbol.ident));
+                  IF (sym.id = Symbol.comma) THEN
+                    aliasList.Append(CheckSym(Symbol.comma));
+                  ELSE
+                    EXIT;
+                  END;
+                END;
+              END;
+              rParen := CheckSym (Symbol.rParen);
+            END AliasList;
+          
           BEGIN
-            (*S: Receiver = "(" ["VAR"] ident ":" ident ")".  *)
+            (*S: AliasList = "(" [ident {"," ident}] ")".
+              S: Receiver = "(" ["VAR"] ident ":" ident  [AliasList] ")".  *)
             lParen := CheckSym (Symbol.lParen);
             IF (sym. id = Symbol.var) THEN
               var := CheckSym (Symbol.var)
@@ -1137,8 +1252,18 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
             ident := IdentDef (0, FALSE, TRUE, dummy);
             colon := CheckSym (Symbol.colon);
             type := CheckSym (Symbol.ident);
+            
+            IF (sym.id = Symbol.lParen) THEN
+              AliasList(lParenAlias, aliasList, rParenAlias);
+            ELSE
+              lParenAlias := NIL;
+              aliasList := NIL;
+              rParenAlias := NIL;
+            END;
+            
             rParen := CheckSym (Symbol.rParen);
-            RETURN ast. Receiver (lParen, var, ident, colon, type, rParen)
+            RETURN ast. Receiver (lParen, var, ident, colon, type,
+                                  lParenAlias, aliasList, rParenAlias, rParen);
           END Receiver;
         
         BEGIN  (* pre: (sym. id = Symbol.procedure) *)
@@ -1398,7 +1523,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
             LOOP
               var := Qualident();
               colon := CheckSym (Symbol.colon);
-              type := Qualident();
+              type := QualType();
               guardList. Append (ast. Operator (var, colon, type));
               guardList. Append (CheckSym (Symbol.do));
               guardList. Append (StatementSeq());

@@ -1,4 +1,4 @@
-(* 	$Id: Make.Mod,v 1.40 2003/04/06 12:11:14 mva Exp $	 *)
+(* 	$Id: Make.Mod,v 1.47 2003/05/12 17:48:20 mva Exp $	 *)
 MODULE OOC:Make;
 (*  Builds object files, libraries, binaries, and the like.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -32,7 +32,7 @@ IMPORT
   OOC:Doc:ResolveRef, Rep := OOC:Repository, OOC:AST,
   Sym := OOC:SymbolTable, OOC:SymbolTable:CreateNamespace,
   OOC:SymbolTable:InterfaceDescr, OOC:SymbolTable:InterfaceXML,
-  OOC:Auxiliary:ParseModule, OOC:Make:LinkProgramC,
+  OOC:SymbolTable:Uses, OOC:Auxiliary:ParseModule, OOC:Make:LinkProgramC,
   
   OOC:C:IRtoC,
   OOC:Config:CCompiler, OOC:Make:TranslateToC,
@@ -82,6 +82,14 @@ TYPE
     
     errout: Channel.Channel;
     (**Error messages are written to this channel.  *)
+
+    forceUpdate: BOOLEAN;
+    (**If @code{TRUE}, then compile module even if all derived files are up
+       to date with respect to the source code.  This flag has no effect if
+       no source code is available.  *)
+
+    uses: Uses.Uses;
+    (**Used to track uses of a given list of objects.  Can be @code{NIL}.  *)
   END;
 
 CONST
@@ -150,6 +158,9 @@ PROCEDURE InitRules* (r: Rules);
     r.extensionDict := NIL;
     r.runCreateNamespace := TRUE;
     r.errout := StdChannels.stdout;
+    r.forceUpdate := FALSE;
+    r.forceUpdate := FALSE;
+    r.uses := NIL;
   END InitRules;
 
 PROCEDURE NewRules*(): Rules;
@@ -183,6 +194,19 @@ PROCEDURE (r: Rules) SetErrOut* (ch: Channel.Channel);
   BEGIN
     r.errout := ch;
   END SetErrOut;
+
+PROCEDURE (r: Rules) SetForceUpdate*(forceUpdate: BOOLEAN);
+  BEGIN
+    r.forceUpdate := forceUpdate;
+  END SetForceUpdate;
+
+PROCEDURE (r: Rules) UsageTracking*(extIdent: ARRAY OF CHAR): BOOLEAN;
+  VAR
+    syntaxError: BOOLEAN;
+  BEGIN
+    r.uses := Uses.New(extIdent, syntaxError);
+    RETURN ~syntaxError;
+  END UsageTracking;
 
 PROCEDURE (r: Rules) SetExtensionDict*(dict: Dictionary.Dictionary);
   BEGIN
@@ -395,7 +419,7 @@ RAISES IO.Error;
       (* the symbol file does not exist, or the source file is more recent
          than the symbol file: extract information from source file *)
       ParseModule.ParseModule(module, FALSE, FALSE, FALSE, TRUE,
-                              r.libraryName,
+                              r.libraryName, r.uses,
                               ast, symTab, pragmaHistory, errList);
       IF errList.NoErrors() THEN
         module.SetInterfaceData(symTab, Rep.importsOnly,
@@ -441,7 +465,10 @@ RAISES IO.Error;
     RETURN b;
   END SelectBackend;
 
-PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN
+PROCEDURE (r: Rules) CompileModule*(module: Rep.Module;
+                                    analysisOnly: BOOLEAN): BOOLEAN
+(**With @oparam{analysisOnly}, no output files are written.  Note: This is only
+   implemented for the C back-end right now.  *)
 RAISES IO.Error;
   VAR
     success: BOOLEAN;
@@ -458,7 +485,7 @@ RAISES IO.Error;
       pragmaHistory: Pragmas.History;
     BEGIN
       ParseModule.ParseModule (module, FALSE, TRUE, TRUE, FALSE, libraryName,
-                               ast, symTab, pragmaHistory, errList);
+                               r.uses, ast, symTab, pragmaHistory, errList);
       RETURN errList;
     END DoEmptyBackend;
   
@@ -468,7 +495,8 @@ RAISES IO.Error;
       t: TranslateToC.Translator;
     BEGIN
       t := SSAtoC.NewTranslator(writeStats, inspectProc, inspectStage);
-      RETURN TranslateToC.Run(module, libraryName, writeAST, writeIR, t);
+      RETURN TranslateToC.Run(module, libraryName, analysisOnly, r.uses,
+                              writeAST, writeIR, t);
     END DoSSAtoC;
   
   PROCEDURE DoIRtoC(libraryName: STRING): Error.List
@@ -477,7 +505,8 @@ RAISES IO.Error;
       t: TranslateToC.Translator;
     BEGIN
       t := IRtoC.NewTranslator();
-      RETURN TranslateToC.Run(module, libraryName, writeAST, writeIR, t);
+      RETURN TranslateToC.Run(module, libraryName, analysisOnly, r.uses,
+                              writeAST, writeIR, t);
     END DoIRtoC;
   
   PROCEDURE DoSSAtoIA32(libraryName: STRING): Error.List
@@ -486,7 +515,8 @@ RAISES IO.Error;
       t: TranslateToIA32.Translator;
     BEGIN
       t := SSAtoIA32.NewTranslator(module, inspectProc, inspectStage);
-      RETURN TranslateToIA32.Run(module, libraryName, writeAST, writeIR, t);
+      RETURN TranslateToIA32.Run(module, libraryName, r.uses,
+                                 writeAST, writeIR, t);
     END DoSSAtoIA32;
   
   BEGIN
@@ -518,7 +548,7 @@ RAISES IO.Error;
       END;
 
       success := (errList = NIL) OR errList.NoErrors();
-      IF success THEN
+      IF success & ~analysisOnly THEN
         (* read symbol file that we have just written *)
         module.SetInterfaceData(NIL, Rep.noInterfaceData, TRUE);
         success := r.GetImports(module);
@@ -538,7 +568,7 @@ PROCEDURE (r: Rules) UpdateSymbolFile(module: Rep.Module): BOOLEAN
 RAISES IO.Error;
   VAR
     i: LONGINT;
-    isUpToDate: BOOLEAN;
+    isUpToDate, dummy: BOOLEAN;
     errList: Error.List;
     err: Error.Msg;
     chars: Object.CharsLatin1;
@@ -599,13 +629,19 @@ RAISES IO.Error;
         ASSERT(module.ifData # NIL);
         module.SetInterfaceData(module. ifData, Rep.completeInterface,
                                 r.CheckAllImports(module));
+
+        IF (r.uses # NIL) & r.uses.TrackingDeclarations() THEN
+          (* symbol file is up to date, but we are looking for uses of
+             declarations: compile module in "analysis only" mode *)
+          dummy := r.CompileModule(module, TRUE);
+        END;
       ELSE
-        isUpToDate := r.CompileModule(module);
+        isUpToDate := r.CompileModule(module, FALSE);
       END;
 
       IF isUpToDate THEN
         errList := CreateErrList(module);
-        CreateNamespace.CreateNamespace(module.ifData, errList);
+        CreateNamespace.CreateNamespace(module.ifData, r.uses, errList);
         r.WriteErrList(errList);
         IF ~errList.NoErrors() THEN
           r.WriteErrList(errList);
@@ -646,7 +682,7 @@ RAISES IO.Error;
          depending on only the local symbol file should be sufficient  *)
       IF DerivedIsOlder(module, Rep.modInterfaceDescr, Rep.modSymbolFile) THEN
         errList := CreateErrList(module);
-        CreateNamespace.CreateNamespace(module.ifData, errList);
+        CreateNamespace.CreateNamespace(module.ifData, r.uses, errList);
         ResolveRef.Resolve(module.ifData, errList);
         ASSERT (errList.msgCount = 0);
         
@@ -684,7 +720,7 @@ RAISES IO.Error;
         errList := CreateErrList(module);
 
         ParseModule.ParseModule(module, FALSE, TRUE, FALSE, FALSE,
-                                r.libraryName,
+                                r.libraryName, r.uses,
                                 ast, symTab, pragmaHistory, errList);
         IF errList.NoErrors() THEN
           outputChannel := module.GetOutputChannel(Rep.modInterfaceXML, TRUE);
@@ -734,24 +770,31 @@ RAISES IO.Error;
     IF success THEN
       IF DerivedIsOlder(module, Rep.modInterfaceHTML, Rep.modInterfaceDescr) THEN
         exit := 0;
+        (* put file name of style sheet into str *)
         uri := GetSystemId (Config.repositories);
         uri(File.URI). GetPath (str);
-        Strings.Insert(" ", 0, str);
+                
+        (* put -o <file> option in front of style sheet  *)
+        Strings.Insert (" ", 0, str);
+        uri := module. GetURI (Rep.modInterfaceHTML, TRUE);
+        uri(File.URI). GetPath (path);
+        Strings.Insert (path, 0, str);
+        Strings.Insert (" -o ", 0, str);
+
+        (* create directory for HTML file, if it does not exist *)
+        Path.dirname (path, path);
+        OSFiles.makedirs (path, OSFiles.defaultMode, res);
+        
+        (* prefix option and style sheet argument with command name *)
         Strings.Insert(Config.xsltproc.value(StringValue.Value).string^,
                        0, str);
-        
+
+        (* append name of XML file *)
         uri := module. GetURI (Rep.modInterfaceDescr, TRUE);
         uri(File.URI). GetPath (path);
         Strings.Append (" ", str);
         Strings.Append (path, str);
-        Strings.Append (" >", str);
         
-        uri := module. GetURI (Rep.modInterfaceHTML, TRUE);
-        uri(File.URI). GetPath (path);
-        Strings.Append (path, str);
-        
-        Path.dirname (path, path);
-        OSFiles.makedirs (path, OSFiles.defaultMode, res);
         IF (res = NIL) THEN
           Logger.ShellCommand(str);
           exit := ProcessManagement.system (str)
@@ -770,12 +813,13 @@ RAISES IO.Error;
   END UpdateInterfaceHTML;
 
 PROCEDURE UpdateCompilerOutput (r: Rules; module: Rep.Module;
-                               fileId: Rep.FileId): BOOLEAN
+                                fileId: Rep.FileId): BOOLEAN
 RAISES IO.Error;
   BEGIN
     IF Exists(module, Rep.modModuleSource) THEN
-      IF DerivedIsOlder(module, fileId, Rep.modModuleSource) THEN
-        RETURN r.CompileModule(module);
+      IF r.forceUpdate OR
+         DerivedIsOlder(module, fileId, Rep.modModuleSource) THEN
+        RETURN r.CompileModule(module, FALSE);
       ELSE
         RETURN TRUE;
       END;

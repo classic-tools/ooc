@@ -338,7 +338,7 @@ l38:
   if (i2) goto l86;
   i2 = OOC_SymbolTable_TypeRules__IsCharType((OOC_SymbolTable__Type)i1);
   if (i2) goto l63;
-  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 16107)))), &_td_OOC_SymbolTable__PredefTypeDesc, 16107)), 16118))+32);
+  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 16107)))), &_td_OOC_SymbolTable__PredefTypeDesc, 16107)), 16118))+36);
   switch (i1) {
   case 14:
     i1 = (OOC_INT32)w;
@@ -389,7 +389,7 @@ l62:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 16709)))), OOC_C_DeclWriter__WriterDesc_WriteString)),OOC_C_DeclWriter__WriterDesc_WriteString)((OOC_C_DeclWriter__Writer)i2, "})", 3);
   goto l112;
 l63:
-  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15219)))), &_td_OOC_SymbolTable__PredefTypeDesc, 15219)), 15230))+32);
+  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15219)))), &_td_OOC_SymbolTable__PredefTypeDesc, 15219)), 15230))+36);
   switch (i1) {
   case 2:
     i1 = (OOC_INT32)w;
@@ -441,7 +441,7 @@ l83:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 15620)))), IO_TextRider__WriterDesc_WriteLInt)),IO_TextRider__WriterDesc_WriteLInt)((IO_TextRider__Writer)i1, i0, 0);
   goto l112;
 l86:
-  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 14317)))), &_td_OOC_SymbolTable__PredefTypeDesc, 14317)), 14328))+32);
+  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 14317)))), &_td_OOC_SymbolTable__PredefTypeDesc, 14317)), 14328))+36);
   i1 = i1==1;
   if (i1) goto l101;
   i1 = (OOC_INT32)w;
@@ -798,7 +798,7 @@ l16:
   i2 = (OOC_INT32)OOC_SymbolTable_TypeRules__BaseCharType((OOC_SymbolTable__Type)i1);
   i2 = OOC_SymbolTable_TypeRules__IsPredefType((OOC_SymbolTable__Type)i2, 1);
   if (i2) goto l23;
-  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22899)))), &_td_OOC_SymbolTable__PredefTypeDesc, 22899)), 22910))+32);
+  i1 = *(OOC_INT16*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22899)))), &_td_OOC_SymbolTable__PredefTypeDesc, 22899)), 22910))+36);
   switch (i1) {
   case 14:
     i1 = (OOC_INT32)w;

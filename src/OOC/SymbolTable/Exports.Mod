@@ -1,7 +1,7 @@
-(* 	$Id: Exports.Mod,v 1.15 2002/12/29 14:41:23 mva Exp $	 *)
+(* 	$Id: Exports.Mod,v 1.22 2003/05/11 13:56:32 mva Exp $	 *)
 MODULE OOC:SymbolTable:Exports;
 (*  Marks declarations that are part of the module's symbol file.
-    Copyright (C) 2000, 2001, 2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,11 +21,11 @@ MODULE OOC:SymbolTable:Exports;
 *)
 
 IMPORT
-  Log, ADT:Dictionary, Sym := OOC:SymbolTable, OOC:SymbolTable:Builder,
-  OOC:Doc;
+  Log, Sym := OOC:SymbolTable, OOC:SymbolTable:Builder, OOC:Doc,
+  ADT:Dictionary:AddressKey;
 
 
-PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Dictionary.Dictionary;
+PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Sym.Exports;
 (**Creates a dictionary with all items that appear in the module's symbol file.
 
    With @oparam{forSymbolFile}, additional declarations are included that must
@@ -33,7 +33,7 @@ PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Dictionary.D
    are not exported themself.  Examples for this are fields of records
    appearing in the public interface.  *)
   VAR
-    dict: Dictionary.Dictionary;
+    dict: Sym.Exports;
   
   PROCEDURE MarkReferencedImports (doc: Doc.Document);
     VAR
@@ -100,7 +100,19 @@ PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Dictionary.D
                 MarkType (type. srcCodeBaseType)
               END;
               MarkList (type)
-            END
+            | type: Sym.TypeVar DO
+              MarkType (type. srcCodeBound)
+            | type: Sym.QualType DO
+              MarkType (type. srcCodeBaseType);
+              FOR i := 0 TO LEN(type.arguments^)-1  DO
+                MarkType(type.arguments[i].srcCodeType);
+              END;
+            END;
+
+            IF type.PreciousTypePars() THEN
+              dict.Set(type.typePars, NIL);
+              MarkList(type.typePars);
+            END;
           END
         END MarkType;
 
@@ -140,12 +152,15 @@ PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Dictionary.D
         WITH ptr: Sym.Declaration DO
           IF (ptr. exportMark # Sym.nameNotExported) OR 
              (ptr IS Sym.VarDecl) & ptr(Sym.VarDecl). isParameter OR
+             (ptr IS Sym.TypeDecl) &
+               (ptr(Sym.TypeDecl).isTypeParameter OR
+                (ptr.parent IS Sym.FormalPars)) OR
              (ptr IS Sym.Import) &
                ((module.class # Sym.mcStandard) OR
                 (ptr.name.str[0] = Builder.prefixAutoImport)) OR
              forSymbolFile &
              ((ptr IS Sym.FieldDecl) OR
-              (ptr IS Sym.ProcDecl) & ptr(Sym.ProcDecl). isTypeBound) THEN
+              (ptr IS Sym.ProcDecl) & ptr(Sym.ProcDecl).IsTypeBound()) THEN
             MarkDecl (ptr)
           END
         ELSE                               (* ignore non-declarations *)
@@ -155,7 +170,7 @@ PROCEDURE GetExports* (module: Sym.Module; forSymbolFile: BOOLEAN): Dictionary.D
     END MarkList;
   
   BEGIN
-    dict := Dictionary.New();
+    dict := AddressKey.New();
     MarkReferencedImports(module.docString);
     MarkList (module);
     RETURN dict

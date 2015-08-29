@@ -1,6 +1,6 @@
 dnl Autoconf requirements
 AC_PREREQ(2.53)
-AC_INIT(OOC,2.0.8,mia@de.uu.net)
+AC_INIT(OOC,2.0.9,mva@users.sf.net)
 AC_CONFIG_SRCDIR(src/OOC/Parser.Mod)
 AC_CONFIG_HEADER(lib/src/__config.h)
 
@@ -34,15 +34,17 @@ else
 fi
 
 dnl checks for libraries
-AC_CHECK_LIB(m,sin)
 AC_CHECK_LIB(gc,GC_malloc)
-AC_CHECK_LIB(xnet,socket)
-if test $ac_cv_lib_xnet_socket = yes; then
-   have_libxnet=TRUE
+OOC_CHECK_LIB(xnet,socket)
+if test $TARGET_OS = Win32; then
+  ooc_have_lib_m=FALSE
+  OOC_CHECK_LIB(mingwex,main)
+  OOC_CHECK_LIB(wsock32,main)
 else
-   have_libxnet=FALSE
+  OOC_CHECK_LIB(m,sin)
+  ooc_have_lib_mingwex=FALSE
+  ooc_have_lib_wsock32=FALSE
 fi
-AC_SUBST(have_libxnet)
 
 dnl checks for header files
 AC_HEADER_STDC

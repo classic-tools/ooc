@@ -1,7 +1,7 @@
-(* 	$Id: AST.Mod,v 1.11 2002/12/29 14:33:43 mva Exp $	 *)
+(* 	$Id: AST.Mod,v 1.16 2003/05/11 13:56:33 mva Exp $	 *)
 MODULE OOC:AST [OOC_EXTENSIONS];
 (*  Abstract builder class for parser output.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:AST [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Strings, OOC:Scanner:InputBuffer, OOC:Doc, OOC:Scanner:Builder:BasicList,
+  Strings, OOC:Scanner:InputBuffer, OOC:Doc, OOC:Scanner:BasicList,
   <*PUSH; Warnings:=FALSE*>OOC:Scanner:Symbol<*POP (*for refs in docs*)*>;
 
 TYPE
@@ -34,7 +34,7 @@ TYPE
   END;
 
 TYPE
-  NodeArray = POINTER TO ARRAY OF Node;
+  NodeArray* = POINTER TO ARRAY OF Node;
   NodeList* = POINTER TO NodeListDesc;
   NodeListDesc* = RECORD
     (**Defines a simple list of nodes.  This is used to model repetition 
@@ -167,11 +167,13 @@ CONST  (* ids for the various invocations of Flags(): *)
   flagsArrayType* = 1;
   flagsRecordType* = 2;
   flagsPointerType* = 3;
-  flagsVariable* = 4;
-  flagsParameter* = 5;
-  flagsProcedure* = 6;
-  flagsModule* = 7;
-  
+  flagsConstDecl* = 4;
+  flagsTypeDecl* = 5;
+  flagsVariable* = 6;
+  flagsField* = 7;
+  flagsParameter* = 8;
+  flagsProcedure* = 9;
+  flagsModule* = 10;
 
 PROCEDURE InitNodeList* (nl: NodeList);
 (**Initializes a node list of length zero.  *)
@@ -299,12 +301,14 @@ PROCEDURE (b: Builder) [ABSTRACT] FieldList* (identList: NodeList; colon, type: 
 
    @table @oparam
    @item identList
-   A list of identifiers, separated by commas.
+   A list of identifiers and optional flags, separated by commas.
    
    @table @samp
-   @item identList MOD 2 == 0
+   @item identList MOD 3 == 0
    A field name, result of @oproc{Builder.IdentDef}.
-   @item identList MOD 2 == 1
+   @item identList MOD 3 == 1
+   Flags (optional).
+   @item identList MOD 3 == 2
    The symbol @samp{,}, result of @oproc{Builder.Terminal}.
    @end table
    
@@ -477,6 +481,84 @@ PROCEDURE (b: Builder) [ABSTRACT] ProcType* (procedure, formalPars: Node): Node;
    @end table  *)
   END ProcType;
 
+PROCEDURE (b: Builder) [ABSTRACT] TPSection* (identList: NodeList; colon, type: Node): Node;
+(**Section of type parameters.
+
+   @table @oparam
+   @item identList
+   A list of identifiers, separated by commas.
+   
+   @table @samp
+   @item identList MOD 3 == 0
+   A field name, result of @oproc{Builder.Terminal}.
+   @item identList MOD 3 == 1
+   The symbol @samp{,}, result of @oproc{Builder.Terminal}.
+   @end table
+   
+   @item colon
+   The symbol @samp{:}, result of @oproc{Builder.Terminal}.
+   
+   @item type
+   A type name.
+   @end table  *)
+  END TPSection;
+
+PROCEDURE (b: Builder) [ABSTRACT] TypePars* (lParen: Node;
+                                             tpSections: NodeList;
+                                             rParen: Node): Node;
+(**Type parameter definition.
+
+   @table @oparam
+   @item lParen
+   The symbol @samp{<}, result of @oproc{Builder.Terminal}.
+   
+   @item tpSections
+   A list of type parameter sections.  This list may have a length of zero.
+   
+   @table @samp
+   @item tpSections MOD 2 == 0
+   A formal parameter section, result of @oproc{Builder.TPSection}.
+   @item fpSections MOD 2 == 1
+   The symbol @samp{;}, result of @oproc{Builder.Terminal}.
+   @end table
+   
+   @item rParen
+   The symbol @samp{>}, result of @oproc{Builder.Terminal}.
+   @end table  *)
+  END TypePars;
+  
+PROCEDURE (b: Builder) [ABSTRACT] QualType* (qualident: Node;
+                                             lParen: Node;
+                                             arguments: NodeList;
+                                             rParen: Node): Node;
+(**A qualified type reference.  This method is @emph{only} used if a parameter
+   list is given.  That is, @oparam{lParen}, @oparam{arguments}, and
+   @oparam{rParen} are never @code{NIL}.
+
+   @table @oparam
+   @item qualident
+   The type name, @oproc{Builder.Terminal} or @oproc{Builder.Operator}.
+
+   @item lParen
+   The symbol @samp{<}, result of @oproc{Builder.Terminal}.
+
+   @item arguments
+   A list of type parameter sections.  This list may have a length of zero.
+
+   @table @samp
+   @item tpSections MOD 2 == 0
+   A qualified type, @oproc{Builder.Terminal}, @oproc{Builder.Operator}, or
+   @oproc{Builder.QualType}.
+   @item fpSections MOD 2 == 1
+   The symbol @samp{,}, result of @oproc{Builder.Terminal}.
+   @end table
+
+   @item rParen
+   The symbol @samp{>}, result of @oproc{Builder.Terminal}.
+   @end table  *)
+  END QualType;
+  
+
 PROCEDURE (b: Builder) [ABSTRACT] ImportDecl* (alias, becomes, module: Node;
                                                moduleName: Name): Node;
 (**An import declaration for a single module.
@@ -500,13 +582,16 @@ PROCEDURE (b: Builder) [ABSTRACT] ImportDecl* (alias, becomes, module: Node;
    @end table  *)
   END ImportDecl;
 
-PROCEDURE (b: Builder) [ABSTRACT] ConstDecl* (identDef, equal, expr, semicolon: Node): Node;
+PROCEDURE (b: Builder) [ABSTRACT] ConstDecl* (identDef, flags, equal, expr, semicolon: Node): Node;
 (**Constant declaration.
 
    @table @oparam
    @item identDef
    The identifier, optionally followed by an export mark.  Result 
    of @oproc{Builder.IdentDef}.
+
+   @item flags
+   Declaration flags.
    
    @item equal
    The symbol @samp{=}, result of @oproc{Builder.Terminal}.
@@ -520,20 +605,28 @@ PROCEDURE (b: Builder) [ABSTRACT] ConstDecl* (identDef, equal, expr, semicolon: 
    @end table  *)
   END ConstDecl;
 
-PROCEDURE (b: Builder) [ABSTRACT] TypeDecl* (identDef, equal, type, semicolon: Node): Node;
+PROCEDURE (b: Builder) [ABSTRACT] TypeDecl* (identDef, flags, typePars, equal,
+                                             type, semicolon: Node): Node;
 (**Type declaration.
 
    @table @oparam
    @item identDef
-   The identifier, optionally followed by an export mark.  Result 
-   of @oproc{Builder.IdentDef}.
+   The identifier, optionally followed by an export mark.  Result of
+   @oproc{Builder.IdentDef}.
+
+   @item flags
+   Declaration flags.
    
+   @item typePars
+   For a parameterized type, this is the list of type parameters (a result of
+   @oproc{Builder.TypePars}).  Otherwise, it is @code{NIL}.
+
    @item equal
    The symbol @samp{=}, result of @oproc{Builder.Terminal}.
-   
+
    @item type
    A type reference or type constructor.
-   
+
    @item semicolon
    The symbol @samp{;}, result of @oproc{Builder.Terminal}.
    @end table  *)
@@ -568,26 +661,41 @@ PROCEDURE (b: Builder) [ABSTRACT] VarDecl* (identList: NodeList; colon, type, se
    @end table  *)
   END VarDecl;
 
-PROCEDURE (b: Builder) [ABSTRACT] Receiver* (lParen, var, ident, colon, type, rParen: Node): Node;
+PROCEDURE (b: Builder) [ABSTRACT] Receiver* (lParen, var, ident, colon, type,
+                                             lParenAlias: Node;
+                                             aliasList: NodeList;
+                                             rParenAlias, rParen: Node): Node;
 (**Receiver of the declaration of a type-bound procedure.
 
    @table @oparam
    @item lParen
    The symbol @samp{(}, result of @oproc{Builder.Terminal}.
-   
+
    @item var
    The keyword @samp{VAR} (created by @oproc{Builder.Terminal}), or @code{NIL}
    if the receiver describes value parameter.
-   
+
    @item ident
    An identifier, created by @oproc{Builder.Terminal}.
-   
+
    @item colon
    The symbol @samp{:}, result of @oproc{Builder.Terminal}.
-   
+
    @item type
    A type name, result of @oproc{Builder.Terminal}.
-   
+
+   @item lParenAlias
+   If the receiver is for a parametric record type, this result of
+   @oproc{Builder.Terminal} introduces the list of aliases for the type
+   parameters.  Otherwise, it is @code{NIL}.
+
+   @item aliasList
+   List of @oproc{Builder.Terminal} values, even elements are identifiers, odd
+   are @samp{,}.
+
+   @item rParenAlias
+   End of the alias list, result of @oproc{Builder.Terminal}.
+
    @item rParen
    The symbol @samp{)}, result of @oproc{Builder.Terminal}.
    @end table  *)

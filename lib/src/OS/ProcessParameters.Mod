@@ -1,4 +1,4 @@
-(* 	$Id: ProcessParameters.Mod,v 1.4 2003/04/11 00:20:39 mva Exp $	 *)
+(* 	$Id: ProcessParameters.Mod,v 1.5 2003/04/16 01:44:48 sgreenhill Exp $	 *)
 MODULE OS:ProcessParameters [FOREIGN "C"; LINK FILE "ProcessParameters.c" END];
 (*  Handles information of the current process and user.
     Copyright (C) 2000  Michael van Acken
@@ -57,13 +57,5 @@ VAR
 
 PROCEDURE getcwd* (VAR buffer: Path; VAR res: Result);
 (**Returns a string representing the current working directory.  *)
-
-<* IF TARGET_OS="Win32" THEN *>
-
-PROCEDURE getdcwd* (drive : C.int; VAR buffer: Path; VAR res: Result);
-(**Returns a string representing the current working directory on the
-indicated drive (0=current, 1=A, 2=B, etc).  Availability: Windows.  *)
-
-<* END *>
 
 END OS:ProcessParameters.

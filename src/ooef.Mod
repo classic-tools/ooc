@@ -1,7 +1,7 @@
-(* 	$Id: ooef.Mod,v 1.3 2003/04/14 19:30:08 mva Exp $	 *)
+(* 	$Id: ooef.Mod,v 1.5 2003/05/02 10:06:46 mva Exp $	 *)
 MODULE ooef;  
 (*  Filter to convert error messages emitted by oo2c into other formats.
-    Copyright (C) 1995-1999, 2002  Michael van Acken
+    Copyright (C) 1995-1999, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -201,7 +201,7 @@ PROCEDURE ScanInput;
         END;
         Str.Extract (str, 8, Str.Length (str)-10, filename);
         ActiveFile (filename)
-      ELSIF Match ("*:* *", str) THEN
+      ELSIF Match ("*: *", str) THEN
         (* error message, refering to the file in `files' *)
         IF echoErrors THEN
           Out.String (str);
@@ -572,7 +572,7 @@ BEGIN
   Config.Read(cfgErrList);
   
   IF (cfgErrList. msgCount # 0) THEN
-    cfgErrList. Write (StdChannels.stdout);
+    cfgErrList. Write (StdChannels.stderr);
   END;
   IF ~cfgErrList.NoErrors() THEN
     HALT (1)

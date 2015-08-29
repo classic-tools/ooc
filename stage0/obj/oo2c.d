@@ -19,7 +19,7 @@
 #include <OOC/Config/CCompiler.oh>
 #include <OOC/Package.oh>
 #include <OOC/SymbolTable/Builder.oh>
-#include <OOC/Config/Pragmas/StdPragmas.oh>
+#include <OOC/Config/StdPragmas.oh>
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
 #include <OOC/Repository/FileSystem.oh>
@@ -37,6 +37,8 @@ static OOC_INT32 oo2c__i;
 static Config_Value__StringPtr oo2c__arg;
 static OOC_INT8 oo2c__mode;
 static Config_Section_Options__Option oo2c__command;
+static Config_Section_Options__Option oo2c__forceUpdate;
+static Config_Section_Options__Option oo2c__listUses;
 static Config_Section_Options__Option oo2c__useStderr;
 static Config_Section_Options__Option oo2c__writeStats;
 static Config_Section_Options__Option oo2c__errorStyle;
@@ -60,7 +62,7 @@ static void oo2c__WriteHelp(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_oo2c__5365 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_oo2c__5870 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"oo2c", (RT0__Struct[]) { NULL } };
 
 extern void OOC_oo2c_init0() {

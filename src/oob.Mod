@@ -1,4 +1,4 @@
-(* 	$Id: oob.Mod,v 1.13 2003/04/14 19:30:09 mva Exp $	 *)
+(* 	$Id: oob.Mod,v 1.17 2003/05/11 20:36:47 mva Exp $	 *)
 MODULE oob;
 (*  Symbol file browser.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -291,6 +291,17 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
         DEC(indent);
         Newline;
         Out.String("END");
+
+      | type: Sym.QualType DO
+        Type(type.baseType, type.srcCodeBaseType);
+        Out.String("(");
+        FOR i := 0 TO LEN(type.arguments^)-1 DO
+          IF (i # 0) THEN
+            Out.String(", ");
+          END;
+          Type(type.arguments[i].type, type.arguments[i].srcCodeType);
+        END;
+        Out.String(")");
       END;
     END Type;
 
@@ -338,10 +349,39 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
     END ConstDecl;
   
   PROCEDURE TypeDecl(typeDecl: Sym.TypeDecl);
+    VAR
+      ptr: Sym.Item;
+      first: BOOLEAN;
     BEGIN
       IdentDef(typeDecl);
-      Out.String (" = ");
-      Type(typeDecl.type, typeDecl.srcCodeType);
+      IF (typeDecl.type IS Sym.TypeVar) THEN
+        Out.String(": ");
+        Type(typeDecl.type(Sym.TypeVar).bound,
+             typeDecl.type(Sym.TypeVar).srcCodeBound);
+      ELSE
+        IF typeDecl.HasTypeParameters() THEN
+          Out.String("(");
+          first := TRUE;
+          ptr := typeDecl.type.parent(Sym.TypePars).nestedItems;
+          WHILE (ptr # NIL) DO
+            WITH ptr: Sym.TypeDecl DO
+              IF first THEN
+                first := FALSE;
+              ELSE
+                Out.String("; ");
+              END;
+              TypeDecl(ptr);
+            ELSE
+              (* ignore *)
+            END;
+            ptr := ptr.nextNested;
+          END;
+          Out.String(")");
+        END;
+        
+        Out.String (" = ");
+        Type(typeDecl.type, typeDecl.srcCodeType);
+      END;
     END TypeDecl;
 
   PROCEDURE VarDecl(varDecl: Sym.VarDecl);
@@ -358,7 +398,7 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
     BEGIN
       Newline;
       Out.String("PROCEDURE ");
-      IF procDecl.isTypeBound THEN
+      IF procDecl.IsTypeBound() THEN
         Out.String("(");
         VarDecl(procDecl.formalPars.receiver);
         Out.String(") ");
@@ -372,7 +412,7 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
       (* non-declarations are skipped on the top level, and type-bound
          procedures are written as part of their records *)
       RETURN (item IS Sym.Declaration) &
-          (~(item IS Sym.ProcDecl) OR ~item(Sym.ProcDecl).isTypeBound);
+          (~(item IS Sym.ProcDecl) OR ~item(Sym.ProcDecl).IsTypeBound());
     END WriteTopLevel;
   
   BEGIN
@@ -453,7 +493,7 @@ BEGIN
   Config.Read(cfgErrList);
   
   IF (cfgErrList. msgCount # 0) THEN
-    cfgErrList. Write (StdChannels.stdout);
+    cfgErrList. Write (StdChannels.stderr);
   END;
   IF ~cfgErrList.NoErrors() THEN
     HALT (1)
@@ -468,7 +508,7 @@ BEGIN
     errList := E.NewList("");
     ImportModules.ImportModules(CreateNamespace.systemModule, symTab, errList);
     IF errList.NoErrors() THEN
-      CreateNamespace.CreateNamespace(symTab, errList);
+      CreateNamespace.CreateNamespace(symTab, NIL, errList);
       IF errList.NoErrors() THEN
         WriteSymTab(symTab);
       END;

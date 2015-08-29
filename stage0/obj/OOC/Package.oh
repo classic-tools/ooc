@@ -94,6 +94,7 @@ extern void OOC_Package__WritePackage(OOC_Package__Package pkg, const OOC_CHAR8 
 extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
 extern void OOC_Package__RemovePkgInfoCmd(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 uninstall__ref[], OOC_LEN uninstall_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern OOC_Package__Package OOC_Package__GetPkgInfo(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Error__List *errList);
+extern OOC_Package__Repository OOC_Package__GetRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, OOC_Error__List *errList);
 extern OOC_CHAR8 OOC_Package__UpdateRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
 extern void OOC_OOC_Package_init(void);
 extern void OOC_OOC_Package_init0(void);
@@ -130,18 +131,19 @@ extern RT0__StructDesc _td_OOC_Package__14111;
 extern RT0__StructDesc _td_OOC_Package__15382;
 extern RT0__StructDesc _td_OOC_Package__18586;
 extern RT0__StructDesc _td_OOC_Package__18788;
-extern RT0__StructDesc _td_OOC_Package__28751;
-extern RT0__StructDesc _td_OOC_Package__29461;
-extern RT0__StructDesc _td_OOC_Package__31051;
-extern RT0__StructDesc _td_OOC_Package__31163;
-extern RT0__StructDesc _td_OOC_Package__31193;
-extern RT0__StructDesc _td_OOC_Package__31832;
-extern RT0__StructDesc _td_OOC_Package__34917;
-extern RT0__StructDesc _td_OOC_Package__36152;
-extern RT0__StructDesc _td_OOC_Package__36204;
-extern RT0__StructDesc _td_OOC_Package__36613;
-extern RT0__StructDesc _td_OOC_Package__37203;
-extern RT0__StructDesc _td_OOC_Package__37456;
+extern RT0__StructDesc _td_OOC_Package__29512;
+extern RT0__StructDesc _td_OOC_Package__30222;
+extern RT0__StructDesc _td_OOC_Package__31812;
+extern RT0__StructDesc _td_OOC_Package__31924;
+extern RT0__StructDesc _td_OOC_Package__31954;
+extern RT0__StructDesc _td_OOC_Package__32593;
+extern RT0__StructDesc _td_OOC_Package__35678;
+extern RT0__StructDesc _td_OOC_Package__36913;
+extern RT0__StructDesc _td_OOC_Package__36965;
+extern RT0__StructDesc _td_OOC_Package__37374;
+extern RT0__StructDesc _td_OOC_Package__37961;
+extern RT0__StructDesc _td_OOC_Package__38450;
+extern RT0__StructDesc _td_OOC_Package__38703;
 #endif /* _MODULE_OOC_Package_ */
 
 /* --- */

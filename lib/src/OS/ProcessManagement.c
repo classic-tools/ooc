@@ -1,4 +1,4 @@
-/* 	$Id: ProcessManagement.c,v 1.5 2003/04/11 13:50:54 sgreenhill Exp $	 */
+/* 	$Id: ProcessManagement.c,v 1.7 2003/05/12 03:57:16 sgreenhill Exp $	 */
 #include <stdlib.h>
 #include <stdio.h>
 #include <__oo2c.h>
@@ -60,7 +60,7 @@ trial and error to sort out the inconsistencies above.
  * This replacement system() uses Kernel functions to manage the process.
  */
 
-static int new_system(char * args) {
+static int new_system(const char * args) {
   PROCESS_INFORMATION info;
   STARTUPINFO si;
   HANDLE handles[1];
@@ -86,6 +86,7 @@ static int new_system(char * args) {
   return GetLastError();
 }
 
+#ifdef USE_SHELL
 char * prefix = "/bin/sh -c \"";
 
 int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
@@ -140,6 +141,12 @@ int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
   free(buffer);
   return result;
 }
+
+#else
+int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
+  return new_system((const char*)command);
+}
+#endif
 #else
 int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
   return system((const char*)command);

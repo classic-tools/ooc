@@ -15,9 +15,9 @@ typedef OOC_INT8 RealConv__ConvResults;
 extern void RealConv__ScanReal(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__ScanState *nextState);
 extern OOC_INT8 RealConv__FormatReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
 extern OOC_REAL32 RealConv__ValueReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
-extern OOC_INT16 RealConv__LengthFloatReal(OOC_REAL32 real, OOC_INT16 sigFigs);
-extern OOC_INT16 RealConv__LengthEngReal(OOC_REAL32 real, OOC_INT16 sigFigs);
-extern OOC_INT16 RealConv__LengthFixedReal(OOC_REAL32 real, OOC_INT16 place);
+extern OOC_INT16 NORETURN RealConv__LengthFloatReal(OOC_REAL32 real, OOC_INT16 sigFigs) NORETURN2;
+extern OOC_INT16 NORETURN RealConv__LengthEngReal(OOC_REAL32 real, OOC_INT16 sigFigs) NORETURN2;
+extern OOC_INT16 NORETURN RealConv__LengthFixedReal(OOC_REAL32 real, OOC_INT16 place) NORETURN2;
 extern void OOC_RealConv_init(void);
 extern void OOC_RealConv_init0(void);
 

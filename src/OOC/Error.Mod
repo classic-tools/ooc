@@ -1,7 +1,7 @@
-(* 	$Id: Error.Mod,v 1.10 2002/12/08 23:08:58 mva Exp $	 *)
+(* 	$Id: Error.Mod,v 1.13 2003/05/02 10:06:45 mva Exp $	 *)
 MODULE OOC:Error;
 (*  Creates lists of error messages and converts them to text.
-    Copyright (C) 1999, 2000, 2001, 2002  Michael van Acken
+    Copyright (C) 1999, 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -76,8 +76,7 @@ CONST
   (**All error messages using this prefix are considered warnings.  They do not
      influence compilation, nor do they cause the compiler to terminate with a
      non-zero exit code.  The test for warnings is a bit crude right now,
-     because it checks if @samp{"100 "+warningPrefix} or
-     @samp{": "+warningPrefix} appears somewhere in the
+     because it checks if @samp{": "+warningPrefix} appears somewhere in the
      error message's template string.  *)
   
 PROCEDURE InitContext* (c: Context; id: M.String);
@@ -111,11 +110,18 @@ PROCEDURE IsWarning (msg: Msg): BOOLEAN;
   BEGIN
     msg.context.GetTemplate(msg, template);
     LongStrings.FindNext(": "+warningPrefix, template, 0, found, pos);
-    IF ~found THEN
-      LongStrings.FindNext("100 "+warningPrefix, template, 0, found, pos);
-    END;
     RETURN found;
   END IsWarning;
+
+PROCEDURE (l: List) AppendWarning*(msg: Msg);
+  VAR
+    oldNoError: BOOLEAN;
+  BEGIN
+    oldNoError := l.noError;
+    l.Append(msg);
+    l.noError := oldNoError;
+    (* NOTE: l.Append^(msg) should only be called in Append() below *)
+  END AppendWarning;
 
 PROCEDURE (l: List) Append* (msg: Msg);
   VAR
@@ -161,7 +167,7 @@ PROCEDURE (c: Context) BaseTemplate* (msg: Msg; text: LString; VAR templ: LStrin
     repl: ARRAY 8*1024 OF M.LChar;
   BEGIN
     IF (style = styleCharPos) THEN
-      COPY ("${pos}:100 ", templ);
+      COPY ("${pos}: ", templ);
       LongStrings.Append (text, templ);
     ELSIF (style = styleFileLineColumn) THEN
       COPY (":${line}:${column}: ", templ);

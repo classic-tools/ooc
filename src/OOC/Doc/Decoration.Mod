@@ -1,4 +1,4 @@
-(* 	$Id: Decoration.Mod,v 1.3 2001/05/14 23:02:43 mva Exp $	 *)
+(* 	$Id: Decoration.Mod,v 1.4 2003/04/16 10:32:38 mva Exp $	 *)
 MODULE OOC:Doc:Decoration;
 (*  Abstraction layer dealing with comment decorations.
     Copyright (C) 1999, 2000, 2001  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:Doc:Decoration;
 
 IMPORT
   Ascii, CharClass, Strings,
-  OOC:Scanner:InputBuffer, OOC:Scanner, OOC:Scanner:Builder:BasicList;
+  OOC:Scanner:InputBuffer, OOC:Scanner, OOC:Scanner:BasicList;
   
 
 TYPE

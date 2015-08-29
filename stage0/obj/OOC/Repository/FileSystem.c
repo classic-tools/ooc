@@ -307,7 +307,7 @@ l10:
   _assert((i1==4), 127, 6415);
   Strings__Append("lib", 4, (void*)(OOC_INT32)path, path_0d);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6511))+12);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6518))+48);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6518))+52);
   i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6538)))), &_td_Object__String8Desc, 6538)));
   chars = (Object__CharsLatin1)i0;
   _copy_8((const void*)(_check_pointer(i0, 6578)),(void*)(OOC_INT32)str,1024);

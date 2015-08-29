@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.8 2003/02/02 17:58:39 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.9 2003/04/17 20:50:46 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:XML;
 (*  Writes an abstract syntax tree into an XML document.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
@@ -145,12 +145,36 @@ RAISES IO.Error;
           Node (n. rParen);
           Node (n. colon);
           Node (n. result);
+          Node (n. raises);
+          Node (n. raisesList);
           w. EndTag
           
         | n: ExtTree.ProcType DO
           w. StartTag ("proc_type", FALSE);
           Node (n. procedure);
           Node (n. formalPars);
+          w. EndTag
+          
+        | n: ExtTree.TPSection DO
+          w. StartTag ("tp_section", FALSE);
+          Node (n. identList);
+          Node (n. colon);
+          Node (n. type);
+          w. EndTag
+        
+        | n: ExtTree.TypePars DO
+          w. StartTag ("type_pars", FALSE);
+          Node (n. lParen);
+          Node (n. tpSections);
+          Node (n. rParen);
+          w. EndTag
+          
+        | n: ExtTree.QualType DO
+          w. StartTag ("qual_type", FALSE);
+          Node (n. qualident);
+          Node (n. lParen);
+          Node (n. arguments);
+          Node (n. rParen);
           w. EndTag
           
         | n: ExtTree.ImportDecl DO
@@ -171,6 +195,7 @@ RAISES IO.Error;
         | n: ExtTree.TypeDecl DO
           w. StartTag ("type_decl", FALSE);
           Node (n. identDef);
+          Node (n. typePars);
           Node (n. equal);
           Node (n. type);
           Node (n. semicolon);

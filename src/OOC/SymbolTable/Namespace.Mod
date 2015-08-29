@@ -1,7 +1,7 @@
-(* 	$Id: Namespace.Mod,v 1.9 2003/04/12 14:06:29 mva Exp $	 *)
+(* 	$Id: Namespace.Mod,v 1.20 2003/05/11 14:52:54 mva Exp $	 *)
 MODULE OOC:SymbolTable:Namespace;
 (*  Implements namespaces and semantic checks on them.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -22,7 +22,8 @@ MODULE OOC:SymbolTable:Namespace;
 
 
 IMPORT
-  OOC:Error, Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules;
+  OOC:Error, Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules,
+  OOC:SymbolTable:Predef, OOC:SymbolTable:Uses;
 
 
 TYPE
@@ -65,7 +66,6 @@ TYPE
   END;
 
 
-
 CONST
   multipleDeclForName = 1;
   multipleMemberForName = 2;
@@ -74,6 +74,8 @@ CONST
   invalidTBProcExport = 5;
   invalidRedefintion = 6;
   redefinitionBeforeBase = 7;
+  staticMethodNotExported = 8;
+  notProcedure = 9;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -104,6 +106,10 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "Formal parameters don't match inherited declaration"
     | redefinitionBeforeBase:
       t := "This procedure redefines a procedure that is declared later"
+    | staticMethodNotExported:
+      t := "This static type-bound procedure must be exported"
+    | notProcedure:
+      t := "This must be a non-function procedure"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
@@ -126,6 +132,11 @@ PROCEDURE (ns: Namespace) IdentifyLocal2*(sourceContext: Sym.Item;
     s, e, m: LONGINT;
     decl: Sym.Declaration;
   BEGIN
+(*    Log.String("### looking for", name.str^);
+    FOR s := 0 TO ns.localCount-1 DO
+      Log.String ("  local", ns.localDecl[s].name.str^);
+    END;*)
+    
     s := 0; e := ns. localCount;
     WHILE (s < e) DO
       m := (s+e) DIV 2;
@@ -396,6 +407,7 @@ PROCEDURE (ns: Extended) GetSuperProcByIndex* (index: LONGINT): Sym.ProcDecl;
   END GetSuperProcByIndex;
 
 PROCEDURE (ns: Extended) CheckRestrictions* (record: Sym.Record;
+                                             uses: Uses.Uses;
                                              errList: Error.List);
 (**Checks the restrictions placed by the language on the names of record
    fields and type-bound procedures.  For redefinitions of type-bound 
@@ -409,9 +421,12 @@ PROCEDURE (ns: Extended) CheckRestrictions* (record: Sym.Record;
    @ofield{Sym.Record.tbProcCount} correctly reflects the
    number of type-bound procedures attached to it.  *)
   VAR
-    i: LONGINT;
+    i, j: LONGINT;
     decl, base: Sym.Declaration;
     baseNotExported: BOOLEAN;
+    rec, ptr, baseFormalPars: Sym.Type;
+    args: Sym.TypeRefArray;
+    qualType: Sym.QualType;
   BEGIN
     FOR i := 0 TO ns. localCount-1 DO
       decl := ns. localDecl[i];
@@ -424,7 +439,8 @@ PROCEDURE (ns: Extended) CheckRestrictions* (record: Sym.Record;
           ELSE
             ErrDecl (definedForBaseType, decl, errList)
           END;
-        END
+        END;
+        
       | decl: Sym.ProcDecl DO
         baseNotExported := FALSE;
         IF (ns. extends = NIL) THEN
@@ -439,18 +455,56 @@ PROCEDURE (ns: Extended) CheckRestrictions* (record: Sym.Record;
             IF (decl. exportMark # base. exportMark) THEN
               ErrDecl (invalidTBProcExport, decl, errList)
             END;
-            IF TR.IsValidRedefinition (base. formalPars, decl. formalPars) THEN
+
+            rec := decl.Class();
+            IF (rec.typePars # NIL) THEN
+              (* calculate type closure for the record type of the original
+                 procedure definition *)
+              NEW(args, LEN(rec.typePars.params^));
+              FOR j := 0 TO LEN(args^)-1 DO
+                Sym.InitTypeRef(args[j], rec.typePars.params[j]);
+              END;
+              
+              NEW(qualType);
+              Sym.InitQualType(qualType, NIL, rec.position, rec, args);
+              rec := Sym.Expand(qualType);
+
+              WHILE (rec.Deparam() # base.Class()) DO
+                ptr := rec.Deparam();
+                rec := rec.Closure(ptr(Sym.Record).baseType);
+              END;
+              baseFormalPars := rec.Closure(base.formalPars);
+            ELSE
+              baseFormalPars := base.formalPars;
+            END;
+            
+            IF (decl.procClass = Sym.staticMethod) OR
+               TR.IsValidRedefinition(baseFormalPars, decl.formalPars) THEN
               IF base.notRedefined THEN
                 base.notRedefined := FALSE;
               END;
               base. CopyTBProcIndex (decl);
               IF (decl. name. pos < base. visibleFrom) THEN
                 ErrDecl (redefinitionBeforeBase, decl, errList)
-              END
+              END;
+              IF (decl.procClass = Sym.staticMethod) THEN
+                IF (decl.exportMark = Sym.nameNotExported) THEN
+                  ErrDecl (staticMethodNotExported, decl, errList);
+                END;
+                IF (decl.name.str^ = Predef.initMethod) &
+                   (decl.formalPars.resultType # NIL) THEN
+                  ErrDecl(notProcedure, decl, errList);
+                END;
+              END;
+
+              decl.deprecated := decl.deprecated OR base.deprecated;
+              
+              Uses.Mark(base, uses, decl.name);
             ELSE
               ErrDecl (invalidRedefintion, decl, errList)
-            END
-          END
+            END;
+          END;
+          
         ELSE
           record. AssignTBProcIndex (decl)
         END

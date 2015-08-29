@@ -1,4 +1,4 @@
-(* 	$Id: ExtTree.Mod,v 1.32 2003/04/05 18:51:01 mva Exp $	 *)
+(* 	$Id: ExtTree.Mod,v 1.37 2003/05/11 13:56:32 mva Exp $	 *)
 MODULE OOC:AST:ExtTree [OOC_EXTENSIONS];
 (*  Creates extended abstract syntax tree from the parser output.
     Copyright (C) 2000-2003  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:AST:ExtTree [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Object, OOC:Scanner:Builder:BasicList, OOC:AST, OOC:Doc;
+  Object, OOC:Scanner:BasicList, OOC:AST, OOC:Doc;
 
 
 
@@ -168,6 +168,35 @@ TYPE
     formalPars-: AST.Node;
   END;
 
+TYPE
+  TPSection* = POINTER TO TPSectionDesc;
+  TPSectionDesc = RECORD
+    (NodeDesc)
+    var-: AST.Node;
+    identList-: AST.NodeList;
+    colon-: AST.Node;
+    type-: AST.Node;
+  END;
+
+TYPE
+  TypePars* = POINTER TO TypeParsDesc;
+  TypeParsDesc = RECORD
+    (NodeDesc)
+    lParen-: AST.Node;
+    tpSections-: AST.NodeList;
+    rParen-: AST.Node;
+  END;
+
+TYPE
+  QualType* = POINTER TO QualTypeDesc;
+  QualTypeDesc = RECORD
+    (NodeDesc)
+    qualident-: Node;
+    lParen-: Terminal;
+    arguments-: AST.NodeList;
+    rParen-: Terminal;
+  END;
+
 
 TYPE
   ImportDecl* = POINTER TO ImportDeclDesc;
@@ -184,6 +213,7 @@ TYPE
   ConstDeclDesc = RECORD
     (NodeDesc)
     identDef-: IdentDef;
+    flags-: Flags;
     equal-: AST.Node;
     expr-: AST.Node;
     semicolon-: AST.Node;
@@ -194,6 +224,8 @@ TYPE
   TypeDeclDesc = RECORD
     (NodeDesc)
     identDef-: IdentDef;
+    flags-: Flags;
+    typePars-: TypePars;
     equal-: AST.Node;
     type-: AST.Node;
     semicolon-: AST.Node;
@@ -218,6 +250,9 @@ TYPE
     ident-: IdentDef;
     colon-: AST.Node;
     type-: AST.Node;
+    lParenAlias-: Terminal;
+    aliasList-: NodeList;
+    rParenAlias-: Terminal;
     rParen-: AST.Node;
   END;
 
@@ -568,6 +603,16 @@ PROCEDURE (v: Visitor) VisitFormalPars* (formalPars: FormalPars);
 
 PROCEDURE (v: Visitor) VisitProcType* (procType: ProcType);
   END VisitProcType;
+
+PROCEDURE (v: Visitor) VisitTPSection* (tpSection: TPSection);
+  END VisitTPSection;
+
+PROCEDURE (v: Visitor) VisitTypePars* (typePars: TypePars);
+  END VisitTypePars;
+
+PROCEDURE (v: Visitor) VisitQualType* (qualType: QualType);
+  END VisitQualType;
+
 
 (* declarations *)
 PROCEDURE (v: Visitor) VisitImportDecl* (importDecl: ImportDecl);
@@ -940,6 +985,63 @@ PROCEDURE (procType: ProcType) Accept* (v: Visitor);
   END Accept;
 
 
+PROCEDURE (b: Builder) TPSection* (identList: AST.NodeList; colon, type: AST.Node): Node;
+  VAR
+    tp: TPSection;
+  BEGIN
+    NEW (tp);
+    tp. identList := identList;
+    tp. colon := colon;
+    tp. type := type;
+    RETURN tp
+  END TPSection;
+
+PROCEDURE (tpSection: TPSection) Accept* (v: Visitor);
+  BEGIN
+    v. VisitTPSection (tpSection)
+  END Accept;
+
+
+PROCEDURE (b: Builder) TypePars* (lParen: AST.Node;
+                                  tpSections: AST.NodeList;
+                                  rParen: AST.Node): Node;
+  VAR
+    tp: TypePars;
+  BEGIN
+    NEW (tp);
+    tp. lParen := lParen;
+    tp. tpSections := tpSections;
+    tp. rParen := rParen;
+    RETURN tp
+  END TypePars;
+  
+PROCEDURE (typePars: TypePars) Accept* (v: Visitor);
+  BEGIN
+    v. VisitTypePars (typePars)
+  END Accept;
+
+
+PROCEDURE (b: Builder) QualType*(qualident: AST.Node;
+                                 lParen: AST.Node;
+                                 arguments: AST.NodeList;
+                                 rParen: AST.Node): Node;
+  VAR
+    qt: QualType;
+  BEGIN
+    NEW (qt);
+    qt.qualident := qualident(Node);
+    qt.lParen := lParen(Terminal);
+    qt.arguments := arguments;
+    qt.rParen := rParen(Terminal);
+    RETURN qt;
+  END QualType;
+  
+PROCEDURE (qualType: QualType) Accept* (v: Visitor);
+  BEGIN
+    v. VisitQualType (qualType)
+  END Accept;
+
+
 
 PROCEDURE (b: Builder) ImportDecl* (alias, becomes, module: AST.Node;
                                     moduleName: AST.Name): Node;
@@ -960,12 +1062,18 @@ PROCEDURE (importDecl: ImportDecl) Accept* (v: Visitor);
   END Accept;
 
 
-PROCEDURE (b: Builder) ConstDecl* (identDef, equal, expr, semicolon: AST.Node): Node;
+PROCEDURE (b: Builder) ConstDecl* (identDef, flags, equal,
+                                   expr, semicolon: AST.Node): Node;
   VAR
     cd: ConstDecl;
   BEGIN
     NEW (cd);
     cd. identDef := identDef(IdentDef);
+    IF (flags = NIL) THEN
+      cd. flags := NIL;
+    ELSE
+      cd. flags := flags(Flags);
+    END;
     cd. equal := equal;
     cd. expr := expr;
     cd. semicolon := semicolon;
@@ -978,12 +1086,23 @@ PROCEDURE (constDecl: ConstDecl) Accept* (v: Visitor);
   END Accept;
 
 
-PROCEDURE (b: Builder) TypeDecl* (identDef, equal, type, semicolon: AST.Node): Node;
+PROCEDURE (b: Builder) TypeDecl* (identDef, flags, typePars, equal,
+                                  type, semicolon: AST.Node): Node;
   VAR
     td: TypeDecl;
   BEGIN
     NEW (td);
     td. identDef := identDef(IdentDef);
+    IF (flags = NIL) THEN
+      td. flags := NIL;
+    ELSE
+      td. flags := flags(Flags);
+    END;
+    IF (typePars = NIL) THEN
+      td. typePars := NIL;
+    ELSE
+      td. typePars := typePars(TypePars);
+    END;
     td. equal := equal;
     td. type := type;
     td. semicolon := semicolon;
@@ -1014,7 +1133,10 @@ PROCEDURE (varDecl: VarDecl) Accept* (v: Visitor);
   END Accept;
 
 
-PROCEDURE (b: Builder) Receiver* (lParen, var, ident, colon, type, rParen: AST.Node): Node;
+PROCEDURE (b: Builder) Receiver* (lParen, var, ident, colon, type,
+                                  lParenAlias: AST.Node;
+                                  aliasList: AST.NodeList;
+                                  rParenAlias, rParen: AST.Node): Node;
   VAR
     r: Receiver;
   BEGIN
@@ -1024,6 +1146,15 @@ PROCEDURE (b: Builder) Receiver* (lParen, var, ident, colon, type, rParen: AST.N
     r. ident := ident(IdentDef);
     r. colon := colon;
     r. type := type;
+    IF (lParenAlias # NIL) THEN
+      r. lParenAlias := lParenAlias(Terminal);
+      r. aliasList := aliasList(NodeList);
+      r. rParenAlias := rParenAlias(Terminal);
+    ELSE
+      r. lParenAlias := NIL;
+      r. aliasList := NIL;
+      r. rParenAlias := NIL;
+    END;
     r. rParen := rParen;
     RETURN r
   END Receiver;
@@ -1034,7 +1165,7 @@ PROCEDURE (receiver: Receiver) Accept* (v: Visitor);
   END Accept;
 
 
-PROCEDURE (b: Builder) ProcDecl* (proc, arrow, receiver, 
+PROCEDURE (b: Builder) ProcDecl*(proc, arrow, receiver, 
                                  flags, identDef, formalPars, semicolon1,
                                  body, semicolon2: AST.Node): Node;
   VAR

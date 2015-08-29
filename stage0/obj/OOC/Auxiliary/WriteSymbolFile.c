@@ -18,7 +18,7 @@ void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OO
   mem = (IO_Memory__Channel)i0;
   i1 = (OOC_INT32)symTab;
   i2 = (OOC_INT32)OOC_SymbolTable_Exports__GetExports((OOC_SymbolTable__Module)i1, 1u);
-  OOC_SymbolTable__Prune((OOC_SymbolTable__Module)i1, (ADT_Dictionary__Dictionary)i2);
+  OOC_SymbolTable__Prune((OOC_SymbolTable__Module)i1, (ADT_Dictionary_AddressKey__Dictionary)i2);
   i2 = (OOC_INT32)OOC_SymbolTable_Builder__New();
   stb = (OOC_SymbolTable_Builder__Builder)i2;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 618)))), OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)),OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)((OOC_SymbolTable_Builder__Builder)i2, (IO__ByteChannel)i0, (OOC_SymbolTable__Module)i1);
@@ -31,17 +31,17 @@ void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OO
   w = (IO_BinaryRider__Writer)i3;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 802)))), IO_BinaryRider__WriterDesc_WriteBytes)),IO_BinaryRider__WriterDesc_WriteBytes)((IO_BinaryRider__Writer)i3, (void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber, 5, 0, 4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 869)))), IO_BinaryRider__WriterDesc_WriteBytes)),IO_BinaryRider__WriterDesc_WriteBytes)((IO_BinaryRider__Writer)i3, (void*)(OOC_INT32)&fp, 4, 0, 4);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1197))+64);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1197))+68);
   i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1211)), 0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1177)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i3, i4);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1244))+64);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1244))+68);
   i = 0;
   i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1258)), 0);
   i5 = 0<i4;
   if (!i5) goto l8;
   i5=0;
 l3_loop:
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1284))+64);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1284))+68);
   i6 = _check_pointer(i6, 1298);
   i7 = OOC_ARRAY_LENGTH(i6, 0);
   i6 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 1298))*4);

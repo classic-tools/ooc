@@ -1,6 +1,6 @@
-(* 	$Id: Files.Mod,v 1.3 2003/04/04 08:01:01 sgreenhill Exp $	 *)
+(* 	$Id: Files.Mod,v 1.4 2003/05/12 03:56:36 sgreenhill Exp $	 *)
 MODULE OS:Files [FOREIGN "C"; LINK FILE "Files.c" 
-  <*IF TARGET_OS="Win32" THEN *> ; LIB "mingwex" <* END *>
+  <*IF HAVE_LIB_MINGWEX THEN *> ; LIB "mingwex" <* END *>
   END];
 (*  Manipulation of file and directory entries.
     Copyright (C) 2000, 2002  Michael van Acken

@@ -664,14 +664,14 @@ l13:
 OOC_CHAR8 ADT_Dictionary__DictionaryDesc_Equals(ADT_Dictionary__Dictionary dict, Object__Object obj) {
 
   _assert(0u, 127, 13660);
-  _failed_function(13582); return 0;
+  _failed_function(13582); 
   ;
 }
 
 OOC_INT32 ADT_Dictionary__DictionaryDesc_HashCode(ADT_Dictionary__Dictionary dict) {
 
   _assert(0u, 127, 13790);
-  _failed_function(13728); return 0;
+  _failed_function(13728); 
   ;
 }
 

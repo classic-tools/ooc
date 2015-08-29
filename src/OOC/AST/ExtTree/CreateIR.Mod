@@ -1,4 +1,4 @@
-(* 	$Id: CreateIR.Mod,v 1.61 2003/04/05 18:51:01 mva Exp $	 *)
+(* 	$Id: CreateIR.Mod,v 1.66 2003/05/11 14:52:54 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateIR;
 (*  Creates an IR representation from the abstract syntax tree.
     Copyright (C) 2001-2003  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:AST:ExtTree:CreateIR;
 
 IMPORT
   Log, Object:BigInt,
-  OOC:Scanner:Symbol, OOC:Scanner:Builder:BasicList,
+  OOC:Scanner:Symbol, OOC:Scanner:BasicList,
   OOC:AST:ExtTree, Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules,
   OOC:SymbolTable:Predef, OOC:IR;
 
@@ -40,6 +40,8 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
   PROCEDURE ^ FunctionCall (call: ExtTree.FunctionCall;
                             isProcCall: BOOLEAN): IR.Expression;
     
+  PROCEDURE ^ QualType(qualType: ExtTree.QualType): IR.Expression;
+    
   PROCEDURE Designator (design: ExtTree.Node): IR.Expression;
     VAR
       left: IR.Expression;
@@ -54,7 +56,7 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
         WITH left: IR.ModuleRef DO
           RETURN b. NewQualident (currentNamespace, left, currentSourceContext,
                                   design. right(ExtTree.Terminal). sym);
-          
+
         ELSE                             (* field or tb procedure selector *)
           IF (left = b.errorExpr) THEN
             RETURN b. errorExpr;           (* left side has errors *)
@@ -95,6 +97,10 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
 
       | design: ExtTree.FunctionCall DO
         RETURN FunctionCall (design, FALSE);
+
+      | design: ExtTree.QualType DO
+        RETURN QualType(design);
+        
       ELSE
         Log.Type("++ Unknown type in Designator", design);
         ASSERT (FALSE)
@@ -132,6 +138,26 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
     END;
   END SetConstruct;
 
+  PROCEDURE QualType(qualType: ExtTree.QualType): IR.Expression;
+    VAR
+      type: IR.Expression;
+      arguments: IR.ExpressionList;
+      i: LONGINT;
+      n: ExtTree.Node;
+    BEGIN
+      type := Designator(qualType.qualident);
+      NEW(arguments, (qualType.arguments.len+1) DIV 2);
+      FOR i := 0 TO LEN(arguments^)-1 DO
+        n := qualType.arguments.n[i*2](ExtTree.Node);
+        WITH n: ExtTree.QualType DO
+          arguments[i] := QualType(n);
+        ELSE
+          arguments[i] := Designator(n);  (* actually Qualident *)
+        END;
+      END;
+      RETURN b.NewQualType(type, arguments, qualType.rParen.sym);
+    END QualType;
+  
   PROCEDURE Expr (expr: ExtTree.Node): IR.Expression;
     VAR
       left, right, res: IR.Expression;
@@ -186,8 +212,11 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
         res := SetConstruct(expr);
 
       | expr: ExtTree.FunctionCall DO
-        res := FunctionCall (expr, FALSE)
-            
+        res := FunctionCall (expr, FALSE);
+
+      | expr: ExtTree.QualType DO
+        res := QualType(expr);
+        
       ELSE
         Log.Type("++ Unknown expression class in Expr", expr);
         ASSERT (FALSE)
@@ -207,7 +236,8 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
       FOR i := 0 TO LEN (arguments^)-1 DO
         arguments[i] := Expr (call. arguments. n[i*2](ExtTree.Node))
       END;
-      RETURN b. NewCall (design, arguments, ~isProcCall, call. rParen. sym);
+      RETURN b.NewCall(design, arguments, ~isProcCall, currentSourceContext,
+                       call.rParen.sym);
     END FunctionCall;
 
   PROCEDURE StatementSeq (statmSeq: ExtTree.NodeList): IR.StatementSeq;
@@ -228,7 +258,8 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
           (* create procedure call from lonely designator *)
           NEW (arguments, 0);
           design := Designator (call. call);
-          expr := b. NewCall (design, arguments, FALSE, design. sym);
+          expr := b.NewCall(design, arguments, FALSE, currentSourceContext,
+                            design.sym);
         END;
         IF (expr # NIL) & (expr IS IR.Statement) THEN
           RETURN expr(IR.Statement);

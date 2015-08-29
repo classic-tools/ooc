@@ -57,21 +57,21 @@ l13:
 OOC_INT16 LRealConv__LengthFloatReal(OOC_REAL64 real, OOC_INT16 sigFigs) {
 
   _assert(0u, 127, 2897);
-  _failed_function(2797); return 0;
+  _failed_function(2797); 
   ;
 }
 
 OOC_INT16 LRealConv__LengthEngReal(OOC_REAL64 real, OOC_INT16 sigFigs) {
 
   _assert(0u, 127, 3053);
-  _failed_function(2955); return 0;
+  _failed_function(2955); 
   ;
 }
 
 OOC_INT16 LRealConv__LengthFixedReal(OOC_REAL64 real, OOC_INT16 place) {
 
   _assert(0u, 127, 3207);
-  _failed_function(3109); return 0;
+  _failed_function(3109); 
   ;
 }
 

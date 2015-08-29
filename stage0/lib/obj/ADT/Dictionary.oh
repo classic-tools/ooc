@@ -63,12 +63,12 @@ typedef Object__ObjectArrayPtr (*_TBP_ADT_Dictionary__DictionaryDesc_Keys)(ADT_D
 extern Object__ObjectArrayPtr ADT_Dictionary__DictionaryDesc_Values(ADT_Dictionary__Dictionary dict);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Values 14
 typedef Object__ObjectArrayPtr (*_TBP_ADT_Dictionary__DictionaryDesc_Values)(ADT_Dictionary__Dictionary dict);
-extern OOC_CHAR8 ADT_Dictionary__DictionaryDesc_Equals(ADT_Dictionary__Dictionary dict, Object__Object obj);
+extern OOC_CHAR8 NORETURN ADT_Dictionary__DictionaryDesc_Equals(ADT_Dictionary__Dictionary dict, Object__Object obj) NORETURN2;
 #define _TBN_ADT_Dictionary__DictionaryDesc_Equals 0
-typedef OOC_CHAR8 (*_TBP_ADT_Dictionary__DictionaryDesc_Equals)(ADT_Dictionary__Dictionary dict, Object__Object obj);
-extern OOC_INT32 ADT_Dictionary__DictionaryDesc_HashCode(ADT_Dictionary__Dictionary dict);
+typedef OOC_CHAR8 NORETURN (*_TBP_ADT_Dictionary__DictionaryDesc_Equals)(ADT_Dictionary__Dictionary dict, Object__Object obj) NORETURN2;
+extern OOC_INT32 NORETURN ADT_Dictionary__DictionaryDesc_HashCode(ADT_Dictionary__Dictionary dict) NORETURN2;
 #define _TBN_ADT_Dictionary__DictionaryDesc_HashCode 1
-typedef OOC_INT32 (*_TBP_ADT_Dictionary__DictionaryDesc_HashCode)(ADT_Dictionary__Dictionary dict);
+typedef OOC_INT32 NORETURN (*_TBP_ADT_Dictionary__DictionaryDesc_HashCode)(ADT_Dictionary__Dictionary dict) NORETURN2;
 extern void ADT_Dictionary__DictionaryDesc_Store(ADT_Dictionary__Dictionary dict, ADT_Storable__Writer w);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Store 5
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Store)(ADT_Dictionary__Dictionary dict, ADT_Storable__Writer w);

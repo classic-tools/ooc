@@ -384,89 +384,98 @@ OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)type;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38007)))), &_td_OOC_SymbolTable__PredefTypeDesc);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38010)))), OOC_SymbolTable__TypeDesc_Deparam)),OOC_SymbolTable__TypeDesc_Deparam)((OOC_SymbolTable__Type)i0);
+  type = (OOC_SymbolTable__Type)i0;
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38035)))), &_td_OOC_SymbolTable__PredefTypeDesc);
+  if (i1) goto l23;
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38812)))), &_td_OOC_SymbolTable__ArrayDesc);
+  if (i1) goto l21;
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38859)))), &_td_OOC_SymbolTable__RecordDesc);
   if (i1) goto l19;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38784)))), &_td_OOC_SymbolTable__ArrayDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38907)))), &_td_OOC_SymbolTable__PointerDesc);
   if (i1) goto l17;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38831)))), &_td_OOC_SymbolTable__RecordDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38959)))), &_td_OOC_SymbolTable__FormalParsDesc);
   if (i1) goto l15;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38879)))), &_td_OOC_SymbolTable__PointerDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39014)))), &_td_OOC_SymbolTable__TypeVarDesc);
   if (i1) goto l13;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38931)))), &_td_OOC_SymbolTable__FormalParsDesc);
-  if (i1) goto l11;
   Log__Type("++ Unknown type in TypeToSubclass", 34, (void*)i0);
-  _assert(0u, 127, 39050);
-  goto l39;
-l11:
-  return 9;
-  goto l39;
+  _assert(0u, 127, 39154);
+  goto l43;
 l13:
-  return 9;
-  goto l39;
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39063))+36);
+  i0 = OOC_SSA_Opcode__TypeToSubclass((OOC_SymbolTable__Type)i0);
+  return i0;
+  goto l43;
 l15:
-  return 0;
-  goto l39;
+  return 9;
+  goto l43;
 l17:
-  return 0;
-  goto l39;
+  return 9;
+  goto l43;
 l19:
-  i0 = *(OOC_INT16*)((_check_pointer(i0, 38042))+32);
+  return 0;
+  goto l43;
+l21:
+  return 0;
+  goto l43;
+l23:
+  i0 = *(OOC_INT16*)((_check_pointer(i0, 38070))+36);
   switch (i0) {
   case 17:
     return 0;
-    goto l39;
+    goto l43;
   case 1:
     return 5;
-    goto l39;
+    goto l43;
   case 2:
     return 6;
-    goto l39;
+    goto l43;
   case 3:
     return 7;
-    goto l39;
+    goto l43;
   case 0:
     return 5;
-    goto l39;
+    goto l43;
   case 4:
     return 1;
-    goto l39;
+    goto l43;
   case 5:
     return 2;
-    goto l39;
+    goto l43;
   case 6:
     return 3;
-    goto l39;
+    goto l43;
   case 7:
     return 4;
-    goto l39;
+    goto l43;
   case 8:
     return 10;
-    goto l39;
+    goto l43;
   case 9:
     return 11;
-    goto l39;
+    goto l43;
   case 10:
     return 7;
-    goto l39;
+    goto l43;
   case 11:
     return 5;
-    goto l39;
+    goto l43;
   case 12:
     return 9;
-    goto l39;
+    goto l43;
   case 13:
   case 14:
   case 15:
     return 9;
-    goto l39;
+    goto l43;
   case 16:
     return 9;
-    goto l39;
+    goto l43;
   default:
-    _failed_case(i0, 38033);
-    goto l39;
+    _failed_case(i0, 38061);
+    goto l43;
   }
-l39:
+l43:
   _failed_function(37942); return 0;
   ;
 }

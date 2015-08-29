@@ -66,8 +66,8 @@ typedef struct IO__FormatErrorDesc {
 } IO__FormatErrorDesc;
 extern void IO__InitError(IO__Error e, Object__String msg);
 extern IO__FormatError IO__NewFormatError(Object__String msg);
-extern void IO__RaiseFormatError(Object__String msg);
-extern void IO__RaiseNotImplemented(void);
+extern void NORETURN IO__RaiseFormatError(Object__String msg) NORETURN2;
+extern void NORETURN IO__RaiseNotImplemented(void) NORETURN2;
 extern void IO__InitSelectionKey(IO__SelectionKey k, OOC_INT32 fd, IO__Selector selector, IO__Channel channel, OOC_UINT32 ops, Object__Object attachment);
 extern void IO__SelectionKeyDesc_Attach(IO__SelectionKey k, Object__Object obj);
 #define _TBN_IO__SelectionKeyDesc_Attach 3

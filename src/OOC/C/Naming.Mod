@@ -162,8 +162,16 @@ PROCEDURE NameOfType* (type: Sym.Type): STRING;
    @samp{type. namingDecl # NIL}
    @end precond *)
   BEGIN
-    ASSERT (type. namingDecl # NIL);
-    RETURN NameOfDeclaration (type. namingDecl);
+    WITH type: Sym.TypeVar DO
+      RETURN NameOfType(type.bound);
+    ELSE
+      WHILE (type.namingDecl = NIL) & (type IS Sym.QualType) DO
+        (* skip over implicit type argument list *)
+        type := type(Sym.QualType).baseType;
+      END;
+      ASSERT (type. namingDecl # NIL);
+      RETURN NameOfDeclaration (type. namingDecl);
+    END;
   END NameOfType;
 
 PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): STRING;
@@ -174,6 +182,7 @@ PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): STRING;
     string: STRING;
     str, str2: ARRAY 32 OF CHAR;
   BEGIN
+    type := type.Deparam();
     WITH type: Sym.PredefType DO
       CASE type. id OF
       | Predef.boolean : str := "boolean"

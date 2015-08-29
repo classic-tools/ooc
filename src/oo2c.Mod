@@ -1,4 +1,4 @@
-(* 	$Id: oo2c.Mod,v 1.48 2003/04/14 19:16:44 mva Exp $	 *)
+(* 	$Id: oo2c.Mod,v 1.54 2003/05/03 10:51:07 mva Exp $	 *)
 MODULE oo2c;
 (*  Main module for the Oberon-2 to C translator.
     Copyright (C) 2002,2003  Michael van Acken
@@ -26,7 +26,7 @@ IMPORT
   OS:ProcessManagement, Config:Section:Arguments, Config:Section:Options,
   Config:Value:Boolean, Config:Value:Integer, StringValue:=Config:Value:String,
   OOC:Logger, OOC:Config, OOC:Config:CCompiler, OOC:Package,
-  OOC:SymbolTable:Builder, OOC:Config:Pragmas:StdPragmas, OOC:Error,
+  OOC:SymbolTable:Builder, OOC:Config:StdPragmas, OOC:Error,
   Rep := OOC:Repository, OOC:Repository:FileSystem, OOC:Make, OOC:SSA:Stats;
   
 
@@ -43,7 +43,7 @@ VAR
   i: LONGINT;
   arg: Arguments.Argument;
   mode: SHORTINT;
-  command, useStderr, writeStats,
+  command, forceUpdate, listUses, useStderr, writeStats,
       errorStyle, showHelp, showVersion: Options.Option;
   makeRules: Make.Rules;
   rep: Rep.Repository;
@@ -55,6 +55,8 @@ VAR
 PROCEDURE NewConfig;
   BEGIN
     command := Config.AddOption("command", Integer.New(0));
+    forceUpdate := Config.AddOption("forceUpdate", Boolean.New(FALSE));
+    listUses := Config.AddOption("listUses", StringValue.New(""));
     useStderr := Config.AddOption("useStderr", Boolean.New(FALSE));
     writeStats := Config.AddOption("writeStats", Boolean.New(FALSE));
     errorStyle := Config.AddOption("errorStyle",
@@ -96,6 +98,13 @@ PROCEDURE NewConfig;
     Config.AddCmdLine ("--verbose,-v", "");  (* ignored for now *)
     Config.AddCmdLine ("--warnings,-w", ""); (* ignored for now *)
     
+    Config.AddCmdLine ("-A,--all",
+                       "<options><set name='forceUpdate'>TRUE</set></options>");
+    Config.AddCmdLine ("--uses",
+                       "<options>"+
+                       "  <set name='listUses'>$1</set>"+
+                       "  <set name='command'>1</set>"+  (* --make *)
+                       "</options>");
     Config.AddCmdLine ("--error-style",
                        "<options><set name='errorStyle'>$1</set></options>");
     Config.AddCmdLine ("--use-stderr",
@@ -529,6 +538,7 @@ PROCEDURE WriteHelp();
     Out.String("Usage:"); Out.Ln;
     Out.String("  oo2c [options] <module>..."); Out.Ln;
     Out.String("  oo2c (--make|-M) [options] <module>"); Out.Ln;
+    Out.String("  oo2c --uses <ext-ident> [options] <module> ..."); Out.Ln;
     Out.String("  oo2c --build-package [options] <package>"); Out.Ln;
     Out.String("  oo2c --install-package [options] <package>"); Out.Ln;
     Out.String("  oo2c --uninstall-package [options] <package>"); Out.Ln;
@@ -537,6 +547,7 @@ PROCEDURE WriteHelp();
     Out.String("  --config <file>"); Out.Ln;
     Out.String("  --repository <directory>, -r <directory>"); Out.Ln;
     Out.String("  --no-rtc"); Out.Ln;
+    Out.String("  (--all|-A)"); Out.Ln;
     Out.String("  --error-style (file:line:column|char-pos|attributes)");
     Out.Ln;
   END WriteHelp;
@@ -551,6 +562,13 @@ BEGIN  <*Warnings:=FALSE*>
   makeRules := Make.NewRules();
   IF useStderr.value(Boolean.Value).boolean THEN
     makeRules.SetErrOut(StdChannels.stderr);
+  END;
+  makeRules.SetForceUpdate(forceUpdate.value(Boolean.Value).boolean);
+  ok := makeRules.UsageTracking(listUses.value(StringValue.Value).string^);
+  IF ~ok THEN
+    Err.String ("Error: Invalid selector string for `--uses'");
+    Err.Ln;
+    HALT (1)
   END;
   Make.writeStats := writeStats.value(Boolean.Value).boolean;
       
@@ -582,7 +600,9 @@ BEGIN  <*Warnings:=FALSE*>
     cfgErrList. Write (StdChannels.stderr);
     HALT(1);
   ELSIF showVersion.value(Boolean.Value).boolean THEN
-    Out.String("oo2c/gcc ");
+    Out.String("oo2c/");
+    Out.String(StdPragmas.defaultTargetArch);
+    Out.String(" ");
     Out.String(StdPragmas.defaultCompilerVersion);
     Out.Ln;
     HALT(0);

@@ -481,7 +481,7 @@ void OOC_SSA__InstrDesc_SetSubclass(OOC_SSA__Instr instr, OOC_INT8 subclass) {
   ;
 }
 
-void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_Builder_BasicList__Symbol sym) {
+void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_BasicList__Symbol sym) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)instr;
@@ -1710,10 +1710,10 @@ OOC_SSA__Const OOC_SSA__ProcBlockDesc_GetConstNil(OOC_SSA__ProcBlock pb) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)OOC_SymbolTable_Predef__GetType(16);
+  i1 = (OOC_INT32)OOC_SSA__nil;
   i0 = OOC_SSA_Opcode__TypeToSubclass((OOC_SymbolTable__Type)i0);
-  i1 = (OOC_INT32)pb;
-  i2 = (OOC_INT32)OOC_SSA__nil;
-  i0 = (OOC_INT32)OOC_SSA__ProcBlockDesc_GetConst((OOC_SSA__ProcBlock)i1, (Object_Boxed__Object)i2, i0, (OOC_SymbolTable__Type)(OOC_INT32)0);
+  i2 = (OOC_INT32)pb;
+  i0 = (OOC_INT32)OOC_SSA__ProcBlockDesc_GetConst((OOC_SSA__ProcBlock)i2, (Object_Boxed__Object)i1, i0, (OOC_SymbolTable__Type)(OOC_INT32)0);
   return (OOC_SSA__Const)i0;
   ;
 }
@@ -1959,7 +1959,7 @@ l9:
 l11:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 45862));
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 45868)))), &_td_OOC_SSA__DeclRefDesc, 45868)), 45876))+44);
-      i1 = *(OOC_UINT8*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 45887)))), &_td_OOC_SymbolTable__VarDeclDesc, 45887)), 45895))+48);
+      i1 = *(OOC_UINT8*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 45887)))), &_td_OOC_SymbolTable__VarDeclDesc, 45887)), 45895))+52);
       
 l13:
       if (i1) goto l15;
@@ -2020,9 +2020,9 @@ l18:
   i1 = *(OOC_INT8*)((_check_pointer(i1, 46652))+36);
   _assert((i1==12), 127, 46634);
   i1 = (OOC_INT32)dimType;
-  i2 = *(OOC_UINT8*)((_check_pointer(i1, 46690))+32);
+  i2 = *(OOC_UINT8*)((_check_pointer(i1, 46690))+36);
   if (i2) goto l3;
-  i0 = *(OOC_INT32*)((_check_pointer(i1, 47477))+44);
+  i0 = *(OOC_INT32*)((_check_pointer(i1, 47477))+48);
   i1 = (OOC_INT32)pb;
   i0 = (OOC_INT32)OOC_SSA__ProcBlockDesc_GetConstInt((OOC_SSA__ProcBlock)i1, i0);
   return (OOC_SSA__Instr)i0;

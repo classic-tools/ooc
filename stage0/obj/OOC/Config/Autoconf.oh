@@ -10,12 +10,13 @@
 #define OOC_Config_Autoconf__nameTargetOS "Unix"
 #define OOC_Config_Autoconf__bitsTargetInteger 64
 #define OOC_Config_Autoconf__bitsTargetAddress 32
-#define OOC_Config_Autoconf__compilerVersion "2.0.8"
+#define OOC_Config_Autoconf__compilerVersion "2.0.9"
 #define OOC_Config_Autoconf__compilerMajor 2
 #define OOC_Config_Autoconf__compilerMinor 0
 #define OOC_Config_Autoconf__longint 6
 #define OOC_Config_Autoconf__hugeint 7
 #define OOC_Config_Autoconf__address 6
+#define OOC_Config_Autoconf__haveLibM OOC_TRUE
 extern void OOC_OOC_Config_Autoconf_init(void);
 extern void OOC_OOC_Config_Autoconf_init0(void);
 

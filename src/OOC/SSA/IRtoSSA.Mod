@@ -1,4 +1,4 @@
-(* 	$Id: IRtoSSA.Mod,v 1.114 2003/02/23 19:13:07 mva Exp $	 *)
+(* 	$Id: IRtoSSA.Mod,v 1.122 2003/05/09 22:48:45 mva Exp $	 *)
 MODULE OOC:SSA:IRtoSSA;
 (*  Converts the IR of a procedure into its SSA representation.
     Copyright (C) 2001-2003  Michael van Acken
@@ -132,6 +132,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       (* get type of the value we are interested in *)
       type := value. type;
       FOR i := 0 TO dim DO
+        type := type.Deparam();
         type := type(Sym.Array). elementType;
       END;
       
@@ -155,9 +156,10 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       
       (* get type of the value we are interested in *)
       type := value.type;
-      WHILE (type IS Sym.Array) DO
-        type := type(Sym.Array).elementType;
+      WHILE TR.IsArrayType(type) DO
+        type := TR.ArrayElementType(type);
       END;
+      type := type.Deparam();
       
       size := pb.AddInstr (Opcode.multiply, Opcode.scAddress);
       size.AddOpnd(FixAddress(length), Opnd.arg);
@@ -262,8 +264,11 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
   (* `design' is the variable designator, `value' its translation to SSA *)
     VAR
       instr, check: SSA.Instr;
+      type: Sym.Type;
     BEGIN
-      IF checkDerefOfNil & (design. type IS Sym.Pointer) THEN
+      type := design.type.Deparam();
+      type := type.Bound();  (* for a type variable, continue with bound *)
+      IF checkDerefOfNil & (type IS Sym.Pointer) THEN
         check := AddException (pb, derefSym,
                                Opcode.checkPointer, value. subclass);
         check. AddOpnd (value, Opnd.arg);
@@ -271,15 +276,15 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       END;
       
       instr := pb. AddInstr (Opcode.typeTag, Opcode.scAddress);
-      IF (design. type IS Sym.Pointer) THEN
+      IF (type IS Sym.Pointer) THEN
         instr. AddOpnd (value, Opnd.arg);
       ELSIF (design IS IR.Var) &
             design(IR.Var). decl(Sym.VarDecl). isVarParam &
-            (design(IR.Var). decl(Sym.VarDecl). type IS Sym.Record) THEN
+            TR.IsRecord(design(IR.Var).decl(Sym.VarDecl).type) THEN
         (* type tag of a VAR parameter *)
         instr. AddOpnd (value. instr. GetArgClass (Opnd.readDesign), Opnd.arg);
       ELSE                             (* static type tag *)
-        instr. AddOpnd (pb. GetTypeRef (design. type), Opnd.arg);
+        instr. AddOpnd (pb. GetTypeRef (type), Opnd.arg);
       END;
       RETURN instr;
     END TypeTag;
@@ -348,8 +353,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
           address := check;
         END;
         
-        instr := pb. AddInstr (Opcode.get, 
-                               Opcode.TypeToSubclass (deref. derefType));
+        instr := pb. AddInstr (Opcode.get, Opcode.TypeToSubclass (deref.type));
         instr. AddOpnd (s, Opnd.store);
         instr. AddOpnd (address, Opnd.readAdr);
         instr. AddOpnd (pb. GetTypeRef (deref. pointer. type), Opnd.readDesign);
@@ -386,10 +390,11 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         instr, elementAdr, scaledIndex, newSize, check: SSA.Instr;
         baseResult, length, index: SSA.Result;
         adrOpnd: SSA.Opnd;
-        elementType: Sym.Type;
+        elementType, arrayType: Sym.Type;
       BEGIN
+        arrayType := indexOp.array.type.Deparam();
         length := pb. AddGetLengthInstr (baseArray(SSA.Instr), dim,
-                                         indexOp. array. type(Sym.Array));
+                                         arrayType(Sym.Array));
         newSize := pb. AddInstr (Opcode.multiply, Opcode.scAddress);
         newSize. AddOpnd (elementSize, Opnd.arg);
         newSize. AddOpnd (FixAddress(length), Opnd.arg);
@@ -717,6 +722,18 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         END;
         RETURN instr;
       END Concat;
+
+    PROCEDURE Constructor(expr: IR.Constructor): SSA.Result;
+      VAR
+        obj, call: SSA.Result;
+      BEGIN
+        obj := NewObject(expr.alloc);
+        IF (expr.init # NIL) THEN
+          call := Expression(expr.init);
+          call.instr.opndList.nextOpnd.ReplaceArg(obj);  (* fixup receiver *)
+        END;
+        RETURN obj;
+      END Constructor;
     
     BEGIN
       WITH expr: IR.Const DO
@@ -774,7 +791,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
           RETURN pb. GetConstInt (expr. arrayVariable(IR.Const). value(Boxed.String). value. length+1);
         ELSE
           baseArray := Expression (expr. arrayVariable);
-          type := expr. arrayVariable. type(Sym.Array). GetNthElementType (expr. dim);
+          type := expr. arrayVariable. type.Deparam();
+          type := type(Sym.Array).GetNthElementType(expr.dim);
           RETURN pb. AddGetLengthInstr (baseArray(SSA.Instr), expr. dim,
                                         type(Sym.Array));
         END;
@@ -958,7 +976,10 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         instr. AddOpnd (s, Opnd.store);
         s := instr. AddResult (Result.store);
         RETURN instr
-            
+
+      | expr: IR.Constructor DO
+        RETURN Constructor(expr);
+        
       ELSE
         Log.Type("++ Unknown type in Expression", expr);
         ASSERT (FALSE)

@@ -1,4 +1,4 @@
-(* 	$Id: TranslateToIA32.Mod,v 1.10 2003/02/05 21:31:55 mva Exp $	 *)
+(* 	$Id: TranslateToIA32.Mod,v 1.12 2003/05/06 22:00:59 mva Exp $	 *)
 MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -21,12 +21,12 @@ MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Ascii, IO, IO:StdChannels, ADT:Dictionary, 
+  Ascii, IO, IO:StdChannels,
   OOC:Config:Pragmas, OOC:Auxiliary:ParseModule,
   OOC:Auxiliary:WriteSymbolFile, OOC:Error, Rep := OOC:Repository, OOC:AST,
   OOC:AST:ExtTree, OOC:AST:ExtTree:CreateIR, ASTtoXML := OOC:AST:ExtTree:XML, 
   OOC:IR, IRtoXML := OOC:IR:XML, OOC:IR:ConstFold,
-  Sym := OOC:SymbolTable, OOC:SymbolTable:Exports, 
+  Sym := OOC:SymbolTable, OOC:SymbolTable:Exports, OOC:SymbolTable:Uses,
   OOC:IA32:Writer, OOC:IA32:RuntimeData;
 
 TYPE
@@ -135,7 +135,7 @@ PROCEDURE WriteCodeFile (w: Writer.Writer; m: Rep.Module; symTab: Sym.Module;
   END WriteCodeFile;
 
 
-PROCEDURE Run*(m: Rep.Module; libraryName: STRING;
+PROCEDURE Run*(m: Rep.Module; libraryName: STRING; uses: Uses.Uses;
                writeAST, writeIR: BOOLEAN;
                translator: Translator): Error.List
 RAISES IO.Error;
@@ -144,7 +144,7 @@ RAISES IO.Error;
     ast: AST.Node;
     symTab: Sym.Module;
     errList: Error.List;
-    exports: Dictionary.Dictionary;
+    exports: Sym.Exports;
     moduleIR: IR.Module;
     pragmaHistory: Pragmas.History;
     w: Writer.Writer;
@@ -158,7 +158,7 @@ RAISES IO.Error;
     END CloseFile;
   
   BEGIN
-    ParseModule.ParseModule (m, TRUE, TRUE, FALSE, FALSE, libraryName,
+    ParseModule.ParseModule (m, TRUE, TRUE, FALSE, FALSE, libraryName, uses,
                              ast, symTab, pragmaHistory, errList);
     (* note: don't let `ParseModule' write the symbol file; this reduces the
        data in `symTab' to the view of client modules: declarations private to
@@ -169,8 +169,8 @@ RAISES IO.Error;
         ASTtoXML.Write (StdChannels.stdout, ast(ExtTree.Module));
       END;
       moduleIR := CreateIR.CreateIR (ast(ExtTree.Module), symTab, 
-                                     IR.NewBuilder (symTab, pragmaHistory,
-                                                    errList,
+                                     IR.NewBuilder (symTab, uses,
+                                                    pragmaHistory, errList,
                                                     ConstFold.NewConstFold()));
       IF writeIR THEN
         IRtoXML.Write (StdChannels.stdout, moduleIR);

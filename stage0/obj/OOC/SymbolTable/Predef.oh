@@ -70,6 +70,7 @@
 #define OOC_SymbolTable_Predef__minExitCode 0
 #define OOC_SymbolTable_Predef__maxExitCode 128
 #define OOC_SymbolTable_Predef__defaultAssertCode 127
+#define OOC_SymbolTable_Predef__initMethod "INIT"
 extern OOC_SymbolTable__Name OOC_SymbolTable_Predef__nameStringModule;
 extern OOC_SymbolTable__Name OOC_SymbolTable_Predef__nameStringType;
 extern OOC_SymbolTable__Module OOC_SymbolTable_Predef__CreatePredef(OOC_SymbolTable_Builder__Builder stb);
@@ -78,16 +79,18 @@ extern OOC_SymbolTable__PredefType OOC_SymbolTable_Predef__GetType(OOC_INT16 id)
 extern Object_Boxed__Object OOC_SymbolTable_Predef__GetMin(OOC_SymbolTable__Type type);
 extern Object_Boxed__Object OOC_SymbolTable_Predef__GetMax(OOC_SymbolTable__Type type);
 extern OOC_SymbolTable__Type OOC_SymbolTable_Predef__SmallestIntType(Object_BigInt__BigInt value);
+extern OOC_CHAR8 OOC_SymbolTable_Predef__IsStaticMethod(const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern void OOC_OOC_SymbolTable_Predef_init(void);
 extern void OOC_OOC_SymbolTable_Predef_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__3734;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__5751;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6128;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6822;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7154;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7890;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__3727;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__5768;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6145;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6846;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7185;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7921;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__14309;
 #endif /* _MODULE_OOC_SymbolTable_Predef_ */
 
 /* --- */
