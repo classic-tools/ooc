@@ -31,10 +31,6 @@ typedef struct RT0__StructDesc {
   OOC_INT32 len;
   OOC_INT8 form;
 } RT0__StructDesc;
-typedef struct RT0__ObjectDesc *RT0__Object;
-typedef struct RT0__ObjectDesc {
-  char __dummy;
-} RT0__ObjectDesc;
 typedef struct RT0__ModuleDesc {
   RT0__Name name;
   RT0__Struct *typeDescriptors;
@@ -79,17 +75,16 @@ extern void OOC_RT0_init0(void);
 extern RT0__StructDesc _td_RT0__Name;
 extern RT0__StructDesc _td_RT0__Module;
 extern RT0__StructDesc _td_RT0__Struct;
-extern RT0__StructDesc _td_RT0__4741;
-extern RT0__StructDesc _td_RT0__4961;
-extern RT0__StructDesc _td_RT0__Object;
+extern RT0__StructDesc _td_RT0__4793;
+extern RT0__StructDesc _td_RT0__5013;
 extern RT0__StructDesc _td_RT0__ModuleDesc;
-extern RT0__StructDesc _td_RT0__6087;
-extern RT0__StructDesc _td_RT0__6767;
-extern RT0__StructDesc _td_RT0__6693;
-extern RT0__StructDesc _td_RT0__9089;
-extern RT0__StructDesc _td_RT0__9295;
-extern RT0__StructDesc _td_RT0__9494;
-extern RT0__StructDesc _td_RT0__9520;
+extern RT0__StructDesc _td_RT0__6143;
+extern RT0__StructDesc _td_RT0__6823;
+extern RT0__StructDesc _td_RT0__6749;
+extern RT0__StructDesc _td_RT0__9145;
+extern RT0__StructDesc _td_RT0__9351;
+extern RT0__StructDesc _td_RT0__9550;
+extern RT0__StructDesc _td_RT0__9576;
 #endif /* _MODULE_RT0_ */
 
 /* --- */

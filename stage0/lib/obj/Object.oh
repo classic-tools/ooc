@@ -50,6 +50,8 @@ extern Object__String Object__NewUTF16(const OOC_CHAR16 str[], OOC_LEN str_0d);
 extern Object__String Object__NewUTF16Region(const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
 extern Object__String Object__NewUTF16Char(OOC_CHAR16 ch);
 extern Object__String Object__NewUCS4Char(OOC_CHAR32 ch);
+extern Object__String Object__NewUCS4Region(const OOC_CHAR32 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
+extern Object__String Object__NewUCS4(const OOC_CHAR32 str[], OOC_LEN str_0d);
 extern Object__String Object__Concat2(Object__String s1, Object__String s2);
 extern Object__String Object__StringDesc_Concat(Object__String s, Object__String t);
 #define _TBN_Object__StringDesc_Concat 5
@@ -189,20 +191,22 @@ extern RT0__StructDesc _td_Object__String;
 extern RT0__StructDesc _td_Object__StringArray;
 extern RT0__StructDesc _td_Object__StringArrayPtr;
 extern RT0__StructDesc _td_Object__StringDesc;
-extern RT0__StructDesc _td_Object__3987;
+extern RT0__StructDesc _td_Object__4295;
 extern RT0__StructDesc _td_Object__CharsLatin1;
-extern RT0__StructDesc _td_Object__4184;
+extern RT0__StructDesc _td_Object__4492;
 extern RT0__StructDesc _td_Object__CharsUTF16;
 extern RT0__StructDesc _td_Object__String8;
 extern RT0__StructDesc _td_Object__String8Desc;
 extern RT0__StructDesc _td_Object__String16;
 extern RT0__StructDesc _td_Object__String16Desc;
-extern RT0__StructDesc _td_Object__5430;
-extern RT0__StructDesc _td_Object__5896;
-extern RT0__StructDesc _td_Object__10902;
-extern RT0__StructDesc _td_Object__11275;
-extern RT0__StructDesc _td_Object__11941;
-extern RT0__StructDesc _td_Object__12491;
+extern RT0__StructDesc _td_Object__5738;
+extern RT0__StructDesc _td_Object__6204;
+extern RT0__StructDesc _td_Object__11210;
+extern RT0__StructDesc _td_Object__11583;
+extern RT0__StructDesc _td_Object__12249;
+extern RT0__StructDesc _td_Object__12799;
+extern RT0__StructDesc _td_Object__14563;
+extern RT0__StructDesc _td_Object__15641;
 #endif /* _MODULE_Object_ */
 
 /* --- */

@@ -1,4 +1,4 @@
-(* 	$Id: TypeRules.Mod,v 1.66 2003/06/19 13:50:49 mva Exp $	 *)
+(* 	$Id: TypeRules.Mod,v 1.67 2003/07/26 08:14:56 mva Exp $	 *)
 MODULE OOC:SymbolTable:TypeRules;
 (*  Defines the type rules of the language.
     Copyright (C) 2000-2003  Michael van Acken
@@ -641,12 +641,12 @@ PROCEDURE FormalParamsMatch* (baseFParsClosure: Sym.Type;
       RETURN FALSE
     ELSIF (baseResult # NIL) & 
           ~allowSpecialization &   
-          ~SameType(baseResult, procFPars.resultType) THEN
+          ~SameType(baseResult, Sym.Expand(procFPars.resultType)) THEN
       RETURN FALSE
     ELSIF (baseResult # NIL) & 
           allowSpecialization &
-          ~(SameType(baseResult, procFPars.resultType) OR
-            IsExtensionOf(procFPars.resultType, baseResult)) THEN
+          ~(SameType(baseResult, Sym.Expand(procFPars.resultType)) OR
+            IsExtensionOf(Sym.Expand(procFPars.resultType), baseResult)) THEN
       RETURN FALSE
     ELSIF (baseFPars. anyRestParameters # procFPars. anyRestParameters) THEN
       RETURN FALSE
@@ -655,7 +655,7 @@ PROCEDURE FormalParamsMatch* (baseFParsClosure: Sym.Type;
         IF (baseFPars. params[i]. isVarParam # 
             procFPars. params[i]. isVarParam) OR
            ~EqualTypes (baseFParsClosure.Closure(baseFPars.params[i].type), 
-                        procFPars.params[i].type) THEN
+                        Sym.Expand(procFPars.params[i].type)) THEN
           RETURN FALSE
         END
       END;

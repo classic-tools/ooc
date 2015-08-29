@@ -148,9 +148,10 @@ URI_Scheme_File__URI URI_Scheme_File__GetCwd(void) {
   Exception__Context _context0, _context1;
 
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -160,7 +161,6 @@ l6:
     Exception__Clear();
     goto l19;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)OS_ProcessParameters__GetCwd();
     i0 = (OOC_INT32)OS_HostPath__Normalize((Object__String)i0);
     cwd = (Object__String)i0;
@@ -176,9 +176,10 @@ l10:
     i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4229)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i1);
     str = (Object__String)i0;
     {
+      Exception__PushContext(&_context1, &_target1);
       if (!setjmp(_target1)) goto l17;
       Exception__PopContext(1);
-      i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+      i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
       if (i0) goto l15;
       Exception__ActivateContext();
       goto l16;
@@ -188,7 +189,6 @@ l16:
       Exception__Clear();
       goto l18;
 l17:
-      Exception__PushContext(&_context1, &_target1);
       i0 = (OOC_INT32)URI_Parser__NewURI((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4292)))), &_td_Object__String8Desc, 4292)), (URI__HierarchicalURI)(OOC_INT32)0);
       uri = (URI__URI)i0;
       Exception__PopContext(2);
@@ -215,9 +215,10 @@ URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], vol
 
   OOC_INITIALIZE_VPAR(filePath__ref,filePath,OOC_CHAR8 ,filePath_0d)
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l11;
     Exception__PopContext(1);
-    i0 = (OOC_INT32)OOC_TYPE_TAG((Exception__Current()));
+    i0 = (OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()));
     i1 = OOC_TYPE_TEST(i0, &_td_IO__ErrorDesc);
     if (i1) goto l9;
     i0 = OOC_TYPE_TEST(i0, &_td_Exception__ParseErrorDesc);
@@ -233,7 +234,6 @@ l10:
     Exception__Clear();
     goto l16;
 l11:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)Object__NewLatin1((void*)(OOC_INT32)filePath, filePath_0d);
     i0 = (OOC_INT32)OS_HostPath__Normalize((Object__String)i0);
     normPath = (Object__String)i0;

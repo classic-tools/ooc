@@ -1,4 +1,4 @@
-(* 	$Id: CreateIR.Mod,v 1.66 2003/05/11 14:52:54 mva Exp $	 *)
+(* 	$Id: CreateIR.Mod,v 1.68 2003/07/15 19:42:52 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateIR;
 (*  Creates an IR representation from the abstract syntax tree.
     Copyright (C) 2001-2003  Michael van Acken
@@ -444,15 +444,25 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
       VAR
         statmSeq, catchStatm: IR.StatementSeq;
         catchList: IR.CatchList;
+        catch: ExtTree.Catch;
         guard: IR.Expression;
         i: LONGINT;
       BEGIN
-        NEW(catchList, tryStatm.catchList.len DIV 4);
+        NEW(catchList, tryStatm.catchList.len);
         statmSeq := StatementSeq(tryStatm.statmSeq);
-        FOR i := 0 TO tryStatm.catchList.len-1 BY 4 DO
-          guard := Expr(tryStatm.catchList.n[i+1](ExtTree.Node));
-          catchStatm := StatementSeq(tryStatm.catchList.n[i+3](ExtTree.NodeList));
-          catchList[i DIV 4] := b.NewCatchClause(guard, catchStatm);
+        FOR i := 0 TO tryStatm.catchList.len-1 DO
+          catch := tryStatm.catchList.n[i](ExtTree.Catch);
+          guard := Expr(catch.type);
+
+          IF (catch.ident = NIL) THEN
+            catchStatm := StatementSeq(catch.statmSeq);
+          ELSE
+            b.StartExceptionScope(guard, catch.ident.sym, currentNamespace);
+            catchStatm := StatementSeq(catch.statmSeq);
+            b.EndExceptionScope(currentNamespace);
+          END;
+          
+          catchList[i] := b.NewCatchClause(guard, catchStatm);
         END;
         RETURN b.NewTryStatm(tryStatm.try.sym, statmSeq, catchList);
       END TryStatm;

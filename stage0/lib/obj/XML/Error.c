@@ -338,16 +338,16 @@ l3_loop:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7011)))), &_td_Msg__StringAttributeDesc, 7011)), 7027))+8);
   _copy_8((const void*)(_check_pointer(i0, 7034)),(void*)(OOC_INT32)text,8192);
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l13;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l12;
     Exception__ActivateContext();
 l12:
     Exception__Clear();
     goto l21;
 l13:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)OS_ProcessParameters__GetCwd();
     i0 = (OOC_INT32)Object__Concat2((void*)((OOC_INT32)Object__Concat2((void*)i1,(void*)i0)),(void*)i2);
     cwd = (Object__String)i0;

@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.59 2003/07/06 21:49:42 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.61 2003/07/27 10:36:59 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -71,6 +71,9 @@ TYPE
 VAR
   createNamespaceContext: ErrorContext;
   predefModule: Sym.Module;
+  exception-: Sym.VarDecl;
+  (**Predefined pseudo variable @samp{EXCEPTION}, holding the current exception
+     within a @code{CATCH} block.  *)
   systemModule-: Sym.Module;
 
 PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error.LString);
@@ -756,12 +759,12 @@ RAISES IO.Error;
           FOR i := 0 TO LEN(item.arguments^)-1 DO
             item.arguments[i].type :=
                 GetTypeByName(item.arguments[i].srcCodeType, contextOfUse,
-                              FALSE, TRUE, errList);
+                              TRUE, TRUE, errList);
           END;
 
         | item: Sym.TypeVar DO
           item.bound := GetTypeByName(item.bound, contextOfUse,
-                                      FALSE, TRUE, errList);
+                                      TRUE, TRUE, errList);
           
           
         (* scope objects: fix context of use for using 
@@ -1640,26 +1643,6 @@ RAISES IO.Error;
     END;
   END CreateNamespace;
 
-(*PROCEDURE CreateNamespaceRec*(root: Sym.Module;
-                              errList: Error.List);
-  VAR
-    ptr: Sym.Item;
-  BEGIN
-    IF (root.ns = NIL) THEN
-      ptr := root. nestedItems;
-      WHILE (ptr # NIL) & (errList.msgCount = 0) DO
-        WITH ptr: Sym.Import DO
-          CreateNamespaceRec(ptr.externalSymTab, errList);
-        ELSE
-        END;
-        ptr := ptr. nextNested
-      END;
-      IF (errList.msgCount = 0) THEN
-        CreateNamespace(root, errList);
-      END;
-    END;
-  END CreateNamespaceRec;*)
-    
 PROCEDURE Init* ();
   VAR
     stb: Builder.Builder;
@@ -1669,7 +1652,7 @@ PROCEDURE Init* ();
     systemModule := NIL;
     
     stb := Builder.New();
-    predef := Predef.CreatePredef (stb);
+    predef := Predef.CreatePredef (stb, exception);
     system := Predef.CreateSYSTEM (stb);
     TRY
       CreateNamespace (predef, NIL, Error.NewList (""));

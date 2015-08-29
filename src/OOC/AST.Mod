@@ -1,4 +1,4 @@
-(* 	$Id: AST.Mod,v 1.16 2003/05/11 13:56:33 mva Exp $	 *)
+(* 	$Id: AST.Mod,v 1.17 2003/07/15 19:42:52 mva Exp $	 *)
 MODULE OOC:AST [OOC_EXTENSIONS];
 (*  Abstract builder class for parser output.
     Copyright (C) 2000-2003  Michael van Acken
@@ -1241,6 +1241,34 @@ PROCEDURE (b: Builder) [ABSTRACT] ReturnStatm* (return, expr: Node): Node;
    @end table  *)
   END ReturnStatm;
 
+PROCEDURE (b: Builder) [ABSTRACT] Catch*(catch, type, lParen, ident, rParen,
+                                         colon: Node; statmSeq: NodeList): Node;
+(**Catch clause of a @code{TRY} statement.
+
+   @table @oparam
+   @item catch
+   The keyword @samp{CATCH}.
+   
+   @item type
+   A type name, matching the rule of @samp{Qualident}.
+   
+   @item lParen
+   The terminal symbol @samp{(}, or @code{NIL}.
+   
+   @item ident
+   The optional exception name.
+   
+   @item rParen
+   The terminal symbol @samp{)}, or @code{NIL}.
+   
+   @item colon
+   The terminal symbol @samp{:}, or @code{NIL}.
+   
+   @item statmSeq
+   The statement sequence of the catch block.
+   @end table  *)
+  END Catch;
+
 PROCEDURE (b: Builder) [ABSTRACT] TryStatm* (try: Node; statmSeq: NodeList;
                                              catchList: NodeList; end: Node): Node;
 (**Exception handler statement.
@@ -1253,22 +1281,8 @@ PROCEDURE (b: Builder) [ABSTRACT] TryStatm* (try: Node; statmSeq: NodeList;
    The statement sequence of the @samp{TRY}'s body.
    
    @item catchList
-   This is the list of all catch blocks.  It is a sequence of keywords,
-   type names, and statement sequences.
-   
-   @table @samp
-   @item catchList MOD 4 == 0
-   The keyword @samp{CATCH}.
-   
-   @item catchList MOD 4 == 1
-   A type name, matching the rule of @samp{Qualident}.
-   
-   @item catchList MOD 4 == 2
-   The terminal symbol @samp{:}.
-   
-   @item catchList MOD 4 == 3
-   The statement sequence of the catch block.
-   @end table
+   This is the list of all catch blocks.  It is a sequence of nodes
+   produced by @oproc{Builder.Catch}.
 
    @item end
    The keyword @samp{END}, result of @oproc{Builder.Terminal}

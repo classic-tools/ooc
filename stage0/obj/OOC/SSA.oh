@@ -165,13 +165,14 @@ typedef struct OOC_SSA__ProcBlockDesc *OOC_SSA__ProcBlock;
 typedef struct OOC_SSA__ProcBlockDesc {
   OOC_SSA__Instr selectReturn;
   OOC_SSA__Instr loopContext;
+  OOC_SSA__Instr tryContext;
   OOC_SSA__Instr instrList;
   OOC_SSA__Instr instrTail;
   OOC_SymbolTable__ProcDecl procDecl;
   OOC_CHAR8 checkFunctionResult;
-  OOC_CHAR8 __pad21;
-  OOC_CHAR8 __pad22;
-  OOC_CHAR8 __pad23;
+  OOC_CHAR8 __pad25;
+  OOC_CHAR8 __pad26;
+  OOC_CHAR8 __pad27;
   ADT_Dictionary__Dictionary constMap[12];
   ADT_Dictionary__Dictionary objMap;
   ADT_Dictionary__Dictionary adrMap;
@@ -363,6 +364,9 @@ typedef OOC_SSA__Instr (*_TBP_OOC_SSA__ProcBlockDesc_AddGetLengthInstr)(OOC_SSA_
 extern OOC_SSA__Instr OOC_SSA__ProcBlockDesc_SetLoopContext(OOC_SSA__ProcBlock pb, OOC_SSA__Instr loopContext);
 #define _TBN_OOC_SSA__ProcBlockDesc_SetLoopContext 21
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__ProcBlockDesc_SetLoopContext)(OOC_SSA__ProcBlock pb, OOC_SSA__Instr loopContext);
+extern OOC_SSA__Instr OOC_SSA__ProcBlockDesc_SetTryContext(OOC_SSA__ProcBlock pb, OOC_SSA__Instr tryContext);
+#define _TBN_OOC_SSA__ProcBlockDesc_SetTryContext 23
+typedef OOC_SSA__Instr (*_TBP_OOC_SSA__ProcBlockDesc_SetTryContext)(OOC_SSA__ProcBlock pb, OOC_SSA__Instr tryContext);
 extern OOC_SSA__Result OOC_SSA__ProcBlockDesc_FixSubclass(OOC_SSA__ProcBlock pb, OOC_SSA__Result arg, OOC_INT8 subclass);
 #define _TBN_OOC_SSA__ProcBlockDesc_FixSubclass 9
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__ProcBlockDesc_FixSubclass)(OOC_SSA__ProcBlock pb, OOC_SSA__Result arg, OOC_INT8 subclass);
@@ -370,7 +374,7 @@ extern OOC_SSA__Instr OOC_SSA__ProcBlockDesc_FixSubclassInstr(OOC_SSA__ProcBlock
 #define _TBN_OOC_SSA__ProcBlockDesc_FixSubclassInstr 10
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__ProcBlockDesc_FixSubclassInstr)(OOC_SSA__ProcBlock pb, OOC_SSA__Instr instr, OOC_INT8 subclass);
 extern OOC_CHAR8 OOC_SSA__ProcBlockDesc_TopSort(OOC_SSA__ProcBlock pb);
-#define _TBN_OOC_SSA__ProcBlockDesc_TopSort 23
+#define _TBN_OOC_SSA__ProcBlockDesc_TopSort 24
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__ProcBlockDesc_TopSort)(OOC_SSA__ProcBlock pb);
 extern void OOC_SSA__ProcBlockDesc_Reverse(OOC_SSA__ProcBlock pb);
 #define _TBN_OOC_SSA__ProcBlockDesc_Reverse 19
@@ -405,11 +409,11 @@ extern RT0__StructDesc _td_OOC_SSA__TypeRefDesc;
 extern RT0__StructDesc _td_OOC_SSA__AddressDesc;
 extern RT0__StructDesc _td_OOC_SSA__ProcBlock;
 extern RT0__StructDesc _td_OOC_SSA__ProcBlockDesc;
-extern RT0__StructDesc _td_OOC_SSA__7402;
-extern RT0__StructDesc _td_OOC_SSA__17228;
-extern RT0__StructDesc _td_OOC_SSA__26247;
-extern RT0__StructDesc _td_OOC_SSA__31501;
-extern RT0__StructDesc _td_OOC_SSA__31533;
+extern RT0__StructDesc _td_OOC_SSA__7838;
+extern RT0__StructDesc _td_OOC_SSA__17664;
+extern RT0__StructDesc _td_OOC_SSA__26683;
+extern RT0__StructDesc _td_OOC_SSA__31937;
+extern RT0__StructDesc _td_OOC_SSA__31969;
 #endif /* _MODULE_OOC_SSA_ */
 
 /* --- */

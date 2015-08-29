@@ -86,7 +86,7 @@ void OOC_SSA_Opcode__GetSubclassName(OOC_INT8 subclass, OOC_CHAR8 name[], OOC_LE
     _copy_8((const void*)"r64",(void*)(OOC_INT32)scstr,16);
     goto l15;
   default:
-    _failed_case(i0, 33825);
+    _failed_case(i0, 33991);
     goto l15;
   }
 l15:
@@ -123,7 +123,7 @@ void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[
   case 6:
     _copy_8((const void*)"collect",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 81:
+  case 82:
     _copy_8((const void*)"labels",(void*)(OOC_INT32)cstr,32);
     goto l90;
   case 7:
@@ -321,7 +321,7 @@ void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[
   case 71:
     _copy_8((const void*)"failed-type-assert",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 80:
+  case 81:
     _copy_8((const void*)"preloaded-var",(void*)(OOC_INT32)cstr,32);
     goto l90;
   case 72:
@@ -333,38 +333,38 @@ void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[
   case 74:
     _copy_8((const void*)"raise-exception",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 75:
+  case 76:
     _copy_8((const void*)"current-exception",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 76:
+  case 77:
     _copy_8((const void*)"clear-exception",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 77:
+  case 78:
     _copy_8((const void*)"push-exception-context",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 78:
+  case 79:
     _copy_8((const void*)"pop-exception-context",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 79:
+  case 80:
     _copy_8((const void*)"activate-context",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 82:
+  case 83:
     _copy_8((const void*)"dgate",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 83:
+  case 84:
     _copy_8((const void*)"design-standin",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 84:
+  case 85:
     _copy_8((const void*)"equiv",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 85:
+  case 86:
     _copy_8((const void*)"equiv-pre",(void*)(OOC_INT32)cstr,32);
     goto l90;
-  case 86:
+  case 87:
     _copy_8((const void*)"noop",(void*)(OOC_INT32)cstr,32);
     goto l90;
   default:
-    _failed_case(i0, 34514);
+    _failed_case(i0, 34680);
     goto l90;
   }
 l90:
@@ -384,25 +384,25 @@ OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)type;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38010)))), OOC_SymbolTable__TypeDesc_Deparam)),OOC_SymbolTable__TypeDesc_Deparam)((OOC_SymbolTable__Type)i0);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38176)))), OOC_SymbolTable__TypeDesc_Deparam)),OOC_SymbolTable__TypeDesc_Deparam)((OOC_SymbolTable__Type)i0);
   type = (OOC_SymbolTable__Type)i0;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38035)))), &_td_OOC_SymbolTable__PredefTypeDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38201)))), &_td_OOC_SymbolTable__PredefTypeDesc);
   if (i1) goto l23;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38812)))), &_td_OOC_SymbolTable__ArrayDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38978)))), &_td_OOC_SymbolTable__ArrayDesc);
   if (i1) goto l21;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38859)))), &_td_OOC_SymbolTable__RecordDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39025)))), &_td_OOC_SymbolTable__RecordDesc);
   if (i1) goto l19;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38907)))), &_td_OOC_SymbolTable__PointerDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39073)))), &_td_OOC_SymbolTable__PointerDesc);
   if (i1) goto l17;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38959)))), &_td_OOC_SymbolTable__FormalParsDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39125)))), &_td_OOC_SymbolTable__FormalParsDesc);
   if (i1) goto l15;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39014)))), &_td_OOC_SymbolTable__TypeVarDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 39180)))), &_td_OOC_SymbolTable__TypeVarDesc);
   if (i1) goto l13;
   Log__Type("++ Unknown type in TypeToSubclass", 34, (void*)i0);
-  _assert(0u, 127, 39154);
+  _assert(0u, 127, 39320);
   goto l43;
 l13:
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39063))+40);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39229))+40);
   i0 = OOC_SSA_Opcode__TypeToSubclass((OOC_SymbolTable__Type)i0);
   return i0;
   goto l43;
@@ -419,7 +419,7 @@ l21:
   return 0;
   goto l43;
 l23:
-  i0 = *(OOC_INT16*)((_check_pointer(i0, 38070))+40);
+  i0 = *(OOC_INT16*)((_check_pointer(i0, 38236))+40);
   switch (i0) {
   case 17:
     return 0;
@@ -472,11 +472,11 @@ l23:
     return 9;
     goto l43;
   default:
-    _failed_case(i0, 38061);
+    _failed_case(i0, 38227);
     goto l43;
   }
 l43:
-  _failed_function(37942); return 0;
+  _failed_function(38108); return 0;
   ;
 }
 

@@ -232,7 +232,7 @@ static void OOC_SSA_DeadCodeElimination__DeleteDeadCode(OOC_SSA__ProcBlock pb) {
 
 
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3728))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3728))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l104;
@@ -447,9 +447,9 @@ void OOC_SSA_DeadCodeElimination__RemoveDesignators(OOC_SSA__ProcBlock pb) {
   OOC_SSA__Opnd next;
 
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i0, 83, 0);
+  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i0, 84, 0);
   repl = (OOC_SSA__Instr)i1;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7665))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7665))+12);
   instr = (OOC_SSA__Instr)i0;
   i2 = i0!=(OOC_INT32)0;
   if (!i2) goto l31;

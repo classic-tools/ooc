@@ -595,9 +595,10 @@ l94:
   i1 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i1, 1u);
   str = (Object__String)i1;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l101;
     Exception__PopContext(1);
-    i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i1) goto l99;
     Exception__ActivateContext();
     goto l100;
@@ -607,7 +608,6 @@ l100:
     Exception__Clear();
     goto l102;
 l101:
-    Exception__PushContext(&_context0, &_target0);
     i2 = (OOC_INT32)v;
     i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 8461))+16);
     i1 = (OOC_INT32)URI_Parser__NewURI((Object__String8)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8450)))), &_td_Object__String8Desc, 8450)), (URI__HierarchicalURI)i2);

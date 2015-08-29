@@ -1,4 +1,4 @@
-(* 	$Id: Opcode.Mod,v 1.97 2003/04/27 22:25:25 mva Exp $	 *)
+(* 	$Id: Opcode.Mod,v 1.101 2003/07/15 18:49:04 mva Exp $	 *)
 MODULE OOC:SSA:Opcode;
 (*  This modules defines opcodes for SSA instructions.
     Copyright (C) 2001-2003  Michael van Acken
@@ -693,35 +693,38 @@ CONST
      @var{store}, the first (result index @samp{1}) for the body and the second
      (result index @samp{2}) is used for the @code{CATCH} clauses.  *)
   tryEnd* = 73;
-  (**Marks the end of a @code{TRY} block.  This instruction 2 operands
+  (**Marks the end of a @code{TRY} block.  This instruction has 2 operands
      representing values of @var{store}.  The first operand is the @var{store}
      at the end of the @code{TRY}'s body.  The second one holds the @var{store}
      after processing the @code{CATCH} clauses.  *)
   raiseException* = 74;
   (**Raise an exception.  Takes @var{store} and the exception as
      arguments and produces a new @var{store}.  *)
-  currentException* = 75;
+  (*storeCurrentException* = 75;  ... unused *)
+  currentException* = 76;
   (**Produces a pointer to the current exception.  Result is @code{NIL} if
-     there is no active exception.  Takes @var{store} as argument.  *)
-  clearException* = 76;
-  (**Clears the variable with the current exception.  Takes @var{store} as
-     argument and produces a new @var{store}.  *)
-  pushExceptionContext* = 77;
+     there is no active exception.  Takes its @oconst{pushExceptionContext}
+     instruction and @var{store} as arguments.  *)
+  clearException* = 77;
+  (**Clears the variable with the current exception.  Takes 
+     its @oconst{pushExceptionContext} instruction and @var{store} as
+     arguments and produces a new @var{store}.  *)
+  pushExceptionContext* = 78;
   (**Puts the current exception handler context on the top of the stack.
      This instruction takes a single argument, the @var{store} result of its
      associated @oconst{tryStart} instruction.  It has one additional result:
      the new @var{store}.  *)
-  popExceptionContext* = 78;
+  popExceptionContext* = 79;
   (**Removes one or more top entries from the stack of exception handlers.
      Takes @var{store} as argument and produces a new @var{store}.  The second
      argument is a positive integer constant with the number of contexts that
      should be removed.  *)
-  activateContext* = 79;
+  activateContext* = 80;
   (**Passes control to the top-level entry in the stack of exception handlers.
      Takes @var{store} as argument and produces a new @var{store}.  This
      operation never returns.  *)
   
-  preloadedVar* = 80;
+  preloadedVar* = 81;
   (**Value of a variable that is defined as part of the module's
      initialization.  The instruction is both a placeholder for the value,
      and a description how the actual value is computed during run-time.
@@ -729,13 +732,13 @@ CONST
      type cast prefix, followed by the arguments that should be passed to
      the function.  All arguments are constants.  *)
   
-  labels* = 81;
+  labels* = 82;
   (**Pseudo instruction listing all labels of a @code{CASE} branch.  Every
      range and every single value is represented by two consecutive operands,
      the lower and the upper bound.  All operands are of class
      @oconst{*OOC:SSA:Opnd.arg}  *)
   
-  dgate* = 82;
+  dgate* = 83;
   (**Represents a value of a designator at the position of an instruction that
      selects from different flows of control.  This opcode is used internally
      by @omodule{*OOC:SSA:Destore}, and should not appear outside this module.
@@ -758,24 +761,24 @@ CONST
      @oconst{dgate}, or a valid value.
      @end table  *)
   
-  designStandin* = 83;
+  designStandin* = 84;
   (**@oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} replaces computed
      @samp{readDesign} and @samp{writeDesign} operands with a reference to
      this instruction.  Only a single instruction with this opcode exists in
      a procedure, so that CSE can still discover equivalent computations.  *)
 
-  equiv* = 84;
+  equiv* = 85;
   (**Marks a equivalence between two values.  Both results are of class
      @oconst{*OOC:SSA:Opnd.arg}.  The first result is the preferred
      representation of the two values.  The instruction has one use,
      which is an operand of a @oconst{noop} instruction.  Right now,
      only loop rewriting makes use of this instruction, in combination with
      partial redundancy elimination.  *)
-  equivPRE* = 85;
+  equivPRE* = 86;
   (**Like @oconst{equiv}, but used only in the context of the algorithm for
      partial redundancy elimination.  *)
      
-  noop* = 86;
+  noop* = 87;
   (**No operation.  Used to anchor other information in the SSA graph.
      Conceptually, every result of this instruction is the value of the
      corresponding operand.  Any operands beyond the number of results is

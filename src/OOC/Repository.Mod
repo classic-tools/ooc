@@ -1,4 +1,4 @@
-(* 	$Id: Repository.Mod,v 1.42 2003/06/20 19:54:26 mva Exp $	 *)
+(* 	$Id: Repository.Mod,v 1.43 2003/07/14 12:10:50 mva Exp $	 *)
 MODULE OOC:Repository [OOC_EXTENSIONS];
 (*  Abstraction of storage of source, intermediate, and target code.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -644,6 +644,9 @@ RAISES IO.Error;
       
       stb := Builder.New();
       symTab := stb. ReadSymbolTable (ch, chDoc);
+      IF (chDoc # NIL) THEN
+        chDoc.Close;
+      END;
       ch. Close;
       RETURN symTab;
     END;

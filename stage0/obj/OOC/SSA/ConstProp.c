@@ -21,7 +21,7 @@ static OOC_SSA__Const OOC_SSA_ConstProp__ComputeConst(OOC_SSA__ProcBlock pb, OOC
   goto l7;
 l5:
   i1 = *(OOC_INT8*)((_check_pointer(i0, 1837))+36);
-  i1 = i1!=80;
+  i1 = i1!=81;
   
 l7:
   if (i1) goto l9;
@@ -627,7 +627,7 @@ l57:
 
 
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10167))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10167))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l24;
@@ -636,7 +636,7 @@ l3_loop:
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10250)))), &_td_OOC_SSA__ConstDesc);
   if (i1) goto l6;
   i1 = *(OOC_INT8*)((_check_pointer(i0, 10273))+36);
-  i1 = i1==81;
+  i1 = i1==82;
   
   goto l8;
 l6:
@@ -686,7 +686,7 @@ l24:
   OOC_SSA_ConstProp__Transform_SetInfo((OOC_SSA__Instr)i0, (OOC_SSA__Result)i1);
   worklist = (OOC_SSA_ConstProp__Worklist)(OOC_INT32)0;
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11096))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11096))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l39;
@@ -728,7 +728,7 @@ l42_loop:
   if (i0) goto l42_loop;
 l47:
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11762))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11762))+12);
   instr = (OOC_SSA__Instr)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l66;

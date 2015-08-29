@@ -17,7 +17,7 @@
   generic53 generic54 generic55 generic56 generic57 generic58">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; bugExport1 bugExport2">-->
+  select ="&SetupTestCasesWithOut; generic64">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
   select ="&SetupTestCasesWithOut; callconv1 callconv2 callconv3 callconv4 cstring1">-->
@@ -905,8 +905,20 @@
       The called type-bound procedure is not exported by
       <code>TBProc1.Mod</code>.
     </test>
-    <test id="tbproc9" type="reject" file="TBProc9.Mod">
+    <test id="tbproc9" type="run" file="TBProc9.Mod" output="TBProc9.Ref">
       Super call to a different procedure.
+    </test>
+    <test id="tbproc10" type="run" file="TBProc10.Mod" output="TBProc10.Ref">
+      Super call to a different procedure, with the procedure
+      redefinition placed after the call.
+    </test>
+    <test id="tbproc11" type="run" file="TBProc11.Mod" output="TBProc11.Ref">
+      Super call to a different procedure, with the called procedure
+      defined after the call.
+    </test>
+    <test id="tbproc12" type="run" file="TBProc12.Mod" output="TBProc12.Ref">
+      Super call to a different procedure, with the called procedure
+      and the redefinition placed after the call.
     </test>
 
     
@@ -1542,6 +1554,23 @@
       type parameter, even though the base record is a non-parametric
       type.
     </test>
+    <test id="generic60" type="accept" file="Generic60.Mod">
+      Regression test: Using a variable of procedure type whose
+      argument has a parametric type.
+    </test>
+    <test id="generic61" type="accept" file="Generic61.Mod">
+      Regression test: Using a variable of procedure type whose
+      result is a parametric type.
+    </test>
+    <test id="generic62" type="accept" file="Generic62.Mod">
+      The type argument of a qualified type can be a forward reference
+      to a pointer type defined later.
+    </test>
+    <test id="generic63" type="accept" file="Generic63.Mod">
+      The type parameter of a parametric type can be a forward
+      reference to a pointer type defined later.
+    </test>
+    <!-- generic64 is part of the "Warnings" tests -->
   </testcases>
 
   <testcases profile="Tests for Warnings" default-lang="OOC O2">
@@ -1689,6 +1718,11 @@
     <test id="deprecated10" type="accept" file="Deprecated10.Mod">
       Using a type-bound procedure that redefines a
       <code>DEPRECATED</code> procedure.
+    </test>
+
+    <test id="generic64" type="accept" file="Generic64.Mod">
+      A <code>INIT</code> procedure without a super-call to the base
+      type's <code>INIT</code>.
     </test>
   </testcases>
   
@@ -1840,7 +1874,6 @@
       msg="This variable has no dynamic type"/>
     
     <reject-info id="tbproc8" pos="p. %Proc" msg="Undeclared identifier"/>
-    <reject-info id="tbproc9" pos="p.%Proc" msg="Cross procedure super call"/>
 
     <reject-info id="inc2" pos="INC(%x,1)"
       msg="Expression must be of integer type"/>
@@ -2261,5 +2294,8 @@
         msg="Warning: Use of deprecated object"/>
     <warning-info id="deprecated10" pos="b.%TBProc"
         msg="Warning: Use of deprecated object"/>
+    
+    <warning-info id="generic64" pos="(b: B) %INIT"
+        msg="Warning: No call to the base type's INIT procedure"/>
   </processor-info>
 </testsuite-ext>

@@ -909,10 +909,10 @@ l20:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18693)))), IO_TextRider__WriterDesc_WriteLn)),IO_TextRider__WriterDesc_WriteLn)((IO_TextRider__Writer)i0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18709)))), IO_TextRider__WriterDesc_WriteString)),IO_TextRider__WriterDesc_WriteString)((IO_TextRider__Writer)i0, "Procedure: ", 12);
   i1 = (OOC_INT32)pb;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18762))+16);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18762))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18772))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18778))+12);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18762))+16);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18762))+20);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18772))+20);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18778))+12);
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 18783)), 0);
@@ -1175,7 +1175,7 @@ l23:
   OOC_SSA_Blocker__ClearMarkers((OOC_SSA_Blocker__Region)i1);
   violationCount = 0;
   currentId = 1;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22797))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22797))+12);
   get = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l15;
@@ -1226,7 +1226,7 @@ void OOC_SSA_Blocker__RemoveAntiDeps(OOC_SSA__ProcBlock pb) {
   OOC_SSA__Opnd next;
 
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23870))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23870))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l20;
@@ -1270,7 +1270,7 @@ void OOC_SSA_Blocker__RemoveRegionDeps(OOC_SSA__ProcBlock pb) {
   OOC_SSA__Opnd next;
 
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24400))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24400))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l19;
@@ -1854,7 +1854,7 @@ l7:
       i2=1u;
 l9:
       if (i2) goto l15;
-      i1 = i1==85;
+      i1 = i1==86;
       if (i1) goto l13;
       i0=0u;
       goto l16;
@@ -2272,7 +2272,7 @@ l43:
 l44:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41461))+8);
       i0 = *(OOC_INT8*)((_check_pointer(i0, 41468))+36);
-      i0 = i0==81;
+      i0 = i0==82;
       if (i0) goto l47;
       i0 = (OOC_INT32)region;
       i0 = (OOC_INT32)OOC_SSA_Blocker__ArrangeInstructions_GetRegion_CorrectForLoop((OOC_SSA_Blocker__Region)i0);
@@ -3064,7 +3064,7 @@ l1_loop:
   i0 = (OOC_INT32)OOC_SSA_Blocker__NewRegion((OOC_SSA__Instr)(OOC_INT32)0);
   waiting = (OOC_SSA_Blocker__Region)i0;
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 52614))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 52614))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l32;
@@ -3207,7 +3207,7 @@ OOC_SSA_Blocker__DependenceData OOC_SSA_Blocker__GetDependenceData(OOC_SSA__Proc
   *(OOC_INT32*)(_check_pointer(i0, 54818)) = i2;
   i2 = (OOC_INT32)ADT_Dictionary__New();
   proxyMap = (ADT_Dictionary__Dictionary)i2;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 54915))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 54915))+12);
   instr = (OOC_SSA__Instr)i1;
   i3 = i1!=0;
   if (!i3) goto l8;

@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.252 2003/07/04 08:54:17 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.257 2003/08/01 09:00:30 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -426,6 +426,17 @@ TYPE
        receiver argument of @code{NIL}.  The back-end must replace the receiver
        with the result of @ofield{alloc}.  *)
   END;
+
+TYPE
+  CurrentException* = POINTER TO CurrentExceptionDesc;
+  TryStatm* = POINTER TO TryStatmDesc;
+  CurrentExceptionDesc = RECORD
+    (**Access to the current exception is modeled as an operator without
+       any operands.  *)
+    (OperatorDesc)
+    try-: TryStatm;
+    (**The @code{TRY} statement this operator belongs to.  *)
+  END;
   
 TYPE
   Deref* = POINTER TO DerefDesc;
@@ -542,6 +553,9 @@ TYPE
        to the @ofield{receiver} designator.  *)
     receiver-: Expression;
     (**The receiver designator of the call.  *)
+    recordType-: Sym.Type;
+    (**The static record type (aka class) on which the type-bound procedure
+       is called.  *)
     checkPointer-: BOOLEAN;
     (**If @code{TRUE}, then a run-time error should be reported if the
        receiver value is @code{NIL}.  *)
@@ -967,7 +981,6 @@ TYPE
   END;
   
 TYPE
-  TryStatm* = POINTER TO TryStatmDesc;
   TryStatmDesc = RECORD
     (StatementDesc)
     statmSeq-: StatementSeq;
@@ -1169,12 +1182,12 @@ CONST
   unreachableGuard = 65;
   untriggeredCatch = 66;
   notTypeInstance = 67;
-  crossProcSuperCall = 68;
   notParametricType = 69;           (* used as in CreateNamespace *)
   tooFewTypeArgs = 70;              (* used as in CreateNamespace *)
   tooManyTypeArgs = 71;             (* used as in CreateNamespace *)
   notExtensionOfBound = 72;         (* used as in CreateNamespace *)
   notRecordPointerType = 73;
+  initWithoutSuperCall = 74;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -1375,8 +1388,6 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := Error.warningPrefix+"Type matches none of the raised exceptions"
     | notTypeInstance:
       t := "Type test requires static type instance"
-    | crossProcSuperCall:
-      t := "Cross procedure super call"
     | notParametricType:
       t := "This is not a parametric type"
     | tooFewTypeArgs:
@@ -1387,6 +1398,8 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "This is not an extension of the type bound"
     | notRecordPointerType:
       t := "Not a record pointer type"
+    | initWithoutSuperCall:
+      t := Error.warningPrefix+"No call to the base type's INIT procedure"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
@@ -1395,20 +1408,28 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
 (* Guarded Variable Declaration
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitGuardedVar (gv: GuardedVar; var: Sym.VarDecl; type: Sym.Type);
+PROCEDURE InitGuardedVar (gv: GuardedVar; var: Sym.VarDecl; name: Sym.Name;
+                          type: Sym.Type);
+  VAR
+    exportMark: Sym.ExportMark;
   BEGIN
-    Sym.InitDeclaration (gv, NIL, var. name, var. visibleFrom,
-                         var. exportMark, var. docString);
-    gv. var := var;
-    gv. type := type;
+    exportMark := var.exportMark;
+    IF (exportMark = Sym.nameNotExported) THEN
+      exportMark := Sym.nameExportedRO;
+    END;
+    Sym.InitDeclaration (gv, NIL, name, var.visibleFrom,
+                         exportMark, var.docString);
+    gv.var := var;
+    gv.type := type;
   END InitGuardedVar;
 
-PROCEDURE NewGuardedVar (var: Sym.VarDecl; type: Sym.Type): GuardedVar;
+PROCEDURE NewGuardedVar (var: Sym.VarDecl; name: Sym.Name;
+                         type: Sym.Type): GuardedVar;
   VAR
     gv: GuardedVar;
   BEGIN
     NEW (gv);
-    InitGuardedVar (gv, var, type);
+    InitGuardedVar (gv, var, name, type);
     RETURN gv;
   END NewGuardedVar;
 
@@ -2409,6 +2430,34 @@ PROCEDURE (cons: Constructor) Accept* (v: Visitor);
     v. VisitConstructor (cons)
   END Accept;
 
+(* Operator Class: CurrentException
+   ------------------------------------------------------------------------ *)
+
+PROCEDURE InitCurrentException(ce: CurrentException;
+                               sym: Symbol; type: Sym.Type);
+  BEGIN
+    InitOperator(ce, sym, type);
+    ce.try := NIL;
+  END InitCurrentException;
+
+PROCEDURE (b: Builder) NewCurrentException*(sym: Symbol;
+                                            type: Sym.Type): Expression;
+  VAR
+    ce: CurrentException;
+  BEGIN
+    NEW(ce);
+    InitCurrentException(ce, sym, type);
+    RETURN ce;
+  END NewCurrentException;
+
+PROCEDURE (v: Visitor) [ABSTRACT] VisitCurrentException*(ce: CurrentException);
+  END VisitCurrentException;
+
+PROCEDURE (ce: CurrentException) Accept* (v: Visitor);
+  BEGIN
+    v.VisitCurrentException (ce)
+  END Accept;
+
 (* Operator Class: Deref
    ------------------------------------------------------------------------ *)
 
@@ -2434,7 +2483,8 @@ PROCEDURE (b: Builder) NewDeref* (sym: Symbol; design: Expression): Expression;
     class: Sym.Record;
   BEGIN
     WITH design: SelectProc DO (* super call of type-bound procedure *)
-      class := design.tbProc.Class();
+      type := design.recordType.Deparam();
+      class := type(Sym.Record);
       design. tbProc := class.ns(Namespace.Extended).
           GetSuperProcByIndex(design.tbProc.tbProcIndex);
       IF design.isSuperCall THEN
@@ -2820,6 +2870,8 @@ PROCEDURE InitSelectProc (sp: SelectProc; sym: Symbol; receiver: Expression;
   VAR
     baseRecord, class, ptr: Sym.Type;
   BEGIN
+    sp.recordType := recordType;
+    
     (* determine the record type that defines `tbProc' *)
     class := tbProc.Class();
     baseRecord := recordType;
@@ -4514,6 +4566,8 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
     (* Number of enclosing TRY statements.  *)
     enclosingTryLastLoop: LONGINT;
     (* Number of enclosing TRY statements of the nearest LOOP.  *)
+    initWithoutSuper: BOOLEAN;
+    procClass: Sym.Record;
     
   PROCEDURE CheckException(exception: Sym.Type; sym: Symbol);
     VAR
@@ -4599,6 +4653,8 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
         | expr: Constructor DO
           CheckExpr(expr.alloc);
           CheckExpr(expr.init);
+        | expr: CurrentException DO
+          expr.try := currentTry;
         | expr: ChangeElement DO
           CheckExpr(expr.set);
           CheckExpr(expr.element);
@@ -4630,10 +4686,6 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
         | expr: SelectField DO
           CheckExpr(expr.record);
         | expr: SelectProc DO
-          IF expr.isSuperCall &
-             (expr.tbProc.name.str^ # procDecl.name.str^) THEN
-            b.ErrSym(crossProcSuperCall, expr.tbProcSym);
-          END;
           CheckExpr(expr.receiver);
         | expr: SetMember DO
           CheckExpr(expr.element);
@@ -4670,6 +4722,23 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
         oldEnclTryLastLoop: LONGINT;
         fpars: Sym.FormalPars;
         type: Sym.Type;
+
+      PROCEDURE IsInitSuper(design: Expression): BOOLEAN;
+        BEGIN
+          WITH design: SelectProc DO
+            IF ~design.isSuperCall OR
+               ~(design.receiver IS Var) OR
+               (design.receiver(Var).decl # procDecl.formalPars.receiver) THEN
+              (* not a super call to this method's receiver *)
+              RETURN FALSE;
+            ELSE
+              RETURN (design.tbProc.name.str^ = Predef.initMethod);
+            END;
+          ELSE
+            RETURN FALSE;
+          END;
+        END IsInitSuper;
+      
       BEGIN
         WITH statm: Assert DO
           CheckExpr(statm.predicate);
@@ -4678,6 +4747,11 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
           CheckExpr(statm.value)
         | statm: Call DO
           CheckExpr(statm.design);
+
+          IF initWithoutSuper & IsInitSuper(statm.design) THEN
+            initWithoutSuper := FALSE;
+          END;
+          
           FOR i := 0 TO LEN(statm.arguments^)-1 DO
             CheckExpr(statm.arguments[i]);
           END;
@@ -4792,7 +4866,19 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
     currentTry := NIL;
     enclosingTry := 0;
     enclosingTryLastLoop := 0;
+
+    initWithoutSuper := FALSE;
+    procClass := procDecl.Class();
+    initWithoutSuper := (procClass # NIL) & (procClass.baseType # NIL) &
+        (procClass.baseType IS Sym.Record) &
+        (procDecl.name.str^ = Predef.initMethod) &
+        (procDecl.tbProcIndex < procClass.baseType(Sym.Record).tbProcCount);
+    
     CheckStatmSeq (statmSeq);
+
+    IF initWithoutSuper THEN
+      b.WarnName(initWithoutSuperCall, procDecl.name);
+    END;
   END CheckExit;
 
 PROCEDURE InitProcedure* (p: Procedure; sym: Symbol; 
@@ -5015,6 +5101,8 @@ PROCEDURE (m: Module) Destroy*;
             expr := n.init;
             E(expr);
             n.init := NIL;
+          | n: CurrentException DO
+            (* nothing *)
           | n: ChangeElement DO
             E(n.set);
             E(n.element);
@@ -5075,7 +5163,7 @@ PROCEDURE (m: Module) Destroy*;
             E(expr);
             n.test := NIL;
           ELSE
-            Log.Type("--- operator type: ", n);
+            Log.Type("--- operator type", n);
             ASSERT(FALSE);
           END;
         | n: Reference DO
@@ -5083,7 +5171,7 @@ PROCEDURE (m: Module) Destroy*;
         | n: Statement DO                (* function call *)
           S(n);
         ELSE
-          Log.Type("--- expression type: ", n);
+          Log.Type("--- expression type", n);
           ASSERT(FALSE);
         END;
         n := NIL;
@@ -5282,7 +5370,8 @@ PROCEDURE (b: Builder) StartTypeGuard* (typeTest: TypeTest;
     IF (typeTest.expr IS Var) THEN
       var := typeTest. expr(Var). decl(Sym.VarDecl);
       NEW (da, 1);
-      da[0] := NewGuardedVar (var, typeTest. origType. decl(Sym.TypeDecl). type);
+      da[0] := NewGuardedVar (var, var.name,
+                              typeTest.origType.decl(Sym.TypeDecl).type);
       nested := Namespace.NewNested (da, 1);
       nested. SetEnclosingNamespace (namespace(Namespace.Nested));
       namespace := nested;
@@ -5302,6 +5391,33 @@ PROCEDURE (b: Builder) EndTypeGuard* (VAR namespace: Sym.Namespace);
   BEGIN
     namespace := namespace(Namespace.Nested). nestedIn;
   END EndTypeGuard;
+
+PROCEDURE (b: Builder) StartExceptionScope*(exceptionType: Expression;
+                                            varName: Symbol;
+                                            VAR namespace: Sym.Namespace);
+  VAR
+    nested: Namespace.Nested;
+    da: Sym.DeclarationArray;
+    type: Sym.Type;
+  BEGIN
+    WITH exceptionType: TypeRef DO
+      type := exceptionType.qualType;
+    ELSE
+      type := b.errorExpr.type;
+    END;
+    
+    NEW(da, 1);
+    da[0] := NewGuardedVar(CreateNamespace.exception,
+                           b.GetName(varName), type);
+    nested := Namespace.NewNested(da, 1);
+    nested.SetEnclosingNamespace(namespace(Namespace.Nested));
+    namespace := nested;
+  END StartExceptionScope;
+
+PROCEDURE (b: Builder) EndExceptionScope*(VAR namespace: Sym.Namespace);
+  BEGIN
+    namespace := namespace(Namespace.Nested).nestedIn;
+  END EndExceptionScope;
 
 PROCEDURE (b: Builder) NewIdentRef* (baseNS, ns: Sym.Namespace;
                                      context: Sym.Item; 
@@ -5324,9 +5440,13 @@ PROCEDURE (b: Builder) NewIdentRef* (baseNS, ns: Sym.Namespace;
         | decl: Sym.VarDecl DO
           RETURN b. NewVar (name, decl)
         | decl: GuardedVar DO
-          varRef := b. NewVar (name, decl. var);
-          varRef. type := decl. type;
-          RETURN varRef;
+          IF (decl.var = CreateNamespace.exception) THEN
+            RETURN b.NewCurrentException(name, decl.type);
+          ELSE
+            varRef := b.NewVar(name, decl.var);
+            varRef.type := decl.type;
+            RETURN varRef;
+          END;
         | decl: Sym.TypeDecl DO
           RETURN b. NewTypeRef (name, decl)
         | decl: Sym.PredefProc DO

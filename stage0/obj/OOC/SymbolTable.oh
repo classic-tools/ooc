@@ -1119,7 +1119,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__RecordDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeVarDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__QualType;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeRef;
-extern RT0__StructDesc _td_OOC_SymbolTable__32441;
+extern RT0__StructDesc _td_OOC_SymbolTable__32443;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeRefArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__QualTypeDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeClosure;
@@ -1135,13 +1135,13 @@ extern RT0__StructDesc _td_OOC_SymbolTable__FieldDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Redirect;
 extern RT0__StructDesc _td_OOC_SymbolTable__RedirectDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__43023;
-extern RT0__StructDesc _td_OOC_SymbolTable__43012;
+extern RT0__StructDesc _td_OOC_SymbolTable__43025;
+extern RT0__StructDesc _td_OOC_SymbolTable__43014;
 extern RT0__StructDesc _td_OOC_SymbolTable__Writer;
 extern RT0__StructDesc _td_OOC_SymbolTable__WriterDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Reader;
 extern RT0__StructDesc _td_OOC_SymbolTable__ReaderDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__61691;
+extern RT0__StructDesc _td_OOC_SymbolTable__61693;
 #endif /* _MODULE_OOC_SymbolTable_ */
 
 /* --- */

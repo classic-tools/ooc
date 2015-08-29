@@ -1,6 +1,11 @@
-(* 	$Id: RT0.Mod,v 1.37 2003/05/09 22:47:22 mva Exp $	 *)
-MODULE RT0 [FOREIGN "C"; LINK FILE "RT0.c"
-  <* IF HAVE_LIB_M THEN *> ; LIB "m" <* END *> END];
+(* 	$Id: RT0.Mod,v 1.39 2003/07/28 22:05:31 mva Exp $	 *)
+MODULE RT0 [
+  FOREIGN "C";
+  LINK
+    FILE "RT0.c";
+    <*IF HAVE_LIB_GC THEN*>LIB "gc";<*END*>
+    <*IF HAVE_LIB_M THEN*>LIB "m";<*END*>
+  END ];
 (*  Proxy module for the run-time system of C back-ends of OOC2
     Copyright (C) 2001, 2002, 2003  Michael van Acken
 
@@ -157,11 +162,11 @@ TYPE
     (**Identifies which kind of type constructor variant is used.  *)
   END;
 
-TYPE
+(*TYPE
   Object* = POINTER TO ObjectDesc;
   ObjectDesc = RECORD [NO_DESCRIPTOR, NOT_EXTENSIBLE]
     (**A named object defined in a declaration.  *)
-  END;
+  END;*)
 
 TYPE
   ModuleDesc = RECORD

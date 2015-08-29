@@ -648,9 +648,10 @@ static void XML_UnicodeBuffer__FlushBytes(volatile XML_UnicodeBuffer__Output out
   Exception__Context _context0;
 
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -663,7 +664,6 @@ l6:
     Exception__Clear();
     goto l8;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)out;
     i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13672))+8);
     i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13692))+16);

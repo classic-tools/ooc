@@ -1,7 +1,10 @@
-(*	$Id: Socket.Mod,v 1.9 2003/06/28 20:26:08 mva Exp $	*)
-MODULE IO:Socket [FOREIGN "C"; LINK FILE "Socket.c"
-  <* IF HAVE_LIB_WSOCK32 THEN *> ; LIB "wsock32" <* END *>
-  END];
+(*	$Id: Socket.Mod,v 1.10 2003/07/29 15:30:20 mva Exp $	*)
+MODULE IO:Socket [FOREIGN "C";
+  LINK
+    FILE "Socket.c";
+    <*IF HAVE_LIB_XNET THEN*>LIB "xnet";<*END*>
+    <*IF HAVE_LIB_WSOCK32 THEN*>LIB "wsock32";<*END*>
+  END ];
 (*  Server and client sockets for TCP streams.
     Copyright (C) 2003  Michael van Acken
 

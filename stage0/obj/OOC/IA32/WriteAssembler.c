@@ -236,7 +236,7 @@ l3_loop:
     goto l21;
   case 5:
     goto l21;
-  case 81:
+  case 82:
     goto l21;
   case 22:
     goto l21;
@@ -344,10 +344,10 @@ l9:
       if (!i0) goto l18;
       Out__String("PROCEDURE ", 11);
       i0 = (OOC_INT32)pb;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+16);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7126))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7132))+12);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+16);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7126))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7132))+12);
       i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7137)), 0);
@@ -360,16 +360,16 @@ l9:
       Out__Ln();
       Out__Flush();
       {
+        Exception__PushContext(&_context0, &_target0);
         if (!setjmp(_target0)) goto l16;
         Exception__PopContext(1);
-        i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+        i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
         if (i0) goto l15;
         Exception__ActivateContext();
 l15:
         Exception__Clear();
         goto l17;
 l16:
-        Exception__PushContext(&_context0, &_target0);
         i0 = (OOC_INT32)IO_StdChannels__stdout;
         i1 = (OOC_INT32)pb;
         OOC_SSA_XML__Write((IO__ByteChannel)i0, (OOC_SSA__ProcBlock)i1, 1u);
@@ -422,7 +422,7 @@ l18:
   OOC_SSA_DeadCodeElimination__Transform((OOC_SSA__ProcBlock)i0);
   OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody_Write("dce-post", 9, "final", 6);
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8265))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8265))+12);
   instr = (OOC_SSA__Instr)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l12;
@@ -458,16 +458,16 @@ l12:
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l25;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l22;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l21;
     Exception__ActivateContext();
 l21:
     Exception__Clear();
     goto l23;
 l22:
-    Exception__PushContext(&_context0, &_target0);
     i1 = (OOC_INT32)IO_StdChannels__stdout;
     OOC_SSA_XML__WriteSchedule((IO__ByteChannel)i1, (OOC_SSA_Schedule__Block)i0);
     Exception__PopContext(1);

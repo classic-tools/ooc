@@ -1,4 +1,4 @@
-(* 	$Id: SSA.Mod,v 1.80 2003/04/14 19:16:20 mva Exp $	 *)
+(* 	$Id: SSA.Mod,v 1.82 2003/07/15 18:49:04 mva Exp $	 *)
 MODULE OOC:SSA;
 (*  Data structures for SSA code representation.
     Copyright (C) 2001-2003  Michael van Acken
@@ -192,6 +192,14 @@ TYPE
     (**Represents the exit paths of the currently open @code{LOOP} statement,
        or is @code{NIL} if there is no @code{LOOP}.  See
        @oconst{Opcode.loopEnd}.  *)
+
+    tryContext-: Instr;
+    (**With a @code{TRY}, this is the currently open
+       @oconst{Opcode.pushExceptionContext} instruction.  With the first
+       @code{CATCH} clause, the value changes to the current exception thrown
+       within the @code{TRY}.  After the @code{TRY} statement, it changes back
+       to the value it had before it, and it is @code{NIL} if the current code
+       is not within a @code{TRY} statement.  *)
     
     instrList-, instrTail: Instr;
     (**Set of instructions that make up the procedure block.  The instructions
@@ -1146,6 +1154,7 @@ PROCEDURE InitProcBlock (pb: ProcBlock; procDecl: Sym.ProcDecl;
     pb. selectReturn. AddOpnd (initialStore, OpndClass.storeEnter);
     
     pb. loopContext := NIL;
+    pb. tryContext := NIL;
     FOR i := 0 TO LEN(pb.constMap)-1 DO
       pb. constMap[i] := NIL;
     END;
@@ -1520,6 +1529,15 @@ PROCEDURE (pb: ProcBlock) SetLoopContext* (loopContext: Instr): Instr;
     pb. loopContext := loopContext;
     RETURN old
   END SetLoopContext;
+
+PROCEDURE (pb: ProcBlock) SetTryContext* (tryContext: Instr): Instr;
+  VAR
+    old: Instr;
+  BEGIN
+    old := pb. tryContext;
+    pb. tryContext := tryContext;
+    RETURN old
+  END SetTryContext;
 
 PROCEDURE (pb: ProcBlock) FixSubclass*(arg: Result;
                                        subclass: Opcode.Subclass): Result;

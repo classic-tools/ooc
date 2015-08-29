@@ -1,4 +1,4 @@
-(* 	$Id: Codec.Mod,v 1.8 2002/12/20 11:18:40 mva Exp $	 *)
+(* 	$Id: Codec.Mod,v 1.10 2003/07/30 22:35:55 mva Exp $	 *)
 MODULE Codec [OOC_EXTENSIONS];
 (*  Registry for encoders/decoders of binary and character data.
     Copyright (C) 2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE Codec [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Strings, Object, ADT:Dictionary, ADT:StringBuffer;
+  Strings, Object, ADT:Dictionary, ADT:StringBuffer, IO;
 
 (**This module provides a registry for Unicode, transport, and encryption
    codecs.  A codec can be registered under several names.  Case is ignored
@@ -83,6 +83,7 @@ TYPE
   END;
   Encoder* = POINTER TO EncoderDesc;
   EncoderDesc* = RECORD [ABSTRACT]
+    escape: Encoder;
   END;
 
 CONST
@@ -117,6 +118,19 @@ TYPE
 TYPE
   BufferLatin1* = ARRAY 4096 OF CHAR;
   BufferUCS4* = ARRAY 1024 OF UCS4CHAR;
+
+TYPE
+  EncodingError* = POINTER TO EncodingErrorDesc;
+  EncodingErrorDesc = RECORD
+    (IO.ErrorDesc)
+    start, end: LONGINT;
+  END;
+
+TYPE
+  ExceptionEncoder = POINTER TO ExceptionEncoderDesc;
+  ExceptionEncoderDesc = RECORD
+    (EncoderDesc) 
+  END;
   
 CONST
   invalidChar* = 100;
@@ -129,12 +143,20 @@ CONST
 
 VAR
   reg: Dictionary.Dictionary;
+  exceptionEncoder-: ExceptionEncoder;
 
 
-
-PROCEDURE InitDecoder* (dec: Decoder);
+PROCEDURE (e: EncodingError) INIT*(start, end: LONGINT);
   BEGIN
-  END InitDecoder;
+    e.INIT^("Cannot convert text to target encoding");
+    e.start := start;
+    e.end := end;
+  END INIT;
+
+
+PROCEDURE (dec: Decoder) INIT*();
+  BEGIN
+  END INIT;
 
 PROCEDURE (dec: Decoder) Start*;
 (**Allocates and initializes all resources required for the decoder instance.
@@ -175,9 +197,20 @@ PROCEDURE (dec: Decoder) End*;
   END End;
 
 
-PROCEDURE InitEncoder* (enc: Encoder);
+PROCEDURE (enc: Encoder) INIT*(escape: Encoder);
   BEGIN
-  END InitEncoder;
+    enc.escape := escape;
+  END INIT;
+
+PROCEDURE (enc: Encoder) SetEscapeEncoder*(escape: Encoder);
+(**For character sequences that cannot be handled by this encoder, the encoder
+   @oparam{escape} is called.  It either raises an @otype{EncodingError}
+   exception, or translates the characters into a format that can be handled by
+   @oparam{enc}.  An example for this is an encoder that creates XML character
+   references from code points that cannot be mapped by @oparam{enc}.  *)
+  BEGIN
+    enc.escape := escape;
+  END SetEscapeEncoder;
 
 PROCEDURE (enc: Encoder) Start*;
 (**Allocates and initializes all resources required for the encoder instance.
@@ -190,10 +223,11 @@ PROCEDURE (enc: Encoder) Start*;
    several MBytes of memory.  *)
   END Start;
 
-PROCEDURE (enc: Encoder) [ABSTRACT] Encode*(s: STRING;
-                                            start, end: LONGINT;
-                                            b: StringBuffer.StringBuffer);
-(**Encode the 8-bit character sequence in @samp{s[start, end-1]} starting with
+PROCEDURE (enc: Encoder) [ABSTRACT] EncodeLatin1*(s[NO_COPY]: ARRAY OF CHAR;
+                                                  start, end: LONGINT;
+                                                  b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+(**Encode the Latin1 character sequence in @samp{s[start, end-1]} starting with
    the encoder state @oparam{enc}.  The result is a string holding only code
    points in the range @samp{[U+0000, U+00FF]}, which is appended to the string
    buffer @oparam{b}.  On completion, @oparam{enc} is updated to reflect the
@@ -205,9 +239,98 @@ PROCEDURE (enc: Encoder) [ABSTRACT] Encode*(s: STRING;
    end-1]} are valid.  That is, neither is out of range nor from the surrogate
    areas.
    @end precond  *)
+  END EncodeLatin1;
+
+PROCEDURE (enc: Encoder) [ABSTRACT] EncodeUTF16*(s[NO_COPY]: ARRAY OF LONGCHAR;
+                                                 start, end: LONGINT;
+                                                 b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+(**Encode the UTF-16 character sequence in @samp{s[start, end-1]} starting with
+   the encoder state @oparam{enc}.  The result is a string holding only code
+   points in the range @samp{[U+0000, U+00FF]}, which is appended to the string
+   buffer @oparam{b}.  On completion, @oparam{enc} is updated to reflect the
+   encoder's state after the last byte of the sequence has been processed.
+
+   @precond
+   @samp{0 <= @oparam{start} <= @oparam{end} <= @oparam{s}.length}.
+   @oproc{enc.Start} has been called.  All code points in @samp{data[start,
+   end-1]} are valid.  That is, neither is out of range nor from the surrogate
+   areas.
+   @end precond  *)
+  END EncodeUTF16;
+
+PROCEDURE (enc: Encoder) Encode*(s: STRING;
+                                 start, end: LONGINT;
+                                 b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+(**Encode the UTF-16 character sequence in @samp{s[start, end-1]} starting with
+   the encoder state @oparam{enc}.  The result is a string holding only code
+   points in the range @samp{[U+0000, U+00FF]}, which is appended to the string
+   buffer @oparam{b}.  On completion, @oparam{enc} is updated to reflect the
+   encoder's state after the last byte of the sequence has been processed.
+
+   @precond
+   @samp{0 <= @oparam{start} <= @oparam{end} <= @oparam{s}.length}.
+   @oproc{enc.Start} has been called.  All code points in @samp{data[start,
+   end-1]} are valid.  That is, neither is out of range nor from the surrogate
+   areas.
+   @end precond  *)
+  VAR
+    chars8: Object.CharsLatin1;
+    chars16: Object.CharsUTF16;
+  BEGIN
+    WITH s: Object.String8 DO
+      chars8 := s.CharsLatin1();
+      enc.EncodeLatin1(chars8^, start, end, b);
+    | s: Object.String16 DO
+      chars16 := s.CharsUTF16();
+      enc.EncodeUTF16(chars16^, start, end, b);
+    END;
   END Encode;
 
-PROCEDURE (enc: Encoder) [ABSTRACT] Closure*(b: StringBuffer.StringBuffer);
+PROCEDURE EscapeLatin1*(enc: Encoder; s[NO_COPY]: ARRAY OF CHAR;
+                        start, end: LONGINT;
+                        b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+  VAR
+    esc: StringBuffer.StringBuffer;
+    chars8: StringBuffer.CharsLatin1;
+    chars16: StringBuffer.CharsUTF16;
+  BEGIN
+    esc := NEW(StringBuffer.StringBuffer, end-start);
+    enc.escape.EncodeLatin1(s, start, end, esc);
+    
+    chars8 := esc.CharsLatin1();
+    IF (chars8 # NIL) THEN
+      enc.EncodeLatin1(chars8^, 0, esc.length, b);
+    ELSE
+      chars16 := esc.CharsUTF16();
+      enc.EncodeUTF16(chars16^, 0, esc.length, b);
+    END;
+  END EscapeLatin1;
+
+PROCEDURE EscapeUTF16*(enc: Encoder; s[NO_COPY]: ARRAY OF LONGCHAR;
+                       start, end: LONGINT;
+                       b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+  VAR
+    esc: StringBuffer.StringBuffer;
+    chars8: StringBuffer.CharsLatin1;
+    chars16: StringBuffer.CharsUTF16;
+  BEGIN
+    esc := NEW(StringBuffer.StringBuffer, end-start);
+    enc.escape.EncodeUTF16(s, start, end, esc);
+    
+    chars8 := esc.CharsLatin1();
+    IF (chars8 # NIL) THEN
+      enc.EncodeLatin1(chars8^, 0, esc.length, b);
+    ELSE
+      chars16 := esc.CharsUTF16();
+      enc.EncodeUTF16(chars16^, 0, esc.length, b);
+    END;
+  END EscapeUTF16;
+
+PROCEDURE (enc: Encoder) Closure*(b: StringBuffer.StringBuffer);
 (**If the encoder still holds any partial data from previous calls to
    @oproc{enc.Encode}, then flush this data to the buffer @oparam{b}.  This
    method must be called at the end of the data stream for codecs that operate
@@ -229,12 +352,12 @@ PROCEDURE (enc: Encoder) End*;
   END End;
 
 
-PROCEDURE InitCodec* (codec: Codec; class: CodecClass;
-                      preferredName: ARRAY OF CHAR);
+PROCEDURE (codec: Codec) INIT*(class: CodecClass;
+                               preferredName: ARRAY OF CHAR);
   BEGIN
     codec. class := class;
     codec. preferredName := Object.NewLatin1(preferredName);
-  END InitCodec;
+  END INIT;
 
 PROCEDURE (codec: Codec) [ABSTRACT] NewDecoder*(): Decoder;
 (**Creates a decoder object for the codec @oparam{codec}.  Note: Some decoders,
@@ -243,15 +366,18 @@ PROCEDURE (codec: Codec) [ABSTRACT] NewDecoder*(): Decoder;
   END NewDecoder;
 
 PROCEDURE (codec: Codec) [ABSTRACT] NewEncoder*(): Encoder;
-(**Creates an encoder object for the codec @oparam{codec}.  Note: Some
-   encoders, like those implementing encryption algorithm, require additional
-   settings before they can be used.  *)
+(**Creates an encoder object for the codec @oparam{codec}.  By default, any
+   character sequences the encoder cannot handle cause it to raise an exception
+   @otype{EncodingError}.
+
+   Note: Some encoders, like those implementing encryption algorithm, require
+   additional settings before they can be used.  *)
   END NewEncoder;
 
 PROCEDURE (codec: Codec) DecodeRegion*(data[NO_COPY]: ARRAY OF CHAR;
                                        start, end: LONGINT): STRING;
 (**Decode the 8-bit character sequence in @samp{data[start, end-1]}.  For
-   succesul completion, the byte sequence @samp{data[start, end-1]} must be
+   succesful completion, the byte sequence @samp{data[start, end-1]} must be
    well formed with respect to the decoder, and the resulting Unicode code
    points must all be valid.
 
@@ -263,7 +389,7 @@ PROCEDURE (codec: Codec) DecodeRegion*(data[NO_COPY]: ARRAY OF CHAR;
     b: StringBuffer.StringBuffer;
   BEGIN
     dec := codec. NewDecoder();
-    b := StringBuffer.NewCapacity(end-start);
+    b := NEW(StringBuffer.StringBuffer, end-start+1);
     dec. Start;
     dec. Decode (data, start, end, b);
     dec. End;
@@ -283,7 +409,8 @@ PROCEDURE (codec: Codec) Decode*(data[NO_COPY]: ARRAY OF CHAR): STRING;
   END Decode;
 
 PROCEDURE (codec: Codec) EncodeRegion*(s: STRING;
-                                       start, end: LONGINT): Object.String8;
+                                       start, end: LONGINT): Object.String8
+RAISES EncodingError;
 (**Encode Unicode sequence in @samp{s[start, end-1]} into the 8-bit
    character sequence.  The result is stored in a string holding only code
    points in the range @samp{[U+0000, U+00FF]}.
@@ -299,7 +426,7 @@ PROCEDURE (codec: Codec) EncodeRegion*(s: STRING;
     s8: STRING;
   BEGIN
     enc := codec. NewEncoder();
-    b := StringBuffer.NewCapacity(end-start);
+    b := NEW(StringBuffer.StringBuffer, end-start+1);
     enc. Start;
     enc. Encode (s, start, end, b);
     enc. End;
@@ -307,21 +434,43 @@ PROCEDURE (codec: Codec) EncodeRegion*(s: STRING;
     RETURN s8(Object.String8);
   END EncodeRegion;
 
-PROCEDURE (codec: Codec) Encode*(s: STRING): Object.String8;
+PROCEDURE (codec: Codec) Encode*(s: STRING): Object.String8
+RAISES EncodingError;
 (**Equivalent to @samp{codec.Encode(s,0,s.length)}.  *)
   BEGIN
     RETURN codec.EncodeRegion(s, 0, s.length);
   END Encode;
 
-PROCEDURE InitCryptoDecoder* (dec: CryptoDecoder);
-  BEGIN
-    InitDecoder (dec);
-  END InitCryptoDecoder;
+(* ------------------------------------------------------------------------ *)
 
-PROCEDURE InitCryptoEncoder* (enc: CryptoEncoder);
+PROCEDURE (enc: ExceptionEncoder) EncodeLatin1*(s[NO_COPY]: ARRAY OF CHAR;
+                                                start, end: LONGINT;
+                                                b: StringBuffer.StringBuffer)
+RAISES EncodingError;
   BEGIN
-    InitEncoder (enc);
-  END InitCryptoEncoder;
+    RAISE(NEW(EncodingError, start, end));
+  END EncodeLatin1;
+
+PROCEDURE (enc: ExceptionEncoder) EncodeUTF16*(s[NO_COPY]: ARRAY OF LONGCHAR;
+                                               start, end: LONGINT;
+                                               b: StringBuffer.StringBuffer)
+RAISES EncodingError;
+  BEGIN
+    RAISE(NEW(EncodingError, start, end));
+  END EncodeUTF16;
+
+
+(* ------------------------------------------------------------------------ *)
+
+PROCEDURE (dec: CryptoDecoder) INIT*();
+  BEGIN
+    dec.INIT^();
+  END INIT;
+
+PROCEDURE (enc: CryptoEncoder) INIT*(codec: Codec);
+  BEGIN
+    enc.INIT^(exceptionEncoder);
+  END INIT;
 
 PROCEDURE (dec: CryptoDecoder) [ABSTRACT] SetKey* (key: Object.String8);
   END SetKey;

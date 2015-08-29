@@ -1,4 +1,4 @@
-(* 	$Id: oob.Mod,v 1.19 2003/06/20 19:54:26 mva Exp $	 *)
+(* 	$Id: oob.Mod,v 1.20 2003/07/14 22:05:21 mva Exp $	 *)
 MODULE oob;
 (*  Symbol file browser.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -218,7 +218,7 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
     
     BEGIN
       WITH srcCodeType: Sym.TypeName DO
-        IF (srcCodeType.module # NIL) THEN
+        IF (srcCodeType.module # NIL) & ~srcCodeType.IsPredefReference() THEN
           (* expand the locally used module alias to the full module name;
              this way, aliases make no appearance at all in the output *)
           name := ModuleName(srcCodeType);

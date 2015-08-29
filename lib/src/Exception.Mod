@@ -1,4 +1,4 @@
-(* 	$Id: Exception.Mod,v 1.8 2003/06/02 20:43:36 mva Exp $	 *)
+(* 	$Id: Exception.Mod,v 1.17 2003/08/01 07:58:00 mva Exp $	 *)
 MODULE Exception [FOREIGN "C"; LINK FILE "Exception.c" END];
 (*  Implements the run-time part of the exceptions mechanism.
     Copyright (C) 2002,2003  Michael van Acken
@@ -27,11 +27,11 @@ IMPORT
 
    @example
    TRY
-   S
-   CATCH T1:
-   C1
-   CATCH T2:
-   C2
+     S
+   CATCH T1(t1):
+     C1
+   CATCH T2(t2):
+     C2
    END;
    @end example
 
@@ -54,11 +54,13 @@ IMPORT
    Exception.PopContext;
    temp := Exception.Current();
    WITH temp: T1 DO
-   C1;
+     t1 := temp;
+     C1;
    | temp: T2 DO
-   C2;
+     t2 := temp;
+     C2;
    ELSE
-   Exception.ActivateContext;
+     Exception.ActivateContext;
    END;
    Exception.Clear;
    @end example
@@ -70,6 +72,10 @@ IMPORT
    such a clause exist.  Otherwise, the exception is written to @var{stderr}
    and the program is aborted.
 
+   Within a @code{CATCH}, the optional name given in parenthesis refers to the
+   current exception that triggered the @code{CACTH}.  Its type is the one
+   from the @code{CATCH} clause.  The variable is read-only.
+   
    An exception @var{E} must either be caught within a procedure, or the
    procedure must declare that it may pass an exception of type @var{E} up to
    its caller.  For example,
@@ -134,6 +140,20 @@ TYPE
        field is @samp{-1}.  *)
   END;
 
+TYPE
+  ThreadStatePtr* = POINTER TO ThreadState;
+  ThreadState* = RECORD [NO_DESCRIPTOR, NOT_EXTENSIBLE]
+    (**Holds thread local state for the exception module.  *)
+    contextStack: ContextPtr;
+    currentException: Exception;
+  END;
+
+VAR
+  GetThreadState*: PROCEDURE(): ThreadStatePtr;
+  (**Return a pointer to the per-thread data area for exception state.  If
+     the program uses threading, then this function returns a pointer to
+     thread local storage.  *)
+
 
 PROCEDURE (e: Exception) INIT*(msg: STRING);
 (**Initialize exception @oparam{e} and set @oparam{msg} as its message.
@@ -154,13 +174,26 @@ PROCEDURE Raise* [NO_RETURN](e: Exception) RAISES Exception;
    @oparam{e} is not @code{NIL}.
    @end precond  *)
 PROCEDURE Current*(): Exception;
-(**Pointer to the currently active exception.  This is @code{NIL}
-   if no exeception has been raised, or when a @code{CATCH} clause has been
-   completed successfully for the last exception.  *)
+(**Return the pointer to the currently active exception.  This is @code{NIL} if
+   no exception has been raised, or when a @code{CATCH} clause has been
+   completed successfully for the last exception.  Within a @code{CATCH} block
+   that includes a name in parenthesis, the name identifies a predefined
+   read-only variable holding the same pointer value.
+
+   @emph{Note}: Within a @code{CATCH} block, this function's result becomes
+   undefined at the start of the first @code{TRY} statement nested in the
+   @code{CATCH}.  Catching into a name defines the value over the whole
+   @code{CATCH} block.  *)
   
 PROCEDURE Clear*;
-(**Set the current exception marker to @code{NIL}.  This procedure should never
-   be called directly.  *)
+(**Set the current exception marker to @code{NIL}.  This procedure is called at
+   the very end of a @code{CATCH} block.  It should never be called directly.
+
+   Note: This procedure does @emph{not} restore the value of @oproc{Current} to
+   that of the beginning of a @code{TRY} statement.  That is, after a
+   @code{TRY} @oproc{Current} is @code{NIL} if an exception was raised.  *)
+PROCEDURE ClearFixed*(VAR context: Context);
+(**FIXME... Eliminate this procedure again.  *)
 PROCEDURE PushContext*(VAR context: Context; jmpbuf: SYSTEM.PTR);
 (**Push @oparam{context} on the stack of exception handlers, and make it point
    to the execution context @oparam{jmpbuf}.  This procedure should never be
@@ -177,7 +210,7 @@ PROCEDURE ActivateContext* [NO_RETURN]();
    If the stack is empty, a message with details of the current exception is
    written to @var{stderr}, and the program is aborted.  This procedure should
    never be called directly.  *)
-
+  
 PROCEDURE (e: Exception) GetMessage*(): STRING;
 (**Return the message string describing the exception @oparam{e}.  *)
 PROCEDURE (e: Exception) WriteBacktrace*;
@@ -186,12 +219,17 @@ PROCEDURE (e: Exception) WriteBacktrace*;
    its output.  Please see the documentation of GNU libc for more information
    on how to make function names available to the program.  The tool
    @samp{oobacktrace} may also be able to add function names to the output.  *)
-
+PROCEDURE (e: Exception) Name*(): Object.String8;
+(**Return the name of the execption's type as
+   @samp{@var{module}.@var{typename}}.  *)
+   
 PROCEDURE (e: ParseError) INIT*(msg: STRING; offset: LONGINT);
   
-PROCEDURE FatalError*[NO_RETURN]();
-(**Write data of current exception to @var{stderr} and abort program.  It is
-   an error to call this procedure outside a @code{CATCH} block of a @code{TRY}
-   statement.  *)
+PROCEDURE Abort*[NO_RETURN](e: Exception);
+(**Write data of exception @oparam{e} to @var{stderr} and abort program.  *)
+PROCEDURE FatalError*[NO_RETURN](msg: STRING);
+(**Raise an exception with message @oparam{msg} and abort program.  *)
+
+PROCEDURE InitThreadState*(VAR ts: ThreadState);
   
 END Exception.

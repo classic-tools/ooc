@@ -147,9 +147,10 @@ l3:
   i0 = (OOC_INT32)XML_EntityResolver__NormalizeURI((XML_UnicodeBuffer__CharArray)i0);
   str8 = (XML_DTD__StringURI)i0;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l10;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l8;
     Exception__ActivateContext();
     goto l9;
@@ -171,7 +172,6 @@ l9:
     Exception__Clear();
     goto l19;
 l10:
-    Exception__PushContext(&_context0, &_target0);
     i1 = (OOC_INT32)baseURI;
     i2 = i1!=(OOC_INT32)0;
     if (i2) goto l13;

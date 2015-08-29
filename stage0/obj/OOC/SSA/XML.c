@@ -483,10 +483,10 @@ l18:
   i0 = (OOC_INT32)w;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8364)))), XML_Writer__WriterDesc_StartTag)),XML_Writer__WriterDesc_StartTag)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){112,114,111,99,101,100,117,114,101,45,98,111,100,121,0}), 15, 0u);
   i1 = (OOC_INT32)pb;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8437))+16);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8437))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 8447))+20);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 8453))+12);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8437))+16);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8437))+20);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 8447))+20);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 8453))+12);
   i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 8458)), 0);
@@ -496,7 +496,7 @@ l18:
   i0 = includeDeadCode;
   if (!i0) goto l14;
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8652))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8652))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=0;
   if (!i1) goto l14;
@@ -543,16 +543,16 @@ void OOC_SSA_XML__ToStderr(volatile OOC_SSA__ProcBlock pb) {
   Exception__Context _context0;
 
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l6;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
 l5:
     Exception__Clear();
     goto l7;
 l6:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)IO_StdChannels__stderr;
     i1 = (OOC_INT32)pb;
     OOC_SSA_XML__Write((IO__ByteChannel)i0, (OOC_SSA__ProcBlock)i1, 1u);

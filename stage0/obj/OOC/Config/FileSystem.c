@@ -116,9 +116,10 @@ l15:
   Strings__Append("/", 2, (void*)(OOC_INT32)str8, 4096);
 l17:
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l24;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l22;
     Exception__ActivateContext();
     goto l23;
@@ -129,7 +130,6 @@ l23:
     Exception__Clear();
     goto l25;
 l24:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)OOC_Repository_FileSystem__baseURI;
     i0 = (OOC_INT32)URI_Parser__NewURILatin1((void*)(OOC_INT32)str8, 4096, (URI__HierarchicalURI)i0);
     uri = (URI__URI)i0;

@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.74 2003/05/04 19:15:20 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.75 2003/07/07 22:06:22 mva Exp $	 *)
 MODULE OOC:IR:XML;
 (*  Write an IR data structure as an XML document.
     Copyright (C) 2001, 2002, 2003  Michael van Acken, Stewart Greenhill
@@ -142,6 +142,12 @@ PROCEDURE (v: Visitor) VisitConstructor* (cons: IR.Constructor);
     END;
     v. w. EndTag;  (* constructor *)
   END VisitConstructor;
+
+PROCEDURE (v: Visitor) VisitCurrentException*(ce: IR.CurrentException);
+  BEGIN
+    v. w. StartTag ("current-exception", FALSE);
+    v. w. EndTag;  (* current-exception *)
+  END VisitCurrentException;
 
 PROCEDURE (v: Visitor) VisitDeref* (deref: IR.Deref);
   BEGIN

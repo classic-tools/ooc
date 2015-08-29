@@ -908,16 +908,16 @@ void XML_Writer__WriterDesc_EndTag(volatile XML_Writer__Writer w) {
   i1 = i1<=0;
   if (!i1) goto l10;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l8;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l7;
     Exception__ActivateContext();
 l7:
     Exception__Clear();
     goto l9;
 l8:
-    Exception__PushContext(&_context0, &_target0);
     OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11675)))), XML_UnicodeBuffer__OutputDesc_Flush)),XML_UnicodeBuffer__OutputDesc_Flush)((XML_UnicodeBuffer__Output)i0);
     Exception__PopContext(1);
 l9:;

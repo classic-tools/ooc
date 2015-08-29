@@ -1,4 +1,4 @@
-(* 	$Id: VisitAll.Mod,v 1.12 2003/05/04 19:15:20 mva Exp $	 *)
+(* 	$Id: VisitAll.Mod,v 1.13 2003/07/07 22:06:23 mva Exp $	 *)
 MODULE OOC:IR:VisitAll;
 (*  A visitor traversing the whole IR data structure.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -100,6 +100,10 @@ PROCEDURE (v: Visitor) VisitConstructor* (cons: IR.Constructor);
       cons.init.Accept(v);
     END;
   END VisitConstructor;
+
+PROCEDURE (v: Visitor) VisitCurrentException*(ce: IR.CurrentException);
+  BEGIN
+  END VisitCurrentException;
 
 PROCEDURE (v: Visitor) VisitDeref* (deref: IR.Deref);
   BEGIN

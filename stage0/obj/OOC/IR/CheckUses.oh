@@ -79,13 +79,13 @@ extern void OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag(OOC_IR_CheckUses__ProcDa
 #define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag 4
 typedef void (*_TBP_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag)(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__Item item, OOC_INT32 flag);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitVar(OOC_IR_CheckUses__Visitor v, OOC_IR__Var var);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitVar 56
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitVar 57
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitVar)(OOC_IR_CheckUses__Visitor v, OOC_IR__Var var);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitDeref(OOC_IR_CheckUses__Visitor v, OOC_IR__Deref deref);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitDeref 21
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitDeref 22
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitDeref)(OOC_IR_CheckUses__Visitor v, OOC_IR__Deref deref);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitIndex(OOC_IR_CheckUses__Visitor v, OOC_IR__Index index);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitIndex 26
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitIndex 27
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitIndex)(OOC_IR_CheckUses__Visitor v, OOC_IR__Index index);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitAdr(OOC_IR_CheckUses__Visitor v, OOC_IR__Adr adr);
 #define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitAdr 1

@@ -2035,7 +2035,7 @@ l4:
       i0 = (OOC_INT32)ADT_Dictionary__New();
       inPlaceEval = (ADT_Dictionary__Dictionary)i0;
       i1 = (OOC_INT32)pb;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 38349))+8);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 38349))+12);
       instr = (OOC_SSA__Instr)i1;
       i2 = i1!=(OOC_INT32)0;
       if (!i2) goto l55;

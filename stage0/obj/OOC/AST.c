@@ -328,51 +328,57 @@ OOC_AST__Node OOC_AST__BuilderDesc_ReturnStatm(OOC_AST__Builder b, OOC_AST__Node
   ;
 }
 
-OOC_AST__Node OOC_AST__BuilderDesc_TryStatm(OOC_AST__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end) {
+OOC_AST__Node OOC_AST__BuilderDesc_Catch(OOC_AST__Builder b, OOC_AST__Node _catch, OOC_AST__Node type, OOC_AST__Node lParen, OOC_AST__Node ident, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__NodeList statmSeq) {
 
   _failed_function(38622); return 0;
   ;
 }
 
+OOC_AST__Node OOC_AST__BuilderDesc_TryStatm(OOC_AST__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end) {
+
+  _failed_function(39313); return 0;
+  ;
+}
+
 OOC_AST__Node OOC_AST__BuilderDesc_Flags(OOC_AST__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak) {
 
-  _failed_function(39559); return 0;
+  _failed_function(39915); return 0;
   ;
 }
 
 OOC_CHAR8 OOC_AST__BuilderDesc_ProcWithoutBody(OOC_AST__Builder b, OOC_AST__Node moduleFlags, OOC_AST__Node procFlags) {
 
-  _failed_function(39727); return 0;
+  _failed_function(40083); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ProcIdFlag(OOC_AST__Builder b, OOC_AST__Node procId, OOC_AST__Node equal, OOC_AST__Node number) {
 
-  _failed_function(40173); return 0;
+  _failed_function(40529); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ModuleFlags(OOC_AST__Builder b, OOC_AST__Node external, OOC_AST__Node callConv, OOC_AST__NodeList moduleFlags, OOC_AST__Node semicolon, OOC_AST__Node link, OOC_AST__NodeList linkSections, OOC_AST__Node end) {
 
-  _failed_function(40275); return 0;
+  _failed_function(40631); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkFileFlag(OOC_AST__Builder b, OOC_AST__Node file, OOC_AST__Node fileName, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt) {
 
-  _failed_function(40514); return 0;
+  _failed_function(40870); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkObjFlag(OOC_AST__Builder b, OOC_AST__Node obj, OOC_AST__Node fileName) {
 
-  _failed_function(40653); return 0;
+  _failed_function(41009); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkLibFlag(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt) {
 
-  _failed_function(40749); return 0;
+  _failed_function(41105); return 0;
   ;
 }
 

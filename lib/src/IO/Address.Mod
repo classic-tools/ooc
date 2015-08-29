@@ -1,5 +1,10 @@
-(*	$Id: Address.Mod,v 1.3 2003/06/01 19:03:03 mva Exp $	*)
-MODULE IO:Address [FOREIGN "C"; LINK FILE "Address.c" END];
+(*	$Id: Address.Mod,v 1.4 2003/07/29 15:30:21 mva Exp $	*)
+MODULE IO:Address [
+  FOREIGN "C";
+  LINK
+    FILE "Address.c";
+    <*IF HAVE_LIB_XNET THEN*>LIB "xnet";<*END*>
+  END ];
 (*  Types and functions for Internet and socket addresses.
     Copyright (C) 2003  Michael van Acken
 

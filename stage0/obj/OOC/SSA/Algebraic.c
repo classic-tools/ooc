@@ -463,7 +463,7 @@ l62:
 
   worklist = (OOC_SSA_Algebraic__Worklist)(OOC_INT32)0;
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7830))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7830))+12);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l8;

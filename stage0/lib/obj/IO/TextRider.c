@@ -100,9 +100,10 @@ void IO_TextRider__WriterDesc_WriteString(volatile IO_TextRider__Writer w, const
   i0 = Strings__Length((void*)(OOC_INT32)s, s_0d);
   len = i0;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -113,7 +114,6 @@ l6:
     Exception__Clear();
     goto l8;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i1 = (OOC_INT32)w;
     i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3781));
     i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3781));
@@ -133,9 +133,10 @@ void IO_TextRider__WriterDesc_WriteStringRegion(volatile IO_TextRider__Writer w,
   Exception__Context _context0;
 
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -146,7 +147,6 @@ l6:
     Exception__Clear();
     goto l8;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)w;
     i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4057));
     i2 = end;
@@ -175,9 +175,10 @@ void IO_TextRider__WriterDesc_WriteObject(volatile IO_TextRider__Writer w, volat
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4384)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
   s = (Object__String)i0;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l9;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l7;
     Exception__ActivateContext();
     goto l8;
@@ -188,7 +189,6 @@ l8:
     Exception__Clear();
     goto l18;
 l9:
-    Exception__PushContext(&_context0, &_target0);
     i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4421)))), &_td_Object__String8Desc);
     if (i1) goto l16;
     i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4541)))), &_td_Object__String16Desc);
@@ -244,9 +244,10 @@ void IO_TextRider__WriterDesc_WriteChar(volatile IO_TextRider__Writer w, volatil
   Exception__Context _context0;
 
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__ErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__ErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -257,7 +258,6 @@ l6:
     Exception__Clear();
     goto l8;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)w;
     i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4993));
     i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4993));

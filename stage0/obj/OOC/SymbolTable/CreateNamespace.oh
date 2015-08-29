@@ -15,6 +15,7 @@ typedef struct OOC_SymbolTable_CreateNamespace__ErrorContextDesc *OOC_SymbolTabl
 typedef struct OOC_SymbolTable_CreateNamespace__ErrorContextDesc {
   Msg__StringPtr id;
 } OOC_SymbolTable_CreateNamespace__ErrorContextDesc;
+extern OOC_SymbolTable__VarDecl OOC_SymbolTable_CreateNamespace__exception;
 extern OOC_SymbolTable__Module OOC_SymbolTable_CreateNamespace__systemModule;
 extern void OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate(OOC_SymbolTable_CreateNamespace__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate 0
@@ -28,7 +29,7 @@ extern void OOC_OOC_SymbolTable_CreateNamespace_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContext;
 extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2504;
+extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2649;
 #endif /* _MODULE_OOC_SymbolTable_CreateNamespace_ */
 
 /* --- */

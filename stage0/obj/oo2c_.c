@@ -68,6 +68,7 @@ extern void OOC_Config_Section_Options_init0(void);
 extern void OOC_OOC_Logger_init0(void);
 extern void OOC_Config_Section_Arguments_init0(void);
 extern void OOC_OOC_Config_Pragmas_init0(void);
+extern void OOC_ADT_Comparator_init0(void);
 extern void OOC_ADT_ArrayList_init0(void);
 extern void OOC_OOC_Error_init0(void);
 extern void OOC_OOC_Scanner_InputBuffer_init0(void);
@@ -244,6 +245,7 @@ int main (int argc, char *argv[]) {
   OOC_OOC_Logger_init0();
   OOC_Config_Section_Arguments_init0();
   OOC_OOC_Config_Pragmas_init0();
+  OOC_ADT_Comparator_init0();
   OOC_ADT_ArrayList_init0();
   OOC_OOC_Error_init0();
   OOC_OOC_Scanner_InputBuffer_init0();

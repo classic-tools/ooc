@@ -67,13 +67,13 @@ extern void OOC_ADT_Dictionary_IntValue_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Entry;
-extern RT0__StructDesc _td_ADT_Dictionary_IntValue__2523;
+extern RT0__StructDesc _td_ADT_Dictionary_IntValue__2524;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Table;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Dictionary;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__DictionaryDesc;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Dummy;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__DummyDesc;
-extern RT0__StructDesc _td_ADT_Dictionary_IntValue__3823;
+extern RT0__StructDesc _td_ADT_Dictionary_IntValue__3824;
 #endif /* _MODULE_ADT_Dictionary_IntValue_ */
 
 /* --- */

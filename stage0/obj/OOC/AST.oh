@@ -38,7 +38,7 @@ typedef struct OOC_AST__BuilderDesc {
 #define OOC_AST__flagsModule 10
 extern void OOC_AST__InitNodeList(OOC_AST__NodeList nl);
 extern OOC_AST__NodeList OOC_AST__BuilderDesc_NewNodeList(OOC_AST__Builder b);
-#define _TBN_OOC_AST__BuilderDesc_NewNodeList 25
+#define _TBN_OOC_AST__BuilderDesc_NewNodeList 26
 typedef OOC_AST__NodeList (*_TBP_OOC_AST__BuilderDesc_NewNodeList)(OOC_AST__Builder b);
 extern void OOC_AST__NodeListDesc_Append(OOC_AST__NodeList nl, OOC_AST__Node node);
 #define _TBN_OOC_AST__NodeListDesc_Append 1
@@ -48,145 +48,148 @@ extern void OOC_AST__NodeDesc_AttachDocString(OOC_AST__Node n, OOC_Doc__Document
 typedef void (*_TBP_OOC_AST__NodeDesc_AttachDocString)(OOC_AST__Node n, OOC_Doc__Document docComment);
 extern void OOC_AST__InitBuilder(OOC_AST__Builder b);
 extern void OOC_AST__BuilderDesc_SetModuleName(OOC_AST__Builder b, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
-#define _TBN_OOC_AST__BuilderDesc_SetModuleName 39
+#define _TBN_OOC_AST__BuilderDesc_SetModuleName 40
 typedef void (*_TBP_OOC_AST__BuilderDesc_SetModuleName)(OOC_AST__Builder b, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Terminal(OOC_AST__Builder b, OOC_Scanner_BasicList__Symbol sym);
-#define _TBN_OOC_AST__BuilderDesc_Terminal 41
+#define _TBN_OOC_AST__BuilderDesc_Terminal 42
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Terminal)(OOC_AST__Builder b, OOC_Scanner_BasicList__Symbol sym);
 extern OOC_AST__Node OOC_AST__BuilderDesc_IdentDef(OOC_AST__Builder b, OOC_AST__Node ident, OOC_AST__Node mark);
-#define _TBN_OOC_AST__BuilderDesc_IdentDef 14
+#define _TBN_OOC_AST__BuilderDesc_IdentDef 15
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_IdentDef)(OOC_AST__Builder b, OOC_AST__Node ident, OOC_AST__Node mark);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ModuleIdent(OOC_AST__Builder b, OOC_AST__NodeList nameList);
-#define _TBN_OOC_AST__BuilderDesc_ModuleIdent 24
+#define _TBN_OOC_AST__BuilderDesc_ModuleIdent 25
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ModuleIdent)(OOC_AST__Builder b, OOC_AST__NodeList nameList);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ArrayType(OOC_AST__Builder b, OOC_AST__Node array, OOC_AST__Node flags, OOC_AST__NodeList exprList, OOC_AST__Node of, OOC_AST__Node type);
 #define _TBN_OOC_AST__BuilderDesc_ArrayType 1
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ArrayType)(OOC_AST__Builder b, OOC_AST__Node array, OOC_AST__Node flags, OOC_AST__NodeList exprList, OOC_AST__Node of, OOC_AST__Node type);
 extern OOC_AST__Node OOC_AST__BuilderDesc_FieldList(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
-#define _TBN_OOC_AST__BuilderDesc_FieldList 9
+#define _TBN_OOC_AST__BuilderDesc_FieldList 10
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_FieldList)(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
 extern OOC_AST__Node OOC_AST__BuilderDesc_RecordType(OOC_AST__Builder b, OOC_AST__Node record, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__Node qualident, OOC_AST__Node rParen, OOC_AST__NodeList fieldLists, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_RecordType 35
+#define _TBN_OOC_AST__BuilderDesc_RecordType 36
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_RecordType)(OOC_AST__Builder b, OOC_AST__Node record, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__Node qualident, OOC_AST__Node rParen, OOC_AST__NodeList fieldLists, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_PointerType(OOC_AST__Builder b, OOC_AST__Node pointer, OOC_AST__Node flags, OOC_AST__Node to, OOC_AST__Node type);
-#define _TBN_OOC_AST__BuilderDesc_PointerType 27
+#define _TBN_OOC_AST__BuilderDesc_PointerType 28
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_PointerType)(OOC_AST__Builder b, OOC_AST__Node pointer, OOC_AST__Node flags, OOC_AST__Node to, OOC_AST__Node type);
 extern OOC_AST__Node OOC_AST__BuilderDesc_FPSection(OOC_AST__Builder b, OOC_AST__Node var, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
-#define _TBN_OOC_AST__BuilderDesc_FPSection 7
+#define _TBN_OOC_AST__BuilderDesc_FPSection 8
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_FPSection)(OOC_AST__Builder b, OOC_AST__Node var, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
 extern OOC_AST__Node OOC_AST__BuilderDesc_FormalPars(OOC_AST__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result, OOC_AST__Node raises, OOC_AST__NodeList raisesList);
-#define _TBN_OOC_AST__BuilderDesc_FormalPars 12
+#define _TBN_OOC_AST__BuilderDesc_FormalPars 13
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_FormalPars)(OOC_AST__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result, OOC_AST__Node raises, OOC_AST__NodeList raisesList);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ProcType(OOC_AST__Builder b, OOC_AST__Node procedure, OOC_AST__Node formalPars);
-#define _TBN_OOC_AST__BuilderDesc_ProcType 30
+#define _TBN_OOC_AST__BuilderDesc_ProcType 31
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ProcType)(OOC_AST__Builder b, OOC_AST__Node procedure, OOC_AST__Node formalPars);
 extern OOC_AST__Node OOC_AST__BuilderDesc_TPSection(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
-#define _TBN_OOC_AST__BuilderDesc_TPSection 40
+#define _TBN_OOC_AST__BuilderDesc_TPSection 41
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_TPSection)(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type);
 extern OOC_AST__Node OOC_AST__BuilderDesc_TypePars(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__NodeList tpSections, OOC_AST__Node rParen);
-#define _TBN_OOC_AST__BuilderDesc_TypePars 44
+#define _TBN_OOC_AST__BuilderDesc_TypePars 45
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_TypePars)(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__NodeList tpSections, OOC_AST__Node rParen);
 extern OOC_AST__Node OOC_AST__BuilderDesc_QualType(OOC_AST__Builder b, OOC_AST__Node qualident, OOC_AST__Node lParen, OOC_AST__NodeList arguments, OOC_AST__Node rParen);
-#define _TBN_OOC_AST__BuilderDesc_QualType 33
+#define _TBN_OOC_AST__BuilderDesc_QualType 34
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_QualType)(OOC_AST__Builder b, OOC_AST__Node qualident, OOC_AST__Node lParen, OOC_AST__NodeList arguments, OOC_AST__Node rParen);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ImportDecl(OOC_AST__Builder b, OOC_AST__Node alias, OOC_AST__Node becomes, OOC_AST__Node module, OOC_Scanner_InputBuffer__CharArray moduleName);
-#define _TBN_OOC_AST__BuilderDesc_ImportDecl 16
+#define _TBN_OOC_AST__BuilderDesc_ImportDecl 17
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ImportDecl)(OOC_AST__Builder b, OOC_AST__Node alias, OOC_AST__Node becomes, OOC_AST__Node module, OOC_Scanner_InputBuffer__CharArray moduleName);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ConstDecl(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node flags, OOC_AST__Node equal, OOC_AST__Node expr, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST__BuilderDesc_ConstDecl 5
+#define _TBN_OOC_AST__BuilderDesc_ConstDecl 6
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ConstDecl)(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node flags, OOC_AST__Node equal, OOC_AST__Node expr, OOC_AST__Node semicolon);
 extern OOC_AST__Node OOC_AST__BuilderDesc_TypeDecl(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node flags, OOC_AST__Node typePars, OOC_AST__Node equal, OOC_AST__Node type, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST__BuilderDesc_TypeDecl 43
+#define _TBN_OOC_AST__BuilderDesc_TypeDecl 44
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_TypeDecl)(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node flags, OOC_AST__Node typePars, OOC_AST__Node equal, OOC_AST__Node type, OOC_AST__Node semicolon);
 extern OOC_AST__Node OOC_AST__BuilderDesc_VarDecl(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST__BuilderDesc_VarDecl 45
+#define _TBN_OOC_AST__BuilderDesc_VarDecl 46
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_VarDecl)(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node semicolon);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Receiver(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node var, OOC_AST__Node ident, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node lParenAlias, OOC_AST__NodeList aliasList, OOC_AST__Node rParenAlias, OOC_AST__Node rParen);
-#define _TBN_OOC_AST__BuilderDesc_Receiver 34
+#define _TBN_OOC_AST__BuilderDesc_Receiver 35
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Receiver)(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node var, OOC_AST__Node ident, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node lParenAlias, OOC_AST__NodeList aliasList, OOC_AST__Node rParenAlias, OOC_AST__Node rParen);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ProcDecl(OOC_AST__Builder b, OOC_AST__Node proc, OOC_AST__Node arrow, OOC_AST__Node receiver, OOC_AST__Node flags, OOC_AST__Node identDef, OOC_AST__Node formalPars, OOC_AST__Node semicolon1, OOC_AST__Node body, OOC_AST__Node semicolon2);
-#define _TBN_OOC_AST__BuilderDesc_ProcDecl 28
+#define _TBN_OOC_AST__BuilderDesc_ProcDecl 29
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ProcDecl)(OOC_AST__Builder b, OOC_AST__Node proc, OOC_AST__Node arrow, OOC_AST__Node receiver, OOC_AST__Node flags, OOC_AST__Node identDef, OOC_AST__Node formalPars, OOC_AST__Node semicolon1, OOC_AST__Node body, OOC_AST__Node semicolon2);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ImportList(OOC_AST__Builder b, OOC_AST__Node import, OOC_AST__NodeList imports, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST__BuilderDesc_ImportList 17
+#define _TBN_OOC_AST__BuilderDesc_ImportList 18
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ImportList)(OOC_AST__Builder b, OOC_AST__Node import, OOC_AST__NodeList imports, OOC_AST__Node semicolon);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Body(OOC_AST__Builder b, OOC_AST__NodeList declSeq, OOC_AST__Node begin, OOC_AST__NodeList statmSeq, OOC_AST__Node end, OOC_AST__Node name);
 #define _TBN_OOC_AST__BuilderDesc_Body 3
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Body)(OOC_AST__Builder b, OOC_AST__NodeList declSeq, OOC_AST__Node begin, OOC_AST__NodeList statmSeq, OOC_AST__Node end, OOC_AST__Node name);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Module(OOC_AST__Builder b, OOC_AST__Node module, OOC_AST__Node name, OOC_AST__Node flags, OOC_AST__Node semicolon, OOC_AST__Node importList, OOC_AST__Node body, OOC_AST__Node period, OOC_Scanner_InputBuffer__CharArray moduleName);
-#define _TBN_OOC_AST__BuilderDesc_Module 22
+#define _TBN_OOC_AST__BuilderDesc_Module 23
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Module)(OOC_AST__Builder b, OOC_AST__Node module, OOC_AST__Node name, OOC_AST__Node flags, OOC_AST__Node semicolon, OOC_AST__Node importList, OOC_AST__Node body, OOC_AST__Node period, OOC_Scanner_InputBuffer__CharArray moduleName);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Operator(OOC_AST__Builder b, OOC_AST__Node left, OOC_AST__Node op, OOC_AST__Node right);
-#define _TBN_OOC_AST__BuilderDesc_Operator 26
+#define _TBN_OOC_AST__BuilderDesc_Operator 27
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Operator)(OOC_AST__Builder b, OOC_AST__Node left, OOC_AST__Node op, OOC_AST__Node right);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Factor(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node expr, OOC_AST__Node rParen);
-#define _TBN_OOC_AST__BuilderDesc_Factor 8
+#define _TBN_OOC_AST__BuilderDesc_Factor 9
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Factor)(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node expr, OOC_AST__Node rParen);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Set(OOC_AST__Builder b, OOC_AST__Node type, OOC_AST__Node lBrace, OOC_AST__NodeList elementList, OOC_AST__Node rBrace);
-#define _TBN_OOC_AST__BuilderDesc_Set 38
+#define _TBN_OOC_AST__BuilderDesc_Set 39
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Set)(OOC_AST__Builder b, OOC_AST__Node type, OOC_AST__Node lBrace, OOC_AST__NodeList elementList, OOC_AST__Node rBrace);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ArrayIndex(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lBrak, OOC_AST__NodeList indices, OOC_AST__Node rBrak);
 #define _TBN_OOC_AST__BuilderDesc_ArrayIndex 0
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ArrayIndex)(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lBrak, OOC_AST__NodeList indices, OOC_AST__Node rBrak);
 extern OOC_AST__Node OOC_AST__BuilderDesc_FunctionCall(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lParen, OOC_AST__NodeList arguments, OOC_AST__Node rParen);
-#define _TBN_OOC_AST__BuilderDesc_FunctionCall 13
+#define _TBN_OOC_AST__BuilderDesc_FunctionCall 14
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_FunctionCall)(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lParen, OOC_AST__NodeList arguments, OOC_AST__Node rParen);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Assignment(OOC_AST__Builder b, OOC_AST__Node assignment);
 #define _TBN_OOC_AST__BuilderDesc_Assignment 2
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Assignment)(OOC_AST__Builder b, OOC_AST__Node assignment);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ProcedureCall(OOC_AST__Builder b, OOC_AST__Node call);
-#define _TBN_OOC_AST__BuilderDesc_ProcedureCall 32
+#define _TBN_OOC_AST__BuilderDesc_ProcedureCall 33
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ProcedureCall)(OOC_AST__Builder b, OOC_AST__Node call);
 extern OOC_AST__Node OOC_AST__BuilderDesc_IfStatm(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_IfStatm 15
+#define _TBN_OOC_AST__BuilderDesc_IfStatm 16
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_IfStatm)(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_CaseStatm(OOC_AST__Builder b, OOC_AST__Node _case, OOC_AST__Node expr, OOC_AST__Node of, OOC_AST__NodeList caseList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
 #define _TBN_OOC_AST__BuilderDesc_CaseStatm 4
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_CaseStatm)(OOC_AST__Builder b, OOC_AST__Node _case, OOC_AST__Node expr, OOC_AST__Node of, OOC_AST__NodeList caseList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_WhileStatm(OOC_AST__Builder b, OOC_AST__Node _while, OOC_AST__Node guard, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_WhileStatm 46
+#define _TBN_OOC_AST__BuilderDesc_WhileStatm 47
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_WhileStatm)(OOC_AST__Builder b, OOC_AST__Node _while, OOC_AST__Node guard, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_RepeatStatm(OOC_AST__Builder b, OOC_AST__Node repeat, OOC_AST__NodeList statmSeq, OOC_AST__Node until, OOC_AST__Node expr);
-#define _TBN_OOC_AST__BuilderDesc_RepeatStatm 36
+#define _TBN_OOC_AST__BuilderDesc_RepeatStatm 37
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_RepeatStatm)(OOC_AST__Builder b, OOC_AST__Node repeat, OOC_AST__NodeList statmSeq, OOC_AST__Node until, OOC_AST__Node expr);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ForStatm(OOC_AST__Builder b, OOC_AST__Node _for, OOC_AST__Node ident, OOC_AST__Node becomes, OOC_AST__Node startValue, OOC_AST__Node to, OOC_AST__Node endValue, OOC_AST__Node by, OOC_AST__Node step, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_ForStatm 11
+#define _TBN_OOC_AST__BuilderDesc_ForStatm 12
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ForStatm)(OOC_AST__Builder b, OOC_AST__Node _for, OOC_AST__Node ident, OOC_AST__Node becomes, OOC_AST__Node startValue, OOC_AST__Node to, OOC_AST__Node endValue, OOC_AST__Node by, OOC_AST__Node step, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_LoopStatm(OOC_AST__Builder b, OOC_AST__Node loop, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_LoopStatm 21
+#define _TBN_OOC_AST__BuilderDesc_LoopStatm 22
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LoopStatm)(OOC_AST__Builder b, OOC_AST__Node loop, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_WithStatm(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_WithStatm 47
+#define _TBN_OOC_AST__BuilderDesc_WithStatm 48
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_WithStatm)(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ExitStatm(OOC_AST__Builder b, OOC_AST__Node exit);
-#define _TBN_OOC_AST__BuilderDesc_ExitStatm 6
+#define _TBN_OOC_AST__BuilderDesc_ExitStatm 7
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ExitStatm)(OOC_AST__Builder b, OOC_AST__Node exit);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ReturnStatm(OOC_AST__Builder b, OOC_AST__Node _return, OOC_AST__Node expr);
-#define _TBN_OOC_AST__BuilderDesc_ReturnStatm 37
+#define _TBN_OOC_AST__BuilderDesc_ReturnStatm 38
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ReturnStatm)(OOC_AST__Builder b, OOC_AST__Node _return, OOC_AST__Node expr);
+extern OOC_AST__Node OOC_AST__BuilderDesc_Catch(OOC_AST__Builder b, OOC_AST__Node _catch, OOC_AST__Node type, OOC_AST__Node lParen, OOC_AST__Node ident, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__NodeList statmSeq);
+#define _TBN_OOC_AST__BuilderDesc_Catch 5
+typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Catch)(OOC_AST__Builder b, OOC_AST__Node _catch, OOC_AST__Node type, OOC_AST__Node lParen, OOC_AST__Node ident, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__NodeList statmSeq);
 extern OOC_AST__Node OOC_AST__BuilderDesc_TryStatm(OOC_AST__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_TryStatm 42
+#define _TBN_OOC_AST__BuilderDesc_TryStatm 43
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_TryStatm)(OOC_AST__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_Flags(OOC_AST__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak);
-#define _TBN_OOC_AST__BuilderDesc_Flags 10
+#define _TBN_OOC_AST__BuilderDesc_Flags 11
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_Flags)(OOC_AST__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak);
 extern OOC_CHAR8 OOC_AST__BuilderDesc_ProcWithoutBody(OOC_AST__Builder b, OOC_AST__Node moduleFlags, OOC_AST__Node procFlags);
-#define _TBN_OOC_AST__BuilderDesc_ProcWithoutBody 31
+#define _TBN_OOC_AST__BuilderDesc_ProcWithoutBody 32
 typedef OOC_CHAR8 (*_TBP_OOC_AST__BuilderDesc_ProcWithoutBody)(OOC_AST__Builder b, OOC_AST__Node moduleFlags, OOC_AST__Node procFlags);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ProcIdFlag(OOC_AST__Builder b, OOC_AST__Node procId, OOC_AST__Node equal, OOC_AST__Node number);
-#define _TBN_OOC_AST__BuilderDesc_ProcIdFlag 29
+#define _TBN_OOC_AST__BuilderDesc_ProcIdFlag 30
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ProcIdFlag)(OOC_AST__Builder b, OOC_AST__Node procId, OOC_AST__Node equal, OOC_AST__Node number);
 extern OOC_AST__Node OOC_AST__BuilderDesc_ModuleFlags(OOC_AST__Builder b, OOC_AST__Node external, OOC_AST__Node callConv, OOC_AST__NodeList moduleFlags, OOC_AST__Node semicolon, OOC_AST__Node link, OOC_AST__NodeList linkSections, OOC_AST__Node end);
-#define _TBN_OOC_AST__BuilderDesc_ModuleFlags 23
+#define _TBN_OOC_AST__BuilderDesc_ModuleFlags 24
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_ModuleFlags)(OOC_AST__Builder b, OOC_AST__Node external, OOC_AST__Node callConv, OOC_AST__NodeList moduleFlags, OOC_AST__Node semicolon, OOC_AST__Node link, OOC_AST__NodeList linkSections, OOC_AST__Node end);
 extern OOC_AST__Node OOC_AST__BuilderDesc_LinkFileFlag(OOC_AST__Builder b, OOC_AST__Node file, OOC_AST__Node fileName, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
-#define _TBN_OOC_AST__BuilderDesc_LinkFileFlag 18
+#define _TBN_OOC_AST__BuilderDesc_LinkFileFlag 19
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LinkFileFlag)(OOC_AST__Builder b, OOC_AST__Node file, OOC_AST__Node fileName, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
 extern OOC_AST__Node OOC_AST__BuilderDesc_LinkObjFlag(OOC_AST__Builder b, OOC_AST__Node obj, OOC_AST__Node fileName);
-#define _TBN_OOC_AST__BuilderDesc_LinkObjFlag 20
+#define _TBN_OOC_AST__BuilderDesc_LinkObjFlag 21
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LinkObjFlag)(OOC_AST__Builder b, OOC_AST__Node obj, OOC_AST__Node fileName);
 extern OOC_AST__Node OOC_AST__BuilderDesc_LinkLibFlag(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
-#define _TBN_OOC_AST__BuilderDesc_LinkLibFlag 19
+#define _TBN_OOC_AST__BuilderDesc_LinkLibFlag 20
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LinkLibFlag)(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
 extern void OOC_OOC_AST_init(void);
 extern void OOC_OOC_AST_init0(void);

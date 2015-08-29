@@ -1104,9 +1104,10 @@ l34:
       i4 = i2==(OOC_INT32)0;
       if (i4) goto l45;
       {
+        Exception__PushContext(&_context0, &_target0);
         if (!setjmp(_target0)) goto l43;
         Exception__PopContext(1);
-        i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+        i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
         if (i0) goto l41;
         Exception__ActivateContext();
         goto l42;
@@ -1119,7 +1120,6 @@ l42:
         Exception__Clear();
         goto l44;
 l43:
-        Exception__PushContext(&_context0, &_target0);
         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 17216)))), Config__VariableDesc_StringToValue)),Config__VariableDesc_StringToValue)((Config__Variable)i2, (Object__String)i0);
         Exception__PopContext(1);
 l44:;
@@ -2145,9 +2145,10 @@ static OOC_Repository__PkgInfo OOC_Package__ParseFile(volatile Object__String fi
   i0 = (OOC_INT32)fileName;
   OOC_Logger__ReadFileName((Object__String)i0);
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_IO__FileNotFoundDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_IO__FileNotFoundDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -2157,7 +2158,6 @@ l6:
     Exception__Clear();
     goto l20;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)Config_Parser__NewFile((Object__String)i0);
     p = (Config_Parser__Parser)i0;
     Config_Parser__ParserDesc_ParseDocument((Config_Parser__Parser)i0);
@@ -2685,16 +2685,17 @@ OOC_Package__Package OOC_Package__GetPkgInfo(Object__String targetDir, Object__S
   Object__String str;
   OOC_Repository__PkgInfo pkgInfo;
 
-  i0 = (OOC_INT32)ADT_StringBuffer__NewCapacity(256);
+  i0 = (OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__StringBuffer.baseTypes[0]);
+  ADT_StringBuffer__StringBufferDesc_INIT((ADT_StringBuffer__StringBuffer)i0, 256);
   sb = (ADT_StringBuffer__StringBuffer)i0;
   i1 = (OOC_INT32)targetDir;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37450)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37476)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c18));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37506)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c19));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37456)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37482)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c18));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37512)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c19));
   i1 = (OOC_INT32)pkgName;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37526)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37550)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c20));
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37581)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37532)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37556)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c20));
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37587)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
   str = (Object__String)i0;
   i1 = (OOC_INT32)OOC_Error__NewList((Object__String)i0);
   *errList = (OOC_Error__List)i1;
@@ -2705,7 +2706,7 @@ OOC_Package__Package OOC_Package__GetPkgInfo(Object__String targetDir, Object__S
   return (OOC_Package__Package)(OOC_INT32)0;
   goto l4;
 l3:
-  return (OOC_Package__Package)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37724)))), &_td_OOC_Package__PackageDesc, 37724));
+  return (OOC_Package__Package)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37730)))), &_td_OOC_Package__PackageDesc, 37730));
 l4:
   _failed_function(37190); return 0;
   ;
@@ -2728,9 +2729,9 @@ OOC_Package__Repository OOC_Package__GetRepository(Object__String targetDir, OOC
   return (OOC_Package__Repository)(OOC_INT32)0;
   goto l4;
 l3:
-  return (OOC_Package__Repository)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38159)))), &_td_OOC_Package__RepositoryDesc, 38159));
+  return (OOC_Package__Repository)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38165)))), &_td_OOC_Package__RepositoryDesc, 38165));
 l4:
-  _failed_function(37799); return 0;
+  _failed_function(37805); return 0;
   ;
 }
 
@@ -2763,24 +2764,24 @@ OOC_CHAR8 OOC_Package__UpdateRepository(Object__String targetDir) {
   i1 = (OOC_INT32)OOC_Package__NewRepository();
   repository = (OOC_Package__Repository)i1;
   i = 0;
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 38734)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 38740)), 0);
   i1 = 0<i0;
   if (!i1) goto l15;
   i1 = (OOC_INT32)_c24;
   i2=0;
 l3_loop:
   i3 = (OOC_INT32)files;
-  i3 = _check_pointer(i3, 38766);
+  i3 = _check_pointer(i3, 38772);
   i4 = OOC_ARRAY_LENGTH(i3, 0);
-  i2 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 38766))*4);
+  i2 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 38772))*4);
   i2 = OOC_Package__UpdateRepository_IsPkgInfo((Object__String)i2);
   if (!i2) goto l10;
   i2 = (OOC_INT32)files;
-  i2 = _check_pointer(i2, 38813);
+  i2 = _check_pointer(i2, 38819);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i4 = i;
   i5 = (OOC_INT32)dirName;
-  i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(i4, i3, OOC_UINT32, 38813))*4);
+  i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(i4, i3, OOC_UINT32, 38819))*4);
   i2 = (OOC_INT32)Object__Concat2((void*)((OOC_INT32)Object__Concat2((void*)i5,(void*)i1)),(void*)i2);
   fileName = (Object__String)i2;
   i3 = (OOC_INT32)OOC_Error__NewList((Object__String)i2);
@@ -2788,11 +2789,11 @@ l3_loop:
   i2 = (OOC_INT32)OOC_Package__ParseFile((Object__String)i2, 1u, (void*)(OOC_INT32)&errList);
   pkg = (OOC_Repository__PkgInfo)i2;
   i3 = (OOC_INT32)errList;
-  i4 = *(OOC_INT32*)(_check_pointer(i3, 38941));
+  i4 = *(OOC_INT32*)(_check_pointer(i3, 38947));
   i4 = i4!=0;
   if (i4) goto l8;
   i3 = (OOC_INT32)repository;
-  OOC_Package__RepositoryDesc_MergePackage((OOC_Package__Repository)i3, (OOC_Package__Package)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 39081)))), &_td_OOC_Package__PackageDesc, 39081)));
+  OOC_Package__RepositoryDesc_MergePackage((OOC_Package__Repository)i3, (OOC_Package__Package)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 39087)))), &_td_OOC_Package__PackageDesc, 39087)));
   goto l10;
 l8:
   i2 = (OOC_INT32)StdChannels__stdout;

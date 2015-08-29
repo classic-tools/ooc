@@ -146,9 +146,10 @@ l4:
 
   OOC_INITIALIZE_VPAR(moduleName__ref,moduleName,OOC_CHAR8 ,moduleName_0d)
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l7;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l5;
     Exception__ActivateContext();
     goto l6;
@@ -158,7 +159,6 @@ l6:
     Exception__Clear();
     goto l8;
 l7:
-    Exception__PushContext(&_context0, &_target0);
     i0 = (OOC_INT32)OOC_Repository_FileSystem__RepositoryDesc_GetModule_GetURI(0);
     uri = (URI__URI)i0;
     Exception__PopContext(1);
@@ -172,9 +172,10 @@ l8:;
   i1 = OS_Files__Exists((Object__String)i1);
   if (i1) goto l25;
   {
+    Exception__PushContext(&_context1, &_target1);
     if (!setjmp(_target1)) goto l19;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l17;
     Exception__ActivateContext();
     goto l18;
@@ -184,7 +185,6 @@ l18:
     Exception__Clear();
     goto l20;
 l19:
-    Exception__PushContext(&_context1, &_target1);
     i0 = (OOC_INT32)OOC_Repository_FileSystem__RepositoryDesc_GetModule_GetURI(1);
     uri = (URI__URI)i0;
     Exception__PopContext(1);
@@ -262,9 +262,10 @@ l10:
   
 l11:
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l18;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l16;
     Exception__ActivateContext();
     goto l17;
@@ -274,7 +275,6 @@ l17:
     Exception__Clear();
     goto l19;
 l18:
-    Exception__PushContext(&_context0, &_target0);
     i1 = (OOC_INT32)rep;
     i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5420))+4);
     i0 = (OOC_INT32)URI_Parser__NewURI((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5407)))), &_td_Object__String8Desc, 5407)), (URI__HierarchicalURI)i1);
@@ -394,9 +394,10 @@ l8:
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 6951)))), OOC_Repository__RepositoryDesc_GetLocalPath)),OOC_Repository__RepositoryDesc_GetLocalPath)((OOC_Repository__Repository)i4, (OOC_Repository__Module)i0, i1);
   path = (Object__String8)i1;
   {
-    if (!setjmp(_target0)) goto l16;
+    Exception__PushContext(&_context0, &_target0);
+    if (!setjmp(_target0)) goto l17;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l14;
     Exception__ActivateContext();
     goto l15;
@@ -405,8 +406,7 @@ l14:
 l15:
     Exception__Clear();
     goto l21;
-l16:
-    Exception__PushContext(&_context0, &_target0);
+l17:
     if (i2) goto l19;
     i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7160));
     i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7167))+4);

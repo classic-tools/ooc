@@ -430,9 +430,10 @@ l34:
   i2 = (OOC_INT32)Config_Parser__NodeDesc_GetCharDataContent((Config_Parser__Node)i2);
   parserString = (XML_UnicodeBuffer__CharArray)i2;
   {
+    Exception__PushContext(&_context1, &_target1);
     if (!setjmp(_target1)) goto l51;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l49;
     Exception__ActivateContext();
     goto l50;
@@ -445,7 +446,6 @@ l50:
     Exception__Clear();
     goto l52;
 l51:
-    Exception__PushContext(&_context1, &_target1);
     i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 7760)), 0);
     i2 = (OOC_INT32)Object__NewUTF16((void*)(_check_pointer(i2, 7760)), i4);
     OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7717)))), Config__VariableDesc_StringToValue)),Config__VariableDesc_StringToValue)((Config__Variable)i1, (Object__String)i2);
@@ -540,9 +540,10 @@ l76:
   i1 = (OOC_INT32)Config_Parser__NodeDesc_GetCharDataContent((Config_Parser__Node)i1);
   parserString = (XML_UnicodeBuffer__CharArray)i1;
   {
+    Exception__PushContext(&_context0, &_target0);
     if (!setjmp(_target0)) goto l89;
     Exception__PopContext(1);
-    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((Exception__Current()))), &_td_Exception__ParseErrorDesc);
+    i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG(((OOC_INT32)Exception__Current()))), &_td_Exception__ParseErrorDesc);
     if (i0) goto l87;
     Exception__ActivateContext();
     goto l88;
@@ -555,7 +556,6 @@ l88:
     Exception__Clear();
     goto l90;
 l89:
-    Exception__PushContext(&_context0, &_target0);
     i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6033))+8);
     i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6033))+8);
     i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6082)), 0);

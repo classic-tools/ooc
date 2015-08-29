@@ -1,4 +1,4 @@
-(*	$Id: SocketChannel.Mod,v 1.5 2003/07/01 22:22:37 mva Exp $	*)
+(*	$Id: SocketChannel.Mod,v 1.6 2003/07/13 21:51:28 mva Exp $	*)
 MODULE IO:SocketChannel;
 (*  Access to TCP connections through channel objects.
     Copyright (C) 2003  Michael van Acken
@@ -50,6 +50,7 @@ PROCEDURE (ch: Channel) Connect*(endPoint: Address.Socket): BOOLEAN
 RAISES IO.Error;
   BEGIN
     ch.connected := ch.socket.Connect(endPoint);
+    ch.connectionPending := ~ch.connected;
     RETURN ch.connected;
   END Connect;
 
@@ -59,6 +60,7 @@ RAISES IO.Error;
     ch.connected := ch.socket.FinishConnect();
     IF ch.connected THEN
       EXCL(ch.readyOps, IO.opConnect);
+      ch.connectionPending := FALSE;
     END;
     RETURN ch.connected;
   END FinishConnect;

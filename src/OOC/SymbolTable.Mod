@@ -1,4 +1,4 @@
-(* 	$Id: SymbolTable.Mod,v 1.108 2003/07/06 21:49:42 mva Exp $	 *)
+(* 	$Id: SymbolTable.Mod,v 1.109 2003/08/01 08:59:10 mva Exp $	 *)
 MODULE OOC:SymbolTable [OOC_EXTENSIONS];
 (*  Defines structure and entries of the symbol table.
     Copyright (C) 2000-2003  Michael van Acken
@@ -651,7 +651,7 @@ TYPE
        Initially, the field holds the value @code{-1}.  As part of
        @oproc{*OOC:SymbolTable:CreateNamespace.CreateNamespace}, this is
        changed to reflect the number of type-bound procedures that are part of
-       the record method table.  *)
+       the record's method table.  *)
     ns-: Namespace;
     (**A reference to the record's namespace.  Note that the namespace
        does not exist before

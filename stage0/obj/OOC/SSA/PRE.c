@@ -48,7 +48,7 @@ static OOC_SSA__Instr OOC_SSA_PRE__GetNoop(OOC_SSA__ProcBlock pb, OOC_SSA__Resul
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2052))+12);
   i2 = *(OOC_INT8*)((_check_pointer(i2, 2058))+36);
-  i2 = i2==86;
+  i2 = i2==87;
   if (!i2) goto l6;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2104))+12);
   return (OOC_SSA__Instr)i2;
@@ -59,7 +59,7 @@ l6:
   if (i2) goto l3_loop;
 l11:
   i1 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i1, 86, 0);
+  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i1, 87, 0);
   i2 = (OOC_INT32)OOC_SSA__InstrDesc_AddResult((OOC_SSA__Instr)i1, 2);
   OOC_SSA__ResultDesc_ReplaceUses((OOC_SSA__Result)i0, (OOC_SSA__Result)i2);
   OOC_SSA__InstrDesc_AddOpnd((OOC_SSA__Instr)i1, (OOC_SSA__Result)i0, 2);
@@ -165,7 +165,7 @@ l17:
 l22_loop:
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3599))+12);
           i3 = *(OOC_INT8*)((_check_pointer(i3, 3605))+36);
-          i3 = i3==85;
+          i3 = i3==86;
           if (i3) goto l25;
           i3=0u;
           goto l27;
@@ -242,7 +242,7 @@ l7_loop:
 l10:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4591))+12);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 4597))+36);
-      i1 = i1!=84;
+      i1 = i1!=85;
       
 l12:
       if (i1) goto l14;
@@ -251,7 +251,7 @@ l12:
 l14:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4638))+12);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 4644))+36);
-      i1 = i1!=85;
+      i1 = i1!=86;
       
 l16:
       if (i1) goto l18;
@@ -384,7 +384,7 @@ l58:
       if (i7) goto l54_loop;
 l63:
       i0 = (OOC_INT32)pb;
-      i0 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i0, 85, 0);
+      i0 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i0, 86, 0);
       equiv = (OOC_SSA__Instr)i0;
       OOC_SSA__InstrDesc_AddOpnd((OOC_SSA__Instr)i0, (OOC_SSA__Result)i2, 1);
       i1 = (OOC_INT32)_new;
@@ -426,7 +426,7 @@ l70:
 
       i0 = (OOC_INT32)equiv;
       i1 = *(OOC_INT8*)((_check_pointer(i0, 7240))+36);
-      _assert((i1==85), 127, 7228);
+      _assert((i1==86), 127, 7228);
       i1 = (OOC_INT32)equivToCollect;
       i1 = (OOC_INT32)ADT_Dictionary__DictionaryDesc_Get((ADT_Dictionary__Dictionary)i1, (Object__Object)i0);
       obj = (Object__Object)i1;
@@ -551,7 +551,7 @@ l31:
 l3_loop:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9225))+12);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 9231))+36);
-      i1 = i1!=85;
+      i1 = i1!=86;
       if (!i1) goto l6;
       return 0u;
 l6:
@@ -573,7 +573,7 @@ l11:
   worklist = (ADT_ArrayList__ArrayList)i1;
   i2 = (OOC_INT32)ADT_ArrayList__New(32);
   equivList = (ADT_ArrayList__ArrayList)i2;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9558))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9558))+12);
   instr = (OOC_SSA__Instr)i2;
   i3 = i2!=(OOC_INT32)0;
   if (!i3) goto l22;
@@ -704,7 +704,7 @@ void OOC_SSA_PRE__ResolveEquiv(OOC_SSA__ProcBlock pb) {
   OOC_SSA__Instr next;
 
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11533))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11533))+12);
   instr = (OOC_SSA__Instr)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l18;
@@ -712,10 +712,10 @@ l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11591))+28);
   next = (OOC_SSA__Instr)i2;
   i3 = *(OOC_INT8*)((_check_pointer(i1, 11618))+36);
-  i3 = i3==84;
+  i3 = i3==85;
   if (i3) goto l9;
   i3 = *(OOC_INT8*)((_check_pointer(i1, 11902))+36);
-  i3 = i3==86;
+  i3 = i3==87;
   if (!i3) goto l13;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11972))+24);
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 11981));

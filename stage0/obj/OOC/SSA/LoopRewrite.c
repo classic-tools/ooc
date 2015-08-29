@@ -3171,7 +3171,7 @@ l15:
   i1 = (OOC_INT32)OOC_SSA__InstrDesc_GetLoopEnd((OOC_SSA__Instr)i0);
   loopEnd = (OOC_SSA__Instr)i1;
   i2 = (OOC_INT32)pb;
-  i3 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 86, 0);
+  i3 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 87, 0);
   anchor = (OOC_SSA__Instr)i3;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 45112));
   storeOut = (OOC_SSA__Result)i1;
@@ -3208,7 +3208,7 @@ l15_loop:
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 45544))+52);
   i5 = OOC_SSA_LoopRewrite__InstallEquivCE_UsedOutsideLoop((OOC_SSA__Result)i5);
   if (!i5) goto l18;
-  i5 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 84, 0);
+  i5 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 85, 0);
   equiv = (OOC_SSA__Instr)i5;
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 45650))+16);
   i6 = _check_pointer(i6, 45663);
@@ -3381,7 +3381,7 @@ l6_loop:
   i5 = i4!=(OOC_INT32)0;
   if (i5) goto l6_loop;
 l11:
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 49726))+8);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 49726))+12);
   instr = (OOC_SSA__Instr)i4;
   i5 = i4!=(OOC_INT32)0;
   if (!i5) goto l30;
@@ -3461,7 +3461,7 @@ l52:
   i4 = i3!=(OOC_INT32)0;
   if (i4) goto l33_loop;
 l57:
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 51320))+8);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 51320))+12);
   instr = (OOC_SSA__Instr)i3;
   i4 = i3!=(OOC_INT32)0;
   if (!i4) goto l72;

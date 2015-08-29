@@ -755,7 +755,7 @@ l48:
 }
 
 OOC_SymbolTable__Module OOC_Repository__ModuleDesc_ReadSymbolFile(OOC_Repository__Module m) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1,i2,i3;
   URI__URI uri;
   IO__ByteChannel ch;
   IO__ByteChannel chDoc;
@@ -765,7 +765,7 @@ OOC_SymbolTable__Module OOC_Repository__ModuleDesc_ReadSymbolFile(OOC_Repository
   i0 = (OOC_INT32)m;
   i1 = *(OOC_INT8*)((_check_pointer(i0, 23160))+16);
   i1 = i1==4;
-  if (i1) goto l7;
+  if (i1) goto l10;
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 23243)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 1, 1u);
   uri = (URI__URI)i1;
   i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 23290)))), URI__URIDesc_GetChannel)),URI__URIDesc_GetChannel)((URI__URI)i1, 2);
@@ -786,15 +786,19 @@ l5:
 l6:
   i1 = (OOC_INT32)OOC_SymbolTable_Builder__New();
   stb = (OOC_SymbolTable_Builder__Builder)i1;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 23609)))), OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)),OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)((OOC_SymbolTable_Builder__Builder)i1, (IO__ByteChannel)i2, (IO__ByteChannel)i0);
-  symTab = (OOC_SymbolTable__Module)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 23648)))), IO__ChannelDesc_Close)),IO__ChannelDesc_Close)((IO__Channel)i2);
-  return (OOC_SymbolTable__Module)i0;
-  goto l8;
-l7:
+  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 23609)))), OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)),OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)((OOC_SymbolTable_Builder__Builder)i1, (IO__ByteChannel)i2, (IO__ByteChannel)i0);
+  symTab = (OOC_SymbolTable__Module)i1;
+  i3 = i0!=(OOC_INT32)0;
+  if (!i3) goto l9;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 23681)))), IO__ChannelDesc_Close)),IO__ChannelDesc_Close)((IO__Channel)i0);
+l9:
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 23708)))), IO__ChannelDesc_Close)),IO__ChannelDesc_Close)((IO__Channel)i2);
+  return (OOC_SymbolTable__Module)i1;
+  goto l11;
+l10:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23211))+12);
   return (OOC_SymbolTable__Module)i0;
-l8:
+l11:
   _failed_function(22385); return 0;
   ;
 }
