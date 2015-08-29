@@ -1,4 +1,4 @@
-(* 	$Id: LinkProgramC.Mod,v 1.26 2003/05/29 16:59:04 mva Exp $	 *)
+(* 	$Id: LinkProgramC.Mod,v 1.27 2003/10/16 20:33:36 mva Exp $	 *)
 MODULE OOC:Make:LinkProgramC;
 (*  Links object files and libraries to create an executable file.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -206,7 +206,7 @@ RAISES IO.Error;
         (* object file is part of a library; for each library encountered
            this way, keep track of one module that it provides *)
         IF ~importedLibs.HasKey(libraryName) THEN
-          importedLibs.Set(imports[i].ifData.libraryName, NIL);
+          importedLibs.Set(libraryName, NIL);
           importedLibsList.Append(imports[i]);
         END;
       ELSIF ~imports[i].ifData.NoObjectFile() THEN

@@ -148,7 +148,7 @@ typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateMainFileAssembler)(OOC_Make__
 extern OOC_CHAR8 OOC_Make__RulesDesc_UpdateMainObjectFile(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_UpdateMainObjectFile 27
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateMainObjectFile)(OOC_Make__Rules r, OOC_Repository__Module module);
-extern OOC_Make__ModuleList OOC_Make__ModuleClosure(OOC_Repository__Module module, Object__String restrictToLibrary);
+extern OOC_Make__ModuleList OOC_Make__ModuleClosure(OOC_Repository__Module module);
 extern OOC_CHAR8 OOC_Make__RulesDesc_UpdateExecutable(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_UpdateExecutable 28
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateExecutable)(OOC_Make__Rules r, OOC_Repository__Module module);

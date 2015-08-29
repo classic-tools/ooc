@@ -1,4 +1,4 @@
-(* 	$Id: oo2c.Mod,v 1.68 2003/06/20 19:54:27 mva Exp $	 *)
+(* 	$Id: oo2c.Mod,v 1.69 2003/10/16 20:34:38 mva Exp $	 *)
 MODULE oo2c;
 (*  Main module for the Oberon-2 to C translator.
     Copyright (C) 2002,2003  Michael van Acken
@@ -333,13 +333,13 @@ RAISES IO.Error;
         i := 0;
         WHILE ok & (i #  LEN(makeRules.imports^)) DO
           m := makeRules.imports[i];
-          IF install THEN
-            IF (m.origin = module.origin) THEN
+          IF (m.origin = module.origin) THEN
+            IF install THEN
               pkg.fileSet.Append(Package.NewFile(m.origin.GetLocalPath(m, Rep.modInterfaceDescr), NIL));
               pkg.fileSet.Append(Package.NewFile(m.origin.GetLocalPath(m, Rep.modInterfaceHTML), NIL));
+            ELSE
+              ok := makeRules.Update(m, Rep.modInterfaceHTML);
             END;
-          ELSE
-            ok := makeRules.Update(m, Rep.modInterfaceHTML);
           END;
           INC(i);
         END;
@@ -503,7 +503,7 @@ RAISES IO.Error;
     BEGIN
       ok := makeRules.Update(module, Rep.modSymbolFile);
       
-      list := Make.ModuleClosure(module, NIL);
+      list := Make.ModuleClosure(module);
       i := 0;
       WHILE ok & (i #  LEN(list^)) DO
         IF (list[i].origin = module.origin) THEN
