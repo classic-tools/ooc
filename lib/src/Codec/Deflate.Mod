@@ -1,4 +1,4 @@
-(* 	$Id: Deflate.Mod,v 1.5 2002/12/20 11:18:40 mva Exp $	 *)
+(* 	$Id: Deflate.Mod,v 1.1 2003/09/22 19:32:17 mva Exp $	 *)
 MODULE Codec:Deflate[OOC_EXTENSIONS];
 (*  Codec for the "deflate" encryption algorithm of the zlib library.
     Copyright (C) 2002  Michael van Acken

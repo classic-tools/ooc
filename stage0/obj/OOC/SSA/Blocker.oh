@@ -125,22 +125,22 @@ extern void OOC_SSA_Blocker__RemoveRegionDeps(OOC_SSA__ProcBlock pb);
 extern OOC_SSA_Blocker__Region OOC_SSA_Blocker__ArrangeInstructions(OOC_SSA__ProcBlock pb, OOC_CHAR8 markAntiDeps);
 extern OOC_SSA_Blocker__DependenceData OOC_SSA_Blocker__GetDependenceData(OOC_SSA__ProcBlock pb);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_SameRegion(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_SameRegion 5
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_SameRegion 0
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_SameRegion)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_Dominates(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Dominates 3
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Dominates 1
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_Dominates)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_Conflict(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Conflict 1
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Conflict 2
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_Conflict)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_DependsOn(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_DependsOn 2
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_DependsOn 3
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_DependsOn)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_AvailableTo(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_AvailableTo 0
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_AvailableTo 4
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_SSA__Instr OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr 4
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr 5
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
 extern void OOC_SSA_Blocker__DependenceDataDesc_SetRegion(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
 #define _TBN_OOC_SSA_Blocker__DependenceDataDesc_SetRegion 6

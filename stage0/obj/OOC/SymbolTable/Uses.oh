@@ -34,16 +34,16 @@ extern void OOC_SymbolTable_Uses__ErrorContextDesc_GetTemplate(OOC_SymbolTable_U
 typedef void (*_TBP_OOC_SymbolTable_Uses__ErrorContextDesc_GetTemplate)(OOC_SymbolTable_Uses__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern OOC_SymbolTable_Uses__Uses OOC_SymbolTable_Uses__New(Object__String extIdent, OOC_CHAR8 *syntaxError);
 extern OOC_CHAR8 OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations(OOC_SymbolTable_Uses__Uses u);
-#define _TBN_OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations 3
+#define _TBN_OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations 0
 typedef OOC_CHAR8 (*_TBP_OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations)(OOC_SymbolTable_Uses__Uses u);
 extern void OOC_SymbolTable_Uses__UsesDesc_StartModule(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Module symTab, OOC_Error__List errList);
-#define _TBN_OOC_SymbolTable_Uses__UsesDesc_StartModule 2
+#define _TBN_OOC_SymbolTable_Uses__UsesDesc_StartModule 1
 typedef void (*_TBP_OOC_SymbolTable_Uses__UsesDesc_StartModule)(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Module symTab, OOC_Error__List errList);
 extern OOC_CHAR8 OOC_SymbolTable_Uses__UsesDesc_Matches(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Declaration decl);
-#define _TBN_OOC_SymbolTable_Uses__UsesDesc_Matches 0
+#define _TBN_OOC_SymbolTable_Uses__UsesDesc_Matches 2
 typedef OOC_CHAR8 (*_TBP_OOC_SymbolTable_Uses__UsesDesc_Matches)(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Declaration decl);
 extern void OOC_SymbolTable_Uses__UsesDesc_RegisterSymTab(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Module symTab);
-#define _TBN_OOC_SymbolTable_Uses__UsesDesc_RegisterSymTab 1
+#define _TBN_OOC_SymbolTable_Uses__UsesDesc_RegisterSymTab 3
 typedef void (*_TBP_OOC_SymbolTable_Uses__UsesDesc_RegisterSymTab)(OOC_SymbolTable_Uses__Uses u, OOC_SymbolTable__Module symTab);
 extern void OOC_SymbolTable_Uses__Mark(OOC_SymbolTable__Declaration decl, OOC_SymbolTable_Uses__Uses uses, OOC_SymbolTable__Name ident);
 extern void OOC_OOC_SymbolTable_Uses_init(void);

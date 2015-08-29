@@ -1,4 +1,4 @@
-(* 	$Id: TypeRules.Mod,v 1.67 2003/07/26 08:14:56 mva Exp $	 *)
+(* 	$Id: TypeRules.Mod,v 1.68 2003/09/12 08:09:31 sgreenhill Exp $	 *)
 MODULE OOC:SymbolTable:TypeRules;
 (*  Defines the type rules of the language.
     Copyright (C) 2000-2003  Michael van Acken
@@ -910,7 +910,11 @@ PROCEDURE AllocateType* (type: Sym.Type);
         (* initialize size and alignment, take base type into account *)
         IF (type. baseType = NIL) THEN 
           align := 1;  (* this alignment is also used if the record is empty *)
-          size := 0
+          size := 0;
+          IF type.isVtable THEN
+            (* for VTABLE records, reserve space for the VTABLE pointer *)
+            size := Sym.predefIdToType[Predef.ptr].size;
+          END;
         ELSE
           AllocateType (type. baseType);
           align := type. baseType. align;

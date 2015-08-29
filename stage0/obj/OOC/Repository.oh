@@ -94,62 +94,62 @@ extern void OOC_Repository__Init(OOC_Repository__Repository rep, OOC_Repository_
 extern void OOC_Repository__InitModule(OOC_Repository__Module m, OOC_Repository__Repository origin, const Msg__String name__ref, OOC_LEN name_0d, URI__HierarchicalURI srcFileOverride);
 extern void OOC_Repository__InitPkgInfo(OOC_Repository__PkgInfo pkgInfo);
 extern void OOC_Repository__RepositoryDesc_SetPackageInfo(OOC_Repository__Repository rep, OOC_Repository__PkgInfo packageInfo);
-#define _TBN_OOC_Repository__RepositoryDesc_SetPackageInfo 7
+#define _TBN_OOC_Repository__RepositoryDesc_SetPackageInfo 0
 typedef void (*_TBP_OOC_Repository__RepositoryDesc_SetPackageInfo)(OOC_Repository__Repository rep, OOC_Repository__PkgInfo packageInfo);
 extern OOC_Repository__Module OOC_Repository__RepositoryDesc_GetModule(OOC_Repository__Repository rep, const OOC_CHAR8 moduleName__ref[], OOC_LEN moduleName_0d, URI__HierarchicalURI srcFileOverride);
-#define _TBN_OOC_Repository__RepositoryDesc_GetModule 4
+#define _TBN_OOC_Repository__RepositoryDesc_GetModule 1
 typedef OOC_Repository__Module (*_TBP_OOC_Repository__RepositoryDesc_GetModule)(OOC_Repository__Repository rep, const OOC_CHAR8 moduleName__ref[], OOC_LEN moduleName_0d, URI__HierarchicalURI srcFileOverride);
 extern URI__URI OOC_Repository__RepositoryDesc_GetResource(OOC_Repository__Repository rep, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
-#define _TBN_OOC_Repository__RepositoryDesc_GetResource 6
+#define _TBN_OOC_Repository__RepositoryDesc_GetResource 2
 typedef URI__URI (*_TBP_OOC_Repository__RepositoryDesc_GetResource)(OOC_Repository__Repository rep, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
 extern void OOC_Repository__RepositoryDesc_DumpContent(OOC_Repository__Repository rep, TextRider__Writer w);
-#define _TBN_OOC_Repository__RepositoryDesc_DumpContent 0
+#define _TBN_OOC_Repository__RepositoryDesc_DumpContent 3
 typedef void (*_TBP_OOC_Repository__RepositoryDesc_DumpContent)(OOC_Repository__Repository rep, TextRider__Writer w);
 extern void OOC_Repository__ModuleDesc_SetInterfaceData(OOC_Repository__Module m, OOC_SymbolTable__Module ifData, OOC_INT8 ifQuality, OOC_CHAR8 allImports);
-#define _TBN_OOC_Repository__ModuleDesc_SetInterfaceData 13
+#define _TBN_OOC_Repository__ModuleDesc_SetInterfaceData 3
 typedef void (*_TBP_OOC_Repository__ModuleDesc_SetInterfaceData)(OOC_Repository__Module m, OOC_SymbolTable__Module ifData, OOC_INT8 ifQuality, OOC_CHAR8 allImports);
 extern void OOC_Repository__ModuleDesc_SetFingerprint(OOC_Repository__Module m, OOC_INT32 fp);
-#define _TBN_OOC_Repository__ModuleDesc_SetFingerprint 12
+#define _TBN_OOC_Repository__ModuleDesc_SetFingerprint 4
 typedef void (*_TBP_OOC_Repository__ModuleDesc_SetFingerprint)(OOC_Repository__Module m, OOC_INT32 fp);
 extern OOC_Repository__Module OOC_Repository__ModuleDesc_GetImportedModule(OOC_Repository__Module m, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 #define _TBN_OOC_Repository__ModuleDesc_GetImportedModule 5
 typedef OOC_Repository__Module (*_TBP_OOC_Repository__ModuleDesc_GetImportedModule)(OOC_Repository__Module m, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern Object__String8 OOC_Repository__RepositoryDesc_GetLocalPath(OOC_Repository__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId);
-#define _TBN_OOC_Repository__RepositoryDesc_GetLocalPath 3
+#define _TBN_OOC_Repository__RepositoryDesc_GetLocalPath 4
 typedef Object__String8 (*_TBP_OOC_Repository__RepositoryDesc_GetLocalPath)(OOC_Repository__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId);
 extern OOC_Scanner_InputBuffer__Buffer OOC_Repository__ModuleDesc_GetInputBuffer(OOC_Repository__Module m);
 #define _TBN_OOC_Repository__ModuleDesc_GetInputBuffer 6
 typedef OOC_Scanner_InputBuffer__Buffer (*_TBP_OOC_Repository__ModuleDesc_GetInputBuffer)(OOC_Repository__Module m);
 extern URI__HierarchicalURI OOC_Repository__ModuleDesc_GetURI(OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 allowRelative);
-#define _TBN_OOC_Repository__ModuleDesc_GetURI 9
+#define _TBN_OOC_Repository__ModuleDesc_GetURI 7
 typedef URI__HierarchicalURI (*_TBP_OOC_Repository__ModuleDesc_GetURI)(OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 allowRelative);
 extern OOC_CHAR8 OOC_Repository__ModuleDesc_MatchesURI(OOC_Repository__Module m, OOC_INT8 fileId, URI__URI uri);
-#define _TBN_OOC_Repository__ModuleDesc_MatchesURI 10
+#define _TBN_OOC_Repository__ModuleDesc_MatchesURI 8
 typedef OOC_CHAR8 (*_TBP_OOC_Repository__ModuleDesc_MatchesURI)(OOC_Repository__Module m, OOC_INT8 fileId, URI__URI uri);
 extern void OOC_Repository__ModuleDesc_GetTimeStamp(OOC_Repository__Module m, OOC_INT8 fileId, struct Time__TimeStamp *ts, RT0__Struct ts__tag);
-#define _TBN_OOC_Repository__ModuleDesc_GetTimeStamp 8
+#define _TBN_OOC_Repository__ModuleDesc_GetTimeStamp 9
 typedef void (*_TBP_OOC_Repository__ModuleDesc_GetTimeStamp)(OOC_Repository__Module m, OOC_INT8 fileId, struct Time__TimeStamp *ts, RT0__Struct ts__tag);
 extern OOC_CHAR8 OOC_Repository__ModuleDesc_FileExists(OOC_Repository__Module m, OOC_INT8 fileId);
-#define _TBN_OOC_Repository__ModuleDesc_FileExists 4
+#define _TBN_OOC_Repository__ModuleDesc_FileExists 10
 typedef OOC_CHAR8 (*_TBP_OOC_Repository__ModuleDesc_FileExists)(OOC_Repository__Module m, OOC_INT8 fileId);
 extern void OOC_Repository__ModuleDesc_CreateOutputDir(OOC_Repository__Module m, OOC_INT8 fileId);
-#define _TBN_OOC_Repository__ModuleDesc_CreateOutputDir 3
+#define _TBN_OOC_Repository__ModuleDesc_CreateOutputDir 11
 typedef void (*_TBP_OOC_Repository__ModuleDesc_CreateOutputDir)(OOC_Repository__Module m, OOC_INT8 fileId);
 extern IO__ByteChannel OOC_Repository__ModuleDesc_GetOutputChannel(OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
-#define _TBN_OOC_Repository__ModuleDesc_GetOutputChannel 7
+#define _TBN_OOC_Repository__ModuleDesc_GetOutputChannel 12
 typedef IO__ByteChannel (*_TBP_OOC_Repository__ModuleDesc_GetOutputChannel)(OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
 extern Object__String8 OOC_Repository__RepositoryDesc_GetDefaultSubdir(OOC_Repository__Repository rep, OOC_INT8 id);
-#define _TBN_OOC_Repository__RepositoryDesc_GetDefaultSubdir 1
+#define _TBN_OOC_Repository__RepositoryDesc_GetDefaultSubdir 5
 typedef Object__String8 (*_TBP_OOC_Repository__RepositoryDesc_GetDefaultSubdir)(OOC_Repository__Repository rep, OOC_INT8 id);
 extern Object__String8 OOC_Repository__RepositoryDesc_GetDefaultSuffix(OOC_Repository__Repository rep, OOC_INT8 id);
-#define _TBN_OOC_Repository__RepositoryDesc_GetDefaultSuffix 2
+#define _TBN_OOC_Repository__RepositoryDesc_GetDefaultSuffix 6
 typedef Object__String8 (*_TBP_OOC_Repository__RepositoryDesc_GetDefaultSuffix)(OOC_Repository__Repository rep, OOC_INT8 id);
 extern OOC_CHAR8 OOC_Repository__ValidModuleName(const OOC_CHAR8 moduleName__ref[], OOC_LEN moduleName_0d);
 extern OOC_Repository__Module OOC_Repository__RepositoryDesc_GetModuleByURI(OOC_Repository__Repository rep, URI__HierarchicalURI uri, OOC_CHAR8 force);
-#define _TBN_OOC_Repository__RepositoryDesc_GetModuleByURI 5
+#define _TBN_OOC_Repository__RepositoryDesc_GetModuleByURI 7
 typedef OOC_Repository__Module (*_TBP_OOC_Repository__RepositoryDesc_GetModuleByURI)(OOC_Repository__Repository rep, URI__HierarchicalURI uri, OOC_CHAR8 force);
 extern OOC_SymbolTable__Module OOC_Repository__ModuleDesc_ReadSymbolFile(OOC_Repository__Module m);
-#define _TBN_OOC_Repository__ModuleDesc_ReadSymbolFile 11
+#define _TBN_OOC_Repository__ModuleDesc_ReadSymbolFile 13
 typedef OOC_SymbolTable__Module (*_TBP_OOC_Repository__ModuleDesc_ReadSymbolFile)(OOC_Repository__Module m);
 extern void OOC_OOC_Repository_init(void);
 extern void OOC_OOC_Repository_init0(void);

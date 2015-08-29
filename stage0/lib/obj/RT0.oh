@@ -20,6 +20,8 @@
 #define RT0__strRecord (-3)
 #define RT0__strPointer (-4)
 #define RT0__strQualType (-5)
+#define RT0__flagAtomic 0
+#define RT0__flagVTable 1
 typedef OOC_CHAR8 *RT0__Name;
 typedef struct RT0__ModuleDesc *RT0__Module;
 typedef struct RT0__StructDesc *RT0__Struct;
@@ -31,6 +33,7 @@ typedef struct RT0__StructDesc {
   RT0__Name name;
   OOC_INT32 size;
   OOC_INT32 len;
+  OOC_UINT32 flags;
   OOC_INT8 form;
 } RT0__StructDesc;
 typedef struct RT0__ModuleDesc {
@@ -77,15 +80,15 @@ extern void OOC_RT0_init0(void);
 extern RT0__StructDesc _td_RT0__Name;
 extern RT0__StructDesc _td_RT0__Module;
 extern RT0__StructDesc _td_RT0__Struct;
-extern RT0__StructDesc _td_RT0__5663;
-extern RT0__StructDesc _td_RT0__5883;
-extern RT0__StructDesc _td_RT0__6077;
+extern RT0__StructDesc _td_RT0__5996;
+extern RT0__StructDesc _td_RT0__6216;
+extern RT0__StructDesc _td_RT0__6410;
 extern RT0__StructDesc _td_RT0__ModuleDesc;
-extern RT0__StructDesc _td_RT0__7460;
-extern RT0__StructDesc _td_RT0__8140;
-extern RT0__StructDesc _td_RT0__8066;
-extern RT0__StructDesc _td_RT0__11132;
-extern RT0__StructDesc _td_RT0__11338;
+extern RT0__StructDesc _td_RT0__8187;
+extern RT0__StructDesc _td_RT0__8867;
+extern RT0__StructDesc _td_RT0__8793;
+extern RT0__StructDesc _td_RT0__11859;
+extern RT0__StructDesc _td_RT0__12065;
 #endif /* _MODULE_RT0_ */
 
 /* --- */

@@ -21,76 +21,76 @@ extern Object_BigInt__BigInt Object_BigInt__zero;
 extern Object_BigInt__BigInt Object_BigInt__one;
 extern Object_BigInt__BigInt Object_BigInt__NewInt(OOC_INT32 _int);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Copy(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_Copy 8
+#define _TBN_Object_BigInt__BigIntDesc_Copy 6
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Copy)(Object_BigInt__BigInt a);
 extern OOC_INT32 Object_BigInt__BigIntDesc_HashCode(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_HashCode 1
+#define _TBN_Object_BigInt__BigIntDesc_HashCode 2
 typedef OOC_INT32 (*_TBP_Object_BigInt__BigIntDesc_HashCode)(Object_BigInt__BigInt a);
 extern OOC_CHAR8 Object_BigInt__BigIntDesc_Equals(Object_BigInt__BigInt a, Object__Object b);
-#define _TBN_Object_BigInt__BigIntDesc_Equals 0
+#define _TBN_Object_BigInt__BigIntDesc_Equals 1
 typedef OOC_CHAR8 (*_TBP_Object_BigInt__BigIntDesc_Equals)(Object_BigInt__BigInt a, Object__Object b);
 extern OOC_CHAR8 Object_BigInt__BigIntDesc_IsZero(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_IsZero 13
+#define _TBN_Object_BigInt__BigIntDesc_IsZero 7
 typedef OOC_CHAR8 (*_TBP_Object_BigInt__BigIntDesc_IsZero)(Object_BigInt__BigInt a);
 extern OOC_CHAR8 Object_BigInt__BigIntDesc_NonZero(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_NonZero 18
+#define _TBN_Object_BigInt__BigIntDesc_NonZero 8
 typedef OOC_CHAR8 (*_TBP_Object_BigInt__BigIntDesc_NonZero)(Object_BigInt__BigInt a);
 extern OOC_INT32 Object_BigInt__BigIntDesc_ToLongInt(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_ToLongInt 22
+#define _TBN_Object_BigInt__BigIntDesc_ToLongInt 9
 typedef OOC_INT32 (*_TBP_Object_BigInt__BigIntDesc_ToLongInt)(Object_BigInt__BigInt a);
 extern OOC_INT32 Object_BigInt__BigIntDesc_Sign(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_Sign 20
+#define _TBN_Object_BigInt__BigIntDesc_Sign 10
 typedef OOC_INT32 (*_TBP_Object_BigInt__BigIntDesc_Sign)(Object_BigInt__BigInt a);
 extern OOC_INT32 Object_BigInt__BigIntDesc_Cmp(Object_BigInt__BigInt a, Object__Object b);
 #define _TBN_Object_BigInt__BigIntDesc_Cmp 5
 typedef OOC_INT32 (*_TBP_Object_BigInt__BigIntDesc_Cmp)(Object_BigInt__BigInt a, Object__Object b);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Abs(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_Abs 6
+#define _TBN_Object_BigInt__BigIntDesc_Abs 11
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Abs)(Object_BigInt__BigInt a);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Neg(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_Neg 17
+#define _TBN_Object_BigInt__BigIntDesc_Neg 12
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Neg)(Object_BigInt__BigInt a);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Add(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
-#define _TBN_Object_BigInt__BigIntDesc_Add 7
+#define _TBN_Object_BigInt__BigIntDesc_Add 13
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Add)(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Sub(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
-#define _TBN_Object_BigInt__BigIntDesc_Sub 21
+#define _TBN_Object_BigInt__BigIntDesc_Sub 14
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Sub)(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Mul(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
-#define _TBN_Object_BigInt__BigIntDesc_Mul 16
+#define _TBN_Object_BigInt__BigIntDesc_Mul 15
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Mul)(Object_BigInt__BigInt a, Object_BigInt__BigInt b);
 extern void Object_BigInt__BigIntDesc_DivMod(Object_BigInt__BigInt v, Object_BigInt__BigInt w, Object_BigInt__BigInt *div, Object_BigInt__BigInt *mod);
-#define _TBN_Object_BigInt__BigIntDesc_DivMod 10
+#define _TBN_Object_BigInt__BigIntDesc_DivMod 16
 typedef void (*_TBP_Object_BigInt__BigIntDesc_DivMod)(Object_BigInt__BigInt v, Object_BigInt__BigInt w, Object_BigInt__BigInt *div, Object_BigInt__BigInt *mod);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Div(Object_BigInt__BigInt v, Object_BigInt__BigInt w);
-#define _TBN_Object_BigInt__BigIntDesc_Div 9
+#define _TBN_Object_BigInt__BigIntDesc_Div 17
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Div)(Object_BigInt__BigInt v, Object_BigInt__BigInt w);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Mod(Object_BigInt__BigInt v, Object_BigInt__BigInt w);
-#define _TBN_Object_BigInt__BigIntDesc_Mod 15
+#define _TBN_Object_BigInt__BigIntDesc_Mod 18
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Mod)(Object_BigInt__BigInt v, Object_BigInt__BigInt w);
 extern Object__String8 Object_BigInt__BigIntDesc_Format(Object_BigInt__BigInt a, OOC_INT16 outputBase);
-#define _TBN_Object_BigInt__BigIntDesc_Format 11
+#define _TBN_Object_BigInt__BigIntDesc_Format 19
 typedef Object__String8 (*_TBP_Object_BigInt__BigIntDesc_Format)(Object_BigInt__BigInt a, OOC_INT16 outputBase);
 extern Object__String8 Object_BigInt__BigIntDesc_ToString(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_ToString 2
+#define _TBN_Object_BigInt__BigIntDesc_ToString 0
 typedef Object__String8 (*_TBP_Object_BigInt__BigIntDesc_ToString)(Object_BigInt__BigInt a);
 extern Object_BigInt__BigInt Object_BigInt__NewLatin1Region(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end, OOC_INT32 inputBase);
 extern Object_BigInt__BigInt Object_BigInt__NewLatin1(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 inputBase);
 extern Object_BigInt__BigInt Object_BigInt__New(Object__String str, OOC_INT32 inputBase);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_Invert(Object_BigInt__BigInt a);
-#define _TBN_Object_BigInt__BigIntDesc_Invert 12
+#define _TBN_Object_BigInt__BigIntDesc_Invert 20
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_Invert)(Object_BigInt__BigInt a);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_LShift(Object_BigInt__BigInt a, OOC_INT32 n);
-#define _TBN_Object_BigInt__BigIntDesc_LShift 14
+#define _TBN_Object_BigInt__BigIntDesc_LShift 21
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_LShift)(Object_BigInt__BigInt a, OOC_INT32 n);
 extern Object_BigInt__BigInt Object_BigInt__BigIntDesc_RShift(Object_BigInt__BigInt a, OOC_INT32 n);
-#define _TBN_Object_BigInt__BigIntDesc_RShift 19
+#define _TBN_Object_BigInt__BigIntDesc_RShift 22
 typedef Object_BigInt__BigInt (*_TBP_Object_BigInt__BigIntDesc_RShift)(Object_BigInt__BigInt a, OOC_INT32 n);
 extern void Object_BigInt__BigIntDesc_Store(Object_BigInt__BigInt a, ADT_Storable__Writer w);
-#define _TBN_Object_BigInt__BigIntDesc_Store 4
+#define _TBN_Object_BigInt__BigIntDesc_Store 3
 typedef void (*_TBP_Object_BigInt__BigIntDesc_Store)(Object_BigInt__BigInt a, ADT_Storable__Writer w);
 extern void Object_BigInt__BigIntDesc_Load(Object_BigInt__BigInt a, ADT_Storable__Reader r);
-#define _TBN_Object_BigInt__BigIntDesc_Load 3
+#define _TBN_Object_BigInt__BigIntDesc_Load 4
 typedef void (*_TBP_Object_BigInt__BigIntDesc_Load)(Object_BigInt__BigInt a, ADT_Storable__Reader r);
 extern void OOC_Object_BigInt_init(void);
 extern void OOC_Object_BigInt_init0(void);

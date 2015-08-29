@@ -48,7 +48,7 @@ static OOC_SSA__Instr OOC_SSA_PRE__GetNoop(OOC_SSA__ProcBlock pb, OOC_SSA__Resul
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2052))+12);
   i2 = *(OOC_INT8*)((_check_pointer(i2, 2058))+36);
-  i2 = i2==87;
+  i2 = i2==88;
   if (!i2) goto l6;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2104))+12);
   return (OOC_SSA__Instr)i2;
@@ -59,7 +59,7 @@ l6:
   if (i2) goto l3_loop;
 l11:
   i1 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i1, 87, 0);
+  i1 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i1, 88, 0);
   i2 = (OOC_INT32)OOC_SSA__InstrDesc_AddResult((OOC_SSA__Instr)i1, 2);
   OOC_SSA__ResultDesc_ReplaceUses((OOC_SSA__Result)i0, (OOC_SSA__Result)i2);
   OOC_SSA__InstrDesc_AddOpnd((OOC_SSA__Instr)i1, (OOC_SSA__Result)i0, 2);
@@ -715,7 +715,7 @@ l3_loop:
   i3 = i3==85;
   if (i3) goto l9;
   i3 = *(OOC_INT8*)((_check_pointer(i1, 11902))+36);
-  i3 = i3==87;
+  i3 = i3==88;
   if (!i3) goto l13;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11972))+24);
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 11981));

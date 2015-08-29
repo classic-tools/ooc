@@ -15,14 +15,14 @@ static void OOC_SymbolTable_Predef__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_SymbolTable_Predef__3676 = { (RT0__Struct[]){&_td_Object_Boxed__Object}, NULL, NULL, &_mid, NULL, 72, 18, RT0__strArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__5717 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__6094 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__6772 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__7190 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__7529 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__8318 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_Predef__14792 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__3676 = { (RT0__Struct[]){&_td_Object_Boxed__Object}, NULL, NULL, &_mid, NULL, 72, 18, 0, RT0__strArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__5717 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__6094 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__6772 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__7190 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__7529 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__8318 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_Predef__14792 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SymbolTable:Predef", (RT0__Struct[]) { NULL } };
 
 extern void OOC_OOC_SymbolTable_Predef_init0() {

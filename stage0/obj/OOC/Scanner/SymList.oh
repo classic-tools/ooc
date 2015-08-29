@@ -38,10 +38,10 @@ extern OOC_Scanner_SymList__Builder OOC_Scanner_SymList__New(OOC_Scanner_InputBu
 extern OOC_Scanner_SymList__Symbol OOC_Scanner_SymList__NewSymbol(OOC_Scanner_InputBuffer__CharArray str, OOC_INT32 len);
 extern OOC_Scanner_SymList__Symbol OOC_Scanner_SymList__CloneSymbol(OOC_Scanner_SymList__Symbol old, const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
 extern void OOC_Scanner_SymList__BuilderDesc_Clear(OOC_Scanner_SymList__Builder b);
-#define _TBN_OOC_Scanner_SymList__BuilderDesc_Clear 1
+#define _TBN_OOC_Scanner_SymList__BuilderDesc_Clear 0
 typedef void (*_TBP_OOC_Scanner_SymList__BuilderDesc_Clear)(OOC_Scanner_SymList__Builder b);
 extern void OOC_Scanner_SymList__BuilderDesc_AddSymbol(OOC_Scanner_SymList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
-#define _TBN_OOC_Scanner_SymList__BuilderDesc_AddSymbol 0
+#define _TBN_OOC_Scanner_SymList__BuilderDesc_AddSymbol 1
 typedef void (*_TBP_OOC_Scanner_SymList__BuilderDesc_AddSymbol)(OOC_Scanner_SymList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
 extern void OOC_Scanner_SymList__BuilderDesc_SetPragmaHistory(OOC_Scanner_SymList__Builder b, OOC_Config_Pragmas__History pragmaHistory);
 #define _TBN_OOC_Scanner_SymList__BuilderDesc_SetPragmaHistory 2

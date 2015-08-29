@@ -1,4 +1,4 @@
-(* 	$Id: Codec.Mod,v 1.10 2003/07/30 22:35:55 mva Exp $	 *)
+(* 	$Id: Codec.Mod,v 1.1 2003/09/22 19:32:17 mva Exp $	 *)
 MODULE Codec [OOC_EXTENSIONS];
 (*  Registry for encoders/decoders of binary and character data.
     Copyright (C) 2002  Michael van Acken

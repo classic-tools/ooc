@@ -96,8 +96,9 @@ typedef OOC_INT8 OOC_SSA_Opcode__Subclass;
 #define OOC_SSA_Opcode__designStandin 84
 #define OOC_SSA_Opcode__equiv 85
 #define OOC_SSA_Opcode__equivPRE 86
-#define OOC_SSA_Opcode__noop 87
-#define OOC_SSA_Opcode__lastOpcode 87
+#define OOC_SSA_Opcode__vtableProcAddress 87
+#define OOC_SSA_Opcode__noop 88
+#define OOC_SSA_Opcode__lastOpcode 88
 #define OOC_SSA_Opcode__scNone 0
 #define OOC_SSA_Opcode__scSigned8 1
 #define OOC_SSA_Opcode__scSigned16 2
@@ -123,10 +124,10 @@ extern void OOC_OOC_SSA_Opcode_init(void);
 extern void OOC_OOC_SSA_Opcode_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SSA_Opcode__33879;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__33965;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__34551;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__34654;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__34364;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__34450;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__35036;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__35139;
 #endif /* _MODULE_OOC_SSA_Opcode_ */
 
 /* --- */

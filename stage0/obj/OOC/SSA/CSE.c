@@ -171,7 +171,7 @@ void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb) {
   register OOC_INT32 i0,i1,i2,i3;
   OOC_INT32 i;
   OOC_INT32 j;
-  OOC_SSA_CSE__Partition opcodes[88][12];
+  OOC_SSA_CSE__Partition opcodes[89][12];
   OOC_SSA_CSE__Partition worklist;
   OOC_SSA_CSE__Partition pList;
   OOC_SSA__Instr instr;
@@ -701,7 +701,7 @@ l1_loop:
   j = 0;
   i2=0;
 l2_loop:
-  *(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i1, 88, OOC_UINT32, 11150))*48))+(_check_index(i2, 12, OOC_UINT32, 11152))*4) = (OOC_INT32)0;
+  *(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i1, 89, OOC_UINT32, 11150))*48))+(_check_index(i2, 12, OOC_UINT32, 11152))*4) = (OOC_INT32)0;
   i2 = i2+1;
   j = i2;
   i3 = i2<=11;
@@ -709,7 +709,7 @@ l2_loop:
 l6:
   i1 = i1+1;
   i = i1;
-  i2 = i1<=87;
+  i2 = i1<=88;
   if (i2) goto l1_loop;
 l10:
   worklist = (OOC_SSA_CSE__Partition)(OOC_INT32)0;
@@ -730,7 +730,7 @@ l18:
   if (i1) goto l24;
   i1 = *(OOC_INT8*)((_check_pointer(i0, 11651))+36);
   i0 = *(OOC_INT8*)((_check_pointer(i0, 11665))+5);
-  i0 = (OOC_INT32)*(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i1, 88, OOC_UINT8, 11645))*48))+(_check_index(i0, 12, OOC_UINT8, 11658))*4);
+  i0 = (OOC_INT32)*(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i1, 89, OOC_UINT8, 11645))*48))+(_check_index(i0, 12, OOC_UINT8, 11658))*4);
   p = (OOC_SSA_CSE__Partition)i0;
   i1 = i0==(OOC_INT32)0;
   if (!i1) goto l25;
@@ -739,7 +739,7 @@ l18:
   i1 = (OOC_INT32)instr;
   i2 = *(OOC_INT8*)((_check_pointer(i1, 11757))+36);
   i1 = *(OOC_INT8*)((_check_pointer(i1, 11772))+5);
-  *(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i2, 88, OOC_UINT8, 11751))*48))+(_check_index(i1, 12, OOC_UINT8, 11765))*4) = i0;
+  *(OOC_INT32*)(((OOC_INT32)opcodes+((_check_index(i2, 89, OOC_UINT8, 11751))*48))+(_check_index(i1, 12, OOC_UINT8, 11765))*4) = i0;
   
   goto l25;
 l24:

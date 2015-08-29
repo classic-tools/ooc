@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.61 2003/07/27 10:36:59 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.66 2003/09/30 17:40:47 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -61,6 +61,7 @@ CONST
   notExtensionOfBound = 31;
   tooFewTypeAliases = 32;
   cannotDefineTypeAliases = 33;
+  inconsistentVtable = 34;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -147,6 +148,8 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "The base record type has ${count} type parameter(s)"
     | cannotDefineTypeAliases:
       t := "The base record type has no type parameters"
+    | inconsistentVtable:
+      t := "VTABLE flag is inconsistent with base type"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
@@ -1066,18 +1069,59 @@ RAISES IO.Error;
       VAR
         i: LONGINT;
         proc: Sym.ProcDecl;
+        baseRecord : Sym.Record;
+
+      PROCEDURE AllocateTBProcIndices(record: Sym.Record);
+      (* When this procedure is done, all type-bound procedures of the record
+         namespace have a valid value in @ofield{Sym.ProcDecl.tbProcIndex}, and
+         the record's @ofield{Sym.Record.tbProcCount} correctly reflects the
+         number of type-bound procedures attached to it.  *)
+        VAR
+          decl, base: Sym.Item;
+          ns: Namespace.Extended;
+        BEGIN
+          decl := root.nestedItems;
+          WHILE (decl # NIL) DO
+            WITH decl: Sym.ProcDecl DO
+              IF decl.IsTypeBound() & ~decl.isForwardDecl &
+                 (decl.Class() = record) THEN
+                ns := record.ns(Namespace.Extended);
+                IF (ns.extends = NIL) THEN
+                  base := NIL;
+                ELSE
+                  base := ns.extends.Identify(decl, decl.name, TRUE);
+                END;
+                IF (base # NIL) & (base IS Sym.ProcDecl) THEN
+                  base(Sym.ProcDecl).CopyTBProcIndex(decl);
+                ELSE
+                  record.AssignTBProcIndex(decl);
+                END;
+              END;
+            ELSE
+              (* ignore *)
+            END;
+            decl := decl.nextNested;
+          END;
+        END AllocateTBProcIndices;
+      
       BEGIN
         IF (record. tbProcCount = -1) THEN
           IF (record. baseType = NIL) OR 
              ~(record. baseType IS Sym.Record) THEN
             record. tbProcCount := 0
           ELSE
-            CheckRecord (record. baseType(Sym.Record));
-            record. tbProcCount := record. baseType(Sym.Record). tbProcCount
+            baseRecord := record. baseType(Sym.Record);
+            CheckRecord (baseRecord);
+            record. tbProcCount := baseRecord. tbProcCount;
+            IF record. isVtable # baseRecord. isVtable THEN
+              ErrType(inconsistentVtable, record);
+            END
           END;
           record.ns(Namespace.Extended).CheckRestrictions (record, uses,
                                                            errList);
 
+          AllocateTBProcIndices(record);
+          
           IF errList.NoErrors() & ~record.isAbstract THEN
             (* Check that no abstract procedure remain.  Only do this if the
                call to CheckRestrictions did not report any errors, or we might
@@ -1236,6 +1280,10 @@ RAISES IO.Error;
                 SetFlag(item.isExtensible, FALSE);
               | Sym.flagExtensible:
                 SetFlag(item.isExtensible, TRUE);
+              | Sym.flagUncheckedException:
+                SetFlag(item.isUncheckedException, TRUE);
+              | Sym.flagVtable:
+                SetFlag(item.isVtable, TRUE);
               | Sym.flagUnion:
                 SetFlag(item.isUnion, TRUE);
               | Sym.flagAlign1:
@@ -1325,6 +1373,13 @@ RAISES IO.Error;
             item.isStatic := TRUE;
           END;
 
+        | item: Sym.Record DO
+          IF (item.baseType # NIL) &
+             (item.baseType IS Sym.Record) &
+             item.baseType(Sym.Record).isUncheckedException THEN
+            item.isUncheckedException := TRUE;
+          END;
+          
         | item: Sym.VarDecl DO
           IF item.isParameter THEN
             type := item.type;

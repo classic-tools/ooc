@@ -1,4 +1,4 @@
-(* 	$Id: UU.Mod,v 1.6 2002/12/20 11:18:40 mva Exp $	 *)
+(* 	$Id: UU.Mod,v 1.1 2003/09/22 19:32:17 mva Exp $	 *)
 MODULE Codec:UU [OOC_EXTENSIONS];
 (*  Codec for uuencode transport encoding.
     Copyright (C) 2002  Michael van Acken

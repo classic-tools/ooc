@@ -13,6 +13,18 @@ typedef struct Exception__ExceptionDesc {
   OOC_PTR backtrace[21];
   OOC_INT32 backtraceSize;
 } Exception__ExceptionDesc;
+typedef struct Exception__CheckedDesc *Exception__Checked;
+typedef struct Exception__CheckedDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} Exception__CheckedDesc;
+typedef struct Exception__UncheckedDesc *Exception__Unchecked;
+typedef struct Exception__UncheckedDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} Exception__UncheckedDesc;
 typedef struct Exception__Context *Exception__ContextPtr;
 typedef struct Exception__Context {
   Exception__ContextPtr next;
@@ -32,7 +44,7 @@ typedef struct Exception__ThreadState {
 } Exception__ThreadState;
 extern Exception__ThreadStatePtr (*Exception__GetThreadState)(void);
 extern void Exception__ExceptionDesc_INIT(Exception__Exception e, Object__String msg);
-#define _TBN_Exception__ExceptionDesc_INIT 1
+#define _TBN_Exception__ExceptionDesc_INIT 0
 typedef void (*_TBP_Exception__ExceptionDesc_INIT)(Exception__Exception e, Object__String msg);
 extern void NORETURN Exception__Raise(Exception__Exception e) NORETURN2;
 extern Exception__Exception Exception__Current(void);
@@ -41,16 +53,16 @@ extern void Exception__PushContext(struct Exception__Context *context, OOC_PTR j
 extern void Exception__PopContext(OOC_INT32 n);
 extern void NORETURN Exception__ActivateContext(void) NORETURN2;
 extern Object__String Exception__ExceptionDesc_GetMessage(Exception__Exception e);
-#define _TBN_Exception__ExceptionDesc_GetMessage 0
+#define _TBN_Exception__ExceptionDesc_GetMessage 1
 typedef Object__String (*_TBP_Exception__ExceptionDesc_GetMessage)(Exception__Exception e);
 extern void Exception__ExceptionDesc_WriteBacktrace(Exception__Exception e);
-#define _TBN_Exception__ExceptionDesc_WriteBacktrace 3
+#define _TBN_Exception__ExceptionDesc_WriteBacktrace 2
 typedef void (*_TBP_Exception__ExceptionDesc_WriteBacktrace)(Exception__Exception e);
 extern Object__String8 Exception__ExceptionDesc_Name(Exception__Exception e);
-#define _TBN_Exception__ExceptionDesc_Name 2
+#define _TBN_Exception__ExceptionDesc_Name 3
 typedef Object__String8 (*_TBP_Exception__ExceptionDesc_Name)(Exception__Exception e);
 extern void Exception__ParseErrorDesc_INIT(Exception__ParseError e, Object__String msg, OOC_INT32 offset);
-#define _TBN_Exception__ParseErrorDesc_INIT 1
+#define _TBN_Exception__ParseErrorDesc_INIT 0
 typedef void (*_TBP_Exception__ParseErrorDesc_INIT)(Exception__ParseError e, Object__String msg, OOC_INT32 offset);
 extern void NORETURN Exception__Abort(Exception__Exception e) NORETURN2;
 extern void NORETURN Exception__FatalError(Object__String msg) NORETURN2;
@@ -61,7 +73,11 @@ extern void OOC_Exception_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_Exception__Exception;
 extern RT0__StructDesc _td_Exception__ExceptionDesc;
-extern RT0__StructDesc _td_Exception__4189;
+extern RT0__StructDesc _td_Exception__4465;
+extern RT0__StructDesc _td_Exception__Checked;
+extern RT0__StructDesc _td_Exception__CheckedDesc;
+extern RT0__StructDesc _td_Exception__Unchecked;
+extern RT0__StructDesc _td_Exception__UncheckedDesc;
 extern RT0__StructDesc _td_Exception__ContextPtr;
 extern RT0__StructDesc _td_Exception__ParseError;
 extern RT0__StructDesc _td_Exception__ParseErrorDesc;

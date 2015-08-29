@@ -1,4 +1,4 @@
-(* 	$Id: Twofish.Mod,v 1.5 2002/12/20 11:18:40 mva Exp $	 *)
+(* 	$Id: Twofish.Mod,v 1.1 2003/09/22 19:32:17 mva Exp $	 *)
 MODULE Codec:Twofish[OOC_EXTENSIONS];
 (*  Codec for the Twofish encryption algorithm.
     Copyright (C) 2002  Michael van Acken

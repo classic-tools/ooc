@@ -55,7 +55,7 @@ extern void OOC_IR_CheckUses__ErrorContextDesc_GetTemplate(OOC_IR_CheckUses__Err
 #define _TBN_OOC_IR_CheckUses__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_IR_CheckUses__ErrorContextDesc_GetTemplate)(OOC_IR_CheckUses__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern void OOC_IR_CheckUses__VisitorCallsDesc_VisitCall(OOC_IR_CheckUses__VisitorCalls v, OOC_IR__Call call);
-#define _TBN_OOC_IR_CheckUses__VisitorCallsDesc_VisitCall 8
+#define _TBN_OOC_IR_CheckUses__VisitorCallsDesc_VisitCall 40
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorCallsDesc_VisitCall)(OOC_IR_CheckUses__VisitorCalls v, OOC_IR__Call call);
 extern OOC_IR_CheckUses__Def OOC_IR_CheckUses__DefDesc_Copy(OOC_IR_CheckUses__Def def);
 #define _TBN_OOC_IR_CheckUses__DefDesc_Copy 3
@@ -64,10 +64,10 @@ extern OOC_INT32 OOC_IR_CheckUses__DefDesc_GetClass(OOC_IR_CheckUses__Def def, O
 #define _TBN_OOC_IR_CheckUses__DefDesc_GetClass 4
 typedef OOC_INT32 (*_TBP_OOC_IR_CheckUses__DefDesc_GetClass)(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var);
 extern void OOC_IR_CheckUses__DefDesc_SetClass(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var, OOC_INT32 _class);
-#define _TBN_OOC_IR_CheckUses__DefDesc_SetClass 6
+#define _TBN_OOC_IR_CheckUses__DefDesc_SetClass 5
 typedef void (*_TBP_OOC_IR_CheckUses__DefDesc_SetClass)(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var, OOC_INT32 _class);
 extern void OOC_IR_CheckUses__DefDesc_Merge(OOC_IR_CheckUses__Def def, OOC_IR_CheckUses__Def def2);
-#define _TBN_OOC_IR_CheckUses__DefDesc_Merge 5
+#define _TBN_OOC_IR_CheckUses__DefDesc_Merge 6
 typedef void (*_TBP_OOC_IR_CheckUses__DefDesc_Merge)(OOC_IR_CheckUses__Def def, OOC_IR_CheckUses__Def def2);
 extern void OOC_IR_CheckUses__DefDesc_Unreachable(OOC_IR_CheckUses__Def def);
 #define _TBN_OOC_IR_CheckUses__DefDesc_Unreachable 7
@@ -79,19 +79,19 @@ extern void OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag(OOC_IR_CheckUses__ProcDa
 #define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag 4
 typedef void (*_TBP_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag)(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__Item item, OOC_INT32 flag);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitVar(OOC_IR_CheckUses__Visitor v, OOC_IR__Var var);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitVar 57
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitVar 36
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitVar)(OOC_IR_CheckUses__Visitor v, OOC_IR__Var var);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitDeref(OOC_IR_CheckUses__Visitor v, OOC_IR__Deref deref);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitDeref 22
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitDeref 12
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitDeref)(OOC_IR_CheckUses__Visitor v, OOC_IR__Deref deref);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitIndex(OOC_IR_CheckUses__Visitor v, OOC_IR__Index index);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitIndex 27
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitIndex 14
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitIndex)(OOC_IR_CheckUses__Visitor v, OOC_IR__Index index);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitAdr(OOC_IR_CheckUses__Visitor v, OOC_IR__Adr adr);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitAdr 1
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitAdr 2
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitAdr)(OOC_IR_CheckUses__Visitor v, OOC_IR__Adr adr);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitCall(OOC_IR_CheckUses__Visitor v, OOC_IR__Call call);
-#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitCall 8
+#define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitCall 40
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorDesc_VisitCall)(OOC_IR_CheckUses__Visitor v, OOC_IR__Call call);
 extern void OOC_IR_CheckUses__CheckUses(OOC_IR__Module module, OOC_SymbolTable__Module moduleDecl, OOC_Config_Pragmas__History pragmaHistory, OOC_Error__List errList);
 extern void OOC_OOC_IR_CheckUses_init(void);

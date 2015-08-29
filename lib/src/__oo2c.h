@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.h,v 1.45 2003/08/13 08:34:28 mva Exp $        */
+/*      $Id: __oo2c.h,v 1.46 2003/09/12 08:06:11 sgreenhill Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001-2003  Michael van Acken
 
@@ -201,6 +201,8 @@ extern OOC_INT32 _cmp32(const OOC_CHAR32* l, const OOC_CHAR32* r);
    (((RT0__Struct)(_tag))->baseTypes[(_td)->len] == (_td)))
 
 #define OOC_TBPROC_ADR(_tag,_name) (((RT0__Struct)(_tag))->tbProcs[_TBN_##_name])
+
+#define OOC_VTABLEPROC_ADR(_adr,_name) (((OOC_PTR **) _adr)[0][_TBN_##_name])
 
 #define OOC_TBCALL(_adr,_name) ((_TBP_##_name)(_adr))
 

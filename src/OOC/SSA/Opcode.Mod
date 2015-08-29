@@ -1,4 +1,4 @@
-(* 	$Id: Opcode.Mod,v 1.102 2003/09/02 19:49:36 mva Exp $	 *)
+(* 	$Id: Opcode.Mod,v 1.104 2003/09/16 03:27:13 sgreenhill Exp $	 *)
 MODULE OOC:SSA:Opcode;
 (*  This modules defines opcodes for SSA instructions.
     Copyright (C) 2001-2003  Michael van Acken
@@ -778,7 +778,22 @@ CONST
   (**Like @oconst{equiv}, but used only in the context of the algorithm for
      partial redundancy elimination.  *)
      
-  noop* = 87;
+  vtableProcAddress* = 87;
+  (**Calculates the address of the procedure that is to be used for a dynamic
+     vtable type-bound call.
+
+     @table @oconst
+     @item *OOC:SSA.Opnd.arg
+	 A pointer to a VTABLE record.
+
+     @item *OOC:SSA.Opnd.arg
+     The static procedure declaration that is used by the call in the source
+     code.  The referenced instruction's opcode is @oconst{declRef}.
+     @end table
+
+     Result of the instruction is the address of the procedure.  *)
+
+  noop* = 88;
   (**No operation.  Used to anchor other information in the SSA graph.
      Conceptually, every result of this instruction is the value of the
      corresponding operand.  Any operands beyond the number of results is
@@ -962,6 +977,7 @@ PROCEDURE GetName* (class: Class; subclass: Subclass; VAR name: ARRAY OF CHAR);
     | designStandin: cstr := "design-standin";
     | equiv: cstr := "equiv";
     | equivPRE: cstr := "equiv-pre";
+    | vtableProcAddress: cstr := "vtable-proc-address";
     | noop: cstr := "noop";
     END;
     

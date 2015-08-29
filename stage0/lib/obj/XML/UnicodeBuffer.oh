@@ -49,10 +49,10 @@ typedef struct XML_UnicodeBuffer__OutputDesc {
   OOC_INT32 unicodeEnd;
 } XML_UnicodeBuffer__OutputDesc;
 extern OOC_CHAR8 XML_UnicodeBuffer__InputDesc_NextBlock(XML_UnicodeBuffer__Input in);
-#define _TBN_XML_UnicodeBuffer__InputDesc_NextBlock 1
+#define _TBN_XML_UnicodeBuffer__InputDesc_NextBlock 0
 typedef OOC_CHAR8 (*_TBP_XML_UnicodeBuffer__InputDesc_NextBlock)(XML_UnicodeBuffer__Input in);
 extern void XML_UnicodeBuffer__InputDesc_Close(XML_UnicodeBuffer__Input in);
-#define _TBN_XML_UnicodeBuffer__InputDesc_Close 0
+#define _TBN_XML_UnicodeBuffer__InputDesc_Close 1
 typedef void (*_TBP_XML_UnicodeBuffer__InputDesc_Close)(XML_UnicodeBuffer__Input in);
 extern void XML_UnicodeBuffer__InputDesc_SetCodec(XML_UnicodeBuffer__Input in, XML_UnicodeCodec__Factory cf, OOC_CHAR8 autoDetect);
 #define _TBN_XML_UnicodeBuffer__InputDesc_SetCodec 2
@@ -60,19 +60,19 @@ typedef void (*_TBP_XML_UnicodeBuffer__InputDesc_SetCodec)(XML_UnicodeBuffer__In
 extern void XML_UnicodeBuffer__InitInput(XML_UnicodeBuffer__Input input, OOC_CHAR8 _new, IO__ByteChannel reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
 extern XML_UnicodeBuffer__Input XML_UnicodeBuffer__NewInput(IO__ByteChannel reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
 extern void XML_UnicodeBuffer__OutputDesc_Write16I(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
-#define _TBN_XML_UnicodeBuffer__OutputDesc_Write16I 2
+#define _TBN_XML_UnicodeBuffer__OutputDesc_Write16I 0
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write16I)(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
 extern void XML_UnicodeBuffer__OutputDesc_Write8I(XML_UnicodeBuffer__Output out, const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
-#define _TBN_XML_UnicodeBuffer__OutputDesc_Write8I 4
+#define _TBN_XML_UnicodeBuffer__OutputDesc_Write8I 1
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write8I)(XML_UnicodeBuffer__Output out, const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
 extern void XML_UnicodeBuffer__OutputDesc_Write16(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d);
-#define _TBN_XML_UnicodeBuffer__OutputDesc_Write16 1
+#define _TBN_XML_UnicodeBuffer__OutputDesc_Write16 2
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write16)(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d);
 extern void XML_UnicodeBuffer__OutputDesc_Write8(XML_UnicodeBuffer__Output out, const OOC_CHAR8 str[], OOC_LEN str_0d);
 #define _TBN_XML_UnicodeBuffer__OutputDesc_Write8 3
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write8)(XML_UnicodeBuffer__Output out, const OOC_CHAR8 str[], OOC_LEN str_0d);
 extern void XML_UnicodeBuffer__OutputDesc_Flush(XML_UnicodeBuffer__Output out);
-#define _TBN_XML_UnicodeBuffer__OutputDesc_Flush 0
+#define _TBN_XML_UnicodeBuffer__OutputDesc_Flush 4
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Flush)(XML_UnicodeBuffer__Output out);
 extern void XML_UnicodeBuffer__InitOutput(XML_UnicodeBuffer__Output out, OOC_CHAR8 _new, IO__ByteChannel writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);
 extern XML_UnicodeBuffer__Output XML_UnicodeBuffer__NewOutput(IO__ByteChannel writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);

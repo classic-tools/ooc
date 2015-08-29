@@ -1,4 +1,4 @@
-(*	$Id: IO.Mod,v 1.13 2003/08/03 12:18:44 mva Exp $	*)
+(*	$Id: IO.Mod,v 1.14 2003/09/30 17:40:50 mva Exp $	*)
 MODULE IO;
 (*  Defines common behaviour of I/O channel and selector.
     Copyright (C) 2003  Michael van Acken
@@ -132,7 +132,7 @@ TYPE
   Error* = POINTER TO ErrorDesc;
   ErrorDesc* = RECORD
   (**Base class of all I/O exceptions raised by channel implementations.  *)
-    (Exception.ExceptionDesc) 
+    (Exception.CheckedDesc) 
   END;
   FileNotFound* = POINTER TO FileNotFoundDesc;
   FileNotFoundDesc = RECORD

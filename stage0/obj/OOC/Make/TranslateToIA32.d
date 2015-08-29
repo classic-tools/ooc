@@ -17,8 +17,8 @@ static void OOC_Make_TranslateToIA32__WriteCodeFile(OOC_IA32_Writer__Writer w, O
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Make_TranslateToIA32__Translator = { (RT0__Struct[]){&_td_OOC_Make_TranslateToIA32__TranslatorDesc}, NULL, NULL, &_mid, "Translator", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Make_TranslateToIA32__TranslatorDesc = { (RT0__Struct[]){&_td_OOC_Make_TranslateToIA32__TranslatorDesc}, (void*[]){(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcBody,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure}, NULL, &_mid, "TranslatorDesc", 20, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_Make_TranslateToIA32__Translator = { (RT0__Struct[]){&_td_OOC_Make_TranslateToIA32__TranslatorDesc}, NULL, NULL, &_mid, "Translator", 4, -1, 0, RT0__strPointer };
+RT0__StructDesc _td_OOC_Make_TranslateToIA32__TranslatorDesc = { (RT0__Struct[]){&_td_OOC_Make_TranslateToIA32__TranslatorDesc}, (void*[]){(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcBody,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures}, NULL, &_mid, "TranslatorDesc", 20, 0, 0, RT0__strRecord };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Make:TranslateToIA32", (RT0__Struct[]) { &_td_OOC_Make_TranslateToIA32__Translator, &_td_OOC_Make_TranslateToIA32__TranslatorDesc, NULL } };
 
 extern void OOC_OOC_Make_TranslateToIA32_init0() {

@@ -62,25 +62,25 @@ typedef struct Config_Parser__ResolverDesc {
   char __dummy;
 } Config_Parser__ResolverDesc;
 extern void Config_Parser__BuilderDesc_SetLocator(Config_Parser__Builder b, XML_Locator__Locator l);
-#define _TBN_Config_Parser__BuilderDesc_SetLocator 14
+#define _TBN_Config_Parser__BuilderDesc_SetLocator 0
 typedef void (*_TBP_Config_Parser__BuilderDesc_SetLocator)(Config_Parser__Builder b, XML_Locator__Locator l);
 extern void Config_Parser__BuilderDesc_SetErrorListener(Config_Parser__Builder b, XML_Locator__ErrorListener errorListener);
-#define _TBN_Config_Parser__BuilderDesc_SetErrorListener 13
+#define _TBN_Config_Parser__BuilderDesc_SetErrorListener 1
 typedef void (*_TBP_Config_Parser__BuilderDesc_SetErrorListener)(Config_Parser__Builder b, XML_Locator__ErrorListener errorListener);
 extern void Config_Parser__BuilderDesc_StartElement(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName);
-#define _TBN_Config_Parser__BuilderDesc_StartElement 19
+#define _TBN_Config_Parser__BuilderDesc_StartElement 6
 typedef void (*_TBP_Config_Parser__BuilderDesc_StartElement)(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName);
 extern void Config_Parser__BuilderDesc_Attribute(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName, XML_DTD__AttrDecl attrDecl, XML_DTD__AttValue value, OOC_CHAR8 specified);
-#define _TBN_Config_Parser__BuilderDesc_Attribute 0
+#define _TBN_Config_Parser__BuilderDesc_Attribute 8
 typedef void (*_TBP_Config_Parser__BuilderDesc_Attribute)(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName, XML_DTD__AttrDecl attrDecl, XML_DTD__AttValue value, OOC_CHAR8 specified);
 extern void Config_Parser__BuilderDesc_AttributesDone(Config_Parser__Builder b);
-#define _TBN_Config_Parser__BuilderDesc_AttributesDone 1
+#define _TBN_Config_Parser__BuilderDesc_AttributesDone 10
 typedef void (*_TBP_Config_Parser__BuilderDesc_AttributesDone)(Config_Parser__Builder b);
 extern void Config_Parser__BuilderDesc_EndElement(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName);
 #define _TBN_Config_Parser__BuilderDesc_EndElement 7
 typedef void (*_TBP_Config_Parser__BuilderDesc_EndElement)(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName);
 extern void Config_Parser__BuilderDesc_Characters(Config_Parser__Builder b, XML_DTD__StringVar chars, OOC_LEN chars_0d, OOC_INT32 charsStart, OOC_INT32 charsEnd, OOC_INT8 elementWhitespace);
-#define _TBN_Config_Parser__BuilderDesc_Characters 2
+#define _TBN_Config_Parser__BuilderDesc_Characters 12
 typedef void (*_TBP_Config_Parser__BuilderDesc_Characters)(Config_Parser__Builder b, XML_DTD__StringVar chars, OOC_LEN chars_0d, OOC_INT32 charsStart, OOC_INT32 charsEnd, OOC_INT8 elementWhitespace);
 extern Config_Parser__Parser Config_Parser__NewFile(Object__String filePath);
 extern Config_Parser__Parser Config_Parser__NewChannel(IO__ByteChannel ch);
@@ -88,7 +88,7 @@ extern void Config_Parser__ParserDesc_ParseDocument(Config_Parser__Parser p);
 #define _TBN_Config_Parser__ParserDesc_ParseDocument 0
 typedef void (*_TBP_Config_Parser__ParserDesc_ParseDocument)(Config_Parser__Parser p);
 extern OOC_CHAR8 Config_Parser__NodeDesc_IsWhitespace(Config_Parser__Node node);
-#define _TBN_Config_Parser__NodeDesc_IsWhitespace 3
+#define _TBN_Config_Parser__NodeDesc_IsWhitespace 0
 typedef OOC_CHAR8 (*_TBP_Config_Parser__NodeDesc_IsWhitespace)(Config_Parser__Node node);
 extern OOC_CHAR8 Config_Parser__NodeDesc_HasNoElementContent(Config_Parser__Node node);
 #define _TBN_Config_Parser__NodeDesc_HasNoElementContent 1
@@ -97,7 +97,7 @@ extern OOC_CHAR8 Config_Parser__NodeDesc_IsEmpty(Config_Parser__Node node);
 #define _TBN_Config_Parser__NodeDesc_IsEmpty 2
 typedef OOC_CHAR8 (*_TBP_Config_Parser__NodeDesc_IsEmpty)(Config_Parser__Node node);
 extern XML_UnicodeBuffer__CharArray Config_Parser__NodeDesc_GetCharDataContent(Config_Parser__Node node);
-#define _TBN_Config_Parser__NodeDesc_GetCharDataContent 0
+#define _TBN_Config_Parser__NodeDesc_GetCharDataContent 3
 typedef XML_UnicodeBuffer__CharArray (*_TBP_Config_Parser__NodeDesc_GetCharDataContent)(Config_Parser__Node node);
 extern void OOC_Config_Parser_init(void);
 extern void OOC_Config_Parser_init0(void);

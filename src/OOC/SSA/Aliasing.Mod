@@ -1,4 +1,4 @@
-(* 	$Id: Aliasing.Mod,v 1.8 2003/05/10 20:40:08 mva Exp $	 *)
+(* 	$Id: Aliasing.Mod,v 1.9 2003/09/28 10:15:50 mva Exp $	 *)
 MODULE OOC:SSA:Aliasing;
 (*  Calculates aliasing between instructions.
     Copyright (C) 2002,2003  Michael van Acken
@@ -147,7 +147,7 @@ PROCEDURE DesignatorAlias* (instr, reference: SSA.Opnd): Id;
 
   PROCEDURE CompatiblePointers (a, b: Sym.Type): BOOLEAN;
     BEGIN
-      IF (a = b) THEN
+      IF TR.SameType(a, b) THEN
         RETURN TRUE;
       ELSE
         a := a.Bound(); b := b.Bound();

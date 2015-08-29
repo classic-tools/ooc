@@ -14,13 +14,13 @@ typedef struct OOC_Doc_TextBuffer__BufferDesc {
 } OOC_Doc_TextBuffer__BufferDesc;
 extern OOC_Doc_TextBuffer__Buffer OOC_Doc_TextBuffer__New(void);
 extern void OOC_Doc_TextBuffer__BufferDesc_Clear(OOC_Doc_TextBuffer__Buffer b);
-#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Clear 6
+#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Clear 0
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_Clear)(OOC_Doc_TextBuffer__Buffer b);
 extern void OOC_Doc_TextBuffer__BufferDesc_Append(OOC_Doc_TextBuffer__Buffer b, const OOC_CHAR8 str[], OOC_LEN str_0d);
-#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Append 0
+#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Append 1
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_Append)(OOC_Doc_TextBuffer__Buffer b, const OOC_CHAR8 str[], OOC_LEN str_0d);
 extern void OOC_Doc_TextBuffer__BufferDesc_AppendEOL(OOC_Doc_TextBuffer__Buffer b);
-#define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendEOL 1
+#define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendEOL 2
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_AppendEOL)(OOC_Doc_TextBuffer__Buffer b);
 extern void OOC_Doc_TextBuffer__BufferDesc_AppendSpaces(OOC_Doc_TextBuffer__Buffer b, OOC_INT32 len);
 #define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendSpaces 3
@@ -29,10 +29,10 @@ extern void OOC_Doc_TextBuffer__BufferDesc_AppendSubstring(OOC_Doc_TextBuffer__B
 #define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendSubstring 4
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_AppendSubstring)(OOC_Doc_TextBuffer__Buffer b, const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
 extern void OOC_Doc_TextBuffer__BufferDesc_AppendNoLB(OOC_Doc_TextBuffer__Buffer b, const OOC_CHAR8 str[], OOC_LEN str_0d);
-#define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendNoLB 2
+#define _TBN_OOC_Doc_TextBuffer__BufferDesc_AppendNoLB 5
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_AppendNoLB)(OOC_Doc_TextBuffer__Buffer b, const OOC_CHAR8 str[], OOC_LEN str_0d);
 extern void OOC_Doc_TextBuffer__BufferDesc_Capitalize(OOC_Doc_TextBuffer__Buffer b, OOC_INT32 start, OOC_INT32 end);
-#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Capitalize 5
+#define _TBN_OOC_Doc_TextBuffer__BufferDesc_Capitalize 6
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_Capitalize)(OOC_Doc_TextBuffer__Buffer b, OOC_INT32 start, OOC_INT32 end);
 extern void OOC_Doc_TextBuffer__FormatBlock(OOC_Doc_TextBuffer__Buffer dest, OOC_Doc_TextBuffer__Buffer source, OOC_INT32 indent, OOC_INT32 scrWidth, OOC_INT32 offsetFirst);
 extern void OOC_Doc_TextBuffer__FormatBlockHTML(OOC_Doc_TextBuffer__Buffer dest, OOC_Doc_TextBuffer__Buffer source, OOC_INT32 indent, OOC_INT32 scrWidth, OOC_INT32 offsetFirst);

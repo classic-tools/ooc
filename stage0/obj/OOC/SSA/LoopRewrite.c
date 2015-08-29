@@ -3171,7 +3171,7 @@ l15:
   i1 = (OOC_INT32)OOC_SSA__InstrDesc_GetLoopEnd((OOC_SSA__Instr)i0);
   loopEnd = (OOC_SSA__Instr)i1;
   i2 = (OOC_INT32)pb;
-  i3 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 87, 0);
+  i3 = (OOC_INT32)OOC_SSA__ProcBlockDesc_AddInstr((OOC_SSA__ProcBlock)i2, 88, 0);
   anchor = (OOC_SSA__Instr)i3;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 45112));
   storeOut = (OOC_SSA__Result)i1;

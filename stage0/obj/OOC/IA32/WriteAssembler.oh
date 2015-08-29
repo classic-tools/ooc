@@ -22,7 +22,7 @@ typedef struct OOC_IA32_WriteAssembler__TranslatorDesc {
   OOC_INT32 lfeCount;
 } OOC_IA32_WriteAssembler__TranslatorDesc;
 extern void OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody(volatile OOC_IA32_WriteAssembler__Translator t, volatile OOC_IR__Procedure proc);
-#define _TBN_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody 3
+#define _TBN_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody 2
 typedef void (*_TBP_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody)(OOC_IA32_WriteAssembler__Translator t, OOC_IR__Procedure proc);
 extern void OOC_IA32_WriteAssembler__InitTranslator(OOC_IA32_WriteAssembler__Translator t, OOC_Repository__Module module, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
 extern OOC_IA32_WriteAssembler__Translator OOC_IA32_WriteAssembler__NewTranslator(OOC_Repository__Module module, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);

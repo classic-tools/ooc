@@ -21,7 +21,7 @@ extern void OOC_C_IRtoC__WriteStatmSeq(OOC_C_DeclWriter__Writer w, OOC_IR__State
 extern void OOC_C_IRtoC__InitTranslator(OOC_C_IRtoC__Translator t);
 extern OOC_C_IRtoC__Translator OOC_C_IRtoC__NewTranslator(void);
 extern void OOC_C_IRtoC__TranslatorDesc_WriteProcBody(OOC_C_IRtoC__Translator t, OOC_IR__Procedure proc);
-#define _TBN_OOC_C_IRtoC__TranslatorDesc_WriteProcBody 4
+#define _TBN_OOC_C_IRtoC__TranslatorDesc_WriteProcBody 3
 typedef void (*_TBP_OOC_C_IRtoC__TranslatorDesc_WriteProcBody)(OOC_C_IRtoC__Translator t, OOC_IR__Procedure proc);
 extern void OOC_OOC_C_IRtoC_init(void);
 extern void OOC_OOC_C_IRtoC_init0(void);

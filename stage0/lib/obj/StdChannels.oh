@@ -29,34 +29,34 @@ typedef struct StdChannels__WriterDesc {
 } StdChannels__WriterDesc;
 extern StdChannels__NullChannel StdChannels__null;
 extern OOC_INT32 StdChannels__WriterDesc_Pos(StdChannels__Writer w);
-#define _TBN_StdChannels__WriterDesc_Pos 1
+#define _TBN_StdChannels__WriterDesc_Pos 0
 typedef OOC_INT32 (*_TBP_StdChannels__WriterDesc_Pos)(StdChannels__Writer w);
 extern void StdChannels__WriterDesc_SetPos(StdChannels__Writer w, OOC_INT32 newPos);
-#define _TBN_StdChannels__WriterDesc_SetPos 2
+#define _TBN_StdChannels__WriterDesc_SetPos 1
 typedef void (*_TBP_StdChannels__WriterDesc_SetPos)(StdChannels__Writer w, OOC_INT32 newPos);
 extern void StdChannels__WriterDesc_WriteByte(StdChannels__Writer w, OOC_CHAR8 x);
-#define _TBN_StdChannels__WriterDesc_WriteByte 3
+#define _TBN_StdChannels__WriterDesc_WriteByte 2
 typedef void (*_TBP_StdChannels__WriterDesc_WriteByte)(StdChannels__Writer w, OOC_CHAR8 x);
 extern void StdChannels__WriterDesc_WriteBytes(StdChannels__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
-#define _TBN_StdChannels__WriterDesc_WriteBytes 4
+#define _TBN_StdChannels__WriterDesc_WriteBytes 3
 typedef void (*_TBP_StdChannels__WriterDesc_WriteBytes)(StdChannels__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern OOC_INT32 StdChannels__NullChannelDesc_Length(StdChannels__NullChannel ch);
-#define _TBN_StdChannels__NullChannelDesc_Length 4
+#define _TBN_StdChannels__NullChannelDesc_Length 0
 typedef OOC_INT32 (*_TBP_StdChannels__NullChannelDesc_Length)(StdChannels__NullChannel ch);
 extern void StdChannels__NullChannelDesc_GetModTime(StdChannels__NullChannel ch, struct Time__TimeStamp *mtime, RT0__Struct mtime__tag);
-#define _TBN_StdChannels__NullChannelDesc_GetModTime 3
+#define _TBN_StdChannels__NullChannelDesc_GetModTime 1
 typedef void (*_TBP_StdChannels__NullChannelDesc_GetModTime)(StdChannels__NullChannel ch, struct Time__TimeStamp *mtime, RT0__Struct mtime__tag);
 extern Channel__Reader StdChannels__NullChannelDesc_NewReader(StdChannels__NullChannel ch);
-#define _TBN_StdChannels__NullChannelDesc_NewReader 5
+#define _TBN_StdChannels__NullChannelDesc_NewReader 2
 typedef Channel__Reader (*_TBP_StdChannels__NullChannelDesc_NewReader)(StdChannels__NullChannel ch);
 extern Channel__Writer StdChannels__NullChannelDesc_NewWriter(StdChannels__NullChannel ch);
-#define _TBN_StdChannels__NullChannelDesc_NewWriter 6
+#define _TBN_StdChannels__NullChannelDesc_NewWriter 3
 typedef Channel__Writer (*_TBP_StdChannels__NullChannelDesc_NewWriter)(StdChannels__NullChannel ch);
 extern void StdChannels__NullChannelDesc_Flush(StdChannels__NullChannel ch);
-#define _TBN_StdChannels__NullChannelDesc_Flush 2
+#define _TBN_StdChannels__NullChannelDesc_Flush 4
 typedef void (*_TBP_StdChannels__NullChannelDesc_Flush)(StdChannels__NullChannel ch);
 extern void StdChannels__NullChannelDesc_Close(StdChannels__NullChannel ch);
-#define _TBN_StdChannels__NullChannelDesc_Close 1
+#define _TBN_StdChannels__NullChannelDesc_Close 5
 typedef void (*_TBP_StdChannels__NullChannelDesc_Close)(StdChannels__NullChannel ch);
 extern void OOC_StdChannels_init(void);
 extern void OOC_StdChannels_init0(void);

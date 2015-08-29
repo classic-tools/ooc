@@ -23,13 +23,13 @@ typedef struct XML_InputBuffer__BufferDesc {
 } XML_InputBuffer__BufferDesc;
 #define XML_InputBuffer__sizeOfBuffer 16352
 extern OOC_CHAR8 XML_InputBuffer__BufferDesc_NextBlock(XML_InputBuffer__Buffer b);
-#define _TBN_XML_InputBuffer__BufferDesc_NextBlock 2
+#define _TBN_XML_InputBuffer__BufferDesc_NextBlock 0
 typedef OOC_CHAR8 (*_TBP_XML_InputBuffer__BufferDesc_NextBlock)(XML_InputBuffer__Buffer b);
 extern OOC_CHAR8 XML_InputBuffer__BufferDesc_EndOfBuffer(XML_InputBuffer__Buffer b, OOC_INT32 cpos);
 #define _TBN_XML_InputBuffer__BufferDesc_EndOfBuffer 1
 typedef OOC_CHAR8 (*_TBP_XML_InputBuffer__BufferDesc_EndOfBuffer)(XML_InputBuffer__Buffer b, OOC_INT32 cpos);
 extern void XML_InputBuffer__BufferDesc_Close(XML_InputBuffer__Buffer b);
-#define _TBN_XML_InputBuffer__BufferDesc_Close 0
+#define _TBN_XML_InputBuffer__BufferDesc_Close 2
 typedef void (*_TBP_XML_InputBuffer__BufferDesc_Close)(XML_InputBuffer__Buffer b);
 extern XML_InputBuffer__Buffer XML_InputBuffer__New(IO__ByteChannel reader, Msg__MsgList errList);
 extern void OOC_XML_InputBuffer_init(void);

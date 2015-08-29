@@ -41,13 +41,13 @@ extern OOC_INT32 XML_Error__errMsgCharPosBase;
 extern void XML_Error__InitContext(XML_Error__Context c, const Msg__String id__ref, OOC_LEN id_0d);
 extern XML_Error__Context XML_Error__NewContext(const Msg__String id__ref, OOC_LEN id_0d);
 extern void XML_Error__ContextDesc_WriteTemplate(XML_Error__Context context, Msg__Msg msg, const Msg__LString msgText__ref, OOC_LEN msgText_0d, Msg__LString templ, OOC_LEN templ_0d);
-#define _TBN_XML_Error__ContextDesc_WriteTemplate 2
+#define _TBN_XML_Error__ContextDesc_WriteTemplate 1
 typedef void (*_TBP_XML_Error__ContextDesc_WriteTemplate)(XML_Error__Context context, Msg__Msg msg, const Msg__LString msgText__ref, OOC_LEN msgText_0d, Msg__LString templ, OOC_LEN templ_0d);
 extern void XML_Error__ContextDesc_GetTemplate(XML_Error__Context context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_XML_Error__ContextDesc_GetTemplate 0
 typedef void (*_TBP_XML_Error__ContextDesc_GetTemplate)(XML_Error__Context context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern void XML_Error__ContextDesc_SetString(XML_Error__Context context, OOC_INT32 code, const Msg__String str__ref, OOC_LEN str_0d);
-#define _TBN_XML_Error__ContextDesc_SetString 1
+#define _TBN_XML_Error__ContextDesc_SetString 2
 typedef void (*_TBP_XML_Error__ContextDesc_SetString)(XML_Error__Context context, OOC_INT32 code, const Msg__String str__ref, OOC_LEN str_0d);
 extern Msg__Msg XML_Error__New(XML_Error__Context context, OOC_INT32 code);
 extern XML_Error__List XML_Error__NewList(void);

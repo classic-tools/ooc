@@ -1,4 +1,4 @@
-(* 	$Id: SymbolTable.Mod,v 1.114 2003/08/26 14:05:22 mva Exp $	 *)
+(* 	$Id: SymbolTable.Mod,v 1.118 2003/09/30 17:40:48 mva Exp $	 *)
 MODULE OOC:SymbolTable [OOC_EXTENSIONS];
 (*  Defines structure and entries of the symbol table.
     Copyright (C) 2000-2003  Michael van Acken
@@ -105,11 +105,12 @@ CONST
   (**This flag is disabled, because it causes a deref of NIL in
      @omodule{*OOC:SymbolTable:InterfaceDescr} due to an unset
      @ofield{Record.className}.  *)
-
   flagAlign1* = 13;
   flagAlign2* = 14;
   flagAlign4* = 15;
   flagAlign8* = 16;
+  flagVtable* = 17;
+  flagUncheckedException* = 18;
 
 CONST
   libTypeStandard* = 0;
@@ -275,7 +276,15 @@ TYPE
     (**Common base type of all type definitions.  As far as the symbol table is
        concerned, a type is either a type reference (that is, an instance of
        @otype{TypeName}), or a type constructor defining a new record, array,
-       pointer, or procedure type.  *)
+       pointer, or procedure type.
+
+       @emph{Note}: Prior to the introduction of parametric types, two type
+       instances were considered to be of the same type if, and only if, their
+       pointers were equal.  With parametric types, this decision is not that
+       simple any more: two types involving type arguments may be represented
+       by different objects, but still are of the same type. The predicate
+       @oproc{*OOC:SymbolTable:TypeRules.SameType} must be used to get the
+       correct result.  *)
     (ItemDesc)
     position-: Position;
     (**Position of the type name or type constructor.  This field is mostly
@@ -668,6 +677,12 @@ TYPE
     (**If @code{TRUE}, then this type can serve as a base type for other
        records.  Default is @code{TRUE} for non-
        @code{INTERFACE} modules.  *)
+    isUncheckedException*: BOOLEAN;
+    (**If @code{TRUE}, then this record represents an unchecked exception.  The
+       default is checked, that is, @code{FALSE}.  This applies to
+       @otype{*Exception.Exception}.  *)
+    isVtable*: BOOLEAN;
+    (**If @code{TRUE}, then this type has a C++ virtual method table. *)
     fieldAlign* : INTEGER;
     (**Alignment constraint on fields of this record. Normally, a field is
        placed at an address that is a multiple of its size.  For example, a
@@ -1239,7 +1254,10 @@ PROCEDURE ^ (type: Type) Deparam*(): Type;
 PROCEDURE (item: Item) Module*(): Module;
 (**Returns the item, that is the root of the hierarchy that includes
    @oparam{item}.  The returned item is never @code{NIL}, because even
-   predefined items are nested in pseudo modules.  *)
+   predefined items are nested in pseudo modules.
+
+   @emph{Note}: Currently, this function fails for the automatically generated
+   pseudo procedure @oconst{declModuleBody} representing the module body.  *)
   BEGIN
     IF (item.parent = NIL) & (item IS Type) THEN
       item := item(Type).Deparam();  (* fix up "orphaned" type closure *)
@@ -1253,6 +1271,20 @@ PROCEDURE (item: Item) Module*(): Module;
     RETURN item(Module)
   END Module;
 
+PROCEDURE (item: Item) InStandardModule*(): BOOLEAN;
+(**Return @code{TRUE} if @oparam{item} is part of a normal module.  Result is
+   false for internal, @samp{INTERFACE}, or @samp{FOREIGN} modules.  *)
+  VAR
+    module: Module;
+  BEGIN
+    IF (item.parent = NIL) THEN  (* for module body "procedure" *)
+      RETURN TRUE;
+    ELSE
+      module := item.Module();
+      RETURN (module.class = mcStandard);
+    END;
+  END InStandardModule;
+  
 PROCEDURE (item: Item) Procedure*(): ProcDecl;
 (**Returns the procedure item in which @oparam{item} is nested.  The result is
    @code{NIL}, if @oparam{item} is not part of a procedure.  *)
@@ -1298,6 +1330,8 @@ PROCEDURE (item: Item) AddFlag* (name: Name);
       id := flagNotExtensible;
     (*ELSIF (name.str^ = "EXTENSIBLE") THEN
       id := flagExtensible;*)
+    ELSIF (name.str^ = "UNCHECKED_EXCEPTION") THEN
+      id := flagUncheckedException;
     ELSIF (name.str^ = "CSTRING") THEN
       id := flagCString;
     ELSIF (name.str^ = "NIL_COMPAT") THEN
@@ -1320,6 +1354,8 @@ PROCEDURE (item: Item) AddFlag* (name: Name);
       id := flagAlign4;
     ELSIF (name.str^ = "ALIGN8") THEN
       id := flagAlign8;
+    ELSIF (name.str^ = "VTABLE") THEN
+      id := flagVtable;
     ELSE
       id := flagUnknownName;
     END;
@@ -1426,6 +1462,19 @@ PROCEDURE (type: Type) PreciousTypePars*(): BOOLEAN;
   BEGIN
     RETURN (type.typePars # NIL) & (type.typePars.nestedItems # NIL);
   END PreciousTypePars;
+
+PROCEDURE (type: Type) IsCheckedException*(): BOOLEAN;
+  VAR
+    ptr: Type;
+  BEGIN
+    IF (type IS Pointer) THEN
+      ptr := type.Deparam();
+      ptr := ptr(Pointer).baseType.Deparam();
+      RETURN ~(ptr IS Record) OR ~ptr(Record).isUncheckedException;
+    ELSE
+      RETURN TRUE;
+    END;
+  END IsCheckedException;
 
 PROCEDURE (type: Type) Store* (w: Storable.Writer) RAISES IO.Error;
   BEGIN
@@ -2366,6 +2415,8 @@ PROCEDURE InitRecord* (record: Record; parent: Item; position: Position;
     record. isUnion := FALSE;
     record. isAbstract := FALSE;
     record. isExtensible := TRUE;
+    record. isUncheckedException := FALSE;
+    record. isVtable := FALSE;
     record. fieldAlign := 0;
     record. className := NIL
   END InitRecord;
@@ -2378,6 +2429,8 @@ PROCEDURE (record: Record) Store* (w: Storable.Writer) RAISES IO.Error;
     w. WriteBool (record. isUnion);
     w. WriteBool (record. isAbstract);
     w. WriteBool (record. isExtensible);
+    w. WriteBool (record. isUncheckedException);
+    w. WriteBool (record. isVtable);
     w. WriteInt (record. fieldAlign);
     w. WriteObject (record. className);
     (* ignore field `ns' *)
@@ -2394,6 +2447,8 @@ PROCEDURE (record: Record) Load* (r: Storable.Reader) RAISES IO.Error;
     r. ReadBool (record. isUnion);
     r. ReadBool (record. isAbstract);
     r. ReadBool (record. isExtensible);
+    r. ReadBool (record. isUncheckedException);
+    r. ReadBool (record. isVtable);
     r. ReadInt (record. fieldAlign);
     r. ReadObject (obj);
     IF (obj = NIL) THEN
