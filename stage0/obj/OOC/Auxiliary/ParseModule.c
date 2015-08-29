@@ -16,20 +16,20 @@ void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 
 
   i0 = (OOC_INT32)m;
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1843)))), OOC_Repository__ModuleDesc_GetInputBuffer)),OOC_Repository__ModuleDesc_GetInputBuffer)((OOC_Repository__Module)i0);
-  i2 = i1==(OOC_INT32)0;
   inputBuffer = (OOC_Scanner_InputBuffer__Buffer)i1;
+  i2 = i1==(OOC_INT32)0;
   if (i2) goto l34;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2158))+20);
   *errList = (OOC_Error__List)i2;
-  i3 = (OOC_INT32)OOC_Scanner_Builder_BasicList__New((OOC_Scanner_InputBuffer__Buffer)i1, OOC_TRUE);
+  i3 = (OOC_INT32)OOC_Scanner_Builder_BasicList__New((OOC_Scanner_InputBuffer__Buffer)i1, 1u);
   scannerBuilder = (OOC_Scanner_Builder_BasicList__Builder)i3;
+  scannerFlags = 31u;
   i4 = abortAfterImport;
-  scannerFlags = 31;
   if (i4) goto l5;
-  i5=31;
+  i5=31u;
   goto l6;
 l5:
-  i5 = _set_bit(31,5);
+  i5 = _set_bit(31u,5);
   scannerFlags = i5;
   
 l6:
@@ -50,15 +50,15 @@ l9:
   if (!i5) goto l12;
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2685))+4);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2685))+4);
-  i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 2691)), (OOC_INT32)0);
+  i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 2691)), 0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2667)))), OOC_AST__BuilderDesc_SetModuleName)),OOC_AST__BuilderDesc_SetModuleName)((OOC_AST__Builder)i1, (void*)(_check_pointer(i5, 2691)), i6);
 l12:
-  parserFlags = -17;
+  parserFlags = (-17u);
   if (i4) goto l15;
-  i4=-17;
+  i4=(-17u);
   goto l16;
 l15:
-  i4 = _clear_bit((_set_bit(-17,4)),3);
+  i4 = _clear_bit((_set_bit((-17u),4)),3);
   parserFlags = i4;
   
 l16:
@@ -72,7 +72,7 @@ l17:
   if (!i3) goto l35;
   i3 = (OOC_INT32)OOC_SymbolTable_Builder__New();
   stb = (OOC_SymbolTable_Builder__Builder)i3;
-  i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3194)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, OOC_FALSE);
+  i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3194)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 0u);
   i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3252));
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 3260))+4);
   i6 = (OOC_INT32)libraryName;
@@ -86,7 +86,7 @@ l17:
 l24:
   i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3438)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
   if (i3) goto l27;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l29;
 l27:
   i3 = writeSymbolFile;
@@ -99,7 +99,7 @@ l34:
   *ast = (OOC_AST__Node)(OOC_INT32)0;
   *symTab = (OOC_SymbolTable__Module)(OOC_INT32)0;
   *pragmaHistory = (OOC_Config_Pragmas__History)(OOC_INT32)0;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1976)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, OOC_TRUE);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1976)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 1u);
   uri = (URI__URI)i0;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2030)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)uriStr, 1024);
   i0 = (OOC_INT32)OOC_Error__NewList((void*)(OOC_INT32)uriStr, 1024);

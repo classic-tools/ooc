@@ -1,7 +1,7 @@
-(* 	$Id: Allocator.Mod,v 1.33 2002/12/30 09:29:21 mva Exp $	 *)
+(* 	$Id: Allocator.Mod,v 1.35 2003/02/24 04:33:53 mva Exp $	 *)
 MODULE OOC:SSA:Allocator;
 (*  A register allocator for the C back-end.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -180,11 +180,14 @@ PROCEDURE GetBlockList (enterBlock, exitBlock: Schedule.Block): BlockList;
 
 PROCEDURE SubclassToBasicType* (subclass: Opcode.Subclass): DeclWriter.BasicTypeId;
   (**Maps a subclass id to a basic type of the C back-end.  *)
-  
   BEGIN
     CASE subclass OF
     | Opcode.scNone: RETURN DeclWriter.void
-    | Opcode.scAddress: RETURN DeclWriter.ptr
+    | Opcode.scAddress:
+      CASE Predef.address OF
+      | Predef.hugeint: RETURN DeclWriter.int64;
+      | Predef.longint: RETURN DeclWriter.int32;
+      END;
     | Opcode.scUnsigned8: RETURN DeclWriter.uint8
     | Opcode.scUnsigned16: RETURN DeclWriter.uint16
     | Opcode.scUnsigned32: RETURN DeclWriter.uint32
@@ -275,7 +278,9 @@ PROCEDURE IdentifyResults (blockList: BlockList;
        a register to all uses of this value.  Note: Non-instruction results
        that produce tangible values are _always_ passed through registers.  *)
       BEGIN
-        RETURN ~instr. IsConst() & (instr.opcode # Opcode.tryStart);
+        RETURN ~instr. IsConst() &
+            (instr.opcode # Opcode.set) &
+            (instr.opcode # Opcode.tryStart);
       END PassedThroughRegister;
 
     PROCEDURE RegisterResult (result: SSA.Result;

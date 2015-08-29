@@ -1,7 +1,7 @@
-(* 	$Id: ConstProp.Mod,v 1.8 2002/12/17 01:23:13 mva Exp $	 *)
+(* 	$Id: ConstProp.Mod,v 1.12 2003/02/27 04:23:56 mva Exp $	 *)
 MODULE OOC:SSA:ConstProp;
 (*  Constant propagation and unreachable code elimination.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -47,7 +47,14 @@ PROCEDURE ComputeConst (pb: SSA.ProcBlock; instr: SSA.Instr): SSA.Const;
     v: Boxed.Object;
     i1, i2: BigInt.BigInt;
   BEGIN
-    IF (instr. SizeOpndList() >= 2) &
+    IF (instr.opcode = Opcode.typeConv)  THEN
+      arg1 := instr. opndList. arg. info(SSA.Const);
+      IF (arg1.value IS BigInt.BigInt) &
+         (instr.subclass < Opcode.scReal32) THEN
+        (* FIXME... check for overflow *)
+        RETURN pb. GetConst(arg1.value, instr.subclass, NIL);
+      END;
+    ELSIF (instr. SizeOpndList() >= 2) &
        (instr. opcode # Opcode.preloadedVar) &
        (instr. opcode # Opcode.setBit) &
        (instr. opcode # Opcode.clearBit) &
@@ -91,9 +98,9 @@ PROCEDURE ComputeConst (pb: SSA.ProcBlock; instr: SSA.Instr): SSA.Const;
 
       IF (v # NIL) THEN
         IF (v IS Boxed.Boolean) THEN
-          RETURN pb. GetConstBool (v(Boxed.Boolean). value);
+          RETURN pb. GetConstBool(v(Boxed.Boolean). value);
         ELSE
-          RETURN pb. GetConst (v, arg1. type);
+          RETURN pb. GetConst(v, instr.subclass, NIL);
         END;
       END;
     END;
@@ -184,7 +191,9 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
       
       BEGIN
         IF isSwitch THEN
-          WHILE (branch # NIL) & (branch.class = Opnd.labels) DO
+          WHILE (branch # NIL) &
+                (branch.class = Opnd.labels) &
+                ~(branch.arg IS SSA.Const) DO
             IF InLabelList (expr. value, branch. arg(SSA.Instr). opndList) THEN
               RETURN branch. nextOpnd;
             END;

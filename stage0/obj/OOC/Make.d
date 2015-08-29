@@ -39,6 +39,7 @@ StringSearch__Matcher OOC_Make__inspectProc;
 StringSearch__Matcher OOC_Make__inspectStage;
 OOC_CHAR8 OOC_Make__writeAST;
 OOC_CHAR8 OOC_Make__writeIR;
+OOC_CHAR8 OOC_Make__writeStats;
 #define OOC_Make__noSuchModule 1
 #define OOC_Make__partOfAnotherLibrary 2
 static OOC_Make__ErrorContext OOC_Make__makeContext;
@@ -65,7 +66,7 @@ RT0__StructDesc _td_OOC_Make__3542 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid,
 RT0__StructDesc _td_OOC_Make__3517 = { (RT0__Struct[]){&_td_OOC_Make__3542}, NULL, &_mid, NULL, 504, 21, RT0__strArray };
 RT0__StructDesc _td_OOC_Make__ErrorContext = { (RT0__Struct[]){&_td_OOC_Make__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Make__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Make__ErrorContextDesc}, (void*[]){(void*)OOC_Make__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Make__4528 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Make__4677 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Make", (RT0__Struct[]) { &_td_OOC_Make__ShellCommand, &_td_OOC_Make__ModuleInfo, &_td_OOC_Make__ModuleInfoDesc, &_td_OOC_Make__ModuleList, &_td_OOC_Make__Rules, &_td_OOC_Make__RulesDesc, &_td_OOC_Make__ErrorContext, &_td_OOC_Make__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Make_init0() {

@@ -31,7 +31,7 @@ void OOC_IA32_RuntimeData__Write(OOC_IA32_Writer__Writer w, OOC_SymbolTable__Mod
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1380))+12);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1374))+16);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1380))+12);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 1385)), (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 1385)), 0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1351)))), OOC_IA32_Writer__WriterDesc_StringLiteral)),OOC_IA32_Writer__WriterDesc_StringLiteral)((OOC_IA32_Writer__Writer)i0, (void*)(_check_pointer(i2, 1385)), i1);
       return;
       ;
@@ -45,8 +45,8 @@ void OOC_IA32_RuntimeData__Write(OOC_IA32_Writer__Writer w, OOC_SymbolTable__Mod
 }
 
 void OOC_OOC_IA32_RuntimeData_init(void) {
-  _c0 = Object__NewLatin1Region("_mid", 5, (OOC_INT32)0, 4);
-  _c1 = Object__NewLatin1Region(".LC0", 5, (OOC_INT32)0, 4);
+  _c0 = Object__NewLatin1Region("_mid", 5, 0, 4);
+  _c1 = Object__NewLatin1Region(".LC0", 5, 0, 4);
 
   return;
   ;

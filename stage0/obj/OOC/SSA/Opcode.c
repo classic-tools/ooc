@@ -8,7 +8,7 @@ OOC_CHAR8 OOC_SSA_Opcode__IsSigned(OOC_INT8 subclass) {
   i0 = subclass;
   i1 = 1<=i0;
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i0 = i0<=4;
@@ -24,7 +24,7 @@ OOC_CHAR8 OOC_SSA_Opcode__IsUnsigned(OOC_INT8 subclass) {
   i0 = subclass;
   i1 = 5<=i0;
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i0 = i0<=8;
@@ -86,7 +86,7 @@ void OOC_SSA_Opcode__GetSubclassName(OOC_INT8 subclass, OOC_CHAR8 name[], OOC_LE
     _copy_8((const void*)"r64",(void*)(OOC_INT32)scstr,16);
     goto l15;
   default:
-    _failed_case(i0, 30868);
+    _failed_case(i0, 33635);
     goto l15;
   }
 l15:
@@ -104,266 +104,278 @@ void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[
   switch (i0) {
   case 0:
     _copy_8((const void*)"const",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 1:
     _copy_8((const void*)"declref",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 2:
     _copy_8((const void*)"typeref",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 3:
     _copy_8((const void*)"address",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 4:
     _copy_8((const void*)"enter",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 5:
     _copy_8((const void*)"select",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 6:
     _copy_8((const void*)"collect",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 81:
     _copy_8((const void*)"labels",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 7:
     _copy_8((const void*)"return",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 8:
     _copy_8((const void*)"select-return",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 9:
     _copy_8((const void*)"exit",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 10:
     _copy_8((const void*)"loop-start",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 11:
     _copy_8((const void*)"loop-end",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 12:
     _copy_8((const void*)"get",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 13:
     _copy_8((const void*)"set",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 14:
     _copy_8((const void*)"copy",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 15:
     _copy_8((const void*)"copy-string",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 16:
     _copy_8((const void*)"cmp-string",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 17:
     _copy_8((const void*)"concat",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 18:
     _copy_8((const void*)"move-block",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 56:
     _copy_8((const void*)"get-length-heap",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 57:
     _copy_8((const void*)"get-length-param",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 58:
     _copy_8((const void*)"copy-parameter",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 59:
     _copy_8((const void*)"new-object",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 60:
     _copy_8((const void*)"new-block",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 61:
     _copy_8((const void*)"type-tag",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 62:
     _copy_8((const void*)"type-test",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 63:
     _copy_8((const void*)"tb-proc-address",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 19:
     _copy_8((const void*)"add",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 20:
     _copy_8((const void*)"subtract",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 21:
     _copy_8((const void*)"negate",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 22:
     _copy_8((const void*)"multiply",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 23:
     _copy_8((const void*)"divide",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 24:
     _copy_8((const void*)"modulo",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 25:
     _copy_8((const void*)"eql",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 26:
     _copy_8((const void*)"neq",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 27:
     _copy_8((const void*)"lss",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 28:
     _copy_8((const void*)"leq",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 29:
     _copy_8((const void*)"gtr",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 30:
     _copy_8((const void*)"geq",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 31:
     _copy_8((const void*)"and",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 32:
     _copy_8((const void*)"or",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 33:
     _copy_8((const void*)"not",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 34:
     _copy_8((const void*)"logical-and",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 35:
     _copy_8((const void*)"logical-or",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 36:
     _copy_8((const void*)"logical-xor",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 37:
     _copy_8((const void*)"logical-complement",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 38:
     _copy_8((const void*)"logical-subtr",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 39:
     _copy_8((const void*)"set-bit",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 40:
     _copy_8((const void*)"clear-bit",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 41:
     _copy_8((const void*)"type-cast",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 42:
     _copy_8((const void*)"type-conv",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 43:
     _copy_8((const void*)"set-member",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 44:
     _copy_8((const void*)"set-range",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 45:
     _copy_8((const void*)"abs",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 46:
     _copy_8((const void*)"shift-left",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 47:
     _copy_8((const void*)"shift-right",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 48:
     _copy_8((const void*)"ash",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 49:
     _copy_8((const void*)"cap",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 50:
     _copy_8((const void*)"entier",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 51:
     _copy_8((const void*)"indexed",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 52:
     _copy_8((const void*)"lsh",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 53:
     _copy_8((const void*)"rot",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 54:
     _copy_8((const void*)"odd",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 55:
     _copy_8((const void*)"call",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 64:
     _copy_8((const void*)"assert",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 65:
     _copy_8((const void*)"halt",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 66:
     _copy_8((const void*)"check-index",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 67:
     _copy_8((const void*)"check-pointer",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 68:
     _copy_8((const void*)"type-guard",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 69:
     _copy_8((const void*)"failed-case",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 70:
     _copy_8((const void*)"failed-with",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 71:
     _copy_8((const void*)"failed-type-assert",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 80:
     _copy_8((const void*)"preloaded-var",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 72:
     _copy_8((const void*)"try-start",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 73:
     _copy_8((const void*)"try-end",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 74:
     _copy_8((const void*)"raise-exception",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 75:
     _copy_8((const void*)"current-exception",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 76:
     _copy_8((const void*)"clear-exception",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 77:
     _copy_8((const void*)"push-exception-context",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 78:
     _copy_8((const void*)"pop-exception-context",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 79:
     _copy_8((const void*)"activate-context",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
   case 82:
     _copy_8((const void*)"dgate",(void*)(OOC_INT32)cstr,32);
-    goto l86;
+    goto l90;
+  case 83:
+    _copy_8((const void*)"design-standin",(void*)(OOC_INT32)cstr,32);
+    goto l90;
+  case 84:
+    _copy_8((const void*)"equiv",(void*)(OOC_INT32)cstr,32);
+    goto l90;
+  case 85:
+    _copy_8((const void*)"equiv-pre",(void*)(OOC_INT32)cstr,32);
+    goto l90;
+  case 86:
+    _copy_8((const void*)"noop",(void*)(OOC_INT32)cstr,32);
+    goto l90;
   default:
-    _failed_case(i0, 31557);
-    goto l86;
+    _failed_case(i0, 34324);
+    goto l90;
   }
-l86:
+l90:
+  _copy_8((const void*)(OOC_INT32)cstr,(void*)(OOC_INT32)name,name_0d);
   i0 = subclass;
   i1 = i0!=0;
-  _copy_8((const void*)(OOC_INT32)cstr,(void*)(OOC_INT32)name,name_0d);
-  if (!i1) goto l89;
+  if (!i1) goto l93;
   OOC_SSA_Opcode__GetSubclassName(i0, (void*)(OOC_INT32)scstr, 32);
   Strings__Append("-", 2, (void*)(OOC_INT32)name, name_0d);
   Strings__Append((void*)(OOC_INT32)scstr, 32, (void*)(OOC_INT32)name, name_0d);
-l89:
+l93:
   return;
   ;
 }
@@ -372,18 +384,18 @@ OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)type;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 34908)))), &_td_OOC_SymbolTable__PredefTypeDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37817)))), &_td_OOC_SymbolTable__PredefTypeDesc);
   if (i1) goto l19;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 35685)))), &_td_OOC_SymbolTable__ArrayDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38594)))), &_td_OOC_SymbolTable__ArrayDesc);
   if (i1) goto l17;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 35732)))), &_td_OOC_SymbolTable__RecordDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38641)))), &_td_OOC_SymbolTable__RecordDesc);
   if (i1) goto l15;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 35780)))), &_td_OOC_SymbolTable__PointerDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38689)))), &_td_OOC_SymbolTable__PointerDesc);
   if (i1) goto l13;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 35832)))), &_td_OOC_SymbolTable__FormalParsDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38741)))), &_td_OOC_SymbolTable__FormalParsDesc);
   if (i1) goto l11;
   Log__Type("++ Unknown type in TypeToSubclass", 34, (void*)i0);
-  _assert(OOC_FALSE, 127, 35951);
+  _assert(0u, 127, 38860);
   goto l39;
 l11:
   return 9;
@@ -398,7 +410,7 @@ l17:
   return 0;
   goto l39;
 l19:
-  i0 = *(OOC_INT16*)((_check_pointer(i0, 34943))+32);
+  i0 = *(OOC_INT16*)((_check_pointer(i0, 37852))+32);
   switch (i0) {
   case 17:
     return 0;
@@ -451,11 +463,11 @@ l19:
     return 9;
     goto l39;
   default:
-    _failed_case(i0, 34934);
+    _failed_case(i0, 37843);
     goto l39;
   }
 l39:
-  _failed_function(34843); return 0;
+  _failed_function(37752); return 0;
   ;
 }
 

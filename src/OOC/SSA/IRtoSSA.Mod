@@ -1,7 +1,7 @@
-(* 	$Id: IRtoSSA.Mod,v 1.110 2002/12/29 14:54:17 mva Exp $	 *)
+(* 	$Id: IRtoSSA.Mod,v 1.114 2003/02/23 19:13:07 mva Exp $	 *)
 MODULE OOC:SSA:IRtoSSA;
 (*  Converts the IR of a procedure into its SSA representation.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,10 +21,10 @@ MODULE OOC:SSA:IRtoSSA;
 *)
 
 IMPORT
-  Log, Object, Object:Boxed, Object:BigInt,
+  SYSTEM, Log, Object, Object:Boxed, Object:BigInt,
   Sym := OOC:SymbolTable, OOC:SymbolTable:Predef, OOC:SymbolTable:Builder,
   TR := OOC:SymbolTable:TypeRules, OOC:IR, 
-  OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Result, OOC:SSA:Allocator;
+  OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Result;
 
 
 PROCEDURE AddStoreBackwardFeed (pb: SSA.ProcBlock;
@@ -70,11 +70,21 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       s := instr. AddResult (Result.store)
     END Chain;
 
+  PROCEDURE FixAddress(arg: SSA.Result): SSA.Result;
+    BEGIN
+      RETURN pb.FixSubclass(arg, Opcode.scAddress);
+    END FixAddress;
+  
+  PROCEDURE FixLength(arg: SSA.Result): SSA.Result;
+    BEGIN
+      RETURN pb.FixSubclass(arg, Opcode.scLength);
+    END FixLength;
+  
   PROCEDURE ^ Call (call: IR.Call): SSA.Instr;
   PROCEDURE ^ Expression (expr: IR.Expression): SSA.Result;
     
   PROCEDURE CalculateLength (pb: SSA.ProcBlock; value: IR.Expression;
-                             dim: LONGINT; baseArray: SSA.Result): SSA.Instr;
+                             dim: LONGINT; baseArray: SSA.Result): SSA.Result;
   (* Calculate the one-dimensional length of the variable @oparam{value} or of
      one of its elements.  With @oparam{dim=-1}, return the number of elements
      of the whole variable.  With @oparam{dim>=0}, return the length of an
@@ -84,9 +94,10 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       type: Sym.Type;
       i: LONGINT;
       
-    PROCEDURE RecursiveGetLength (type: Sym.Type; dim: LONGINT): SSA.Instr;
+    PROCEDURE RecursiveGetLength (type: Sym.Type; dim: LONGINT): SSA.Result;
       VAR
-        len, lenp: SSA.Instr;
+        len: SSA.Result;
+        lenp: SSA.Instr;
       BEGIN
         WITH type: Sym.Array DO
           IF type.isOpenArray THEN
@@ -94,9 +105,10 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
           ELSE
             len := pb.GetConstInt(type.length);
           END;
-
+          len := FixLength(len);
+          
           IF (type.elementType IS Sym.Array) THEN
-            lenp := pb. AddInstr (Opcode.multiply, Opcode.scAddress);
+            lenp := pb. AddInstr (Opcode.multiply, Opcode.scLength);
             lenp. AddOpnd (len, Opnd.arg);
             lenp. AddOpnd (RecursiveGetLength (type.elementType, dim+1),
                            Opnd.arg);
@@ -105,7 +117,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
             RETURN len;
           END;
         ELSE
-          RETURN pb.GetConstInt(1);
+          RETURN FixLength(pb.GetConstInt(1));
         END;
       END RecursiveGetLength;
     
@@ -127,7 +139,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
     END CalculateLength;
   
   PROCEDURE CalculateSize (pb: SSA.ProcBlock; value: IR.Expression;
-                           length: SSA.Instr): SSA.Instr;
+                           length: SSA.Result): SSA.Instr;
   (* Calculate the size of the variable @oparam{value} based on the given
      length and the (non-array) base type of the index expression
      @oparam{value}.  *)
@@ -148,8 +160,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       END;
       
       size := pb.AddInstr (Opcode.multiply, Opcode.scAddress);
-      size.AddOpnd(length, Opnd.arg);
-      size.AddOpnd(pb.GetConstInt(type.size), Opnd.arg);
+      size.AddOpnd(FixAddress(length), Opnd.arg);
+      size.AddOpnd(FixAddress(pb.GetConstInt(type.size)), Opnd.arg);
       RETURN size;
     END CalculateSize;
   
@@ -318,6 +330,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       opcode: Opcode.Class;
       dim: LONGINT;
       type: Sym.Type;
+      v: Boxed.Object;
+      x: BigInt.BigInt;
 
     PROCEDURE Deref (deref: IR.Deref): SSA.Result;
       VAR
@@ -378,7 +392,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
                                          indexOp. array. type(Sym.Array));
         newSize := pb. AddInstr (Opcode.multiply, Opcode.scAddress);
         newSize. AddOpnd (elementSize, Opnd.arg);
-        newSize. AddOpnd (length, Opnd.arg);
+        newSize. AddOpnd (FixAddress(length), Opnd.arg);
         
         IF (indexOp. array IS IR.Index) THEN
           baseResult := Index (indexOp. array(IR.Index), baseArray,
@@ -409,7 +423,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
             
         elementType := indexOp. type;
         scaledIndex := pb. AddInstr (Opcode.multiply, Opcode.scAddress);
-        scaledIndex. AddOpnd (index, Opnd.arg);
+        scaledIndex. AddOpnd (FixAddress(index), Opnd.arg);
         scaledIndex. AddOpnd (elementSize, Opnd.arg);
         
         adrOpnd := instr. opndList. nextOpnd;
@@ -426,7 +440,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
     PROCEDURE SelectField (selectOp: IR.SelectField): SSA.Result;
       VAR
         instr, fieldAdr: SSA.Instr;
-        baseResult: SSA.Result;
+        baseResult, offset: SSA.Result;
         adrOpnd: SSA.Opnd;
       BEGIN
         (* take the "get" instruction of the record's designator and
@@ -438,8 +452,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         adrOpnd := instr. opndList. nextOpnd;
         fieldAdr := pb. AddInstr (Opcode.add, Opcode.scAddress);
         fieldAdr. AddOpnd (adrOpnd. arg, Opnd.arg);
-        fieldAdr. AddOpnd (pb. GetConstInt (selectOp. field. offset),
-                             Opnd. arg);
+        offset := pb.GetConstInt(selectOp.field.offset);
+        fieldAdr.AddOpnd(FixAddress(offset), Opnd.arg);
         adrOpnd. ReplaceArg (fieldAdr);
         instr. AddOpnd (pb. GetDeclRef (selectOp. field), Opnd.readDesign);
         instr. SetSubclass (Opcode.TypeToSubclass (selectOp. field. type));
@@ -645,7 +659,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
           | Predef.stringUCS4Char:
             fct := Object.NewLatin1(Builder.stringModuleC+"__NewUCS4Region");
           END;
-          instr.AddOpnd(pb.GetConst(Boxed.NewString(fct),
+          instr.AddOpnd(pb.GetConst(Boxed.NewString(fct), Opcode.scAddress,
                                     Predef.GetType(Predef.stringChar)),
                         Opnd.arg);
           instr.AddOpnd(const, Opnd.arg);
@@ -660,12 +674,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         ELSE
           scDest := Opcode.TypeToSubclass (conv. type);
           scSource := Opcode.TypeToSubclass (conv. expr. type);
-          IF (Allocator.RegisterType (Allocator.SubclassToBasicType (scDest)) #
-              Allocator.RegisterType (Allocator.SubclassToBasicType (scSource))) THEN
-            (* only insert explicit type-conv instruction if the source and the
-               destination value are stored in different register sets; not
-               sure if this optimization should be done here, though, because
-               it makes type information in SSA less strict  *)
+          IF (scDest # scSource) THEN
             instr := pb. AddInstr (Opcode.typeConv, scDest);
             instr. AddOpnd (Expression (conv. expr), Opnd.arg);
             RETURN instr;
@@ -712,9 +721,27 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
     BEGIN
       WITH expr: IR.Const DO
         IF (expr. value = NIL) THEN
-          RETURN pb. GetConst (SSA.nil, expr. type)
+          RETURN pb.GetConst(SSA.nil, Opcode.scAddress, NIL);
         ELSE
-          RETURN pb. GetConst (expr. value, expr. type)
+          v := expr.value;
+          WITH v: Boxed.String DO
+            IF TR.IsStringConst(expr.type) THEN
+              RETURN pb.GetConst(v, Opcode.scAddress, expr.type);
+            ELSE
+              x := BigInt.NewInt(ORD(v.value.CharAt(0)));
+              RETURN pb.GetConst(x, Opcode.TypeToSubclass(expr.type), NIL);
+            END;
+
+          | v: Boxed.Boolean DO
+            RETURN pb.GetConstBool(v.value);
+
+          | v: Boxed.Set DO
+            x := BigInt.NewInt(SYSTEM.VAL(LONGINT, v.value));
+            RETURN pb.GetConst(x, Opcode.TypeToSubclass(expr.type), NIL);
+
+          ELSE
+            RETURN pb.GetConst(v, Opcode.TypeToSubclass(expr.type), NIL);
+          END;
         END;
             
       | expr: IR.ProcedureRef DO
@@ -734,11 +761,12 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       | expr: IR.Adr DO
         res := Expression (expr. design);
         IF (res. instr. opcode = Opcode.get) THEN
-          RETURN res. instr. GetArgClass (Opnd.readAdr);
+          RETURN pb.FixSubclass(res. instr. GetArgClass (Opnd.readAdr),
+                                Opcode.TypeToSubclass(expr.type));
         ELSE
           (* must be a string constant; currently, this is its own address
              FIXME... we should probably introduce an address opcode here *)
-          RETURN res
+          RETURN res;
         END;
         
       | expr: IR.Len DO
@@ -1130,20 +1158,20 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         END;
       END;
       
-      select. AddOpnd (pb. GetConstBool (FALSE), Opnd.arg);
+      select. AddOpnd (pb. GetConstBool (FALSE), Opnd.labels);
       IF (caseStatm. default # NIL) THEN
         select. AddOpnd (StatmSeq (pb, storeAfterSelect, caseStatm. default),
-                         Opnd.labels);
+                         Opnd.arg);
         
       ELSIF caseStatm. checkMatch THEN
         s := storeAfterSelect;
         instr := AddException (pb, caseStatm. sym,
                                Opcode.failedCase, Opcode.scNone);
         instr. AddOpnd (select. opndList. arg, Opnd.arg);
-        select. AddOpnd (s, Opnd.labels);
+        select. AddOpnd (s, Opnd.arg);
         
       ELSE
-        select. AddOpnd (storeAfterSelect, Opnd.labels)
+        select. AddOpnd (storeAfterSelect, Opnd.arg)
       END;
 
       s := select. AddResult (Result.store)
@@ -1439,7 +1467,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
   
   PROCEDURE CopyParameter (cp: IR.CopyParameter);
     VAR
-      instr, len: SSA.Instr;
+      instr: SSA.Instr;
+      len: SSA.Result;
     BEGIN
       len := CalculateLength(pb, cp.param, -1, Expression (cp.param));
       instr := pb. AddCopyParameter(cp. param. decl(Sym.VarDecl), s, len,

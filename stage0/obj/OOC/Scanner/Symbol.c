@@ -12,59 +12,59 @@ OOC_CHAR8 OOC_Scanner_Symbol__IsKeyword(OOC_INT8 id) {
   
   goto l5;
 l3:
-  i1=OOC_TRUE;
+  i1=1u;
 l5:
   if (i1) goto l7;
   i1 = i0==15;
   
   goto l9;
 l7:
-  i1=OOC_TRUE;
+  i1=1u;
 l9:
   if (i1) goto l11;
   i1 = i0==16;
   
   goto l13;
 l11:
-  i1=OOC_TRUE;
+  i1=1u;
 l13:
   if (i1) goto l15;
   i1 = i0==42;
   
   goto l17;
 l15:
-  i1=OOC_TRUE;
+  i1=1u;
 l17:
   if (i1) goto l19;
   i1 = i0==8;
   
   goto l21;
 l19:
-  i1=OOC_TRUE;
+  i1=1u;
 l21:
   if (i1) goto l27;
   i1 = 25<=i0;
   if (i1) goto l25;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l29;
 l25:
   i1 = i0<=31;
   
   goto l29;
 l27:
-  i1=OOC_TRUE;
+  i1=1u;
 l29:
   if (i1) goto l35;
   i1 = 48<=i0;
   if (i1) goto l33;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l36;
 l33:
   i0 = i0<=71;
   
   goto l36;
 l35:
-  i0=OOC_TRUE;
+  i0=1u;
 l36:
   return i0;
   ;
@@ -76,7 +76,7 @@ OOC_CHAR8 OOC_Scanner_Symbol__IsWhitespace(OOC_INT8 id) {
   i0 = id;
   i1 = i0>=77;
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i0 = i0<81;

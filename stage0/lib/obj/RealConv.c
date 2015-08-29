@@ -56,22 +56,22 @@ l13:
 
 OOC_INT16 RealConv__LengthFloatReal(OOC_REAL32 real, OOC_INT16 sigFigs) {
 
-  _assert(OOC_FALSE, 127, 2786);
-  return -1;
+  _assert(0u, 127, 2786);
+  return (-1);
   ;
 }
 
 OOC_INT16 RealConv__LengthEngReal(OOC_REAL32 real, OOC_INT16 sigFigs) {
 
-  _assert(OOC_FALSE, 127, 2931);
-  return -1;
+  _assert(0u, 127, 2931);
+  return (-1);
   ;
 }
 
 OOC_INT16 RealConv__LengthFixedReal(OOC_REAL32 real, OOC_INT16 place) {
 
-  _assert(OOC_FALSE, 127, 3074);
-  return -1;
+  _assert(0u, 127, 3074);
+  return (-1);
   ;
 }
 

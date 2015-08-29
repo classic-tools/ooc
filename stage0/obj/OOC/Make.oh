@@ -48,6 +48,7 @@ extern StringSearch__Matcher OOC_Make__inspectProc;
 extern StringSearch__Matcher OOC_Make__inspectStage;
 extern OOC_CHAR8 OOC_Make__writeAST;
 extern OOC_CHAR8 OOC_Make__writeIR;
+extern OOC_CHAR8 OOC_Make__writeStats;
 typedef struct OOC_Make__ErrorContextDesc *OOC_Make__ErrorContext;
 typedef struct OOC_Make__ErrorContextDesc {
   Msg__StringPtr id;
@@ -162,7 +163,7 @@ extern RT0__StructDesc _td_OOC_Make__3542;
 extern RT0__StructDesc _td_OOC_Make__3517;
 extern RT0__StructDesc _td_OOC_Make__ErrorContext;
 extern RT0__StructDesc _td_OOC_Make__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Make__4528;
+extern RT0__StructDesc _td_OOC_Make__4677;
 #endif /* _MODULE_OOC_Make_ */
 
 /* --- */

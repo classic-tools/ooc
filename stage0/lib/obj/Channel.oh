@@ -9,8 +9,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef Msg__Msg Channel__Result;
-#define Channel__noLength -1
-#define Channel__noPosition -2
+#define Channel__noLength (-1)
+#define Channel__noPosition (-2)
 #define Channel__done  0
 #define Channel__invalidChannel 1
 #define Channel__writeError 2

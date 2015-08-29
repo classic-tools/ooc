@@ -30,10 +30,10 @@ Object_Boxed__Boolean Object_Boxed__ParseBoolean(const OOC_CHAR8 str[], OOC_LEN 
   register OOC_INT32 i0;
 
   i0 = (
-  _cmp8((const void*)(OOC_INT32)str,(const void*)"TRUE"))==(OOC_INT32)0;
+  _cmp8((const void*)(OOC_INT32)str,(const void*)"TRUE"))==0;
   if (i0) goto l7;
   i0 = (
-  _cmp8((const void*)(OOC_INT32)str,(const void*)"FALSE"))==(OOC_INT32)0;
+  _cmp8((const void*)(OOC_INT32)str,(const void*)"FALSE"))==0;
   if (i0) goto l5;
   return (Object_Boxed__Boolean)(OOC_INT32)0;
   goto l8;
@@ -55,7 +55,7 @@ OOC_CHAR8 Object_Boxed__BooleanDesc_Equals(Object_Boxed__Boolean v, Object__Obje
   i0 = (OOC_INT32)y;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3091)))), &_td_Object_Boxed__BooleanDesc);
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i1 = (OOC_INT32)v;
@@ -70,8 +70,8 @@ l4:
 
 OOC_INT32 Object_Boxed__BooleanDesc_Cmp(Object_Boxed__Boolean v, Object__Object y) {
 
-  _assert(OOC_FALSE, 127, 3216);
-  return -1;
+  _assert(0u, 127, 3216);
+  return (-1);
   ;
 }
 
@@ -184,13 +184,13 @@ Object_Boxed__LongReal Object_Boxed__ParseLongRealLiteral(const OOC_CHAR8 s__ref
 
   OOC_INITIALIZE_VPAR(s__ref,s,OOC_CHAR8 ,s_0d)
   i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT32, 4981)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
   i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT32, 4995)));
-  i0 = i0!=(OOC_CHAR8)'D';
+  i0 = i0!=68u;
   
 l5:
   if (i0) goto l7;
@@ -201,19 +201,19 @@ l7:
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 4981)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l11;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l11:
   i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 4995)));
-  i1 = i1!=(OOC_CHAR8)'D';
+  i1 = i1!=68u;
   
 l13:
   if (i1) goto l8_loop;
 l17:
   i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 5061)));
-  i1 = i1==(OOC_CHAR8)'D';
+  i1 = i1==68u;
   if (i1) goto l24;
   RealStr__StrToReal((void*)(OOC_INT32)s, s_0d, (void*)(OOC_INT32)&real, (void*)(OOC_INT32)&res);
   i0 = res;
@@ -227,7 +227,7 @@ l22:
   
   goto l29;
 l24:
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 5084))) = (OOC_CHAR8)'E';
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 5084))) = 69u;
   LRealStr__StrToReal((void*)(OOC_INT32)s, s_0d, (void*)(OOC_INT32)&longreal, (void*)(OOC_INT32)&res);
   i0 = res;
   i0 = i0==0;
@@ -272,7 +272,7 @@ OOC_CHAR8 Object_Boxed__LongRealDesc_Equals(Object_Boxed__LongReal v, Object__Ob
   i0 = (OOC_INT32)y;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5724)))), &_td_Object_Boxed__LongRealDesc);
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i1 = (OOC_INT32)v;
@@ -291,11 +291,11 @@ OOC_INT32 Object_Boxed__LongRealDesc_HashCode(Object_Boxed__LongReal v) {
 
   i0 = (OOC_INT32)v;
   _move_block((_check_pointer(i0, 6059)),(OOC_INT32)a,8);
-  i0=0;i1=0;
+  i0=0u;i1=0;
 l1_loop:
   i2 = *(OOC_UINT32*)((OOC_INT32)a+(_check_index(i1, 2, OOC_UINT32, 6172))*4);
-  i1 = i1+1;
   i0 = i0^i2;
+  i1 = i1+1;
   i2 = i1<=1;
   if (i2) goto l1_loop;
 l5:
@@ -395,7 +395,7 @@ OOC_INT32 Object_Boxed__LongRealDesc_Cmp(Object_Boxed__LongReal v, Object__Objec
   return 1;
   goto l8;
 l5:
-  return -1;
+  return (-1);
   goto l8;
 l7:
   return 0;
@@ -443,7 +443,7 @@ OOC_CHAR8 Object_Boxed__SetDesc_Equals(Object_Boxed__Set v, Object__Object y) {
   i0 = (OOC_INT32)y;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7719)))), &_td_Object_Boxed__SetDesc);
   if (i1) goto l3;
-  return OOC_FALSE;
+  return 0u;
   goto l4;
 l3:
   i1 = (OOC_INT32)v;
@@ -457,8 +457,8 @@ l4:
 
 OOC_INT32 Object_Boxed__SetDesc_Cmp(Object_Boxed__Set v, Object__Object y) {
 
-  _assert(OOC_FALSE, 127, 7863);
-  return -1;
+  _assert(0u, 127, 7863);
+  return (-1);
   ;
 }
 
@@ -475,9 +475,9 @@ static void Object_Boxed__SetToString(OOC_UINT32 val, OOC_CHAR8 str[], OOC_LEN s
   register OOC_INT32 i0,i1,i2,i3,i4;
   OOC_CHAR8 num[8];
 
-  _copy_8((const void*)"{",(void*)(OOC_INT32)str,str_0d);
   i0 = val;
-  i1=(OOC_INT32)0;i2=OOC_FALSE;
+  _copy_8((const void*)"{",(void*)(OOC_INT32)str,str_0d);
+  i1=0;i2=0u;
 l1_loop:
   i3 = _in(i1,i0);
   if (i3) goto l4;
@@ -486,7 +486,7 @@ l1_loop:
 l4:
   i3 = i1<31;
   if (i3) goto l7;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l9;
 l7:
   i3 = _in((i1+1),i0);
@@ -501,7 +501,7 @@ l12_loop:
   i3 = i3+1;
   i4 = i3<31;
   if (i4) goto l15;
-  i4=OOC_FALSE;
+  i4=0u;
   goto l17;
 l15:
   i4 = _in((i3+1),i0);
@@ -526,7 +526,7 @@ l30:
   IntStr__IntToStr(i3, (void*)(OOC_INT32)num, 8);
   Strings__Append((void*)(OOC_INT32)num, 8, (void*)(OOC_INT32)str, str_0d);
 l31:
-  i2=i3;i1=OOC_TRUE;
+  i2=i3;i1=1u;
 l32:
   i2 = i2+1;
   i3 = i2<=31;
@@ -612,7 +612,7 @@ OOC_CHAR8 Object_Boxed__StringDesc_Equals(Object_Boxed__String v, Object__Object
   i0 = (OOC_INT32)y;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9744)))), &_td_Object_Boxed__StringDesc);
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
   i1 = (OOC_INT32)v;
@@ -646,7 +646,7 @@ Object__String Object_Boxed__StringDesc_ToString(Object_Boxed__String v) {
   i0 = (OOC_INT32)v;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10064));
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10064));
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10071)))), Object__StringDesc_IndexOf)),Object__StringDesc_IndexOf)((Object__String)i2, (OOC_CHAR8)'"', 0);
+  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10071)))), Object__StringDesc_IndexOf)),Object__StringDesc_IndexOf)((Object__String)i2, 34u, 0);
   i = i1;
   i1 = i1<0;
   if (i1) goto l3;
@@ -691,7 +691,7 @@ Object_Boxed__String Object_Boxed__ParseString(const OOC_CHAR8 str[], OOC_LEN st
   register OOC_INT32 i0,i1,i2;
 
   i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT32, 10652)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (i0) goto l3;
   i0=0;
   goto l9;
@@ -700,12 +700,12 @@ l3:
 l4_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 10652)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l4_loop;
 l9:
   i1 = i0>=2;
   if (i1) goto l12;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l14;
 l12:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 10710)));
@@ -714,18 +714,18 @@ l12:
   
 l14:
   if (i1) goto l16;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l22;
 l16:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 10733)));
-  i1 = i1==(OOC_CHAR8)'"';
+  i1 = i1==34u;
   if (i1) goto l19;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 10751)));
-  i1 = i1==(OOC_CHAR8)'\047';
+  i1 = i1==39u;
   
   goto l22;
 l19:
-  i1=OOC_TRUE;
+  i1=1u;
 l22:
   if (i1) goto l24;
   return (Object_Boxed__String)(OOC_INT32)0;
@@ -742,11 +742,11 @@ l25:
 void OOC_Object_Boxed_init(void) {
   register OOC_INT32 i0,i1;
 
-  i0 = (OOC_INT32)Object_Boxed__NewBoolean(OOC_TRUE);
+  i0 = (OOC_INT32)Object_Boxed__NewBoolean(1u);
   Object_Boxed__true = (Object_Boxed__Boolean)i0;
   i0 = (OOC_INT32)Object__NewLatin1("TRUE", 5);
   Object_Boxed__trueString = (Object__String)i0;
-  i0 = (OOC_INT32)Object_Boxed__NewBoolean(OOC_FALSE);
+  i0 = (OOC_INT32)Object_Boxed__NewBoolean(0u);
   Object_Boxed__false = (Object_Boxed__Boolean)i0;
   i0 = (OOC_INT32)Object__NewLatin1("FALSE", 6);
   Object_Boxed__falseString = (Object__String)i0;

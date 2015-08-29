@@ -92,7 +92,7 @@ OOC_CHAR8 OOC_Config__HaveXsltProc() {
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2557))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2571)))), &_td_Config_Value_String__ValueDesc, 2571)), 2577));
   return ((
-  _cmp8((const void*)(_check_pointer(i0, 2584)),(const void*)"no"))!=(OOC_INT32)0);
+  _cmp8((const void*)(_check_pointer(i0, 2584)),(const void*)"no"))!=0);
   ;
 }
 

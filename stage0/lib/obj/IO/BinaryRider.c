@@ -22,7 +22,7 @@ void IO_BinaryRider__ReaderDesc_ReadBytes(IO_BinaryRider__Reader r, OOC_CHAR8 x[
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2362))+4);
   i2 = start;
   i3 = n;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2370)))), IO__ByteChannelDesc_Read)),IO__ByteChannelDesc_Read)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, -1, i2, i3);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2370)))), IO__ByteChannelDesc_Read)),IO__ByteChannelDesc_Read)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, (-1), i2, i3);
   i0 = i0!=i3;
   if (!i0) goto l4;
   IO__RaiseFormatError((Object__String)((OOC_INT32)_c0));
@@ -43,10 +43,10 @@ void IO_BinaryRider__ReaderDesc_ReadBytesOrdered(IO_BinaryRider__Reader r, OOC_C
   i2 = IO_BinaryRider__systemByteOrder;
   i1 = i1==i2;
   
-  goto l4;
+  goto l5;
 l3:
-  i1=OOC_TRUE;
-l4:
+  i1=1u;
+l5:
   if (i1) goto l18;
   i1 = x_0d-1;
   i = i1;
@@ -62,7 +62,7 @@ l9_loop:
   if (!i3) goto l12;
   IO__RaiseFormatError((Object__String)i2);
 l12:
-  i1 = i1+-1;
+  i1 = i1+(-1);
   i = i1;
   i3 = i1>=0;
   if (i3) goto l9_loop;
@@ -70,7 +70,7 @@ l12:
 l18:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2735))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2735))+4);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2743)))), IO__ByteChannelDesc_Read)),IO__ByteChannelDesc_Read)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, -1, 0, x_0d);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2743)))), IO__ByteChannelDesc_Read)),IO__ByteChannelDesc_Read)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, (-1), 0, x_0d);
   i0 = i0!=x_0d;
   if (!i0) goto l22;
   IO__RaiseFormatError((Object__String)((OOC_INT32)_c2));
@@ -92,7 +92,7 @@ void IO_BinaryRider__ReaderDesc_ReadBool(IO_BinaryRider__Reader r, OOC_CHAR8 *_b
   i0 = byte;
   i1 = i0!=0;
   if (i1) goto l5;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l7;
 l5:
   i0 = i0!=1;
@@ -139,27 +139,27 @@ void IO_BinaryRider__ReaderDesc_ReadString(IO_BinaryRider__Reader r, OOC_CHAR8 s
   OOC_INT16 len;
   OOC_INT16 cnt;
 
-  i0 = s_0d-1;
-  len = i0;
-  i1 = (OOC_INT32)r;
-  i2=-1;
+  i0 = (OOC_INT32)r;
+  i1 = s_0d-1;
+  len = i1;
+  i2=(-1);
 l1_loop:
   i2 = i2+1;
   cnt = i2;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4071)))), IO_BinaryRider__ReaderDesc_ReadChar)),IO_BinaryRider__ReaderDesc_ReadChar)((IO_BinaryRider__Reader)i1, (void*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4082))));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4071)))), IO_BinaryRider__ReaderDesc_ReadChar)),IO_BinaryRider__ReaderDesc_ReadChar)((IO_BinaryRider__Reader)i0, (void*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4082))));
   i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4101)));
-  i3 = i3==(OOC_CHAR8)'\000';
+  i3 = i3==0u;
   if (i3) goto l4;
-  i3 = i2==i0;
+  i3 = i2==i1;
   
   goto l6;
 l4:
-  i3=OOC_TRUE;
+  i3=1u;
 l6:
   if (!i3) goto l1_loop;
 l9:
   i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4134)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (!i0) goto l12;
   IO__RaiseFormatError((Object__String)((OOC_INT32)_c6));
 l12:
@@ -172,27 +172,27 @@ void IO_BinaryRider__ReaderDesc_ReadLString(IO_BinaryRider__Reader r, OOC_CHAR16
   OOC_INT16 len;
   OOC_INT16 cnt;
 
-  i0 = s_0d-1;
-  len = i0;
-  i1 = (OOC_INT32)r;
-  i2=-1;
+  i0 = (OOC_INT32)r;
+  i1 = s_0d-1;
+  len = i1;
+  i2=(-1);
 l1_loop:
   i2 = i2+1;
   cnt = i2;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4607)))), IO_BinaryRider__ReaderDesc_ReadLChar)),IO_BinaryRider__ReaderDesc_ReadLChar)((IO_BinaryRider__Reader)i1, (void*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4619))*2));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4607)))), IO_BinaryRider__ReaderDesc_ReadLChar)),IO_BinaryRider__ReaderDesc_ReadLChar)((IO_BinaryRider__Reader)i0, (void*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4619))*2));
   i3 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4638))*2);
-  i3 = i3==(OOC_CHAR8)'\000';
+  i3 = i3==0u;
   if (i3) goto l4;
-  i3 = i2==i0;
+  i3 = i2==i1;
   
   goto l6;
 l4:
-  i3=OOC_TRUE;
+  i3=1u;
 l6:
   if (!i3) goto l1_loop;
 l9:
   i0 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 4671))*2);
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (!i0) goto l12;
   IO__RaiseFormatError((Object__String)((OOC_INT32)_c7));
 l12:
@@ -238,7 +238,7 @@ void IO_BinaryRider__ReaderDesc_ReadNum(IO_BinaryRider__Reader r, OOC_INT32 *num
   i0 = (OOC_INT32)r;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5343)))), IO_BinaryRider__ReaderDesc_ReadChar)),IO_BinaryRider__ReaderDesc_ReadChar)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)&x);
   i1 = x;
-  i1 = i1>=(OOC_CHAR8)'\200';
+  i1 = (OOC_UINT8)i1>=(OOC_UINT8)128u;
   if (i1) goto l3;
   i0=0;i1=0;
   goto l13;
@@ -253,11 +253,11 @@ l4_loop:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5451)))), IO_BinaryRider__ReaderDesc_ReadChar)),IO_BinaryRider__ReaderDesc_ReadChar)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)&x);
   i3 = i2<28;
   if (i3) goto l7;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l9;
 l7:
   i3 = x;
-  i3 = i3>=(OOC_CHAR8)'\200';
+  i3 = (OOC_UINT8)i3>=(OOC_UINT8)128u;
   
 l9:
   if (i3) goto l4_loop;
@@ -265,25 +265,25 @@ l12:
   i0=i2;
 l13:
   i2 = x;
-  i3 = i2>=(OOC_CHAR8)'\200';
+  i3 = (OOC_UINT8)i2>=(OOC_UINT8)128u;
   if (i3) goto l24;
   i3 = i0==28;
   if (i3) goto l18;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l20;
 l18:
-  i3 = (OOC_CHAR8)'\010'<=i2;
+  i3 = (OOC_UINT8)8u<=(OOC_UINT8)i2;
   
 l20:
   if (i3) goto l22;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l26;
 l22:
-  i3 = i2<(OOC_CHAR8)'x';
+  i3 = (OOC_UINT8)i2<(OOC_UINT8)120u;
   
   goto l26;
 l24:
-  i3=OOC_TRUE;
+  i3=1u;
 l26:
   if (i3) goto l28;
   *num = ((_ash((_lsh(OOC_INT32, i2, 25)),(i0-25)))+i1);
@@ -340,14 +340,13 @@ void IO_BinaryRider__ReaderDesc_ReadStr(IO_BinaryRider__Reader r, Object__String
   i2 = i1>0;
   if (i2) goto l25;
   i1 = (-i1)-1;
-  i2 = i1<512;
   len = i1;
+  i2 = i1<512;
   if (i2) goto l15;
   i2 = (OOC_INT32)RT0__NewObject(_td_IO_BinaryRider__6488.baseTypes[0], i1);
   dynBuffer32 = (void*)i2;
-  i1 = i1-1;
-  i3 = 0<=i1;
   i = 0;
+  i3 = 0<i1;
   if (!i3) goto l14;
   i3=0;
 l9_loop:
@@ -355,19 +354,18 @@ l9_loop:
   i4 = x;
   *(OOC_UINT32*)((OOC_INT32)buffer32+(_check_index(i3, 512, OOC_UINT32, 7334))*4) = i4;
   i3 = i3+1;
-  i4 = i3<=i1;
   i = i3;
+  i4 = i3<i1;
   if (i4) goto l9_loop;
 l14:
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i2, 7411)), (OOC_INT32)0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i2, 7411)), 0);
   i1 = len;
   i0 = (OOC_INT32)Object__NewUCS4Region((void*)(_check_pointer(i2, 7411)), i0, 0, i1);
   *s = (Object__String)i0;
   goto l32;
 l15:
-  i1 = i1-1;
-  i2 = 0<=i1;
   i = 0;
+  i2 = 0<i1;
   if (!i2) goto l23;
   i2=0;
 l18_loop:
@@ -375,8 +373,8 @@ l18_loop:
   i3 = x;
   *(OOC_UINT32*)((OOC_INT32)buffer32+(_check_index(i2, 512, OOC_UINT32, 7134))*4) = i3;
   i2 = i2+1;
-  i3 = i2<=i1;
   i = i2;
+  i3 = i2<i1;
   if (i3) goto l18_loop;
 l23:
   i0 = len;
@@ -390,8 +388,8 @@ l25:
   if (i2) goto l28;
   i2 = (OOC_INT32)RT0__NewObject(_td_IO_BinaryRider__6399.baseTypes[0], i1);
   dynBuffer8 = (void*)i2;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6824)))), IO_BinaryRider__ReaderDesc_ReadBytes)),IO_BinaryRider__ReaderDesc_ReadBytes)((IO_BinaryRider__Reader)i0, (void*)(_check_pointer(i2, 6845)), -1, 0, i1);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i2, 6903)), (OOC_INT32)0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6824)))), IO_BinaryRider__ReaderDesc_ReadBytes)),IO_BinaryRider__ReaderDesc_ReadBytes)((IO_BinaryRider__Reader)i0, (void*)(_check_pointer(i2, 6845)), (-1), 0, i1);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i2, 6903)), 0);
   i1 = len;
   i0 = (OOC_INT32)Object__NewLatin1Region((void*)(_check_pointer(i2, 6903)), i0, 0, i1);
   *s = (Object__String)i0;
@@ -415,7 +413,7 @@ void IO_BinaryRider__ReaderDesc_SetByteOrder(IO_BinaryRider__Reader r, OOC_INT8 
   i0 = order;
   i1 = i0>=0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l4;
 l3:
   i1 = i0<=2;
@@ -448,7 +446,7 @@ void IO_BinaryRider__WriterDesc_WriteBytes(IO_BinaryRider__Writer w, const OOC_C
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8309))+4);
   i2 = start;
   i3 = n;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8317)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, -1, i2, i3);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8317)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, (-1), i2, i3);
   return;
   ;
 }
@@ -466,10 +464,10 @@ void IO_BinaryRider__WriterDesc_WriteOrdered(IO_BinaryRider__Writer w, OOC_CHAR8
   i2 = IO_BinaryRider__systemByteOrder;
   i1 = i1==i2;
   
-  goto l4;
+  goto l5;
 l3:
-  i1=OOC_TRUE;
-l4:
+  i1=1u;
+l5:
   if (i1) goto l15;
   i1 = x_0d-1;
   i = i1;
@@ -480,7 +478,7 @@ l9_loop:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8703))+4);
   i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 8711)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i3, (void*)((OOC_INT32)x+(_check_index(i1, x_0d, OOC_UINT32, 8719))), 1, 0, 1);
   d = i2;
-  i1 = i1+-1;
+  i1 = i1+(-1);
   i = i1;
   i2 = i1>=0;
   if (i2) goto l9_loop;
@@ -488,7 +486,7 @@ l9_loop:
 l15:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8622))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8622))+4);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8630)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, -1, 0, x_0d);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8630)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)x, (-1), 0, x_0d);
 l16:
   return;
   ;
@@ -511,11 +509,11 @@ void IO_BinaryRider__WriterDesc_WriteBool(IO_BinaryRider__Writer w, OOC_CHAR8 _b
   i0 = _bool;
   if (i0) goto l3;
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9044)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i0, (OOC_CHAR8)'\000');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9044)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i0, 0u);
   goto l4;
 l3:
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9011)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i0, (OOC_CHAR8)'\001');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9011)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i0, 1u);
 l4:
   return;
   ;
@@ -537,7 +535,7 @@ void IO_BinaryRider__WriterDesc_WriteString(IO_BinaryRider__Writer w, const OOC_
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9383))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9383))+4);
   i2 = Strings__Length((void*)(OOC_INT32)s, s_0d);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9391)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)s, -1, 0, (i2+1));
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9391)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)s, (-1), 0, (i2+1));
   return;
   ;
 }
@@ -547,14 +545,14 @@ void IO_BinaryRider__WriterDesc_WriteLString(IO_BinaryRider__Writer w, const OOC
   OOC_INT32 i;
 
   i0 = (OOC_INT32)w;
-  i1=-1;
+  i1=(-1);
 l1_loop:
   i1 = i1+1;
   i = i1;
   i2 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT32, 9673))*2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9658)))), IO_BinaryRider__WriterDesc_WriteLChar)),IO_BinaryRider__WriterDesc_WriteLChar)((IO_BinaryRider__Writer)i0, i2);
   i2 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT32, 9690))*2);
-  i2 = i2==(OOC_CHAR8)'\000';
+  i2 = i2==0u;
   if (!i2) goto l1_loop;
 l5:
   return;
@@ -594,32 +592,30 @@ void IO_BinaryRider__WriterDesc_WriteNum(IO_BinaryRider__Writer w, OOC_INT32 lin
   register OOC_INT32 i0,i1,i2;
 
   i0 = lint;
-  i1 = i0<-64;
-  if (i1) goto l3;
-  i0 = i0>63;
-  
-  goto l4;
-l3:
-  i0=OOC_TRUE;
-l4:
   i1 = (OOC_INT32)w;
-  if (!i0) goto l16;
-l7_loop:
-  i0 = lint;
+  i2 = i0<(-64);
+  if (i2) goto l3;
+  i2 = i0>63;
+  
+  goto l5;
+l3:
+  i2=1u;
+l5:
+  if (!i2) goto l17;
+l8_loop:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10298)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i1, ((_mod(i0,128))+128));
   i0 = i0>>7;
-  i2 = i0<-64;
   lint = i0;
-  if (i2) goto l10;
-  i0 = i0>63;
+  i2 = i0<(-64);
+  if (i2) goto l11;
+  i2 = i0>63;
   
-  goto l12;
-l10:
-  i0=OOC_TRUE;
-l12:
-  if (i0) goto l7_loop;
-l16:
-  i0 = lint;
+  goto l13;
+l11:
+  i2=1u;
+l13:
+  if (i2) goto l8_loop;
+l17:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10372)))), IO_BinaryRider__WriterDesc_WriteChar)),IO_BinaryRider__WriterDesc_WriteChar)((IO_BinaryRider__Writer)i1, (_mod(i0,128)));
   return;
   ;
@@ -673,20 +669,19 @@ l7:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11254)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, ((-i2)-1));
   i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11298)))), Object__String32Desc_CharsUCS4)),Object__String32Desc_CharsUCS4)((Object__String32)i0);
   chars32 = (Object__CharsUCS4)i2;
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 11335));
-  i0 = i0-1;
-  i3 = 0<=i0;
   i = 0;
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 11335));
+  i3 = 0<i0;
   if (!i3) goto l20;
   i3=0;
 l10_loop:
   i4 = _check_pointer(i2, 11380);
-  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
   i4 = *(OOC_UINT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 11380))*4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11359)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, i4);
   i3 = i3+1;
-  i4 = i3<=i0;
   i = i3;
+  i4 = i3<i0;
   if (i4) goto l10_loop;
   goto l20;
 l17:
@@ -698,7 +693,7 @@ l17:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11127))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11127))+4);
   i0 = *(OOC_INT32*)(_check_pointer(i0, 11155));
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 11135)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i1, (void*)(_check_pointer(i2, 11148)), -1, 0, i0);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 11135)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i1, (void*)(_check_pointer(i2, 11148)), (-1), 0, i0);
   goto l20;
 l19:
   i0 = (OOC_INT32)w;
@@ -714,7 +709,7 @@ void IO_BinaryRider__WriterDesc_SetByteOrder(IO_BinaryRider__Writer w, OOC_INT8 
   i0 = order;
   i1 = i0>=0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l4;
 l3:
   i1 = i0<=2;
@@ -775,7 +770,7 @@ static void IO_BinaryRider__SetDefaultByteOrder(OOC_CHAR8 x[], OOC_LEN x_0d) {
   register OOC_INT32 i0;
 
   i0 = *(OOC_UINT8*)((OOC_INT32)x+(_check_index(0, x_0d, OOC_UINT8, 13208)));
-  i0 = (_type_cast_fast(OOC_UINT8, OOC_UINT8, i0))==(OOC_CHAR8)'\001';
+  i0 = (_type_cast_fast(OOC_UINT8, OOC_UINT8, i0))==1u;
   if (i0) goto l3;
   IO_BinaryRider__systemByteOrder = 2;
   goto l4;
@@ -796,15 +791,15 @@ static void IO_BinaryRider__Init() {
 }
 
 void OOC_IO_BinaryRider_init(void) {
-  _c0 = Object__NewLatin1Region("Short file", 11, (OOC_INT32)0, 10);
-  _c1 = Object__NewLatin1Region("Short file", 11, (OOC_INT32)0, 10);
-  _c2 = Object__NewLatin1Region("Short file", 11, (OOC_INT32)0, 10);
-  _c3 = Object__NewLatin1Region("Value out of range", 19, (OOC_INT32)0, 18);
-  _c4 = Object__NewLatin1Region("Short file", 11, (OOC_INT32)0, 10);
-  _c5 = Object__NewLatin1Region("Short file", 11, (OOC_INT32)0, 10);
-  _c6 = Object__NewLatin1Region("String not terminated", 22, (OOC_INT32)0, 21);
-  _c7 = Object__NewLatin1Region("String not terminated", 22, (OOC_INT32)0, 21);
-  _c8 = Object__NewLatin1Region("Overflow", 9, (OOC_INT32)0, 8);
+  _c0 = Object__NewLatin1Region("Short file", 11, 0, 10);
+  _c1 = Object__NewLatin1Region("Short file", 11, 0, 10);
+  _c2 = Object__NewLatin1Region("Short file", 11, 0, 10);
+  _c3 = Object__NewLatin1Region("Value out of range", 19, 0, 18);
+  _c4 = Object__NewLatin1Region("Short file", 11, 0, 10);
+  _c5 = Object__NewLatin1Region("Short file", 11, 0, 10);
+  _c6 = Object__NewLatin1Region("String not terminated", 22, 0, 21);
+  _c7 = Object__NewLatin1Region("String not terminated", 22, 0, 21);
+  _c8 = Object__NewLatin1Region("Overflow", 9, 0, 8);
 
   IO_BinaryRider__Init();
   return;

@@ -42,7 +42,7 @@ Config_Value__StringPtr Config_Value__GetStringPtr(Config_Value__String str, OOC
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Value__StringPtr.baseTypes[0], (i0+1));
   s = (Config_Value__StringPtr)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1275)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1275)), 0);
   _copy_8((const void*)(OOC_INT32)str,(void*)(_check_pointer(i0, 1275)),i1);
   return (Config_Value__StringPtr)i0;
   ;
@@ -54,7 +54,7 @@ Config_Value__PrototypeList Config_Value__NewPrototypeList() {
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Value__PrototypeList.baseTypes[0]);
   tl = (Config_Value__PrototypeList)i0;
-  *(OOC_INT32*)(_check_pointer(i0, 1418)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 1418)) = 0;
   return (Config_Value__PrototypeList)i0;
   ;
 }
@@ -73,12 +73,12 @@ void Config_Value__PrototypeListDesc_RegisterPrototype(Config_Value__PrototypeLi
   ptr = (Config_Value__Prototype)i1;
   i2 = i1!=(OOC_INT32)0;
   if (i2) goto l3;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l5;
 l3:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1679))+4);
   i2 = (
-  _cmp8((const void*)(_check_pointer(i2, 1685)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i2, 1685)),(const void*)(OOC_INT32)name))!=0;
   
 l5:
   if (i2) goto l8_loop;
@@ -90,12 +90,12 @@ l8_loop:
   ptr = (Config_Value__Prototype)i2;
   i3 = i2!=(OOC_INT32)0;
   if (i3) goto l11;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l13;
 l11:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1679))+4);
   i3 = (
-  _cmp8((const void*)(_check_pointer(i3, 1685)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i3, 1685)),(const void*)(OOC_INT32)name))!=0;
   
 l13:
   if (!i3) goto l16;
@@ -112,7 +112,7 @@ l17:
   *(OOC_INT32*)((_check_pointer(i1, 1848))+4) = ((OOC_INT32)RT0__NewObject(_td_Config_Value__PrototypeName.baseTypes[0], (i3+1)));
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1910))+4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1910))+4);
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1916)), (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1916)), 0);
   _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i3, 1916)),i4);
   i3 = (OOC_INT32)prototype;
   *(OOC_INT32*)((_check_pointer(i1, 1936))+8) = i3;
@@ -135,34 +135,34 @@ Config_Value__Value Config_Value__PrototypeListDesc_GetClone(Config_Value__Proto
   OOC_INITIALIZE_VPAR(prototypeName__ref,prototypeName,OOC_CHAR8 ,prototypeName_0d)
   i0 = (OOC_INT32)tl;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2225));
-  i1 = i0!=(OOC_INT32)0;
   ptr = (Config_Value__Prototype)i0;
+  i1 = i0!=0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2261))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=0;
   
 l5:
   if (!i1) goto l17;
 l8_loop:
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2305));
   ptr = (Config_Value__Prototype)i0;
-  i1 = i0!=(OOC_INT32)0;
+  i1 = i0!=0;
   if (i1) goto l11;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2261))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=0;
   
 l13:
   if (i1) goto l8_loop;
 l17:
-  i1 = i0==(OOC_INT32)0;
+  i1 = i0==0;
   if (i1) goto l20;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2387))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2387))+8);
@@ -170,7 +170,7 @@ l17:
   return (Config_Value__Value)i0;
   goto l21;
 l20:
-  return (Config_Value__Value)(OOC_INT32)0;
+  return (Config_Value__Value)0;
 l21:
   _failed_function(2129); return 0;
   ;

@@ -135,13 +135,13 @@ extern RT0__StructDesc _td_OOC_Package__29461;
 extern RT0__StructDesc _td_OOC_Package__31051;
 extern RT0__StructDesc _td_OOC_Package__31163;
 extern RT0__StructDesc _td_OOC_Package__31193;
-extern RT0__StructDesc _td_OOC_Package__31829;
-extern RT0__StructDesc _td_OOC_Package__34890;
-extern RT0__StructDesc _td_OOC_Package__36122;
-extern RT0__StructDesc _td_OOC_Package__36174;
-extern RT0__StructDesc _td_OOC_Package__36583;
-extern RT0__StructDesc _td_OOC_Package__37173;
-extern RT0__StructDesc _td_OOC_Package__37426;
+extern RT0__StructDesc _td_OOC_Package__31832;
+extern RT0__StructDesc _td_OOC_Package__34917;
+extern RT0__StructDesc _td_OOC_Package__36152;
+extern RT0__StructDesc _td_OOC_Package__36204;
+extern RT0__StructDesc _td_OOC_Package__36613;
+extern RT0__StructDesc _td_OOC_Package__37203;
+extern RT0__StructDesc _td_OOC_Package__37456;
 #endif /* _MODULE_OOC_Package_ */
 
 /* --- */

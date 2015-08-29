@@ -5,7 +5,7 @@
 #include <RT0.oh>
 #include <StringSearch.oh>
 #include <ADT/Dictionary.oh>
-#include <ADT/ArrayList.oh>
+#include <ADT/Dictionary/IntValue.oh>
 #include <OOC/SymbolTable.oh>
 #include <OOC/IR.oh>
 #include <OOC/IR/VisitAll.oh>
@@ -31,8 +31,12 @@ typedef struct OOC_SSA_WriteC__TranslatorDesc {
   OOC_INT32 currentProc;
   StringSearch__Matcher inspectProc;
   StringSearch__Matcher inspectStage;
+  OOC_CHAR8 writeStats;
+  OOC_CHAR8 __pad25;
+  OOC_CHAR8 __pad26;
+  OOC_CHAR8 __pad27;
   ADT_Dictionary__Dictionary nonLocalAccess;
-  ADT_ArrayList__ArrayList preloadedVars;
+  ADT_Dictionary_IntValue__Dictionary preloadedVars;
 } OOC_SSA_WriteC__TranslatorDesc;
 typedef struct OOC_SSA_WriteC__WriterDesc *OOC_SSA_WriteC__Writer;
 typedef struct OOC_SSA_WriteC__WriterDesc {
@@ -63,52 +67,52 @@ extern void OOC_SSA_WriteC__VisitorDesc_VisitVar(OOC_SSA_WriteC__Visitor v, OOC_
 #define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitVar 55
 typedef void (*_TBP_OOC_SSA_WriteC__VisitorDesc_VisitVar)(OOC_SSA_WriteC__Visitor v, OOC_IR__Var var);
 extern void OOC_SSA_WriteC__WriterDesc_ClearSwapData(OOC_SSA_WriteC__Writer w);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_ClearSwapData 26
+#define _TBN_OOC_SSA_WriteC__WriterDesc_ClearSwapData 28
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_ClearSwapData)(OOC_SSA_WriteC__Writer w);
 extern void OOC_SSA_WriteC__WriterDesc_AddSwapData(OOC_SSA_WriteC__Writer w, Object__String source, Object__String dest, OOC_INT8 ctype);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_AddSwapData 25
+#define _TBN_OOC_SSA_WriteC__WriterDesc_AddSwapData 27
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_AddSwapData)(OOC_SSA_WriteC__Writer w, Object__String source, Object__String dest, OOC_INT8 ctype);
 extern void OOC_SSA_WriteC__WriterDesc_CountReadsSwapData(OOC_SSA_WriteC__Writer w);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_CountReadsSwapData 27
+#define _TBN_OOC_SSA_WriteC__WriterDesc_CountReadsSwapData 29
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_CountReadsSwapData)(OOC_SSA_WriteC__Writer w);
 extern void OOC_SSA_WriteC__WriterDesc_RemoveSwapData(OOC_SSA_WriteC__Writer w, OOC_INT32 i);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_RemoveSwapData 35
+#define _TBN_OOC_SSA_WriteC__WriterDesc_RemoveSwapData 37
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_RemoveSwapData)(OOC_SSA_WriteC__Writer w, OOC_INT32 i);
 extern void OOC_SSA_WriteC__WriterDesc_IntroduceHelperVar(OOC_SSA_WriteC__Writer w, OOC_INT32 i);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_IntroduceHelperVar 30
+#define _TBN_OOC_SSA_WriteC__WriterDesc_IntroduceHelperVar 32
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_IntroduceHelperVar)(OOC_SSA_WriteC__Writer w, OOC_INT32 i);
 extern void OOC_SSA_WriteC__WriterDesc_FixupHelperVars(OOC_SSA_WriteC__Writer w);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_FixupHelperVars 29
+#define _TBN_OOC_SSA_WriteC__WriterDesc_FixupHelperVars 31
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_FixupHelperVars)(OOC_SSA_WriteC__Writer w);
 extern void OOC_SSA_WriteC__WriterDesc_LengthExprHeap(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_LengthExprHeap 31
+#define _TBN_OOC_SSA_WriteC__WriterDesc_LengthExprHeap 33
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_LengthExprHeap)(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
 extern void OOC_SSA_WriteC__WriterDesc_LengthExprParam(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_LengthExprParam 32
+#define _TBN_OOC_SSA_WriteC__WriterDesc_LengthExprParam 34
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_LengthExprParam)(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
 extern void OOC_SSA_WriteC__WriterDesc_Ref(OOC_SSA_WriteC__Writer w, OOC_SSA__Opnd opnd);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_Ref 34
+#define _TBN_OOC_SSA_WriteC__WriterDesc_Ref 36
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_Ref)(OOC_SSA_WriteC__Writer w, OOC_SSA__Opnd opnd);
 extern void OOC_SSA_WriteC__WriterDesc_TypeRef(OOC_SSA_WriteC__Writer w, OOC_SymbolTable__Type type);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_TypeRef 36
+#define _TBN_OOC_SSA_WriteC__WriterDesc_TypeRef 38
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_TypeRef)(OOC_SSA_WriteC__Writer w, OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SSA_WriteC__WriterDesc_Noop(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_Noop 33
+#define _TBN_OOC_SSA_WriteC__WriterDesc_Noop 35
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_WriteC__WriterDesc_Noop)(OOC_SSA_WriteC__Writer w, OOC_SSA__Instr instr);
 extern OOC_CHAR8 OOC_SSA_WriteC__WriterDesc_EmptyBlock(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block b);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_EmptyBlock 28
+#define _TBN_OOC_SSA_WriteC__WriterDesc_EmptyBlock 30
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_WriteC__WriterDesc_EmptyBlock)(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block b);
 extern void OOC_SSA_WriteC__WriterDesc_WriteInstrList(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block b);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_WriteInstrList 38
+#define _TBN_OOC_SSA_WriteC__WriterDesc_WriteInstrList 40
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_WriteInstrList)(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block b);
 extern void OOC_SSA_WriteC__WriterDesc_WriteBlocks(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block domRoot);
-#define _TBN_OOC_SSA_WriteC__WriterDesc_WriteBlocks 37
+#define _TBN_OOC_SSA_WriteC__WriterDesc_WriteBlocks 39
 typedef void (*_TBP_OOC_SSA_WriteC__WriterDesc_WriteBlocks)(OOC_SSA_WriteC__Writer w, OOC_SSA_Schedule__Block domRoot);
 extern void OOC_SSA_WriteC__TranslatorDesc_WriteProcBody(volatile OOC_SSA_WriteC__Translator t, volatile OOC_IR__Procedure proc);
 #define _TBN_OOC_SSA_WriteC__TranslatorDesc_WriteProcBody 4
 typedef void (*_TBP_OOC_SSA_WriteC__TranslatorDesc_WriteProcBody)(OOC_SSA_WriteC__Translator t, OOC_IR__Procedure proc);
-extern void OOC_SSA_WriteC__InitTranslator(OOC_SSA_WriteC__Translator t, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
-extern OOC_SSA_WriteC__Translator OOC_SSA_WriteC__NewTranslator(StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
+extern void OOC_SSA_WriteC__InitTranslator(OOC_SSA_WriteC__Translator t, OOC_CHAR8 writeStats, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
+extern OOC_SSA_WriteC__Translator OOC_SSA_WriteC__NewTranslator(OOC_CHAR8 writeStats, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
 extern void OOC_SSA_WriteC__TranslatorDesc_SetProcedureList(OOC_SSA_WriteC__Translator t, OOC_IR__ProcedureList procList);
 #define _TBN_OOC_SSA_WriteC__TranslatorDesc_SetProcedureList 1
 typedef void (*_TBP_OOC_SSA_WriteC__TranslatorDesc_SetProcedureList)(OOC_SSA_WriteC__Translator t, OOC_IR__ProcedureList procList);
@@ -117,7 +121,7 @@ extern void OOC_OOC_SSA_WriteC_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_WriteC__RegisterSwap;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__1723;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__1854;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__SwapArray;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__Translator;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__TranslatorDesc;
@@ -125,14 +129,15 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__Writer;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__WriterDesc;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__Visitor;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__VisitorDesc;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__6612;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__7646;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__21452;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22951;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__23155;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__23448;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__37569;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__50155;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__6091;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__7131;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__21925;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23424;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23627;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24638;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24931;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__39023;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__51659;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

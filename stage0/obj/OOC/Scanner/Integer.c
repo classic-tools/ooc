@@ -31,7 +31,7 @@ Msg__Msg OOC_Scanner_Integer__Convert10(OOC_Scanner_InputBuffer__CharArray str, 
   OOC_INT8 format;
 
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 875)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 875)), 0);
   IntStr__StrToInt((void*)(_check_pointer(i0, 875)), i1, (void*)(OOC_INT32)_int, (void*)(OOC_INT32)&format);
   i0 = format;
   i0 = i0==1;
@@ -39,8 +39,8 @@ Msg__Msg OOC_Scanner_Integer__Convert10(OOC_Scanner_InputBuffer__CharArray str, 
   return (Msg__Msg)(OOC_INT32)0;
   goto l4;
 l3:
-  i0 = (OOC_INT32)OOC_Scanner_Integer__integerContext;
   *_int = 1;
+  i0 = (OOC_INT32)OOC_Scanner_Integer__integerContext;
   i0 = (OOC_INT32)OOC_Error__New((OOC_Error__Context)i0, 1);
   return (Msg__Msg)i0;
 l4:
@@ -60,10 +60,10 @@ Msg__Msg OOC_Scanner_Integer__Convert16(OOC_Scanner_InputBuffer__CharArray str, 
       i0 = c;
       i1 = 48<=i0;
       if (i1) goto l3;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l5;
 l3:
-      i1 = i0<=57;
+      i1 = (OOC_UINT8)i0<=(OOC_UINT8)57;
       
 l5:
       if (i1) goto l7;
@@ -81,14 +81,14 @@ l8:
 
   spos = 0;
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1647)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1647)), 0);
   i1 = Strings__Length((void*)(_check_pointer(i0, 1647)), i1);
   epos = i1;
   *_int = 0;
   i2 = _check_pointer(i0, 1713);
-  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH(i2, 0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(0, i3, OOC_UINT32, 1713)));
-  i2 = i2==(OOC_CHAR8)'0';
+  i2 = i2==48u;
   if (i2) goto l3;
   i2=0;
   goto l9;
@@ -98,9 +98,9 @@ l4_loop:
   i2 = i2+1;
   spos = i2;
   i3 = _check_pointer(i0, 1713);
-  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 1713)));
-  i3 = i3==(OOC_CHAR8)'0';
+  i3 = i3==48u;
   if (i3) goto l4_loop;
 l9:
   i3 = (i1-i2)>7;
@@ -108,17 +108,17 @@ l9:
   i1 = i2<=i1;
   if (!i1) goto l32;
   i0 = _check_pointer(i0, 2027);
-  i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH(i0, 0);
   i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 2027)));
   i0 = OOC_Scanner_Integer__Convert16_GetDigit(i0);
   i1 = spos;
+  *_int = i0;
   i1 = i1+1;
   i2 = epos;
-  *_int = i0;
-  i3 = (i2-i1)==6;
   spos = i1;
+  i3 = (i2-i1)==6;
   if (i3) goto l16;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l18;
 l16:
   i3 = i0>=8;
@@ -137,16 +137,16 @@ l21:
 l24_loop:
   i2 = (OOC_INT32)str;
   i2 = _check_pointer(i2, 2546);
-  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH(i2, 0);
   i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 2546)));
   i1 = OOC_Scanner_Integer__Convert16_GetDigit(i1);
   i0 = (i0*16)+i1;
   i1 = spos;
-  i1 = i1+1;
   *_int = i0;
+  i1 = i1+1;
+  spos = i1;
   i2 = epos;
   i2 = i1<=i2;
-  spos = i1;
   if (i2) goto l24_loop;
   goto l32;
 l31:

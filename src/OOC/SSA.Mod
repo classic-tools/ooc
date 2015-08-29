@@ -1,7 +1,7 @@
-(* 	$Id: SSA.Mod,v 1.72 2002/12/18 11:18:07 mva Exp $	 *)
+(* 	$Id: SSA.Mod,v 1.79 2003/03/09 22:01:03 mva Exp $	 *)
 MODULE OOC:SSA;
 (*  Data structures for SSA code representation.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -26,7 +26,8 @@ IMPORT
   Sym := OOC:SymbolTable, OOC:SymbolTable:Predef, OOC:IR,
   OOC:SSA:Opcode, ResultClass := OOC:SSA:Result, OpndClass := OOC:SSA:Opnd;
 
-  
+<*DEFINE OOC_CHECK_ARGS:=FALSE*>
+
 TYPE
   Node* = POINTER TO NodeDesc;
   Opnd* = POINTER TO OpndDesc;
@@ -144,8 +145,13 @@ TYPE
     (InstrDesc)
     value-: Boxed.Object;
     (**For a constant representing a @code{NIL} value, this field refers to
-       @ovar{nil}.  *)
-    type-: Sym.Type;
+       @ovar{nil}.  Otherwise, it is an instance of BigInt, Boxed.LongReal,
+       or Boxed.String.  *)
+    stringType-: Sym.Type;
+    (**For a string constant, the instructions @ofield{subclass} is
+       @oconst{Opcode.scAddress}, and this field is used to disambiguate the
+       string's base character type.  For all other constants, this field
+       is @code{NIL}.  *)
   END;
   
 TYPE
@@ -199,7 +205,7 @@ TYPE
        of the function body is reached without encountering any @code{RETURN}.
        *)
     
-    constMap: ARRAY Predef.lastId+1 OF Dictionary.Dictionary;
+    constMap: ARRAY Opcode.lastSubclass+1 OF Dictionary.Dictionary;
     (**Maps constant values onto @code{const} instructions.  See
        @oproc{ProcBlock.GetConst}.  *)
     
@@ -312,6 +318,17 @@ PROCEDURE (opnd: Opnd) DeleteOpnd*;
     opnd. instr := NIL
   END DeleteOpnd;
 
+<*IF OOC_CHECK_ARGS THEN*>
+PROCEDURE CheckArg(instr: Instr; arg: Result);
+  BEGIN
+    CASE instr.opcode OF
+    | Opcode.add, Opcode.subtract, Opcode.multiply:
+      ASSERT(arg.subclass = instr.subclass);
+    ELSE
+    END;
+  END CheckArg;
+<*END*>
+
 PROCEDURE (opnd: Opnd) ReplaceArg* (arg: Result);
 (**Replaces the current argument of the operand with @oparam{arg}.
 
@@ -319,6 +336,9 @@ PROCEDURE (opnd: Opnd) ReplaceArg* (arg: Result);
    @samp{arg # @code{NIL}}
    @end precond  *)
   BEGIN
+<*IF OOC_CHECK_ARGS THEN*>
+    IF (opnd.class=OpndClass.arg) THEN CheckArg(opnd.instr, arg) END;
+<*END*>
     DeleteUse (opnd);
     SetUse (arg, opnd)
   END ReplaceArg;
@@ -457,6 +477,9 @@ PROCEDURE (res: Result) ReplaceUses* (with: Result);
     use := res. useList;
     WHILE (use # NIL) DO
       nextUse := use. nextUse;
+<*IF OOC_CHECK_ARGS THEN*>
+    IF (use.class=OpndClass.arg) THEN CheckArg(use.instr, with) END;
+<*END*>
       DeleteUse (use);
       SetUse (with, use);
       use := nextUse
@@ -486,12 +509,12 @@ PROCEDURE (result: Result) IsBooleanConst* (value: BOOLEAN): BOOLEAN;
 
    @precond
    @samp{@oparam{result} IS @otype{Const}} and the constant value is of type
-   @otype{Boxed.Boolean}.
+   @otype{BigInt.BigInt}.
    @end precond  *)
   BEGIN
     ASSERT (result IS Const);
-    ASSERT (result(Const). value IS Boxed.Boolean);
-    RETURN (result(Const). value(Boxed.Boolean). value = value)
+    ASSERT (result(Const).value IS BigInt.BigInt);
+    RETURN (result(Const).value.Equals(BigInt.zero) # value)
   END IsBooleanConst;
 
 PROCEDURE (result: Result) LogId* (msg: ARRAY OF CHAR);
@@ -543,6 +566,9 @@ PROCEDURE AddOpnd (instr: Instr; opnd: Opnd);
   VAR
     prev: Opnd;
   BEGIN
+<*IF OOC_CHECK_ARGS THEN*>
+    IF (opnd.class=OpndClass.arg) THEN CheckArg(instr, opnd.arg) END;
+<*END*>
     opnd. instr := instr;
     IF (instr. opndList = NIL) THEN
       instr. opndList := opnd
@@ -565,6 +591,17 @@ PROCEDURE (instr: Instr) AddOpnd* (arg: Result; class: OpndClass.Class);
   BEGIN
     AddOpnd (instr, NewOpnd (arg, class));
   END AddOpnd;
+
+PROCEDURE (instr: Instr) AddOpndFct* (arg: Result; class: OpndClass.Class): Opnd;
+(**Like @oproc{Instr.AddOpnd}, but return a reference to the new operand
+   object.  *)
+  VAR
+    opnd: Opnd;
+  BEGIN
+    opnd := NewOpnd (arg, class);
+    AddOpnd (instr, opnd);
+    RETURN opnd;
+  END AddOpndFct;
 
 PROCEDURE (instr: Instr) AddUniqueOpnd* (arg: Result; class: OpndClass.Class);
 (**Adds @oparam{arg} to the end of the operand list of instruction
@@ -903,6 +940,75 @@ PROCEDURE (instr: Instr) GetCollectTarget* (): Instr;
     END;
   END GetCollectTarget;
 
+PROCEDURE (select: Instr) NumberOfPaths*(): LONGINT;
+(* Return the number of paths leading into the select.
+
+   @precond
+   @oparam{select} is one of @oconst{Opcode.select}, @oconst{Opcode.loopStart},
+   @oconst{Opcode.loopEnd}.
+   @end precond *)
+  BEGIN
+    CASE select.opcode OF
+    | Opcode.select:
+      IF (select.GetOpndClass(OpndClass.labels) = NIL) THEN
+        RETURN (select.CountOpndClass(OpndClass.arg) DIV 2);
+      ELSE
+        RETURN select.CountOpndClass(OpndClass.labels);
+      END;
+    | Opcode.loopStart:
+      RETURN 2;
+    | Opcode.loopEnd:
+      RETURN select.CountOpndClass(OpndClass.storeExit);
+    END;
+  END NumberOfPaths;
+
+PROCEDURE ^ (pb: ProcBlock) AddInstr* (opcode: Opcode.Class;
+                                       subclass: Opcode.Subclass): Instr;
+  
+PROCEDURE (select: Instr) GetCollect*(pb: ProcBlock; pathNum: LONGINT): Instr;
+(* Return the "collect" instruction of path @oparam{pathNum} leading
+   into @oparam{select}.  The first path has the number @samp{0}.
+   If no matching "collect" exists, create one.
+
+   @precond
+   @oparam{select} is one of @oconst{Opcode.select}, @oconst{Opcode.loopStart},
+   @oconst{Opcode.loopEnd}.
+   @end precond *)
+  VAR
+    opnd: Opnd;
+    collect, loopEnd: Instr;
+    oldStore: Result;
+  BEGIN
+    CASE select.opcode OF
+    | Opcode.select:
+      opnd := select.NthOpnd(pathNum*2+2);
+      
+    | Opcode.loopEnd:         (* place collect _before_ "exit" *)
+      opnd := select.NthOpnd(pathNum+2);
+      ASSERT(opnd.arg.instr.opcode = Opcode.exit);
+      opnd := opnd.arg.instr.opndList;
+      
+    | Opcode.loopStart:
+      IF (pathNum = 0) THEN
+        opnd := select.NthOpnd(pathNum);
+      ELSE
+        loopEnd := select.GetLoopEnd();
+        opnd := loopEnd.GetOpndClass(OpndClass.backwardFeed);
+      END;
+    END;
+    
+    IF (opnd.arg.instr.opcode = Opcode.collect) THEN
+      RETURN opnd.arg.instr
+    ELSE
+      collect := pb.AddInstr(Opcode.collect, Opcode.scNone);
+      oldStore := opnd.arg;
+      opnd.ReplaceArg(collect.AddResult(ResultClass.store));
+      collect.AddOpnd(oldStore, OpndClass.store);
+      RETURN collect
+    END;
+  END GetCollect;
+
+
 PROCEDURE (instr: Instr) LogOpcode* (msg: ARRAY OF CHAR);
   VAR
     name: ARRAY 64 OF CHAR;
@@ -928,7 +1034,7 @@ PROCEDURE (instr: Instr) UniqueResult*(): BOOLEAN;
    of a volatile variable, or a call to the predefined procedure @code{NEW}. *)
   BEGIN
     CASE instr. opcode OF
-    | Opcode.newObject, Opcode.exit, Opcode.return, Opcode.indexed:
+    | Opcode.newObject, Opcode.exit, Opcode.return(*, Opcode.indexed*):
       RETURN TRUE;
     ELSE
       RETURN FALSE;
@@ -970,12 +1076,12 @@ PROCEDURE (instr: Instr) IsSwitchStatm*(): BOOLEAN;
 (* ---------------------------------------------------------------------- *)
 
 PROCEDURE InitConst (const: Const; subclass: Opcode.Subclass;
-                     value: Boxed.Object; type: Sym.Type);
+                     value: Boxed.Object; stringType: Sym.Type);
   BEGIN
     InitInstr (const, Opcode.const, subclass);
     ASSERT (value # NIL);
     const. value := value;
-    const. type := type;
+    const. stringType := stringType;
   END InitConst;
 
 PROCEDURE InitDeclRef (declRef: DeclRef; decl: Sym.Declaration);
@@ -1008,9 +1114,6 @@ PROCEDURE NewAddress (opcode: Opcode.Class; decl: Sym.Declaration): Address;
 
   (* ---------------------------------------------------------------------- *)
 
-PROCEDURE ^ (pb: ProcBlock) AddInstr* (opcode: Opcode.Class;
-                                       subclass: Opcode.Subclass): Instr;
-  
 PROCEDURE InitProcBlock (pb: ProcBlock; procDecl: Sym.ProcDecl;
                          checkFunctionResult: BOOLEAN);
   VAR
@@ -1030,7 +1133,7 @@ PROCEDURE InitProcBlock (pb: ProcBlock; procDecl: Sym.ProcDecl;
     pb. selectReturn. AddOpnd (initialStore, OpndClass.storeEnter);
     
     pb. loopContext := NIL;
-    FOR i := 0 TO Predef.lastId DO
+    FOR i := 0 TO LEN(pb.constMap)-1 DO
       pb. constMap[i] := NIL;
     END;
     pb. objMap := Dictionary.New();
@@ -1073,15 +1176,6 @@ PROCEDURE (pb: ProcBlock) AddInstr* (opcode: Opcode.Class;
     RETURN instr
   END AddInstr;
   
-PROCEDURE ConstBucket (type: Sym.Type): LONGINT;
-  BEGIN
-    WITH type: Sym.PredefType DO
-      RETURN type. id;
-    ELSE
-      RETURN Predef.void;
-    END;
-  END ConstBucket;
-
 PROCEDURE (pb: ProcBlock) DeleteInstr* (instr: Instr);
 (**Removes @oparam{instr} from list of instructions of @oparam{pb}.  All
    operands are removed.  @emph{Note}: The use lists of the instruction itself
@@ -1096,7 +1190,9 @@ PROCEDURE (pb: ProcBlock) DeleteInstr* (instr: Instr);
     WITH instr: Address DO
       pb. adrMap. Delete (instr. decl);
     | instr: Const DO
-      pb. constMap[ConstBucket (instr. type)]. Delete (instr. value);
+      IF (instr.stringType = NIL) THEN
+        pb.constMap[instr.subclass].Delete(instr.value);
+      END;
     | instr: DeclRef DO
       pb. objMap. Delete (instr. decl);
     | instr: TypeRef DO
@@ -1125,44 +1221,75 @@ PROCEDURE (pb: ProcBlock) DeleteInstr* (instr: Instr);
   END DeleteInstr;
   
 PROCEDURE (pb: ProcBlock) GetConst* (value: Boxed.Object;
-                                     type: Sym.Type): Const;
+                                     subclass: Opcode.Subclass;
+                                     stringType: Sym.Type): Const;
 (**Returns the @code{const} instruction for the value @oparam{value}.  Equal
-   values are mapped to the same unique instruction.  *)
+   values are mapped to the same unique instruction.  For string constants,
+   @oparam{stringType} is not @code{NIL} and identifies the strings exact type.
+   For all other constants, @oparam{stringType} must be @code{NIL}.  *)
   VAR
     obj: Object.Object;
     const: Const;
-    bucket: LONGINT;
   BEGIN
-    bucket := ConstBucket (type);
-    IF (pb. constMap[bucket] = NIL) THEN
-      pb. constMap[bucket] := Dictionary.New();
+    (*IF (stringType # NIL) THEN
+      ASSERT(subclass = Opcode.scAddress);
     END;
-
-    IF pb. constMap[bucket]. HasKey (value) THEN
-      obj := pb. constMap[bucket]. Get (value);
+    (* check permitted value, kind of an ASSERT *)
+    WITH value: BigInt.BigInt DO
+      ASSERT(subclass < Opcode.scReal32);
+    | value: Boxed.LongReal DO
+      ASSERT(subclass >= Opcode.scReal32);
+    | value: Boxed.String DO
+      ASSERT(stringType # NIL);
+    END;*)
+    
+    IF (pb. constMap[subclass] = NIL) THEN
+      pb. constMap[subclass] := Dictionary.New();
+    END;
+    
+    IF pb.constMap[subclass].HasKey(value) THEN
+      obj := pb. constMap[subclass]. Get (value);
       RETURN obj(Const);
     ELSE
       NEW (const);
-      InitConst (const, Opcode.TypeToSubclass (type), value, type);
+      InitConst (const, subclass, value, stringType);
       AppendInstr (pb, const);
-      pb. constMap[bucket]. Set (value, const);
+      IF (stringType = NIL) THEN
+        (* only cash constants of basic type, since the hash key does not
+           include type information *)
+        pb. constMap[subclass]. Set (value, const);
+      END;
       RETURN const
     END;
   END GetConst;
 
 PROCEDURE (pb: ProcBlock) GetConstInt* (int: LONGINT): Const;
+  VAR
+    x: BigInt.BigInt;
+    subclass: Opcode.Subclass;
   BEGIN
-    RETURN pb.GetConst(BigInt.NewInt(int), Predef.GetType(Predef.integer));
+    x := BigInt.NewInt(int);
+    subclass := Opcode.TypeToSubclass(Predef.SmallestIntType(x));
+    RETURN pb.GetConst(x, subclass, NIL);
   END GetConstInt;
 
 PROCEDURE (pb: ProcBlock) GetConstBool* (b: BOOLEAN): Const;
+  VAR
+    x: BigInt.BigInt;
   BEGIN
-    RETURN pb.GetConst(Boxed.NewBoolean(b), Predef.GetType(Predef.boolean));
+    IF b THEN
+      x := BigInt.one;
+    ELSE
+      x := BigInt.zero;
+    END;
+    RETURN pb.GetConst(x, Opcode.scBoolean, NIL);
   END GetConstBool;
 
 PROCEDURE (pb: ProcBlock) GetConstNil*(): Const;
   BEGIN
-    RETURN pb.GetConst(nil, Predef.GetType(Predef.nil))
+    RETURN pb.GetConst(nil,
+                       Opcode.TypeToSubclass(Predef.GetType(Predef.nil)),
+                       NIL);
   END GetConstNil;
 
 
@@ -1381,6 +1508,37 @@ PROCEDURE (pb: ProcBlock) SetLoopContext* (loopContext: Instr): Instr;
     RETURN old
   END SetLoopContext;
 
+PROCEDURE (pb: ProcBlock) FixSubclass*(arg: Result;
+                                       subclass: Opcode.Subclass): Result;
+(**If @oparam{arg} is not of the indicated subclass, then add a type conversion
+   instruction for it and return this instruction.  Otherwise, return
+   @oparam{arg}.  *)
+  VAR
+    instr: Instr;
+  BEGIN
+    IF (arg.subclass # subclass) THEN
+      IF (arg IS Const) &
+         ((arg.subclass < Opcode.scReal32) = (subclass < Opcode.scReal32)) THEN
+        RETURN pb.GetConst(arg(Const).value, subclass, NIL);
+      ELSE
+        instr := pb.AddInstr(Opcode.typeConv, subclass);
+        instr. AddOpnd (arg, OpndClass.arg);
+        RETURN instr;
+      END;
+    ELSE
+      RETURN arg;
+    END;
+  END FixSubclass;
+
+PROCEDURE (pb: ProcBlock) FixSubclassInstr*(instr: Instr;
+                                            subclass: Opcode.Subclass): Instr;
+  VAR
+    res: Result;
+  BEGIN
+    res := pb.FixSubclass(instr, subclass);
+    RETURN res(Instr);
+  END FixSubclassInstr;
+
 
 PROCEDURE Add (VAR list: Instr; instr: Instr);
   BEGIN
@@ -1546,5 +1704,6 @@ PROCEDURE (pb: ProcBlock) Destroy*;
   END Destroy;
 
 BEGIN
-  nil := BigInt.NewInt(0);
+  nil := BigInt.zero.Add(BigInt.zero);  (* force unique instance *)
+  ASSERT(nil # BigInt.zero);
 END OOC:SSA.

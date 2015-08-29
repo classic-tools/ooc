@@ -14,7 +14,7 @@
 #define OOC_Parser__enableRestParam 2
 #define OOC_Parser__enableDocComment 3
 #define OOC_Parser__onlyParseImport 4
-#define OOC_Parser__enableAll -17
+#define OOC_Parser__enableAll (-17)
 typedef struct OOC_Parser__ErrorContextDesc *OOC_Parser__ErrorContext;
 typedef struct OOC_Parser__ErrorContextDesc {
   Msg__StringPtr id;

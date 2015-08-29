@@ -14,7 +14,7 @@ static Msg__Msg StdChannels__GetError(OOC_INT32 code) {
 
 OOC_INT32 StdChannels__WriterDesc_Pos(StdChannels__Writer w) {
 
-  return -2;
+  return (-2);
   ;
 }
 
@@ -45,7 +45,7 @@ void StdChannels__WriterDesc_WriteBytes(StdChannels__Writer w, const OOC_CHAR8 x
 
 OOC_INT32 StdChannels__NullChannelDesc_Length(StdChannels__NullChannel ch) {
 
-  return -1;
+  return (-1);
   ;
 }
 
@@ -65,7 +65,7 @@ Channel__Reader StdChannels__NullChannelDesc_NewReader(StdChannels__NullChannel 
   i0 = (OOC_INT32)ch;
   i1 = (OOC_INT32)StdChannels__GetError(9);
   *(OOC_INT32*)(_check_pointer(i0, 3370)) = i1;
-  return (Channel__Reader)(OOC_INT32)0;
+  return (Channel__Reader)0;
   ;
 }
 
@@ -86,8 +86,8 @@ l3:
   w = (StdChannels__Writer)i1;
   *(OOC_INT32*)(_check_pointer(i1, 3607)) = i0;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3628)))), Channel__WriterDesc_ClearError)),Channel__WriterDesc_ClearError)((Channel__Writer)i1);
-  *(OOC_UINT8*)((_check_pointer(i1, 3649))+12) = OOC_FALSE;
-  *(OOC_INT32*)((_check_pointer(i1, 3681))+8) = -1;
+  *(OOC_UINT8*)((_check_pointer(i1, 3649))+12) = 0u;
+  *(OOC_INT32*)((_check_pointer(i1, 3681))+8) = (-1);
   *(OOC_INT32*)((_check_pointer(i0, 3711))+8) = i1;
   return (Channel__Writer)i1;
 l4:
@@ -149,9 +149,9 @@ void OOC_StdChannels_init(void) {
   StdChannels__null = (StdChannels__NullChannel)i0;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4486)))), Channel__ChannelDesc_ClearError)),Channel__ChannelDesc_ClearError)((Channel__Channel)i0);
   i0 = (OOC_INT32)StdChannels__null;
-  *(OOC_UINT8*)((_check_pointer(i0, 4506))+4) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 4533))+5) = OOC_TRUE;
-  *(OOC_UINT8*)((_check_pointer(i0, 4559))+6) = OOC_TRUE;
+  *(OOC_UINT8*)((_check_pointer(i0, 4506))+4) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 4533))+5) = 1u;
+  *(OOC_UINT8*)((_check_pointer(i0, 4559))+6) = 1u;
   Termination__RegisterProc((Termination__Proc)(OOC_INT32)&StdChannels__Flush);
   return;
   ;

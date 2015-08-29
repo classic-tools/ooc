@@ -4,7 +4,7 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <ADT/Dictionary.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <OOC/SSA.oh>
 #include <OOC/SSA/Opcode.oh>
 #include <OOC/SSA/Opnd.oh>
@@ -124,6 +124,12 @@ extern void OOC_SSA_Blocker__RemoveAntiDeps(OOC_SSA__ProcBlock pb);
 extern void OOC_SSA_Blocker__RemoveRegionDeps(OOC_SSA__ProcBlock pb);
 extern OOC_SSA_Blocker__Region OOC_SSA_Blocker__ArrangeInstructions(OOC_SSA__ProcBlock pb, OOC_CHAR8 markAntiDeps);
 extern OOC_SSA_Blocker__DependenceData OOC_SSA_Blocker__GetDependenceData(OOC_SSA__ProcBlock pb);
+extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_SameRegion(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_SameRegion 5
+typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_SameRegion)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
+extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_Dominates(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Dominates 3
+typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_Dominates)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_Conflict(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 #define _TBN_OOC_SSA_Blocker__DependenceDataDesc_Conflict 1
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_Conflict)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
@@ -133,8 +139,15 @@ typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_DependsOn)(OOC_SSA_
 extern OOC_CHAR8 OOC_SSA_Blocker__DependenceDataDesc_AvailableTo(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
 #define _TBN_OOC_SSA_Blocker__DependenceDataDesc_AvailableTo 0
 typedef OOC_CHAR8 (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr x, OOC_SSA__Instr y);
-extern void OOC_SSA_Blocker__Write(Channel__Channel c, OOC_SSA__ProcBlock pb);
-extern void OOC_SSA_Blocker__WriteMarker(Channel__Channel c, OOC_SSA__ProcBlock pb, ADT_Dictionary__Dictionary marker);
+extern OOC_SSA__Instr OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr 4
+typedef OOC_SSA__Instr (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_GetSameInstr)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
+extern void OOC_SSA_Blocker__DependenceDataDesc_SetRegion(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
+#define _TBN_OOC_SSA_Blocker__DependenceDataDesc_SetRegion 6
+typedef void (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_SetRegion)(OOC_SSA_Blocker__DependenceData dd, OOC_SSA__Instr regionInstr, OOC_SSA__Instr instr);
+extern void OOC_SSA_Blocker__Write(IO__ByteChannel c, OOC_SSA__ProcBlock pb);
+extern void OOC_SSA_Blocker__WriteMarker(IO__ByteChannel c, OOC_SSA__ProcBlock pb, ADT_Dictionary__Dictionary marker);
+extern void OOC_SSA_Blocker__ToStderr(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_Blocker_init();
 extern void OOC_OOC_SSA_Blocker_init0();
 
@@ -146,14 +159,14 @@ extern RT0__StructDesc _td_OOC_SSA_Blocker__Loop;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__ProxyDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__RegionDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__SelectDesc;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__5561;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__5550;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__5568;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__5557;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__Preceeds;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__PreceedsDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__LoopDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__DependenceData;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__DependenceDataDesc;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__15917;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__15944;
 #endif /* _MODULE_OOC_SSA_Blocker_ */
 
 /* --- */

@@ -15,10 +15,10 @@
 #define RT0__strSet32 9
 #define RT0__strByte 10
 #define RT0__strPtr 11
-#define RT0__strArray -1
-#define RT0__strOpenArray -2
-#define RT0__strRecord -3
-#define RT0__strPointer -4
+#define RT0__strArray (-1)
+#define RT0__strOpenArray (-2)
+#define RT0__strRecord (-3)
+#define RT0__strPointer (-4)
 typedef OOC_CHAR8 *RT0__Name;
 typedef struct RT0__ModuleDesc *RT0__Module;
 typedef struct RT0__StructDesc *RT0__Struct;

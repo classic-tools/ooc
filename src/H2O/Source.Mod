@@ -2,8 +2,8 @@ MODULE H2O:Source [OOC_EXTENSIONS];
 
 IMPORT
   H2O:Module,
-  Object, TextRider, Channel, Err, Msg, Files, Strings,
-  OOC:Config, OOC:Repository, URI;
+  Object, Err, ADT:ArrayList,
+  OOC:Config, OOC:Repository, URI, IO, IO:FileChannel, Exception;
 
 CONST
   cr = 0DX;
@@ -16,9 +16,9 @@ CONST
 TYPE
   Source* = POINTER TO SourceDesc;
   SourceDesc = RECORD
-    name : Object.String8;
+    name : STRING;
     pos, line, col : LONGINT;
-    rd: TextRider.Reader;
+	channel : IO.ByteChannel;
     next : Source;
     module : Module.Module;
   END;
@@ -28,7 +28,13 @@ TYPE
     module- : Module.Module;
     lines, files : LONGINT;
     src : Source;
+    path : ArrayList.ArrayList;
   END;
+
+PROCEDURE (i : Input) AppendPath* (path : STRING);
+BEGIN
+  i.path.Append(path);
+END AppendPath;
 
 PROCEDURE (i : Input) ShowContext*;
 VAR s : Source;
@@ -43,102 +49,116 @@ BEGIN
   END;
 END ShowContext;
 
+PROCEDURE (i : Input) Error(msg : STRING);
+BEGIN
+  i.ShowContext();
+  Err.String("Error: ");
+  Err.Object(msg);
+  Err.Ln;
+  HALT(1);
+END Error;
+
+(* Report source context for exception *)
+
+PROCEDURE (i : Input) Exception(e : Exception.Exception);
+BEGIN
+  i.Error(e.GetMessage());
+END Exception;
+
 PROCEDURE (i : Input) ReadChar* (VAR ch : CHAR);
 VAR
-  rd : TextRider.Reader; src : Source;
+  count : LONGINT;
+  src : Source;
 BEGIN
-  IF (i.src # NIL) & (i.src.rd.Available() = 0) & (ch # eol) THEN
-    ch := eol;
-    Err.String("End of line assumed for incorrectly terminated file");
-    Err.Ln;
-    i.ShowContext;
-  ELSE
+  TRY
     REPEAT
-      WHILE (i.src # NIL) & (i.src.rd.Available() = 0) DO
-        i.src.rd.base.Close;
-        INC(i.lines, i.src.line); INC(i.files);
-        i.src := i.src.next;
-      END;
       IF i.src = NIL THEN
-        ch := eof;
+        ch := eof
       ELSE
-        src := i.src; rd := src.rd;
-        i.module := src.module;
-        IF rd.Eol() THEN
-          rd.ReadLn;
-          ch := eol;
+        (* Read one character from the current source *)
+        count := i.src.channel.Read(ch, 0, 1);
+        IF count = -1 THEN
+          (* No more input available *)
+          IF ch # eol THEN
+            (* Check file termination, required for preprocessor *)
+            ch := eol;
+            Err.String("End of line assumed for incorrectly terminated file");
+            Err.Ln;
+            i.ShowContext
+          ELSE
+            (* Close this source, and retry *)
+            i.src.channel.Close;
+            INC(i.lines, i.src.line); INC(i.files);
+            i.src := i.src.next;
+            ch := cr;
+          END
+        ELSIF count = 1 THEN
+          src := i.src;
+          INC(src.pos);
+          IF ch = eol THEN
+            src.col := 0; INC(src.line)
+          ELSE
+            INC(src.col)
+          END
         ELSE
-          rd.ReadChar(ch);
-        END;
-        src.pos := rd.Pos();
-        IF ch = eol THEN
-          src.col := 0; INC(src.line);
-        ELSE
-          INC(src.col);
-        END;
+          i.Error("Non-blocking stream returned 0 bytes")
+        END
       END
-    UNTIL ch # cr
-  END;
-  IF debugText IN debug THEN
-    Err.Char(ch);
+    UNTIL ch # cr;
+  CATCH IO.Error:
+    i.Exception(Exception.Current())
   END;
 END ReadChar;
 
-PROCEDURE Fatal* (msg : ARRAY OF CHAR);
+PROCEDURE (i : Input) Search(fileName : STRING; VAR path : STRING; VAR channel : IO.ByteChannel) : BOOLEAN;
+VAR 
+  pos : LONGINT;
+  obj : Object.Object;
 BEGIN
-  Err.String("Error: ");
-  Err.String(msg);
-  Err.Ln;
-  HALT(1);
-END Fatal;
+  FOR pos := 0 TO i.path.Size() - 1 DO
+    obj := i.path.Get(pos);
+    path := obj(STRING) + "/" + fileName;
+    TRY
+      channel := FileChannel.Open(path(Object.String8), {FileChannel.read});
+      RETURN TRUE;
+    CATCH IO.Error:
+    END;
+  END;
+  RETURN FALSE;
+END Search;
 
-PROCEDURE (i : Input) NoFile(res : Files.Result);
+PROCEDURE (i : Input) Include* (fileName : STRING; search : BOOLEAN);
 VAR
-  a : ARRAY 256 OF CHAR;
-BEGIN
-  i.ShowContext();
-  res.GetText(a);
-  Fatal(a);
-END NoFile;
-
-PROCEDURE (i : Input) Include* (fileName : ARRAY OF CHAR; search : BOOLEAN);
-VAR
-  realFileName : ARRAY 256 OF CHAR;
-  moduleName : Object.String8;
+  realFileName : STRING;
+  moduleName : STRING;
   module : Module.Module;
   s : Source;
-  m : Repository.Module;
-  uri : URI.HierarchicalURI;
-  channel : Channel.Channel;
-  msg : Msg.Msg;
+  channel : IO.ByteChannel;
+  chars : Object.CharsLatin1;
 BEGIN
-  IF search THEN
-    m := Config.repositories. GetModule (fileName);
-    IF (m = NIL) THEN
-      Err.String ("Error: Cannot locate module ");
-      Err.String (fileName);
-      Err.Ln;
-      HALT (1)
+  TRY
+    IF search THEN
+      IF ~i.Search(fileName, realFileName, channel) THEN
+        Err.String ("Error: Cannot locate module ");
+        Err.Object (fileName);
+        Err.Ln;
+        HALT (1)
+      END;    
     ELSE
-      uri := m.GetURI(Repository.modHeaderFileC, FALSE);
-      uri.GetString(realFileName);
-      channel := uri.GetChannel(URI.channelOld, msg);
-    END;    
-  ELSE
-    Strings.Assign(fileName, realFileName);
-    channel := Files.Old(realFileName, {Files.read}, msg);
-  END;
-  IF channel = NIL THEN
-    i.NoFile(msg)
+      realFileName := fileName;
+      channel := FileChannel.Open(fileName(Object.String8), {FileChannel.read});
+    END;
+  CATCH IO.Error:
+	i.Exception(Exception.Current());
   END;
 
   NEW(s);
-  s.rd := TextRider.ConnectReader(channel);
+  s.channel := channel;
   s.pos := 0;
   s.line := 0;
   s.col := 0;
   s.next := i.src;
-  s.name := Object.NewLatin1(realFileName);
+  s.name := realFileName;
   i.src := s;
   Err.String("<Processing "); Err.Object(s.name); Err.Char(">"); Err.Ln;
 
@@ -149,7 +169,7 @@ BEGIN
     module := Module.NewModule(moduleName);
   END;
   Err.String("MODULE "); Err.Object(moduleName); 
-  Err.String(" for "); Err.String(realFileName);
+  Err.String(" for "); Err.Object(realFileName);
   Err.Ln;
   i.module := module;
   s.module := module;
@@ -169,6 +189,7 @@ BEGIN
   i.src := NIL;
   i.lines := 0;
   i.files := 0;
+  i.path := ArrayList.New(10);
   RETURN i;
 END New;
 

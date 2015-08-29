@@ -43,18 +43,18 @@ void URI__URIDesc_Copy(URI__URI uri, URI__URI dest) {
 
   i0 = (OOC_INT32)uri;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6797));
-  i1 = i1==(OOC_INT32)0;
+  i1 = i1==0;
   if (i1) goto l3;
   i1 = (OOC_INT32)dest;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6894));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6894));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6904)), (OOC_INT32)0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6904)), 0);
   i0 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 6904)), i0);
   *(OOC_INT32*)(_check_pointer(i1, 6867)) = i0;
   goto l4;
 l3:
   i0 = (OOC_INT32)dest;
-  *(OOC_INT32*)(_check_pointer(i0, 6830)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 6830)) = 0;
 l4:
   return;
   ;
@@ -87,11 +87,11 @@ void URI__URIDesc_AppendScheme(URI__URI uri, OOC_CHAR8 str[], OOC_LEN str_0d) {
 
   i0 = (OOC_INT32)uri;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7872));
-  i1 = i1!=(OOC_INT32)0;
+  i1 = i1!=0;
   if (!i1) goto l4;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7920));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7920));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7930)), (OOC_INT32)0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7930)), 0);
   Strings__Append((void*)(_check_pointer(i1, 7930)), i0, (void*)(OOC_INT32)str, str_0d);
   Strings__Append(":", 2, (void*)(OOC_INT32)str, str_0d);
 l4:
@@ -210,13 +210,13 @@ void URI__QueryDesc_Append(URI__Query query, OOC_CHAR8 str[], OOC_LEN str_0d) {
 void URI__InitHierarchicalURI(URI__HierarchicalURI uri, URI_String__StringPtr schemeId, URI__Authority authority, URI__Query query) {
   register OOC_INT32 i0,i1;
 
-  i0 = (OOC_INT32)schemeId;
-  i1 = (OOC_INT32)uri;
-  URI__InitURI((URI__URI)i1, (URI_String__StringPtr)i0);
-  i0 = (OOC_INT32)authority;
-  *(OOC_INT32*)((_check_pointer(i1, 14046))+4) = i0;
-  i0 = (OOC_INT32)query;
-  *(OOC_INT32*)((_check_pointer(i1, 14079))+8) = i0;
+  i0 = (OOC_INT32)uri;
+  i1 = (OOC_INT32)schemeId;
+  URI__InitURI((URI__URI)i0, (URI_String__StringPtr)i1);
+  i1 = (OOC_INT32)authority;
+  *(OOC_INT32*)((_check_pointer(i0, 14046))+4) = i1;
+  i1 = (OOC_INT32)query;
+  *(OOC_INT32*)((_check_pointer(i0, 14079))+8) = i1;
   return;
   ;
 }
@@ -295,14 +295,14 @@ void URI__HierarchicalURIDesc_ResolveRelative(URI__HierarchicalURI uri, URI__Hie
 
   i0 = (OOC_INT32)uri;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 15907));
-  i1 = i1==(OOC_INT32)0;
+  i1 = i1==0;
   if (!i1) goto l3;
   i1 = (OOC_INT32)baseURI;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 15960));
   *(OOC_INT32*)(_check_pointer(i0, 15939)) = i1;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15991))+4);
-  i1 = i1==(OOC_INT32)0;
+  i1 = i1==0;
   if (!i1) goto l6;
   i1 = (OOC_INT32)baseURI;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16046))+4);
@@ -332,43 +332,47 @@ URI__URI URI__HierarchicalURIDesc_MakeRelative(URI__HierarchicalURI uri, URI__Hi
 
   i0 = (OOC_INT32)baseURI;
   i1 = i0==(OOC_INT32)0;
-  i2 = (OOC_INT32)uri;
   if (i1) goto l17;
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 17170));
+  i1 = (OOC_INT32)uri;
+  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 17170));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 17191));
-  i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 17180)),(const void*)(_check_pointer(i3, 17201))))!=(OOC_INT32)0;
-  if (i1) goto l15;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17309))+4);
+  i2 = (
+  _cmp8((const void*)(_check_pointer(i2, 17180)),(const void*)(_check_pointer(i3, 17201))))!=0;
+  if (i2) goto l15;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17309))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17338))+4);
-  i1 = (i1==(OOC_INT32)0)!=(i3==(OOC_INT32)0);
-  if (i1) goto l13;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17676))+4);
-  i1 = i1!=(OOC_INT32)0;
-  if (!i1) goto l18;
+  i2 = (i2==(OOC_INT32)0)!=(i3==(OOC_INT32)0);
+  if (i2) goto l13;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17676))+4);
+  i2 = i2!=(OOC_INT32)0;
+  if (!i2) goto l16;
   _copy_8((const void*)"",(void*)(OOC_INT32)a1,1024);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17719))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17719))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 17730)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i3, (void*)(OOC_INT32)a1, 1024);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17719))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 17719))+4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 17730)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i3, (void*)(OOC_INT32)a1, 1024);
   _copy_8((const void*)"",(void*)(OOC_INT32)a2,1024);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17768))+4);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17768))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17768))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 17779)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i0, (void*)(OOC_INT32)a2, 1024);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 17779)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i0, (void*)(OOC_INT32)a2, 1024);
   i0 = (
-  _cmp8((const void*)(OOC_INT32)a1,(const void*)(OOC_INT32)a2))!=(OOC_INT32)0;
-  if (!i0) goto l18;
-  return (URI__URI)i2;
-  goto l18;
+  _cmp8((const void*)(OOC_INT32)a1,(const void*)(OOC_INT32)a2))!=0;
+  if (!i0) goto l16;
+  return (URI__URI)i1;
+  goto l16;
 l13:
-  return (URI__URI)i2;
-  goto l18;
+  return (URI__URI)i1;
+  goto l16;
 l15:
-  return (URI__URI)i2;
+  return (URI__URI)i1;
+l16:
+  i0=i1;
   goto l18;
 l17:
-  return (URI__URI)i2;
+  i0 = (OOC_INT32)uri;
+  return (URI__URI)i0;
+  
 l18:
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 17982)))), URI__URIDesc_Clone)),URI__URIDesc_Clone)((URI__URI)i2);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 17982)))), URI__URIDesc_Clone)),URI__URIDesc_Clone)((URI__URI)i0);
   copy = (URI__URI)i0;
   *(OOC_INT32*)(_check_pointer(i0, 18001)) = (OOC_INT32)0;
   *(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18029)))), &_td_URI__HierarchicalURIDesc, 18029)), 18045))+4) = (OOC_INT32)0;
@@ -442,7 +446,7 @@ void URI__ReferenceDesc_WriteXML(URI__Reference ref, TextRider__Writer w) {
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 20339));
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 20344)))), URI__URIDesc_WriteXML)),URI__URIDesc_WriteXML)((URI__URI)i3, (TextRider__Writer)i0);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20371))+4);
-  i2 = i2!=(OOC_INT32)0;
+  i2 = i2!=0;
   if (!i2) goto l4;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20403))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20403))+4);
@@ -458,7 +462,7 @@ void URI__ReferenceDesc_GetString(URI__Reference ref, OOC_CHAR8 str[], OOC_LEN s
 
   i0 = (OOC_INT32)ref;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 20857));
-  i1 = i1!=(OOC_INT32)0;
+  i1 = i1!=0;
   if (i1) goto l3;
   _copy_8((const void*)"",(void*)(OOC_INT32)str,str_0d);
   goto l4;
@@ -468,7 +472,7 @@ l3:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20889)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i2, (void*)(OOC_INT32)str, str_0d);
 l4:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20957))+4);
-  i1 = i1!=(OOC_INT32)0;
+  i1 = i1!=0;
   if (!i1) goto l7;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20989))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20989))+4);
@@ -482,7 +486,7 @@ static OOC_CHAR8 URI__Equal(URI_String__String a, OOC_LEN a_0d, URI_String__Stri
   register OOC_INT32 i0,i1,i2;
 
   i0 = *(OOC_UINT8*)((OOC_INT32)a+(_check_index(0, a_0d, OOC_UINT32, 21220)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (i0) goto l3;
   i0=0;
   goto l13;
@@ -493,7 +497,7 @@ l4_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)b+(_check_index(i0, b_0d, OOC_UINT32, 21262)));
   i1 = (_cap(i1))==(_cap(i2));
   if (i1) goto l7;
-  return OOC_FALSE;
+  return 0u;
   
   goto l8;
 l7:
@@ -501,11 +505,11 @@ l7:
   
 l8:
   i1 = *(OOC_UINT8*)((OOC_INT32)a+(_check_index(i0, a_0d, OOC_UINT32, 21220)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l4_loop;
 l13:
   i0 = *(OOC_UINT8*)((OOC_INT32)b+(_check_index(i0, b_0d, OOC_UINT32, 21353)));
-  return (i0==(OOC_CHAR8)'\000');
+  return (i0==0u);
   ;
 }
 
@@ -525,8 +529,8 @@ void URI__RegisterScheme(URI__URI scheme) {
       i3 = (OOC_INT32)scheme;
       i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 21927));
       i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 21927));
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 21918)), (OOC_INT32)0);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 21937)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 21918)), 0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 21937)), 0);
       i1 = URI__Equal((void*)(_check_pointer(i1, 21918)), i2, (void*)(_check_pointer(i4, 21937)), i3);
       if (i1) goto l5;
       URI__RegisterScheme_Append((void*)(_check_pointer(i0, 22007)));
@@ -561,7 +565,7 @@ URI__URI URI__GetScheme(URI_String__StringPtr name) {
   scheme = (URI__List)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22422))+4);
@@ -569,8 +573,8 @@ l3:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22422))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 22430));
   i3 = (OOC_INT32)name;
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22447)), (OOC_INT32)0);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22440)), (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22447)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22440)), 0);
   i1 = URI__Equal((void*)(_check_pointer(i1, 22440)), i2, (void*)(_check_pointer(i3, 22447)), i4);
   i1 = !i1;
   
@@ -583,15 +587,15 @@ l8_loop:
   scheme = (URI__List)i0;
   i2 = i0!=(OOC_INT32)0;
   if (i2) goto l11;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l13;
 l11:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22422))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 22430));
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22422))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 22430));
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 22447)), (OOC_INT32)0);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22440)), (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 22447)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22440)), 0);
   i2 = URI__Equal((void*)(_check_pointer(i2, 22440)), i3, (void*)(_check_pointer(i1, 22447)), i4);
   i2 = !i2;
   

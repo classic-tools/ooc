@@ -33,8 +33,8 @@ OOC_Error__List OOC_Error__NewList(const OOC_CHAR8 fileName__ref[], OOC_LEN file
   list = (OOC_Error__List)i0;
   Msg__InitMsgList((Msg__MsgList)i0);
   _copy_8((const void*)(OOC_INT32)fileName,(void*)((_check_pointer(i0, 3110))+12),256);
-  *(OOC_UINT8*)((_check_pointer(i0, 3131))+268) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 3165))+269) = OOC_TRUE;
+  *(OOC_UINT8*)((_check_pointer(i0, 3131))+268) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 3165))+269) = 1u;
   return (OOC_Error__List)i0;
   ;
 }
@@ -74,20 +74,20 @@ void OOC_Error__ListDesc_Append(OOC_Error__List l, Msg__Msg msg) {
   i2 = (OOC_INT32)l;
   i3 = *(OOC_UINT8*)((_check_pointer(i2, 3765))+269);
   if (i3) goto l3;
-  i3=OOC_FALSE;
+  i3=0u;
   goto l5;
 l3:
   i3=i1;
 l5:
   if (!i3) goto l7;
-  *(OOC_UINT8*)((_check_pointer(i2, 3796))+269) = OOC_FALSE;
+  *(OOC_UINT8*)((_check_pointer(i2, 3796))+269) = 0u;
 l7:
   i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3846)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i0, "pos", 4);
   msgPos = (Msg__Attribute)i3;
   if (!i1) goto l29;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3904))+4);
-  i4 = i1!=(OOC_INT32)0;
   ptr = (Msg__Msg)i1;
+  i4 = i1!=(OOC_INT32)0;
   if (!i4) goto l29;
 l12_loop:
   i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3962)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i1, "pos", 4);
@@ -95,14 +95,14 @@ l12_loop:
   i5 = OOC_Error__IsWarning((Msg__Msg)i1);
   i5 = !i5;
   if (i5) goto l15;
-  i5=OOC_FALSE;
+  i5=0u;
   goto l17;
 l15:
   i5 = i4!=(OOC_INT32)0;
   
 l17:
   if (i5) goto l19;
-  i4=OOC_FALSE;
+  i4=0u;
   goto l21;
 l19:
   i4 = *(OOC_INT32*)((_check_pointer((_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 4068)))), &_td_Msg__IntAttributeDesc, 4068)), 4081))+8);
@@ -139,8 +139,8 @@ void OOC_Error__ContextDesc_BaseTemplate(OOC_Error__Context c, Msg__Msg msg, con
   OOC_CHAR16 repl[8192];
   Msg__Attribute attr;
 
-  i0 = OOC_Error__style;
   OOC_INITIALIZE_VPAR(text__ref,text,OOC_CHAR16 ,(text_0d*2))
+  i0 = OOC_Error__style;
   i1 = i0==1;
   if (i1) goto l15;
   i0 = i0==0;
@@ -150,8 +150,8 @@ void OOC_Error__ContextDesc_BaseTemplate(OOC_Error__Context c, Msg__Msg msg, con
   LongStrings__Append((void*)(OOC_INT32)repl, 8192, (void*)(OOC_INT32)templ, templ_0d);
   i0 = (OOC_INT32)msg;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5207))+16);
-  i1 = i0!=(OOC_INT32)0;
   attr = (Msg__Attribute)i0;
+  i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l16;
 l7_loop:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5267))+4);
@@ -212,11 +212,11 @@ void OOC_Error__ListDesc_Write(OOC_Error__List errList, Channel__Channel ch) {
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6664)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i0, "pos", 4);
       attrPos = (Msg__Attribute)i1;
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6713)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i0, "line", 5);
+      attrLine = (Msg__Attribute)i1;
       i2 = (OOC_INT32)attrPos;
       i3 = i2!=(OOC_INT32)0;
-      attrLine = (Msg__Attribute)i1;
       if (i3) goto l5;
-      i3=OOC_FALSE;
+      i3=0u;
       goto l7;
 l5:
       i3 = i1!=(OOC_INT32)0;
@@ -245,7 +245,7 @@ l15:
       attrColumn = (Msg__Attribute)i1;
       i2 = i1!=(OOC_INT32)0;
       if (i2) goto l18;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l20;
 l18:
       i2 = (OOC_INT32)attrLine;
@@ -260,7 +260,7 @@ l22:
       i0 = (OOC_INT32)attrLine;
       i0 = i0!=(OOC_INT32)0;
       if (i0) goto l25;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l27;
 l25:
       i0 = (OOC_INT32)attrColumn;
@@ -289,23 +289,23 @@ l30:
       Msg__Attribute pos;
 
       best = (Msg__Msg)(OOC_INT32)0;
-      bestPos = -1;
+      bestPos = (-1);
       i0 = (OOC_INT32)errList;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8004))+4);
       msg = (Msg__Msg)i0;
       i1 = i0!=(OOC_INT32)0;
       if (i1) goto l3;
-      i0=-1;i1=(OOC_INT32)0;
+      i0=(-1);i1=(OOC_INT32)0;
       goto l25;
 l3:
       i1 = *lastPos;
-      i2=(OOC_INT32)0;i3=-1;
+      i2=(OOC_INT32)0;i3=(-1);
 l4_loop:
       i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8060)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i0, "pos", 4);
       pos = (Msg__Attribute)i4;
       i5 = i4!=(OOC_INT32)0;
       if (i5) goto l7;
-      i5=OOC_FALSE;
+      i5=0u;
       goto l9;
 l7:
       i5 = *(OOC_INT32*)((_check_pointer((_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 8116)))), &_td_Msg__IntAttributeDesc, 8116)), 8129))+8);
@@ -313,7 +313,7 @@ l7:
       
 l9:
       if (i5) goto l11;
-      i5=OOC_FALSE;
+      i5=0u;
       goto l17;
 l11:
       i5 = i2==(OOC_INT32)0;
@@ -323,7 +323,7 @@ l11:
       
       goto l17;
 l14:
-      i5=OOC_TRUE;
+      i5=1u;
 l17:
       if (!i5) goto l20;
       best = (Msg__Msg)i0;
@@ -350,9 +350,9 @@ l25:
   _assert((i0!=(OOC_INT32)0), 127, 8460);
   i1 = (OOC_INT32)errList;
   i2 = (
-  _cmp8((const void*)((_check_pointer(i1, 8503))+12),(const void*)""))!=(OOC_INT32)0;
+  _cmp8((const void*)((_check_pointer(i1, 8503))+12),(const void*)""))!=0;
   if (i2) goto l3;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l5;
 l3:
   i2 = OOC_Error__style;
@@ -382,7 +382,7 @@ l13:
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l10_loop;
 l18:
-  lastPos = -1;
+  lastPos = (-1);
 l19_loop:
   i0 = (OOC_INT32)OOC_Error__ListDesc_Write_GetNext((void*)(OOC_INT32)&lastPos);
   msg = (Msg__Msg)i0;
@@ -390,7 +390,7 @@ l19_loop:
   if (i1) goto l24;
   OOC_Error__ListDesc_Write_WriteMsg((Msg__Msg)i0);
   i0 = (OOC_INT32)msg;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9193)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "pos", 4, -2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9193)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "pos", 4, (-2));
   goto l19_loop;
 l24:
   return;

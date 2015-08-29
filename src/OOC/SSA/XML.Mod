@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.23 2003/02/02 17:58:38 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.26 2003/03/11 22:08:41 mva Exp $	 *)
 MODULE OOC:SSA:XML;
 (*  Produces a canonical representation of SSA code in XML.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:SSA:XML;
 
 
 IMPORT
-  Object, IO, Dictionary := ADT:Dictionary:IntValue, 
+  Object, IO, IO:StdChannels, Dictionary := ADT:Dictionary:IntValue, 
   ADT:StringBuffer, WriterXML := XML:Writer, XML:UnicodeCodec:Latin1,
   OOC:SSA:Opcode, OOC:SSA:Result, OOC:SSA:Opnd, OOC:SSA, OOC:SSA:Schedule;
 
@@ -99,7 +99,7 @@ PROCEDURE (w: Writer) AttrId* (name: ARRAY OF LONGCHAR; result: SSA.Result);
         w. sb. AppendInt (posSameId);
       END;
     END;
-    w. AttrStr(name, w. sb.ToString());
+    w. AttrObject(name, w. sb.ToString());
   END AttrId;
 
 PROCEDURE (w: Writer) AttrRef* (res: SSA.Result);
@@ -115,7 +115,11 @@ PROCEDURE (w: Writer) AttrRef* (res: SSA.Result);
         ELSE
           value := res. value. ToString();
         END;
-        w. AttrStr ("const-value", value(Object.String8));
+        IF (value IS Object.String32) THEN
+          w. AttrObject ("const-value", "[Object.String32]");
+        ELSE
+          w. AttrObject ("const-value", value(Object.String8));
+        END;
       | res: SSA.DeclRef DO
         w. AttrStringLatin1 ("declref", res. decl. name. str^);
       | res: SSA.Address DO
@@ -193,7 +197,7 @@ PROCEDURE (w: Writer) WriteInstr (instr: SSA.Instr);
       ELSE
         value := instr. value. ToString();        
       END;
-      w. AttrStr ("value", value(Object.String8));
+      w. AttrObject ("value", value(Object.String8));
 
     | instr: SSA.Address DO
       w. AttrStringLatin1 ("address-of", instr. decl. name. str^);
@@ -324,6 +328,14 @@ RAISES IO.Error;
     w := NewWriter (cw);
     w. WriteProcBody (pb, includeDeadCode);
   END Write;
+
+PROCEDURE ToStderr*(pb: SSA.ProcBlock);
+  BEGIN
+    TRY
+      Write(StdChannels.stderr, pb, TRUE);
+    CATCH IO.Error:
+    END;
+  END ToStderr;
 
 PROCEDURE (w: Writer) WriteSchedule* (domRoot: Schedule.Block)
 RAISES IO.Error;

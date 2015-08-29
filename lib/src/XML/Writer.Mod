@@ -1,4 +1,4 @@
-(*      $Id: Writer.Mod,v 1.6 2003/02/02 17:58:39 mva Exp $   *)
+(*      $Id: Writer.Mod,v 1.7 2003/03/11 22:08:43 mva Exp $   *)
 MODULE XML:Writer [OOC_EXTENSIONS];
 (*  Support for generating XML documents.
     Copyright (C) 2000-2003  Michael van Acken
@@ -385,14 +385,16 @@ PROCEDURE (w: Writer) AttrStringLatin1* (name[NO_COPY]: ARRAY OF Char;
     w. Write8 ("'")
   END AttrStringLatin1;
 
-PROCEDURE (w: Writer) AttrStr* (name[NO_COPY]: ARRAY OF Char;
-                                value: Object.String);
+PROCEDURE (w: Writer) AttrObject* (name[NO_COPY]: ARRAY OF Char;
+                                   value: Object.String);
   VAR
     chars: Object.CharsLatin1;
-  BEGIN  (* FIXME... handle wide chars; and rename method! *)
-    chars := value(Object.String8).CharsLatin1();
+    s: Object.String;
+  BEGIN  (* FIXME... handle wide chars *)
+    s := value.ToString();
+    chars := s(Object.String8).CharsLatin1();
     w.AttrStringLatin1(name, chars^);
-  END AttrStr;
+  END AttrObject;
 
 PROCEDURE (w: Writer) AttrInt* (name[NO_COPY]: ARRAY OF Char; value: LONGINT);
   VAR

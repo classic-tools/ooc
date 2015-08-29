@@ -10,7 +10,6 @@
 #include <Object/Boxed.oh>
 #include <Object/BigInt.oh>
 #include <OOC/SymbolTable.oh>
-#include <OOC/SymbolTable/Predef.oh>
 #include <OOC/SSA.oh>
 #include <OOC/SSA/Opcode.oh>
 #include <OOC/SSA/Opnd.oh>
@@ -30,9 +29,9 @@ static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_IA32_WriteAssembler__Translator = { (RT0__Struct[]){&_td_OOC_IA32_WriteAssembler__TranslatorDesc}, NULL, &_mid, "Translator", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_IA32_WriteAssembler__TranslatorDesc = { (RT0__Struct[]){&_td_OOC_Make_TranslateToIA32__TranslatorDesc,&_td_OOC_IA32_WriteAssembler__TranslatorDesc}, (void*[]){(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetProcedureList,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_SetWriter,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteNestedProcedures,(void*)OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody,(void*)OOC_Make_TranslateToIA32__TranslatorDesc_WriteProcedure}, &_mid, "TranslatorDesc", 32, 1, RT0__strRecord };
 RT0__StructDesc _td_OOC_IA32_WriteAssembler__Buffer = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, "Buffer", 256, 256, RT0__strArray };
-RT0__StructDesc _td_OOC_IA32_WriteAssembler__2290 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_IA32_WriteAssembler__6695 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_IA32_WriteAssembler__6889 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_IA32_WriteAssembler__2267 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_IA32_WriteAssembler__6662 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_IA32_WriteAssembler__6884 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:IA32:WriteAssembler", (RT0__Struct[]) { &_td_OOC_IA32_WriteAssembler__Translator, &_td_OOC_IA32_WriteAssembler__TranslatorDesc, &_td_OOC_IA32_WriteAssembler__Buffer, NULL } };
 
 extern void OOC_OOC_IA32_WriteAssembler_init0() {

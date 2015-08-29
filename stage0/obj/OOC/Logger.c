@@ -43,9 +43,9 @@ void OOC_Logger__ReadFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_
   register OOC_INT32 i0;
   OOC_ALLOCATE_VPAR(fileName,OOC_CHAR8 ,fileName_0d)
 
+  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   if (!i0) goto l4;
   Out__String("- ", 3);
   Out__String((void*)(OOC_INT32)fileName, fileName_0d);
@@ -76,9 +76,9 @@ void OOC_Logger__WriteFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName
   register OOC_INT32 i0;
   OOC_ALLOCATE_VPAR(fileName,OOC_CHAR8 ,fileName_0d)
 
+  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   if (!i0) goto l4;
   Out__String("+ ", 3);
   Out__String((void*)(OOC_INT32)fileName, fileName_0d);
@@ -93,9 +93,9 @@ void OOC_Logger__ShellCommand(const OOC_CHAR8 str__ref[], OOC_LEN str_0d) {
   register OOC_INT32 i0;
   OOC_ALLOCATE_VPAR(str,OOC_CHAR8 ,str_0d)
 
+  OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
   if (!i0) goto l4;
   Out__String((void*)(OOC_INT32)str, str_0d);
   Out__Ln();
@@ -129,14 +129,14 @@ void OOC_Logger__EnterMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, const O
   OOC_ALLOCATE_VPAR(module,OOC_CHAR8 ,module_0d)
 
   OOC_INITIALIZE_VPAR(rule__ref,rule,OOC_CHAR8 ,rule_0d)
+  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l5:
   if (!i0) goto l7;
   OOC_Logger__IndentMake();
@@ -158,14 +158,14 @@ OOC_CHAR8 OOC_Logger__ExitMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, con
   OOC_ALLOCATE_VPAR(module,OOC_CHAR8 ,module_0d)
 
   OOC_INITIALIZE_VPAR(rule__ref,rule,OOC_CHAR8 ,rule_0d)
+  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l4:
   i1 = success;
   if (!i0) goto l11;
@@ -194,14 +194,14 @@ OOC_CHAR8 OOC_Logger__CachedMake(const OOC_CHAR8 rule__ref[], OOC_LEN rule_0d, c
   OOC_ALLOCATE_VPAR(module,OOC_CHAR8 ,module_0d)
 
   OOC_INITIALIZE_VPAR(rule__ref,rule,OOC_CHAR8 ,rule_0d)
+  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(module__ref,module,OOC_CHAR8 ,module_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l4;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l4:
   i1 = success;
   if (!i0) goto l11;
@@ -226,14 +226,14 @@ void OOC_Logger__ExplainMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d) {
   register OOC_INT32 i0;
   OOC_ALLOCATE_VPAR(s1,OOC_CHAR8 ,s1_0d)
 
+  OOC_INITIALIZE_VPAR(s1__ref,s1,OOC_CHAR8 ,s1_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(s1__ref,s1,OOC_CHAR8 ,s1_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l5:
   if (!i0) goto l7;
   OOC_Logger__IndentMake();
@@ -250,14 +250,14 @@ void OOC_Logger__ExplainFileMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d, URI__
   OOC_ALLOCATE_VPAR(s2,OOC_CHAR8 ,s2_0d)
 
   OOC_INITIALIZE_VPAR(s1__ref,s1,OOC_CHAR8 ,s1_0d)
+  OOC_INITIALIZE_VPAR(s2__ref,s2,OOC_CHAR8 ,s2_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(s2__ref,s2,OOC_CHAR8 ,s2_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l5:
   if (!i0) goto l7;
   OOC_Logger__IndentMake();
@@ -279,14 +279,14 @@ void OOC_Logger__ExplainFilesMake(const OOC_CHAR8 s1__ref[], OOC_LEN s1_0d, URI_
 
   OOC_INITIALIZE_VPAR(s1__ref,s1,OOC_CHAR8 ,s1_0d)
   OOC_INITIALIZE_VPAR(s2__ref,s2,OOC_CHAR8 ,s2_0d)
+  OOC_INITIALIZE_VPAR(s3__ref,s3,OOC_CHAR8 ,s3_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
-  OOC_INITIALIZE_VPAR(s3__ref,s3,OOC_CHAR8 ,s3_0d)
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
-  i0=OOC_FALSE;
+  i0=0u;
 l5:
   if (!i0) goto l7;
   OOC_Logger__IndentMake();
@@ -309,7 +309,7 @@ void OOC_OOC_Logger_init(void) {
   i0 = (OOC_INT32)URI_Scheme_File__GetCwd();
   OOC_Logger__cwd = (URI_Scheme_File__URI)i0;
   OOC_Logger__indentMake = 0;
-  OOC_Logger__silence = OOC_FALSE;
+  OOC_Logger__silence = 0u;
   return;
   ;
 }

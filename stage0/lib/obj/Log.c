@@ -7,7 +7,7 @@ OOC_CHAR8 Log__Done() {
 
   i0 = (OOC_INT32)Log__writer;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1349));
-  return (i0==(OOC_INT32)0);
+  return (i0==0);
   ;
 }
 
@@ -89,18 +89,18 @@ void Log__LString(const OOC_CHAR8 msg[], OOC_LEN msg_0d, const OOC_CHAR16 s[], O
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2880)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, ": ", 3);
   i = 0;
   i0 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT32, 2926))*2);
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (!i0) goto l42;
   i0=0;
 l3_loop:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 2953))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l6;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l8;
 l6:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 2967))*2);
-  i1 = i1<=(OOC_CHAR8)'\377';
+  i1 = (OOC_UINT16)i1<=(OOC_UINT16)255u;
   
 l8:
   if (!i1) goto l20;
@@ -111,47 +111,47 @@ l11_loop:
   i0 = i0+1;
   i = i0;
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 2953))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l14;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l16;
 l14:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 2967))*2);
-  i1 = i1<=(OOC_CHAR8)'\377';
+  i1 = (OOC_UINT16)i1<=(OOC_UINT16)255u;
   
 l16:
   if (i1) goto l11_loop;
 l20:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 3072))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l23;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l25;
 l23:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 3086))*2);
-  i1 = i1>(OOC_CHAR8)'\377';
+  i1 = (OOC_UINT16)i1>(OOC_UINT16)255u;
   
 l25:
   if (!i1) goto l37;
 l28_loop:
   i1 = (OOC_INT32)Log__writer;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3121)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, (OOC_CHAR8)'?');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3121)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, 63u);
   i0 = i0+1;
   i = i0;
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 3072))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l31;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l33;
 l31:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 3086))*2);
-  i1 = i1>(OOC_CHAR8)'\377';
+  i1 = (OOC_UINT16)i1>(OOC_UINT16)255u;
   
 l33:
   if (i1) goto l28_loop;
 l37:
   i1 = *(OOC_UINT16*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT32, 2926))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l3_loop;
 l42:
   i0 = (OOC_INT32)Log__writer;
@@ -368,7 +368,7 @@ void Log__Ptr(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_PTR ptr) {
   i0 = (OOC_INT32)ptr;
   i1 = i0==(OOC_INT32)0;
   if (i1) goto l3;
-  Log__HexAdr((void*)(OOC_INT32)msg, msg_0d, (_type_cast_fast(OOC_INT32, OOC_PTR, i0)));
+  Log__HexAdr((void*)(OOC_INT32)msg, msg_0d, (_type_cast_fast(OOC_INT32, OOC_INT32, i0)));
   goto l4;
 l3:
   Log__String((void*)(OOC_INT32)msg, msg_0d, "NIL", 4);

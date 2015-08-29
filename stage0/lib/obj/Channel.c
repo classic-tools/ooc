@@ -167,7 +167,7 @@ l3:
   i1 = (OOC_INT32)Channel__GetError(9);
   *(OOC_INT32*)(_check_pointer(i0, 23187)) = i1;
 l4:
-  return (Channel__Reader)(OOC_INT32)0;
+  return (Channel__Reader)0;
   ;
 }
 
@@ -184,7 +184,7 @@ l3:
   i1 = (OOC_INT32)Channel__GetError(10);
   *(OOC_INT32*)(_check_pointer(i0, 24197)) = i1;
 l4:
-  return (Channel__Writer)(OOC_INT32)0;
+  return (Channel__Writer)0;
   ;
 }
 
@@ -204,7 +204,7 @@ void Channel__ChannelDesc_ClearError(Channel__Channel ch) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)ch;
-  *(OOC_INT32*)(_check_pointer(i0, 26041)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 26041)) = 0;
   return;
   ;
 }

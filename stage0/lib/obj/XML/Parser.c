@@ -8,7 +8,7 @@ static OOC_CHAR8 XML_Parser__IsCharUCS4(OOC_INT32 ch) {
   i0 = ch;
   i1 = 32<=i0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = i0<=55295;
@@ -19,45 +19,45 @@ l5:
   
   goto l9;
 l7:
-  i1=OOC_TRUE;
+  i1=1u;
 l9:
   if (i1) goto l11;
   i1 = i0==10;
   
   goto l13;
 l11:
-  i1=OOC_TRUE;
+  i1=1u;
 l13:
   if (i1) goto l15;
   i1 = i0==13;
   
   goto l17;
 l15:
-  i1=OOC_TRUE;
+  i1=1u;
 l17:
   if (i1) goto l23;
   i1 = 57344<=i0;
   if (i1) goto l21;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l25;
 l21:
   i1 = i0<=65533;
   
   goto l25;
 l23:
-  i1=OOC_TRUE;
+  i1=1u;
 l25:
   if (i1) goto l31;
   i1 = 65536<=i0;
   if (i1) goto l29;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l32;
 l29:
   i0 = i0<=1114111;
   
   goto l32;
 l31:
-  i0=OOC_TRUE;
+  i0=1u;
 l32:
   return i0;
   ;
@@ -67,36 +67,36 @@ static OOC_CHAR8 XML_Parser__IsDigit(OOC_CHAR16 ch) {
   register OOC_INT32 i0,i1;
 
   i0 = ch;
-  i1 = i0<(OOC_CHAR16)256;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)256u;
   if (i1) goto l6;
   switch (i0) {
-  case (OOC_CHAR16)1632 ... (OOC_CHAR16)1641:
-  case (OOC_CHAR16)1776 ... (OOC_CHAR16)1785:
-  case (OOC_CHAR16)2406 ... (OOC_CHAR16)2415:
-  case (OOC_CHAR16)2534 ... (OOC_CHAR16)2543:
-  case (OOC_CHAR16)2662 ... (OOC_CHAR16)2671:
-  case (OOC_CHAR16)2790 ... (OOC_CHAR16)2799:
-  case (OOC_CHAR16)2918 ... (OOC_CHAR16)2927:
-  case (OOC_CHAR16)3047 ... (OOC_CHAR16)3055:
-  case (OOC_CHAR16)3174 ... (OOC_CHAR16)3183:
-  case (OOC_CHAR16)3302 ... (OOC_CHAR16)3311:
-  case (OOC_CHAR16)3430 ... (OOC_CHAR16)3439:
-  case (OOC_CHAR16)3664 ... (OOC_CHAR16)3673:
-  case (OOC_CHAR16)3792 ... (OOC_CHAR16)3801:
-  case (OOC_CHAR16)3872 ... (OOC_CHAR16)3881:
-    return OOC_TRUE;
+  case 1632u ... 1641u:
+  case 1776u ... 1785u:
+  case 2406u ... 2415u:
+  case 2534u ... 2543u:
+  case 2662u ... 2671u:
+  case 2790u ... 2799u:
+  case 2918u ... 2927u:
+  case 3047u ... 3055u:
+  case 3174u ... 3183u:
+  case 3302u ... 3311u:
+  case 3430u ... 3439u:
+  case 3664u ... 3673u:
+  case 3792u ... 3801u:
+  case 3872u ... 3881u:
+    return 1u;
     goto l11;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l11;
   }
 l6:
-  i1 = (OOC_CHAR8)'0'<=i0;
+  i1 = (OOC_UINT8)48u<=(OOC_UINT8)i0;
   if (i1) goto l9;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l10;
 l9:
-  i0 = i0<=(OOC_CHAR8)'9';
+  i0 = (OOC_UINT16)i0<=(OOC_UINT16)57u;
   
 l10:
   return i0;
@@ -109,273 +109,273 @@ static OOC_CHAR8 XML_Parser__IsBaseChar(OOC_CHAR16 ch) {
   register OOC_INT32 i0,i1;
 
   i0 = ch;
-  i1 = i0<(OOC_CHAR16)256;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)256u;
   if (i1) goto l41;
-  i1 = i0<(OOC_CHAR16)1024;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)1024u;
   if (i1) goto l36;
-  i1 = i0<(OOC_CHAR16)2048;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)2048u;
   if (i1) goto l31;
-  i1 = i0<(OOC_CHAR16)3072;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)3072u;
   if (i1) goto l26;
-  i1 = i0<(OOC_CHAR16)4096;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)4096u;
   if (i1) goto l21;
-  i1 = i0<(OOC_CHAR16)5120;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)5120u;
   if (i1) goto l16;
   switch (i0) {
-  case (OOC_CHAR16)7680 ... (OOC_CHAR16)7835:
-  case (OOC_CHAR16)7840 ... (OOC_CHAR16)7929:
-  case (OOC_CHAR16)7936 ... (OOC_CHAR16)7957:
-  case (OOC_CHAR16)7960 ... (OOC_CHAR16)7965:
-  case (OOC_CHAR16)7968 ... (OOC_CHAR16)8005:
-  case (OOC_CHAR16)8008 ... (OOC_CHAR16)8013:
-  case (OOC_CHAR16)8016 ... (OOC_CHAR16)8023:
-  case (OOC_CHAR16)8025:
-  case (OOC_CHAR16)8027:
-  case (OOC_CHAR16)8029:
-  case (OOC_CHAR16)8031 ... (OOC_CHAR16)8061:
-  case (OOC_CHAR16)8064 ... (OOC_CHAR16)8116:
-  case (OOC_CHAR16)8118 ... (OOC_CHAR16)8124:
-  case (OOC_CHAR16)8126:
-  case (OOC_CHAR16)8130 ... (OOC_CHAR16)8132:
-  case (OOC_CHAR16)8134 ... (OOC_CHAR16)8140:
-  case (OOC_CHAR16)8144 ... (OOC_CHAR16)8147:
-  case (OOC_CHAR16)8150 ... (OOC_CHAR16)8155:
-  case (OOC_CHAR16)8160 ... (OOC_CHAR16)8172:
-  case (OOC_CHAR16)8178 ... (OOC_CHAR16)8180:
-  case (OOC_CHAR16)8182 ... (OOC_CHAR16)8188:
-  case (OOC_CHAR16)8486:
-  case (OOC_CHAR16)8490 ... (OOC_CHAR16)8491:
-  case (OOC_CHAR16)8494:
-  case (OOC_CHAR16)8576 ... (OOC_CHAR16)8578:
-  case (OOC_CHAR16)12353 ... (OOC_CHAR16)12436:
-  case (OOC_CHAR16)12449 ... (OOC_CHAR16)12538:
-  case (OOC_CHAR16)12549 ... (OOC_CHAR16)12588:
-  case (OOC_CHAR16)44032 ... (OOC_CHAR16)55203:
-    return OOC_TRUE;
+  case 7680u ... 7835u:
+  case 7840u ... 7929u:
+  case 7936u ... 7957u:
+  case 7960u ... 7965u:
+  case 7968u ... 8005u:
+  case 8008u ... 8013u:
+  case 8016u ... 8023u:
+  case 8025u:
+  case 8027u:
+  case 8029u:
+  case 8031u ... 8061u:
+  case 8064u ... 8116u:
+  case 8118u ... 8124u:
+  case 8126u:
+  case 8130u ... 8132u:
+  case 8134u ... 8140u:
+  case 8144u ... 8147u:
+  case 8150u ... 8155u:
+  case 8160u ... 8172u:
+  case 8178u ... 8180u:
+  case 8182u ... 8188u:
+  case 8486u:
+  case 8490u ... 8491u:
+  case 8494u:
+  case 8576u ... 8578u:
+  case 12353u ... 12436u:
+  case 12449u ... 12538u:
+  case 12549u ... 12588u:
+  case 44032u ... 55203u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l16:
   switch (i0) {
-  case (OOC_CHAR16)4256 ... (OOC_CHAR16)4293:
-  case (OOC_CHAR16)4304 ... (OOC_CHAR16)4342:
-  case (OOC_CHAR16)4352:
-  case (OOC_CHAR16)4354 ... (OOC_CHAR16)4355:
-  case (OOC_CHAR16)4357 ... (OOC_CHAR16)4359:
-  case (OOC_CHAR16)4361:
-  case (OOC_CHAR16)4363 ... (OOC_CHAR16)4364:
-  case (OOC_CHAR16)4366 ... (OOC_CHAR16)4370:
-  case (OOC_CHAR16)4412:
-  case (OOC_CHAR16)4414:
-  case (OOC_CHAR16)4416:
-  case (OOC_CHAR16)4428:
-  case (OOC_CHAR16)4430:
-  case (OOC_CHAR16)4432:
-  case (OOC_CHAR16)4436 ... (OOC_CHAR16)4437:
-  case (OOC_CHAR16)4441:
-  case (OOC_CHAR16)4447 ... (OOC_CHAR16)4449:
-  case (OOC_CHAR16)4451:
-  case (OOC_CHAR16)4453:
-  case (OOC_CHAR16)4455:
-  case (OOC_CHAR16)4457:
-  case (OOC_CHAR16)4461 ... (OOC_CHAR16)4462:
-  case (OOC_CHAR16)4466 ... (OOC_CHAR16)4467:
-  case (OOC_CHAR16)4469:
-  case (OOC_CHAR16)4510:
-  case (OOC_CHAR16)4520:
-  case (OOC_CHAR16)4523:
-  case (OOC_CHAR16)4526 ... (OOC_CHAR16)4527:
-  case (OOC_CHAR16)4535 ... (OOC_CHAR16)4536:
-  case (OOC_CHAR16)4538:
-  case (OOC_CHAR16)4540 ... (OOC_CHAR16)4546:
-  case (OOC_CHAR16)4587:
-  case (OOC_CHAR16)4592:
-  case (OOC_CHAR16)4601:
-    return OOC_TRUE;
+  case 4256u ... 4293u:
+  case 4304u ... 4342u:
+  case 4352u:
+  case 4354u ... 4355u:
+  case 4357u ... 4359u:
+  case 4361u:
+  case 4363u ... 4364u:
+  case 4366u ... 4370u:
+  case 4412u:
+  case 4414u:
+  case 4416u:
+  case 4428u:
+  case 4430u:
+  case 4432u:
+  case 4436u ... 4437u:
+  case 4441u:
+  case 4447u ... 4449u:
+  case 4451u:
+  case 4453u:
+  case 4455u:
+  case 4457u:
+  case 4461u ... 4462u:
+  case 4466u ... 4467u:
+  case 4469u:
+  case 4510u:
+  case 4520u:
+  case 4523u:
+  case 4526u ... 4527u:
+  case 4535u ... 4536u:
+  case 4538u:
+  case 4540u ... 4546u:
+  case 4587u:
+  case 4592u:
+  case 4601u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l21:
   switch (i0) {
-  case (OOC_CHAR16)3077 ... (OOC_CHAR16)3084:
-  case (OOC_CHAR16)3086 ... (OOC_CHAR16)3088:
-  case (OOC_CHAR16)3090 ... (OOC_CHAR16)3112:
-  case (OOC_CHAR16)3114 ... (OOC_CHAR16)3123:
-  case (OOC_CHAR16)3125 ... (OOC_CHAR16)3129:
-  case (OOC_CHAR16)3168 ... (OOC_CHAR16)3169:
-  case (OOC_CHAR16)3205 ... (OOC_CHAR16)3212:
-  case (OOC_CHAR16)3214 ... (OOC_CHAR16)3216:
-  case (OOC_CHAR16)3218 ... (OOC_CHAR16)3240:
-  case (OOC_CHAR16)3242 ... (OOC_CHAR16)3251:
-  case (OOC_CHAR16)3253 ... (OOC_CHAR16)3257:
-  case (OOC_CHAR16)3294:
-  case (OOC_CHAR16)3296 ... (OOC_CHAR16)3297:
-  case (OOC_CHAR16)3333 ... (OOC_CHAR16)3340:
-  case (OOC_CHAR16)3342 ... (OOC_CHAR16)3344:
-  case (OOC_CHAR16)3346 ... (OOC_CHAR16)3368:
-  case (OOC_CHAR16)3370 ... (OOC_CHAR16)3385:
-  case (OOC_CHAR16)3424 ... (OOC_CHAR16)3425:
-  case (OOC_CHAR16)3585 ... (OOC_CHAR16)3630:
-  case (OOC_CHAR16)3632:
-  case (OOC_CHAR16)3634 ... (OOC_CHAR16)3635:
-  case (OOC_CHAR16)3648 ... (OOC_CHAR16)3653:
-  case (OOC_CHAR16)3713 ... (OOC_CHAR16)3714:
-  case (OOC_CHAR16)3716:
-  case (OOC_CHAR16)3719 ... (OOC_CHAR16)3720:
-  case (OOC_CHAR16)3722:
-  case (OOC_CHAR16)3725:
-  case (OOC_CHAR16)3732 ... (OOC_CHAR16)3735:
-  case (OOC_CHAR16)3737 ... (OOC_CHAR16)3743:
-  case (OOC_CHAR16)3745 ... (OOC_CHAR16)3747:
-  case (OOC_CHAR16)3749:
-  case (OOC_CHAR16)3751:
-  case (OOC_CHAR16)3754 ... (OOC_CHAR16)3755:
-  case (OOC_CHAR16)3757 ... (OOC_CHAR16)3758:
-  case (OOC_CHAR16)3760:
-  case (OOC_CHAR16)3762 ... (OOC_CHAR16)3763:
-  case (OOC_CHAR16)3773:
-  case (OOC_CHAR16)3776 ... (OOC_CHAR16)3780:
-  case (OOC_CHAR16)3904 ... (OOC_CHAR16)3911:
-  case (OOC_CHAR16)3913 ... (OOC_CHAR16)3945:
-    return OOC_TRUE;
+  case 3077u ... 3084u:
+  case 3086u ... 3088u:
+  case 3090u ... 3112u:
+  case 3114u ... 3123u:
+  case 3125u ... 3129u:
+  case 3168u ... 3169u:
+  case 3205u ... 3212u:
+  case 3214u ... 3216u:
+  case 3218u ... 3240u:
+  case 3242u ... 3251u:
+  case 3253u ... 3257u:
+  case 3294u:
+  case 3296u ... 3297u:
+  case 3333u ... 3340u:
+  case 3342u ... 3344u:
+  case 3346u ... 3368u:
+  case 3370u ... 3385u:
+  case 3424u ... 3425u:
+  case 3585u ... 3630u:
+  case 3632u:
+  case 3634u ... 3635u:
+  case 3648u ... 3653u:
+  case 3713u ... 3714u:
+  case 3716u:
+  case 3719u ... 3720u:
+  case 3722u:
+  case 3725u:
+  case 3732u ... 3735u:
+  case 3737u ... 3743u:
+  case 3745u ... 3747u:
+  case 3749u:
+  case 3751u:
+  case 3754u ... 3755u:
+  case 3757u ... 3758u:
+  case 3760u:
+  case 3762u ... 3763u:
+  case 3773u:
+  case 3776u ... 3780u:
+  case 3904u ... 3911u:
+  case 3913u ... 3945u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l26:
   switch (i0) {
-  case (OOC_CHAR16)2309 ... (OOC_CHAR16)2361:
-  case (OOC_CHAR16)2365:
-  case (OOC_CHAR16)2392 ... (OOC_CHAR16)2401:
-  case (OOC_CHAR16)2437 ... (OOC_CHAR16)2444:
-  case (OOC_CHAR16)2447 ... (OOC_CHAR16)2448:
-  case (OOC_CHAR16)2451 ... (OOC_CHAR16)2472:
-  case (OOC_CHAR16)2474 ... (OOC_CHAR16)2480:
-  case (OOC_CHAR16)2482:
-  case (OOC_CHAR16)2486 ... (OOC_CHAR16)2489:
-  case (OOC_CHAR16)2524 ... (OOC_CHAR16)2525:
-  case (OOC_CHAR16)2527 ... (OOC_CHAR16)2529:
-  case (OOC_CHAR16)2544 ... (OOC_CHAR16)2545:
-  case (OOC_CHAR16)2565 ... (OOC_CHAR16)2570:
-  case (OOC_CHAR16)2575 ... (OOC_CHAR16)2576:
-  case (OOC_CHAR16)2579 ... (OOC_CHAR16)2600:
-  case (OOC_CHAR16)2602 ... (OOC_CHAR16)2608:
-  case (OOC_CHAR16)2610 ... (OOC_CHAR16)2611:
-  case (OOC_CHAR16)2613 ... (OOC_CHAR16)2614:
-  case (OOC_CHAR16)2616 ... (OOC_CHAR16)2617:
-  case (OOC_CHAR16)2649 ... (OOC_CHAR16)2652:
-  case (OOC_CHAR16)2654:
-  case (OOC_CHAR16)2674 ... (OOC_CHAR16)2676:
-  case (OOC_CHAR16)2693 ... (OOC_CHAR16)2699:
-  case (OOC_CHAR16)2701:
-  case (OOC_CHAR16)2703 ... (OOC_CHAR16)2705:
-  case (OOC_CHAR16)2707 ... (OOC_CHAR16)2728:
-  case (OOC_CHAR16)2730 ... (OOC_CHAR16)2736:
-  case (OOC_CHAR16)2738 ... (OOC_CHAR16)2739:
-  case (OOC_CHAR16)2741 ... (OOC_CHAR16)2745:
-  case (OOC_CHAR16)2749:
-  case (OOC_CHAR16)2784:
-  case (OOC_CHAR16)2821 ... (OOC_CHAR16)2828:
-  case (OOC_CHAR16)2831 ... (OOC_CHAR16)2832:
-  case (OOC_CHAR16)2835 ... (OOC_CHAR16)2856:
-  case (OOC_CHAR16)2858 ... (OOC_CHAR16)2864:
-  case (OOC_CHAR16)2866 ... (OOC_CHAR16)2867:
-  case (OOC_CHAR16)2870 ... (OOC_CHAR16)2873:
-  case (OOC_CHAR16)2877:
-  case (OOC_CHAR16)2908 ... (OOC_CHAR16)2909:
-  case (OOC_CHAR16)2911 ... (OOC_CHAR16)2913:
-  case (OOC_CHAR16)2949 ... (OOC_CHAR16)2954:
-  case (OOC_CHAR16)2958 ... (OOC_CHAR16)2960:
-  case (OOC_CHAR16)2962 ... (OOC_CHAR16)2965:
-  case (OOC_CHAR16)2969 ... (OOC_CHAR16)2970:
-  case (OOC_CHAR16)2972:
-  case (OOC_CHAR16)2974 ... (OOC_CHAR16)2975:
-  case (OOC_CHAR16)2979 ... (OOC_CHAR16)2980:
-  case (OOC_CHAR16)2984 ... (OOC_CHAR16)2986:
-  case (OOC_CHAR16)2990 ... (OOC_CHAR16)2997:
-  case (OOC_CHAR16)2999 ... (OOC_CHAR16)3001:
-    return OOC_TRUE;
+  case 2309u ... 2361u:
+  case 2365u:
+  case 2392u ... 2401u:
+  case 2437u ... 2444u:
+  case 2447u ... 2448u:
+  case 2451u ... 2472u:
+  case 2474u ... 2480u:
+  case 2482u:
+  case 2486u ... 2489u:
+  case 2524u ... 2525u:
+  case 2527u ... 2529u:
+  case 2544u ... 2545u:
+  case 2565u ... 2570u:
+  case 2575u ... 2576u:
+  case 2579u ... 2600u:
+  case 2602u ... 2608u:
+  case 2610u ... 2611u:
+  case 2613u ... 2614u:
+  case 2616u ... 2617u:
+  case 2649u ... 2652u:
+  case 2654u:
+  case 2674u ... 2676u:
+  case 2693u ... 2699u:
+  case 2701u:
+  case 2703u ... 2705u:
+  case 2707u ... 2728u:
+  case 2730u ... 2736u:
+  case 2738u ... 2739u:
+  case 2741u ... 2745u:
+  case 2749u:
+  case 2784u:
+  case 2821u ... 2828u:
+  case 2831u ... 2832u:
+  case 2835u ... 2856u:
+  case 2858u ... 2864u:
+  case 2866u ... 2867u:
+  case 2870u ... 2873u:
+  case 2877u:
+  case 2908u ... 2909u:
+  case 2911u ... 2913u:
+  case 2949u ... 2954u:
+  case 2958u ... 2960u:
+  case 2962u ... 2965u:
+  case 2969u ... 2970u:
+  case 2972u:
+  case 2974u ... 2975u:
+  case 2979u ... 2980u:
+  case 2984u ... 2986u:
+  case 2990u ... 2997u:
+  case 2999u ... 3001u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l31:
   switch (i0) {
-  case (OOC_CHAR16)1025 ... (OOC_CHAR16)1036:
-  case (OOC_CHAR16)1038 ... (OOC_CHAR16)1103:
-  case (OOC_CHAR16)1105 ... (OOC_CHAR16)1116:
-  case (OOC_CHAR16)1118 ... (OOC_CHAR16)1153:
-  case (OOC_CHAR16)1168 ... (OOC_CHAR16)1220:
-  case (OOC_CHAR16)1223 ... (OOC_CHAR16)1224:
-  case (OOC_CHAR16)1227 ... (OOC_CHAR16)1228:
-  case (OOC_CHAR16)1232 ... (OOC_CHAR16)1259:
-  case (OOC_CHAR16)1262 ... (OOC_CHAR16)1269:
-  case (OOC_CHAR16)1272 ... (OOC_CHAR16)1273:
-  case (OOC_CHAR16)1329 ... (OOC_CHAR16)1366:
-  case (OOC_CHAR16)1369:
-  case (OOC_CHAR16)1377 ... (OOC_CHAR16)1414:
-  case (OOC_CHAR16)1488 ... (OOC_CHAR16)1514:
-  case (OOC_CHAR16)1520 ... (OOC_CHAR16)1522:
-  case (OOC_CHAR16)1569 ... (OOC_CHAR16)1594:
-  case (OOC_CHAR16)1601 ... (OOC_CHAR16)1610:
-  case (OOC_CHAR16)1649 ... (OOC_CHAR16)1719:
-  case (OOC_CHAR16)1722 ... (OOC_CHAR16)1726:
-  case (OOC_CHAR16)1728 ... (OOC_CHAR16)1742:
-  case (OOC_CHAR16)1744 ... (OOC_CHAR16)1747:
-  case (OOC_CHAR16)1749:
-  case (OOC_CHAR16)1765 ... (OOC_CHAR16)1766:
-    return OOC_TRUE;
+  case 1025u ... 1036u:
+  case 1038u ... 1103u:
+  case 1105u ... 1116u:
+  case 1118u ... 1153u:
+  case 1168u ... 1220u:
+  case 1223u ... 1224u:
+  case 1227u ... 1228u:
+  case 1232u ... 1259u:
+  case 1262u ... 1269u:
+  case 1272u ... 1273u:
+  case 1329u ... 1366u:
+  case 1369u:
+  case 1377u ... 1414u:
+  case 1488u ... 1514u:
+  case 1520u ... 1522u:
+  case 1569u ... 1594u:
+  case 1601u ... 1610u:
+  case 1649u ... 1719u:
+  case 1722u ... 1726u:
+  case 1728u ... 1742u:
+  case 1744u ... 1747u:
+  case 1749u:
+  case 1765u ... 1766u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l36:
   switch (i0) {
-  case (OOC_CHAR16)256 ... (OOC_CHAR16)305:
-  case (OOC_CHAR16)308 ... (OOC_CHAR16)318:
-  case (OOC_CHAR16)321 ... (OOC_CHAR16)328:
-  case (OOC_CHAR16)330 ... (OOC_CHAR16)382:
-  case (OOC_CHAR16)384 ... (OOC_CHAR16)451:
-  case (OOC_CHAR16)461 ... (OOC_CHAR16)496:
-  case (OOC_CHAR16)500 ... (OOC_CHAR16)501:
-  case (OOC_CHAR16)506 ... (OOC_CHAR16)535:
-  case (OOC_CHAR16)592 ... (OOC_CHAR16)680:
-  case (OOC_CHAR16)699 ... (OOC_CHAR16)705:
-  case (OOC_CHAR16)902:
-  case (OOC_CHAR16)904 ... (OOC_CHAR16)906:
-  case (OOC_CHAR16)908:
-  case (OOC_CHAR16)910 ... (OOC_CHAR16)929:
-  case (OOC_CHAR16)931 ... (OOC_CHAR16)974:
-  case (OOC_CHAR16)976 ... (OOC_CHAR16)982:
-  case (OOC_CHAR16)986:
-  case (OOC_CHAR16)988:
-  case (OOC_CHAR16)990:
-  case (OOC_CHAR16)992:
-  case (OOC_CHAR16)994 ... (OOC_CHAR16)1011:
-    return OOC_TRUE;
+  case 256u ... 305u:
+  case 308u ... 318u:
+  case 321u ... 328u:
+  case 330u ... 382u:
+  case 384u ... 451u:
+  case 461u ... 496u:
+  case 500u ... 501u:
+  case 506u ... 535u:
+  case 592u ... 680u:
+  case 699u ... 705u:
+  case 902u:
+  case 904u ... 906u:
+  case 908u:
+  case 910u ... 929u:
+  case 931u ... 974u:
+  case 976u ... 982u:
+  case 986u:
+  case 988u:
+  case 990u:
+  case 992u:
+  case 994u ... 1011u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l41:
   switch (i0) {
-  case (OOC_CHAR8)'A' ... (OOC_CHAR8)'Z':
-  case (OOC_CHAR8)'a' ... (OOC_CHAR8)'z':
-  case (OOC_CHAR8)'\300' ... (OOC_CHAR8)'\326':
-  case (OOC_CHAR8)'\330' ... (OOC_CHAR8)'\366':
-  case (OOC_CHAR8)'\370' ... (OOC_CHAR8)'\377':
-    return OOC_TRUE;
+  case 65u ... 90u:
+  case 97u ... 122u:
+  case 192u ... 214u:
+  case 216u ... 246u:
+  case 248u ... 255u:
+    return 1u;
     goto l45;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l45;
   }
 l45:
@@ -387,32 +387,32 @@ static OOC_CHAR8 XML_Parser__IsIdeographic(OOC_CHAR16 ch) {
   register OOC_INT32 i0,i1;
 
   i0 = ch;
-  i1 = (OOC_CHAR16)19968<=i0;
+  i1 = (OOC_UINT16)19968u<=(OOC_UINT16)i0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
-  i1 = i0<=(OOC_CHAR16)40869;
+  i1 = (OOC_UINT16)i0<=(OOC_UINT16)40869u;
   
 l5:
   if (i1) goto l7;
-  i1 = i0==(OOC_CHAR16)12295;
+  i1 = i0==12295u;
   
   goto l9;
 l7:
-  i1=OOC_TRUE;
+  i1=1u;
 l9:
   if (i1) goto l15;
-  i1 = (OOC_CHAR16)12321<=i0;
+  i1 = (OOC_UINT16)12321u<=(OOC_UINT16)i0;
   if (i1) goto l13;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l16;
 l13:
-  i0 = i0<=(OOC_CHAR16)12329;
+  i0 = (OOC_UINT16)i0<=(OOC_UINT16)12329u;
   
   goto l16;
 l15:
-  i0=OOC_TRUE;
+  i0=1u;
 l16:
   return i0;
   ;
@@ -422,147 +422,147 @@ static OOC_CHAR8 XML_Parser__IsCombiningChar(OOC_CHAR16 ch) {
   register OOC_INT32 i0,i1;
 
   i0 = ch;
-  i1 = i0<(OOC_CHAR16)768;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)768u;
   if (i1) goto l31;
-  i1 = i0<(OOC_CHAR16)2560;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)2560u;
   if (i1) goto l26;
-  i1 = i0<(OOC_CHAR16)3328;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)3328u;
   if (i1) goto l21;
-  i1 = i0<(OOC_CHAR16)4096;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)4096u;
   if (i1) goto l16;
-  i1 = i0<(OOC_CHAR16)8192;
+  i1 = (OOC_UINT16)i0<(OOC_UINT16)8192u;
   if (i1) goto l14;
   switch (i0) {
-  case (OOC_CHAR16)8400 ... (OOC_CHAR16)8412:
-  case (OOC_CHAR16)8417:
-  case (OOC_CHAR16)12330 ... (OOC_CHAR16)12335:
-  case (OOC_CHAR16)12441:
-  case (OOC_CHAR16)12442:
-    return OOC_TRUE;
+  case 8400u ... 8412u:
+  case 8417u:
+  case 12330u ... 12335u:
+  case 12441u:
+  case 12442u:
+    return 1u;
     goto l32;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l32;
   }
 l14:
-  return OOC_FALSE;
+  return 0u;
   goto l32;
 l16:
   switch (i0) {
-  case (OOC_CHAR16)3330 ... (OOC_CHAR16)3331:
-  case (OOC_CHAR16)3390 ... (OOC_CHAR16)3395:
-  case (OOC_CHAR16)3398 ... (OOC_CHAR16)3400:
-  case (OOC_CHAR16)3402 ... (OOC_CHAR16)3405:
-  case (OOC_CHAR16)3415:
-  case (OOC_CHAR16)3633:
-  case (OOC_CHAR16)3636 ... (OOC_CHAR16)3642:
-  case (OOC_CHAR16)3655 ... (OOC_CHAR16)3662:
-  case (OOC_CHAR16)3761:
-  case (OOC_CHAR16)3764 ... (OOC_CHAR16)3769:
-  case (OOC_CHAR16)3771 ... (OOC_CHAR16)3772:
-  case (OOC_CHAR16)3784 ... (OOC_CHAR16)3789:
-  case (OOC_CHAR16)3864 ... (OOC_CHAR16)3865:
-  case (OOC_CHAR16)3893:
-  case (OOC_CHAR16)3895:
-  case (OOC_CHAR16)3897:
-  case (OOC_CHAR16)3902:
-  case (OOC_CHAR16)3903:
-  case (OOC_CHAR16)3953 ... (OOC_CHAR16)3972:
-  case (OOC_CHAR16)3974 ... (OOC_CHAR16)3979:
-  case (OOC_CHAR16)3984 ... (OOC_CHAR16)3989:
-  case (OOC_CHAR16)3991:
-  case (OOC_CHAR16)3993 ... (OOC_CHAR16)4013:
-  case (OOC_CHAR16)4017 ... (OOC_CHAR16)4023:
-  case (OOC_CHAR16)4025:
-    return OOC_TRUE;
+  case 3330u ... 3331u:
+  case 3390u ... 3395u:
+  case 3398u ... 3400u:
+  case 3402u ... 3405u:
+  case 3415u:
+  case 3633u:
+  case 3636u ... 3642u:
+  case 3655u ... 3662u:
+  case 3761u:
+  case 3764u ... 3769u:
+  case 3771u ... 3772u:
+  case 3784u ... 3789u:
+  case 3864u ... 3865u:
+  case 3893u:
+  case 3895u:
+  case 3897u:
+  case 3902u:
+  case 3903u:
+  case 3953u ... 3972u:
+  case 3974u ... 3979u:
+  case 3984u ... 3989u:
+  case 3991u:
+  case 3993u ... 4013u:
+  case 4017u ... 4023u:
+  case 4025u:
+    return 1u;
     goto l32;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l32;
   }
 l21:
   switch (i0) {
-  case (OOC_CHAR16)2562:
-  case (OOC_CHAR16)2620:
-  case (OOC_CHAR16)2622:
-  case (OOC_CHAR16)2623:
-  case (OOC_CHAR16)2624 ... (OOC_CHAR16)2626:
-  case (OOC_CHAR16)2631 ... (OOC_CHAR16)2632:
-  case (OOC_CHAR16)2635 ... (OOC_CHAR16)2637:
-  case (OOC_CHAR16)2672 ... (OOC_CHAR16)2673:
-  case (OOC_CHAR16)2689 ... (OOC_CHAR16)2691:
-  case (OOC_CHAR16)2748:
-  case (OOC_CHAR16)2750 ... (OOC_CHAR16)2757:
-  case (OOC_CHAR16)2759 ... (OOC_CHAR16)2761:
-  case (OOC_CHAR16)2763 ... (OOC_CHAR16)2765:
-  case (OOC_CHAR16)2817 ... (OOC_CHAR16)2819:
-  case (OOC_CHAR16)2876:
-  case (OOC_CHAR16)2878 ... (OOC_CHAR16)2883:
-  case (OOC_CHAR16)2887 ... (OOC_CHAR16)2888:
-  case (OOC_CHAR16)2891 ... (OOC_CHAR16)2893:
-  case (OOC_CHAR16)2902 ... (OOC_CHAR16)2903:
-  case (OOC_CHAR16)2946 ... (OOC_CHAR16)2947:
-  case (OOC_CHAR16)3006 ... (OOC_CHAR16)3010:
-  case (OOC_CHAR16)3014 ... (OOC_CHAR16)3016:
-  case (OOC_CHAR16)3018 ... (OOC_CHAR16)3021:
-  case (OOC_CHAR16)3031:
-  case (OOC_CHAR16)3073 ... (OOC_CHAR16)3075:
-  case (OOC_CHAR16)3134 ... (OOC_CHAR16)3140:
-  case (OOC_CHAR16)3142 ... (OOC_CHAR16)3144:
-  case (OOC_CHAR16)3146 ... (OOC_CHAR16)3149:
-  case (OOC_CHAR16)3157 ... (OOC_CHAR16)3158:
-  case (OOC_CHAR16)3202 ... (OOC_CHAR16)3203:
-  case (OOC_CHAR16)3262 ... (OOC_CHAR16)3268:
-  case (OOC_CHAR16)3270 ... (OOC_CHAR16)3272:
-  case (OOC_CHAR16)3274 ... (OOC_CHAR16)3277:
-  case (OOC_CHAR16)3285 ... (OOC_CHAR16)3286:
-    return OOC_TRUE;
+  case 2562u:
+  case 2620u:
+  case 2622u:
+  case 2623u:
+  case 2624u ... 2626u:
+  case 2631u ... 2632u:
+  case 2635u ... 2637u:
+  case 2672u ... 2673u:
+  case 2689u ... 2691u:
+  case 2748u:
+  case 2750u ... 2757u:
+  case 2759u ... 2761u:
+  case 2763u ... 2765u:
+  case 2817u ... 2819u:
+  case 2876u:
+  case 2878u ... 2883u:
+  case 2887u ... 2888u:
+  case 2891u ... 2893u:
+  case 2902u ... 2903u:
+  case 2946u ... 2947u:
+  case 3006u ... 3010u:
+  case 3014u ... 3016u:
+  case 3018u ... 3021u:
+  case 3031u:
+  case 3073u ... 3075u:
+  case 3134u ... 3140u:
+  case 3142u ... 3144u:
+  case 3146u ... 3149u:
+  case 3157u ... 3158u:
+  case 3202u ... 3203u:
+  case 3262u ... 3268u:
+  case 3270u ... 3272u:
+  case 3274u ... 3277u:
+  case 3285u ... 3286u:
+    return 1u;
     goto l32;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l32;
   }
 l26:
   switch (i0) {
-  case (OOC_CHAR16)768 ... (OOC_CHAR16)837:
-  case (OOC_CHAR16)864 ... (OOC_CHAR16)865:
-  case (OOC_CHAR16)1155 ... (OOC_CHAR16)1158:
-  case (OOC_CHAR16)1425 ... (OOC_CHAR16)1441:
-  case (OOC_CHAR16)1443 ... (OOC_CHAR16)1465:
-  case (OOC_CHAR16)1467 ... (OOC_CHAR16)1469:
-  case (OOC_CHAR16)1471:
-  case (OOC_CHAR16)1473 ... (OOC_CHAR16)1474:
-  case (OOC_CHAR16)1476:
-  case (OOC_CHAR16)1611 ... (OOC_CHAR16)1618:
-  case (OOC_CHAR16)1648:
-  case (OOC_CHAR16)1750 ... (OOC_CHAR16)1756:
-  case (OOC_CHAR16)1757 ... (OOC_CHAR16)1759:
-  case (OOC_CHAR16)1760 ... (OOC_CHAR16)1764:
-  case (OOC_CHAR16)1767 ... (OOC_CHAR16)1768:
-  case (OOC_CHAR16)1770 ... (OOC_CHAR16)1773:
-  case (OOC_CHAR16)2305 ... (OOC_CHAR16)2307:
-  case (OOC_CHAR16)2364:
-  case (OOC_CHAR16)2366 ... (OOC_CHAR16)2380:
-  case (OOC_CHAR16)2381:
-  case (OOC_CHAR16)2385 ... (OOC_CHAR16)2388:
-  case (OOC_CHAR16)2402 ... (OOC_CHAR16)2403:
-  case (OOC_CHAR16)2433 ... (OOC_CHAR16)2435:
-  case (OOC_CHAR16)2492:
-  case (OOC_CHAR16)2494:
-  case (OOC_CHAR16)2495:
-  case (OOC_CHAR16)2496 ... (OOC_CHAR16)2500:
-  case (OOC_CHAR16)2503 ... (OOC_CHAR16)2504:
-  case (OOC_CHAR16)2507 ... (OOC_CHAR16)2509:
-  case (OOC_CHAR16)2519:
-  case (OOC_CHAR16)2530 ... (OOC_CHAR16)2531:
-    return OOC_TRUE;
+  case 768u ... 837u:
+  case 864u ... 865u:
+  case 1155u ... 1158u:
+  case 1425u ... 1441u:
+  case 1443u ... 1465u:
+  case 1467u ... 1469u:
+  case 1471u:
+  case 1473u ... 1474u:
+  case 1476u:
+  case 1611u ... 1618u:
+  case 1648u:
+  case 1750u ... 1756u:
+  case 1757u ... 1759u:
+  case 1760u ... 1764u:
+  case 1767u ... 1768u:
+  case 1770u ... 1773u:
+  case 2305u ... 2307u:
+  case 2364u:
+  case 2366u ... 2380u:
+  case 2381u:
+  case 2385u ... 2388u:
+  case 2402u ... 2403u:
+  case 2433u ... 2435u:
+  case 2492u:
+  case 2494u:
+  case 2495u:
+  case 2496u ... 2500u:
+  case 2503u ... 2504u:
+  case 2507u ... 2509u:
+  case 2519u:
+  case 2530u ... 2531u:
+    return 1u;
     goto l32;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l32;
   }
 l31:
-  return OOC_FALSE;
+  return 0u;
 l32:
   _failed_function(13943); return 0;
   ;
@@ -572,32 +572,32 @@ static OOC_CHAR8 XML_Parser__IsExtender(OOC_CHAR16 ch) {
   register OOC_INT32 i0,i1;
 
   i0 = ch;
-  i1 = i0==(OOC_CHAR8)'\267';
+  i1 = i0==183u;
   if (i1) goto l10;
-  i1 = i0>=(OOC_CHAR16)720;
+  i1 = (OOC_UINT16)i0>=(OOC_UINT16)720u;
   if (i1) goto l5;
-  return OOC_FALSE;
+  return 0u;
   goto l11;
 l5:
   switch (i0) {
-  case (OOC_CHAR16)720:
-  case (OOC_CHAR16)721:
-  case (OOC_CHAR16)903:
-  case (OOC_CHAR16)1600:
-  case (OOC_CHAR16)3654:
-  case (OOC_CHAR16)3782:
-  case (OOC_CHAR16)12293:
-  case (OOC_CHAR16)12337 ... (OOC_CHAR16)12341:
-  case (OOC_CHAR16)12445 ... (OOC_CHAR16)12446:
-  case (OOC_CHAR16)12540 ... (OOC_CHAR16)12542:
-    return OOC_TRUE;
+  case 720u:
+  case 721u:
+  case 903u:
+  case 1600u:
+  case 3654u:
+  case 3782u:
+  case 12293u:
+  case 12337u ... 12341u:
+  case 12445u ... 12446u:
+  case 12540u ... 12542u:
+    return 1u;
     goto l11;
   default:
-    return OOC_FALSE;
+    return 0u;
     goto l11;
   }
 l10:
-  return OOC_TRUE;
+  return 1u;
 l11:
   _failed_function(15981); return 0;
   ;
@@ -613,7 +613,7 @@ static OOC_CHAR8 XML_Parser__IsLetter(OOC_CHAR16 ch) {
   
   goto l4;
 l3:
-  i0=OOC_TRUE;
+  i0=1u;
 l4:
   return i0;
   ;
@@ -629,49 +629,49 @@ OOC_CHAR8 XML_Parser__IsNameChar(OOC_CHAR16 ch) {
   
   goto l5;
 l3:
-  i1=OOC_TRUE;
+  i1=1u;
 l5:
   if (i1) goto l7;
-  i1 = i0==(OOC_CHAR8)'.';
+  i1 = i0==46u;
   
   goto l9;
 l7:
-  i1=OOC_TRUE;
+  i1=1u;
 l9:
   if (i1) goto l11;
-  i1 = i0==(OOC_CHAR8)'-';
+  i1 = i0==45u;
   
   goto l13;
 l11:
-  i1=OOC_TRUE;
+  i1=1u;
 l13:
   if (i1) goto l15;
-  i1 = i0==(OOC_CHAR8)'_';
+  i1 = i0==95u;
   
   goto l17;
 l15:
-  i1=OOC_TRUE;
+  i1=1u;
 l17:
   if (i1) goto l19;
-  i1 = i0==(OOC_CHAR8)':';
+  i1 = i0==58u;
   
   goto l21;
 l19:
-  i1=OOC_TRUE;
+  i1=1u;
 l21:
   if (i1) goto l23;
   i1 = XML_Parser__IsCombiningChar(i0);
   
   goto l25;
 l23:
-  i1=OOC_TRUE;
+  i1=1u;
 l25:
   if (i1) goto l27;
   i0 = XML_Parser__IsExtender(i0);
   
   goto l28;
 l27:
-  i0=OOC_TRUE;
+  i0=1u;
 l28:
   return i0;
   ;
@@ -683,18 +683,18 @@ OOC_CHAR8 XML_Parser__IsNameChar0(OOC_CHAR16 ch) {
   i0 = ch;
   i1 = XML_Parser__IsLetter(i0);
   if (i1) goto l3;
-  i1 = i0==(OOC_CHAR8)'_';
+  i1 = i0==95u;
   
   goto l5;
 l3:
-  i1=OOC_TRUE;
+  i1=1u;
 l5:
   if (i1) goto l7;
-  i0 = i0==(OOC_CHAR8)':';
+  i0 = i0==58u;
   
   goto l8;
 l7:
-  i0=OOC_TRUE;
+  i0=1u;
 l8:
   return i0;
   ;
@@ -705,52 +705,52 @@ static OOC_CHAR8 XML_Parser__IsPubidChar(OOC_CHAR16 ch) {
 
   i0 = ch;
   i1 = _cap(i0);
-  i2 = (OOC_CHAR8)'A'<=i1;
+  i2 = (OOC_UINT8)65u<=(OOC_UINT8)i1;
   if (i2) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
-  i1 = i1<=(OOC_CHAR8)'Z';
+  i1 = (OOC_UINT16)i1<=(OOC_UINT16)90u;
   
 l5:
   if (i1) goto l11;
-  i1 = (OOC_CHAR8)'0'<=i0;
+  i1 = (OOC_UINT8)48u<=(OOC_UINT8)i0;
   if (i1) goto l9;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l9:
-  i1 = i0<=(OOC_CHAR8)'9';
+  i1 = (OOC_UINT16)i0<=(OOC_UINT16)57u;
   
   goto l13;
 l11:
-  i1=OOC_TRUE;
+  i1=1u;
 l13:
   if (i1) goto l15;
-  i1 = i0==(OOC_CHAR8)' ';
+  i1 = i0==32u;
   
   goto l17;
 l15:
-  i1=OOC_TRUE;
+  i1=1u;
 l17:
   if (i1) goto l19;
-  i1 = i0==(OOC_CHAR8)'\015';
+  i1 = i0==13u;
   
   goto l21;
 l19:
-  i1=OOC_TRUE;
+  i1=1u;
 l21:
   if (i1) goto l23;
-  i1 = i0==(OOC_CHAR8)'\012';
+  i1 = i0==10u;
   
   goto l25;
 l23:
-  i1=OOC_TRUE;
+  i1=1u;
 l25:
   if (i1) goto l44;
   i1 = *(OOC_UINT16*)((OOC_INT32)XML_Parser__suplPubidChar+(_check_index(0, 32, OOC_UINT32, 17132))*2);
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l29;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l31;
 l29:
   i1 = *(OOC_UINT16*)((OOC_INT32)XML_Parser__suplPubidChar+(_check_index(0, 32, OOC_UINT32, 17158))*2);
@@ -765,9 +765,9 @@ l33:
 l34_loop:
   i1 = i1+1;
   i2 = *(OOC_UINT16*)((OOC_INT32)XML_Parser__suplPubidChar+(_check_index(i1, 32, OOC_UINT32, 17132))*2);
-  i2 = i2!=(OOC_CHAR8)'\000';
+  i2 = i2!=0u;
   if (i2) goto l37;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l39;
 l37:
   i2 = *(OOC_UINT16*)((OOC_INT32)XML_Parser__suplPubidChar+(_check_index(i1, 32, OOC_UINT32, 17158))*2);
@@ -779,10 +779,10 @@ l42:
   i0=i1;
 l43:
   i0 = *(OOC_UINT16*)((OOC_INT32)XML_Parser__suplPubidChar+(_check_index(i0, 32, OOC_UINT32, 17225))*2);
-  return (i0!=(OOC_CHAR8)'\000');
+  return (i0!=0u);
   goto l45;
 l44:
-  return OOC_TRUE;
+  return 1u;
 l45:
   _failed_function(16850); return 0;
   ;
@@ -793,53 +793,53 @@ static OOC_CHAR8 XML_Parser__IsVersionNumChar(OOC_CHAR16 ch) {
 
   i0 = ch;
   i1 = _cap(i0);
-  i2 = (OOC_CHAR8)'A'<=i1;
+  i2 = (OOC_UINT8)65u<=(OOC_UINT8)i1;
   if (i2) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
-  i1 = i1<=(OOC_CHAR8)'Z';
+  i1 = (OOC_UINT16)i1<=(OOC_UINT16)90u;
   
 l5:
   if (i1) goto l11;
-  i1 = (OOC_CHAR8)'0'<=i0;
+  i1 = (OOC_UINT8)48u<=(OOC_UINT8)i0;
   if (i1) goto l9;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l9:
-  i1 = i0<=(OOC_CHAR8)'9';
+  i1 = (OOC_UINT16)i0<=(OOC_UINT16)57u;
   
   goto l13;
 l11:
-  i1=OOC_TRUE;
+  i1=1u;
 l13:
   if (i1) goto l15;
-  i1 = i0==(OOC_CHAR8)'_';
+  i1 = i0==95u;
   
   goto l17;
 l15:
-  i1=OOC_TRUE;
+  i1=1u;
 l17:
   if (i1) goto l19;
-  i1 = i0==(OOC_CHAR8)'.';
+  i1 = i0==46u;
   
   goto l21;
 l19:
-  i1=OOC_TRUE;
+  i1=1u;
 l21:
   if (i1) goto l23;
-  i1 = i0==(OOC_CHAR8)':';
+  i1 = i0==58u;
   
   goto l25;
 l23:
-  i1=OOC_TRUE;
+  i1=1u;
 l25:
   if (i1) goto l27;
-  i0 = i0==(OOC_CHAR8)'-';
+  i0 = i0==45u;
   
   goto l28;
 l27:
-  i0=OOC_TRUE;
+  i0=1u;
 l28:
   return i0;
   ;
@@ -850,54 +850,54 @@ static OOC_CHAR8 XML_Parser__IsEncNameChar(OOC_CHAR16 ch, OOC_CHAR8 first) {
 
   i0 = ch;
   i1 = _cap(i0);
-  i2 = (OOC_CHAR8)'A'<=i1;
+  i2 = (OOC_UINT8)65u<=(OOC_UINT8)i1;
   if (i2) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
-  i1 = i1<=(OOC_CHAR8)'Z';
+  i1 = (OOC_UINT16)i1<=(OOC_UINT16)90u;
   
 l5:
   if (i1) goto l27;
   i1 = first;
   i1 = !i1;
   if (i1) goto l9;
-  return OOC_FALSE;
+  return 0u;
   goto l28;
 l9:
-  i1 = (OOC_CHAR8)'0'<=i0;
+  i1 = (OOC_UINT8)48u<=(OOC_UINT8)i0;
   if (i1) goto l12;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l14;
 l12:
-  i1 = i0<=(OOC_CHAR8)'9';
+  i1 = (OOC_UINT16)i0<=(OOC_UINT16)57u;
   
 l14:
   if (i1) goto l16;
-  i1 = i0==(OOC_CHAR8)'.';
+  i1 = i0==46u;
   
   goto l18;
 l16:
-  i1=OOC_TRUE;
+  i1=1u;
 l18:
   if (i1) goto l20;
-  i1 = i0==(OOC_CHAR8)'_';
+  i1 = i0==95u;
   
   goto l22;
 l20:
-  i1=OOC_TRUE;
+  i1=1u;
 l22:
   if (i1) goto l24;
-  i0 = i0==(OOC_CHAR8)'-';
+  i0 = i0==45u;
   
   goto l25;
 l24:
-  i0=OOC_TRUE;
+  i0=1u;
 l25:
   return i0;
   goto l28;
 l27:
-  return OOC_TRUE;
+  return 1u;
 l28:
   _failed_function(17517); return 0;
   ;
@@ -931,11 +931,11 @@ Msg__Msg XML_Parser__ErrorListenerDesc_Error(XML_Parser__ErrorListener el, XML_E
   i2 = (OOC_INT32)URI__NewURIAttribute("baseURI", 8, (URI__URI)i2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18434)))), Msg__MsgDesc_SetAttribute)),Msg__MsgDesc_SetAttribute)((Msg__Msg)i1, (Msg__Attribute)i2);
   i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)pos+16);
-  i3 = i2!=(OOC_INT32)0;
+  i3 = i2!=0;
   if (!i3) goto l3;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18663))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18663))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 18669)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 18669)), 0);
   i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 18669)), i2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18559)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "entity_name", 12, (Msg__LStringPtr)i2);
 l3:
@@ -944,7 +944,7 @@ l3:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 18696)))), Msg__MsgListDesc_Append)),Msg__MsgListDesc_Append)((Msg__MsgList)i3, (Msg__Msg)i1);
   i2 = fatalError;
   if (i2) goto l6;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l8;
 l6:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18747))+40);
@@ -1045,7 +1045,7 @@ void XML_Parser__ParserDesc_ParseDocument(XML_Parser__Parser p) {
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21244))+36);
       i1 = i1!=(OOC_INT32)0;
       if (i1) goto l3;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l5;
 l3:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21268))+36);
@@ -1063,7 +1063,7 @@ l5:
       i = i1;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21697))+84);
       i2 = _check_pointer(i2, 21706);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21723))+36);
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+((_check_index(i1, i3, OOC_UINT32, 21706))*28));
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 21727))+20);
@@ -1074,7 +1074,7 @@ l12_loop:
       i = i1;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21697))+84);
       i2 = _check_pointer(i2, 21706);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21723))+36);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 21727))+20);
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+((_check_index(i1, i3, OOC_UINT32, 21706))*28));
@@ -1087,10 +1087,10 @@ l18:
 l19:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21813))+84);
       i2 = _check_pointer(i2, 21822);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21836))+84);
       i4 = _check_pointer(i4, 21845);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i4 = (OOC_INT32)*(OOC_INT32*)((i4+((_check_index(i1, i5, OOC_UINT32, 21845))*28))+24);
       i2 = *(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 21822))*28))+4);
       i3 = *(OOC_INT32*)((_check_pointer(i4, 21852))+24);
@@ -1099,29 +1099,29 @@ l19:
       *(OOC_INT32*)((OOC_INT32)pos+4) = i2;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21928))+84);
       i2 = _check_pointer(i2, 21937);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 21937))*28))+4);
       i3 = *(OOC_INT32*)((_check_pointer(i0, 21977))+96);
       i4 = *(OOC_INT32*)((_check_pointer(i0, 21992))+100);
       *(OOC_INT32*)((OOC_INT32)pos+8) = ((i2-i3)+i4);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22020))+84);
       i2 = _check_pointer(i2, 22029);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = (OOC_INT32)*(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 22029))*28))+20);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 22040))+4);
       i2 = i2!=(OOC_INT32)0;
       if (!i2) goto l24;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22106))+84);
       i2 = _check_pointer(i2, 22115);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = (OOC_INT32)*(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 22115))*28))+20);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 22126))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22106))+84);
       i0 = _check_pointer(i0, 22115);
-      i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((i0+((_check_index(i1, i3, OOC_UINT32, 22115))*28))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22126))+4);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 22132)), (OOC_INT32)0);
+      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 22132)), 0);
       i0 = LongStrings__Length((void*)(_check_pointer(i2, 22132)), i0);
       XML_Parser__ParserDesc_ParseDocument_DecLength((void*)(OOC_INT32)pos, (RT0__Struct)((OOC_INT32)pos__tag), (i0+2));
       goto l24;
@@ -1215,15 +1215,15 @@ l24:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23092))+104);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23189))+84);
       i3 = _check_pointer(i3, 23198);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i3 = (OOC_INT32)*(OOC_INT32*)((i3+((_check_index(i1, i4, OOC_UINT32, 23198))*28))+20);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 23209))+4);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23189))+84);
       i4 = _check_pointer(i4, 23198);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i1 = (OOC_INT32)*(OOC_INT32*)((i4+((_check_index(i1, i5, OOC_UINT32, 23198))*28))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 23209))+4);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 23215)), (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 23215)), 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23092))+104);
       i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 23215)), i1);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 23103)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "entity_name", 12, (Msg__LStringPtr)i1);
@@ -1274,11 +1274,11 @@ l4:
       Out__Ln();
       i2 = (OOC_INT32)chars;
       i2 = _check_pointer(i2, 23780);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT16*)(i2+(_check_index(i0, i3, OOC_UINT32, 23780))*2);
-      i2 = i2<(OOC_CHAR16)65534;
+      i2 = (OOC_UINT16)i2<(OOC_UINT16)65534u;
       if (i2) goto l3;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l5;
 l3:
       i2 = i0<=i1;
@@ -1288,27 +1288,27 @@ l5:
 l7_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 23837);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i3 = *(OOC_UINT16*)(i3+(_check_index(i0, i4, OOC_UINT32, 23837))*2);
-      i3 = i3>(OOC_CHAR8)'\377';
+      i3 = (OOC_UINT16)i3>(OOC_UINT16)255u;
       if (i3) goto l10;
       i2 = _check_pointer(i2, 23922);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT16*)(i2+(_check_index(i0, i3, OOC_UINT32, 23922))*2);
       Out__Char(i2);
       goto l11;
 l10:
-      Out__Char((OOC_CHAR8)'?');
+      Out__Char(63u);
 l11:
       i0 = i0+1;
       i = i0;
       i2 = (OOC_INT32)chars;
       i2 = _check_pointer(i2, 23780);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT16*)(i2+(_check_index(i0, i3, OOC_UINT32, 23780))*2);
-      i2 = i2<(OOC_CHAR16)65534;
+      i2 = (OOC_UINT16)i2<(OOC_UINT16)65534u;
       if (i2) goto l14;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l16;
 l14:
       i2 = i0<=i1;
@@ -1362,25 +1362,24 @@ l4:
       OOC_INT32 i;
 
       i0 = (OOC_INT32)string;
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 24605)), (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 24605)), 0);
       i1 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], i1);
       clone = (XML_UnicodeBuffer__CharArray)i1;
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 24641)), (OOC_INT32)0);
-      i2 = i2-1;
-      i3 = 0<=i2;
       i = 0;
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 24641)), 0);
+      i3 = 0<i2;
       if (!i3) goto l8;
       i3=0;
 l3_loop:
       i4 = _check_pointer(i1, 24662);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i6 = _check_pointer(i0, 24675);
-      i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+      i7 = OOC_ARRAY_LENGTH(i6, 0);
       i6 = *(OOC_UINT16*)(i6+(_check_index(i3, i7, OOC_UINT32, 24675))*2);
       *(OOC_UINT16*)(i4+(_check_index(i3, i5, OOC_UINT32, 24662))*2) = i6;
       i3 = i3+1;
-      i4 = i3<=i2;
       i = i3;
+      i4 = i3<i2;
       if (i4) goto l3_loop;
 l8:
       return (XML_UnicodeBuffer__CharArray)i1;
@@ -1393,38 +1392,37 @@ l8:
       XML_UnicodeBuffer__CharArray string;
       OOC_INT32 i;
 
-      i0 = start;
-      i1 = end;
-      i2 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], ((i1-i0)+1));
+      i0 = end;
+      i1 = start;
+      i2 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], ((i0-i1)+1));
       string = (XML_UnicodeBuffer__CharArray)i2;
-      i0 = i0!=i1;
       i = 0;
-      if (i0) goto l3;
+      i3 = i1!=i0;
+      if (i3) goto l3;
       i0=0;
       goto l9;
 l3:
-      i0 = (OOC_INT32)chars;
-      i3=0;
+      i3 = (OOC_INT32)chars;
+      i4=i1;i1=0;
 l4_loop:
-      i4 = _check_pointer(i2, 24944);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
-      i6 = _check_pointer(i0, 24956);
-      i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
-      i8 = start;
-      i6 = *(OOC_UINT16*)(i6+(_check_index(i8, i7, OOC_UINT32, 24956))*2);
-      *(OOC_UINT16*)(i4+(_check_index(i3, i5, OOC_UINT32, 24944))*2) = i6;
-      i4 = i8+1;
+      i5 = _check_pointer(i2, 24944);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
+      i7 = _check_pointer(i3, 24956);
+      i8 = OOC_ARRAY_LENGTH(i7, 0);
+      i7 = *(OOC_UINT16*)(i7+(_check_index(i4, i8, OOC_UINT32, 24956))*2);
+      *(OOC_UINT16*)(i5+(_check_index(i1, i6, OOC_UINT32, 24944))*2) = i7;
+      i4 = i4+1;
       start = i4;
-      i3 = i3+1;
-      i4 = i4!=i1;
-      i = i3;
-      if (i4) goto l4_loop;
+      i1 = i1+1;
+      i = i1;
+      i5 = i4!=i0;
+      if (i5) goto l4_loop;
 l8:
-      i0=i3;
+      i0=i1;
 l9:
       i1 = _check_pointer(i2, 25017);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      *(OOC_UINT16*)(i1+(_check_index(i0, i3, OOC_UINT32, 25017))*2) = (OOC_CHAR8)'\000';
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      *(OOC_UINT16*)(i1+(_check_index(i0, i3, OOC_UINT32, 25017))*2) = 0u;
       return (XML_UnicodeBuffer__CharArray)i2;
       ;
     }
@@ -1495,7 +1493,7 @@ l4:
 
     
     XML_UnicodeBuffer__CharArray XML_Parser__ParserDesc_ParseDocument_Internalize(XML_DTD__ExternalEntity entity) {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
+      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;
       XML_UnicodeBuffer__Input in;
       OOC_INT32 len;
       OOC_INT32 i;
@@ -1504,8 +1502,8 @@ l4:
 
       i0 = (OOC_INT32)entity;
       i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_GetBuffer((XML_DTD__ExternalEntity)i0);
-      i2 = i1!=(OOC_INT32)0;
       in = (XML_UnicodeBuffer__Input)i1;
+      i2 = i1!=(OOC_INT32)0;
       if (i2) goto l3;
       i1 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], 2);
       str = (XML_UnicodeBuffer__CharArray)i1;
@@ -1522,8 +1520,8 @@ l10:
       i2 = *(OOC_INT32*)((_check_pointer(i1, 26250))+28);
       len = i2;
       i = 0;
-      i3 = 0!=i2;
       delta = 0;
+      i3 = 0!=i2;
       if (i3) goto l13;
       i3=0;
       goto l27;
@@ -1532,20 +1530,20 @@ l13:
 l14_loop:
       i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26337))+20);
       i5 = _check_pointer(i5, 26344);
-      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
       i5 = *(OOC_UINT16*)(i5+(_check_index(i3, i6, OOC_UINT32, 26344))*2);
       switch (i5) {
-      case (OOC_CHAR8)'\015':
+      case 13u:
         i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26387))+20);
         i5 = _check_pointer(i5, 26394);
-        i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
-        *(OOC_UINT16*)(i5+(_check_index((i3-i4), i6, OOC_UINT32, 26394))*2) = (OOC_CHAR8)'\012';
+        i6 = OOC_ARRAY_LENGTH(i5, 0);
+        *(OOC_UINT16*)(i5+(_check_index((i3-i4), i6, OOC_UINT32, 26394))*2) = 10u;
         i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26435))+20);
         i5 = _check_pointer(i5, 26442);
-        i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i5, 0);
         i7 = i3+1;
         i5 = *(OOC_UINT16*)(i5+(_check_index(i7, i6, OOC_UINT32, 26442))*2);
-        i5 = i5==(OOC_CHAR8)'\012';
+        i5 = i5==10u;
         if (i5) goto l19;
         {register OOC_INT32 h0=i3;i3=i4;i4=h0;}
         goto l22;
@@ -1557,10 +1555,10 @@ l19:
       default:
         i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26545))+20);
         i5 = _check_pointer(i5, 26552);
-        i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i5, 0);
         i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26567))+20);
         i7 = _check_pointer(i7, 26574);
-        i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+        i8 = OOC_ARRAY_LENGTH(i7, 0);
         i7 = *(OOC_UINT16*)(i7+(_check_index(i3, i8, OOC_UINT32, 26574))*2);
         *(OOC_UINT16*)(i5+(_check_index((i3-i4), i6, OOC_UINT32, 26552))*2) = i7;
         {register OOC_INT32 h0=i3;i3=i4;i4=h0;}
@@ -1568,8 +1566,8 @@ l19:
       }
 l22:
       i4 = i4+1;
-      i5 = i4!=i2;
       i = i4;
+      i5 = i4!=i2;
       if (!i5) goto l27;
       {register OOC_INT32 h0=i3;i3=i4;i4=h0;}
       goto l14_loop;
@@ -1578,23 +1576,22 @@ l27:
       len = i2;
       i3 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i2+2));
       str = (XML_UnicodeBuffer__CharArray)i3;
-      i4 = i2-1;
-      i5 = 0<=i4;
       i = 0;
-      if (!i5) goto l35;
-      i5=0;
+      i4 = 0<i2;
+      if (!i4) goto l35;
+      i4=0;
 l30_loop:
-      i6 = _check_pointer(i3, 26721);
-      i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
-      i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26730))+20);
-      i8 = _check_pointer(i8, 26737);
-      i9 = OOC_ARRAY_LENGTH(i8, (OOC_INT32)0);
-      i8 = *(OOC_UINT16*)(i8+(_check_index(i5, i9, OOC_UINT32, 26737))*2);
-      *(OOC_UINT16*)(i6+(_check_index(i5, i7, OOC_UINT32, 26721))*2) = i8;
-      i5 = i5+1;
-      i6 = i5<=i4;
-      i = i5;
-      if (i6) goto l30_loop;
+      i5 = _check_pointer(i3, 26721);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
+      i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 26730))+20);
+      i7 = _check_pointer(i7, 26737);
+      i8 = OOC_ARRAY_LENGTH(i7, 0);
+      i7 = *(OOC_UINT16*)(i7+(_check_index(i4, i8, OOC_UINT32, 26737))*2);
+      *(OOC_UINT16*)(i5+(_check_index(i4, i6, OOC_UINT32, 26721))*2) = i7;
+      i4 = i4+1;
+      i = i4;
+      i5 = i4<i2;
+      if (i5) goto l30_loop;
 l35:
       XML_Parser__ParserDesc_ParseDocument_CheckInvalidChars();
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 26791)))), XML_UnicodeBuffer__InputDesc_Close)),XML_UnicodeBuffer__InputDesc_Close)((XML_UnicodeBuffer__Input)i1);
@@ -1604,13 +1601,13 @@ l36:
       switch (i0) {
       case 2:
         i0 = _check_pointer(i1, 26933);
-        i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i3, OOC_UINT32, 26933))*2) = (OOC_CHAR16)65535;
+        i3 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i3, OOC_UINT32, 26933))*2) = 65535u;
         goto l41;
       case 3:
         i0 = _check_pointer(i1, 27007);
-        i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i3, OOC_UINT32, 27007))*2) = (OOC_CHAR16)65534;
+        i3 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i3, OOC_UINT32, 27007))*2) = 65534u;
         goto l41;
       default:
         _failed_case(i0, 26866);
@@ -1630,35 +1627,34 @@ l41:
       i0 = (OOC_INT32)entity;
       i1 = i0!=(OOC_INT32)0;
       if (!i1) goto l3;
-      *(OOC_UINT8*)((_check_pointer(i0, 27501))+17) = OOC_TRUE;
+      *(OOC_UINT8*)((_check_pointer(i0, 27501))+17) = 1u;
 l3:
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27571))+84);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 27550))+88);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 27580)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 27580)), 0);
       i2 = i3==i2;
       if (!i2) goto l14;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27617))+84);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 27626)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 27626)), 0);
       i2 = (OOC_INT32)RT0__NewObject(_td_XML_Parser__PEInfoList.baseTypes[0], (i2+4));
       newList = (XML_Parser__PEInfoList)i2;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27671))+84);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 27680)), (OOC_INT32)0);
-      i3 = i3-1;
-      i4 = 0<=i3;
       i = 0;
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 27680)), 0);
+      i4 = 0<i3;
       if (!i4) goto l13;
       i4=0;
 l8_loop:
       i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27713))+84);
       i5 = _check_pointer(i5, 27722);
-      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
       i7 = _check_pointer(i2, 27705);
-      i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+      i8 = OOC_ARRAY_LENGTH(i7, 0);
       _copy_block((i5+((_check_index(i4, i6, OOC_UINT32, 27722))*28)),(i7+((_check_index(i4, i8, OOC_UINT32, 27705))*28)),28);
       i4 = i4+1;
-      i5 = i4<=i3;
       i = i4;
+      i5 = i4<i3;
       if (i5) goto l8_loop;
 l13:
       *(OOC_INT32*)((_check_pointer(i1, 27748))+84) = i2;
@@ -1666,49 +1662,49 @@ l14:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27787))+84);
       i2 = _check_pointer(i2, 27796);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 27798))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 27796))*28))+20) = i0;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27838))+84);
       i2 = _check_pointer(i2, 27847);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 27849))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = (OOC_INT32)chars;
       *(OOC_INT32*)(i2+((_check_index(i3, i4, OOC_UINT32, 27847))*28)) = i5;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27890))+84);
       i2 = _check_pointer(i2, 27899);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 27901))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = cpos;
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 27899))*28))+4) = i5;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 27940))+84);
       i2 = _check_pointer(i2, 27949);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 27951))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = *(OOC_INT32*)((_check_pointer(i1, 27982))+92);
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 27949))*28))+8) = i5;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 28001))+84);
       i2 = _check_pointer(i2, 28010);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 28012))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = *(OOC_INT32*)((_check_pointer(i1, 28046))+96);
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 28010))*28))+12) = i5;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 28068))+84);
       i2 = _check_pointer(i2, 28077);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 28079))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = *(OOC_INT32*)((_check_pointer(i1, 28113))+100);
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 28077))*28))+16) = i5;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 28135))+84);
       i2 = _check_pointer(i2, 28144);
       i3 = *(OOC_INT32*)((_check_pointer(i1, 28146))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 28168))+36);
       *(OOC_INT32*)((i2+((_check_index(i3, i4, OOC_UINT32, 28144))*28))+24) = i5;
       i2 = *(OOC_INT32*)((_check_pointer(i1, 28186))+88);
       *(OOC_INT32*)((_check_pointer(i1, 28186))+88) = (i2+1);
       i2 = syncEntity;
       if (i2) goto l17;
-      i3=OOC_FALSE;
+      i3=0u;
       goto l19;
 l17:
       i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 28238)))), &_td_XML_DTD__ExternalEntityDesc);
@@ -1717,7 +1713,7 @@ l19:
       if (i3) goto l47;
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 28897)))), &_td_XML_DTD__ExternalEntityDesc);
       if (i1) goto l23;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l25;
 l23:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28929))+12);
@@ -1736,35 +1732,35 @@ l27:
       case 0:
       case 2:
         i2 = _check_pointer(i1, 29207);
-        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29218)), (OOC_INT32)0);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-        *(OOC_UINT16*)(i2+(_check_index((i1-2), i3, OOC_UINT32, 29207))*2) = (OOC_CHAR16)65535;
+        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29218)), 0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
+        *(OOC_UINT16*)(i2+(_check_index((i1-2), i3, OOC_UINT32, 29207))*2) = 65535u;
         goto l39;
       case 1:
       case 3:
         i3 = _check_pointer(i1, 29327);
-        i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29338)), (OOC_INT32)0);
-        i5 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-        *(OOC_UINT16*)(i3+(_check_index((i4-2), i5, OOC_UINT32, 29327))*2) = (OOC_CHAR16)65534;
+        i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29338)), 0);
+        i5 = OOC_ARRAY_LENGTH(i3, 0);
+        *(OOC_UINT16*)(i3+(_check_index((i4-2), i5, OOC_UINT32, 29327))*2) = 65534u;
         i3 = (OOC_INT32)p;
         i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 29732))+72);
         i3 = i3==(OOC_INT32)0;
         if (!i3) goto l39;
         i3 = _check_pointer(i1, 29779);
-        i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29790)), (OOC_INT32)0);
-        i5 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-        *(OOC_UINT16*)(i3+(_check_index((i4-2), i5, OOC_UINT32, 29779))*2) = (OOC_CHAR8)' ';
+        i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29790)), 0);
+        i5 = OOC_ARRAY_LENGTH(i3, 0);
+        *(OOC_UINT16*)(i3+(_check_index((i4-2), i5, OOC_UINT32, 29779))*2) = 32u;
         if (i2) goto l35;
         i2 = _check_pointer(i1, 29927);
-        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29938)), (OOC_INT32)0);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-        *(OOC_UINT16*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 29927))*2) = (OOC_CHAR16)65534;
+        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29938)), 0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
+        *(OOC_UINT16*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 29927))*2) = 65534u;
         goto l39;
 l35:
         i2 = _check_pointer(i1, 29854);
-        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29865)), (OOC_INT32)0);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-        *(OOC_UINT16*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 29854))*2) = (OOC_CHAR16)65535;
+        i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 29865)), 0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
+        *(OOC_UINT16*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 29854))*2) = 65535u;
         goto l39;
       default:
         _failed_case(i3, 29107);
@@ -1779,7 +1775,7 @@ l39:
       
       goto l44;
 l42:
-      i1=OOC_TRUE;
+      i1=1u;
 l44:
       if (!i1) goto l52;
       i1 = (OOC_INT32)p;
@@ -1803,8 +1799,8 @@ l50:
       i0 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], 2);
       chars = (XML_UnicodeBuffer__CharArray)i0;
       i0 = _check_pointer(i0, 28562);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-      *(OOC_UINT16*)(i0+(_check_index(0, i1, OOC_UINT8, 28562))*2) = (OOC_CHAR16)65535;
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
+      *(OOC_UINT16*)(i0+(_check_index(0, i1, OOC_UINT8, 28562))*2) = 65535u;
 l52:
       cpos = 0;
       cdelta = 0;
@@ -1829,7 +1825,7 @@ l52:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30545))+72);
       i5 = cstart;
       i6 = (OOC_INT32)chars;
-      i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 30575)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i6, i5, (i4-i3), OOC_TRUE);
+      i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 30575)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i6, i5, (i4-i3), 1u);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 30562)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i0, (XML_DTD__Fragment)i2);
 l3:
       i0 = (OOC_INT32)p;
@@ -1838,13 +1834,13 @@ l3:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30683))+36);
       i1 = i1!=(OOC_INT32)0;
       if (i1) goto l6;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l8;
 l6:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30707))+84);
       i1 = _check_pointer(i1, 30716);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 30718))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30699))+36);
       i1 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 30716))*28))+24);
       i0 = i0!=i1;
@@ -1861,44 +1857,44 @@ l10:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30872))+84);
       i1 = _check_pointer(i1, 30881);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 30883))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = (OOC_INT32)*(OOC_INT32*)(i1+((_check_index(i2, i3, OOC_UINT32, 30881))*28));
       chars = (XML_UnicodeBuffer__CharArray)i1;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30923))+84);
       i1 = _check_pointer(i1, 30932);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 30934))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 30932))*28))+4);
       cpos = i1;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30980))+84);
       i1 = _check_pointer(i1, 30989);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 30991))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 30989))*28))+8);
       *(OOC_INT32*)((_check_pointer(i0, 30965))+92) = i1;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31044))+84);
       i1 = _check_pointer(i1, 31053);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 31055))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 31053))*28))+12);
       *(OOC_INT32*)((_check_pointer(i0, 31026))+96) = i1;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31111))+84);
       i1 = _check_pointer(i1, 31120);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 31122))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 31120))*28))+16);
       *(OOC_INT32*)((_check_pointer(i0, 31093))+100) = i1;
       i1 = *(OOC_INT32*)((_check_pointer(i0, 31165))+88);
       i1 = i1-1;
-      i2 = i1>=0;
       i = i1;
+      i2 = i1>=0;
       if (i2) goto l13;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l15;
 l13:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31207))+84);
       i2 = _check_pointer(i2, 31216);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = (OOC_INT32)*(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 31216))*28))+20);
       i2 = !(OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 31228)))), &_td_XML_DTD__ExternalEntityDesc));
       
@@ -1909,12 +1905,12 @@ l18_loop:
       i = i1;
       i2 = i1>=0;
       if (i2) goto l21;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l23;
 l21:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31207))+84);
       i2 = _check_pointer(i2, 31216);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = (OOC_INT32)*(OOC_INT32*)((i2+((_check_index(i1, i3, OOC_UINT32, 31216))*28))+20);
       i2 = !(OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 31228)))), &_td_XML_DTD__ExternalEntityDesc));
       
@@ -1929,7 +1925,7 @@ l27:
 l30:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31328))+84);
       i0 = _check_pointer(i0, 31337);
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((i0+((_check_index(i1, i2, OOC_UINT32, 31337))*28))+20);
       XML_Parser__ParserDesc_ParseDocument_SetFileEntity((XML_DTD__ExternalEntity)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 31353)))), &_td_XML_DTD__ExternalEntityDesc, 31353)));
 l31:
@@ -1945,14 +1941,14 @@ l34:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31583))+84);
       i2 = _check_pointer(i2, 31592);
       i3 = *(OOC_INT32*)((_check_pointer(i0, 31594))+88);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = (OOC_INT32)*(OOC_INT32*)((i2+((_check_index((i3-1), i4, OOC_UINT32, 31592))*28))+20);
       *(OOC_INT32*)((_check_pointer(i1, 31560))+16) = (_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 31622)))), &_td_XML_DTD__InternalEntityDesc, 31622));
 l35:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31760))+84);
       i1 = _check_pointer(i1, 31769);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 31771))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 31769))*28))+24);
       *(OOC_INT32*)((_check_pointer(i0, 31751))+36) = i1;
       i1 = cpos;
@@ -1961,16 +1957,16 @@ l35:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31843))+84);
       i1 = _check_pointer(i1, 31852);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 31854))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index(i2, i3, OOC_UINT32, 31852))*28))+20);
       i1 = i1!=(OOC_INT32)0;
       if (!i1) goto l38;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 31897))+84);
       i1 = _check_pointer(i1, 31906);
       i0 = *(OOC_INT32*)((_check_pointer(i0, 31908))+88);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index(i0, i2, OOC_UINT32, 31906))*28))+20);
-      *(OOC_UINT8*)((_check_pointer(i0, 31929))+17) = OOC_FALSE;
+      *(OOC_UINT8*)((_check_pointer(i0, 31929))+17) = 0u;
 l38:
       return;
       ;
@@ -1984,15 +1980,15 @@ l38:
 
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 32113);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 32113))*2);
-      _assert((i1==(OOC_CHAR16)65534), 127, 32100);
+      _assert((i1==65534u), 127, 32100);
       i1 = (OOC_INT32)p;
       i2 = *(OOC_INT32*)((_check_pointer(i1, 32152))+88);
       i2 = i2!=0;
       if (i2) goto l3;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l5;
 l3:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 32174))+36);
@@ -2030,14 +2026,14 @@ l7:
       i1 = i1==(OOC_INT32)0;
       if (!i1) goto l10;
       i1 = _check_pointer(i0, 32369);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 32380)), (OOC_INT32)0);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 32380)), 0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index((i2-2), i3, OOC_UINT32, 32369))*2);
-      _assert((i1==(OOC_CHAR8)' '), 127, 32356);
+      _assert((i1==32u), 127, 32356);
       i1 = _check_pointer(i0, 32409);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 32420)), (OOC_INT32)0);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      *(OOC_UINT16*)(i1+(_check_index((i0-2), i2, OOC_UINT32, 32409))*2) = (OOC_CHAR16)65534;
+      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 32420)), 0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
+      *(OOC_UINT16*)(i1+(_check_index((i0-2), i2, OOC_UINT32, 32409))*2) = 65534u;
 l10:
       XML_Parser__ParserDesc_ParseDocument_PopEntity();
 l11:
@@ -2113,10 +2109,10 @@ l4:
 
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 33906);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 33906))*2);
-      i1 = i1<=(OOC_CHAR8)' ';
+      i1 = (OOC_UINT16)i1<=(OOC_UINT16)32u;
       if (i1) goto l23;
       i1 = (OOC_INT32)p;
       i2 = *(OOC_UINT8*)((_check_pointer(i1, 33960))+67);
@@ -2125,30 +2121,30 @@ l4:
       
       goto l7;
 l5:
-      i2=OOC_TRUE;
+      i2=1u;
 l7:
       if (i2) goto l9;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l11;
 l9:
       i2 = _check_pointer(i0, 34023);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 34023))*2);
-      i2 = i2==(OOC_CHAR8)'%';
+      i2 = i2==37u;
       
 l11:
       if (i2) goto l13;
-      return OOC_FALSE;
+      return 0u;
       goto l24;
 l13:
       i2 = _check_pointer(i0, 34058);
       i3 = i3+1;
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 34058))*2);
-      i2 = i2==(OOC_CHAR16)65534;
+      i2 = i2==65534u;
       if (i2) goto l16;
       i0 = _check_pointer(i0, 34400);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 34400))*2);
       i0 = XML_Parser__IsNameChar(i0);
       return i0;
@@ -2158,7 +2154,7 @@ l16:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 34118))+20);
       i0 = i0==i1;
       if (i0) goto l19;
-      return OOC_FALSE;
+      return 0u;
       goto l24;
 l19:
       cpos = i3;
@@ -2168,13 +2164,13 @@ l19:
       cpos = i0;
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 34294);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i0 = *(OOC_UINT16*)(i1+(_check_index((i0+1), i2, OOC_UINT32, 34294))*2);
       i0 = XML_Parser__IsNameChar(i0);
       return i0;
       goto l24;
 l23:
-      return OOC_TRUE;
+      return 1u;
 l24:
       _failed_function(33808); return 0;
       ;
@@ -2186,10 +2182,10 @@ l24:
 
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 34588);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 34588))*2);
-      return (i0<=(OOC_CHAR8)' ');
+      return ((OOC_UINT16)i0<=(OOC_UINT16)32u);
       ;
     }
 
@@ -2206,33 +2202,31 @@ l24:
 l1_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 35479);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i5 = cpos;
       i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 35479))*2);
-      i3 = i3==(OOC_CHAR16)65534;
+      i3 = i3==65534u;
       if (i3) goto l17;
       i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, str_0d, OOC_UINT32, 35789)));
-      i3 = i3==(OOC_CHAR8)'\000';
+      i3 = i3==0u;
       if (i3) goto l10;
       i2 = _check_pointer(i2, 36030);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, str_0d, OOC_UINT32, 36019)));
       i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i3, OOC_UINT32, 36030))*2);
       i2 = i4==i2;
-      if (i2) goto l8;
-      i2 = i5-i1;
-      cpos = i2;
-      return OOC_FALSE;
-      {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-      goto l9;
+      if (!i2) goto l7;
+      goto l8;
+l7:
+      cpos = (i5-i1);
+      return 0u;
+      
+      goto l1_loop;
 l8:
       i1 = i1+1;
       i = i1;
-      i2 = i5+1;
-      cpos = i2;
-      {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-l9:
-      i1=i2;
+      cpos = (i5+1);
+      
       goto l1_loop;
 l10:
       i3 = i5-i1;
@@ -2240,13 +2234,13 @@ l10:
       switch (i0) {
       case 1:
         i2 = _check_pointer(i2, 35926);
-        i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i4 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index((i3+i1), i4, OOC_UINT32, 35926))*2);
         i2 = XML_Parser__IsNameChar(i2);
         return (!i2);
         goto l1_loop;
       case 0:
-        return OOC_TRUE;
+        return 1u;
         goto l1_loop;
       default:
         _failed_case(i0, 35839);
@@ -2262,7 +2256,7 @@ l17:
 l19:
       cpos = (i5-i1);
       i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, str_0d, OOC_UINT32, 35747)));
-      return (i2==(OOC_CHAR8)'\000');
+      return (i2==0u);
       goto l1_loop;
 l20:
       XML_Parser__ParserDesc_ParseDocument_NextBlock();
@@ -2277,17 +2271,17 @@ l24:
 
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 36243);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 36243))*2);
-      i1 = i1!=(OOC_CHAR16)65535;
+      i1 = i1!=65535u;
       if (!i1) goto l6;
       i1 = i3+1;
       cpos = i1;
       i0 = _check_pointer(i0, 36312);
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT16*)(i0+(_check_index(i1, i2, OOC_UINT32, 36312))*2);
-      i0 = i0==(OOC_CHAR16)65534;
+      i0 = i0==65534u;
       if (!i0) goto l6;
       XML_Parser__ParserDesc_ParseDocument_NextBlock();
 l6:
@@ -2303,7 +2297,7 @@ l6:
 
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 36632);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 36632))*2);
       i0 = XML_Parser__IsNameChar(i0);
@@ -2312,116 +2306,118 @@ l6:
       XML_Parser__ParserDesc_ParseDocument_NextChar();
       i0 = (OOC_INT32)XML_Parser__noName;
       return (XML_UnicodeBuffer__CharArray)i0;
-      goto l49;
+      goto l50;
 l3:
       i0 = cpos;
       cstart = i0;
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 36686);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index(i0, i2, OOC_UINT32, 36686))*2);
-      i1 = i1==(OOC_CHAR8)':';
-      i2 = checkForQName;
-      i3 = noColon;
+      i1 = i1==58u;
       if (i1) goto l6;
-      colon = -1;
-      i0=-1;
-      goto l13;
+      colon = (-1);
+      i0=(-1);
+      goto l14;
 l6:
       colon = i0;
-      if (!i2) goto l13;
-      if (i3) goto l10;
+      i1 = checkForQName;
+      if (!i1) goto l14;
+      i1 = noColon;
+      if (i1) goto l11;
       XML_Parser__ParserDesc_ParseDocument_Err(31);
-      goto l13;
-l10:
+      goto l14;
+l11:
       XML_Parser__ParserDesc_ParseDocument_Err(30);
-l13:
+l14:
       i1 = cpos;
       cpos = (i1+1);
+      i1 = noColon;
+      i2 = checkForQName;
       
-l14_loop:
-      i1 = (OOC_INT32)chars;
-      i4 = _check_pointer(i1, 37093);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+l15_loop:
+      i3 = (OOC_INT32)chars;
+      i4 = _check_pointer(i3, 37093);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i6 = cpos;
       i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 37093))*2);
-      i4 = i4==(OOC_CHAR16)65534;
-      if (i4) goto l35;
-      i4 = _check_pointer(i1, 37372);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      i4 = i4==65534u;
+      if (i4) goto l36;
+      i4 = _check_pointer(i3, 37372);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 37372))*2);
-      i4 = i4==(OOC_CHAR8)':';
-      if (i4) goto l19;
-      i4=OOC_FALSE;
-      goto l21;
-l19:
+      i4 = i4==58u;
+      if (i4) goto l20;
+      i4=0u;
+      goto l22;
+l20:
       i4=i2;
-l21:
-      if (i4) goto l27;
-      i1 = _check_pointer(i1, 37711);
-      i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      i1 = *(OOC_UINT16*)(i1+(_check_index(i6, i4, OOC_UINT32, 37711))*2);
-      i1 = XML_Parser__IsNameChar(i1);
-      if (!i1) goto l24;
-      goto l25;
-l24:
+l22:
+      if (i4) goto l28;
+      i3 = _check_pointer(i3, 37711);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i4, OOC_UINT32, 37711))*2);
+      i3 = XML_Parser__IsNameChar(i3);
+      if (!i3) goto l25;
+      goto l26;
+l25:
       i0 = cpos;
       i1 = cstart;
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_GetString(i1, i0);
       string = (XML_UnicodeBuffer__CharArray)i0;
       
-      goto l42;
-l25:
-      i1 = cpos;
-      cpos = (i1+1);
-      goto l14_loop;
-l27:
-      if (i3) goto l32;
+      goto l43;
+l26:
+      i3 = cpos;
+      cpos = (i3+1);
+      goto l15_loop;
+l28:
+      if (i1) goto l33;
       i0 = i0>=0;
-      if (i0) goto l30;
-      goto l33;
-l30:
+      if (i0) goto l31;
+      goto l34;
+l31:
       XML_Parser__ParserDesc_ParseDocument_Err(31);
-      goto l33;
-l32:
-      XML_Parser__ParserDesc_ParseDocument_Err(30);
+      goto l34;
 l33:
+      XML_Parser__ParserDesc_ParseDocument_Err(30);
+l34:
       i0 = cpos;
       colon = i0;
       cpos = (i0+1);
       
-      goto l14_loop;
-l35:
+      goto l15_loop;
+l36:
       i4 = (OOC_INT32)p;
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 37150))+36);
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 37154))+20);
-      i1 = i1!=i4;
-      if (i1) goto l39;
+      i3 = i3!=i4;
+      if (i3) goto l40;
       XML_Parser__ParserDesc_ParseDocument_NextBlock();
-      goto l14_loop;
-l39:
+      goto l15_loop;
+l40:
       i0 = cstart;
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_GetString(i0, i6);
       string = (XML_UnicodeBuffer__CharArray)i0;
       XML_Parser__ParserDesc_ParseDocument_NextBlock();
       
-l42:
-      if (i2) goto l44;
-      i1=OOC_FALSE;
-      goto l46;
-l44:
+l43:
+      if (i2) goto l45;
+      i1=0u;
+      goto l47;
+l45:
       i1 = _check_pointer(i0, 37888);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 37900)), (OOC_INT32)0);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 37900)), 0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index((i2-2), i3, OOC_UINT32, 37888))*2);
-      i1 = i1==(OOC_CHAR8)':';
+      i1 = i1==58u;
       
-l46:
-      if (!i1) goto l48;
+l47:
+      if (!i1) goto l49;
       XML_Parser__ParserDesc_ParseDocument_Err(31);
-l48:
-      return (XML_UnicodeBuffer__CharArray)i0;
 l49:
+      return (XML_UnicodeBuffer__CharArray)i0;
+l50:
       _failed_function(36419); return 0;
       ;
     }
@@ -2432,7 +2428,7 @@ l49:
 
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 38290);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 38290))*2);
       i0 = XML_Parser__IsNameChar0(i0);
@@ -2460,7 +2456,7 @@ l4:
 
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 38674);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 38674))*2);
       i1 = ch;
@@ -2477,17 +2473,17 @@ l4:
 l3:
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 38861);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 38861))*2);
-      i1 = i1!=(OOC_CHAR16)65535;
+      i1 = i1!=65535u;
       if (!i1) goto l9;
       i1 = i3+1;
       cpos = i1;
       i0 = _check_pointer(i0, 38930);
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT16*)(i0+(_check_index(i1, i2, OOC_UINT32, 38930))*2);
-      i0 = i0==(OOC_CHAR16)65534;
+      i0 = i0==65534u;
       if (!i0) goto l9;
       XML_Parser__ParserDesc_ParseDocument_NextBlock();
 l9:
@@ -2500,12 +2496,12 @@ l9:
       register OOC_INT32 i0,i1;
 
       i0 = (OOC_INT32)p;
-      *(OOC_UINT8*)((_check_pointer(i0, 39275))+64) = OOC_FALSE;
+      *(OOC_UINT8*)((_check_pointer(i0, 39275))+64) = 0u;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39314))+52);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 39330))+48);
       i1 = i1!=0;
       if (!i1) goto l3;
-      *(OOC_UINT8*)((_check_pointer(i0, 39378))+63) = OOC_FALSE;
+      *(OOC_UINT8*)((_check_pointer(i0, 39378))+63) = 0u;
 l3:
       return;
       ;
@@ -2524,14 +2520,14 @@ l3:
       i0 = declSep;
       i1 = !i0;
       if (i1) goto l3;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l9;
 l3:
       i1 = (OOC_INT32)p;
       i2 = *(OOC_UINT8*)((_check_pointer(i1, 39739))+67);
       i2 = !i2;
       if (i2) goto l6;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l9;
 l6:
       i1 = *(OOC_UINT8*)((_check_pointer(i1, 39762))+68);
@@ -2541,26 +2537,26 @@ l9:
       if (!i1) goto l11;
       XML_Parser__ParserDesc_ParseDocument_Err(115);
 l11:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'%');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(37u);
       i1 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 39881))+36);
       i1 = *(OOC_INT32*)((_check_pointer(i1, 39885))+24);
       i2 = cstart;
       i1 = i2+i1;
       oldCStart = i1;
-      i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+      i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
       name = (XML_UnicodeBuffer__CharArray)i2;
       i3 = (OOC_INT32)p;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 39957))+36);
       i3 = *(OOC_INT32*)((_check_pointer(i3, 39961))+24);
       cstart = (i1-i3);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)';');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(59u);
       i1 = (OOC_INT32)dtd;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40019))+8);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40019))+8);
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 40032)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i1, (XML_UnicodeBuffer__CharArray)i2);
-      i3 = i1==(OOC_INT32)0;
       decl = (XML_DTD__Declaration)i1;
+      i3 = i1==(OOC_INT32)0;
       if (i3) goto l48;
       i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 40424)))), &_td_XML_DTD__EntityDesc, 40424);
       entity = (XML_DTD__Entity)i1;
@@ -2570,7 +2566,7 @@ l11:
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Internalize((XML_DTD__ExternalEntity)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41854)))), &_td_XML_DTD__ExternalEntityDesc, 41854)));
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41812)))), XML_DTD__EntityDesc_SetEntityValue)),XML_DTD__EntityDesc_SetEntityValue)((XML_DTD__Entity)i1, (XML_UnicodeBuffer__CharArray)i0);
 l18:
-      XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, OOC_FALSE);
+      XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, 0u);
       goto l61;
 l19:
       i0 = (OOC_INT32)p;
@@ -2581,7 +2577,7 @@ l19:
       
       goto l24;
 l22:
-      i3=OOC_TRUE;
+      i3=1u;
 l24:
       if (i3) goto l26;
       XML_Parser__ParserDesc_ParseDocument_SkippedEntity((XML_UnicodeBuffer__CharArray)i2);
@@ -2593,7 +2589,7 @@ l26:
       
       goto l30;
 l29:
-      i0=OOC_TRUE;
+      i0=1u;
 l30:
       i0 = !i0;
       inInternalSubset = i0;
@@ -2604,7 +2600,7 @@ l30:
       i4 = *(OOC_INT8*)((_check_pointer(i1, 40985))+8);
       i4 = i4==3;
       if (!i4) goto l36;
-      *(OOC_UINT8*)((_check_pointer(i2, 41043))+68) = OOC_TRUE;
+      *(OOC_UINT8*)((_check_pointer(i2, 41043))+68) = 1u;
       i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<?xml", 6, 1);
       if (!i2) goto l36;
       XML_Parser__ParserDesc_ParseDocument_XMLDecl((XML_DTD__ExternalEntity)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41168)))), &_td_XML_DTD__ExternalEntityDesc, 41168)));
@@ -2612,10 +2608,10 @@ l36:
       XML_Parser__ParserDesc_ParseDocument_extSubsetDecl();
       i2 = (OOC_INT32)chars;
       i2 = _check_pointer(i2, 41281);
-      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, 0);
       i5 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i4, OOC_UINT32, 41281))*2);
-      i2 = i2!=(OOC_CHAR16)65535;
+      i2 = i2!=65535u;
       if (!i2) goto l39;
       XML_Parser__ParserDesc_ParseDocument_Err(28);
 l39:
@@ -2634,14 +2630,14 @@ l48:
       if (i1) goto l55;
       i1 = *(OOC_UINT8*)((_check_pointer(i0, 40163))+63);
       if (i1) goto l53;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l57;
 l53:
       i0 = *(OOC_UINT8*)((_check_pointer(i0, 40188))+60);
       
       goto l57;
 l55:
-      i0=OOC_TRUE;
+      i0=1u;
 l57:
       if (i0) goto l59;
       XML_Parser__ParserDesc_ParseDocument_SkippedEntity((XML_UnicodeBuffer__CharArray)i2);
@@ -2651,7 +2647,7 @@ l59:
       i0 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40264))+104);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40264))+104);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 40326)), (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 40326)), 0);
       i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 40326)), i3);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 40275)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
 l61:
@@ -2668,36 +2664,36 @@ l61:
 l1_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 42417);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i5 = cpos;
       i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 42417))*2);
       switch (i3) {
-      case (OOC_CHAR16)65534:
+      case 65534u:
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
         goto l1_loop;
-      case (OOC_CHAR8)' ':
+      case 32u:
         cpos = (i5+1);
         goto l1_loop;
-      case (OOC_CHAR8)'\012':
+      case 10u:
         cpos = (i5+1);
         XML_Parser__ParserDesc_ParseDocument_EndOfLine();
         goto l1_loop;
-      case (OOC_CHAR8)'\015':
+      case 13u:
         i3 = i5+1;
         cpos = i3;
         i2 = _check_pointer(i2, 42624);
-        i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i4 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 42624))*2);
-        i2 = i2==(OOC_CHAR16)65534;
+        i2 = i2==65534u;
         if (!i2) goto l9;
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
 l9:
         i2 = (OOC_INT32)chars;
         i2 = _check_pointer(i2, 42712);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i4 = cpos;
         i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 42712))*2);
-        i2 = i2==(OOC_CHAR8)'\012';
+        i2 = i2==10u;
         if (i2) goto l11;
         goto l12;
 l11:
@@ -2705,21 +2701,21 @@ l11:
 l12:
         XML_Parser__ParserDesc_ParseDocument_EndOfLine();
         goto l1_loop;
-      case (OOC_CHAR8)'\011':
+      case 9u:
         XML_Parser__ParserDesc_ParseDocument_Tab();
         i2 = cpos;
         cpos = (i2+1);
         goto l1_loop;
-      case (OOC_CHAR8)'%':
+      case 37u:
         if (!i1) goto l25;
-        XML_Parser__ParserDesc_ParseDocument_PEReference(OOC_FALSE);
+        XML_Parser__ParserDesc_ParseDocument_PEReference(0u);
         XML_Parser__ParserDesc_ParseDocument_OptS(i0);
         goto l1_loop;
       default:
         i2 = _check_pointer(i2, 43014);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i3, OOC_UINT32, 43014))*2);
-        i2 = i2<(OOC_CHAR8)' ';
+        i2 = (OOC_UINT16)i2<(OOC_UINT16)32u;
         if (!i2) goto l25;
         XML_Parser__ParserDesc_ParseDocument_Err(1);
         i2 = cpos;
@@ -2740,7 +2736,7 @@ l25:
       XML_Parser__ParserDesc_ParseDocument_Err(9);
       goto l4;
 l3:
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(0u);
 l4:
       return;
       ;
@@ -2755,7 +2751,7 @@ l4:
       XML_Parser__ParserDesc_ParseDocument_Err(9);
       goto l4;
 l3:
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_TRUE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(1u);
 l4:
       return;
       ;
@@ -2768,93 +2764,93 @@ l4:
 
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 44056);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 44056))*2);
-      i1 = i1<(OOC_CHAR8)' ';
+      i1 = (OOC_UINT16)i1<(OOC_UINT16)32u;
       if (i1) goto l3;
       i1 = _check_pointer(i0, 44079);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 44079))*2);
-      i1 = i1==(OOC_CHAR16)65534;
+      i1 = i1==65534u;
       
       goto l4;
 l3:
-      i1=OOC_TRUE;
+      i1=1u;
 l4:
       i2 = cdelta;
       i2 = i3-i2;
       _assert(i1, 127, 44042);
       cend = i2;
       i1 = _check_pointer(i0, 44151);
-      i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i4, OOC_UINT32, 44151))*2);
       switch (i1) {
-      case (OOC_CHAR16)65534:
+      case 65534u:
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
         goto l30;
-      case (OOC_CHAR8)' ':
+      case 32u:
         i0 = _check_pointer(i0, 44231);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 44231))*2) = (OOC_CHAR8)' ';
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 44231))*2) = 32u;
         cpos = (i3+1);
         goto l30;
-      case (OOC_CHAR8)'\012':
+      case 10u:
         i1 = (OOC_INT32)p;
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 44296))+36);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 44300))+20);
         i1 = i0==i1;
         if (i1) goto l11;
         i1 = _check_pointer(i0, 44521);
-        i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i4 = OOC_ARRAY_LENGTH(i1, 0);
         i0 = _check_pointer(i0, 44536);
-        i5 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i0, 0);
         i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i5, OOC_UINT32, 44536))*2);
         *(OOC_UINT16*)(i1+(_check_index(i2, i4, OOC_UINT32, 44521))*2) = i0;
         cpos = (i3+1);
         goto l30;
 l11:
         i0 = _check_pointer(i0, 44329);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
         i4 = eolReplacement;
         *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 44329))*2) = i4;
         cpos = (i3+1);
         XML_Parser__ParserDesc_ParseDocument_EndOfLine();
         goto l30;
-      case (OOC_CHAR8)'\015':
+      case 13u:
         i1 = (OOC_INT32)p;
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 44606))+36);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 44610))+20);
         i1 = i0==i1;
         if (i1) goto l16;
         i1 = _check_pointer(i0, 45034);
-        i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i4 = OOC_ARRAY_LENGTH(i1, 0);
         i0 = _check_pointer(i0, 45049);
-        i5 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i0, 0);
         i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i5, OOC_UINT32, 45049))*2);
         *(OOC_UINT16*)(i1+(_check_index(i2, i4, OOC_UINT32, 45034))*2) = i0;
         cpos = (i3+1);
         goto l30;
 l16:
         i1 = _check_pointer(i0, 44639);
-        i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i4 = OOC_ARRAY_LENGTH(i1, 0);
         i5 = eolReplacement;
         *(OOC_UINT16*)(i1+(_check_index(i2, i4, OOC_UINT32, 44639))*2) = i5;
         i1 = i3+1;
         cpos = i1;
         i0 = _check_pointer(i0, 44706);
-        i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i2 = OOC_ARRAY_LENGTH(i0, 0);
         i0 = *(OOC_UINT16*)(i0+(_check_index(i1, i2, OOC_UINT32, 44706))*2);
-        i0 = i0==(OOC_CHAR16)65534;
+        i0 = i0==65534u;
         if (!i0) goto l19;
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
 l19:
         i0 = (OOC_INT32)chars;
         i0 = _check_pointer(i0, 44794);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
         i2 = cpos;
         i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 44794))*2);
-        i0 = i0==(OOC_CHAR8)'\012';
+        i0 = i0==10u;
         if (!i0) goto l22;
         i0 = cdelta;
         cpos = (i2+1);
@@ -2862,18 +2858,18 @@ l19:
 l22:
         XML_Parser__ParserDesc_ParseDocument_EndOfLine();
         goto l30;
-      case (OOC_CHAR8)'\011':
+      case 9u:
         i1 = eolReplacement;
-        i1 = i1==(OOC_CHAR8)' ';
+        i1 = i1==32u;
         if (i1) goto l27;
         i0 = _check_pointer(i0, 45194);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45194))*2) = (OOC_CHAR8)'\011';
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45194))*2) = 9u;
         goto l28;
 l27:
         i0 = _check_pointer(i0, 45152);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45152))*2) = (OOC_CHAR8)' ';
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45152))*2) = 32u;
 l28:
         XML_Parser__ParserDesc_ParseDocument_Tab();
         i0 = cpos;
@@ -2881,8 +2877,8 @@ l28:
         goto l30;
       default:
         i0 = _check_pointer(i0, 45274);
-        i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45274))*2) = (OOC_CHAR16)65533;
+        i1 = OOC_ARRAY_LENGTH(i0, 0);
+        *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 45274))*2) = 65533u;
         XML_Parser__ParserDesc_ParseDocument_Err(1);
         i0 = cpos;
         cpos = (i0+1);
@@ -2906,132 +2902,132 @@ l30:
           OOC_INT32 i;
           OOC_INT32 delta;
 
-          i0 = cdelta;
-          i1 = cpos;
-          i2 = i1-i0;
+          i0 = cpos;
+          i1 = cdelta;
+          i2 = i0-i1;
           i3 = cstart;
           i4 = i3!=i2;
           if (i4) goto l3;
-          i3=OOC_FALSE;
+          i4=0u;
           goto l5;
 l3:
           i4 = (OOC_INT32)chars;
           i4 = _check_pointer(i4, 45897);
-          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
-          i3 = *(OOC_UINT16*)(i4+(_check_index(i3, i5, OOC_UINT32, 45897))*2);
-          i3 = i3<=(OOC_CHAR8)' ';
+          i5 = OOC_ARRAY_LENGTH(i4, 0);
+          i4 = *(OOC_UINT16*)(i4+(_check_index(i3, i5, OOC_UINT32, 45897))*2);
+          i4 = (OOC_UINT16)i4<=(OOC_UINT16)32u;
           
 l5:
-          if (!i3) goto l16;
-          i3 = (OOC_INT32)chars;
-l7_loop:
-          i4 = cstart;
-          i4 = i4+1;
-          i5 = i4!=i2;
-          cstart = i4;
-          if (i5) goto l10;
-          i4=OOC_FALSE;
-          goto l12;
-l10:
-          i5 = _check_pointer(i3, 45897);
-          i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
-          i4 = *(OOC_UINT16*)(i5+(_check_index(i4, i6, OOC_UINT32, 45897))*2);
-          i4 = i4<=(OOC_CHAR8)' ';
+          if (!i4) goto l17;
+          i4 = (OOC_INT32)chars;
           
-l12:
-          if (i4) goto l7_loop;
-l16:
-          i3 = cstart;
+l8_loop:
+          i3 = i3+1;
+          cstart = i3;
+          i5 = i3!=i2;
+          if (i5) goto l11;
+          i5=0u;
+          goto l13;
+l11:
+          i5 = _check_pointer(i4, 45897);
+          i6 = OOC_ARRAY_LENGTH(i5, 0);
+          i5 = *(OOC_UINT16*)(i5+(_check_index(i3, i6, OOC_UINT32, 45897))*2);
+          i5 = (OOC_UINT16)i5<=(OOC_UINT16)32u;
+          
+l13:
+          if (i5) goto l8_loop;
+l17:
           i = i3;
-          i4 = i3!=i2;
           delta = 0;
-          if (i4) goto l19;
+          i4 = i3!=i2;
+          if (i4) goto l20;
           i2=0;
-          goto l46;
-l19:
+          goto l47;
+l20:
           i4 = (OOC_INT32)chars;
           i5=i3;i6=0;
-l20_loop:
+l21_loop:
           i7 = _check_pointer(i4, 46040);
-          i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+          i8 = OOC_ARRAY_LENGTH(i7, 0);
           i7 = *(OOC_UINT16*)(i7+(_check_index(i5, i8, OOC_UINT32, 46040))*2);
-          i7 = i7<=(OOC_CHAR8)' ';
-          if (i7) goto l23;
+          i7 = (OOC_UINT16)i7<=(OOC_UINT16)32u;
+          if (i7) goto l24;
           i7 = _check_pointer(i4, 46302);
-          i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+          i8 = OOC_ARRAY_LENGTH(i7, 0);
           i9 = _check_pointer(i4, 46320);
-          i10 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
+          i10 = OOC_ARRAY_LENGTH(i9, 0);
           i9 = *(OOC_UINT16*)(i9+(_check_index(i5, i10, OOC_UINT32, 46320))*2);
           *(OOC_UINT16*)(i7+(_check_index((i5-i6), i8, OOC_UINT32, 46302))*2) = i9;
           {register OOC_INT32 h0=i5;i5=i6;i6=h0;}
-          goto l41;
-l23:
+          goto l42;
+l24:
           i7 = _check_pointer(i4, 46138);
-          i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
-          i9 = i5+1;
-          i10 = i9!=i2;
-          *(OOC_UINT16*)(i7+(_check_index((i5-i6), i8, OOC_UINT32, 46138))*2) = (OOC_CHAR8)' ';
-          if (i10) goto l26;
-          i7=OOC_FALSE;
-          goto l28;
-l26:
-          i7 = _check_pointer(i4, 46202);
-          i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
-          i7 = *(OOC_UINT16*)(i7+(_check_index(i9, i8, OOC_UINT32, 46202))*2);
-          i7 = i7<=(OOC_CHAR8)' ';
-          
-l28:
-          if (i7) goto l31_loop;
-          {register OOC_INT32 h0=i5;i5=i6;i6=h0;}
-          goto l41;
-l31_loop:
-          i5 = i5+1;
-          i = i5;
+          i8 = OOC_ARRAY_LENGTH(i7, 0);
+          *(OOC_UINT16*)(i7+(_check_index((i5-i6), i8, OOC_UINT32, 46138))*2) = 32u;
           i7 = i5+1;
-          i6 = i6+1;
           i8 = i7!=i2;
-          delta = i6;
-          if (i8) goto l34;
-          i7=OOC_FALSE;
-          goto l36;
-l34:
+          if (i8) goto l27;
+          i8=0u;
+          goto l29;
+l27:
           i8 = _check_pointer(i4, 46202);
-          i9 = OOC_ARRAY_LENGTH(i8, (OOC_INT32)0);
-          i7 = *(OOC_UINT16*)(i8+(_check_index(i7, i9, OOC_UINT32, 46202))*2);
-          i7 = i7<=(OOC_CHAR8)' ';
+          i9 = OOC_ARRAY_LENGTH(i8, 0);
+          i8 = *(OOC_UINT16*)(i8+(_check_index(i7, i9, OOC_UINT32, 46202))*2);
+          i8 = (OOC_UINT16)i8<=(OOC_UINT16)32u;
           
-l36:
-          if (i7) goto l31_loop;
-l39:
+l29:
+          if (i8) goto l31;
           {register OOC_INT32 h0=i5;i5=i6;i6=h0;}
-l41:
-          i6 = i6+1;
-          i7 = i6!=i2;
+          goto l42;
+l31:
+          i5=i6;i6=i7;
+l32_loop:
           i = i6;
-          if (!i7) goto l45;
+          i5 = i5+1;
+          delta = i5;
+          i7 = i6+1;
+          i8 = i7!=i2;
+          if (i8) goto l35;
+          i8=0u;
+          goto l37;
+l35:
+          i8 = _check_pointer(i4, 46202);
+          i9 = OOC_ARRAY_LENGTH(i8, 0);
+          i8 = *(OOC_UINT16*)(i8+(_check_index(i7, i9, OOC_UINT32, 46202))*2);
+          i8 = (OOC_UINT16)i8<=(OOC_UINT16)32u;
+          
+l37:
+          if (!i8) goto l42;
+          i6=i7;
+          goto l32_loop;
+l42:
+          i6 = i6+1;
+          i = i6;
+          i7 = i6!=i2;
+          if (!i7) goto l46;
           {register OOC_INT32 h0=i5;i5=i6;i6=h0;}
-          goto l20_loop;
-l45:
-          i2=i5;
+          goto l21_loop;
 l46:
-          i0 = i0+i2;
-          i1 = i1-i0;
-          i2 = i1!=i3;
-          cdelta = i0;
-          if (i2) goto l49;
-          i1=OOC_FALSE;
-          goto l51;
-l49:
+          i2=i5;
+l47:
+          i1 = i1+i2;
+          cdelta = i1;
+          i0 = i0-i1;
+          i2 = i0!=i3;
+          if (i2) goto l50;
+          i0=0u;
+          goto l52;
+l50:
           i2 = (OOC_INT32)chars;
           i2 = _check_pointer(i2, 46514);
-          i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-          i1 = *(OOC_UINT16*)(i2+(_check_index((i1-1), i3, OOC_UINT32, 46514))*2);
-          i1 = i1==(OOC_CHAR8)' ';
+          i3 = OOC_ARRAY_LENGTH(i2, 0);
+          i0 = *(OOC_UINT16*)(i2+(_check_index((i0-1), i3, OOC_UINT32, 46514))*2);
+          i0 = i0==32u;
           
-l51:
-          if (!i1) goto l53;
-          cdelta = (i0+1);
-l53:
+l52:
+          if (!i0) goto l54;
+          cdelta = (i1+1);
+l54:
           return;
           ;
         }
@@ -3039,19 +3035,19 @@ l53:
 
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 46638);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 46638))*2);
-      i1 = i1==(OOC_CHAR8)'\047';
+      i1 = i1==39u;
       if (i1) goto l3;
       i0 = _check_pointer(i0, 46661);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 46661))*2);
-      i0 = i0==(OOC_CHAR8)'"';
+      i0 = i0==34u;
       
       goto l5;
 l3:
-      i0=OOC_TRUE;
+      i0=1u;
 l5:
       if (i0) goto l7;
       XML_Parser__ParserDesc_ParseDocument_Err(16);
@@ -3064,7 +3060,7 @@ l7:
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(OOC_INT32)&pos, (RT0__Struct)i0);
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 46733);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 46733))*2);
       endChar = i1;
@@ -3075,22 +3071,22 @@ l7:
 l8_loop:
       i1 = (OOC_INT32)chars;
       i2 = _check_pointer(i1, 46831);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 46831))*2);
       switch (i2) {
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-      case (OOC_CHAR16)65534:
+      case 0u ... 31u:
+      case 65534u:
         i2 = type;
         i2 = i2==2;
         if (i2) goto l13;
-        i1=OOC_FALSE;
+        i1=0u;
         goto l15;
 l13:
         i1 = _check_pointer(i1, 46932);
-        i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i2 = OOC_ARRAY_LENGTH(i1, 0);
         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 46932))*2);
-        i1 = i1==(OOC_CHAR8)'\011';
+        i1 = i1==9u;
         
 l15:
         if (i1) goto l16;
@@ -3098,9 +3094,9 @@ l15:
 l16:
         XML_Parser__ParserDesc_ParseDocument_Err(20);
 l17:
-        XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+        XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
         goto l8_loop;
-      case (OOC_CHAR16)65535:
+      case 65535u:
         XML_Parser__ParserDesc_ParseDocument_ErrPos(6, (void*)(OOC_INT32)&pos, (RT0__Struct)i0);
         i1 = cpos;
         i2 = cdelta;
@@ -3110,7 +3106,7 @@ l17:
         goto l8_loop;
       default:
         i2 = _check_pointer(i1, 47205);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 47205))*2);
         i3 = endChar;
         i2 = i2==i3;
@@ -3119,7 +3115,7 @@ l17:
         switch (i2) {
         case 2:
           i1 = _check_pointer(i1, 48009);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 48009))*2);
           i1 = XML_Parser__IsPubidChar(i1);
           i1 = !i1;
@@ -3130,7 +3126,7 @@ l25:
           goto l36;
         case 4:
           i1 = _check_pointer(i1, 48155);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = cstart;
           i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 48155))*2);
           i1 = XML_Parser__IsEncNameChar(i1, (i4==i3));
@@ -3142,7 +3138,7 @@ l29:
           goto l36;
         case 3:
           i1 = _check_pointer(i1, 48320);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 48320))*2);
           i1 = XML_Parser__IsVersionNumChar(i1);
           i1 = !i1;
@@ -3159,9 +3155,9 @@ l36:
         i2 = _check_pointer(i1, 48469);
         i3 = cdelta;
         i4 = cpos;
-        i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i2, 0);
         i1 = _check_pointer(i1, 48491);
-        i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i1, 0);
         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 48491))*2);
         *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 48469))*2) = i1;
         cpos = (i4+1);
@@ -3183,13 +3179,13 @@ l40:
         switch (i2) {
         case 5:
           i2 = (
-          _cmp16((const void*)(_check_pointer(i1, 47535)),(const void*)((OOC_CHAR16[]){121,101,115,0})))!=(OOC_INT32)0;
+          _cmp16((const void*)(_check_pointer(i1, 47535)),(const void*)((OOC_CHAR16[]){121,101,115,0})))!=0;
           if (i2) goto l45;
-          i2=OOC_FALSE;
+          i2=0u;
           goto l47;
 l45:
           i2 = (
-          _cmp16((const void*)(_check_pointer(i1, 47555)),(const void*)((OOC_CHAR16[]){110,111,0})))!=(OOC_INT32)0;
+          _cmp16((const void*)(_check_pointer(i1, 47555)),(const void*)((OOC_CHAR16[]){110,111,0})))!=0;
           
 l47:
           if (i2) goto l48;
@@ -3200,7 +3196,7 @@ l48:
         case 4:
         case 3:
           i2 = (
-          _cmp16((const void*)(_check_pointer(i1, 47709)),(const void*)((OOC_CHAR16[]){0})))==(OOC_INT32)0;
+          _cmp16((const void*)(_check_pointer(i1, 47709)),(const void*)((OOC_CHAR16[]){0})))==0;
           if (i2) goto l52;
           goto l55;
 l52:
@@ -3221,9 +3217,9 @@ l59:
     
     void XML_Parser__ParserDesc_ParseDocument_Eq() {
 
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_TRUE);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'=');
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_TRUE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(1u);
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(61u);
+      XML_Parser__ParserDesc_ParseDocument_OptS(1u);
       return;
       ;
     }
@@ -3244,9 +3240,9 @@ l59:
       cpos = i0;
       i2 = (OOC_INT32)chars;
       i2 = _check_pointer(i2, 49198);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i0 = *(OOC_UINT16*)(i2+(_check_index(i0, i3, OOC_UINT32, 49198))*2);
-      i0 = i0!=(OOC_CHAR8)'?';
+      i0 = i0!=63u;
       if (!i0) goto l3;
       XML_Parser__ParserDesc_ParseDocument_S();
 l3:
@@ -3265,10 +3261,10 @@ l9:
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 49370)))), XML_DTD__ExternalEntityDesc_SetVersion)),XML_DTD__ExternalEntityDesc_SetVersion)((XML_DTD__ExternalEntity)i1, (XML_UnicodeBuffer__CharArray)i0);
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 49426);
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i3 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i2, OOC_UINT32, 49426))*2);
-      i0 = i0!=(OOC_CHAR8)'?';
+      i0 = i0!=63u;
       if (!i0) goto l13;
       XML_Parser__ParserDesc_ParseDocument_S();
 l13:
@@ -3289,7 +3285,7 @@ l19:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 49743))+36);
       i2 = *(OOC_UINT8*)((_check_pointer(i2, 49747))+16);
       if (i2) goto l22;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l24;
 l22:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 49776))+44);
@@ -3297,40 +3293,39 @@ l22:
       
 l24:
       if (!i2) goto l42;
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 49994)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 49994)), 0);
       i2 = LongStrings__Length((void*)(_check_pointer(i0, 49994)), i2);
       i2 = (OOC_INT32)RT0__NewObject(_td_XML_Parser__48977.baseTypes[0], (i2+1));
       encoding = (void*)i2;
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 50038)), (OOC_INT32)0);
-      i3 = i3-1;
-      i4 = 0<=i3;
       i = 0;
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 50038)), 0);
+      i4 = 0<i3;
       if (!i4) goto l37;
       i4=0;
 l28_loop:
       i5 = _check_pointer(i0, 50068);
-      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
       i5 = *(OOC_UINT16*)(i5+(_check_index(i4, i6, OOC_UINT32, 50068))*2);
-      i5 = i5>(OOC_CHAR8)'\377';
+      i5 = (OOC_UINT16)i5>(OOC_UINT16)255u;
       if (i5) goto l31;
       i5 = _check_pointer(i2, 50163);
-      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
       i7 = _check_pointer(i0, 50183);
-      i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+      i8 = OOC_ARRAY_LENGTH(i7, 0);
       i7 = *(OOC_UINT16*)(i7+(_check_index(i4, i8, OOC_UINT32, 50183))*2);
       *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT32, 50163))) = i7;
       goto l32;
 l31:
       i5 = _check_pointer(i2, 50113);
-      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
-      *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT32, 50113))) = (OOC_CHAR8)'?';
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
+      *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT32, 50113))) = 63u;
 l32:
       i4 = i4+1;
-      i5 = i4<=i3;
       i = i4;
+      i5 = i4<i3;
       if (i5) goto l28_loop;
 l37:
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 50271)), (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 50271)), 0);
       i2 = (OOC_INT32)XML_UnicodeCodec__GetFactory((void*)(_check_pointer(i2, 50271)), i3);
       codecFactory = (XML_UnicodeCodec__Factory)i2;
       i3 = i2==(OOC_INT32)0;
@@ -3338,7 +3333,7 @@ l37:
       i3 = (OOC_INT32)p;
       i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 50385))+36);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 50385))+36);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 50389)))), XML_UnicodeBuffer__InputDesc_SetCodec)),XML_UnicodeBuffer__InputDesc_SetCodec)((XML_UnicodeBuffer__Input)i3, (XML_UnicodeCodec__Factory)i2, OOC_FALSE);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 50389)))), XML_UnicodeBuffer__InputDesc_SetCodec)),XML_UnicodeBuffer__InputDesc_SetCodec)((XML_UnicodeBuffer__Input)i3, (XML_UnicodeCodec__Factory)i2, 0u);
       XML_Parser__ParserDesc_ParseDocument_ResetLocator();
       XML_Parser__ParserDesc_ParseDocument_XMLDecl((XML_DTD__ExternalEntity)i1);
       return;
@@ -3349,17 +3344,17 @@ l42:
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 50548)))), XML_DTD__ExternalEntityDesc_SetEncoding)),XML_DTD__ExternalEntityDesc_SetEncoding)((XML_DTD__ExternalEntity)i1, (XML_UnicodeBuffer__CharArray)i0);
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 50589);
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i3 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i2, OOC_UINT32, 50589))*2);
-      i0 = i0!=(OOC_CHAR8)'?';
+      i0 = i0!=63u;
       if (!i0) goto l46;
       XML_Parser__ParserDesc_ParseDocument_S();
 l46:
       i0 = *(OOC_INT8*)((_check_pointer(i1, 50729))+8);
       i0 = i0==5;
       if (i0) goto l49;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l51;
 l49:
       i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("standalone", 11, 1);
@@ -3372,14 +3367,14 @@ l51:
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_String(5);
       string = (XML_UnicodeBuffer__CharArray)i0;
       i0 = (
-      _cmp16((const void*)(_check_pointer(i0, 50959)),(const void*)((OOC_CHAR16[]){121,101,115,0})))==(OOC_INT32)0;
+      _cmp16((const void*)(_check_pointer(i0, 50959)),(const void*)((OOC_CHAR16[]){121,101,115,0})))==0;
       if (i0) goto l55;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 51056)))), XML_DTD__ExternalEntityDesc_SetStandalone)),XML_DTD__ExternalEntityDesc_SetStandalone)((XML_DTD__ExternalEntity)i1, 1);
       goto l57;
 l55:
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 50991)))), XML_DTD__ExternalEntityDesc_SetStandalone)),XML_DTD__ExternalEntityDesc_SetStandalone)((XML_DTD__ExternalEntity)i1, 0);
 l57:
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_TRUE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(1u);
       i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("?>", 3, 0);
       if (i0) goto l60;
       XML_Parser__ParserDesc_ParseDocument_Err(114);
@@ -3403,13 +3398,13 @@ l61:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 51458))+84);
       i1 = _check_pointer(i1, 51467);
       i2 = *(OOC_INT32*)((_check_pointer(i0, 51469))+88);
-      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index((i2-1), i3, OOC_UINT32, 51467))*28))+20);
       _assert((i1!=(OOC_INT32)0), 127, 51449);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 51517))+84);
       i1 = _check_pointer(i1, 51526);
       i0 = *(OOC_INT32*)((_check_pointer(i0, 51528))+88);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i0 = (OOC_INT32)*(OOC_INT32*)((i1+((_check_index((i0-1), i2, OOC_UINT32, 51526))*28))+20);
       return (XML_DTD__Entity)i0;
       goto l4;
@@ -3430,7 +3425,7 @@ l4:
       i0 = (OOC_INT32)p;
       i0 = *(OOC_UINT8*)((_check_pointer(i0, 51664))+62);
       if (i0) goto l3;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l5;
 l3:
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_CurrentEntity();
@@ -3458,21 +3453,21 @@ l7:
 
           OOC_INITIALIZE_VPAR(name__ref,name,OOC_CHAR16 ,(name_0d*2))
           i0 = *(OOC_UINT16*)((OOC_INT32)name+(_check_index(0, name_0d, OOC_UINT8, 52024))*2);
-          i0 = (_cap(i0))==(OOC_CHAR8)'X';
+          i0 = (_cap(i0))==88u;
           if (i0) goto l3;
-          i0=OOC_FALSE;
+          i0=0u;
           goto l5;
 l3:
           i0 = *(OOC_UINT16*)((OOC_INT32)name+(_check_index(1, name_0d, OOC_UINT8, 52063))*2);
-          i0 = (_cap(i0))==(OOC_CHAR8)'M';
+          i0 = (_cap(i0))==77u;
           
 l5:
           if (i0) goto l7;
-          i0=OOC_FALSE;
+          i0=0u;
           goto l8;
 l7:
           i0 = *(OOC_UINT16*)((OOC_INT32)name+(_check_index(2, name_0d, OOC_UINT8, 52102))*2);
-          i0 = (_cap(i0))==(OOC_CHAR8)'L';
+          i0 = (_cap(i0))==76u;
           
 l8:
           return i0;
@@ -3490,12 +3485,12 @@ l8:
       i2 = cpos;
       currentEntity = (XML_DTD__Entity)i1;
       cpos = (i2+2);
-      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
       target = (XML_UnicodeBuffer__CharArray)i1;
       i2 = (
-      _cmp16((const void*)(_check_pointer(i1, 52327)),(const void*)((OOC_CHAR16[]){120,109,108,0})))==(OOC_INT32)0;
+      _cmp16((const void*)(_check_pointer(i1, 52327)),(const void*)((OOC_CHAR16[]){120,109,108,0})))==0;
       if (i2) goto l6;
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 52419)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 52419)), 0);
       i1 = XML_Parser__ParserDesc_ParseDocument_PI_IsReserved((void*)(_check_pointer(i1, 52419)), i2);
       if (!i1) goto l7;
       i1 = (OOC_INT32)p;
@@ -3522,35 +3517,34 @@ l7:
 l10_loop:
       i3 = (OOC_INT32)chars;
       i4 = _check_pointer(i3, 52794);
-      i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
       i6 = cpos;
       i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 52794))*2);
       switch (i4) {
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-      case (OOC_CHAR16)65534:
-        XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+      case 0u ... 31u:
+      case 65534u:
+        XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
         goto l10_loop;
-      case (OOC_CHAR16)65535:
+      case 65535u:
         i1 = (OOC_INT32)p;
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 52943))+4);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 52943))+4);
         i1 = _check_pointer(i1, 52946);
         XML_Parser__ParserDesc_ParseDocument_ErrPos(7, (void*)(_check_pointer(i2, 52946)), (RT0__Struct)i0);
         goto l23;
-      case (OOC_CHAR8)'?':
+      case 63u:
         i3 = XML_Parser__ParserDesc_ParseDocument_LookingAt("?>", 3, 0);
         if (i3) goto l18;
         i3 = (OOC_INT32)chars;
         i4 = _check_pointer(i3, 53394);
         i5 = cdelta;
         i6 = cpos;
-        i7 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+        i7 = OOC_ARRAY_LENGTH(i4, 0);
         i3 = _check_pointer(i3, 53416);
-        i8 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+        i8 = OOC_ARRAY_LENGTH(i3, 0);
         i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i8, OOC_UINT32, 53416))*2);
         *(OOC_UINT16*)(i4+(_check_index((i6-i5), i7, OOC_UINT32, 53394))*2) = i3;
-        i3 = i6+1;
-        cpos = i3;
+        cpos = (i6+1);
         
         goto l10_loop;
 l18:
@@ -3563,19 +3557,18 @@ l18:
         i6 = cdelta;
         i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 53101))+44);
         i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 53298))+36);
-        i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 53148)), (OOC_INT32)0);
+        i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 53148)), 0);
         i8 = cstart;
         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 53110)))), XML_Builder__BuilderDesc_ProcessingInstruction)),XML_Builder__BuilderDesc_ProcessingInstruction)((XML_Builder__Builder)i0, (XML_UnicodeBuffer__CharArray)i1, (void*)(_check_pointer(i3, 53148)), i7, i8, (i5-i6), (URI__URI)i4);
         i0 = cpos;
-        i0 = i0+2;
-        cpos = i0;
+        cpos = (i0+2);
         goto l23;
       default:
         i4 = _check_pointer(i3, 53483);
         i5 = cdelta;
-        i7 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+        i7 = OOC_ARRAY_LENGTH(i4, 0);
         i3 = _check_pointer(i3, 53505);
-        i8 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+        i8 = OOC_ARRAY_LENGTH(i3, 0);
         i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i8, OOC_UINT32, 53505))*2);
         *(OOC_UINT16*)(i4+(_check_index((i6-i5), i7, OOC_UINT32, 53483))*2) = i3;
         cpos = (i6+1);
@@ -3588,7 +3581,7 @@ l22:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 52656))+56);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 52541))+44);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 52668))+36);
-      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 52588)), (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 52588)), 0);
       i5 = (OOC_INT32)target;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 52550)))), XML_Builder__BuilderDesc_ProcessingInstruction)),XML_Builder__BuilderDesc_ProcessingInstruction)((XML_Builder__Builder)i0, (XML_UnicodeBuffer__CharArray)i5, (void*)(_check_pointer(i2, 52588)), i4, 0, 0, (URI__URI)i3);
       i0 = cpos;
@@ -3611,30 +3604,30 @@ l23:
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i1, 53719)), (RT0__Struct)i0);
       i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_CurrentEntity();
       i2 = cpos;
-      i2 = i2+4;
       currentEntity = (XML_DTD__Entity)i1;
+      i2 = i2+4;
       cpos = i2;
       cstart = i2;
       cdelta = 0;
 l1_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 53891);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i5 = cpos;
       i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 53891))*2);
       switch (i3) {
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-      case (OOC_CHAR16)65534:
-        XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+      case 0u ... 31u:
+      case 65534u:
+        XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
         goto l1_loop;
-      case (OOC_CHAR16)65535:
+      case 65535u:
         i1 = (OOC_INT32)p;
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 54037))+4);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 54037))+4);
         i1 = _check_pointer(i1, 54040);
         XML_Parser__ParserDesc_ParseDocument_ErrPos(5, (void*)(_check_pointer(i2, 54040)), (RT0__Struct)i0);
         goto l15;
-      case (OOC_CHAR8)'-':
+      case 45u:
         i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("-->", 4, 0);
         if (i2) goto l12;
         i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("--", 3, 0);
@@ -3647,9 +3640,9 @@ l11:
         i3 = _check_pointer(i2, 54419);
         i4 = cpos;
         i5 = cdelta;
-        i6 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i3, 0);
         i2 = _check_pointer(i2, 54441);
-        i7 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i7 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i7, OOC_UINT32, 54441))*2);
         *(OOC_UINT16*)(i3+(_check_index((i4-i5), i6, OOC_UINT32, 54419))*2) = i2;
         cpos = (i4+1);
@@ -3662,7 +3655,7 @@ l12:
         i3 = cpos;
         i4 = cdelta;
         i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 54186))+44);
-        i5 = OOC_ARRAY_LENGTH((_check_pointer(i2, 54211)), (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH((_check_pointer(i2, 54211)), 0);
         i6 = cstart;
         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 54195)))), XML_Builder__BuilderDesc_Comment)),XML_Builder__BuilderDesc_Comment)((XML_Builder__Builder)i0, (void*)(_check_pointer(i2, 54211)), i5, i6, (i3-i4));
         i0 = cpos;
@@ -3671,9 +3664,9 @@ l12:
       default:
         i3 = _check_pointer(i2, 54489);
         i4 = cdelta;
-        i6 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i3, 0);
         i2 = _check_pointer(i2, 54511);
-        i7 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i7 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i7, OOC_UINT32, 54511))*2);
         *(OOC_UINT16*)(i3+(_check_index((i5-i4), i6, OOC_UINT32, 54489))*2) = i2;
         cpos = (i5+1);
@@ -3707,31 +3700,31 @@ l15:
 l1_loop:
       i1 = (OOC_INT32)chars;
       i2 = _check_pointer(i1, 54900);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 54900))*2);
       switch (i2) {
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-      case (OOC_CHAR16)65534:
-        XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+      case 0u ... 31u:
+      case 65534u:
+        XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
         goto l1_loop;
-      case (OOC_CHAR16)65535:
+      case 65535u:
         i1 = (OOC_INT32)p;
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55044))+4);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55044))+4);
         i1 = _check_pointer(i1, 55047);
         XML_Parser__ParserDesc_ParseDocument_ErrPos(8, (void*)(_check_pointer(i2, 55047)), (RT0__Struct)i0);
         goto l12;
-      case (OOC_CHAR8)']':
+      case 93u:
         i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("]]>", 4, 0);
         if (i1) goto l9;
         i1 = (OOC_INT32)chars;
         i2 = _check_pointer(i1, 55476);
         i3 = cdelta;
         i4 = cpos;
-        i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i2, 0);
         i1 = _check_pointer(i1, 55498);
-        i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i1, 0);
         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 55498))*2);
         *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 55476))*2) = i1;
         cpos = (i4+1);
@@ -3741,14 +3734,14 @@ l9:
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55156))+4);
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55156))+4);
         i1 = _check_pointer(i1, 55159);
-        XML_Parser__ParserDesc_ParseDocument_DecLength((void*)(_check_pointer(i2, 55159)), (RT0__Struct)i0, -9);
+        XML_Parser__ParserDesc_ParseDocument_DecLength((void*)(_check_pointer(i2, 55159)), (RT0__Struct)i0, (-9));
         i1 = (OOC_INT32)p;
         i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55180))+44);
         i3 = (OOC_INT32)chars;
         i4 = cpos;
         i5 = cdelta;
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 55180))+44);
-        i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 55208)), (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 55208)), 0);
         i7 = cstart;
         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 55189)))), XML_Builder__BuilderDesc_Characters)),XML_Builder__BuilderDesc_Characters)((XML_Builder__Builder)i1, (void*)(_check_pointer(i3, 55208)), i6, i7, (i4-i5), 1);
         i1 = cpos;
@@ -3766,9 +3759,9 @@ l9:
       default:
         i2 = _check_pointer(i1, 55559);
         i3 = cdelta;
-        i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i2, 0);
         i1 = _check_pointer(i1, 55581);
-        i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i1, 0);
         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 55581))*2);
         *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 55559))*2) = i1;
         cpos = (i4+1);
@@ -3799,10 +3792,10 @@ l12:
           i3 = cdelta;
           i4 = cpos;
           i3 = i4-i3;
-          i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+          i4 = OOC_ARRAY_LENGTH(i2, 0);
           *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 56339))*2) = (55296+(i0>>10));
           i1 = _check_pointer(i1, 56405);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           *(OOC_UINT16*)(i1+(_check_index((i3+1), i2, OOC_UINT32, 56405))*2) = (56320+(_mod(i0,1024)));
           return 2;
           goto l4;
@@ -3811,7 +3804,7 @@ l3:
           i1 = _check_pointer(i1, 56229);
           i2 = cdelta;
           i3 = cpos;
-          i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i4 = OOC_ARRAY_LENGTH(i1, 0);
           *(OOC_UINT16*)(i1+(_check_index((i3-i2), i4, OOC_UINT32, 56229))*2) = i0;
           return 1;
 l4:
@@ -3833,25 +3826,25 @@ l4:
 l3_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 57371);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i5 = cpos;
       i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 57371))*2);
       switch (i3) {
-      case (OOC_CHAR16)65534:
+      case 65534u:
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
         
         goto l3_loop;
-      case (OOC_CHAR8)';':
-      case (OOC_CHAR16)65535:
+      case 59u:
+      case 65535u:
         
         goto l33;
-      case (OOC_CHAR8)'0' ... (OOC_CHAR8)'9':
+      case 48u ... 57u:
         i3 = i1<=131072;
         if (i3) goto l10;
         goto l11;
 l10:
         i2 = _check_pointer(i2, 57588);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i3, OOC_UINT32, 57588))*2);
         i1 = ((i1*10)+i2)-48;
         cval = i1;
@@ -3877,25 +3870,25 @@ l15:
 l16_loop:
       i2 = (OOC_INT32)chars;
       i3 = _check_pointer(i2, 56689);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i5 = cpos;
       i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 56689))*2);
       switch (i3) {
-      case (OOC_CHAR16)65534:
+      case 65534u:
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
         
         goto l16_loop;
-      case (OOC_CHAR8)';':
-      case (OOC_CHAR16)65535:
+      case 59u:
+      case 65535u:
         
         goto l33;
-      case (OOC_CHAR8)'0' ... (OOC_CHAR8)'9':
+      case 48u ... 57u:
         i3 = i1<=131072;
         if (i3) goto l23;
         goto l24;
 l23:
         i2 = _check_pointer(i2, 56906);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i3, OOC_UINT32, 56906))*2);
         i1 = ((i1*16)+i2)-48;
         cval = i1;
@@ -3906,14 +3899,14 @@ l24:
         cdelta = (i2+1);
         
         goto l16_loop;
-      case (OOC_CHAR8)'a' ... (OOC_CHAR8)'f':
-      case (OOC_CHAR8)'A' ... (OOC_CHAR8)'F':
+      case 97u ... 102u:
+      case 65u ... 70u:
         i3 = i1<=131072;
         if (i3) goto l28;
         goto l29;
 l28:
         i2 = _check_pointer(i2, 57099);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i3, OOC_UINT32, 57099))*2);
         i1 = ((i1*16)+((_cap(i2))+10))-65;
         cval = i1;
@@ -3933,15 +3926,15 @@ l29:
 l33:
       i2 = (OOC_INT32)chars;
       i2 = _check_pointer(i2, 57795);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 57795))*2);
-      i2 = i2==(OOC_CHAR8)';';
+      i2 = i2==59u;
       if (!i2) goto l36;
       i2 = cdelta;
       cdelta = (i2+1);
 l36:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)';');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(59u);
       i2 = XML_Parser__IsCharUCS4(i1);
       i2 = !i2;
       if (i2) goto l39;
@@ -3970,26 +3963,26 @@ l40:
 
       i0 = (OOC_INT32)&_td_XML_Locator__Position;
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(OOC_INT32)&pos, (RT0__Struct)i0);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'&');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(38u);
       i1 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 58437))+36);
       i1 = *(OOC_INT32*)((_check_pointer(i1, 58441))+24);
       i2 = cstart;
       i1 = i1+i2;
       localCStart = i1;
-      i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+      i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
       name = (XML_UnicodeBuffer__CharArray)i2;
       i3 = (OOC_INT32)p;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 58522))+36);
       i3 = *(OOC_INT32*)((_check_pointer(i3, 58526))+24);
       cstart = (i1-i3);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)';');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(59u);
       i1 = (OOC_INT32)dtd;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 58591))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 58591))+4);
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 58604)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i1, (XML_UnicodeBuffer__CharArray)i2);
-      i3 = i1==(OOC_INT32)0;
       decl = (XML_DTD__Declaration)i1;
+      i3 = i1==(OOC_INT32)0;
       if (i3) goto l15;
       i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 58911)))), &_td_XML_DTD__EntityDesc, 58911);
       entity = (XML_DTD__Entity)i1;
@@ -3999,7 +3992,7 @@ l40:
       i3 = permitExternal;
       i3 = !i3;
       if (i3) goto l7;
-      i3=OOC_FALSE;
+      i3=0u;
       goto l9;
 l7:
       i3 = *(OOC_INT8*)((_check_pointer(i1, 59159))+8);
@@ -4014,7 +4007,7 @@ l11:
       i0 = (OOC_INT32)p;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 59260))+104);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 59260))+104);
-      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 59322)), (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 59322)), 0);
       i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 59322)), i4);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 59271)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
       i0 = (OOC_INT32)XML_Parser__noName;
@@ -4026,7 +4019,7 @@ l13:
       i0 = (OOC_INT32)p;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 59028))+104);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 59028))+104);
-      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 59090)), (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 59090)), 0);
       i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 59090)), i4);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 59039)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
       i0 = (OOC_INT32)XML_Parser__noName;
@@ -4034,10 +4027,10 @@ l13:
       
       goto l27;
 l15:
-      i1 = enforceDecl;
       entity = (XML_DTD__Entity)(OOC_INT32)0;
+      i1 = enforceDecl;
       if (i1) goto l18;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l20;
 l18:
       i1 = (OOC_INT32)p;
@@ -4045,7 +4038,7 @@ l18:
       
 l20:
       if (i1) goto l22;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l24;
 l22:
       i1 = (OOC_INT32)XML_Parser__noName;
@@ -4057,7 +4050,7 @@ l24:
       i0 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 58795))+104);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 58795))+104);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 58857)), (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 58857)), 0);
       i3 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 58857)), i3);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 58806)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i3);
 l26:
@@ -4103,19 +4096,19 @@ l4:
       attValue = (XML_DTD__AttValue)i0;
       i0 = (OOC_INT32)chars;
       i1 = _check_pointer(i0, 60177);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 60177))*2);
-      i1 = i1==(OOC_CHAR8)'\047';
+      i1 = i1==39u;
       if (i1) goto l3;
       i0 = _check_pointer(i0, 60200);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 60200))*2);
-      i0 = i0==(OOC_CHAR8)'"';
+      i0 = i0==34u;
       
       goto l5;
 l3:
-      i0=OOC_TRUE;
+      i0=1u;
 l5:
       if (i0) goto l7;
       XML_Parser__ParserDesc_ParseDocument_Err(108);
@@ -4126,7 +4119,7 @@ l7:
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(OOC_INT32)&pos, (RT0__Struct)i0);
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 60272);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 60272))*2);
       endChar = i1;
@@ -4137,36 +4130,36 @@ l7:
 l8_loop:
       i1 = (OOC_INT32)chars;
       i2 = _check_pointer(i1, 60369);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 60369))*2);
       switch (i2) {
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-      case (OOC_CHAR16)65534:
-        XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)' ');
+      case 0u ... 31u:
+      case 65534u:
+        XML_Parser__ParserDesc_ParseDocument_ControlChar(32u);
         goto l8_loop;
-      case (OOC_CHAR16)65535:
+      case 65535u:
         XML_Parser__ParserDesc_ParseDocument_ErrPos(6, (void*)(OOC_INT32)&pos, (RT0__Struct)i0);
         XML_Parser__ParserDesc_ParseDocument_AttValue_Flush();
         goto l25;
-      case (OOC_CHAR8)'<':
+      case 60u:
         XML_Parser__ParserDesc_ParseDocument_Err(13);
         i1 = (OOC_INT32)chars;
         i1 = _check_pointer(i1, 60628);
-        i2 = cdelta;
-        i3 = cpos;
-        i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-        *(OOC_UINT16*)(i1+(_check_index((i3-i2), i4, OOC_UINT32, 60628))*2) = (OOC_CHAR8)' ';
-        cpos = (i3+1);
+        i2 = cpos;
+        i3 = cdelta;
+        i4 = OOC_ARRAY_LENGTH(i1, 0);
+        *(OOC_UINT16*)(i1+(_check_index((i2-i3), i4, OOC_UINT32, 60628))*2) = 32u;
+        cpos = (i2+1);
         goto l8_loop;
-      case (OOC_CHAR8)'&':
+      case 38u:
         i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("&#", 3, 0);
         if (!i1) goto l15;
         goto l16;
 l15:
         XML_Parser__ParserDesc_ParseDocument_AttValue_Flush();
         i1 = (OOC_INT32)attValue;
-        i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(OOC_TRUE, OOC_FALSE);
+        i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(1u, 0u);
         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 60886)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i1, (XML_DTD__Fragment)i2);
         i1 = cpos;
         cstart = i1;
@@ -4177,16 +4170,16 @@ l16:
         goto l8_loop;
       default:
         i2 = _check_pointer(i1, 61017);
-        i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i3 = OOC_ARRAY_LENGTH(i2, 0);
         i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 61017))*2);
         i3 = endChar;
         i2 = i2==i3;
         if (i2) goto l22;
         i2 = _check_pointer(i1, 61382);
         i3 = cdelta;
-        i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+        i5 = OOC_ARRAY_LENGTH(i2, 0);
         i1 = _check_pointer(i1, 61404);
-        i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+        i6 = OOC_ARRAY_LENGTH(i1, 0);
         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 61404))*2);
         *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 61382))*2) = i1;
         cpos = (i4+1);
@@ -4220,7 +4213,7 @@ l25:
           i0 = (OOC_INT32)entity;
           i1 = *(OOC_UINT8*)((_check_pointer(i0, 61959))+17);
           if (i1) goto l24;
-          *(OOC_UINT8*)((_check_pointer(i0, 62027))+17) = OOC_TRUE;
+          *(OOC_UINT8*)((_check_pointer(i0, 62027))+17) = 1u;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 62068))+20);
           i1 = i1==(OOC_INT32)0;
           if (!i1) goto l5;
@@ -4238,7 +4231,7 @@ l8_loop:
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 62322))+8);
           i2 = i2!=(OOC_INT32)0;
           if (i2) goto l13;
-          i2=OOC_FALSE;
+          i2=0u;
           goto l15;
 l13:
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 62378))+8);
@@ -4246,19 +4239,19 @@ l13:
           
 l15:
           if (!i2) goto l18;
-          *(OOC_UINT8*)((_check_pointer(i0, 62415))+17) = OOC_FALSE;
-          return OOC_TRUE;
+          *(OOC_UINT8*)((_check_pointer(i0, 62415))+17) = 0u;
+          return 1u;
 l18:
           i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 62588));
           fragment = (XML_DTD__Fragment)i1;
           i2 = i1!=(OOC_INT32)0;
           if (i2) goto l8_loop;
 l23:
-          *(OOC_UINT8*)((_check_pointer(i0, 62626))+17) = OOC_FALSE;
-          return OOC_FALSE;
+          *(OOC_UINT8*)((_check_pointer(i0, 62626))+17) = 0u;
+          return 0u;
           goto l25;
 l24:
-          return OOC_TRUE;
+          return 1u;
 l25:
           _failed_function(61829); return 0;
           ;
@@ -4280,7 +4273,7 @@ l25:
               i2 = (OOC_INT32)attValue;
               i3 = (OOC_INT32)dtd;
               i4 = (OOC_INT32)chars;
-              i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 62939)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i3, (XML_UnicodeBuffer__CharArray)i4, i1, i0, OOC_FALSE);
+              i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 62939)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i3, (XML_UnicodeBuffer__CharArray)i4, i1, i0, 0u);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 62926)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i2, (XML_DTD__Fragment)i0);
 l3:
               return;
@@ -4294,7 +4287,7 @@ l3:
           i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Internalize((XML_DTD__ExternalEntity)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 63136)))), &_td_XML_DTD__ExternalEntityDesc, 63136)));
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 63094)))), XML_DTD__EntityDesc_SetEntityValue)),XML_DTD__EntityDesc_SetEntityValue)((XML_DTD__Entity)i0, (XML_UnicodeBuffer__CharArray)i1);
 l3:
-          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i0, OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i0, 0u);
           i0 = (OOC_INT32)dtd;
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 63227)))), XML_DTD__BuilderDesc_NewAttValue)),XML_DTD__BuilderDesc_NewAttValue)((XML_DTD__Builder)i0);
           attValue = (XML_DTD__AttValue)i0;
@@ -4303,34 +4296,34 @@ l3:
 l4_loop:
           i0 = (OOC_INT32)chars;
           i1 = _check_pointer(i0, 63301);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = cpos;
           i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 63301))*2);
           switch (i1) {
-          case (OOC_CHAR16)65535:
+          case 65535u:
             XML_Parser__ParserDesc_ParseDocument_Expand_ExpandAttValue_Flush();
             goto l19;
-          case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
+          case 0u ... 31u:
             i1 = _check_pointer(i0, 63605);
-            i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+            i2 = OOC_ARRAY_LENGTH(i1, 0);
             i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 63605))*2);
-            i1 = i1!=(OOC_CHAR8)'\011';
+            i1 = i1!=9u;
             if (!i1) goto l4_loop;
             i0 = _check_pointer(i0, 63648);
-            i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
-            *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 63648))*2) = (OOC_CHAR8)' ';
+            i1 = OOC_ARRAY_LENGTH(i0, 0);
+            *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 63648))*2) = 32u;
             goto l4_loop;
-          case (OOC_CHAR8)'<':
+          case 60u:
             XML_Parser__ParserDesc_ParseDocument_Err(13);
             i0 = cpos;
             cpos = (i0+1);
             goto l4_loop;
-          case (OOC_CHAR8)'&':
+          case 38u:
             XML_Parser__ParserDesc_ParseDocument_Expand_ExpandAttValue_Flush();
             i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("&#", 3, 0);
             if (i0) goto l15;
             i0 = (OOC_INT32)attValue;
-            i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(OOC_TRUE, OOC_FALSE);
+            i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(1u, 0u);
             OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 64109)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i0, (XML_DTD__Fragment)i1);
             goto l16;
 l15:
@@ -4344,7 +4337,7 @@ l15:
             i3 = cdelta;
             i4 = (OOC_INT32)chars;
             i5 = cstart;
-            i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 64017)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i1, (XML_UnicodeBuffer__CharArray)i4, i5, (i2-i3), OOC_FALSE);
+            i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 64017)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i1, (XML_UnicodeBuffer__CharArray)i4, i5, (i2-i3), 0u);
             OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 64004)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i0, (XML_DTD__Fragment)i1);
 l16:
             i0 = cpos;
@@ -4364,35 +4357,38 @@ l19:
 
       i0 = (OOC_INT32)attValue;
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 64359));
-      i1 = i0!=(OOC_INT32)0;
       fragment = (XML_DTD__Fragment)i0;
-      if (!i1) goto l21;
+      i1 = i0!=0;
+      if (!i1) goto l22;
 l3_loop:
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 64428)))), &_td_XML_DTD__EntityRefDesc);
-      if (!i1) goto l16;
+      if (!i1) goto l17;
       i1 = (OOC_INT32)dtd;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 64468))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 64468))+4);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 64496))+4);
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 64481)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i1, (XML_UnicodeBuffer__CharArray)i3);
       decl = (XML_DTD__Declaration)i1;
-      i2 = i1==(OOC_INT32)0;
-      if (i2) goto l14;
+      i2 = i1==0;
+      if (i2) goto l15;
       i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 64710)))), &_td_XML_DTD__EntityDesc, 64710);
       entity = (XML_DTD__Entity)i1;
       *(OOC_INT32*)((_check_pointer(i0, 64739))+8) = i1;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 64781))+20);
-      i0 = i0==(OOC_INT32)0;
-      if (!i0) goto l10;
+      i0 = i0==0;
+      if (i0) goto l10;
+      i0=i1;
+      goto l11;
+l10:
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Expand_ExpandAttValue((XML_DTD__Entity)i1);
       *(OOC_INT32*)((_check_pointer(i1, 64824))+20) = i0;
       i0 = (OOC_INT32)entity;
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 64891))+20);
-      XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i0);
-l10:
-      i0 = (OOC_INT32)entity;
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 64891))+20);
+      XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i1);
+      
+l11:
       i0 = XML_Parser__ParserDesc_ParseDocument_Expand_IsRecursive((XML_DTD__Entity)i0);
-      if (!i0) goto l16;
+      if (!i0) goto l17;
       XML_Parser__ParserDesc_ParseDocument_Err(213);
       i0 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 65021))+104);
@@ -4400,7 +4396,7 @@ l10:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 65085))+4);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 65085))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 65021))+104);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 65091)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 65091)), 0);
       i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 65091)), i2);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 65032)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
       i0 = (OOC_INT32)fragment;
@@ -4409,24 +4405,24 @@ l10:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 65118))+8);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 65126))+20);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 65136)))), XML_DTD__AttValueDesc_Clear)),XML_DTD__AttValueDesc_Clear)((XML_DTD__AttValue)i0);
-      goto l16;
-l14:
+      goto l17;
+l15:
       XML_Parser__ParserDesc_ParseDocument_Err(210);
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 64588))+104);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 64654))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 64654))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 64588))+104);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 64660)), (OOC_INT32)0);
+      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 64660)), 0);
       i0 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 64660)), i0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 64599)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "name", 5, (Msg__LStringPtr)i0);
-l16:
+l17:
       i0 = (OOC_INT32)fragment;
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 65283));
       fragment = (XML_DTD__Fragment)i0;
-      i1 = i0!=(OOC_INT32)0;
+      i1 = i0!=0;
       if (i1) goto l3_loop;
-l21:
+l22:
       return;
       ;
     }
@@ -4454,12 +4450,12 @@ l21:
 l1_loop:
           i1 = (OOC_INT32)chars;
           i2 = _check_pointer(i1, 66188);
-          i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+          i3 = OOC_ARRAY_LENGTH(i2, 0);
           i4 = cpos;
           i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 66188))*2);
           switch (i2) {
-          case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-          case (OOC_CHAR16)65534:
+          case 0u ... 31u:
+          case 65534u:
             i2 = (OOC_INT32)p;
             i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 66263))+36);
             i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 66267))+20);
@@ -4467,7 +4463,7 @@ l1_loop:
             if (!i1) goto l5;
             goto l9;
 l5:
-            XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+            XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
             i1 = cdelta;
             i1 = i1!=0;
             if (!i1) goto l1_loop;
@@ -4475,15 +4471,15 @@ l5:
 l9:
             cpos = (i4+1);
             goto l1_loop;
-          case (OOC_CHAR8)' ':
+          case 32u:
             cpos = (i4+1);
             
             goto l1_loop;
-          case (OOC_CHAR8)'<':
-          case (OOC_CHAR8)'&':
-          case (OOC_CHAR16)65535:
+          case 60u:
+          case 38u:
+          case 65535u:
             goto l21_loop;
-          case (OOC_CHAR8)']':
+          case 93u:
             i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("]]>", 4, 0);
             if (i1) goto l21_loop;
             i0 = cpos;
@@ -4500,12 +4496,12 @@ l9:
 l21_loop:
           i1 = (OOC_INT32)chars;
           i2 = _check_pointer(i1, 66912);
-          i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+          i3 = OOC_ARRAY_LENGTH(i2, 0);
           i4 = cpos;
           i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 66912))*2);
           switch (i2) {
-          case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-          case (OOC_CHAR16)65534:
+          case 0u ... 31u:
+          case 65534u:
             i2 = (OOC_INT32)p;
             i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 66987))+36);
             i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 66991))+20);
@@ -4513,40 +4509,40 @@ l21_loop:
             if (!i2) goto l25;
             goto l26;
 l25:
-            XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+            XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
             goto l21_loop;
 l26:
             i2 = _check_pointer(i1, 67387);
             i3 = cdelta;
-            i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+            i5 = OOC_ARRAY_LENGTH(i2, 0);
             i1 = _check_pointer(i1, 67409);
-            i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+            i6 = OOC_ARRAY_LENGTH(i1, 0);
             i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 67409))*2);
             *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 67387))*2) = i1;
             cpos = (i4+1);
             goto l21_loop;
-          case (OOC_CHAR8)' ':
+          case 32u:
             i2 = _check_pointer(i1, 67532);
             i3 = cdelta;
-            i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+            i5 = OOC_ARRAY_LENGTH(i2, 0);
             i1 = _check_pointer(i1, 67554);
-            i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+            i6 = OOC_ARRAY_LENGTH(i1, 0);
             i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 67554))*2);
             *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 67532))*2) = i1;
             cpos = (i4+1);
             
             goto l21_loop;
-          case (OOC_CHAR8)'<':
-          case (OOC_CHAR16)65535:
+          case 60u:
+          case 65535u:
             goto l41;
-          case (OOC_CHAR8)'&':
+          case 38u:
             i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("&#", 3, 0);
             if (!i1) goto l41;
             elementWhitespace = 1;
             XML_Parser__ParserDesc_ParseDocument_CharRef();
             i0=1;
             goto l21_loop;
-          case (OOC_CHAR8)']':
+          case 93u:
             i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("]]>", 4, 0);
             if (i0) goto l37;
             goto l38;
@@ -4558,9 +4554,9 @@ l38:
             i1 = _check_pointer(i0, 68056);
             i2 = cdelta;
             i3 = cpos;
-            i4 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+            i4 = OOC_ARRAY_LENGTH(i1, 0);
             i0 = _check_pointer(i0, 68078);
-            i5 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+            i5 = OOC_ARRAY_LENGTH(i0, 0);
             i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i5, OOC_UINT32, 68078))*2);
             *(OOC_UINT16*)(i1+(_check_index((i3-i2), i4, OOC_UINT32, 68056))*2) = i0;
             cpos = (i3+1);
@@ -4570,9 +4566,9 @@ l38:
             elementWhitespace = 1;
             i0 = _check_pointer(i1, 68187);
             i2 = cdelta;
-            i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+            i3 = OOC_ARRAY_LENGTH(i0, 0);
             i1 = _check_pointer(i1, 68209);
-            i5 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+            i5 = OOC_ARRAY_LENGTH(i1, 0);
             i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i5, OOC_UINT32, 68209))*2);
             *(OOC_UINT16*)(i0+(_check_index((i4-i2), i3, OOC_UINT32, 68187))*2) = i1;
             cpos = (i4+1);
@@ -4580,9 +4576,9 @@ l38:
             goto l21_loop;
           }
 l41:
-          i1 = cpos;
-          i2 = cdelta;
-          i1 = i1-i2;
+          i1 = cdelta;
+          i2 = cpos;
+          i1 = i2-i1;
           i2 = cstart;
           i3 = i1!=i2;
           if (!i3) goto l44;
@@ -4590,7 +4586,7 @@ l41:
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 68306))+44);
           i5 = (OOC_INT32)chars;
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 68306))+44);
-          i6 = OOC_ARRAY_LENGTH((_check_pointer(i5, 68334)), (OOC_INT32)0);
+          i6 = OOC_ARRAY_LENGTH((_check_pointer(i5, 68334)), 0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 68315)))), XML_Builder__BuilderDesc_Characters)),XML_Builder__BuilderDesc_Characters)((XML_Builder__Builder)i3, (void*)(_check_pointer(i5, 68334)), i6, i2, i1, i0);
 l44:
           return;
@@ -4611,8 +4607,8 @@ l44:
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 68664))+4);
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 68677)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i0, (XML_UnicodeBuffer__CharArray)i3);
           decl = (XML_DTD__Declaration)i0;
-          i1 = i0!=(OOC_INT32)0;
           entity = (XML_DTD__Entity)(OOC_INT32)0;
+          i1 = i0!=(OOC_INT32)0;
           if (i1) goto l3;
           i1=(OOC_INT32)0;
           goto l4;
@@ -4638,7 +4634,7 @@ l4:
           i4 = _check_pointer(i4, 68899);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 68931))+4);
           i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 68931))+4);
-          i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 68937)), (OOC_INT32)0);
+          i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 68937)), 0);
           i4 = LongStrings__Length((void*)(_check_pointer(i4, 68937)), i6);
           XML_Parser__ParserDesc_ParseDocument_DecLength((void*)(_check_pointer(i5, 68899)), (RT0__Struct)i3, (i4+2));
 l7:
@@ -4649,7 +4645,7 @@ l7:
           i4 = *(OOC_INT8*)((_check_pointer(i1, 69387))+8);
           i4 = i4==2;
           if (i4) goto l14;
-          i4=OOC_FALSE;
+          i4=0u;
           goto l16;
 l14:
           i4 = (OOC_INT32)p;
@@ -4662,12 +4658,12 @@ l16:
           i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 69567))+44);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 69567))+44);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 69576)))), XML_Builder__BuilderDesc_StartEntity)),XML_Builder__BuilderDesc_StartEntity)((XML_Builder__Builder)i4, (XML_DTD__Entity)i1);
-          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, OOC_TRUE);
+          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, 1u);
           XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(OOC_INT32)&pos, (RT0__Struct)i3);
           i4 = *(OOC_INT8*)((_check_pointer(i1, 69770))+8);
           i4 = i4==2;
           if (i4) goto l20;
-          i4=OOC_FALSE;
+          i4=0u;
           goto l22;
 l20:
           i4 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<?xml", 6, 1);
@@ -4679,10 +4675,10 @@ l24:
           XML_Parser__ParserDesc_ParseDocument_content();
           i0 = (OOC_INT32)chars;
           i0 = _check_pointer(i0, 69965);
-          i4 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+          i4 = OOC_ARRAY_LENGTH(i0, 0);
           i5 = cpos;
           i0 = *(OOC_UINT16*)(i0+(_check_index(i5, i4, OOC_UINT32, 69965))*2);
-          i0 = i0!=(OOC_CHAR16)65535;
+          i0 = i0!=65535u;
           if (!i0) goto l27;
           XML_Parser__ParserDesc_ParseDocument_ErrPos(302, (void*)(OOC_INT32)&pos, (RT0__Struct)i3);
           i0 = (OOC_INT32)p;
@@ -4690,7 +4686,7 @@ l24:
           i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 70165))+4);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 70165))+4);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 70058))+104);
-          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 70171)), (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 70171)), 0);
           i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i5, 70171)), i2);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 70069)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
 l27:
@@ -4719,7 +4715,7 @@ l30:
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 69356))+4);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 69356))+4);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 69250))+104);
-          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 69362)), (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 69362)), 0);
           i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 69362)), i2);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 69261)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
           goto l33;
@@ -4734,7 +4730,7 @@ l32:
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 69152))+4);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 69152))+4);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 69046))+104);
-          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 69158)), (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 69158)), 0);
           i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 69158)), i2);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 69057)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
 l33:
@@ -4746,13 +4742,13 @@ l33:
 l1_loop:
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 70380);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 70380))*2);
       switch (i0) {
-      case (OOC_CHAR16)65535:
+      case 65535u:
         goto l28;
-      case (OOC_CHAR8)'<':
+      case 60u:
         i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<!--", 5, 0);
         if (!i0) goto l6;
         goto l19;
@@ -4768,9 +4764,9 @@ l10:
         i0 = (OOC_INT32)chars;
         i0 = _check_pointer(i0, 70689);
         i1 = cpos;
-        i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+        i2 = OOC_ARRAY_LENGTH(i0, 0);
         i0 = *(OOC_UINT16*)(i0+(_check_index((i1+1), i2, OOC_UINT32, 70689))*2);
-        i0 = i0!=(OOC_CHAR8)'/';
+        i0 = i0!=47u;
         if (!i0) goto l28;
         XML_Parser__ParserDesc_ParseDocument_element();
         goto l1_loop;
@@ -4783,12 +4779,12 @@ l17:
 l19:
         XML_Parser__ParserDesc_ParseDocument_Comment();
         goto l1_loop;
-      case (OOC_CHAR8)'&':
+      case 38u:
         i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("&#", 3, 0);
         if (!i0) goto l23;
         goto l24;
 l23:
-        i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(OOC_FALSE, OOC_TRUE);
+        i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(0u, 1u);
         XML_Parser__ParserDesc_ParseDocument_content_FollowEntityRef((XML_DTD__EntityRef)i0);
         goto l1_loop;
 l24:
@@ -4805,7 +4801,7 @@ l28:
 
     
     void XML_Parser__ParserDesc_ParseDocument_element() {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5;
+      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
       OOC_CHAR8 emptyElementTag;
       XML_UnicodeBuffer__CharArray startName;
       XML_DTD__Declaration decl;
@@ -4828,31 +4824,30 @@ l28:
           i0 = (OOC_INT32)p;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71469))+76);
           i2 = *(OOC_INT32*)((_check_pointer(i0, 71447))+80);
-          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 71479)), (OOC_INT32)0);
+          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 71479)), 0);
           i1 = i2==i1;
           if (!i1) goto l11;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71518))+76);
-          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 71528)), (OOC_INT32)0);
+          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 71528)), 0);
           i1 = (OOC_INT32)RT0__NewObject(_td_XML_Parser__NameList.baseTypes[0], (i1+8));
           newList = (XML_Parser__NameList)i1;
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71576))+76);
-          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 71586)), (OOC_INT32)0);
-          i2 = i2-1;
-          i3 = 0<=i2;
           i = 0;
+          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 71586)), 0);
+          i3 = 0<i2;
           if (!i3) goto l10;
           i3=0;
 l5_loop:
           i4 = _check_pointer(i1, 71613);
-          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+          i5 = OOC_ARRAY_LENGTH(i4, 0);
           i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71621))+76);
           i6 = _check_pointer(i6, 71631);
-          i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+          i7 = OOC_ARRAY_LENGTH(i6, 0);
           i6 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i3, i7, OOC_UINT32, 71631))*4);
           *(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 71613))*4) = i6;
           i3 = i3+1;
-          i4 = i3<=i2;
           i = i3;
+          i4 = i3<i2;
           if (i4) goto l5_loop;
 l10:
           *(OOC_INT32*)((_check_pointer(i0, 71661))+76) = i1;
@@ -4860,7 +4855,7 @@ l11:
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71705))+76);
           i1 = _check_pointer(i1, 71715);
           i2 = *(OOC_INT32*)((_check_pointer(i0, 71717))+80);
-          i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i3 = OOC_ARRAY_LENGTH(i1, 0);
           i4 = (OOC_INT32)name;
           *(OOC_INT32*)(i1+(_check_index(i2, i3, OOC_UINT32, 71715))*4) = i4;
           i1 = *(OOC_INT32*)((_check_pointer(i0, 71755))+80);
@@ -4875,35 +4870,34 @@ l11:
           OOC_INT32 i;
 
           i0 = (OOC_INT32)p;
-          i1 = *(OOC_INT32*)((_check_pointer(i0, 71921))+80);
-          i1 = i1-1;
-          i2 = 0<=i1;
           i = 0;
+          i1 = *(OOC_INT32*)((_check_pointer(i0, 71921))+80);
+          i2 = 0<i1;
           if (!i2) goto l11;
           i2 = (OOC_INT32)name;
           i3=0;
 l3_loop:
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 71963))+76);
           i4 = _check_pointer(i4, 71973);
-          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+          i5 = OOC_ARRAY_LENGTH(i4, 0);
           i4 = (OOC_INT32)*(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 71973))*4);
           i4 = (
-          _cmp16((const void*)(_check_pointer(i2, 71958)),(const void*)(_check_pointer(i4, 71976))))==(OOC_INT32)0;
+          _cmp16((const void*)(_check_pointer(i2, 71958)),(const void*)(_check_pointer(i4, 71976))))==0;
           if (!i4) goto l6;
-          return OOC_TRUE;
+          return 1u;
 l6:
           i3 = i3+1;
-          i4 = i3<=i1;
           i = i3;
+          i4 = i3<i1;
           if (i4) goto l3_loop;
 l11:
-          return OOC_FALSE;
+          return 0u;
           ;
         }
 
         
         void XML_Parser__ParserDesc_ParseDocument_element_AddDefaultAttributes(XML_DTD__ElementDecl elemDecl) {
-          register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+          register OOC_INT32 i0,i1,i2,i3,i4,i5;
           XML_DTD__Declaration decl;
           XML_DTD__AttrDecl attrDecl;
           auto OOC_CHAR8 XML_Parser__ParserDesc_ParseDocument_element_AddDefaultAttributes_AttributeDefined(XML_UnicodeBuffer__CharArray name);
@@ -4922,12 +4916,12 @@ l11:
 l3_loop:
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 72439))+76);
               i3 = _check_pointer(i3, 72449);
-              i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+              i4 = OOC_ARRAY_LENGTH(i3, 0);
               i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 72449))*4);
               i3 = (
-              _cmp16((const void*)(_check_pointer(i3, 72452)),(const void*)(_check_pointer(i1, 72460))))==(OOC_INT32)0;
+              _cmp16((const void*)(_check_pointer(i3, 72452)),(const void*)(_check_pointer(i1, 72460))))==0;
               if (!i3) goto l6;
-              return OOC_TRUE;
+              return 1u;
 l6:
               i2 = i2+1;
               i = i2;
@@ -4935,7 +4929,7 @@ l6:
               i3 = i2!=i3;
               if (i3) goto l3_loop;
 l11:
-              return OOC_FALSE;
+              return 0u;
               ;
             }
 
@@ -4943,8 +4937,8 @@ l11:
           i0 = (OOC_INT32)elemDecl;
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 72642))+20);
           i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 72657));
-          i1 = i0!=(OOC_INT32)0;
           decl = (XML_DTD__Declaration)i0;
+          i1 = i0!=0;
           if (!i1) goto l22;
           i1 = (OOC_INT32)&_td_XML_Locator__Position;
           
@@ -4954,49 +4948,50 @@ l3_loop:
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 72781))+4);
           i0 = XML_Parser__ParserDesc_ParseDocument_element_AddDefaultAttributes_AttributeDefined((XML_UnicodeBuffer__CharArray)i0);
           i0 = !i0;
-          i2 = (OOC_INT32)decl;
           if (!i0) goto l17;
           i0 = (OOC_INT32)attrDecl;
-          i3 = *(OOC_INT8*)((_check_pointer(i0, 72818))+20);
-          i3 = i3>=2;
-          if (i3) goto l15;
-          i3 = (OOC_INT32)p;
-          i4 = *(OOC_UINT8*)((_check_pointer(i3, 73051))+62);
-          if (i4) goto l10;
-          i4=OOC_FALSE;
+          i2 = *(OOC_INT8*)((_check_pointer(i0, 72818))+20);
+          i2 = i2>=2;
+          if (i2) goto l15;
+          i2 = (OOC_INT32)p;
+          i3 = *(OOC_UINT8*)((_check_pointer(i2, 73051))+62);
+          if (i3) goto l10;
+          i3=0u;
           goto l12;
 l10:
-          i4 = *(OOC_INT8*)((_check_pointer(i0, 73093))+20);
-          i4 = i4==0;
+          i3 = *(OOC_INT8*)((_check_pointer(i0, 73093))+20);
+          i3 = i3==0;
           
 l12:
-          if (!i4) goto l17;
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73174))+4);
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73174))+4);
-          i3 = _check_pointer(i3, 73177);
-          XML_Parser__ParserDesc_ParseDocument_ErrPosNF(214, (void*)(_check_pointer(i4, 73177)), (RT0__Struct)i1);
-          i3 = (OOC_INT32)p;
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73196))+104);
-          i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73262))+4);
+          if (!i3) goto l17;
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73174))+4);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73174))+4);
+          i2 = _check_pointer(i2, 73177);
+          XML_Parser__ParserDesc_ParseDocument_ErrPosNF(214, (void*)(_check_pointer(i3, 73177)), (RT0__Struct)i1);
+          i2 = (OOC_INT32)p;
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73196))+104);
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73262))+4);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73262))+4);
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73196))+104);
-          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 73268)), (OOC_INT32)0);
-          i0 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i5, 73268)), i0);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 73207)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i3, "name", 5, (Msg__LStringPtr)i0);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73196))+104);
+          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 73268)), 0);
+          i0 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i4, 73268)), i0);
+          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 73207)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i2, "name", 5, (Msg__LStringPtr)i0);
           goto l17;
 l15:
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 72883))+24);
-          XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i3);
-          i3 = (OOC_INT32)p;
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 72915))+44);
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 72915))+44);
-          i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 72946))+4);
-          i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73009))+24);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 72924)))), XML_Builder__BuilderDesc_Attribute)),XML_Builder__BuilderDesc_Attribute)((XML_Builder__Builder)i3, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i5, (XML_DTD__AttrDecl)i0, (XML_DTD__AttValue)i6, OOC_FALSE);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 72883))+24);
+          XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i2);
+          i2 = (OOC_INT32)p;
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 72915))+44);
+          i4 = (OOC_INT32)decl;
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 72915))+44);
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 72946))+4);
+          i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73009))+24);
+          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 72924)))), XML_Builder__BuilderDesc_Attribute)),XML_Builder__BuilderDesc_Attribute)((XML_Builder__Builder)i2, (XML_DTD__NamespaceDeclaration)0, (XML_UnicodeBuffer__CharArray)i4, (XML_DTD__AttrDecl)i0, (XML_DTD__AttValue)i5, 0u);
 l17:
-          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 73325));
+          i0 = (OOC_INT32)decl;
+          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 73325));
           decl = (XML_DTD__Declaration)i0;
-          i2 = i0!=(OOC_INT32)0;
+          i2 = i0!=0;
           if (i2) goto l3_loop;
 l22:
           return;
@@ -5015,7 +5010,7 @@ l22:
           i0 = (OOC_INT32)p;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73506))+104);
           i2 = (OOC_INT32)startName;
-          i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 73573)), (OOC_INT32)0);
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 73573)), 0);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73506))+104);
           i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 73573)), i3);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 73517)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i2);
@@ -5027,141 +5022,143 @@ l4:
 
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 73640);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 73640))*2);
-      i0 = i0==(OOC_CHAR8)'<';
+      i0 = i0==60u;
       if (i0) goto l3;
       XML_Parser__ParserDesc_ParseDocument_Err(208);
       goto l51;
 l3:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'<');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(60u);
       i0 = (OOC_INT32)p;
       *(OOC_INT32*)((_check_pointer(i0, 73693))+80) = 0;
-      emptyElementTag = OOC_FALSE;
+      emptyElementTag = 0u;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73771))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 73771))+4);
       i0 = _check_pointer(i0, 73774);
       i0 = (OOC_INT32)&_td_XML_Locator__Position;
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i1, 73774)), (RT0__Struct)i0);
-      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
       startName = (XML_UnicodeBuffer__CharArray)i1;
       i2 = (OOC_INT32)dtd;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73832))+12);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73832))+12);
       i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 73850)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i2, (XML_UnicodeBuffer__CharArray)i1);
       decl = (XML_DTD__Declaration)i2;
-      i2 = (OOC_INT32)p;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73878))+44);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 73878))+44);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 73887)))), XML_Builder__BuilderDesc_StartElement)),XML_Builder__BuilderDesc_StartElement)((XML_Builder__Builder)i2, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i1);
+      i3 = (OOC_INT32)p;
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73878))+44);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 73878))+44);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 73887)))), XML_Builder__BuilderDesc_StartElement)),XML_Builder__BuilderDesc_StartElement)((XML_Builder__Builder)i3, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i1);
+      i1 = i2!=(OOC_INT32)0;
+      {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
 l4_loop:
-      i1 = (OOC_INT32)chars;
-      i2 = _check_pointer(i1, 73967);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i4 = cpos;
-      i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 73967))*2);
-      i2 = i2==(OOC_CHAR16)65535;
-      if (i2) goto l34;
-      i2 = _check_pointer(i1, 74038);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 74038))*2);
-      i2 = i2!=(OOC_CHAR8)'>';
-      if (i2) goto l9;
-      i1=OOC_FALSE;
+      i3 = (OOC_INT32)chars;
+      i4 = _check_pointer(i3, 73967);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      i6 = cpos;
+      i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 73967))*2);
+      i4 = i4==65535u;
+      if (i4) goto l34;
+      i4 = _check_pointer(i3, 74038);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 74038))*2);
+      i4 = i4!=62u;
+      if (i4) goto l9;
+      i3=0u;
       goto l11;
 l9:
-      i1 = _check_pointer(i1, 74060);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 74060))*2);
-      i1 = i1!=(OOC_CHAR8)'/';
+      i3 = _check_pointer(i3, 74060);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i4, OOC_UINT32, 74060))*2);
+      i3 = i3!=47u;
       
 l11:
-      if (!i1) goto l14;
+      if (!i3) goto l14;
       XML_Parser__ParserDesc_ParseDocument_S();
 l14:
-      i1 = (OOC_INT32)chars;
-      i2 = _check_pointer(i1, 74127);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i4 = cpos;
-      i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 74127))*2);
-      i2 = i2==(OOC_CHAR8)'/';
-      if (i2) goto l32;
-      i1 = _check_pointer(i1, 74251);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
-      i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 74251))*2);
-      i1 = i1==(OOC_CHAR8)'>';
-      if (i1) goto l34;
+      i3 = (OOC_INT32)chars;
+      i4 = _check_pointer(i3, 74127);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      i6 = cpos;
+      i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 74127))*2);
+      i4 = i4==47u;
+      if (i4) goto l32;
+      i3 = _check_pointer(i3, 74251);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i4, OOC_UINT32, 74251))*2);
+      i3 = i3==62u;
+      if (i3) goto l34;
 l20:
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74339))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74339))+4);
       i1 = _check_pointer(i1, 74342);
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i2, 74342)), (RT0__Struct)i0);
-      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+      i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
       attrName = (XML_UnicodeBuffer__CharArray)i1;
       i1 = XML_Parser__ParserDesc_ParseDocument_element_AttributeNameUsed((XML_UnicodeBuffer__CharArray)i1);
-      i2 = (OOC_INT32)attrName;
       if (!i1) goto l23;
       i1 = (OOC_INT32)p;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74468))+4);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74468))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74468))+4);
       i1 = _check_pointer(i1, 74471);
-      XML_Parser__ParserDesc_ParseDocument_ErrPos(212, (void*)(_check_pointer(i3, 74471)), (RT0__Struct)i0);
+      XML_Parser__ParserDesc_ParseDocument_ErrPos(212, (void*)(_check_pointer(i2, 74471)), (RT0__Struct)i0);
       i1 = (OOC_INT32)p;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74488))+104);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74488))+104);
+      i3 = (OOC_INT32)attrName;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 74488))+104);
-      i4 = OOC_ARRAY_LENGTH((_check_pointer(i2, 74554)), (OOC_INT32)0);
-      i4 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 74554)), i4);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 74499)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "name", 5, (Msg__LStringPtr)i4);
+      i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 74554)), 0);
+      i3 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 74554)), i4);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 74499)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "name", 5, (Msg__LStringPtr)i3);
 l23:
-      XML_Parser__ParserDesc_ParseDocument_element_NoteName((XML_UnicodeBuffer__CharArray)i2);
+      i1 = (OOC_INT32)attrName;
+      XML_Parser__ParserDesc_ParseDocument_element_NoteName((XML_UnicodeBuffer__CharArray)i1);
       XML_Parser__ParserDesc_ParseDocument_Eq();
+      attrDecl = (XML_DTD__AttrDecl)(OOC_INT32)0;
       i1 = (OOC_INT32)decl;
       i2 = i1!=(OOC_INT32)0;
-      attrDecl = (XML_DTD__AttrDecl)(OOC_INT32)0;
-      i3 = (OOC_INT32)attrName;
       if (i2) goto l26;
-      i1=(OOC_INT32)0;
+      i3=(OOC_INT32)0;
       goto l31;
 l26:
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 74706)))), &_td_XML_DTD__ElementDeclDesc, 74706)), 74718))+20);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 74706)))), &_td_XML_DTD__ElementDeclDesc, 74706)), 74718))+20);
-      i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 74733)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i1, (XML_UnicodeBuffer__CharArray)i3);
-      decl0 = (XML_DTD__Declaration)i1;
-      i2 = i1!=(OOC_INT32)0;
-      if (i2) goto l29;
-      i1=(OOC_INT32)0;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 74706)))), &_td_XML_DTD__ElementDeclDesc, 74706)), 74718))+20);
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 74706)))), &_td_XML_DTD__ElementDeclDesc, 74706)), 74718))+20);
+      i5 = (OOC_INT32)attrName;
+      i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 74733)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i4, (XML_UnicodeBuffer__CharArray)i5);
+      decl0 = (XML_DTD__Declaration)i3;
+      i4 = i3!=(OOC_INT32)0;
+      if (i4) goto l29;
+      i3=(OOC_INT32)0;
       goto l31;
 l29:
-      i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 74821)))), &_td_XML_DTD__AttrDeclDesc, 74821);
-      attrDecl = (XML_DTD__AttrDecl)i1;
+      i3 = _type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 74821)))), &_td_XML_DTD__AttrDeclDesc, 74821);
+      attrDecl = (XML_DTD__AttrDecl)i3;
       
 l31:
-      i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_AttValue(OOC_TRUE);
-      attrValue = (XML_DTD__AttValue)i2;
-      XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i2);
-      i4 = (OOC_INT32)p;
-      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 74943))+44);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 74943))+44);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 74952)))), XML_Builder__BuilderDesc_Attribute)),XML_Builder__BuilderDesc_Attribute)((XML_Builder__Builder)i4, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i3, (XML_DTD__AttrDecl)i1, (XML_DTD__AttValue)i2, OOC_TRUE);
+      i4 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_AttValue(1u);
+      attrValue = (XML_DTD__AttValue)i4;
+      XML_Parser__ParserDesc_ParseDocument_Expand((XML_DTD__AttValue)i4);
+      i5 = (OOC_INT32)p;
+      i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 74943))+44);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 74943))+44);
+      i7 = (OOC_INT32)attrName;
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 74952)))), XML_Builder__BuilderDesc_Attribute)),XML_Builder__BuilderDesc_Attribute)((XML_Builder__Builder)i5, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i7, (XML_DTD__AttrDecl)i3, (XML_DTD__AttValue)i4, 1u);
       
       goto l4_loop;
 l32:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'/');
-      emptyElementTag = OOC_TRUE;
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(47u);
+      emptyElementTag = 1u;
 l34:
-      i1 = (OOC_INT32)p;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75068))+4);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75068))+4);
-      i1 = _check_pointer(i1, 75071);
-      XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i2, 75071)), (RT0__Struct)i0);
-      i1 = (OOC_INT32)decl;
-      i2 = i1!=(OOC_INT32)0;
+      i3 = (OOC_INT32)p;
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 75068))+4);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 75068))+4);
+      i3 = _check_pointer(i3, 75071);
+      XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i4, 75071)), (RT0__Struct)i0);
       if (!i2) goto l37;
       XML_Parser__ParserDesc_ParseDocument_element_AddDefaultAttributes((XML_DTD__ElementDecl)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 75145)))), &_td_XML_DTD__ElementDeclDesc, 75145)));
 l37:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75206))+44);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75206))+44);
@@ -5173,34 +5170,34 @@ l37:
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(OOC_INT32)&pos, (RT0__Struct)i0);
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 75504);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 75504))*2);
-      i1 = i1!=(OOC_CHAR8)'<';
+      i1 = i1!=60u;
       if (!i1) goto l42;
       XML_Parser__ParserDesc_ParseDocument_element_ErrEndTag();
 l42:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'<');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(60u);
       i1 = (OOC_INT32)chars;
       i1 = _check_pointer(i1, 75584);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = cpos;
       i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 75584))*2);
-      i1 = i1!=(OOC_CHAR8)'/';
+      i1 = i1!=47u;
       if (!i1) goto l45;
       XML_Parser__ParserDesc_ParseDocument_element_ErrEndTag();
 l45:
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'/');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(47u);
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75671))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 75671))+4);
       i1 = _check_pointer(i1, 75674);
       XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i2, 75674)), (RT0__Struct)i0);
-      i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+      i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
       endName = (XML_UnicodeBuffer__CharArray)i0;
       i1 = (OOC_INT32)startName;
       i0 = (
-      _cmp16((const void*)(_check_pointer(i0, 75734)),(const void*)(_check_pointer(i1, 75747))))!=(OOC_INT32)0;
+      _cmp16((const void*)(_check_pointer(i0, 75734)),(const void*)(_check_pointer(i1, 75747))))!=0;
       if (!i0) goto l48;
       XML_Parser__ParserDesc_ParseDocument_element_ErrEndTag();
 l48:
@@ -5209,8 +5206,8 @@ l48:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 75781))+44);
       i2 = (OOC_INT32)startName;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 75790)))), XML_Builder__BuilderDesc_EndElement)),XML_Builder__BuilderDesc_EndElement)((XML_Builder__Builder)i0, (XML_DTD__NamespaceDeclaration)(OOC_INT32)0, (XML_UnicodeBuffer__CharArray)i2);
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_TRUE);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+      XML_Parser__ParserDesc_ParseDocument_OptS(1u);
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
       goto l51;
 l49:
       i1 = (OOC_INT32)p;
@@ -5235,14 +5232,14 @@ l51:
 l1_loop:
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 76091);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 76091))*2);
       switch (i0) {
-      case (OOC_CHAR16)65534:
+      case 65534u:
         XML_Parser__ParserDesc_ParseDocument_NextBlock();
         goto l1_loop;
-      case (OOC_CHAR8)'<':
+      case 60u:
         i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<!--", 5, 0);
         if (!i0) goto l6;
         goto l11;
@@ -5254,7 +5251,7 @@ l6:
 l11:
         XML_Parser__ParserDesc_ParseDocument_Comment();
         goto l1_loop;
-      case (OOC_CHAR8)'\000' ... (OOC_CHAR8)' ':
+      case 0u ... 32u:
         XML_Parser__ParserDesc_ParseDocument_S();
         goto l1_loop;
       default:
@@ -5284,41 +5281,41 @@ l5:
       cpos = (i0+6);
       XML_Parser__ParserDesc_ParseDocument_S();
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_String(2);
-      i1 = optionJustPubid;
-      i1 = !i1;
       *_public = (XML_UnicodeBuffer__CharArray)i0;
-      if (i1) goto l8;
-      i0 = XML_Parser__ParserDesc_ParseDocument_LookingAtS();
+      i0 = optionJustPubid;
+      i0 = !i0;
+      if (i0) goto l8;
+      i1 = XML_Parser__ParserDesc_ParseDocument_LookingAtS();
       
       goto l10;
 l8:
-      i0=OOC_TRUE;
+      i1=1u;
 l10:
-      if (!i0) goto l23;
+      if (!i1) goto l23;
       XML_Parser__ParserDesc_ParseDocument_S();
-      if (i1) goto l14;
+      if (i0) goto l14;
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 77420);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 77420))*2);
-      i0 = i0==(OOC_CHAR8)'\047';
+      i0 = i0==39u;
       
       goto l16;
 l14:
-      i0=OOC_TRUE;
+      i0=1u;
 l16:
       if (i0) goto l18;
       i0 = (OOC_INT32)chars;
       i0 = _check_pointer(i0, 77443);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = cpos;
       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 77443))*2);
-      i0 = i0==(OOC_CHAR8)'"';
+      i0 = i0==34u;
       
       goto l20;
 l18:
-      i0=OOC_TRUE;
+      i0=1u;
 l20:
       if (!i0) goto l23;
       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_String(2);
@@ -5391,7 +5388,7 @@ l32:
               auto XML_DTD__CP XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_children(XML_DTD__Entity currentEntity);
                 
                 XML_DTD__CP XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_Mixed(XML_DTD__Entity currentEntity) {
-                  register OOC_INT32 i0,i1,i2,i3,i4;
+                  register OOC_INT32 i0,i1,i2,i3,i4,i5;
                   XML_DTD__CP first;
                   XML_DTD__CP last;
                   OOC_CHAR8 hasAlternative;
@@ -5404,54 +5401,54 @@ l32:
                   first = (XML_DTD__CP)i0;
                   cpos = (i1+7);
                   last = (XML_DTD__CP)i0;
-                  XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
-                  hasAlternative = OOC_FALSE;
+                  XML_Parser__ParserDesc_ParseDocument_OptS(0u);
+                  hasAlternative = 0u;
                   i1 = (OOC_INT32)chars;
                   i1 = _check_pointer(i1, 78733);
-                  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                  i2 = OOC_ARRAY_LENGTH(i1, 0);
                   i3 = cpos;
                   i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 78733))*2);
-                  i1 = i1==(OOC_CHAR8)'|';
+                  i2 = (OOC_INT32)currentEntity;
+                  i1 = i1==124u;
                   if (i1) goto l3;
-                  i1=OOC_FALSE;
+                  i1=0u;
                   goto l9;
 l3:
                   i1=i0;
 l4_loop:
-                  hasAlternative = OOC_TRUE;
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'|');
-                  XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
-                  i2 = (OOC_INT32)dtd;
-                  i3 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
-                  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 78879)))), XML_DTD__BuilderDesc_NewNameCP)),XML_DTD__BuilderDesc_NewNameCP)((XML_DTD__Builder)i2, 0, (XML_UnicodeBuffer__CharArray)i3);
-                  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 78865)))), XML_DTD__CPDesc_SetNext)),XML_DTD__CPDesc_SetNext)((XML_DTD__CP)i1, (XML_DTD__CP)i2);
+                  hasAlternative = 1u;
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(124u);
+                  XML_Parser__ParserDesc_ParseDocument_OptS(0u);
+                  i3 = (OOC_INT32)dtd;
+                  i4 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
+                  i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 78879)))), XML_DTD__BuilderDesc_NewNameCP)),XML_DTD__BuilderDesc_NewNameCP)((XML_DTD__Builder)i3, 0, (XML_UnicodeBuffer__CharArray)i4);
+                  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 78865)))), XML_DTD__CPDesc_SetNext)),XML_DTD__CPDesc_SetNext)((XML_DTD__CP)i1, (XML_DTD__CP)i3);
                   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 78946))+4);
                   last = (XML_DTD__CP)i1;
-                  XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
-                  i2 = (OOC_INT32)chars;
-                  i2 = _check_pointer(i2, 78733);
-                  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-                  i4 = cpos;
-                  i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 78733))*2);
-                  i2 = i2==(OOC_CHAR8)'|';
-                  if (i2) goto l4_loop;
+                  XML_Parser__ParserDesc_ParseDocument_OptS(0u);
+                  i3 = (OOC_INT32)chars;
+                  i3 = _check_pointer(i3, 78733);
+                  i4 = OOC_ARRAY_LENGTH(i3, 0);
+                  i5 = cpos;
+                  i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 78733))*2);
+                  i3 = i3==124u;
+                  if (i3) goto l4_loop;
 l8:
-                  i1=OOC_TRUE;
+                  i1=1u;
 l9:
-                  i2 = (OOC_INT32)currentEntity;
                   XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i2);
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)')');
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(41u);
                   if (i1) goto l12;
                   i1 = (OOC_INT32)chars;
                   i1 = _check_pointer(i1, 79114);
-                  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                  i2 = OOC_ARRAY_LENGTH(i1, 0);
                   i3 = cpos;
                   i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 79114))*2);
-                  i1 = i1==(OOC_CHAR8)'*';
+                  i1 = i1==42u;
                   
                   goto l14;
 l12:
-                  i1=OOC_TRUE;
+                  i1=1u;
 l14:
                   if (i1) goto l16;
                   i1 = (OOC_INT32)dtd;
@@ -5459,7 +5456,7 @@ l14:
                   return (XML_DTD__CP)i0;
                   goto l17;
 l16:
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'*');
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(42u);
                   i1 = (OOC_INT32)dtd;
                   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 79188)))), XML_DTD__BuilderDesc_NewChoiceCP)),XML_DTD__BuilderDesc_NewChoiceCP)((XML_DTD__Builder)i1, 2, (XML_DTD__CP)i0);
                   return (XML_DTD__CP)i0;
@@ -5480,20 +5477,20 @@ l17:
 
                       i0 = (OOC_INT32)chars;
                       i0 = _check_pointer(i0, 79677);
-                      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+                      i1 = OOC_ARRAY_LENGTH(i0, 0);
                       i2 = cpos;
                       i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 79677))*2);
                       switch (i0) {
-                      case (OOC_CHAR8)'*':
-                        XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'*');
+                      case 42u:
+                        XML_Parser__ParserDesc_ParseDocument_CheckChar(42u);
                         return 2;
                         goto l6;
-                      case (OOC_CHAR8)'+':
-                        XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'+');
+                      case 43u:
+                        XML_Parser__ParserDesc_ParseDocument_CheckChar(43u);
                         return 3;
                         goto l6;
-                      case (OOC_CHAR8)'?':
-                        XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'?');
+                      case 63u:
+                        XML_Parser__ParserDesc_ParseDocument_CheckChar(63u);
                         return 1;
                         goto l6;
                       default:
@@ -5520,13 +5517,13 @@ l6:
 
                           i0 = (OOC_INT32)chars;
                           i1 = _check_pointer(i0, 80435);
-                          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                          i2 = OOC_ARRAY_LENGTH(i1, 0);
                           i3 = cpos;
                           i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 80435))*2);
-                          i1 = i1==(OOC_CHAR8)'(';
+                          i1 = i1==40u;
                           if (i1) goto l7;
                           i0 = _check_pointer(i0, 80663);
-                          i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+                          i1 = OOC_ARRAY_LENGTH(i0, 0);
                           i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 80663))*2);
                           i0 = XML_Parser__IsNameChar0(i0);
                           if (i0) goto l5;
@@ -5539,7 +5536,7 @@ l6:
                           goto l8;
 l5:
                           i0 = (OOC_INT32)dtd;
-                          i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+                          i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
                           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 80703)))), XML_DTD__BuilderDesc_NewNameCP)),XML_DTD__BuilderDesc_NewNameCP)((XML_DTD__Builder)i0, 0, (XML_UnicodeBuffer__CharArray)i1);
                           cp = (XML_DTD__CP)i0;
                           
@@ -5547,8 +5544,8 @@ l5:
 l7:
                           i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_CurrentEntity();
                           currentEntity = (XML_DTD__Entity)i0;
-                          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'(');
-                          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                          XML_Parser__ParserDesc_ParseDocument_CheckChar(40u);
+                          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                           i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_children_choiceseq((XML_DTD__Entity)i0);
                           cp = (XML_DTD__CP)i0;
                           
@@ -5560,55 +5557,55 @@ l8:
                         }
 
 
-                      _class = (OOC_CHAR8)'\000';
+                      _class = 0u;
                       i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_children_choiceseq_cp();
                       first = (XML_DTD__CP)i0;
-                      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                      XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                       last = (XML_DTD__CP)i0;
                       
 l1_loop:
                       i1 = (OOC_INT32)chars;
                       i2 = _check_pointer(i1, 81149);
-                      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+                      i3 = OOC_ARRAY_LENGTH(i2, 0);
                       i4 = cpos;
                       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 81149))*2);
                       switch (i2) {
-                      case (OOC_CHAR16)65534:
+                      case 65534u:
                         XML_Parser__ParserDesc_ParseDocument_NextBlock();
                         
                         goto l1_loop;
-                      case (OOC_CHAR8)',':
-                      case (OOC_CHAR8)'|':
+                      case 44u:
+                      case 124u:
                         i2 = _class;
-                        i2 = i2==(OOC_CHAR8)'\000';
+                        i2 = i2==0u;
                         if (i2) goto l6;
                         goto l7;
 l6:
                         i1 = _check_pointer(i1, 81324);
-                        i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                        i2 = OOC_ARRAY_LENGTH(i1, 0);
                         i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 81324))*2);
                         _class = i1;
 l7:
                         i1 = _class;
                         XML_Parser__ParserDesc_ParseDocument_CheckChar(i1);
-                        XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                        XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                         i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_children_choiceseq_cp();
                         OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 81453)))), XML_DTD__CPDesc_SetNext)),XML_DTD__CPDesc_SetNext)((XML_DTD__CP)i0, (XML_DTD__CP)i1);
                         i0 = (OOC_INT32)last;
                         i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 81501))+4);
                         last = (XML_DTD__CP)i0;
-                        XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                        XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                         
                         goto l1_loop;
                       default:
                         goto l10;
                       }
 l10:
-                      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)')');
+                      XML_Parser__ParserDesc_ParseDocument_CheckChar(41u);
                       i0 = (OOC_INT32)currentEntity;
                       XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i0);
                       i0 = _class;
-                      i0 = i0==(OOC_CHAR8)',';
+                      i0 = i0==44u;
                       if (i0) goto l13;
                       i0 = (OOC_INT32)dtd;
                       i1 = (OOC_INT32)first;
@@ -5643,10 +5640,10 @@ l14:
               if (i0) goto l13;
               i0 = (OOC_INT32)chars;
               i0 = _check_pointer(i0, 82413);
-              i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+              i1 = OOC_ARRAY_LENGTH(i0, 0);
               i2 = cpos;
               i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 82413))*2);
-              i0 = i0==(OOC_CHAR8)'(';
+              i0 = i0==40u;
               if (i0) goto l7;
               XML_Parser__ParserDesc_ParseDocument_Err(106);
               i0 = (OOC_INT32)dtd;
@@ -5657,8 +5654,8 @@ l14:
 l7:
               i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_CurrentEntity();
               currentEntity = (XML_DTD__Entity)i0;
-              XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'(');
-              XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+              XML_Parser__ParserDesc_ParseDocument_CheckChar(40u);
+              XML_Parser__ParserDesc_ParseDocument_OptS(0u);
               i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("#PCDATA", 8, 1);
               if (i1) goto l10;
               i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec_children((XML_DTD__Entity)i0);
@@ -5670,13 +5667,13 @@ l10:
               goto l16;
 l13:
               i0 = (OOC_INT32)dtd;
-              i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+              i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
               i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 82352)))), XML_DTD__BuilderDesc_NewNameCP)),XML_DTD__BuilderDesc_NewNameCP)((XML_DTD__Builder)i0, 0, (XML_UnicodeBuffer__CharArray)i1);
               return (XML_DTD__CP)i0;
               goto l16;
 l15:
               i0 = (OOC_INT32)dtd;
-              i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+              i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
               i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 82233)))), XML_DTD__BuilderDesc_NewNameCP)),XML_DTD__BuilderDesc_NewNameCP)((XML_DTD__Builder)i0, 0, (XML_UnicodeBuffer__CharArray)i1);
               return (XML_DTD__CP)i0;
 l16:
@@ -5688,12 +5685,12 @@ l16:
           i0 = cpos;
           cpos = (i0+9);
           XML_Parser__ParserDesc_ParseDocument_S();
-          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
           elementName = (XML_UnicodeBuffer__CharArray)i0;
           XML_Parser__ParserDesc_ParseDocument_S();
           i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_markupdecl_elementdecl_contentspec();
           cp = (XML_DTD__CP)i0;
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
           i1 = (OOC_INT32)dtd;
           i2 = (OOC_INT32)currentEntity;
           i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 83130)))), XML_DTD__EntityDesc_IsDocumentEntity)),XML_DTD__EntityDesc_IsDocumentEntity)((XML_DTD__Entity)i2);
@@ -5714,7 +5711,7 @@ l16:
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 83290)))), &_td_XML_DTD__ElementDeclDesc, 83290)), 83302)))), XML_DTD__ElementDeclDesc_SetMultipleDecl)),XML_DTD__ElementDeclDesc_SetMultipleDecl)((XML_DTD__ElementDecl)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 83290)))), &_td_XML_DTD__ElementDeclDesc, 83290)));
 l3:
           XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i2);
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
           return;
           ;
         }
@@ -5742,19 +5739,19 @@ l3:
                   i0 = (OOC_INT32)dtd;
                   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 84106)))), XML_DTD__BuilderDesc_NewEnumeration)),XML_DTD__BuilderDesc_NewEnumeration)((XML_DTD__Builder)i0);
                   *_enum = (XML_DTD__Enumeration)i0;
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'(');
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(40u);
                   i0 = attrType;
 l1_loop:
-                  XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                  XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                   switch (i0) {
                   case 7:
                     i1 = (OOC_INT32)*_enum;
-                    i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+                    i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
                     OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 84285)))), XML_DTD__EnumerationDesc_Append)),XML_DTD__EnumerationDesc_Append)((XML_DTD__Enumeration)i1, (XML_UnicodeBuffer__CharArray)i2);
                     goto l6;
                   case 8:
                     i1 = (OOC_INT32)*_enum;
-                    i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Nmtoken(OOC_FALSE, OOC_FALSE);
+                    i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Nmtoken(0u, 0u);
                     OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 84364)))), XML_DTD__EnumerationDesc_Append)),XML_DTD__EnumerationDesc_Append)((XML_DTD__Enumeration)i1, (XML_UnicodeBuffer__CharArray)i2);
                     goto l6;
                   default:
@@ -5762,18 +5759,18 @@ l1_loop:
                     goto l6;
                   }
 l6:
-                  XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+                  XML_Parser__ParserDesc_ParseDocument_OptS(0u);
                   i1 = (OOC_INT32)chars;
                   i1 = _check_pointer(i1, 84468);
-                  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                  i2 = OOC_ARRAY_LENGTH(i1, 0);
                   i3 = cpos;
                   i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 84468))*2);
-                  i1 = i1==(OOC_CHAR8)'|';
+                  i1 = i1==124u;
                   if (!i1) goto l11;
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'|');
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(124u);
                   goto l1_loop;
 l11:
-                  XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)')');
+                  XML_Parser__ParserDesc_ParseDocument_CheckChar(41u);
                   i0 = (OOC_INT32)*_enum;
                   return (XML_DTD__Enumeration)i0;
                   ;
@@ -5801,14 +5798,14 @@ l11:
               if (i0) goto l19;
               i0 = (OOC_INT32)chars;
               i0 = _check_pointer(i0, 85806);
-              i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+              i1 = OOC_ARRAY_LENGTH(i0, 0);
               i2 = cpos;
               i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 85806))*2);
-              i0 = i0==(OOC_CHAR8)'(';
+              i0 = i0==40u;
               
               goto l21;
 l19:
-              i0=OOC_TRUE;
+              i0=1u;
 l21:
               if (i0) goto l23;
               XML_Parser__ParserDesc_ParseDocument_Err(107);
@@ -5818,10 +5815,10 @@ l21:
 l23:
               i0 = (OOC_INT32)chars;
               i0 = _check_pointer(i0, 85846);
-              i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+              i1 = OOC_ARRAY_LENGTH(i0, 0);
               i2 = cpos;
               i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 85846))*2);
-              i0 = i0==(OOC_CHAR8)'(';
+              i0 = i0==40u;
               if (i0) goto l26;
               *attrType = 7;
               cpos = (i2+8);
@@ -5898,7 +5895,7 @@ l7:
               XML_Parser__ParserDesc_ParseDocument_S();
               *_default = 3;
 l8:
-              i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_AttValue(OOC_TRUE);
+              i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_AttValue(1u);
               *defaultValue = (XML_DTD__AttValue)i0;
               goto l12;
 l9:
@@ -5919,36 +5916,36 @@ l12:
           i0 = cpos;
           cpos = (i0+9);
           XML_Parser__ParserDesc_ParseDocument_S();
-          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
           elementName = (XML_UnicodeBuffer__CharArray)i0;
 l1_loop:
           i0 = (OOC_INT32)chars;
           i0 = _check_pointer(i0, 87275);
-          i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+          i1 = OOC_ARRAY_LENGTH(i0, 0);
           i2 = cpos;
           i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 87275))*2);
-          i0 = i0!=(OOC_CHAR8)'>';
+          i0 = i0!=62u;
           if (!i0) goto l4;
           XML_Parser__ParserDesc_ParseDocument_S();
 l4:
           i0 = (OOC_INT32)chars;
           i1 = _check_pointer(i0, 87342);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = cpos;
           i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 87342))*2);
-          i1 = i1==(OOC_CHAR8)'>';
+          i1 = i1==62u;
           if (i1) goto l7;
           i0 = _check_pointer(i0, 87365);
-          i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+          i1 = OOC_ARRAY_LENGTH(i0, 0);
           i0 = *(OOC_UINT16*)(i0+(_check_index(i3, i1, OOC_UINT32, 87365))*2);
-          i0 = i0==(OOC_CHAR16)65535;
+          i0 = i0==65535u;
           
           goto l9;
 l7:
-          i0=OOC_TRUE;
+          i0=1u;
 l9:
           if (i0) goto l15;
-          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
           attrName = (XML_UnicodeBuffer__CharArray)i0;
           XML_Parser__ParserDesc_ParseDocument_S();
           XML_Parser__ParserDesc_ParseDocument_markupdecl_AttListDecl_AttType((void*)(OOC_INT32)&attrType, (void*)(OOC_INT32)&attrEnumeration);
@@ -5975,14 +5972,14 @@ l9:
 l15:
           i0 = (OOC_INT32)currentEntity;
           XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i0);
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
           return;
           ;
         }
 
         
         void XML_Parser__ParserDesc_ParseDocument_markupdecl_EntityDecl(XML_DTD__Entity currentEntity) {
-          register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
+          register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;
           OOC_CHAR8 isPEntity;
           XML_UnicodeBuffer__CharArray name;
           XML_UnicodeBuffer__CharArray _public;
@@ -6009,21 +6006,23 @@ l15:
 
                   i0 = start;
                   i1 = end;
-                  i0 = i0!=i1;
-                  if (!i0) goto l8;
-                  i0 = (OOC_INT32)chars;
+                  i2 = i0!=i1;
+                  if (!i2) goto l8;
                   i2 = cdelta;
+                  i3 = (OOC_INT32)chars;
+                  i2 = (i2*(-1))+i0;
+                  
 l3_loop:
-                  i3 = _check_pointer(i0, 88787);
-                  i4 = start;
-                  i5 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
-                  i6 = _check_pointer(i0, 88810);
-                  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
-                  i6 = *(OOC_UINT16*)(i6+(_check_index(i4, i7, OOC_UINT32, 88810))*2);
-                  *(OOC_UINT16*)(i3+(_check_index((i4-i2), i5, OOC_UINT32, 88787))*2) = i6;
-                  i3 = i4+1;
-                  i4 = i3!=i1;
-                  start = i3;
+                  i4 = _check_pointer(i3, 88787);
+                  i5 = OOC_ARRAY_LENGTH(i4, 0);
+                  i6 = _check_pointer(i3, 88810);
+                  i7 = OOC_ARRAY_LENGTH(i6, 0);
+                  i6 = *(OOC_UINT16*)(i6+(_check_index(i0, i7, OOC_UINT32, 88810))*2);
+                  *(OOC_UINT16*)(i4+(_check_index(i2, i5, OOC_UINT32, 88787))*2) = i6;
+                  i0 = i0+1;
+                  start = i0;
+                  i2 = i2+1;
+                  i4 = i0!=i1;
                   if (i4) goto l3_loop;
 l8:
                   return;
@@ -6035,19 +6034,19 @@ l8:
               string = (XML_UnicodeBuffer__CharArray)i0;
               i1 = (OOC_INT32)chars;
               i2 = _check_pointer(i1, 88943);
-              i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+              i3 = OOC_ARRAY_LENGTH(i2, 0);
               i4 = cpos;
               i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 88943))*2);
-              i2 = i2==(OOC_CHAR8)'\047';
+              i2 = i2==39u;
               if (i2) goto l3;
               i1 = _check_pointer(i1, 88966);
-              i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+              i2 = OOC_ARRAY_LENGTH(i1, 0);
               i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 88966))*2);
-              i1 = i1==(OOC_CHAR8)'"';
+              i1 = i1==34u;
               
               goto l5;
 l3:
-              i1=OOC_TRUE;
+              i1=1u;
 l5:
               if (i1) goto l7;
               XML_Parser__ParserDesc_ParseDocument_Err(109);
@@ -6066,7 +6065,7 @@ l7:
               startLevel = i1;
               i1 = (OOC_INT32)chars;
               i1 = _check_pointer(i1, 89383);
-              i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+              i2 = OOC_ARRAY_LENGTH(i1, 0);
               i3 = cpos;
               i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 89383))*2);
               endChar = i1;
@@ -6077,15 +6076,15 @@ l7:
 l8_loop:
               i1 = (OOC_INT32)chars;
               i2 = _check_pointer(i1, 89497);
-              i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+              i3 = OOC_ARRAY_LENGTH(i2, 0);
               i4 = cpos;
               i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 89497))*2);
               switch (i2) {
-              case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-              case (OOC_CHAR16)65534:
-                XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+              case 0u ... 31u:
+              case 65534u:
+                XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
                 goto l8_loop;
-              case (OOC_CHAR16)65535:
+              case 65535u:
                 XML_Parser__ParserDesc_ParseDocument_ErrPos(6, (void*)(OOC_INT32)&pos, (RT0__Struct)i0);
                 i0 = (OOC_INT32)p;
                 i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 89688))+72);
@@ -6095,10 +6094,10 @@ l8_loop:
                 i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 89688))+72);
                 i5 = (OOC_INT32)chars;
                 i6 = cstart;
-                i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 89718)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i5, i6, (i3-i4), OOC_TRUE);
+                i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 89718)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i5, i6, (i3-i4), 1u);
                 OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 89705)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i0, (XML_DTD__Fragment)i2);
                 goto l31;
-              case (OOC_CHAR8)'%':
+              case 37u:
                 i2 = cdelta;
                 i2 = i4-i2;
                 i3 = cstart;
@@ -6110,12 +6109,12 @@ l14:
                 i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 89995))+72);
                 i6 = (OOC_INT32)dtd;
                 i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 89995))+72);
-                i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 90025)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i6, (XML_UnicodeBuffer__CharArray)i1, i3, i2, OOC_TRUE);
+                i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 90025)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i6, (XML_UnicodeBuffer__CharArray)i1, i3, i2, 1u);
                 OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 90012)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i4, (XML_DTD__Fragment)i1);
 l15:
-                XML_Parser__ParserDesc_ParseDocument_PEReference(OOC_FALSE);
+                XML_Parser__ParserDesc_ParseDocument_PEReference(0u);
                 goto l8_loop;
-              case (OOC_CHAR8)'&':
+              case 38u:
                 i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("&#", 3, 0);
                 if (!i1) goto l18;
                 goto l19;
@@ -6126,7 +6125,7 @@ l18:
                 i2 = cpos;
                 i1 = i2+i1;
                 storedPos = i1;
-                i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(OOC_FALSE, OOC_TRUE);
+                i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_EntityRef(0u, 1u);
                 fragment = (XML_DTD__Fragment)i2;
                 i2 = (OOC_INT32)p;
                 i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 90678))+36);
@@ -6139,12 +6138,12 @@ l19:
                 goto l8_loop;
               default:
                 i2 = _check_pointer(i1, 90770);
-                i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+                i3 = OOC_ARRAY_LENGTH(i2, 0);
                 i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 90770))*2);
                 i3 = endChar;
                 i2 = i2==i3;
                 if (i2) goto l24;
-                i2=OOC_FALSE;
+                i2=0u;
                 goto l26;
 l24:
                 i2 = (OOC_INT32)p;
@@ -6156,9 +6155,9 @@ l26:
                 if (i2) goto l29;
                 i2 = _check_pointer(i1, 91171);
                 i3 = cdelta;
-                i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+                i5 = OOC_ARRAY_LENGTH(i2, 0);
                 i1 = _check_pointer(i1, 91193);
-                i6 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+                i6 = OOC_ARRAY_LENGTH(i1, 0);
                 i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i6, OOC_UINT32, 91193))*2);
                 *(OOC_UINT16*)(i2+(_check_index((i4-i3), i5, OOC_UINT32, 91171))*2) = i1;
                 cpos = (i4+1);
@@ -6170,7 +6169,7 @@ l29:
                 i6 = cdelta;
                 i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 90974))+72);
                 i7 = cstart;
-                i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 91004)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i5, (XML_UnicodeBuffer__CharArray)i1, i7, (i4-i6), OOC_TRUE);
+                i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 91004)))), XML_DTD__BuilderDesc_NewCharacters)),XML_DTD__BuilderDesc_NewCharacters)((XML_DTD__Builder)i5, (XML_UnicodeBuffer__CharArray)i1, i7, (i4-i6), 1u);
                 OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 90991)))), XML_DTD__AttValueDesc_Append)),XML_DTD__AttValueDesc_Append)((XML_DTD__AttValue)i0, (XML_DTD__Fragment)i1);
                 XML_Parser__ParserDesc_ParseDocument_CheckChar(i3);
                 goto l31;
@@ -6195,13 +6194,13 @@ l32:
           XML_Parser__ParserDesc_ParseDocument_SnoPE();
           i0 = (OOC_INT32)chars;
           i0 = _check_pointer(i0, 91606);
-          i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+          i1 = OOC_ARRAY_LENGTH(i0, 0);
           i2 = cpos;
           i0 = *(OOC_UINT16*)(i0+(_check_index(i2, i1, OOC_UINT32, 91606))*2);
-          i0 = i0==(OOC_CHAR8)'%';
+          i0 = i0==37u;
           isPEntity = i0;
           if (!i0) goto l3;
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'%');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(37u);
           XML_Parser__ParserDesc_ParseDocument_S();
 l3:
           i1 = (OOC_INT32)p;
@@ -6210,24 +6209,24 @@ l3:
           i1 = _check_pointer(i1, 91726);
           i1 = (OOC_INT32)&_td_XML_Locator__Position;
           XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i2, 91726)), (RT0__Struct)i1);
-          i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+          i2 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
           name = (XML_UnicodeBuffer__CharArray)i2;
           XML_Parser__ParserDesc_ParseDocument_S();
           i3 = (OOC_INT32)chars;
           i4 = _check_pointer(i3, 91787);
-          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+          i5 = OOC_ARRAY_LENGTH(i4, 0);
           i6 = cpos;
           i4 = *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 91787))*2);
-          i4 = i4==(OOC_CHAR8)'\047';
+          i4 = i4==39u;
           if (i4) goto l6;
           i3 = _check_pointer(i3, 91810);
-          i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+          i4 = OOC_ARRAY_LENGTH(i3, 0);
           i3 = *(OOC_UINT16*)(i3+(_check_index(i6, i4, OOC_UINT32, 91810))*2);
-          i3 = i3==(OOC_CHAR8)'"';
+          i3 = i3==34u;
           
           goto l8;
 l6:
-          i3=OOC_TRUE;
+          i3=1u;
 l8:
           if (i3) goto l26;
           entityValue = (XML_UnicodeBuffer__CharArray)(OOC_INT32)0;
@@ -6239,42 +6238,42 @@ l12:
           entityType = 3;
           i1=3;
 l13:
-          XML_Parser__ParserDesc_ParseDocument_ExternalID(OOC_FALSE, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
-          i0 = !i0;
+          XML_Parser__ParserDesc_ParseDocument_ExternalID(0u, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
           ndata = (XML_UnicodeBuffer__CharArray)(OOC_INT32)0;
-          if (i0) goto l16;
-          i0=OOC_FALSE;
+          i3 = !i0;
+          if (i3) goto l16;
+          i3=0u;
           goto l18;
 l16:
-          i0 = XML_Parser__ParserDesc_ParseDocument_LookingAtS();
+          i3 = XML_Parser__ParserDesc_ParseDocument_LookingAtS();
           
 l18:
-          if (i0) goto l20;
-          i0=i1;i1=(OOC_INT32)0;
+          if (i3) goto l20;
+          i3=(OOC_INT32)0;
           goto l25;
 l20:
           XML_Parser__ParserDesc_ParseDocument_S();
-          i0 = XML_Parser__ParserDesc_ParseDocument_LookingAt("NDATA", 6, 1);
-          if (i0) goto l23;
-          i0=i1;i1=(OOC_INT32)0;
+          i3 = XML_Parser__ParserDesc_ParseDocument_LookingAt("NDATA", 6, 1);
+          if (i3) goto l23;
+          i3=(OOC_INT32)0;
           goto l25;
 l23:
-          i0 = cpos;
+          i1 = cpos;
           entityType = 4;
-          cpos = (i0+5);
+          cpos = (i1+5);
           XML_Parser__ParserDesc_ParseDocument_S();
-          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
-          ndata = (XML_UnicodeBuffer__CharArray)i0;
-          i1=i0;i0=4;
+          i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
+          ndata = (XML_UnicodeBuffer__CharArray)i1;
+          i3=i1;i1=4;
 l25:
-          i3 = (OOC_INT32)dtd;
-          i4 = (OOC_INT32)currentEntity;
-          i5 = (OOC_INT32)baseURI;
-          i6 = (OOC_INT32)_public;
-          i7 = (OOC_INT32)system;
-          i4 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 93133)))), XML_DTD__EntityDesc_IsDocumentEntity)),XML_DTD__EntityDesc_IsDocumentEntity)((XML_DTD__Entity)i4);
-          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 93019)))), XML_DTD__BuilderDesc_NewExternalEntity)),XML_DTD__BuilderDesc_NewExternalEntity)((XML_DTD__Builder)i3, (XML_UnicodeBuffer__CharArray)i2, i0, (XML_UnicodeBuffer__CharArray)i6, (XML_UnicodeBuffer__CharArray)i7, (XML_UnicodeBuffer__CharArray)i1, (URI__URI)i5, (!i4));
-          entity = (XML_DTD__Entity)i0;
+          i4 = (OOC_INT32)dtd;
+          i5 = (OOC_INT32)currentEntity;
+          i6 = (OOC_INT32)baseURI;
+          i7 = (OOC_INT32)_public;
+          i8 = (OOC_INT32)system;
+          i5 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 93133)))), XML_DTD__EntityDesc_IsDocumentEntity)),XML_DTD__EntityDesc_IsDocumentEntity)((XML_DTD__Entity)i5);
+          i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 93019)))), XML_DTD__BuilderDesc_NewExternalEntity)),XML_DTD__BuilderDesc_NewExternalEntity)((XML_DTD__Builder)i4, (XML_UnicodeBuffer__CharArray)i2, i1, (XML_UnicodeBuffer__CharArray)i7, (XML_UnicodeBuffer__CharArray)i8, (XML_UnicodeBuffer__CharArray)i3, (URI__URI)i6, (!i5));
+          entity = (XML_DTD__Entity)i1;
           
           goto l38;
 l26:
@@ -6292,55 +6291,55 @@ l29:
           entityType = 1;
           i3=1;
 l30:
-          i2 = !i2;
           i4 = (OOC_INT32)name;
-          if (i2) goto l33;
-          i2=OOC_FALSE;
+          i5 = !i2;
+          if (i5) goto l33;
+          i5=0u;
           goto l35;
 l33:
-          i2 = (OOC_INT32)dtd;
-          i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 92128)))), XML_DTD__BuilderDesc_IsValidEntityDecl)),XML_DTD__BuilderDesc_IsValidEntityDecl)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i4, (XML_UnicodeBuffer__CharArray)i0);
-          i2 = !i2;
+          i5 = (OOC_INT32)dtd;
+          i5 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 92128)))), XML_DTD__BuilderDesc_IsValidEntityDecl)),XML_DTD__BuilderDesc_IsValidEntityDecl)((XML_DTD__Builder)i5, (XML_UnicodeBuffer__CharArray)i4, (XML_UnicodeBuffer__CharArray)i0);
+          i5 = !i5;
           
 l35:
-          if (!i2) goto l37;
-          i2 = (OOC_INT32)p;
-          i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 92219))+4);
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 92219))+4);
-          i2 = _check_pointer(i2, 92222);
-          XML_Parser__ParserDesc_ParseDocument_ErrPos(118, (void*)(_check_pointer(i5, 92222)), (RT0__Struct)i1);
+          if (!i5) goto l37;
+          i5 = (OOC_INT32)p;
+          i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 92219))+4);
+          i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 92219))+4);
+          i5 = _check_pointer(i5, 92222);
+          XML_Parser__ParserDesc_ParseDocument_ErrPos(118, (void*)(_check_pointer(i6, 92222)), (RT0__Struct)i1);
 l37:
           i1 = (OOC_INT32)dtd;
-          i2 = (OOC_INT32)currentEntity;
-          i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 92373)))), XML_DTD__EntityDesc_IsDocumentEntity)),XML_DTD__EntityDesc_IsDocumentEntity)((XML_DTD__Entity)i2);
-          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 92263)))), XML_DTD__BuilderDesc_NewInternalEntity)),XML_DTD__BuilderDesc_NewInternalEntity)((XML_DTD__Builder)i1, (XML_UnicodeBuffer__CharArray)i4, i3, (XML_UnicodeBuffer__CharArray)i0, (!i2));
+          i5 = (OOC_INT32)currentEntity;
+          i5 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 92373)))), XML_DTD__EntityDesc_IsDocumentEntity)),XML_DTD__EntityDesc_IsDocumentEntity)((XML_DTD__Entity)i5);
+          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 92263)))), XML_DTD__BuilderDesc_NewInternalEntity)),XML_DTD__BuilderDesc_NewInternalEntity)((XML_DTD__Builder)i1, (XML_UnicodeBuffer__CharArray)i4, i3, (XML_UnicodeBuffer__CharArray)i0, (!i5));
           entity = (XML_DTD__Entity)i0;
-          
+          i1=i0;i0=i2;
 l38:
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
-          i1 = (OOC_INT32)currentEntity;
-          XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i1);
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
-          i1 = (OOC_INT32)p;
-          i1 = *(OOC_UINT8*)((_check_pointer(i1, 93272))+63);
-          if (!i1) goto l48;
-          i1 = isPEntity;
-          if (i1) goto l46;
-          i1 = (OOC_INT32)dtd;
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93398))+4);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93398))+4);
-          i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93411)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i1, (XML_DTD__Declaration)i0);
-          if (!i1) goto l48;
-          i1 = (OOC_INT32)p;
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93444))+44);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93444))+44);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93453)))), XML_Builder__BuilderDesc_EntityDecl)),XML_Builder__BuilderDesc_EntityDecl)((XML_Builder__Builder)i1, (XML_DTD__Entity)i0);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
+          i2 = (OOC_INT32)currentEntity;
+          XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i2);
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
+          i2 = (OOC_INT32)p;
+          i2 = *(OOC_UINT8*)((_check_pointer(i2, 93272))+63);
+          if (!i2) goto l48;
+l41:
+          if (i0) goto l46;
+          i0 = (OOC_INT32)dtd;
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93398))+4);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93398))+4);
+          i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93411)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i0, (XML_DTD__Declaration)i1);
+          if (!i0) goto l48;
+          i0 = (OOC_INT32)p;
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93444))+44);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93444))+44);
+          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93453)))), XML_Builder__BuilderDesc_EntityDecl)),XML_Builder__BuilderDesc_EntityDecl)((XML_Builder__Builder)i0, (XML_DTD__Entity)i1);
           goto l48;
 l46:
-          i1 = (OOC_INT32)dtd;
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93351))+8);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 93351))+8);
-          i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93364)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i1, (XML_DTD__Declaration)i0);
+          i0 = (OOC_INT32)dtd;
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93351))+8);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93351))+8);
+          i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 93364)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i0, (XML_DTD__Declaration)i1);
 l48:
           return;
           ;
@@ -6362,11 +6361,11 @@ l48:
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 93856))+4);
           i0 = _check_pointer(i0, 93859);
           XML_Parser__ParserDesc_ParseDocument_StorePosition((void*)(_check_pointer(i1, 93859)), (RT0__Struct)((OOC_INT32)&_td_XML_Locator__Position));
-          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_TRUE);
+          i0 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(1u);
           name = (XML_UnicodeBuffer__CharArray)i0;
           XML_Parser__ParserDesc_ParseDocument_S();
-          XML_Parser__ParserDesc_ParseDocument_ExternalID(OOC_TRUE, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_ExternalID(1u, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
           i1 = (OOC_INT32)p;
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 94156))+44);
           i3 = (OOC_INT32)dtd;
@@ -6378,7 +6377,7 @@ l48:
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 94165)))), XML_Builder__BuilderDesc_Notation)),XML_Builder__BuilderDesc_Notation)((XML_Builder__Builder)i1, (XML_DTD__Notation)i0);
           i0 = (OOC_INT32)currentEntity;
           XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i0);
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
           return;
           ;
         }
@@ -6440,40 +6439,39 @@ l24:
           level = 1;
           i0 = cpos;
           cstart = i0;
-          cdelta = 0;
           i0 = (OOC_INT32)&_td_XML_Locator__Position;
+          cdelta = 0;
           i1=1;
 l1_loop:
           i2 = (OOC_INT32)chars;
           i3 = _check_pointer(i2, 95285);
-          i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+          i4 = OOC_ARRAY_LENGTH(i3, 0);
           i5 = cpos;
           i3 = *(OOC_UINT16*)(i3+(_check_index(i5, i4, OOC_UINT32, 95285))*2);
           switch (i3) {
-          case (OOC_CHAR8)'\000' ... (OOC_CHAR8)'\037':
-          case (OOC_CHAR16)65534:
-            XML_Parser__ParserDesc_ParseDocument_ControlChar((OOC_CHAR8)'\012');
+          case 0u ... 31u:
+          case 65534u:
+            XML_Parser__ParserDesc_ParseDocument_ControlChar(10u);
             
             goto l1_loop;
-          case (OOC_CHAR16)65535:
+          case 65535u:
             XML_Parser__ParserDesc_ParseDocument_ErrPos(19, (void*)(OOC_INT32)&pos, (RT0__Struct)i0);
             goto l23;
-          case (OOC_CHAR8)']':
+          case 93u:
             i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("]]>", 4, 0);
             if (i2) goto l8;
             i2 = (OOC_INT32)chars;
             i3 = _check_pointer(i2, 95833);
             i4 = cdelta;
             i5 = cpos;
-            i6 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+            i6 = OOC_ARRAY_LENGTH(i3, 0);
             i2 = _check_pointer(i2, 95855);
-            i7 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+            i7 = OOC_ARRAY_LENGTH(i2, 0);
             i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i7, OOC_UINT32, 95855))*2);
             *(OOC_UINT16*)(i3+(_check_index((i5-i4), i6, OOC_UINT32, 95833))*2) = i2;
-            i2 = i5+1;
-            cpos = i2;
-            {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-            goto l15;
+            cpos = (i5+1);
+            
+            goto l1_loop;
 l8:
             i2 = i1==1;
             if (!i2) goto l11;
@@ -6481,48 +6479,42 @@ l8:
             XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i2);
 l11:
             i2 = cpos;
-            i2 = i2+3;
-            cpos = i2;
+            cpos = (i2+3);
             i1 = i1-1;
             level = i1;
-            i3 = i1==0;
-            if (i3) goto l23;
-            {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-l15:
-            i1=i2;
-            goto l1_loop;
-          case (OOC_CHAR8)'<':
+            i2 = i1==0;
+            if (!i2) goto l1_loop;
+            goto l23;
+          case 60u:
             i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<![", 4, 0);
-            if (i2) goto l19;
+            if (!i2) goto l18;
+            goto l19;
+l18:
             i2 = (OOC_INT32)chars;
             i3 = _check_pointer(i2, 96085);
             i4 = cdelta;
             i5 = cpos;
-            i6 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+            i6 = OOC_ARRAY_LENGTH(i3, 0);
             i2 = _check_pointer(i2, 96107);
-            i7 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+            i7 = OOC_ARRAY_LENGTH(i2, 0);
             i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i7, OOC_UINT32, 96107))*2);
             *(OOC_UINT16*)(i3+(_check_index((i5-i4), i6, OOC_UINT32, 96085))*2) = i2;
-            i2 = i5+1;
-            cpos = i2;
-            {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-            goto l20;
+            cpos = (i5+1);
+            
+            goto l1_loop;
 l19:
             i2 = cpos;
-            i2 = i2+3;
-            cpos = i2;
+            cpos = (i2+3);
             i1 = i1+1;
             level = i1;
-            {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-l20:
-            i1=i2;
+            
             goto l1_loop;
           default:
             i3 = _check_pointer(i2, 96174);
             i4 = cdelta;
-            i6 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+            i6 = OOC_ARRAY_LENGTH(i3, 0);
             i2 = _check_pointer(i2, 96196);
-            i7 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+            i7 = OOC_ARRAY_LENGTH(i2, 0);
             i2 = *(OOC_UINT16*)(i2+(_check_index(i5, i7, OOC_UINT32, 96196))*2);
             *(OOC_UINT16*)(i3+(_check_index((i5-i4), i6, OOC_UINT32, 96174))*2) = i2;
             cpos = (i5+1);
@@ -6539,15 +6531,15 @@ l23:
 l1_loop:
       i1 = (OOC_INT32)chars;
       i2 = _check_pointer(i1, 96314);
-      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = cpos;
       i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 96314))*2);
-      i2 = i2==(OOC_CHAR8)'<';
+      i2 = i2==60u;
       if (i2) goto l12;
       i1 = _check_pointer(i1, 97453);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 97453))*2);
-      i1 = i1==(OOC_CHAR8)'%';
+      i1 = i1==37u;
       if (!i1) goto l5;
       goto l10;
 l5:
@@ -6556,7 +6548,7 @@ l5:
       XML_Parser__ParserDesc_ParseDocument_SnoPE();
       goto l1_loop;
 l10:
-      XML_Parser__ParserDesc_ParseDocument_PEReference(OOC_TRUE);
+      XML_Parser__ParserDesc_ParseDocument_PEReference(1u);
       goto l1_loop;
 l12:
       i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_CurrentEntity();
@@ -6569,7 +6561,7 @@ l12:
 l15:
       i2 = cpos;
       cpos = (i2+3);
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(0u);
       i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("INCLUDE", 8, 1);
       if (i2) goto l22;
       i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("IGNORE", 7, 1);
@@ -6581,17 +6573,17 @@ l19:
 l20:
       i2 = cpos;
       cpos = (i2+6);
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(0u);
       XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i1);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'[');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(91u);
       XML_Parser__ParserDesc_ParseDocument_extSubsetDecl_ignoreSectContents();
       goto l1_loop;
 l22:
       i2 = cpos;
       cpos = (i2+7);
-      XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+      XML_Parser__ParserDesc_ParseDocument_OptS(0u);
       XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i1);
-      XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'[');
+      XML_Parser__ParserDesc_ParseDocument_CheckChar(91u);
       XML_Parser__ParserDesc_ParseDocument_extSubsetDecl();
       XML_Parser__ParserDesc_ParseDocument_CheckCurrentEntity((XML_DTD__Entity)i1);
       i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("]]>", 4, 0);
@@ -6651,8 +6643,8 @@ l30:
               i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 98568))+48);
               i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 98573))+4);
               i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i4, 98586));
-              i5 = i4!=(OOC_INT32)0;
               decl = (XML_DTD__Declaration)i4;
+              i5 = i4!=0;
               if (!i5) goto l14;
 l3_loop:
               i5 = *(OOC_INT8*)((_check_pointer((_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 98655)))), &_td_XML_DTD__EntityDesc, 98655)), 98662))+8);
@@ -6660,20 +6652,20 @@ l3_loop:
               if (!i5) goto l9;
               i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 98748))+4);
               i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 98748))+4);
-              i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 98754)), (OOC_INT32)0);
+              i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 98754)), 0);
               i5 = LongStrings__Length((void*)(_check_pointer(i5, 98754)), i6);
               i5 = i5+2;
               i6 = cpos;
               len = i5;
               cpos = (i6+i5);
-              XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)(_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 98812)))), &_td_XML_DTD__EntityDesc, 98812)), OOC_TRUE);
+              XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)(_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 98812)))), &_td_XML_DTD__EntityDesc, 98812)), 1u);
               XML_Parser__ParserDesc_ParseDocument_content();
               i6 = (OOC_INT32)chars;
               i6 = _check_pointer(i6, 98889);
-              i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+              i7 = OOC_ARRAY_LENGTH(i6, 0);
               i8 = cpos;
               i6 = *(OOC_UINT16*)(i6+(_check_index(i8, i7, OOC_UINT32, 98889))*2);
-              i6 = i6!=(OOC_CHAR16)65535;
+              i6 = i6!=65535u;
               if (!i6) goto l8;
               XML_Parser__ParserDesc_ParseDocument_ErrPos(302, (void*)(OOC_INT32)&pos, (RT0__Struct)i3);
               i6 = (OOC_INT32)p;
@@ -6681,7 +6673,7 @@ l3_loop:
               i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 99099))+4);
               i9 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 99099))+4);
               i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 98990))+104);
-              i9 = OOC_ARRAY_LENGTH((_check_pointer(i9, 99105)), (OOC_INT32)0);
+              i9 = OOC_ARRAY_LENGTH((_check_pointer(i9, 99105)), 0);
               i8 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i8, 99105)), i9);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 99001)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i6, "name", 5, (Msg__LStringPtr)i8);
 l8:
@@ -6691,7 +6683,7 @@ l8:
 l9:
               i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i4, 99226));
               decl = (XML_DTD__Declaration)i4;
-              i5 = i4!=(OOC_INT32)0;
+              i5 = i4!=0;
               if (i5) goto l3_loop;
 l14:
               i3 = (OOC_INT32)p;
@@ -6712,7 +6704,7 @@ l18:
 
 
           i0 = (OOC_INT32)p;
-          *(OOC_UINT8*)((_check_pointer(i0, 99706))+66) = OOC_TRUE;
+          *(OOC_UINT8*)((_check_pointer(i0, 99706))+66) = 1u;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 99756))+4);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 99756))+4);
           i0 = _check_pointer(i0, 99759);
@@ -6726,20 +6718,20 @@ l18:
           i1 = cpos;
           cpos = (i1+9);
           XML_Parser__ParserDesc_ParseDocument_S();
-          i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(OOC_FALSE);
+          i1 = (OOC_INT32)XML_Parser__ParserDesc_ParseDocument_Name(0u);
           rootName = (XML_UnicodeBuffer__CharArray)i1;
           i2 = (OOC_INT32)p;
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 99951))+48);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 99951))+48);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 99956)))), XML_DTD__BuilderDesc_SetRootName)),XML_DTD__BuilderDesc_SetRootName)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i1);
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
           i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("SYSTEM", 7, 0);
           if (i1) goto l3;
           i1 = XML_Parser__ParserDesc_ParseDocument_LookingAt("PUBLIC", 7, 0);
           
           goto l5;
 l3:
-          i1=OOC_TRUE;
+          i1=1u;
 l5:
           if (i1) goto l7;
           system = (XML_UnicodeBuffer__CharArray)(OOC_INT32)0;
@@ -6747,31 +6739,31 @@ l5:
           baseURI = (URI__URI)(OOC_INT32)0;
           goto l8;
 l7:
-          XML_Parser__ParserDesc_ParseDocument_ExternalID(OOC_FALSE, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_ExternalID(0u, (void*)(OOC_INT32)&_public, (void*)(OOC_INT32)&system, (void*)(OOC_INT32)&baseURI);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
 l8:
           i1 = (OOC_INT32)chars;
           i1 = _check_pointer(i1, 100399);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = cpos;
           i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 100399))*2);
-          i1 = i1==(OOC_CHAR8)'[';
+          i1 = i1==91u;
           if (!i1) goto l28;
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'[');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(91u);
 l11_loop:
           i1 = (OOC_INT32)chars;
           i2 = _check_pointer(i1, 100481);
-          i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+          i3 = OOC_ARRAY_LENGTH(i2, 0);
           i4 = cpos;
           i2 = *(OOC_UINT16*)(i2+(_check_index(i4, i3, OOC_UINT32, 100481))*2);
-          i2 = i2==(OOC_CHAR8)'<';
+          i2 = i2==60u;
           if (!i2) goto l13;
           goto l22;
 l13:
           i1 = _check_pointer(i1, 100549);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i1 = *(OOC_UINT16*)(i1+(_check_index(i4, i2, OOC_UINT32, 100549))*2);
-          i1 = i1==(OOC_CHAR8)'%';
+          i1 = i1==37u;
           if (!i1) goto l15;
           goto l20;
 l15:
@@ -6780,7 +6772,7 @@ l15:
           XML_Parser__ParserDesc_ParseDocument_SnoPE();
           goto l11_loop;
 l20:
-          XML_Parser__ParserDesc_ParseDocument_PEReference(OOC_TRUE);
+          XML_Parser__ParserDesc_ParseDocument_PEReference(1u);
           goto l11_loop;
 l22:
           XML_Parser__ParserDesc_ParseDocument_markupdecl();
@@ -6792,20 +6784,20 @@ l24:
           if (!i1) goto l27;
           XML_Parser__ParserDesc_ParseDocument_Err(300);
 l27:
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)']');
-          XML_Parser__ParserDesc_ParseDocument_OptS(OOC_FALSE);
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(93u);
+          XML_Parser__ParserDesc_ParseDocument_OptS(0u);
 l28:
-          XML_Parser__ParserDesc_ParseDocument_CheckChar((OOC_CHAR8)'>');
+          XML_Parser__ParserDesc_ParseDocument_CheckChar(62u);
+          externalSubset = (XML_DTD__ExternalEntity)(OOC_INT32)0;
           i1 = (OOC_INT32)_public;
           i2 = i1!=(OOC_INT32)0;
-          externalSubset = (XML_DTD__ExternalEntity)(OOC_INT32)0;
           if (i2) goto l31;
           i2 = (OOC_INT32)system;
           i2 = i2!=(OOC_INT32)0;
           
           goto l33;
 l31:
-          i2=OOC_TRUE;
+          i2=1u;
 l33:
           if (!i2) goto l45;
           i2 = (OOC_INT32)p;
@@ -6819,22 +6811,22 @@ l37:
           i4 = (OOC_INT32)system;
           i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 101064)))), XML_DTD__BuilderDesc_NewExternalDTD)),XML_DTD__BuilderDesc_NewExternalDTD)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i1, (XML_UnicodeBuffer__CharArray)i4, (URI__URI)i3);
           externalSubset = (XML_DTD__ExternalEntity)i1;
-          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, OOC_TRUE);
+          XML_Parser__ParserDesc_ParseDocument_PushEntity((XML_DTD__Entity)i1, 1u);
           i2 = (OOC_INT32)p;
-          *(OOC_UINT8*)((_check_pointer(i2, 101168))+67) = OOC_TRUE;
+          *(OOC_UINT8*)((_check_pointer(i2, 101168))+67) = 1u;
           i2 = XML_Parser__ParserDesc_ParseDocument_LookingAt("<?xml", 6, 1);
           if (!i2) goto l40;
           XML_Parser__ParserDesc_ParseDocument_XMLDecl((XML_DTD__ExternalEntity)i1);
 l40:
           XML_Parser__ParserDesc_ParseDocument_extSubsetDecl();
           i1 = (OOC_INT32)p;
-          *(OOC_UINT8*)((_check_pointer(i1, 101351))+67) = OOC_FALSE;
+          *(OOC_UINT8*)((_check_pointer(i1, 101351))+67) = 0u;
           i1 = (OOC_INT32)chars;
           i1 = _check_pointer(i1, 101401);
-          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+          i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = cpos;
           i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 101401))*2);
-          i1 = i1!=(OOC_CHAR16)65535;
+          i1 = i1!=65535u;
           if (!i1) goto l43;
           XML_Parser__ParserDesc_ParseDocument_Err(28);
 l43:
@@ -6874,7 +6866,7 @@ l56:
           i3 = (OOC_INT32)externalSubset;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 102039)))), XML_Builder__BuilderDesc_EndDTD)),XML_Builder__BuilderDesc_EndDTD)((XML_Builder__Builder)i0, (XML_DTD__ExternalEntity)i3, i2);
           i0 = (OOC_INT32)p;
-          *(OOC_UINT8*)((_check_pointer(i0, 102110))+66) = OOC_FALSE;
+          *(OOC_UINT8*)((_check_pointer(i0, 102110))+66) = 0u;
           return;
           ;
         }
@@ -6927,7 +6919,7 @@ l6:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 102648)))), XML_Builder__BuilderDesc_StartDocument)),XML_Builder__BuilderDesc_StartDocument)((XML_Builder__Builder)i3, (XML_DTD__ExternalEntity)i1);
   XML_Parser__ParserDesc_ParseDocument_prolog();
   i1 = (OOC_INT32)p;
-  *(OOC_UINT8*)((_check_pointer(i1, 102722))+65) = OOC_TRUE;
+  *(OOC_UINT8*)((_check_pointer(i1, 102722))+65) = 1u;
   XML_Parser__ParserDesc_ParseDocument_element();
   i1 = (OOC_INT32)p;
   i1 = *(OOC_INT32*)((_check_pointer(i1, 102773))+88);
@@ -6936,14 +6928,14 @@ l6:
   XML_Parser__ParserDesc_ParseDocument_Err(301);
 l3:
   i1 = (OOC_INT32)p;
-  *(OOC_UINT8*)((_check_pointer(i1, 102838))+65) = OOC_FALSE;
+  *(OOC_UINT8*)((_check_pointer(i1, 102838))+65) = 0u;
   XML_Parser__ParserDesc_ParseDocument_MiscRep();
   i1 = (OOC_INT32)chars;
   i1 = _check_pointer(i1, 102894);
-  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
   i3 = cpos;
   i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 102894))*2);
-  i1 = i1!=(OOC_CHAR16)65535;
+  i1 = i1!=65535u;
   if (!i1) goto l6;
   XML_Parser__ParserDesc_ParseDocument_Err(2);
 l6:
@@ -6969,7 +6961,7 @@ static void XML_Parser__Init(XML_Parser__Parser p, OOC_CHAR8 _new, IO__ByteChann
   *(OOC_INT32*)(_check_pointer(i0, 103388)) = i1;
   i1 = _new;
   if (i1) goto l3;
-  _assert(OOC_FALSE, 127, 103640);
+  _assert(0u, 127, 103640);
   goto l4;
 l3:
   *(OOC_INT32*)((_check_pointer(i0, 103446))+4) = ((OOC_INT32)RT0__NewObject(_td_XML_Locator__Locator.baseTypes[0]));
@@ -6983,7 +6975,7 @@ l3:
   *(OOC_INT32*)((_check_pointer(i0, 103565))+36) = i1;
 l4:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 103733))+4);
-  *(OOC_INT32*)((_check_pointer(i1, 103736))+16) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i1, 103736))+16) = 0;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 103768))+8);
   *(OOC_INT32*)(_check_pointer(i1, 103783)) = i0;
   i1 = (OOC_INT32)XML_DTD__New();
@@ -7000,25 +6992,25 @@ l4:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 103906)))), XML_DTD__ExternalEntityDesc_SetCodecFactory)),XML_DTD__ExternalEntityDesc_SetCodecFactory)((XML_DTD__ExternalEntity)i3, (XML_UnicodeCodec__Factory)i2);
   i1 = (OOC_INT32)builder;
   *(OOC_INT32*)((_check_pointer(i0, 103952))+44) = i1;
-  i2 = (OOC_INT32)entityResolver;
   *(OOC_INT32*)((_check_pointer(i0, 103979))+40) = i1;
-  i1 = i2==(OOC_INT32)0;
+  i1 = (OOC_INT32)entityResolver;
+  i1 = i1==0;
   if (!i1) goto l7;
   i1 = (OOC_INT32)XML_EntityResolver__New();
   entityResolver = (XML_EntityResolver__Resolver)i1;
 l7:
   i1 = (OOC_INT32)entityResolver;
   *(OOC_INT32*)((_check_pointer(i0, 104102))+32) = i1;
-  *(OOC_UINT8*)((_check_pointer(i0, 104141))+60) = OOC_TRUE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104175))+61) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104206))+62) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104234))+63) = OOC_TRUE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104270))+64) = OOC_TRUE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104307))+65) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104342))+66) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104365))+67) = OOC_FALSE;
-  *(OOC_UINT8*)((_check_pointer(i0, 104399))+68) = OOC_FALSE;
-  *(OOC_INT32*)((_check_pointer(i0, 104438))+72) = (OOC_INT32)0;
+  *(OOC_UINT8*)((_check_pointer(i0, 104141))+60) = 1u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104175))+61) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104206))+62) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104234))+63) = 1u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104270))+64) = 1u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104307))+65) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104342))+66) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104365))+67) = 0u;
+  *(OOC_UINT8*)((_check_pointer(i0, 104399))+68) = 0u;
+  *(OOC_INT32*)((_check_pointer(i0, 104438))+72) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 104469))+80) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 104494))+88) = 0;
   return;
@@ -7034,7 +7026,7 @@ XML_Parser__Parser XML_Parser__NewChannel(IO__ByteChannel ch, URI__URI baseURI, 
   i3 = (OOC_INT32)codecFactory;
   i4 = (OOC_INT32)entityResolver;
   i5 = (OOC_INT32)builder;
-  XML_Parser__Init((XML_Parser__Parser)i0, OOC_TRUE, (IO__ByteChannel)i1, (URI__URI)i2, (XML_UnicodeCodec__Factory)i3, (XML_EntityResolver__Resolver)i4, (XML_Builder__Builder)i5);
+  XML_Parser__Init((XML_Parser__Parser)i0, 1u, (IO__ByteChannel)i1, (URI__URI)i2, (XML_UnicodeCodec__Factory)i3, (XML_EntityResolver__Resolver)i4, (XML_Builder__Builder)i5);
   return (XML_Parser__Parser)i0;
   ;
 }
@@ -7079,12 +7071,12 @@ XML_Parser__Parser XML_Parser__NewExternalID(const OOC_CHAR16 _public__ref[], OO
       XML_UnicodeBuffer__CharArray str;
 
       i0 = (
-      _cmp16((const void*)(OOC_INT32)s,(const void*)((OOC_CHAR16[]){0})))==(OOC_INT32)0;
+      _cmp16((const void*)(OOC_INT32)s,(const void*)((OOC_CHAR16[]){0})))==0;
       if (i0) goto l3;
       i0 = LongStrings__Length((void*)(OOC_INT32)s, s_0d);
       i0 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i0+1));
       str = (XML_UnicodeBuffer__CharArray)i0;
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 108376)), (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 108376)), 0);
       _copy_16((const void*)(OOC_INT32)s,(void*)(_check_pointer(i0, 108376)),i1);
       return (XML_UnicodeBuffer__CharArray)i0;
       goto l4;
@@ -7331,7 +7323,7 @@ void OOC_XML_Parser_init(void) {
   _copy_16((const void*)((OOC_CHAR16[]){45,39,40,41,43,44,46,47,58,61,63,59,33,42,35,64,36,95,37,0}),(void*)(OOC_INT32)XML_Parser__suplPubidChar,32);
   i0 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], 8);
   XML_Parser__noName = (XML_UnicodeBuffer__CharArray)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 113702)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 113702)), 0);
   _copy_16((const void*)((OOC_CHAR16[]){35,110,111,95,110,97,109,101,0}),(void*)(_check_pointer(i0, 113702)),i1);
   i0 = (OOC_INT32)XML_Error__NewContext("XML:Parser", 11);
   XML_Parser__parserContext = (XML_Error__Context)i0;

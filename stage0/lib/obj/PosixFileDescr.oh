@@ -13,8 +13,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef Msg__Msg PosixFileDescr__Result;
-#define PosixFileDescr__noLength -1
-#define PosixFileDescr__noPosition -2
+#define PosixFileDescr__noLength (-1)
+#define PosixFileDescr__noPosition (-2)
 #define PosixFileDescr__done  0
 #define PosixFileDescr__invalidChannel 1
 #define PosixFileDescr__writeError 2

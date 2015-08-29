@@ -18,51 +18,51 @@ Object__String OOC_C_Naming__NameOfDeclaration(OOC_SymbolTable__Declaration decl
       register OOC_INT32 i0,i1;
 
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 1186)));
-      i0 = i0==(OOC_CHAR8)'i';
+      i0 = i0==105u;
       if (i0) goto l3;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 1204)));
-      i0 = i0==(OOC_CHAR8)'w';
+      i0 = i0==119u;
       
       goto l5;
 l3:
-      i0=OOC_TRUE;
+      i0=1u;
 l5:
       if (i0) goto l7;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 1222)));
-      i0 = i0==(OOC_CHAR8)'l';
+      i0 = i0==108u;
       
       goto l9;
 l7:
-      i0=OOC_TRUE;
+      i0=1u;
 l9:
       if (i0) goto l11;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 1249)));
-      i0 = i0==(OOC_CHAR8)'f';
+      i0 = i0==102u;
       
       goto l13;
 l11:
-      i0=OOC_TRUE;
+      i0=1u;
 l13:
       if (i0) goto l15;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT8, 1267)));
-      i0 = i0==(OOC_CHAR8)'d';
+      i0 = i0==100u;
       
       goto l17;
 l15:
-      i0=OOC_TRUE;
+      i0=1u;
 l17:
       if (i0) goto l19;
-      return OOC_FALSE;
+      return 0u;
       goto l41;
 l19:
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(1, str_0d, OOC_UINT32, 1324)));
-      i0 = (OOC_CHAR8)'0'<=i0;
+      i0 = (OOC_UINT8)48u<=(OOC_UINT8)i0;
       if (i0) goto l22;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l24;
 l22:
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(1, str_0d, OOC_UINT32, 1335)));
-      i0 = i0<=(OOC_CHAR8)'9';
+      i0 = (OOC_UINT8)i0<=(OOC_UINT8)57u;
       
 l24:
       if (i0) goto l26;
@@ -73,24 +73,24 @@ l26:
 l27_loop:
       i0 = i0+1;
       i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 1324)));
-      i1 = (OOC_CHAR8)'0'<=i1;
+      i1 = (OOC_UINT8)48u<=(OOC_UINT8)i1;
       if (i1) goto l30;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l32;
 l30:
       i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 1335)));
-      i1 = i1<=(OOC_CHAR8)'9';
+      i1 = (OOC_UINT8)i1<=(OOC_UINT8)57u;
       
 l32:
       if (i1) goto l27_loop;
 l36:
       i1 = i0>1;
       if (i1) goto l39;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l40;
 l39:
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT32, 1410)));
-      i0 = i0==(OOC_CHAR8)'\000';
+      i0 = i0==0u;
       
 l40:
       return i0;
@@ -110,11 +110,11 @@ l41:
     }
 
 
-  relativeName = OOC_FALSE;
+  relativeName = 0u;
   i0 = (OOC_INT32)decl;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1692)))), &_td_OOC_SymbolTable__VarDeclDesc);
   if (i1) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l13;
 l3:
   i1 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1727)))), &_td_OOC_SymbolTable__VarDeclDesc, 1727)), 1735))+48);
@@ -124,7 +124,7 @@ l3:
   
   goto l8;
 l6:
-  i1=OOC_TRUE;
+  i1=1u;
 l8:
   if (i1) goto l10;
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1824)))), OOC_SymbolTable__ItemDesc_Module)),OOC_SymbolTable__ItemDesc_Module)((OOC_SymbolTable__Item)i0);
@@ -132,7 +132,7 @@ l8:
   
   goto l13;
 l10:
-  i0=OOC_TRUE;
+  i0=1u;
 l13:
   if (i0) goto l34;
   i0 = (OOC_INT32)decl;
@@ -140,7 +140,7 @@ l13:
   if (i1) goto l32;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2298)))), &_td_OOC_SymbolTable__ProcDeclDesc);
   if (i1) goto l19;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l21;
 l19:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2327)))), &_td_OOC_SymbolTable__ProcDeclDesc, 2327)), 2336))+56);
@@ -150,7 +150,7 @@ l21:
   if (i1) goto l30;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2572)))), &_td_OOC_SymbolTable__ProcDeclDesc);
   if (i1) goto l25;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l27;
 l25:
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2614)))), OOC_SymbolTable__ItemDesc_Module)),OOC_SymbolTable__ItemDesc_Module)((OOC_SymbolTable__Item)i0);
@@ -158,7 +158,7 @@ l25:
   
 l27:
   if (!i0) goto l35;
-  relativeName = OOC_TRUE;
+  relativeName = 1u;
   goto l35;
 l30:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2528)))), &_td_OOC_SymbolTable__ProcDeclDesc, 2528)), 2537))+56);
@@ -169,7 +169,7 @@ l32:
   relativeName = (!i0);
   goto l35;
 l34:
-  relativeName = OOC_TRUE;
+  relativeName = 1u;
 l35:
   i0 = relativeName;
   if (i0) goto l70;
@@ -192,7 +192,7 @@ l46:
   _copy_8((const void*)(_check_pointer(i1, 3009)),(void*)(OOC_INT32)str,2048);
   i = 0;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 2048, OOC_UINT32, 3048)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l49;
   i1=0;
   goto l58;
@@ -200,36 +200,36 @@ l49:
   i1=0;
 l50_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, 2048, OOC_UINT32, 3076)));
-  i2 = i2==(OOC_CHAR8)':';
+  i2 = i2==58u;
   if (!i2) goto l53;
-  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, 2048, OOC_UINT32, 3095))) = (OOC_CHAR8)'_';
+  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, 2048, OOC_UINT32, 3095))) = 95u;
 l53:
   i1 = i1+1;
   i = i1;
   i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i1, 2048, OOC_UINT32, 3048)));
-  i2 = i2!=(OOC_CHAR8)'\000';
+  i2 = i2!=0u;
   if (i2) goto l50_loop;
 l58:
   Strings__Append("__", 3, (void*)(OOC_INT32)str, 2048);
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3318)))), OOC_SymbolTable__DeclarationDesc_GetId)),OOC_SymbolTable__DeclarationDesc_GetId)((OOC_SymbolTable__Declaration)i0);
   relativeId = (OOC_Scanner_InputBuffer__CharArray)i0;
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3361)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3361)), 0);
   Strings__Append((void*)(_check_pointer(i0, 3361)), i2, (void*)(OOC_INT32)str, 2048);
   i0 = i1+2;
   i = i0;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3404)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (!i1) goto l71;
 l61_loop:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3432)));
-  i1 = i1==(OOC_CHAR8)'.';
+  i1 = i1==46u;
   if (!i1) goto l64;
-  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3451))) = (OOC_CHAR8)'_';
+  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3451))) = 95u;
 l64:
   i0 = i0+1;
   i = i0;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3404)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l61_loop;
   goto l71;
 l70:
@@ -273,18 +273,18 @@ Object__String OOC_C_Naming__NameOfModuleInit(OOC_SymbolTable__Module m, OOC_CHA
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3933))+12);
   _copy_8((const void*)(_check_pointer(i0, 3938)),(void*)(OOC_INT32)str,2048);
   i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 2048, OOC_UINT32, 3973)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = i0!=0u;
   if (!i0) goto l11;
   i0=0;
 l3_loop:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3999)));
-  i1 = i1==(OOC_CHAR8)':';
+  i1 = i1==58u;
   if (!i1) goto l6;
-  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 4018))) = (OOC_CHAR8)'_';
+  *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 4018))) = 95u;
 l6:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 2048, OOC_UINT32, 3973)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l3_loop;
 l11:
   Strings__Insert("OOC_", 5, 0, (void*)(OOC_INT32)str, 2048);
@@ -519,13 +519,13 @@ static void OOC_C_Naming__Init() {
 }
 
 void OOC_OOC_C_Naming_init(void) {
-  _c0 = Object__NewLatin1Char((OOC_CHAR8)'_');
-  _c1 = Object__NewLatin1Char((OOC_CHAR8)'d');
-  _c2 = Object__NewLatin1Region("__tag", 6, (OOC_INT32)0, 5);
-  _c3 = Object__NewLatin1Region("_TBN_", 6, (OOC_INT32)0, 5);
-  _c4 = Object__NewLatin1Region("_TBP_", 6, (OOC_INT32)0, 5);
-  _c5 = Object__NewLatin1Char((OOC_CHAR8)'_');
-  _c6 = Object__NewLatin1Region("_td_", 5, (OOC_INT32)0, 4);
+  _c0 = Object__NewLatin1Char(95u);
+  _c1 = Object__NewLatin1Char(100u);
+  _c2 = Object__NewLatin1Region("__tag", 6, 0, 5);
+  _c3 = Object__NewLatin1Region("_TBN_", 6, 0, 5);
+  _c4 = Object__NewLatin1Region("_TBP_", 6, 0, 5);
+  _c5 = Object__NewLatin1Char(95u);
+  _c6 = Object__NewLatin1Region("_td_", 5, 0, 4);
 
   OOC_C_Naming__Init();
   return;

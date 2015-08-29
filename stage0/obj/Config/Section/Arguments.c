@@ -68,7 +68,7 @@ Config_Value__StringPtr Config_Section_Arguments__SectionDesc_Get(Config_Section
   i0 = position;
   i1 = 0<=i0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = (OOC_INT32)s;
@@ -83,7 +83,7 @@ l7:
   i1 = (OOC_INT32)s;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1666))+4);
   i1 = _check_pointer(i1, 1672);
-  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
   i0 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i0, i2, OOC_UINT32, 1672))*4);
   return (Config_Value__StringPtr)i0;
 l8:
@@ -109,7 +109,7 @@ void Config_Section_Arguments__SectionDesc_ProcessElements(Config_Section_Argume
       i1 = (OOC_INT32)xmlNode;
       i2 = (OOC_INT32)Config_Section_Arguments__argumentsContext;
       i3 = code;
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2184)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i2, i3, OOC_FALSE, (void*)((_check_pointer(i1, 2231))+4));
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2184)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i2, i3, 0u, (void*)((_check_pointer(i1, 2231))+4));
       lastError = (Msg__Msg)i0;
       return;
       ;
@@ -118,8 +118,8 @@ void Config_Section_Arguments__SectionDesc_ProcessElements(Config_Section_Argume
 
   i0 = (OOC_INT32)sectionRoot;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2285))+36);
-  i1 = i0!=(OOC_INT32)0;
   node = (Config_Parser__Node)i0;
+  i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l46;
 l3_loop:
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2337)))), &_td_Config_Parser__ElementDesc);
@@ -137,23 +137,22 @@ l8:
 l13:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2373))+28);
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 2379)),(const void*)((OOC_CHAR16[]){97,114,103,0})))==(OOC_INT32)0;
+  _cmp16((const void*)(_check_pointer(i1, 2379)),(const void*)((OOC_CHAR16[]){97,114,103,0})))==0;
   if (i1) goto l16;
   Config_Section_Arguments__SectionDesc_ProcessElements_Err(1, (Config_Parser__Node)i0);
   i0 = (OOC_INT32)lastError;
   i1 = (OOC_INT32)s;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3385));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3385));
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3391)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3391)), 0);
   i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 3391)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3337)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i1);
   goto l41;
 l16:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2423))+32);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 2433));
-  i0 = i0-1;
-  i1 = 0<=i0;
   i = 0;
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 2433));
+  i1 = 0<i0;
   if (!i1) goto l24;
   i1=0;
 l19_loop:
@@ -161,7 +160,7 @@ l19_loop:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2467))+32);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2477))+4);
   i3 = _check_pointer(i3, 2483);
-  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
   i1 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i1, i4, OOC_UINT32, 2483))*4);
   att = (XML_Builder__Attribute)i1;
   Config_Section_Arguments__SectionDesc_ProcessElements_Err(2, (Config_Parser__Node)i2);
@@ -169,13 +168,13 @@ l19_loop:
   i2 = (OOC_INT32)att;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2601))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2601))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2612)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2612)), 0);
   i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 2612)), i2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2551)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "name", 5, (Msg__LStringPtr)i2);
   i1 = i;
   i1 = i1+1;
-  i2 = i1<=i0;
   i = i1;
+  i2 = i1<i0;
   if (i2) goto l19_loop;
 l24:
   i0 = (OOC_INT32)node;
@@ -185,43 +184,42 @@ l24:
   i1 = (OOC_INT32)s;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2788))+4);
   i3 = *(OOC_INT32*)((_check_pointer(i1, 2768))+8);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2794)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2794)), 0);
   i2 = i3==i2;
   if (!i2) goto l37;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2837))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2843)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2843)), 0);
   i2 = (OOC_INT32)RT0__NewObject(_td_Config_Section_Arguments__ArgumentArray.baseTypes[0], (i2*2));
   newArgs = (Config_Section_Arguments__ArgumentArray)i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2884))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2890)), (OOC_INT32)0);
-  i3 = i3-1;
-  i4 = 0<=i3;
   i = 0;
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2890)), 0);
+  i4 = 0<i3;
   if (!i4) goto l36;
   i4=0;
 l31_loop:
   i5 = _check_pointer(i2, 2921);
-  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
   i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2929))+4);
   i7 = _check_pointer(i7, 2935);
-  i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+  i8 = OOC_ARRAY_LENGTH(i7, 0);
   i7 = (OOC_INT32)*(OOC_INT32*)(i7+(_check_index(i4, i8, OOC_UINT32, 2935))*4);
   *(OOC_INT32*)(i5+(_check_index(i4, i6, OOC_UINT32, 2921))*4) = i7;
   i4 = i4+1;
-  i5 = i4<=i3;
   i = i4;
+  i5 = i4<i3;
   if (i5) goto l31_loop;
 l36:
   *(OOC_INT32*)((_check_pointer(i1, 2973))+4) = i2;
 l37:
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3040)))), Config_Parser__NodeDesc_GetCharDataContent)),Config_Parser__NodeDesc_GetCharDataContent)((Config_Parser__Node)i0);
   parserString = (XML_UnicodeBuffer__CharArray)i0;
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3107)), (OOC_INT32)0);
-  LongStrings__Short((void*)(_check_pointer(i0, 3107)), i2, (OOC_CHAR8)'?', (void*)(OOC_INT32)valueString, 1024);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3107)), 0);
+  LongStrings__Short((void*)(_check_pointer(i0, 3107)), i2, 63u, (void*)(OOC_INT32)valueString, 1024);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3153))+4);
   i0 = _check_pointer(i0, 3159);
   i2 = *(OOC_INT32*)((_check_pointer(i1, 3161))+8);
-  i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH(i0, 0);
   i4 = (OOC_INT32)Config_Value__GetStringPtr((void*)(OOC_INT32)valueString, 1024);
   *(OOC_INT32*)(i0+(_check_index(i2, i3, OOC_UINT32, 3159))*4) = i4;
   i0 = *(OOC_INT32*)((_check_pointer(i1, 3229))+8);
@@ -252,41 +250,40 @@ void Config_Section_Arguments__SectionDesc_DumpContent(Config_Section_Arguments_
   i1 = (OOC_INT32)s;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3815));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3815));
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3821)), (OOC_INT32)0);
-  LongStrings__Short((void*)(_check_pointer(i2, 3821)), i3, (OOC_CHAR8)'?', (void*)(OOC_INT32)str8, 2048);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3821)), 0);
+  LongStrings__Short((void*)(_check_pointer(i2, 3821)), i3, 63u, (void*)(OOC_INT32)str8, 2048);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3841)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "<", 2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3867)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(OOC_INT32)str8, 2048);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3894)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, ">", 2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3916)))), TextRider__WriterDesc_WriteLn)),TextRider__WriterDesc_WriteLn)((TextRider__Writer)i0);
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 3946))+8);
-  i2 = i2-1;
-  i3 = 0<=i2;
   i = 0;
+  i2 = *(OOC_INT32*)((_check_pointer(i1, 3946))+8);
+  i3 = 0<i2;
   if (!i3) goto l8;
   i3=0;
 l3_loop:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3970)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "  <arg>", 8);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4103))+4);
   i4 = _check_pointer(i4, 4109);
-  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
   i4 = (OOC_INT32)*(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 4109))*4);
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4103))+4);
   i5 = _check_pointer(i5, 4109);
-  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
   i5 = (OOC_INT32)*(OOC_INT32*)(i5+(_check_index(i3, i6, OOC_UINT32, 4109))*4);
-  i5 = OOC_ARRAY_LENGTH((_check_pointer(i5, 4112)), (OOC_INT32)0);
+  i5 = OOC_ARRAY_LENGTH((_check_pointer(i5, 4112)), 0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4087)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i4, 4112)), i5);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4123)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</arg>", 7);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4156)))), TextRider__WriterDesc_WriteLn)),TextRider__WriterDesc_WriteLn)((TextRider__Writer)i0);
   i3 = i3+1;
-  i4 = i3<=i2;
   i = i3;
+  i4 = i3<i2;
   if (i4) goto l3_loop;
 l8:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4199));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4199));
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4205)), (OOC_INT32)0);
-  LongStrings__Short((void*)(_check_pointer(i2, 4205)), i1, (OOC_CHAR8)'?', (void*)(OOC_INT32)str8, 2048);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4205)), 0);
+  LongStrings__Short((void*)(_check_pointer(i2, 4205)), i1, 63u, (void*)(OOC_INT32)str8, 2048);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4225)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</", 3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4252)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(OOC_INT32)str8, 2048);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4279)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, ">", 2);

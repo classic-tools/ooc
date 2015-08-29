@@ -100,9 +100,9 @@ typedef void (*_TBP_XML_Writer__WriterDesc_AttrString)(XML_Writer__Writer w, con
 extern void XML_Writer__WriterDesc_AttrStringLatin1(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR8 value[], OOC_LEN value_0d);
 #define _TBN_XML_Writer__WriterDesc_AttrStringLatin1 9
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrStringLatin1)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR8 value[], OOC_LEN value_0d);
-extern void XML_Writer__WriterDesc_AttrStr(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
-#define _TBN_XML_Writer__WriterDesc_AttrStr 7
-typedef void (*_TBP_XML_Writer__WriterDesc_AttrStr)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
+extern void XML_Writer__WriterDesc_AttrObject(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
+#define _TBN_XML_Writer__WriterDesc_AttrObject 7
+typedef void (*_TBP_XML_Writer__WriterDesc_AttrObject)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
 extern void XML_Writer__WriterDesc_AttrInt(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_INT32 value);
 #define _TBN_XML_Writer__WriterDesc_AttrInt 6
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrInt)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_INT32 value);
@@ -149,12 +149,12 @@ extern RT0__StructDesc _td_XML_Writer__8572;
 extern RT0__StructDesc _td_XML_Writer__8740;
 extern RT0__StructDesc _td_XML_Writer__9487;
 extern RT0__StructDesc _td_XML_Writer__9559;
-extern RT0__StructDesc _td_XML_Writer__10298;
-extern RT0__StructDesc _td_XML_Writer__10618;
-extern RT0__StructDesc _td_XML_Writer__10665;
-extern RT0__StructDesc _td_XML_Writer__10825;
-extern RT0__StructDesc _td_XML_Writer__11043;
-extern RT0__StructDesc _td_XML_Writer__11139;
+extern RT0__StructDesc _td_XML_Writer__10301;
+extern RT0__StructDesc _td_XML_Writer__10652;
+extern RT0__StructDesc _td_XML_Writer__10699;
+extern RT0__StructDesc _td_XML_Writer__10859;
+extern RT0__StructDesc _td_XML_Writer__11077;
+extern RT0__StructDesc _td_XML_Writer__11173;
 #endif /* _MODULE_XML_Writer_ */
 
 /* --- */

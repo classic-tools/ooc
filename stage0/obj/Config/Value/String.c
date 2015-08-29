@@ -24,7 +24,7 @@ void Config_Value_String__ValueDesc_StringToValue(Config_Value_String__Value v, 
   i0 = (OOC_INT32)v;
   i1 = (OOC_INT32)Config_Value__GetStringPtr((void*)(OOC_INT32)str, str_0d);
   *(OOC_INT32*)(_check_pointer(i0, 482)) = i1;
-  *errMsg = (Msg__Msg)(OOC_INT32)0;
+  *errMsg = (Msg__Msg)0;
   return;
   ;
 }
@@ -47,13 +47,13 @@ Config_Value_String__Value Config_Value_String__ValueDesc_Clone(Config_Value_Str
   clone = (Config_Value_String__Value)i0;
   i1 = (OOC_INT32)v;
   i1 = _check_pointer(i1, 793);
-  i2 = (OOC_INT32)&_td_Config_Value_String__ValueDesc;
-  i2 = i2!=i2;
-  i3 = _check_pointer(i0, 787);
-  if (!i2) goto l4;
+  i2 = _check_pointer(i0, 787);
+  i3 = (OOC_INT32)&_td_Config_Value_String__ValueDesc;
+  i3 = i3!=i3;
+  if (!i3) goto l4;
   _failed_type_assert(787);
 l4:
-  _copy_block(i1,i3,4);
+  _copy_block(i1,i2,4);
   return (Config_Value_String__Value)i0;
   ;
 }

@@ -83,7 +83,7 @@ void ADT_Storable__ReaderDesc_Disconnect(ADT_Storable__Reader r) {
 }
 
 void OOC_ADT_Storable_init(void) {
-  _c0 = Object__NewLatin1Region("Unknown type", 13, (OOC_INT32)0, 12);
+  _c0 = Object__NewLatin1Region("Unknown type", 13, 0, 12);
 
   return;
   ;

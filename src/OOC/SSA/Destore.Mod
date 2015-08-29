@@ -1,4 +1,4 @@
-(* 	$Id: Destore.Mod,v 1.63 2003/01/05 14:11:41 mva Exp $	 *)
+(* 	$Id: Destore.Mod,v 1.66 2003/03/09 22:01:01 mva Exp $	 *)
 MODULE OOC:SSA:Destore;
 (*  Converts reads from/writes to memory into local values.
     Copyright (C) 2001-2003  Michael van Acken
@@ -21,7 +21,8 @@ MODULE OOC:SSA:Destore;
 *)
 
 IMPORT
-  ADT:Dictionary, Sym := OOC:SymbolTable, OOC:SSA, OOC:SSA:Opcode,
+  ADT:Dictionary, ADT:ArrayList,
+  Sym := OOC:SymbolTable, OOC:SSA, OOC:SSA:Opcode,
   OOC:SSA:Opnd, OOC:SSA:Result, OOC:SSA:Aliasing;
 
   
@@ -310,6 +311,8 @@ PROCEDURE (s: State) Transform*;
     value: SSA.Result;
     use, nextUse, opnd: SSA.Opnd;
     worklist: Worklist;
+    unknownList: ArrayList.ArrayList;
+    i: LONGINT;
 
   PROCEDURE UnknownValue (res: SSA.Result): BOOLEAN;
     BEGIN
@@ -325,6 +328,7 @@ PROCEDURE (s: State) Transform*;
     VAR
       alias: Aliasing.Id;
       instr: SSA.Instr;
+      upstream: SSA.Result;
 
     PROCEDURE InCache (instr: SSA.Instr; VAR value: SSA.Result): BOOLEAN;
       VAR
@@ -461,7 +465,17 @@ PROCEDURE (s: State) Transform*;
         END;
 
       | Opcode.get:
-        RETURN GetValue (instr. GetArgClass (Opnd.store), get);
+        upstream := GetValue (instr. GetArgClass (Opnd.store), get);
+        IF UnknownValue(upstream) THEN
+          alias := Aliasing.DesignatorAlias (get. GetOpndClass (Opnd.readDesign),
+                                             instr. GetOpndClass (Opnd.readDesign));
+          IF (alias = Aliasing.completelyCovered) THEN
+            (* this "get" instruction reads the variable we are tracing, and
+               we don't know what this "get" will return *)
+            RETURN instr;
+          END;
+        END;
+        RETURN upstream;
         
       | Opcode.copy, Opcode.copyString:
         alias := Aliasing.DesignatorAlias (get. GetOpndClass (Opnd.readDesign),
@@ -790,60 +804,6 @@ PROCEDURE (s: State) Transform*;
       opnd: SSA.Opnd;
       replacement, newRes: SSA.Result;
       i: LONGINT;
-      
-    PROCEDURE NumberOfPaths (select: SSA.Instr): LONGINT;
-    (* Return the number of paths leading into the select.  *)
-      BEGIN
-        CASE select. opcode OF
-        | Opcode.select    :
-          IF (select. GetOpndClass (Opnd.labels) = NIL) THEN
-            RETURN (select. CountOpndClass (Opnd.arg) DIV 2);
-          ELSE
-            RETURN (select. CountOpndClass (Opnd.arg)-1);
-          END;
-        | Opcode.loopStart : RETURN 2
-        | Opcode.loopEnd   : RETURN select. CountOpndClass (Opnd.storeExit)
-        END;
-      END NumberOfPaths;
-    
-    PROCEDURE GetCollect (select: SSA.Instr; pathNum: LONGINT): SSA.Instr;
-    (* Return the "collect" instruction of path @oparam{pathNum} leading
-       into @oparam{select}.  The first path has the number @samp{0}.
-       If no matching "collect" exists, create one.  *)
-      VAR
-        opnd: SSA.Opnd;
-        collect, loopEnd: SSA.Instr;
-        oldStore: SSA.Result;
-      BEGIN
-        CASE select. opcode OF
-        | Opcode.select:
-          opnd := select. NthOpnd (pathNum*2+2);
-          
-        | Opcode.loopEnd:         (* place collect _before_ "exit" *)
-          opnd := select. NthOpnd (pathNum+2);
-          ASSERT (opnd. arg. instr. opcode = Opcode.exit);
-          opnd := opnd. arg. instr. opndList;
-          
-        | Opcode.loopStart:
-          IF (pathNum = 0) THEN
-            opnd := select. NthOpnd (pathNum);
-          ELSE
-            loopEnd := select. GetLoopEnd();
-            opnd := loopEnd. GetOpndClass (Opnd.backwardFeed);
-          END;
-        END;
-        
-        IF (opnd. arg. instr. opcode = Opcode.collect) THEN
-          RETURN opnd. arg.instr
-        ELSE
-          collect := pb. AddInstr (Opcode.collect, Opcode.scNone);
-          oldStore := opnd. arg;
-          opnd. ReplaceArg (collect. AddResult (Result.store));
-          collect. AddOpnd (oldStore, Opnd.store);
-          RETURN collect
-        END;
-      END GetCollect;
-    
     BEGIN
       replacement := dgate.opndList.nextOpnd.arg;
       IF (replacement.class = Result.dgatePlaceholder) THEN
@@ -853,11 +813,11 @@ PROCEDURE (s: State) Transform*;
         select := dgate.opndList.arg(SSA.Instr);
         opnd := dgate.NthOpnd(2); i := 0;
         WHILE (opnd # NIL) DO
-          collect := GetCollect(select, i);
+          collect := select.GetCollect(pb, i);
           collect.AddOpnd(opnd.arg, Opnd.arg);
           opnd := opnd.nextOpnd; INC(i);
         END;
-        ASSERT(i = NumberOfPaths(select));
+        ASSERT(i = select.NumberOfPaths());
         newRes := select.AddResultSubclass(Result.selectValue, dgate.subclass);
         replacement.ReplaceUses(newRes);
         RETURN newRes;
@@ -871,14 +831,15 @@ PROCEDURE (s: State) Transform*;
     
     (* visit all "get" instructions and check if their uses can be replaced
        with the value that they are retrieving from memory *)
+    unknownList := ArrayList.New(8);
     pb. SetMarkers (NIL, 0);
     instr := pb. instrList;
     WHILE (instr # NIL) DO
       IF (instr. opcode = Opcode.get) THEN
         value := GetValue (instr. GetArgStore(), instr);
         IF UnknownValue (value) THEN
-          ReplaceStoreUses (instr. GetResultStore(), instr. opndList. arg);
-          instr. opndList. ReplaceArg (value);
+          unknownList.Append(instr);
+          unknownList.Append(value);
         ELSIF (value IS SSA.Instr) &
               (value(SSA.Instr). opcode = Opcode.dgate) THEN
           instr.AddOpnd(value, Opnd.dgateRef);
@@ -888,7 +849,13 @@ PROCEDURE (s: State) Transform*;
       END;
       instr := instr. nextInstr;
     END;
-
+    FOR i := 0 TO unknownList.size-1 BY 2 DO
+      instr := unknownList.array[i](SSA.Instr);
+      value := unknownList.array[i+1](SSA.Result);
+      ReplaceStoreUses(instr.GetResultStore(), instr.opndList.arg);
+      instr.opndList.ReplaceArg(value);
+    END;
+    
     (* visit all "dgate" instructions and compute their replacement
        value *)
     worklist := NIL;

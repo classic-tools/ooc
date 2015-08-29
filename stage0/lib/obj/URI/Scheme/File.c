@@ -30,7 +30,7 @@ URI__Authority URI_Scheme_File__URIDesc_NewAuthority(URI_Scheme_File__URI file) 
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)URI_String__Copy("", 1);
-  i0 = (OOC_INT32)URI_Authority_ServerBased__New((URI_String__StringPtr)(OOC_INT32)0, (URI_String__StringPtr)i0, -1, -1);
+  i0 = (OOC_INT32)URI_Authority_ServerBased__New((URI_String__StringPtr)(OOC_INT32)0, (URI_String__StringPtr)i0, (-1), (-1));
   return (URI__Authority)i0;
   ;
 }
@@ -60,8 +60,8 @@ void URI_Scheme_File__URIDesc_GetPath(URI_Scheme_File__URI file, OOC_CHAR8 fileP
   _copy_8((const void*)"",(void*)(OOC_INT32)filePath,filePath_0d);
   i0 = (OOC_INT32)file;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2435))+12);
-  i2 = i1!=(OOC_INT32)0;
   segm = (URI_Scheme_Hierarchical__Segment)i1;
+  i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l15;
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2494))+12);
@@ -71,14 +71,14 @@ l3_loop:
   
   goto l8;
 l6:
-  i2=OOC_TRUE;
+  i2=1u;
 l8:
   if (!i2) goto l10;
   Strings__Append("/", 2, (void*)(OOC_INT32)filePath, filePath_0d);
 l10:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2609))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2609))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2617)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2617)), 0);
   Strings__Append((void*)(_check_pointer(i2, 2617)), i3, (void*)(OOC_INT32)filePath, filePath_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2649));
   segm = (URI_Scheme_Hierarchical__Segment)i1;
@@ -101,15 +101,15 @@ IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, O
   i1 = mode;
   switch (i1) {
   case 0:
-    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 23);
+    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 23u);
     return (IO__ByteChannel)i0;
     goto l6;
   case 1:
-    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 67);
+    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 67u);
     return (IO__ByteChannel)i0;
     goto l6;
   case 2:
-    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 1);
+    i0 = (OOC_INT32)IO_FileChannel__Open((Object__String8)i0, 1u);
     return (IO__ByteChannel)i0;
     goto l6;
   default:
@@ -145,7 +145,7 @@ URI_Scheme_File__URI URI_Scheme_File__GetCwd() {
   URI_String__AppendEscaped((void*)(OOC_INT32)path, 4096, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
   i0 = Strings__Length((void*)(OOC_INT32)uriString, 4096);
   i0 = *(OOC_UINT8*)((OOC_INT32)uriString+(_check_index((i0-1), 4096, OOC_UINT16, 3997)));
-  i0 = i0!=(OOC_CHAR8)'/';
+  i0 = i0!=47u;
   if (!i0) goto l5;
   Strings__Append("/", 2, (void*)(OOC_INT32)uriString, 4096);
 l5:
@@ -167,7 +167,7 @@ URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], OOC
 
   OOC_INITIALIZE_VPAR(filePath__ref,filePath,OOC_CHAR8 ,filePath_0d)
   i0 = *(OOC_UINT8*)((OOC_INT32)filePath+(_check_index(0, filePath_0d, OOC_UINT8, 4502)));
-  i0 = i0==(OOC_CHAR8)'/';
+  i0 = i0==47u;
   if (i0) goto l3;
   _copy_8((const void*)"",(void*)(OOC_INT32)uriString,4096);
   URI_String__AppendEscaped((void*)(OOC_INT32)filePath, filePath_0d, "@&=+$,/", 8, (void*)(OOC_INT32)uriString, 4096);

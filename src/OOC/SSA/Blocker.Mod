@@ -1,7 +1,7 @@
-(* 	$Id: Blocker.Mod,v 1.41 2002/12/30 09:29:21 mva Exp $	 *)
+(* 	$Id: Blocker.Mod,v 1.48 2003/03/09 18:04:03 mva Exp $	 *)
 MODULE OOC:SSA:Blocker;
 (*  Imposes a block structure on a flat list of SSA instructions.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -23,10 +23,10 @@ MODULE OOC:SSA:Blocker;
 <*DEFINE DEBUG_BLOCKER:=FALSE*>
 
 IMPORT
-  <*IF DEBUG_BLOCKER THEN*>Log,OOC:SSA:Check,StdChannels,<*END*>
+  <*IF DEBUG_BLOCKER THEN*>Log,OOC:SSA:Check,<*END*>
   SYSTEM, Object, Object:BigInt, ADT:Dictionary,
   IntDictionary := ADT:Dictionary:IntValue,
-  Channel, TextRider,
+  IO, IO:TextRider, IO:StdChannels,
   OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:DeadCodeElimination,
   OOC:SSA:Destore;
   
@@ -138,7 +138,7 @@ TYPE
        instruction can be scheduled at the very end of the region.  *)
 
     degreeDiff: LONGINT;
-    (**Number of produced register values minues the number of register values
+    (**Number of produced register values minus the number of register values
        taken as operands.  *)
   END;
   RegionDesc = RECORD
@@ -415,7 +415,7 @@ PROCEDURE Dominates (dom, child: Region): BOOLEAN;
     RETURN (child # NIL);
   END Dominates;
 
-PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
+PROCEDURE WriteBlocks (c: IO.ByteChannel; pb: SSA.ProcBlock; root: Region;
                        marker: Dictionary.Dictionary);
   VAR
     w: TextRider.Writer;
@@ -460,19 +460,19 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
 <*END*>
       w. WriteString ("  ");
       (*IF (instr = NIL) THEN
-          d := 0;
-        ELSE
-          d := instr. info(Proxy). distance;
-        END;
-         w. WriteLInt (d, 3);
-         w. WriteString ("  ");*)
+        d := 0;
+      ELSE
+        d := instr. info(Proxy). distance;
+      END;
+      w. WriteLInt (d, 3);
+      w. WriteString ("  ");*)
       (*IF (instr = NIL) THEN
-          d := 0;
-        ELSE
-          d := instr. info(Proxy). degreeDiff;
-        END;
-         w. WriteLInt (d, 3);
-         w. WriteString ("  ");*)
+        d := 0;
+      ELSE
+        d := instr. info(Proxy). degreeDiff;
+      END;
+      w. WriteLInt (d, 3);
+      w. WriteString ("  ");*)
       (*w. WriteString ("L:");
          IF (p. loopAssoc # NIL) THEN
            WriteResultId (p. loopAssoc. instr);
@@ -511,6 +511,7 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
         w. WriteChar ("]");
       END;
       
+      (*w.WriteHex(SYSTEM.VAL(LONGINT,res),8);*)
       instr := res. instr;
       IF instr. IsConst() THEN
         WITH instr: SSA.Const DO
@@ -1163,15 +1164,18 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
     END AddRegionDeps;
   
   PROCEDURE IgnoredUse (use: SSA.Opnd): BOOLEAN;
+    VAR
+      opcode: Opcode.Class;
     BEGIN
       (* skip all but the first operand of "select-exit", and all of
          "select-return" (the latter is automatically added as first
          instruction to the procedure block, its parents become live
          after that) *)
+      opcode := use.instr.opcode;
       RETURN
-          (use. instr. opcode = Opcode.selectReturn) OR
-          (use. instr. opcode = Opcode.loopEnd) &
-            (use. class = Opnd.storeExit)
+          (opcode = Opcode.selectReturn) OR
+          (opcode = Opcode.loopEnd) & (use.class = Opnd.storeExit) OR
+          (opcode = Opcode.equivPRE) & (use.OpndIndex() = 2);
     END IgnoredUse;
 
   PROCEDURE UpdateDefs (p: Proxy);
@@ -1393,20 +1397,53 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
 
     PROCEDURE GetLength (proxy: Proxy): LONGINT;
       VAR
-        p: Proxy;
         l: LONGINT;
+
+      PROCEDURE RegionLength(region: Region): LONGINT;
+        VAR
+          p: Proxy;
+          l: LONGINT;
+        BEGIN
+          l := 1;
+          p := region. first;
+          WHILE (p # NIL) DO
+            INC (l, GetLength (p));
+            p := p. nextProxy;
+          END;
+          RETURN l;
+        END RegionLength;
+
+      PROCEDURE IsEmpty(region: Region): BOOLEAN;
+        BEGIN
+          RETURN (region.first = NIL);
+        END IsEmpty;
+      
+      PROCEDURE IsExit(region: Region): BOOLEAN;
+        BEGIN
+          RETURN (region.first # NIL) &
+              (region.first.nextProxy = NIL) &
+              (region.first.instr.opcode = Opcode.exit);
+        END IsExit;
+      
       BEGIN
         IF (proxy. length < 0) THEN
-          WITH proxy: Region DO
-            l := 1;
-            p := proxy. first;
-            WHILE (p # NIL) DO
-              INC (l, GetLength (p));
-              p := p. nextProxy;
+          WITH proxy: Select DO
+            IF (LEN(proxy.paths^) = 2) &
+               ((IsEmpty(proxy.paths[0]) & IsExit(proxy.paths[1])) OR
+                (IsEmpty(proxy.paths[1]) & IsExit(proxy.paths[0]))) THEN
+              (* treat two way select containing only a single exit in one of
+                 its branches specially; the idea is to move such a select,
+                 which appears at the end of a WHILE or REPEAT, pretty much
+                 to the end of the block *)
+              l := 0;
+            ELSE
+              l := RegionLength(proxy);
             END;
+          | proxy: Region DO
+            l := RegionLength(proxy);
           ELSE
             CASE proxy. instr. opcode OF
-            | Opcode.collect: l := 0;
+            | Opcode.collect: l := -1;
             | Opcode.call   : l := 20;
             ELSE
               l := 1;
@@ -1423,10 +1460,14 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
         res: SSA.Result;
         use, opnd: SSA.Opnd;
         max, degreeDiff: LONGINT;
+        selectingValue: BOOLEAN;
 
       PROCEDURE CountAsRegister (arg: SSA.Result): BOOLEAN;
         BEGIN
-          IF (arg. subclass = Opcode.scNone) THEN
+          IF (arg.subclass = Opcode.scNone) OR
+             (arg.instr.opcode = Opcode.set) THEN
+            (* the "set" instruction's subclass is that of the memory location
+               it writes to, but it does not produce a value in a register *)
             RETURN FALSE;
           ELSE
             RETURN ~(arg IS SSA.Instr) OR ~arg(SSA.Instr). IsConst();
@@ -1487,6 +1528,7 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
           proxy := ready;
           Remove (ready, proxy);
 
+          selectingValue := FALSE;
           max := 0;
           IF (proxy. instr # NIL) THEN
             res := proxy. instr;
@@ -1496,6 +1538,10 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
                 useProxy := use. instr. info(Proxy);
                 IF (useProxy. region = r) & (useProxy. distance > max) THEN
                   max := useProxy. distance;
+                END;
+                IF (use.instr.opcode = Opcode.select) &
+                   (use.instr.opndList = use) THEN
+                  selectingValue := TRUE;
                 END;
                 use := use. nextUse;
               END;
@@ -1515,8 +1561,14 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
               opnd := opnd. nextOpnd;
             END;
           END;
-          proxy. distance := max+GetLength (proxy);
-
+          IF ~selectingValue THEN
+            (* only increase distance for non-selection operands, so that
+               predicates are scheduled immediately in front of their
+               "select" *)
+            INC(max, GetLength(proxy));
+          END;
+          proxy. distance := max;
+          
           proxy. nextProxy := list;
           list := proxy;
         END;
@@ -1746,6 +1798,7 @@ PROCEDURE ArrangeInstructions* (pb: SSA.ProcBlock;
 
 
 PROCEDURE GetDependenceData* (pb: SSA.ProcBlock): DependenceData;
+(**Note: When done, call RemoveAntiDeps(pb) to remove auxiliary operands.  *)
   VAR
     dd: DependenceData;
     proxyMap: Dictionary.Dictionary;
@@ -1764,6 +1817,20 @@ PROCEDURE GetDependenceData* (pb: SSA.ProcBlock): DependenceData;
     
     RETURN dd;
   END GetDependenceData;
+
+PROCEDURE (dd: DependenceData) SameRegion* (x, y: SSA.Instr): BOOLEAN;
+(**Return @code{TRUE} if the region of @oparam{x} is that of
+   @oparam{y}.  *)
+  BEGIN
+    RETURN (x.info(Proxy).region = y.info(Proxy).region);
+  END SameRegion;
+
+PROCEDURE (dd: DependenceData) Dominates* (x, y: SSA.Instr): BOOLEAN;
+(**Return @code{TRUE} if the region of @oparam{x} dominates that of
+   @oparam{y}.  *)
+  BEGIN
+    RETURN Dominates(x.info(Proxy).region, y.info(Proxy).region);
+  END Dominates;
 
 PROCEDURE (dd: DependenceData) Conflict* (x, y: SSA.Instr): BOOLEAN;
   VAR
@@ -1855,8 +1922,44 @@ PROCEDURE (dd: DependenceData) AvailableTo* (x, y: SSA.Instr): BOOLEAN;
         ~dd. DependsOn (xValue, y);
   END AvailableTo;
 
+PROCEDURE (dd: DependenceData) GetSameInstr*(regionInstr, instr: SSA.Instr): SSA.Instr;
+  VAR
+    region: Region;
+    p: Proxy;
+    opnd1, opnd2: SSA.Opnd;
+    instr2: SSA.Instr;
+  BEGIN
+    region := regionInstr.info(Proxy).region;
+    p := region.first;
+    WHILE (p # NIL) DO
+      instr2 := p.instr;
+      IF (instr.opcode = instr2.opcode) &
+         (instr.subclass = instr2.subclass) THEN
+        opnd1 := instr.opndList;
+        opnd2 := instr2.opndList;
+        WHILE (opnd1 # NIL) & (opnd2 # NIL) & (opnd1.arg = opnd2.arg) DO
+          opnd1 := opnd1.nextOpnd;
+          opnd2 := opnd2.nextOpnd;
+        END;
+        IF (opnd1 = NIL) & (opnd2 = NIL) THEN  (* got a complete match *)
+          RETURN instr2;
+        END;
+      END;
+      p := p.nextProxy;
+    END;
+    RETURN NIL;
+  END GetSameInstr;
 
-PROCEDURE Write* (c: Channel.Channel; pb: SSA.ProcBlock);
+PROCEDURE (dd: DependenceData) SetRegion*(regionInstr, instr: SSA.Instr);
+  VAR
+    p: Proxy;
+  BEGIN
+    p := NewProxy(instr);
+    regionInstr.info(Proxy).region.Append(p);
+    instr.info := p;
+  END SetRegion;
+
+PROCEDURE Write* (c: IO.ByteChannel; pb: SSA.ProcBlock);
   VAR
     root: Region;
   BEGIN
@@ -1865,7 +1968,7 @@ PROCEDURE Write* (c: Channel.Channel; pb: SSA.ProcBlock);
     RemoveAntiDeps (pb);
   END Write;
 
-PROCEDURE WriteMarker* (c: Channel.Channel; pb: SSA.ProcBlock;
+PROCEDURE WriteMarker* (c: IO.ByteChannel; pb: SSA.ProcBlock;
                         marker: Dictionary.Dictionary);
   VAR
     root: Region;
@@ -1874,5 +1977,10 @@ PROCEDURE WriteMarker* (c: Channel.Channel; pb: SSA.ProcBlock;
     WriteBlocks (c, pb, root, marker);
     RemoveAntiDeps (pb);
   END WriteMarker;
+
+PROCEDURE ToStderr*(pb: SSA.ProcBlock);
+  BEGIN
+    Write(StdChannels.stderr, pb);
+  END ToStderr;
 
 END OOC:SSA:Blocker.

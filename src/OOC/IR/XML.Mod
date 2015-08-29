@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.71 2003/02/02 17:58:38 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.72 2003/03/11 22:08:42 mva Exp $	 *)
 MODULE OOC:IR:XML;
 (*  Write an IR data structure as an XML document.
     Copyright (C) 2001, 2002, 2003  Michael van Acken, Stewart Greenhill
@@ -50,7 +50,7 @@ PROCEDURE NewVisitor (w: Writer.Writer): Visitor;
 PROCEDURE TypeAttr (w : Writer.Writer; type : Sym.Type);
 (** Output the name of @oparam{type} as attribute "Type" of the current tag. *)
   BEGIN
-    w.AttrStr("Type", IR.TypeName(type));
+    w.AttrObject("Type", IR.TypeName(type));
   END TypeAttr;
 
 PROCEDURE (v: Visitor) VisitConst* (const: IR.Const);

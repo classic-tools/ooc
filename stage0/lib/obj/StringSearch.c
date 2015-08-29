@@ -24,8 +24,8 @@ void StringSearch__MatchObjectDesc_Destroy(StringSearch__MatchObject m) {
   i0 = (OOC_INT32)m;
   *(OOC_INT32*)(_check_pointer(i0, 4025)) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 4042))+4) = 0;
-  *(OOC_INT32*)((_check_pointer(i0, 4062))+8) = (OOC_INT32)0;
-  *(OOC_INT32*)((_check_pointer(i0, 4085))+12) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i0, 4062))+8) = 0;
+  *(OOC_INT32*)((_check_pointer(i0, 4085))+12) = 0;
   return;
   ;
 }
@@ -60,8 +60,8 @@ void StringSearch__MatcherDesc_Destroy(StringSearch__Matcher matcher) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)matcher;
-  *(OOC_INT32*)(_check_pointer(i0, 5394)) = (OOC_INT32)0;
-  *(OOC_UINT32*)((_check_pointer(i0, 5423))+4) = 0;
+  *(OOC_INT32*)(_check_pointer(i0, 5394)) = 0;
+  *(OOC_UINT32*)((_check_pointer(i0, 5423))+4) = 0u;
   *(OOC_INT32*)((_check_pointer(i0, 5449))+8) = 0;
   return;
   ;

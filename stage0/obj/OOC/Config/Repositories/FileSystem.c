@@ -56,7 +56,7 @@ OOC_Repository__Repository OOC_Config_Repositories_FileSystem__RepositoryEntryDe
       i1 = (OOC_INT32)xmlNode;
       i2 = (OOC_INT32)OOC_Config_Repositories_FileSystem__repositoriesContext;
       i3 = code;
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2778)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i2, i3, OOC_FALSE, (void*)((_check_pointer(i1, 2828))+4));
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2778)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i2, i3, 0u, (void*)((_check_pointer(i1, 2828))+4));
       lastError = (Msg__Msg)i0;
       return;
       ;
@@ -65,10 +65,9 @@ OOC_Repository__Repository OOC_Config_Repositories_FileSystem__RepositoryEntryDe
 
   i0 = (OOC_INT32)node;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2881))+32);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 2891));
-  i0 = i0-1;
-  i1 = 0<=i0;
   i = 0;
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 2891));
+  i1 = 0<i0;
   if (!i1) goto l8;
   i1=0;
 l3_loop:
@@ -76,7 +75,7 @@ l3_loop:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2919))+32);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2929))+4);
   i3 = _check_pointer(i3, 2935);
-  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
   i1 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i1, i4, OOC_UINT32, 2935))*4);
   att = (XML_Builder__Attribute)i1;
   OOC_Config_Repositories_FileSystem__RepositoryEntryDesc_ProcessElement_Err(1, (Config_Parser__Node)i2);
@@ -84,13 +83,13 @@ l3_loop:
   i2 = (OOC_INT32)att;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3041))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3041))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 3052)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 3052)), 0);
   i2 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i3, 3052)), i2);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2991)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i1, "name", 5, (Msg__LStringPtr)i2);
   i1 = i;
   i1 = i1+1;
-  i2 = i1<=i0;
   i = i1;
+  i2 = i1<i0;
   if (i2) goto l3_loop;
 l8:
   i0 = (OOC_INT32)node;
@@ -99,27 +98,27 @@ l8:
   if (i1) goto l22;
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3183)))), Config_Parser__NodeDesc_GetCharDataContent)),Config_Parser__NodeDesc_GetCharDataContent)((Config_Parser__Node)i0);
   parserString = (XML_UnicodeBuffer__CharArray)i1;
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3244)), (OOC_INT32)0);
-  LongStrings__Short((void*)(_check_pointer(i1, 3244)), i2, (OOC_CHAR8)'?', (void*)(OOC_INT32)str8, 4096);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3244)), 0);
+  LongStrings__Short((void*)(_check_pointer(i1, 3244)), i2, 63u, (void*)(OOC_INT32)str8, 4096);
   i1 = (
-  _cmp8((const void*)(OOC_INT32)str8,(const void*)""))==(OOC_INT32)0;
+  _cmp8((const void*)(OOC_INT32)str8,(const void*)""))==0;
   if (i1) goto l13;
   i1 = Strings__Length((void*)(OOC_INT32)str8, 4096);
   i1 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index((i1-1), 4096, OOC_UINT16, 3288)));
-  i1 = i1!=(OOC_CHAR8)'/';
+  i1 = i1!=47u;
   
   goto l15;
 l13:
-  i1=OOC_TRUE;
+  i1=1u;
 l15:
   if (!i1) goto l17;
   Strings__Append("/", 2, (void*)(OOC_INT32)str8, 4096);
 l17:
   i1 = (OOC_INT32)OOC_Repository_FileSystem__baseURI;
   i1 = (OOC_INT32)URI_Parser__NewURI((void*)(OOC_INT32)str8, 4096, (URI__HierarchicalURI)i1, (void*)(OOC_INT32)&res);
-  i2 = (OOC_INT32)res;
-  i2 = i2==(OOC_INT32)0;
   uri = (URI__URI)i1;
+  i2 = (OOC_INT32)res;
+  i2 = i2==0;
   if (i2) goto l20;
   OOC_Config_Repositories_FileSystem__RepositoryEntryDesc_ProcessElement_Err(3, (Config_Parser__Node)i0);
   i0 = (OOC_INT32)lastError;
@@ -134,7 +133,7 @@ l20:
 l22:
   OOC_Config_Repositories_FileSystem__RepositoryEntryDesc_ProcessElement_Err(2, (Config_Parser__Node)i0);
 l23:
-  return (OOC_Repository__Repository)(OOC_INT32)0;
+  return (OOC_Repository__Repository)0;
   ;
 }
 

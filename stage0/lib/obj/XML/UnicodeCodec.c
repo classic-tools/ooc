@@ -89,7 +89,7 @@ void XML_UnicodeCodec__Register(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, XM
       if (i1) goto l7;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14721))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 14727)),(const void*)(OOC_INT32)name))==(OOC_INT32)0;
+      _cmp8((const void*)(_check_pointer(i1, 14727)),(const void*)(OOC_INT32)name))==0;
       if (i1) goto l5;
       XML_UnicodeCodec__Register_ScanList((void*)(_check_pointer(i0, 14802)));
       goto l8;
@@ -105,7 +105,7 @@ l7:
       i0 = (OOC_INT32)*l;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14643))+4);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14643))+4);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 14649)), (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 14649)), 0);
       _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i1, 14649)),i2);
       i1 = (OOC_INT32)factory;
       *(OOC_INT32*)((_check_pointer(i0, 14662))+8) = i1;
@@ -136,7 +136,7 @@ void XML_UnicodeCodec__Unregister(const OOC_CHAR8 name__ref[], OOC_LEN name_0d) 
       if (!i1) goto l7;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15234))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 15240)),(const void*)(OOC_INT32)name))==(OOC_INT32)0;
+      _cmp8((const void*)(_check_pointer(i1, 15240)),(const void*)(OOC_INT32)name))==0;
       if (i1) goto l5;
       XML_UnicodeCodec__Unregister_ScanList((void*)(_check_pointer(i0, 15312)));
       goto l7;
@@ -167,12 +167,12 @@ XML_UnicodeCodec__Factory XML_UnicodeCodec__GetFactory(const OOC_CHAR8 name__ref
   n = (XML_UnicodeCodec__Node)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15745))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=0;
   
 l5:
   if (!i1) goto l17;
@@ -181,12 +181,12 @@ l8_loop:
   n = (XML_UnicodeCodec__Node)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l11;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15745))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
+  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=0;
   
 l13:
   if (i1) goto l8_loop;

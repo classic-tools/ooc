@@ -10,10 +10,10 @@ void OOC_SSA_Result__GetName(OOC_INT8 _class, OOC_CHAR8 name[], OOC_LEN name_0d)
   case 0:
     _copy_8((const void*)"result",(void*)(OOC_INT32)name,name_0d);
     goto l10;
-  case -2:
+  case (-2):
     _copy_8((const void*)"void",(void*)(OOC_INT32)name,name_0d);
     goto l10;
-  case -1:
+  case (-1):
     _copy_8((const void*)"primary",(void*)(OOC_INT32)name,name_0d);
     goto l10;
   case 2:

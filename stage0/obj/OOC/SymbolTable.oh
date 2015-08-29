@@ -41,7 +41,7 @@ typedef struct OOC_SymbolTable__FlagDesc {
   OOC_CHAR8 __pad7;
   OOC_SymbolTable__Position pos;
 } OOC_SymbolTable__FlagDesc;
-#define OOC_SymbolTable__flagUnknownName -1
+#define OOC_SymbolTable__flagUnknownName (-1)
 #define OOC_SymbolTable__flagNoCopy 0
 #define OOC_SymbolTable__flagAbstract 1
 #define OOC_SymbolTable__flagNoLengthInfo 2
@@ -63,9 +63,9 @@ typedef struct OOC_SymbolTable__ItemDesc {
   OOC_SymbolTable__Item nestedItems;
   OOC_SymbolTable__Flag flagList;
 } OOC_SymbolTable__ItemDesc;
-#define OOC_SymbolTable__visiblePosImportedDecl -3
-#define OOC_SymbolTable__posImportedName -2
-#define OOC_SymbolTable__visiblePosImportedFormalParam -1
+#define OOC_SymbolTable__visiblePosImportedDecl (-3)
+#define OOC_SymbolTable__posImportedName (-2)
+#define OOC_SymbolTable__visiblePosImportedFormalParam (-1)
 typedef struct OOC_SymbolTable__DeclarationDesc *OOC_SymbolTable__Declaration;
 typedef struct OOC_SymbolTable__DeclarationDesc {
   OOC_SymbolTable__Item nextNested;
@@ -83,8 +83,8 @@ typedef struct OOC_SymbolTable__DeclarationDesc {
   OOC_INT32 usageCount;
 } OOC_SymbolTable__DeclarationDesc;
 typedef OOC_SymbolTable__Declaration *OOC_SymbolTable__DeclarationArray;
-#define OOC_SymbolTable__dynamicSize -1
-#define OOC_SymbolTable__unknownSize -2
+#define OOC_SymbolTable__dynamicSize (-1)
+#define OOC_SymbolTable__unknownSize (-2)
 typedef struct OOC_SymbolTable__TypeDesc *OOC_SymbolTable__Type;
 typedef struct OOC_SymbolTable__TypeDeclDesc *OOC_SymbolTable__TypeDecl;
 typedef struct OOC_SymbolTable__TypeDesc {
@@ -108,7 +108,7 @@ typedef OOC_INT8 OOC_SymbolTable__ModuleClass;
 #define OOC_SymbolTable__mcForeign 2
 #define OOC_SymbolTable__mcInterface 3
 typedef OOC_INT8 OOC_SymbolTable__CallConv;
-#define OOC_SymbolTable__callConvInvalid -1
+#define OOC_SymbolTable__callConvInvalid (-1)
 #define OOC_SymbolTable__callConvDefault 0
 #define OOC_SymbolTable__callConvInternal 1
 #define OOC_SymbolTable__callConvC 2

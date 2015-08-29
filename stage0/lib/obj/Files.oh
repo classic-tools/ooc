@@ -14,8 +14,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef Msg__Msg Files__Result;
-#define Files__noLength -1
-#define Files__noPosition -2
+#define Files__noLength (-1)
+#define Files__noPosition (-2)
 #define Files__done  0
 #define Files__invalidChannel 1
 #define Files__writeError 2

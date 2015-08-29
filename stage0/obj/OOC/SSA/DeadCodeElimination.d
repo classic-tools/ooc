@@ -1,9 +1,8 @@
 #include <OOC/SSA/DeadCodeElimination.oh>
-#include <OOC/SSA/Opcode.oh>
 #include <OOC/SSA/Opnd.oh>
 #define OOC_SSA_DeadCodeElimination__dead 0
 #define OOC_SSA_DeadCodeElimination__live 1
-static void OOC_SSA_DeadCodeElimination__MarkLive(OOC_SSA__Instr instr);
+static void OOC_SSA_DeadCodeElimination__MarkLive(OOC_SSA__Result res);
 static void OOC_SSA_DeadCodeElimination__DeleteDeadCode(OOC_SSA__ProcBlock pb);
 
 /* run-time meta data */

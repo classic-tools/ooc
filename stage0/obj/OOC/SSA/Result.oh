@@ -7,8 +7,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef OOC_INT8 OOC_SSA_Result__Class;
-#define OOC_SSA_Result__void -2
-#define OOC_SSA_Result__primary -1
+#define OOC_SSA_Result__void (-2)
+#define OOC_SSA_Result__primary (-1)
 #define OOC_SSA_Result__result 0
 #define OOC_SSA_Result__store 2
 #define OOC_SSA_Result__selectValue 14

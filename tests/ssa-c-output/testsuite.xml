@@ -5,7 +5,7 @@
 <testsuite-ext profile="Tests code emitted by SSA/C back-end">
 <!--<testsuite-ext
   profile="Tests code emitted by SSA/C back-end"
-  select ="&SetupTestCasesWithOut; noDescriptor1">-->
+  select ="&SetupTestCasesWithOut; pre3">-->
   
   &TestSetupWithOut;
     
@@ -112,6 +112,12 @@
       and an argument <code>FALSE</code> triggers and endless loop.
     </test>
     
+    <test id="var11" type="accept" file="Var11.Mod">
+      The parameter is read from four times, and written to once, but
+      the target code should contain only one load from memory and no
+      store at all.
+    </test>
+    
 
     <test id="swap1" type="run" file="Swap1.Mod" output="Swap1.Ref">
       Swapping to values.  The swap is done in memory.  Register
@@ -205,7 +211,68 @@
       expressions within the guarded commands conflict with no other
       live ranges.
     </test>
+    
+    <test id="dead1" type="accept" file="Dead1.Mod">
+      An otherwise unused variable is incremented within a
+      <code>LOOP</code>.  Dead code elimination should get rid of the
+      initialization and the increment of the variable.
+    </test>
 
+    <test id="rewrite1" type="accept" file="LoopRewrite1.Mod">
+      Simple loops iterating over an array index.  The index can be
+      replaced completely with a pointer that is incremeted by 1 (or
+      2) bytes with each iteration.
+    </test>
+    <test id="rewrite2" type="accept" file="LoopRewrite2.Mod">
+      Loops iterating over all elements of an array and terminating
+      when the index reaches the length of the array.
+    </test>
+    <test id="rewrite3" type="accept" file="LoopRewrite3.Mod">
+      Calculating the length of a character array.  The final value of
+      the induction variable should be recovered from the last pointer
+      value after the loop.
+    </test>
+    <test id="rewrite4" type="accept" file="LoopRewrite4.Mod">
+      A variantion of <code>rewrite2</code>, iterating over a 2
+      dimenional array.
+    </test>
+    <test id="rewrite5" type="accept" file="LoopRewrite5.Mod">
+      Eliminate all characters <code>&lt;= 20X</code> from string.
+      This loop has two induction variables, one incremented with each
+      iteration and the other within a guarded command.  Both should
+      be rewritten.
+    </test>
+    <test id="rewrite6" type="accept" file="LoopRewrite6.Mod">
+      Zeroing an array on the heap.  CSE should have merged the two
+      pointer deref operations, so that only one induction cycle needs
+      to be maintained.
+    </test>
+    <test id="rewrite7" type="accept" file="LoopRewrite7.Mod">
+      The scheduler should be smart enough to have just one jump
+      within the loop, the one going backwards to its beginning.
+    </test>
+    <test id="rewrite8" type="accept" file="LoopRewrite8.Mod">
+      A slightly simplified version of <code>Strings.FindNext</code>.
+    </test>
+    
+    <test id="pre1" type="accept" file="PRE1.Mod">
+      The array index computed in the <code>RETURN</code> is partially
+      redundant with regard to the <code>FALSE</code> path of the
+      <code>IF</code> statement.  Its computation should be pulled
+      into the <code>IF</code>, leaving only the memory access between
+      the <code>IF</code> and the return from the function.
+    </test>
+    <test id="pre2" type="accept" file="PRE2.Mod">
+      The array index is computed in both branches of the
+      <code>IF</code>.  It can be reused after the <code>IF</code>.
+    </test>
+    <test id="pre3" type="accept" file="PRE3.Mod">
+      The value of <code>flags.n</code> must only be accessed
+      <em>after</em> <code>flags</code> has been tested for
+      non-<code>NIL</code>.  In other words, it is an error to move an
+      instruction out of a region if only the region's guard allows
+      it to succeed.
+    </test>
     
     <test id="noCopy7" type="accept" file="NoCopy7.Mod">
       The callee should not create a local copy of the

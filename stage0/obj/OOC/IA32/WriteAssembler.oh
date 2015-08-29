@@ -33,9 +33,9 @@ extern void OOC_OOC_IA32_WriteAssembler_init0();
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Translator;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__TranslatorDesc;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Buffer;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2290;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6695;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6889;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2267;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6662;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6884;
 #endif /* _MODULE_OOC_IA32_WriteAssembler_ */
 
 /* --- */

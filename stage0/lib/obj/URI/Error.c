@@ -8,25 +8,26 @@ void URI_Error__ContextDesc_GetTemplate(URI_Error__Context context, Msg__Msg msg
 
   i0 = (OOC_INT32)context;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1482))+4);
-  i1 = i0!=(OOC_INT32)0;
   m = (URI_Error__Mapping)i0;
-  i2 = (OOC_INT32)msg;
+  i1 = i0!=(OOC_INT32)0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
-  goto l5;
+  i1=0u;
+  goto l4;
 l3:
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 1529))+8);
-  i1 = i1!=i3;
+  i1 = (OOC_INT32)msg;
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i1, 1529))+8);
+  i1 = i2!=i1;
   
-l5:
+l4:
+  i2 = (OOC_INT32)msg;
   if (!i1) goto l17;
 l8_loop:
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1552));
   m = (URI_Error__Mapping)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l11;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l11:
   i1 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);

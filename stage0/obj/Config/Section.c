@@ -39,7 +39,7 @@ void Config_Section__Init(Config_Section__Section s, const Config_Parser__String
   *(OOC_INT32*)(_check_pointer(i0, 1217)) = ((OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i1+1)));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1268));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1268));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1274)), (OOC_INT32)0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1274)), 0);
   _copy_16((const void*)(OOC_INT32)id,(void*)(_check_pointer(i1, 1274)),i0);
   return;
   ;
@@ -63,7 +63,7 @@ Config_Section__SectionList Config_Section__NewSectionList() {
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Section__SectionList.baseTypes[0]);
   sl = (Config_Section__SectionList)i0;
-  *(OOC_INT32*)(_check_pointer(i0, 1934)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 1934)) = 0;
   return (Config_Section__SectionList)i0;
   ;
 }
@@ -84,13 +84,13 @@ void Config_Section__SectionListDesc_Add(Config_Section__SectionList sl, Config_
       i2 = (OOC_INT32)section;
       i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2237));
       i1 = (
-      _cmp16((const void*)(_check_pointer(i1, 2226)),(const void*)(_check_pointer(i3, 2243))))==(OOC_INT32)0;
+      _cmp16((const void*)(_check_pointer(i1, 2226)),(const void*)(_check_pointer(i3, 2243))))==0;
       if (i1) goto l9;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2345))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2354));
       i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2371));
       i1 = (
-      _cmp16((const void*)(_check_pointer(i1, 2360)),(const void*)(_check_pointer(i2, 2377))))>(OOC_INT32)0;
+      _cmp16((const void*)(_check_pointer(i1, 2360)),(const void*)(_check_pointer(i2, 2377))))>0;
       if (i1) goto l7;
       Config_Section__SectionListDesc_Add_Insert((void*)(_check_pointer(i0, 2506)));
       goto l12;
@@ -115,7 +115,7 @@ l12:
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Section__Node.baseTypes[0]);
   _new = (Config_Section__Node)i0;
-  *(OOC_INT32*)(_check_pointer(i0, 2573)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 2573)) = 0;
   i1 = (OOC_INT32)section;
   *(OOC_INT32*)((_check_pointer(i0, 2595))+4) = i1;
   i0 = (OOC_INT32)sl;
@@ -130,17 +130,17 @@ Config_Section__Section Config_Section__SectionListDesc_Get(Config_Section__Sect
 
   i0 = (OOC_INT32)sl;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2759));
-  i1 = i0!=(OOC_INT32)0;
   sn = (Config_Section__Node)i0;
+  i1 = i0!=0;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2793))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2802));
   i2 = (OOC_INT32)name;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 2808)),(const void*)(_check_pointer(i2, 2816))))!=(OOC_INT32)0;
+  _cmp16((const void*)(_check_pointer(i1, 2808)),(const void*)(_check_pointer(i2, 2816))))!=0;
   
 l5:
   if (!i1) goto l17;
@@ -149,26 +149,26 @@ l5:
 l8_loop:
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2836));
   sn = (Config_Section__Node)i0;
-  i2 = i0!=(OOC_INT32)0;
+  i2 = i0!=0;
   if (i2) goto l11;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l13;
 l11:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2793))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2802));
   i2 = (
-  _cmp16((const void*)(_check_pointer(i2, 2808)),(const void*)(_check_pointer(i1, 2816))))!=(OOC_INT32)0;
+  _cmp16((const void*)(_check_pointer(i2, 2808)),(const void*)(_check_pointer(i1, 2816))))!=0;
   
 l13:
   if (i2) goto l8_loop;
 l17:
-  i1 = i0==(OOC_INT32)0;
+  i1 = i0==0;
   if (i1) goto l20;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2916))+4);
   return (Config_Section__Section)i0;
   goto l21;
 l20:
-  return (Config_Section__Section)(OOC_INT32)0;
+  return (Config_Section__Section)0;
 l21:
   _failed_function(2679); return 0;
   ;
@@ -191,7 +191,7 @@ void Config_Section__SectionListDesc_ProcessElements(Config_Section__SectionList
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3251))+16);
       i3 = (OOC_INT32)Config_Section__sectionContext;
       i4 = code;
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3266)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i3, i4, OOC_FALSE, (void*)((_check_pointer(i2, 3311))+4));
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3266)))), XML_Locator__ErrorListenerDesc_Error)),XML_Locator__ErrorListenerDesc_Error)((XML_Locator__ErrorListener)i0, (XML_Error__Context)i3, i4, 0u, (void*)((_check_pointer(i2, 3311))+4));
       lastError = (Msg__Msg)i0;
       return;
       ;
@@ -202,7 +202,7 @@ void Config_Section__SectionListDesc_ProcessElements(Config_Section__SectionList
   i0 = (OOC_INT32)root;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3354))+28);
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 3360)),(const void*)(OOC_INT32)rootElementName))!=(OOC_INT32)0;
+  _cmp16((const void*)(_check_pointer(i1, 3360)),(const void*)(OOC_INT32)rootElementName))!=0;
   if (!i1) goto l3;
   Config_Section__SectionListDesc_ProcessElements_Err(1, (Config_Parser__Node)i0);
   i0 = (OOC_INT32)lastError;
@@ -211,8 +211,8 @@ void Config_Section__SectionListDesc_ProcessElements(Config_Section__SectionList
 l3:
   i0 = (OOC_INT32)root;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3531))+36);
-  i1 = i0!=(OOC_INT32)0;
   node = (Config_Parser__Node)i0;
+  i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l26;
 l6_loop:
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3583)))), &_td_Config_Parser__CharDataDesc);
@@ -220,6 +220,7 @@ l6_loop:
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3708)))), &_td_Config_Parser__ElementDesc);
   if (i1) goto l11;
   _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3702)))), 3702);
+  
   goto l21;
 l11:
   i1 = (OOC_INT32)sl;
@@ -231,6 +232,7 @@ l11:
   i2 = (OOC_INT32)p;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3957))+16);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3931)))), Config_Section__SectionDesc_ProcessElements)),Config_Section__SectionDesc_ProcessElements)((Config_Section__Section)i1, (Config_Parser__Element)i0, (XML_Locator__ErrorListener)i2);
+  
   goto l21;
 l14:
   Config_Section__SectionListDesc_ProcessElements_Err(3, (Config_Parser__Node)i0);
@@ -238,9 +240,10 @@ l14:
   i1 = (OOC_INT32)node;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3897))+28);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3897))+28);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3903)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3903)), 0);
   i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 3903)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3846)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i1);
+  
   goto l21;
 l17:
   i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3620)))), Config_Parser__NodeDesc_IsWhitespace)),Config_Parser__NodeDesc_IsWhitespace)((Config_Parser__Node)i0);
@@ -268,8 +271,8 @@ void Config_Section__SectionListDesc_DumpContent(Config_Section__SectionList sl,
   w = (TextRider__Writer)i1;
   i1 = (OOC_INT32)sl;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4224));
-  i2 = i1!=(OOC_INT32)0;
   n = (Config_Section__Node)i1;
+  i2 = i1!=0;
   if (!i2) goto l8;
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4262))+4);
@@ -277,7 +280,7 @@ l3_loop:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4271)))), Config_Section__SectionDesc_DumpContent)),Config_Section__SectionDesc_DumpContent)((Config_Section__Section)i3, (Channel__Channel)i0);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4303));
   n = (Config_Section__Node)i1;
-  i2 = i1!=(OOC_INT32)0;
+  i2 = i1!=0;
   if (i2) goto l3_loop;
 l8:
   return;

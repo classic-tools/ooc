@@ -7,7 +7,7 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef OOC_INT8 LongStrings__CompareResults;
-#define LongStrings__less -1
+#define LongStrings__less (-1)
 #define LongStrings__equal 0
 #define LongStrings__greater 1
 extern OOC_INT16 LongStrings__Length(const OOC_CHAR16 stringVal__ref[], OOC_LEN stringVal_0d);

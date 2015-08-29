@@ -107,7 +107,7 @@ OOC_INT8 Time__TimeStamp_Cmp(struct Time__TimeStamp *a, RT0__Struct a__tag, cons
   if (i2) goto l7;
   i2 = i0==i1;
   if (i2) goto l5;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l9;
 l5:
   i2 = *(OOC_INT32*)((OOC_INT32)a+4);
@@ -116,12 +116,12 @@ l5:
   
   goto l9;
 l7:
-  i2=OOC_TRUE;
+  i2=1u;
 l9:
   if (i2) goto l19;
   i0 = i0==i1;
   if (i0) goto l13;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l15;
 l13:
   i0 = *(OOC_INT32*)((OOC_INT32)a+4);
@@ -130,7 +130,7 @@ l13:
   
 l15:
   if (i0) goto l17;
-  return -1;
+  return (-1);
   goto l20;
 l17:
   return 0;
@@ -210,7 +210,7 @@ OOC_INT8 Time__Interval_Cmp(struct Time__Interval *a, RT0__Struct a__tag, const 
   if (i2) goto l7;
   i2 = i0==i1;
   if (i2) goto l5;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l9;
 l5:
   i2 = *(OOC_INT32*)((OOC_INT32)a+4);
@@ -219,12 +219,12 @@ l5:
   
   goto l9;
 l7:
-  i2=OOC_TRUE;
+  i2=1u;
 l9:
   if (i2) goto l19;
   i0 = i0==i1;
   if (i0) goto l13;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l15;
 l13:
   i0 = *(OOC_INT32*)((OOC_INT32)a+4);
@@ -233,7 +233,7 @@ l13:
   
 l15:
   if (i0) goto l17;
-  return -1;
+  return (-1);
   goto l20;
 l17:
   return 0;

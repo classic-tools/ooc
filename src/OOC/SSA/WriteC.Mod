@@ -1,4 +1,4 @@
-(* 	$Id: WriteC.Mod,v 1.151 2003/02/05 21:31:54 mva Exp $	 *)
+(* 	$Id: WriteC.Mod,v 1.162 2003/03/11 22:47:49 mva Exp $	 *)
 MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to plain C.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -21,19 +21,22 @@ MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  IntStr, Out, Strings, StringSearch, IO, IO:StdChannels,
-  Object, Object:Boxed, ADT:Dictionary, ADT:ArrayList,
+  IntStr, Err, Out, Strings, StringSearch, IO, IO:StdChannels,
+  Object, Object:Boxed, ADT:Dictionary, IntDict := ADT:Dictionary:IntValue,
   Sym := OOC:SymbolTable,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Predef,
   OOC:SymbolTable:Builder,
   OOC:IR, OOC:IR:VisitAll, OOC:SSA:Opcode, OOC:SSA:Opnd,
   OOC:SSA, OOC:SSA:IRtoSSA, OOC:SSA:Schedule, OOC:SSA:XML,
   OOC:SSA:DeadCodeElimination, OOC:SSA:Destore, OOC:SSA:CSE, OOC:SSA:Algebraic,
-  OOC:SSA:ConstProp,
+  OOC:SSA:ConstProp, OOC:SSA:LoopRewrite, OOC:SSA:PRE, OOC:SSA:Stats,
   OOC:SSA:Allocator, OOC:C:ConvertDecl, OOC:C:Naming, OOC:C:DeclWriter, 
-  OOC:Make:TranslateToC;
+  OOC:Make:TranslateToC, OOC:SSA:Blocker;
 
 
+CONST
+  enableLoopRewriting = TRUE;
+  
 TYPE
   RegisterSwap = RECORD
     source, dest: STRING;
@@ -48,11 +51,13 @@ TYPE
     (TranslateToC.TranslatorDesc)
     inspectProc: StringSearch.Matcher;
     inspectStage: StringSearch.Matcher;
+    writeStats: BOOLEAN;
+    
     nonLocalAccess: Dictionary.Dictionary; (* of Sym.VarDecl *)
     (* The keys of this dictionary are variables that are accessed from
        a nested procedure within the procedure in which they are declared.  *)
     
-    preloadedVars: ArrayList.ArrayList;
+    preloadedVars: IntDict.Dictionary;
   END;
 
 TYPE
@@ -113,24 +118,7 @@ PROCEDURE (v: Visitor) VisitVar* (var: IR.Var);
 
 PROCEDURE SubclassToBasicType (res: SSA.Result): DeclWriter.BasicTypeId;
   BEGIN
-    CASE res. subclass OF
-    | Opcode.scNone: RETURN DeclWriter.void
-    | Opcode.scAddress:
-      CASE Predef.address OF
-      | Predef.hugeint: RETURN DeclWriter.int64;
-      | Predef.longint: RETURN DeclWriter.int32;
-      END;
-    | Opcode.scUnsigned8: RETURN DeclWriter.uint8
-    | Opcode.scUnsigned16: RETURN DeclWriter.uint16
-    | Opcode.scUnsigned32: RETURN DeclWriter.uint32
-    | Opcode.scUnsigned64: RETURN DeclWriter.uint64
-    | Opcode.scSigned8: RETURN DeclWriter.int8
-    | Opcode.scSigned16: RETURN DeclWriter.int16
-    | Opcode.scSigned32: RETURN DeclWriter.int32
-    | Opcode.scSigned64: RETURN DeclWriter.int64
-    | Opcode.scReal32: RETURN DeclWriter.real32
-    | Opcode.scReal64: RETURN DeclWriter.real64
-    END;
+    RETURN Allocator.SubclassToBasicType(res.subclass);
   END SubclassToBasicType;
 
 
@@ -248,12 +236,14 @@ PROCEDURE (w: Writer) FixupHelperVars;
 
 PROCEDURE Fixup (pb: SSA.ProcBlock; VAR jmpbufMap: Dictionary.Dictionary);
   VAR
-    instr: SSA.Instr;
+    instr, next: SSA.Instr;
     num: ARRAY 16 OF CHAR;
+    regDest, regSource: DeclWriter.BasicTypeId;
   BEGIN
     jmpbufMap := NIL;
     instr := pb. instrList;
     WHILE (instr # NIL) DO
+      next := instr.nextInstr;
       CASE instr. opcode OF
       | Opcode.call:
         IF (instr. opndList. arg IS SSA.Address) THEN
@@ -271,9 +261,20 @@ PROCEDURE Fixup (pb: SSA.ProcBlock; VAR jmpbufMap: Dictionary.Dictionary);
         END;
         IntStr.IntToStr(jmpbufMap.Size(), num);
         jmpbufMap.Set(instr, Object.NewLatin1(num));
+
+      | Opcode.typeConv:
+        regDest := Allocator.RegisterType
+            (Allocator.SubclassToBasicType(instr.subclass));
+        regSource := Allocator.RegisterType
+            (Allocator.SubclassToBasicType(instr.opndList.arg.subclass));
+        IF (regDest = regSource) THEN
+          ASSERT(instr.nextResult = NIL);
+          instr.ReplaceUses(instr.opndList.arg);
+          pb.DeleteInstr(instr);
+        END;
       ELSE (* nothing to do *)
       END;
-      instr := instr. nextInstr
+      instr := next;
     END;
   END Fixup;
 
@@ -477,9 +478,12 @@ PROCEDURE (w: Writer) Ref (opnd: SSA.Opnd);
         w. WriteString ("(");
         w. WriteString (w. basicType[bt]. repr);
         w. WriteString (")");
-         w.WriteString("0");
+        w.WriteString("0");
+      ELSIF (arg.stringType # NIL) THEN
+        w.WriteStringConst(arg.value, arg.stringType);
       ELSE
-        w. WriteConst (arg. value, arg. type);
+        w.WriteBasicConst(arg.value,
+                          Allocator.SubclassToBasicType(arg.subclass));
       END;
 
     | arg: SSA.Address DO
@@ -625,6 +629,20 @@ PROCEDURE CastToPtr (w: Writer; var: SSA.Result; type: Sym.Type;
     END;
   END CastToPtr;
 
+PROCEDURE GetPreloadId(preloadedVars: IntDict.Dictionary;
+                       instr: SSA.Instr): LONGINT;
+  VAR
+    id: LONGINT;
+  BEGIN
+    IF preloadedVars.HasKey(instr) THEN
+      id := preloadedVars.Get(instr);
+    ELSE
+      id := preloadedVars.Size();
+      preloadedVars.Set(instr, id);
+    END;
+    RETURN id;
+  END GetPreloadId;
+
 PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
   VAR
     opnd: SSA.Opnd;
@@ -756,6 +774,34 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w. WriteString (op);
       w. Ref (instr. opndList. nextOpnd);
     END WriteDyadicOp;
+  
+  PROCEDURE WriteDyadicOpU (instr: SSA.Instr; op: ARRAY OF CHAR);
+  (* Like WriteDyadicOp, but if first argument is unsigned, then cast both
+     arguments to the unsigned type.  *)
+    VAR
+      type: DeclWriter.BasicTypeId;
+      subclass: Opcode.Subclass;
+    BEGIN
+      subclass := instr.opndList.arg.subclass;
+      IF (Opcode.scUnsigned8 <= subclass) & (subclass <= Opcode.scAddress) THEN
+        type := Allocator.SubclassToBasicType(subclass);
+        IF (type < DeclWriter.uint8) THEN  (* force unsigned for address *)
+          INC(type, DeclWriter.uint8-DeclWriter.int8);
+        END;
+        
+        w. WriteChar ("(");
+        w. WriteString (w. basicType[type]. repr);
+        w. WriteChar (")");
+        w. Ref (instr. opndList);
+        w. WriteString (op);
+        w. WriteChar ("(");
+        w. WriteString (w. basicType[type]. repr);
+        w. WriteChar (")");
+        w. Ref (instr. opndList. nextOpnd);
+      ELSE
+        WriteDyadicOp(instr, op);
+      END;
+    END WriteDyadicOpU;
   
   PROCEDURE WriteDyadicFct (instr: SSA.Instr; fct: ARRAY OF CHAR);
     BEGIN
@@ -1053,18 +1099,18 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
   PROCEDURE PreloadedVar (instr: SSA.Instr);
     VAR
       wd: DeclWriter.Writer;
+      id: LONGINT;
     BEGIN
+      id := GetPreloadId(w.translator.preloadedVars, instr);
       CastFromPtr(instr);
       w.WriteString(prefixPreloadVar);
-      w.textWriter.WriteLInt(w.translator.preloadedVars.size, 0);
+      w.textWriter.WriteLInt(id, 0);
 
       wd := w.translator.wd;
       wd.Newline;
       wd.WriteString("static void* "+prefixPreloadVar);
-      wd.textWriter.WriteLInt(w.translator.preloadedVars.size, 0);
+      wd.textWriter.WriteLInt(id, 0);
       wd.WriteString(";");
-      
-      w.translator.preloadedVars.Append(instr);
     END PreloadedVar;
   
   BEGIN
@@ -1201,13 +1247,13 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
     | Opcode.neq:
       WriteDyadicOp (instr, "!=");
     | Opcode.lss:
-      WriteDyadicOp (instr, "<");
+      WriteDyadicOpU (instr, "<");
     | Opcode.leq:
-      WriteDyadicOp (instr, "<=");
+      WriteDyadicOpU (instr, "<=");
     | Opcode.gtr:
-      WriteDyadicOp (instr, ">");
+      WriteDyadicOpU (instr, ">");
     | Opcode.geq:
-      WriteDyadicOp (instr, ">=");
+      WriteDyadicOpU (instr, ">=");
       
     | Opcode.assert:
       Assert (instr);
@@ -1391,6 +1437,8 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
           (* nothing *)
         | Opcode.labels:
           (* nothing *)
+        | Opcode.designStandin:
+          (* nothing *)
           
         | Opcode.loopStart:
           (* nothing *)
@@ -1457,8 +1505,8 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
         | Opcode.popExceptionContext:
           w.Newline;
           w.WriteString("Exception__PopContext(");
-          w.WriteConst(instr.opndList.nextOpnd.arg(SSA.Const).value,
-                       Predef.GetType(Predef.longint));
+          w.WriteBasicConst(instr.opndList.nextOpnd.arg(SSA.Const).value,
+                            DeclWriter.int32);
           w.WriteString(");");
         | Opcode.clearException:
           w.Newline;
@@ -1642,7 +1690,7 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     w: Writer;
     writeProc: BOOLEAN;
     destore: Destore.State;
-    oldSize: LONGINT;
+    dummy: LONGINT;
 
   PROCEDURE WriteJmpBufDecl(jmpbufMap: Dictionary.Dictionary);
     VAR
@@ -1667,25 +1715,28 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
       END;
     END WriteJmpBufDecl;
   
-  PROCEDURE Write (pre, post: ARRAY OF CHAR);
+  PROCEDURE Write (pre, post: ARRAY OF CHAR; addToStats: BOOLEAN);
     BEGIN
       IF writeProc &
          ((t. inspectStage. MatchChars (pre, 0, -1) # NIL) OR
           (t. inspectStage. MatchChars (post, 0, -1) # NIL)) THEN
-        Out.String ("PROCEDURE ");
-        Out.String (pb. procDecl. name. str^);
-        Out.String ("/");
-        Out.String (pre);
-        Out.String ("/");
-        Out.String (post);
-        Out.String (":");
-        Out.Ln;
-        Out.Flush;
-        TRY
-          XML.Write (StdChannels.stdout, pb, TRUE);
-        CATCH IO.Error:
-        END;
-        Out.Flush;
+        Err.String ("PROCEDURE ");
+        Err.String (pb. procDecl. name. str^);
+        Err.String ("/");
+        Err.String (pre);
+        Err.String ("/");
+        Err.String (post);
+        Err.String (":");
+        Err.Ln;
+        Err.Flush;
+
+        (*XML.ToStderr(pb);*)
+        Blocker.Write(StdChannels.stderr, pb);
+        Err.Flush;
+      END;
+
+      IF addToStats THEN
+        Stats.AddProcBlock(Object.NewLatin1(pre), pb);
       END;
     END Write;
 
@@ -1759,19 +1810,28 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
       END;
     END FixCrossJumps;
 
-  PROCEDURE InitPreloadedVars (vars: ArrayList.ArrayList);
+  PROCEDURE InitPreloadedVars (vars: IntDict.Dictionary);
     VAR
       i, count: LONGINT;
       opnd: SSA.Opnd;
       chars: Object.CharsLatin1;
+      instrList, varList: Object.ObjectArrayPtr;
     BEGIN
-      FOR i := 0 TO vars.size-1 DO
+      instrList := vars.Keys();
+
+      (* sort `instrList' by id *)
+      NEW(varList, LEN(instrList^));
+      FOR i := 0 TO LEN(instrList^)-1 DO
+        varList[vars.Get(instrList[i])] := instrList[i];
+      END;
+      
+      FOR i := 0 TO LEN(varList^)-1 DO
         w.Newline;
         w.WriteString(prefixPreloadVar);
         w.textWriter.WriteLInt(i, 0);
         w.WriteString(" = ");
 
-        opnd := vars.array[i](SSA.Instr). opndList;
+        opnd := varList[i](SSA.Instr). opndList;
         chars := opnd.arg(SSA.Const).value(Boxed.String).value(Object.String8).CharsLatin1();
         w.WriteString(chars^);
         w.WriteString("(");
@@ -1802,22 +1862,50 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     (*Blocker.Write (StdChannels.stdout, pb);*)
     
     (* code transformations *)
-    Write ("initial", "dce-pre");
     DeadCodeElimination.Transform (pb);
-    Write ("dce-post", "destore-pre");
-    destore := Destore.New (pb);
+    Write ("initial", "destore1-pre", TRUE);
+    destore := Destore.New(pb);
     destore. Transform();
-    Write ("destore-post", "constprop-pre");
-    ConstProp.Transform (pb);
-    Write ("constprop-post", "algebraic-pre");
-    Algebraic.Transform (pb);
-    Write ("algebraic-post", "cse-pre");
-    DeadCodeElimination.Transform (pb);
-    CSE.Transform (pb);
-    Write ("cse-post", "final");
-
-    (*Blocker.Write (StdChannels.stdout, pb);*)
+    DeadCodeElimination.RemoveDesignators(pb);
+    DeadCodeElimination.Transform(pb);
+    Write("destore1-post", "constprop1-pre", TRUE);
     
+    ConstProp.Transform(pb);
+    DeadCodeElimination.Transform(pb);
+    Write("constprop1-post", "algebraic1-pre", TRUE);
+    
+    Algebraic.Transform(pb, ~enableLoopRewriting);
+    DeadCodeElimination.Transform(pb);
+    Write("algebraic1-post", "cse1-pre", TRUE);
+    
+    CSE.Transform(pb);
+    DeadCodeElimination.Transform(pb);
+    Write("cse1-post", "loop-pre", TRUE);
+
+    IF enableLoopRewriting THEN
+      LoopRewrite.Transform(pb);
+      DeadCodeElimination.Transform(pb);
+      Write("loop-post", "pared-pre", TRUE);
+      
+      PRE.Transform(pb);
+      PRE.ResolveEquiv(pb);
+      DeadCodeElimination.Transform(pb);
+      Write("pared-post", "constprop2-pre", TRUE);
+      
+      ConstProp.Transform(pb);
+      DeadCodeElimination.Transform(pb);
+      Write("constprop2-post", "algebraic2-pre", TRUE);
+      
+      Algebraic.Transform(pb, TRUE);
+      DeadCodeElimination.Transform(pb);
+      Write("algebraic2-post", "cse2-pre", TRUE);
+      
+      CSE.Transform(pb);
+      DeadCodeElimination.Transform(pb);
+      Write("cse2-post", "final", TRUE);
+    END;
+    
+    Fixup (pb, jmpbufMap);
     domRoot := Schedule.Schedule (pb);
     IF writeProc THEN
       IF (t. inspectStage. MatchChars ("schedule", 0, -1) # NIL) THEN
@@ -1830,7 +1918,6 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
       END;
     END;
     
-    Fixup (pb, jmpbufMap);
     t. w. Indent (1);
     registerMap := Allocator.AssignRegisters (pb, domRoot, t. w);
     w := NewWriter (t, t. w, pb, registerMap, jmpbufMap);
@@ -1839,19 +1926,15 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     IF proc.decl.IsModuleBody() THEN
       (* pick up any preloaded-var instructions in the module body, so that
          we can write them out at the beginning of the init function *)
-      oldSize := t.preloadedVars.Size();
       instr := pb.instrList;
       WHILE (instr # NIL) DO
         IF (instr.opcode = Opcode.preloadedVar) THEN
-          t.preloadedVars.Append(instr);
+          dummy := GetPreloadId(t.preloadedVars, instr);
         END;
         instr := instr.nextInstr;
       END;
       
       InitPreloadedVars(t.preloadedVars);
-
-      (* now undo the changes we caused to t.preloadedVars *)
-      t.preloadedVars.RemoveRange(oldSize, t.preloadedVars.Size());
     END;
     t. WriteNestedProcedures();          (* up call *)
     
@@ -1870,22 +1953,24 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
 
 
 
-PROCEDURE InitTranslator* (t: Translator;
+PROCEDURE InitTranslator* (t: Translator; writeStats: BOOLEAN;
                            inspectProc, inspectStage: StringSearch.Matcher);
   BEGIN
     TranslateToC.InitTranslator (t);
     t. inspectProc := inspectProc;
     t. inspectStage := inspectStage;
+    t. writeStats := writeStats;
     t. nonLocalAccess := NIL;
-    t. preloadedVars := ArrayList.New(16);
+    t. preloadedVars := IntDict.New();
   END InitTranslator;
 
-PROCEDURE NewTranslator* (inspectProc, inspectStage: StringSearch.Matcher): Translator;
+PROCEDURE NewTranslator* (writeStats: BOOLEAN;
+                          inspectProc, inspectStage: StringSearch.Matcher): Translator;
   VAR
     t: Translator;
   BEGIN
     NEW (t);
-    InitTranslator (t, inspectProc, inspectStage);
+    InitTranslator (t, writeStats, inspectProc, inspectStage);
     RETURN t
   END NewTranslator;
 

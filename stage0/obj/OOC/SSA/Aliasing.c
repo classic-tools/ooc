@@ -20,30 +20,30 @@ OOC_INT8 OOC_SSA_Aliasing__DesignatorAlias(OOC_SSA__Opnd instr, OOC_SSA__Opnd re
       i0 = (OOC_INT32)opnd;
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4972));
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4978)))), &_td_OOC_SSA__TypeRefDesc);
-      if (!i1) goto l3;
+      if (!i1) goto l4;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5019))+8);
       opnd = (OOC_SSA__Opnd)i0;
-l3:
-      i0 = (OOC_INT32)opnd;
+      
+l4:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5094))+8);
-      i1 = i1==(OOC_INT32)0;
-      if (i1) goto l6;
+      i1 = i1==0;
+      if (i1) goto l7;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5120))+8);
       i1 = *(OOC_INT8*)((_check_pointer(i1, 5130))+4);
       i2 = *(OOC_INT8*)((_check_pointer(i0, 5144))+4);
       i1 = i1!=i2;
       
-      goto l8;
-l6:
-      i1=OOC_TRUE;
-l8:
-      if (i1) goto l10;
+      goto l9;
+l7:
+      i1=1u;
+l9:
+      if (i1) goto l11;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5207))+8);
       return (OOC_SSA__Opnd)i0;
-      goto l11;
-l10:
-      return (OOC_SSA__Opnd)(OOC_INT32)0;
+      goto l12;
 l11:
+      return (OOC_SSA__Opnd)0;
+l12:
       _failed_function(4911); return 0;
       ;
     }
@@ -56,7 +56,7 @@ l11:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5416));
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5422)))), &_td_OOC_SSA__DeclRefDesc);
       if (i1) goto l3;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l5;
 l3:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5455));
@@ -65,7 +65,7 @@ l3:
       
 l5:
       if (i1) goto l7;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l8;
 l7:
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5513));
@@ -86,7 +86,7 @@ l8:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5722));
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5728)))), &_td_OOC_SSA__DeclRefDesc);
       if (i1) goto l3;
-      i1=OOC_FALSE;
+      i1=0u;
       goto l5;
 l3:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5761));
@@ -95,7 +95,7 @@ l3:
       
 l5:
       if (i1) goto l7;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l8;
 l7:
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5818));
@@ -127,14 +127,14 @@ l8:
       if (i2) goto l15;
       i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6190)))), &_td_OOC_SymbolTable__PointerDesc);
       if (i2) goto l5;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l7;
 l5:
       i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6211)))), &_td_OOC_SymbolTable__PointerDesc);
       
 l7:
       if (i2) goto l9;
-      return OOC_FALSE;
+      return 0u;
       goto l16;
 l9:
       i2 = OOC_SymbolTable_TypeRules__IsExtensionOf((OOC_SymbolTable__Type)i0, (OOC_SymbolTable__Type)i1);
@@ -143,12 +143,12 @@ l9:
       
       goto l13;
 l12:
-      i0=OOC_TRUE;
+      i0=1u;
 l13:
       return i0;
       goto l16;
 l15:
-      return OOC_TRUE;
+      return 1u;
 l16:
       _failed_function(6076); return 0;
       ;
@@ -183,28 +183,28 @@ l4:
       
       goto l4;
 l3:
-      i1=OOC_TRUE;
+      i1=1u;
 l4:
-      i2 = (OOC_INT32)selInstr;
       _assert(i1, 127, 6873);
-      i1 = i2==(OOC_INT32)0;
-      if (i1) goto l15;
-      i1 = (OOC_INT32)selReference;
-      i3 = i1==(OOC_INT32)0;
+      i1 = (OOC_INT32)selInstr;
+      i2 = i1==(OOC_INT32)0;
+      if (i2) goto l15;
+      i2 = (OOC_INT32)selReference;
+      i3 = i2==(OOC_INT32)0;
       if (i3) goto l13;
-      i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 7705));
-      i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7725));
+      i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7705));
+      i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 7725));
       i3 = i3==i4;
       if (i3) goto l11;
-      i0 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i2);
-      i1 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i1);
+      i0 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i1);
+      i1 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i2);
       i0 = OOC_SSA_Aliasing__DesignatorAlias_CheckSelectors((OOC_SSA__Opnd)i0, (OOC_SSA__Opnd)i1, 3);
       return i0;
       goto l20;
 l11:
-      i2 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i2);
       i1 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i1);
-      i0 = OOC_SSA_Aliasing__DesignatorAlias_CheckSelectors((OOC_SSA__Opnd)i2, (OOC_SSA__Opnd)i1, i0);
+      i2 = (OOC_INT32)OOC_SSA_Aliasing__DesignatorAlias_NextPart((OOC_SSA__Opnd)i2);
+      i0 = OOC_SSA_Aliasing__DesignatorAlias_CheckSelectors((OOC_SSA__Opnd)i1, (OOC_SSA__Opnd)i2, i0);
       return i0;
       goto l20;
 l13:
@@ -232,8 +232,8 @@ l20:
 
       i0 = (OOC_INT32)variable;
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8418)))), OOC_SymbolTable__ItemDesc_Procedure)),OOC_SymbolTable__ItemDesc_Procedure)((OOC_SymbolTable__Item)i0);
-      i1 = i0==(OOC_INT32)0;
       pVariable = (OOC_SymbolTable__Item)i0;
+      i1 = i0==(OOC_INT32)0;
       if (i1) goto l12;
       i1 = (OOC_INT32)varParam;
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8659)))), OOC_SymbolTable__ItemDesc_Procedure)),OOC_SymbolTable__ItemDesc_Procedure)((OOC_SymbolTable__Item)i1);
@@ -248,14 +248,14 @@ l3_loop:
       
       goto l8;
 l6:
-      i3=OOC_TRUE;
+      i3=1u;
 l8:
       if (!i3) goto l3_loop;
 l11:
       return i2;
       goto l13;
 l12:
-      return OOC_FALSE;
+      return 0u;
 l13:
       _failed_function(8130); return 0;
       ;
@@ -265,7 +265,7 @@ l13:
   i0 = (OOC_INT32)instr;
   i0 = OOC_SSA_Aliasing__DesignatorAlias_IsVariable((OOC_SSA__Opnd)i0);
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
   i0 = (OOC_INT32)reference;
@@ -276,7 +276,7 @@ l5:
   i0 = (OOC_INT32)instr;
   i0 = OOC_SSA_Aliasing__DesignatorAlias_IsHeapObject((OOC_SSA__Opnd)i0);
   if (i0) goto l9;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l11;
 l9:
   i0 = (OOC_INT32)reference;
@@ -311,7 +311,7 @@ l26:
   i0 = (OOC_INT32)reference;
   i0 = OOC_SSA_Aliasing__DesignatorAlias_IsVarParam((OOC_SSA__Opnd)i0);
   if (i0) goto l29;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l31;
 l29:
   i0 = (OOC_INT32)instr;
@@ -327,7 +327,7 @@ l31:
   i0 = (OOC_INT32)reference;
   i0 = OOC_SSA_Aliasing__DesignatorAlias_IsVariable((OOC_SSA__Opnd)i0);
   if (i0) goto l35;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l37;
 l35:
   i0 = (OOC_INT32)instr;
@@ -352,7 +352,7 @@ l37:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 11958));
   i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11964)))), &_td_OOC_SSA__TypeRefDesc);
   if (i2) goto l43;
-  _assert(OOC_FALSE, 127, 12064);
+  _assert(0u, 127, 12064);
   goto l46;
 l43:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 12015));
@@ -366,20 +366,20 @@ l45:
   typeRef = (OOC_SymbolTable__Type)i2;
 l46:
   i2 = (OOC_INT32)typeRef;
-  i0 = OOC_SymbolTable_TypeRules__IsComponentOf((OOC_SymbolTable__Type)i0, (OOC_SymbolTable__Type)i2, OOC_TRUE);
+  i0 = OOC_SymbolTable_TypeRules__IsComponentOf((OOC_SymbolTable__Type)i0, (OOC_SymbolTable__Type)i2, 1u);
   if (i0) goto l53;
   i0 = OOC_SSA_Aliasing__DesignatorAlias_IsVarParam((OOC_SSA__Opnd)i1);
   if (i0) goto l51;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l55;
 l51:
   i0 = (OOC_INT32)typeInstr;
   i1 = (OOC_INT32)typeRef;
-  i0 = OOC_SymbolTable_TypeRules__IsComponentOf((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0, OOC_TRUE);
+  i0 = OOC_SymbolTable_TypeRules__IsComponentOf((OOC_SymbolTable__Type)i1, (OOC_SymbolTable__Type)i0, 1u);
   
   goto l55;
 l53:
-  i0=OOC_TRUE;
+  i0=1u;
 l55:
   if (i0) goto l57;
   return 0;

@@ -29,31 +29,30 @@ void OOC_AST__NodeListDesc_Append(OOC_AST__NodeList nl, OOC_AST__Node node) {
   i0 = (OOC_INT32)nl;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6693))+4);
   i2 = *(OOC_INT32*)(_check_pointer(i0, 6678));
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6696)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6696)), 0);
   i1 = i2==i1;
   if (!i1) goto l11;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6728))+4);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6731)), (OOC_INT32)0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6731)), 0);
   i1 = (OOC_INT32)RT0__NewObject(_td_OOC_AST__NodeArray.baseTypes[0], (i1*2));
   _new = (OOC_AST__NodeArray)i1;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6765))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 6768)), (OOC_INT32)0);
-  i2 = i2-1;
-  i3 = 0<=i2;
   i = 0;
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 6768)), 0);
+  i3 = 0<i2;
   if (!i3) goto l10;
   i3=0;
 l5_loop:
   i4 = _check_pointer(i1, 6787);
-  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6796))+4);
   i6 = _check_pointer(i6, 6799);
-  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
+  i7 = OOC_ARRAY_LENGTH(i6, 0);
   i6 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i3, i7, OOC_UINT32, 6799))*4);
   *(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 6787))*4) = i6;
   i3 = i3+1;
-  i4 = i3<=i2;
   i = i3;
+  i4 = i3<i2;
   if (i4) goto l5_loop;
 l10:
   *(OOC_INT32*)((_check_pointer(i0, 6822))+4) = i1;
@@ -61,7 +60,7 @@ l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6848))+4);
   i1 = _check_pointer(i1, 6851);
   i2 = *(OOC_INT32*)(_check_pointer(i0, 6854));
-  i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH(i1, 0);
   i4 = (OOC_INT32)node;
   *(OOC_INT32*)(i1+(_check_index(i2, i3, OOC_UINT32, 6851))*4) = i4;
   i1 = *(OOC_INT32*)(_check_pointer(i0, 6881));
@@ -80,7 +79,7 @@ void OOC_AST__InitBuilder(OOC_AST__Builder b) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)b;
-  *(OOC_INT32*)(_check_pointer(i0, 7605)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 7605)) = 0;
   return;
   ;
 }
@@ -95,7 +94,7 @@ void OOC_AST__BuilderDesc_SetModuleName(OOC_AST__Builder b, const OOC_CHAR8 name
   *(OOC_INT32*)(_check_pointer(i0, 7912)) = ((OOC_INT32)RT0__NewObject(_td_OOC_Scanner_InputBuffer__CharArray.baseTypes[0], (i1+1)));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7977));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7977));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7997)), (OOC_INT32)0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7997)), 0);
   _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i1, 7997)),i0);
   return;
   ;

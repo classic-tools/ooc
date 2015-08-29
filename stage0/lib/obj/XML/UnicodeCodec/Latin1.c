@@ -23,35 +23,36 @@ static XML_UnicodeCodec_Latin1__Codec XML_UnicodeCodec_Latin1__New(OOC_INT8 bom)
 }
 
 void XML_UnicodeCodec_Latin1__CodecDesc_Decode(XML_UnicodeCodec_Latin1__Codec codec, OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 sourceStart, OOC_INT32 sourceEnd, OOC_CHAR16 dest[], OOC_LEN dest_0d, OOC_INT32 destStart, OOC_INT32 destEnd, OOC_INT32 *sourceDone, OOC_INT32 *destDone) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2,i3,i4;
 
   i0 = sourceEnd;
-  i1 = destEnd;
-  i2 = destStart;
-  i3 = sourceStart;
-  i1 = i1-i2;
-  i0 = (i0-i3)>i1;
-  if (!i0) goto l3;
-  sourceEnd = (i1+i3);
-l3:
-  i0 = sourceEnd;
-  i1 = i3!=i0;
-  if (!i1) goto l11;
-l6_loop:
-  i1 = destStart;
-  i2 = sourceStart;
+  i1 = sourceStart;
+  i2 = destEnd;
+  i3 = destStart;
+  i2 = i2-i3;
+  i4 = (i0-i1)>i2;
+  if (!i4) goto l4;
+  i0 = i2+i1;
+  
+l4:
+  i2 = i1!=i0;
+  if (i2) goto l7;
+  i0=i1;i1=i3;
+  goto l13;
+l7:
+  i2=i1;i1=i3;
+l8_loop:
   i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 1323)));
   *(OOC_UINT16*)((OOC_INT32)dest+(_check_index(i1, dest_0d, OOC_UINT32, 1302))*2) = i3;
   i2 = i2+1;
-  sourceStart = i2;
-  i2 = i2!=i0;
-  destStart = (i1+1);
-  if (i2) goto l6_loop;
-l11:
-  i0 = sourceStart;
+  i1 = i1+1;
+  i3 = i2!=i0;
+  if (i3) goto l8_loop;
+l12:
+  i0=i2;
+l13:
   *sourceDone = i0;
-  i0 = destStart;
-  *destDone = i0;
+  *destDone = i1;
   return;
   ;
 }
@@ -68,16 +69,16 @@ void XML_UnicodeCodec_Latin1__CodecDesc_Encode(XML_UnicodeCodec_Latin1__Codec co
   i1 = sourceStart;
   i = i1;
   i2 = destStart;
-  i3 = i1<i0;
   j = i2;
+  i3 = i1<i0;
   if (i3) goto l3;
-  i3=OOC_FALSE;
-  goto l4;
+  i3=0u;
+  goto l5;
 l3:
   i3 = destEnd;
   i3 = i2!=i3;
   
-l4:
+l5:
   if (i3) goto l7;
   i0=i1;
   goto l37;
@@ -87,7 +88,7 @@ l7:
   i5=i2;i2=i1;
 l8_loop:
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2214))*2);
-  i6 = i6>(OOC_CHAR8)'\377';
+  i6 = (OOC_UINT16)i6>(OOC_UINT16)255u;
   if (i6) goto l11;
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2582))*2);
   *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i5, dest_0d, OOC_UINT32, 2562))) = i6;
@@ -98,31 +99,31 @@ l8_loop:
 l11:
   i6 = *(OOC_INT32*)(_check_pointer(i4, 2249));
   *(OOC_INT32*)(_check_pointer(i4, 2249)) = (i6+1);
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i5, dest_0d, OOC_UINT32, 2278))) = (OOC_CHAR8)'?';
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i5, dest_0d, OOC_UINT32, 2278))) = 63u;
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2329))*2);
-  i6 = (OOC_CHAR16)55296<=i6;
+  i6 = (OOC_UINT16)55296u<=(OOC_UINT16)i6;
   if (i6) goto l14;
-  i6=OOC_FALSE;
+  i6=0u;
   goto l16;
 l14:
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2343))*2);
-  i6 = i6<(OOC_CHAR16)56320;
+  i6 = (OOC_UINT16)i6<(OOC_UINT16)56320u;
   
 l16:
   if (i6) goto l18;
-  i6=OOC_FALSE;
+  i6=0u;
   goto l20;
 l18:
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index((i2+1), source_0d, OOC_UINT32, 2387))*2);
-  i6 = (OOC_CHAR16)56320<=i6;
+  i6 = (OOC_UINT16)56320u<=(OOC_UINT16)i6;
   
 l20:
   if (i6) goto l22;
-  i6=OOC_FALSE;
+  i6=0u;
   goto l24;
 l22:
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index((i2+1), source_0d, OOC_UINT32, 2403))*2);
-  i6 = i6<(OOC_CHAR16)57344;
+  i6 = (OOC_UINT16)i6<(OOC_UINT16)57344u;
   
 l24:
   if (i6) goto l26;
@@ -136,10 +137,10 @@ l26:
   
 l28:
   i5 = i5+1;
-  i6 = i2<i0;
   j = i5;
+  i6 = i2<i0;
   if (i6) goto l31;
-  i6=OOC_FALSE;
+  i6=0u;
   goto l33;
 l31:
   i6 = i5!=i3;
@@ -155,12 +156,12 @@ l37:
   goto l45;
 l40:
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 2941))*2);
-  i1 = i1<(OOC_CHAR16)256;
+  i1 = (OOC_UINT16)i1<(OOC_UINT16)256u;
   if (i1) goto l43;
   i1 = (OOC_INT32)codec;
   i3 = *(OOC_INT32*)(_check_pointer(i1, 3092));
   *(OOC_INT32*)(_check_pointer(i1, 3092)) = (i3+1);
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT32, 3121))) = (OOC_CHAR8)'?';
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT32, 3121))) = 63u;
   goto l44;
 l43:
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 2990))*2);

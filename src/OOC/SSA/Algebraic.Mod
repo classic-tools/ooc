@@ -1,7 +1,7 @@
-(* 	$Id: Algebraic.Mod,v 1.7 2002/12/17 01:23:13 mva Exp $	 *)
+(* 	$Id: Algebraic.Mod,v 1.9 2003/02/24 00:25:30 mva Exp $	 *)
 MODULE OOC:SSA:Algebraic;
 (*  Algebraic transformations on SSA expressions.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -58,7 +58,27 @@ PROCEDURE IsPowerOf2 (value: BigInt.BigInt): LONGINT;
     RETURN -1;
   END IsPowerOf2;
 
-PROCEDURE Transform* (pb: SSA.ProcBlock);
+PROCEDURE IsNMinus1(res: SSA.Result): BOOLEAN;
+(* Return true if `res' is an integer operation "subtract x,1" that is not
+   checked for overflow.  *)
+  VAR
+    arg: SSA.Result;
+  BEGIN
+    IF (res IS SSA.Instr) &
+       (res(SSA.Instr).opcode = Opcode.subtract) &
+       (res.nextResult = NIL)  THEN  (* no overflow check *)
+      arg := res(SSA.Instr).NthArg(1);
+      RETURN (arg IS SSA.Const) &
+          BigInt.one.Equals(arg(SSA.Const).value);
+    ELSE
+      RETURN FALSE;
+    END;
+  END IsNMinus1;
+
+PROCEDURE Transform* (pb: SSA.ProcBlock; enableSubstitution: BOOLEAN);
+(**With @oparam{enableSubstitution} set, enable substitution of an instruction
+   by one of a different class (fFor example, division can turn into a shift,
+   and a+b*c into "indexed".  *)
   VAR
     instr: SSA.Instr;
     worklist: Worklist;
@@ -66,9 +86,9 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
   PROCEDURE InspectInstr (instr: SSA.Instr);
     VAR
       exp: LONGINT;
-      new: SSA.Instr;
+      new, sub: SSA.Instr;
       
-    PROCEDURE Replace (instr: SSA.Instr; with: SSA.Result);
+    PROCEDURE AddUsesToWorklist(instr: SSA.Instr);
       VAR
         use: SSA.Opnd;
 
@@ -89,6 +109,11 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
           AddToWorklist (use. instr);
           use := use. nextUse;
         END;
+      END AddUsesToWorklist;
+    
+    PROCEDURE Replace (instr: SSA.Instr; with: SSA.Result);
+      BEGIN
+        AddUsesToWorklist(instr);
         instr. ReplaceUses (with);
       END Replace;
 
@@ -117,7 +142,8 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
         instr: SSA.Instr;
         exp: LONGINT;
       BEGIN
-        IF (res IS SSA.Instr) &
+        IF enableSubstitution &
+           (res IS SSA.Instr) &
            (res(SSA.Instr). opcode = Opcode.multiply) &
            (res(SSA.Instr). subclass <= Opcode.scAddress) THEN
           instr := res(SSA.Instr);
@@ -174,7 +200,8 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
         END;
 
       | Opcode.divide: (* replace DIV by power of two with right shift *)
-        IF (instr. subclass < Opcode.scReal32) &
+        IF enableSubstitution &
+           (instr. subclass < Opcode.scReal32) &
            (instr. opndList. nextOpnd. arg IS SSA.Const) THEN
           exp := IsPowerOf2 (instr. opndList. nextOpnd. arg(SSA.Const). value(BigInt.BigInt));
           IF (exp >= 0) THEN
@@ -184,6 +211,22 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
             instr. ReplaceUses (new);
             ASSERT (instr. nextResult = NIL);
           END;
+        END;
+
+      | Opcode.leq:
+        IF IsNMinus1(instr.NthArg(1)) THEN (* x<=n-1 = x<n *)
+          sub := instr.opndList.nextOpnd.arg(SSA.Instr);
+          instr.opndList.nextOpnd.ReplaceArg(sub.opndList.arg);
+          instr.opcode := Opcode.lss;
+          AddUsesToWorklist(instr);
+        END;
+        
+      | Opcode.gtr:
+        IF IsNMinus1(instr.NthArg(1)) THEN (* x>n-1 = x>=n *)
+          sub := instr.opndList.nextOpnd.arg(SSA.Instr);
+          instr.opndList.nextOpnd.ReplaceArg(sub.opndList.arg);
+          instr.opcode := Opcode.geq;
+          AddUsesToWorklist(instr);
         END;
       ELSE  (* ignore any other instructions *)
       END;

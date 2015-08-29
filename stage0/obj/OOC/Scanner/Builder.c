@@ -8,7 +8,7 @@ void OOC_Scanner_Builder__Init(OOC_Scanner_Builder__Builder b, OOC_Scanner_Input
   i0 = (OOC_INT32)b;
   i1 = (OOC_INT32)buffer;
   *(OOC_INT32*)(_check_pointer(i0, 3605)) = i1;
-  *(OOC_INT32*)((_check_pointer(i0, 3635))+4) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i0, 3635))+4) = 0;
   return;
   ;
 }

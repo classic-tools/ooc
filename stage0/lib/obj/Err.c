@@ -7,7 +7,7 @@ OOC_CHAR8 Err__Done() {
 
   i0 = (OOC_INT32)Err__writer;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1490));
-  return (i0==(OOC_INT32)0);
+  return (i0==0);
   ;
 }
 

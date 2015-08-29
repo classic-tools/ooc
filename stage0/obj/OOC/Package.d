@@ -101,13 +101,13 @@ RT0__StructDesc _td_OOC_Package__29461 = { (RT0__Struct[]){&RT0__char}, NULL, &_
 RT0__StructDesc _td_OOC_Package__31051 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_Package__31163 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
 RT0__StructDesc _td_OOC_Package__31193 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_Package__31829 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__34890 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36122 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36174 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__36583 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__37173 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Package__37426 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__31832 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__34917 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36152 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36204 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__36613 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__37203 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Package__37456 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Package", (RT0__Struct[]) { &_td_OOC_Package__URIBuffer, &_td_OOC_Package__Version, &_td_OOC_Package__VersionDesc, &_td_OOC_Package__Executable, &_td_OOC_Package__ExecutableDesc, &_td_OOC_Package__Library, &_td_OOC_Package__LibraryDesc, &_td_OOC_Package__FileData, &_td_OOC_Package__FileDataDesc, &_td_OOC_Package__File, &_td_OOC_Package__FileDesc, &_td_OOC_Package__FileSet, &_td_OOC_Package__FileSetDesc, &_td_OOC_Package__KeyValue, &_td_OOC_Package__KeyValueDesc, &_td_OOC_Package__Package, &_td_OOC_Package__PackageDesc, &_td_OOC_Package__Repository, &_td_OOC_Package__RepositoryDesc, &_td_OOC_Package__ErrorContext, &_td_OOC_Package__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Package_init0() {
@@ -128,4 +128,7 @@ static void* _c9;
 static void* _c10;
 static void* _c11;
 static void* _c12;
+static void* _c13;
+static void* _c14;
+static void* _c15;
 /* --- */

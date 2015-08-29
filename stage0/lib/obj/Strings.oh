@@ -7,7 +7,7 @@
 #include <Object.oh>
 #include <Exception.oh>
 typedef OOC_INT8 Strings__CompareResults;
-#define Strings__less -1
+#define Strings__less (-1)
 #define Strings__equal 0
 #define Strings__greater 1
 extern OOC_INT16 Strings__Length(const OOC_CHAR8 stringVal__ref[], OOC_LEN stringVal_0d);

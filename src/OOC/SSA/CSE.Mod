@@ -1,7 +1,7 @@
-(* 	$Id: CSE.Mod,v 1.3 2002/12/22 08:52:53 mva Exp $	 *)
+(* 	$Id: CSE.Mod,v 1.9 2003/02/22 13:22:35 mva Exp $	 *)
 MODULE OOC:SSA:CSE;
 (*  Common subexpression elimination using value numbering.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -37,6 +37,7 @@ TYPE
     splitted: BOOLEAN;
     (* If @code{TRUE}, then @oproc{Transform.Split} has been called for this
        partition, or is currently executed.  *)
+    inWorklist: BOOLEAN;
     
     ancestor: Partition;
     (* During a run of @oproc{Transform.Split}, newly created partitions store
@@ -51,13 +52,15 @@ TYPE
        @ofield{ancestorOpnd} of every child is greater than the
        @ofield{ancestorOpnd} of this instance.  The end of the list is marked
        by an entry @code{NIL}.  *)
+    
+    nextTouched: Partition;
+    nextOrigin: Partition;
   END;
 
 
   (*
-     FIXME... get rid of empty partitions as soon as possible; don't try
-     to split partitions of size 1; see how the O(n log n) improvement can
-     be incorporated; speed up the DependenceData predicates
+     FIXME... get rid of empty partitions as soon as possible;
+     speed up the DependenceData predicates
      *)
   
 PROCEDURE InitPartition (p: Partition);
@@ -76,6 +79,7 @@ PROCEDURE InitPartition (p: Partition);
     END;
 
     p. splitted := FALSE;
+    p. inWorklist := FALSE;
     
     p. ancestor := NIL;
     p. ancestorOpnd := -1;
@@ -137,7 +141,7 @@ PROCEDURE (p: Partition) Add (instr: SSA.Instr);
 
 PROCEDURE Transform* (pb: SSA.ProcBlock);
   CONST
-    numOpcodes = Opcode.labels+1;
+    numOpcodes = Opcode.lastOpcode+1;
     numSubclasses = Opcode.scReal64+1;
   VAR
     pList, worklist: Partition;
@@ -153,18 +157,20 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
       p := NewPartition();
       p. nextWorklist := worklist;
       worklist := p;
+      p.inWorklist := TRUE;
       p. nextPartition := pList;
       pList := p;
       RETURN p;
     END AddPartition;
 
-  PROCEDURE SplittedPartition (p: Partition; opndIndex: LONGINT): Partition;
+  PROCEDURE SplittedPartition (p: Partition; opndIndex: LONGINT;
+                               VAR touchedList: Partition): Partition;
     VAR
       newList: ChildrenList;
       i, j: LONGINT;
       new: Partition;
     BEGIN
-      ASSERT (opndIndex # p. ancestorOpnd);
+      (*ASSERT (opndIndex # p. ancestorOpnd);*)
       
       IF (opndIndex > p. ancestorOpnd) THEN
         (* locate the child for this operand; if there isn't one, create a
@@ -186,6 +192,8 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
           new := AddPartition();
           new. ancestor := p;
           new. ancestorOpnd := opndIndex;
+          new. nextTouched := touchedList;
+          touchedList := new;
           p. splitChildren[i] := new;
           p. splitChildren[i+1] := NIL;
           RETURN new;
@@ -198,8 +206,8 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
            would violate the invariant on the childrens' `ancestorIndex';
            delegate locating a partition for `opndIndex' to the ancestor,
            and then get the child for `p.ancestorOpnd' *) 
-        new := SplittedPartition (p. ancestor, opndIndex);
-        RETURN SplittedPartition (new, p. ancestorOpnd);
+        new := SplittedPartition (p. ancestor, opndIndex, touchedList);
+        RETURN SplittedPartition (new, p. ancestorOpnd, touchedList);
       END;
     END SplittedPartition;
   
@@ -210,37 +218,54 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
       i, nextResultCount: LONGINT;
       res: SSA.Result;
       use: SSA.Opnd;
-      p: Partition;
-
-    PROCEDURE MarkUnchanged (worklist: Partition);
+      p, pUse, touched, originList, largest: Partition;
+      
+    PROCEDURE LargestChild(p: Partition; largest: Partition): Partition;
+      VAR
+        i: LONGINT;
       BEGIN
-        WHILE (worklist # NIL) & (worklist. ancestor # NIL) DO
-          IF (worklist. ancestor. size = 0) &
-             worklist. ancestor. splitted &
-             (worklist. ancestor. splitChildren[1] = NIL) THEN
-            (* this partition is a copy of the original ancestor, and Split()
-               has been done on the ancestor: mark this one as done *)
-            worklist. splitted := TRUE;
-          END;
-          worklist := worklist. nextWorklist;
+        IF (p.size > largest.size) THEN
+          largest := p;
         END;
-      END MarkUnchanged;
-    
+        
+        i := 0;
+        WHILE (p.splitChildren[i] # NIL) DO
+          largest := LargestChild(p.splitChildren[i], largest);
+          INC(i);
+        END;
+        RETURN largest;
+      END LargestChild;
+
     BEGIN
       (* Iterate over the results in iList.  First over all results at position
          0, then over all existing results at position 1, and so on.  With each
          iteration, iList[0..size-1] holds the remaining results, with size
          shrinking to 0 in the last iteration.  *)
       WHILE (size # 0) DO
+        touched := NIL;
+        originList := NIL;
         nextResultCount := 0;
         FOR i := 0 TO size-1 DO
           res := iList[i];
 
           use := res. useList;
           WHILE (use # NIL) DO
-            p := SplittedPartition (use. instr. info(Partition),
-                                    use. OpndIndex());
-            p. Add (use. instr);
+            pUse := use.instr.info(Partition);
+            IF (pUse.size > 1) OR
+               (pUse.splitChildren[0] # NIL) OR
+               (pUse.ancestor # NIL) THEN
+              (* don't move instructions out of a partition that starts out
+                 with a single instruction; intermediate partitions with a
+                 size of one are handled as before *)
+
+              IF pUse.splitted & (pUse.splitChildren[0] = NIL) THEN
+                pUse.nextOrigin := originList;
+                originList := pUse;
+              END;
+              
+              p := SplittedPartition(pUse, use.OpndIndex(), touched);
+              p.Add(use.instr);
+            END;
             use := use. nextUse;
           END;
           
@@ -252,15 +277,28 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
           END;
         END;
 
-        MarkUnchanged (worklist);
+        p := originList;
+        WHILE (p # NIL) DO
+          largest := LargestChild(p, p);
+          IF (largest # p) THEN
+            IF (p.size > 0) & ~p.inWorklist THEN
+              p.nextWorklist := worklist;
+              worklist := p;
+              p.inWorklist := TRUE;
+            END;
+            p.splitted := FALSE;
+            largest.splitted := TRUE;
+          END;
+          p := p.nextOrigin;
+        END;
         
         (* reset data of touched partitions *)
-        p := pList;
+        p := touched;
         WHILE (p # NIL) DO
           p. ancestor := NIL;
           p. ancestorOpnd := -1;
           p. splitChildren[0] := NIL;
-          p := p. nextPartition;
+          p := p. nextTouched;
         END;
         
         size := nextResultCount;
@@ -318,6 +356,7 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
         END;
         p := p. nextPartition;
       END;
+      Blocker.RemoveAntiDeps(pb);
     END Replace;
   
   BEGIN
@@ -351,6 +390,7 @@ PROCEDURE Transform* (pb: SSA.ProcBlock);
 
     WHILE (worklist # NIL) DO
       p := worklist;
+      p.inWorklist := FALSE;
       worklist := worklist. nextWorklist;
       IF ~p. splitted THEN
         p. splitted := TRUE;

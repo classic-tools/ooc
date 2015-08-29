@@ -50,46 +50,46 @@ void Config_Value_Integer__ValueDesc_StringToValue(Config_Value_Integer__Value v
   OOC_INT8 res;
 
   OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 1285)));
-  i0 = i0!=(OOC_CHAR8)'\000';
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 1285)));
+  i0 = i0!=0u;
   if (i0) goto l3;
-  i0=OOC_FALSE;
+  i0=0u;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((OOC_INT32)0, str_0d, OOC_UINT16, 1301)));
-  i0 = i0<=(OOC_CHAR8)' ';
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, str_0d, OOC_UINT16, 1301)));
+  i0 = (OOC_UINT8)i0<=(OOC_UINT8)32u;
   
 l5:
   if (i0) goto l7;
-  i0=(OOC_INT32)0;
+  i0=0;
   goto l17;
 l7:
-  i0=(OOC_INT32)0;
+  i0=0;
 l8_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 1285)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l11;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l13;
 l11:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 1301)));
-  i1 = i1<=(OOC_CHAR8)' ';
+  i1 = (OOC_UINT8)i1<=(OOC_UINT8)32u;
   
 l13:
   if (i1) goto l8_loop;
 l17:
-  Strings__Delete((void*)(OOC_INT32)str, str_0d, (OOC_INT32)0, i0);
+  Strings__Delete((void*)(OOC_INT32)str, str_0d, 0, i0);
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   len = i0;
   i = i0;
-  i1 = i0>(OOC_INT32)0;
+  i1 = i0>0;
   if (i1) goto l20;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l22;
 l20:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0-1), str_0d, OOC_UINT16, 1494)));
-  i1 = i1<=(OOC_CHAR8)' ';
+  i1 = (OOC_UINT8)i1<=(OOC_UINT8)32u;
   
 l22:
   if (i1) goto l24;
@@ -100,13 +100,13 @@ l24:
 l25_loop:
   i1 = i1-1;
   i = i1;
-  i2 = i1>(OOC_INT32)0;
+  i2 = i1>0;
   if (i2) goto l28;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l30;
 l28:
   i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i1-1), str_0d, OOC_UINT16, 1494)));
-  i2 = i2<=(OOC_CHAR8)' ';
+  i2 = (OOC_UINT8)i2<=(OOC_UINT8)32u;
   
 l30:
   if (i2) goto l25_loop;
@@ -119,7 +119,7 @@ l34:
     i0 = (OOC_INT32)v;
     i1 = _int;
     *(OOC_INT32*)(_check_pointer(i0, 1661)) = i1;
-    *errMsg = (Msg__Msg)(OOC_INT32)0;
+    *errMsg = (Msg__Msg)0;
     goto l38;
   default:
     i1 = (OOC_INT32)Config_Value_Integer__integerContext;
@@ -150,13 +150,13 @@ Config_Value_Integer__Value Config_Value_Integer__ValueDesc_Clone(Config_Value_I
   clone = (Config_Value_Integer__Value)i0;
   i1 = (OOC_INT32)v;
   i1 = _check_pointer(i1, 2022);
-  i2 = (OOC_INT32)&_td_Config_Value_Integer__ValueDesc;
-  i2 = i2!=i2;
-  i3 = _check_pointer(i0, 2016);
-  if (!i2) goto l4;
+  i2 = _check_pointer(i0, 2016);
+  i3 = (OOC_INT32)&_td_Config_Value_Integer__ValueDesc;
+  i3 = i3!=i3;
+  if (!i3) goto l4;
   _failed_type_assert(2016);
 l4:
-  _copy_block(i1,i3,4);
+  _copy_block(i1,i2,4);
   return (Config_Value_Integer__Value)i0;
   ;
 }

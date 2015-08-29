@@ -52,7 +52,7 @@ void OOC_SymbolTable_ImportModules__ImportModules(OOC_SymbolTable__Module system
       i0 = (OOC_INT32)lastError;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2195))+12);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2195))+12);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2200)), (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2200)), 0);
       i1 = (OOC_INT32)Msg__GetStringPtr((void*)(_check_pointer(i2, 2200)), i1);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2146)))), Msg__MsgDesc_SetStringAttrib)),Msg__MsgDesc_SetStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__StringPtr)i1);
       i0 = (OOC_INT32)errList;
@@ -75,10 +75,10 @@ void OOC_SymbolTable_ImportModules__ImportModules(OOC_SymbolTable__Module system
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2532))+12);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2520))+40);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2532))+12);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2537)), (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2537)), 0);
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2501)))), OOC_Config_Repositories__SectionDesc_GetModule)),OOC_Config_Repositories__SectionDesc_GetModule)((OOC_Config_Repositories__Section)i1, (void*)(_check_pointer(i2, 2537)), i3);
-      i2 = i1==(OOC_INT32)0;
       m = (OOC_Repository__Module)i1;
+      i2 = i1==(OOC_INT32)0;
       if (i2) goto l9;
       i2 = *(OOC_INT8*)((_check_pointer(i1, 2644))+16);
       i2 = i2==3;
@@ -92,7 +92,7 @@ l7:
       symTab = (OOC_SymbolTable__Module)i2;
       
 l8:
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3159)))), OOC_Repository__ModuleDesc_SetInterfaceData)),OOC_Repository__ModuleDesc_SetInterfaceData)((OOC_Repository__Module)i1, (OOC_SymbolTable__Module)i2, 4, OOC_TRUE);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3159)))), OOC_Repository__ModuleDesc_SetInterfaceData)),OOC_Repository__ModuleDesc_SetInterfaceData)((OOC_Repository__Module)i1, (OOC_SymbolTable__Module)i2, 4, 1u);
       i2 = (OOC_INT32)symTab;
       i2 = *(OOC_INT32*)((_check_pointer(i2, 3255))+60);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3233)))), OOC_Repository__ModuleDesc_SetFingerprint)),OOC_Repository__ModuleDesc_SetFingerprint)((OOC_Repository__Module)i1, i2);

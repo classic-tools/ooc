@@ -1,7 +1,7 @@
-(* 	$Id: Opcode.Mod,v 1.85 2002/12/29 14:54:16 mva Exp $	 *)
+(* 	$Id: Opcode.Mod,v 1.94 2003/03/10 22:50:50 mva Exp $	 *)
 MODULE OOC:SSA:Opcode;
 (*  This modules defines opcodes for SSA instructions.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -58,15 +58,20 @@ CONST
   enter* = 4;
   select* = 5;
   (**Select one of several states, depending on the value of the selecting
-     expression.
-
+     expression.  This instruction is used for @code{IF}, @code{WITH}, and
+     @code{CASE} statements, as well as for the boolean operators @code{&}
+     and @code{OR}.
+     
      @table @oconst
      @item *OOC:SSA:Opnd.arg
      The selecting expression.
 
      @item *OOC:SSA:Opnd.arg
-     A constant, one of the possible values of the first argument.
-
+     A constant, one of the possible values of the first argument.  For a
+     branch of a @code{CASE} statement, the operand is of class
+     @oconst{*OOC:SSA:Opnd.arg} and refers either to an instruction of type
+     @oconst{labels}, or, for the default path, to the constant @samp{FALSE}.
+     
      @item *OOC:SSA:Opnd.arg
      The value of store if the first argument matches the preceeding constant.
      @end table
@@ -118,7 +123,10 @@ CONST
      only @oconst{collect} instructions with the @var{store} operand are
      created, which are basically identity operations on @var{store}.
      @omodule{*OOC:SSA:Destore} adds further collects, and typically adds more
-     values to the argument lists.  *)
+     values to the argument lists.
+
+     The result of a collect instruction is used in one of @oconst{select},
+     @oconst{loopStart}, @oconst{loopEnd}, or @oconst{exit}.  *)
   
   return* = 7;
   (**This instruction serves two purposes: it marks the place where control
@@ -203,8 +211,7 @@ CONST
      There is one result, the value of @var{store} as seen by the loop body
      when an iteration begins.  *)
   loopEnd* = 11;
-  (**Marks the end of a loop construct.  The instruction has n+2
-     arguments:
+  (**Marks the end of a loop construct.  The instruction has n+2 arguments:
 
      @table @oconst
      @item *OOC:SSA:Opnd.arg
@@ -215,8 +222,7 @@ CONST
      of the loop.  This is actually a virtual argument to the corresponding
      @oconst{loopStart} instruction.  It is placed with the end of the loop to
      avoid cycles in the instruction graph.  Some algorithms need to treat this
-     argument specially, treat it is if it is any argument of the
-     @oconst{loopStart}.
+     argument specially, as if it is an argument of the @oconst{loopStart}.
 
      @item *OOC:SSA:Opnd.storeExit
      Subsequent arguments are the @code{store} results of the loop's
@@ -225,7 +231,9 @@ CONST
      @end table
 
      There is one result of class @oconst{*OOC:SSA:Opnd.store}, the value of
-     @var{store} as seen by the first instruction after the loop.  *)
+     @var{store} as seen by the first instruction after the loop.  Like for
+     @oconst{select}, there are additional results if @oconst{collect}
+     instructions feed distinct values into this instruction.  *)
   
   get* = 12;
   (**Retrieves the value of a variable.  Result is always a scalar value.  The
@@ -249,7 +257,11 @@ CONST
 
      The instruction itself represents the result of the read operation.  If it
      accesses a volatile variable, then it has an additional result, the new
-     value of @var{store} that is produced by this read operation.  *)
+     value of @var{store} that is produced by this read operation.
+
+     Note: Once @oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} has been
+     run, most @samp{readDesign} and @samp{writeDesign} operands are not
+     longer available.  *)
   set* = 13;
   (**Sets the value of a variable.  The source value is always of scalar type.
      The operand list resembles that of a @oconst{get} instruction, using the
@@ -260,7 +272,11 @@ CONST
      to memory.
 
      The instruction has one result of class @oconst{*OOC:SSA:Result.store},
-     representing the new value of store with the updated variable.  *)
+     representing the new value of store with the updated variable.
+
+     Note: Once @oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} has been
+     run, most @samp{readDesign} and @samp{writeDesign} operands are not
+     longer available.  *)
   copy* = 14;
   (**Copy a record or array value.  Used for assignment statements where the
      source and target are not scalar values.  The instruction is very similar
@@ -274,7 +290,11 @@ CONST
      @item
      There is no length operand, because the size of the memory block to be
      copied is size of the first operand's type.
-     @end itemize  *)  
+     @end itemize
+
+     Note: Once @oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} has been
+     run, most @samp{readDesign} and @samp{writeDesign} operands are not
+     longer available.  *)  
   copyString* = 15;
   (**Copy a sequence of characters into a string variable.  This corresponds to
      the @samp{COPY} statement.
@@ -315,7 +335,11 @@ CONST
      The result is undefined if the source value is not terminated with
      @samp{0X}, or if the target as a length of zero characters.  The
      instruction has one result of class @oconst{*OOC:SSA:Result.store},
-     representing the new value of store with the updated variable.  *)  
+     representing the new value of store with the updated variable.
+
+     Note: Once @oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} has been
+     run, most @samp{readDesign} and @samp{writeDesign} operands are not
+     longer available.  *)
   cmpString* = 16;
   (**Compare two string values and return the difference of the first
      characters that differ, or @samp{0} if both strings are equal.
@@ -349,7 +373,11 @@ CONST
      @end table
 
      The result is undefined if the strings are not terminated with
-     @samp{0X}.  *)
+     @samp{0X}.
+
+     Note: Once @oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} has been
+     run, most @samp{readDesign} and @samp{writeDesign} operands are not
+     longer available.  *)
   concat* = 17;
   (**Concatenate two or more instances of @code{STRING}.  *)
   
@@ -726,7 +754,32 @@ CONST
      for this path.  This is either a @var{store}, a reference to a
      @oconst{dgate}, or a valid value.
      @end table  *)
+  
+  designStandin* = 83;
+  (**@oproc{*OOC:SSA:DeadCodeElimination.RemoveDesignators} replaces computed
+     @samp{readDesign} and @samp{writeDesign} operands with a reference to
+     this instruction.  Only a single instruction with this opcode exists in
+     a procedure, so that CSE can still discover equivalent computations.  *)
 
+  equiv* = 84;
+  (**Marks a equivalence between two values.  Both results are of class
+     @oconst{*OOC:SSA:Opnd.arg}.  The first result is the preferred
+     representation of the two values.  The instruction has one use,
+     which is an operand of a @oconst{noop} instruction.  Right now,
+     only loop rewriting makes use of this instruction, in combination with
+     partial redundancy elimination.  *)
+  equivPRE* = 85;
+  (**Like @oconst{equiv}, but used only in the context of the algorithm for
+     partial redundancy elimination.  *)
+     
+  noop* = 86;
+  (**No operation.  Used to anchor other information in the SSA graph.
+     Conceptually, every result of this instruction is the value of the
+     corresponding operand.  Any operands beyond the number of results is
+     simply swallowed.  The instruction itself has no uses.  *)
+  
+  lastOpcode* = noop;
+  
 CONST
   scNone* = 0;
   (**The operation has no variants.  *)
@@ -758,6 +811,7 @@ CONST
   scReal64* = 11;
   (**Double precision IEEE-754 floating point number.  *)
 
+  lastSubclass* = scReal64;
   
 PROCEDURE IsSigned* (subclass: Subclass): BOOLEAN;
   BEGIN
@@ -899,6 +953,10 @@ PROCEDURE GetName* (class: Class; subclass: Subclass; VAR name: ARRAY OF CHAR);
     | activateContext: cstr := "activate-context";
       
     | dgate: cstr := "dgate";
+    | designStandin: cstr := "design-standin";
+    | equiv: cstr := "equiv";
+    | equivPRE: cstr := "equiv-pre";
+    | noop: cstr := "noop";
     END;
     
     COPY (cstr, name);

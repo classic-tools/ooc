@@ -55,26 +55,26 @@ void URI_Authority_ServerBased__AuthorityDesc_Copy(URI_Authority_ServerBased__Au
 l3:
   i1 = (OOC_INT32)auth;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3100));
-  i2 = i2!=(OOC_INT32)0;
+  i2 = i2!=0;
   if (i2) goto l6;
-  *(OOC_INT32*)(_check_pointer(i0, 3202)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 3202)) = 0;
   goto l7;
 l6:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3166));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 3166));
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3176)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3176)), 0);
   i2 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 3176)), i3);
   *(OOC_INT32*)(_check_pointer(i0, 3135)) = i2;
 l7:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3245))+4);
-  i2 = i2!=(OOC_INT32)0;
+  i2 = i2!=0;
   if (i2) goto l10;
-  *(OOC_INT32*)((_check_pointer(i0, 3335))+4) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i0, 3335))+4) = 0;
   goto l11;
 l10:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3303))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3303))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3309)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3309)), 0);
   i2 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 3309)), i3);
   *(OOC_INT32*)((_check_pointer(i0, 3276))+4) = i2;
 l11:
@@ -105,7 +105,7 @@ static Msg__Msg URI_Authority_ServerBased__ParseHost(URI_String__StringPtr str, 
       i1 = _check_pointer(i0, 3706);
       i2 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT8*)(i1+(_check_index(0, i2, OOC_UINT16, 3706)));
-      i1 = i1!=(OOC_CHAR8)'\000';
+      i1 = i1!=0u;
       if (!i1) goto l15;
       i1=0;
 l3_loop:
@@ -115,27 +115,27 @@ l3_loop:
       i2 = URI_CharClass__IsDigit(i2);
       i2 = !i2;
       if (i2) goto l6;
-      i2=OOC_FALSE;
+      i2=0u;
       goto l8;
 l6:
       i2 = _check_pointer(i0, 3764);
       i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 3764)));
-      i2 = i2!=(OOC_CHAR8)'.';
+      i2 = i2!=46u;
       
 l8:
       if (!i2) goto l10;
-      return OOC_FALSE;
+      return 0u;
 l10:
       i1 = i1+1;
       i = i1;
       i2 = _check_pointer(i0, 3706);
       i3 = OOC_ARRAY_LENGTH(i2, 0);
       i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 3706)));
-      i2 = i2!=(OOC_CHAR8)'\000';
+      i2 = i2!=0u;
       if (i2) goto l3_loop;
 l15:
-      return OOC_TRUE;
+      return 1u;
       ;
     }
 
@@ -147,52 +147,52 @@ l15:
 
       i0 = (OOC_INT32)str;
       i0 = _check_pointer(i0, 3999);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = i;
       i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 3999)));
       i0 = URI_CharClass__IsDigit(i0);
       if (i0) goto l3;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l9;
 l3:
       i0 = (OOC_INT32)str;
       i1 = _check_pointer(i0, 4020);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = i;
       i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 4020)));
-      i1 = i1!=(OOC_CHAR8)'0';
+      i1 = i1!=48u;
       if (i1) goto l6;
       i0 = _check_pointer(i0, 4057);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT8*)(i0+(_check_index((i3+1), i1, OOC_UINT16, 4057)));
       i0 = URI_CharClass__IsDigit(i0);
       i0 = !i0;
       
       goto l9;
 l6:
-      i0=OOC_TRUE;
+      i0=1u;
 l9:
       if (!i0) goto l24;
       i0 = i;
       start = i0;
-      val = (OOC_INT32)0;
-      i1=(OOC_INT32)0;
+      val = 0;
+      i1=0;
 l11_loop:
-      i2 = i1<1000;
-      i3 = i;
-      i4 = (OOC_INT32)str;
-      if (!i2) goto l15;
-      i2 = _check_pointer(i4, 4189);
-      i5 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
-      i2 = *(OOC_UINT8*)(i2+(_check_index(i3, i5, OOC_UINT16, 4189)));
-      i1 = ((i1*10)+i2)-48;
+      i2 = i;
+      i3 = (OOC_INT32)str;
+      i4 = i1<1000;
+      if (!i4) goto l15;
+      i4 = _check_pointer(i3, 4189);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 4189)));
+      i1 = ((i1*10)+i4)-48;
       val = i1;
       
 l15:
-      i2 = i3+1;
+      i2 = i2+1;
       i = i2;
-      i3 = _check_pointer(i4, 4273);
-      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
+      i3 = _check_pointer(i3, 4273);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
       i2 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT16, 4273)));
       i2 = URI_CharClass__IsDigit(i2);
       i2 = !i2;
@@ -200,12 +200,12 @@ l15:
 l19:
       i1 = i1>255;
       if (i1) goto l22;
-      return OOC_TRUE;
+      return 1u;
       goto l24;
 l22:
       i = i0;
 l24:
-      return OOC_FALSE;
+      return 0u;
       ;
     }
 
@@ -215,7 +215,7 @@ l24:
 
       i0 = (OOC_INT32)str;
       i0 = _check_pointer(i0, 4562);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = i;
       i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 4562)));
       i0 = URI_CharClass__IsAlpha(i0);
@@ -226,20 +226,20 @@ l3_loop:
       i = i0;
       i1 = (OOC_INT32)str;
       i1 = _check_pointer(i1, 4645);
-      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i0 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT16, 4645)));
       i0 = URI_CharClass__IsAlphaNum(i0);
       i0 = !i0;
       if (i0) goto l6;
-      i0=OOC_FALSE;
+      i0=0u;
       goto l8;
 l6:
       i0 = (OOC_INT32)str;
       i0 = _check_pointer(i0, 4656);
-      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i1 = OOC_ARRAY_LENGTH(i0, 0);
       i2 = i;
       i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 4656)));
-      i0 = i0!=(OOC_CHAR8)'-';
+      i0 = i0!=45u;
       
 l8:
       if (!i0) goto l3_loop;
@@ -247,18 +247,18 @@ l11:
       i0 = (OOC_INT32)str;
       i0 = _check_pointer(i0, 4705);
       i1 = i;
-      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      i2 = OOC_ARRAY_LENGTH(i0, 0);
       i0 = *(OOC_UINT8*)(i0+(_check_index((i1-1), i2, OOC_UINT16, 4705)));
       i0 = URI_CharClass__IsAlphaNum(i0);
       i0 = !i0;
       if (i0) goto l14;
-      return OOC_TRUE;
+      return 1u;
       goto l16;
 l14:
       i0 = i;
       i = (i0-1);
 l16:
-      return OOC_FALSE;
+      return 0u;
       ;
     }
 
@@ -272,34 +272,35 @@ l3_loop:
   lastLabelStart = i0;
   i0 = URI_Authority_ServerBased__ParseHost_SkipLabel();
   i0 = !i0;
-  i1 = i;
   if (!i0) goto l6;
   i0 = offset;
+  i1 = i;
   i2 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
   i0 = (OOC_INT32)URI_Error__New((URI_Error__Context)i2, 2, (i1+i0));
   return (Msg__Msg)i0;
 l6:
   i0 = (OOC_INT32)str;
-  i2 = _check_pointer(i0, 5475);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
-  i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 5475)));
-  i2 = i2==(OOC_CHAR8)'.';
-  if (!i2) goto l18;
-  i1 = i1+1;
+  i1 = _check_pointer(i0, 5475);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
+  i3 = i;
+  i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 5475)));
+  i1 = i1==46u;
+  if (!i1) goto l18;
+  i1 = i3+1;
   i = i1;
   i2 = _check_pointer(i0, 5527);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 5527)));
-  i2 = i2==(OOC_CHAR8)'\000';
+  i2 = i2==0u;
   if (i2) goto l12;
   i2 = _check_pointer(i0, 5544);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 5544)));
-  i1 = i1==(OOC_CHAR8)':';
+  i1 = i1==58u;
   
   goto l14;
 l12:
-  i1=OOC_TRUE;
+  i1=1u;
 l14:
   if (!i1) goto l3_loop;
 l18:
@@ -336,7 +337,7 @@ l26:
   i2 = OOC_ARRAY_LENGTH(i1, 0);
   i3 = i;
   i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 5130)));
-  i1 = i1==(OOC_CHAR8)'.';
+  i1 = i1==46u;
   if (i1) goto l31;
   i1 = offset;
   i2 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
@@ -369,15 +370,15 @@ Msg__Msg URI_Authority_ServerBased__AuthorityDesc_ParseAuthority(URI_Authority_S
   i1 = _check_pointer(i0, 6056);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
   i1 = *(OOC_UINT8*)(i1+(_check_index(0, i2, OOC_UINT16, 6056)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l3;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l5;
 l3:
   i1 = _check_pointer(i0, 6072);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
   i1 = *(OOC_UINT8*)(i1+(_check_index(0, i2, OOC_UINT16, 6072)));
-  i1 = i1!=(OOC_CHAR8)'@';
+  i1 = i1!=64u;
   
 l5:
   if (i1) goto l7;
@@ -391,15 +392,15 @@ l8_loop:
   i2 = _check_pointer(i0, 6056);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 6056)));
-  i2 = i2!=(OOC_CHAR8)'\000';
+  i2 = i2!=0u;
   if (i2) goto l11;
-  i2=OOC_FALSE;
+  i2=0u;
   goto l13;
 l11:
   i2 = _check_pointer(i0, 6072);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 6072)));
-  i2 = i2!=(OOC_CHAR8)'@';
+  i2 = i2!=64u;
   
 l13:
   if (i2) goto l8_loop;
@@ -408,11 +409,11 @@ l17:
   i2 = _check_pointer(i0, 6146);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 6146)));
-  i1 = i1!=(OOC_CHAR8)'\000';
+  i1 = i1!=0u;
   if (i1) goto l20;
   i = 0;
   i1=(OOC_INT32)0;
-  goto l48;
+  goto l49;
 l20:
   i = 0;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6278)), 0);
@@ -423,7 +424,7 @@ l20:
   
   goto l25;
 l23:
-  i1=OOC_TRUE;
+  i1=1u;
 l25:
   if (i1) goto l27;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6371)), 0);
@@ -431,43 +432,43 @@ l25:
   
   goto l29;
 l27:
-  i1=OOC_TRUE;
+  i1=1u;
 l29:
-  if (!i1) goto l43;
-l30_loop:
+  if (!i1) goto l44;
+l31_loop:
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6278)), 0);
   i1 = URI_CharClass__SkipUnreserved((void*)(_check_pointer(i0, 6278)), i1, (void*)(OOC_INT32)&i);
-  if (i1) goto l33;
+  if (i1) goto l34;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6325)), 0);
   i1 = URI_CharClass__SkipEscaped((void*)(_check_pointer(i0, 6325)), i1, (void*)(OOC_INT32)&i);
   
-  goto l35;
-l33:
-  i1=OOC_TRUE;
-l35:
-  if (i1) goto l37;
+  goto l36;
+l34:
+  i1=1u;
+l36:
+  if (i1) goto l38;
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6371)), 0);
   i1 = URI_CharClass__SkipMember((void*)(_check_pointer(i0, 6371)), i1, (void*)(OOC_INT32)&i, ";:&=+$,", 8);
   
-  goto l39;
-l37:
-  i1=OOC_TRUE;
-l39:
-  if (i1) goto l30_loop;
-l43:
+  goto l40;
+l38:
+  i1=1u;
+l40:
+  if (i1) goto l31_loop;
+l44:
   i1 = _check_pointer(i0, 6415);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
   i3 = i;
   i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 6415)));
-  i1 = i1==(OOC_CHAR8)'@';
-  if (i1) goto l46;
+  i1 = i1==64u;
+  if (i1) goto l47;
   i1 = offset;
   i2 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
   i1 = (OOC_INT32)URI_Error__New((URI_Error__Context)i2, 1, (i3+i1));
   return (Msg__Msg)i1;
   i1=(OOC_INT32)0;
-  goto l48;
-l46:
+  goto l49;
+l47:
   i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6487)), 0);
   i1 = (OOC_INT32)URI_String__Extract((void*)(_check_pointer(i0, 6487)), i1, 0, i3);
   i1 = (OOC_INT32)URI_String__Unescape((URI_String__StringPtr)i1);
@@ -475,47 +476,47 @@ l46:
   userinfo = (URI_String__StringPtr)i1;
   i = (i2+1);
   
-l48:
+l49:
   i2 = i;
   start = i2;
   i3 = _check_pointer(i0, 6724);
   i4 = OOC_ARRAY_LENGTH(i3, 0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT16, 6724)));
-  i3 = i3!=(OOC_CHAR8)'\000';
-  if (i3) goto l51;
-  i3=OOC_FALSE;
-  goto l53;
-l51:
+  i3 = i3!=0u;
+  if (i3) goto l52;
+  i3=0u;
+  goto l54;
+l52:
   i3 = _check_pointer(i0, 6740);
   i4 = OOC_ARRAY_LENGTH(i3, 0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT16, 6740)));
-  i3 = i3!=(OOC_CHAR8)':';
+  i3 = i3!=58u;
   
-l53:
-  if (!i3) goto l63;
-l54_loop:
+l54:
+  if (!i3) goto l64;
+l55_loop:
   i3 = i;
   i3 = i3+1;
   i = i3;
   i4 = _check_pointer(i0, 6724);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
   i4 = *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 6724)));
-  i4 = i4!=(OOC_CHAR8)'\000';
-  if (i4) goto l57;
-  i3=OOC_FALSE;
-  goto l59;
-l57:
+  i4 = i4!=0u;
+  if (i4) goto l58;
+  i3=0u;
+  goto l60;
+l58:
   i4 = _check_pointer(i0, 6740);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
   i3 = *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 6740)));
-  i3 = i3!=(OOC_CHAR8)':';
+  i3 = i3!=58u;
   
-l59:
-  if (i3) goto l54_loop;
-l63:
+l60:
+  if (i3) goto l55_loop;
+l64:
   i3 = i;
   i4 = i3==i2;
-  if (i4) goto l69;
+  if (i4) goto l70;
   i4 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6907)), 0);
   i3 = (OOC_INT32)URI_String__Extract((void*)(_check_pointer(i0, 6907)), i4, i2, i3);
   i4 = offset;
@@ -523,25 +524,25 @@ l63:
   i2 = (OOC_INT32)URI_Authority_ServerBased__ParseHost((URI_String__StringPtr)i3, (i4+i2));
   res = (Msg__Msg)i2;
   i3 = i2!=(OOC_INT32)0;
-  if (!i3) goto l70;
+  if (!i3) goto l71;
   return (Msg__Msg)i2;
-  goto l70;
-l69:
+  goto l71;
+l70:
   i2 = offset;
   i4 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
   i2 = (OOC_INT32)URI_Error__New((URI_Error__Context)i4, 4, (i3+i2));
   return (Msg__Msg)i2;
-l70:
-  port = -1;
+l71:
+  port = (-1);
   i2 = _check_pointer(i0, 7071);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
   i4 = i;
   i2 = *(OOC_UINT8*)(i2+(_check_index(i4, i3, OOC_UINT16, 7071)));
-  i2 = i2==(OOC_CHAR8)':';
-  if (i2) goto l73;
-  i2=-1;
-  goto l94;
-l73:
+  i2 = i2==58u;
+  if (i2) goto l74;
+  i2=(-1);
+  goto l95;
+l74:
   i2 = i4+1;
   i = i2;
   i3 = i2+1;
@@ -549,70 +550,70 @@ l73:
   i4 = _check_pointer(i0, 7135);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
   i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 7135)));
-  i4 = i4!=(OOC_CHAR8)'\000';
-  if (i4) goto l76;
-  i2=-1;
-  goto l94;
-l76:
+  i4 = i4!=0u;
+  if (i4) goto l77;
+  i2=(-1);
+  goto l95;
+l77:
   port = 0;
   i4 = _check_pointer(i0, 7205);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
   i2 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 7205)));
   i2 = URI_CharClass__IsDigit(i2);
-  if (i2) goto l79;
+  if (i2) goto l80;
   i2=0;
-  goto l89;
-l79:
+  goto l90;
+l80:
   i2=0;
-l80_loop:
-  i4 = i2<1000000;
-  i5 = i;
-  if (!i4) goto l84;
-  i4 = _check_pointer(i0, 7283);
-  i6 = OOC_ARRAY_LENGTH(i4, 0);
-  i4 = *(OOC_UINT8*)(i4+(_check_index(i5, i6, OOC_UINT16, 7283)));
-  i2 = ((i2*10)+i4)-48;
+l81_loop:
+  i4 = i;
+  i5 = i2<1000000;
+  if (!i5) goto l85;
+  i5 = _check_pointer(i0, 7283);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
+  i5 = *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT16, 7283)));
+  i2 = ((i2*10)+i5)-48;
   port = i2;
   
-l84:
-  i4 = i5+1;
+l85:
+  i4 = i4+1;
   i = i4;
   i5 = _check_pointer(i0, 7205);
   i6 = OOC_ARRAY_LENGTH(i5, 0);
   i4 = *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT16, 7205)));
   i4 = URI_CharClass__IsDigit(i4);
-  if (i4) goto l80_loop;
-l89:
+  if (i4) goto l81_loop;
+l90:
   i4 = i2>65535;
-  if (!i4) goto l94;
+  if (!i4) goto l95;
   i4 = offset;
   i5 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
   i3 = (OOC_INT32)URI_Error__New((URI_Error__Context)i5, 6, (i3+i4));
   return (Msg__Msg)i3;
-l94:
+l95:
   i0 = _check_pointer(i0, 7494);
   i3 = OOC_ARRAY_LENGTH(i0, 0);
   i4 = i;
   i0 = *(OOC_UINT8*)(i0+(_check_index(i4, i3, OOC_UINT16, 7494)));
-  i0 = i0!=(OOC_CHAR8)'\000';
-  if (!i0) goto l97;
+  i0 = i0!=0u;
+  if (!i0) goto l98;
   i0 = offset;
   i3 = (OOC_INT32)URI_Authority_ServerBased__serverContext;
   i0 = (OOC_INT32)URI_Error__New((URI_Error__Context)i3, 7, (i4+i0));
   return (Msg__Msg)i0;
-l97:
+l98:
   i0 = (OOC_INT32)auth;
   *(OOC_INT32*)(_check_pointer(i0, 7600)) = i1;
   i1 = (OOC_INT32)host;
   *(OOC_INT32*)((_check_pointer(i0, 7632))+4) = i1;
-  i1 = i2==-1;
-  if (i1) goto l100;
+  i1 = i2==(-1);
+  if (i1) goto l101;
   *(OOC_INT32*)((_check_pointer(i0, 7738))+8) = i2;
-  goto l101;
-l100:
+  goto l102;
+l101:
   i1 = *(OOC_INT32*)((_check_pointer(i0, 7705))+12);
   *(OOC_INT32*)((_check_pointer(i0, 7691))+8) = i1;
-l101:
+l102:
   return (Msg__Msg)(OOC_INT32)0;
   ;
 }
@@ -625,19 +626,19 @@ void URI_Authority_ServerBased__AuthorityDesc_WriteXML(URI_Authority_ServerBased
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7907)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<authority-server-based>", 26);
   i1 = (OOC_INT32)auth;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7970));
-  i2 = i2!=(OOC_INT32)0;
+  i2 = i2!=0;
   if (!i2) goto l3;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8000)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<userinfo>", 12);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8063));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8063));
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 8073)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 8073)), 0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8044)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 8073)), i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8084)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</userinfo>", 12);
 l3:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8129)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<host>", 8);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8186))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8186))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 8192)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 8192)), 0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8167)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 8192)), i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8201)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</host>", 8);
   i2 = *(OOC_INT32*)((_check_pointer(i1, 8240))+8);
@@ -661,22 +662,22 @@ void URI_Authority_ServerBased__AuthorityDesc_Append(URI_Authority_ServerBased__
   Strings__Append("//", 3, (void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)auth;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8629));
-  i1 = i1!=(OOC_INT32)0;
+  i1 = i1!=0;
   if (!i1) goto l3;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8684));
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8684));
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 8694)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 8694)), 0);
   URI_String__AppendEscaped((void*)(_check_pointer(i1, 8694)), i2, ";:&=+$,", 8, (void*)(OOC_INT32)str, str_0d);
   Strings__Append("@", 2, (void*)(OOC_INT32)str, str_0d);
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8798))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8798))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 8804)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 8804)), 0);
   Strings__Append((void*)(_check_pointer(i1, 8804)), i2, (void*)(OOC_INT32)str, str_0d);
   i1 = *(OOC_INT32*)((_check_pointer(i0, 8825))+8);
   i1 = i1>=0;
   if (i1) goto l6;
-  i1=OOC_FALSE;
+  i1=0u;
   goto l8;
 l6:
   i1 = *(OOC_INT32*)((_check_pointer(i0, 8858))+12);
