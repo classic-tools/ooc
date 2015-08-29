@@ -201,118 +201,121 @@ extern OOC_CHAR8 OOC_SSA__OpndDesc_IsValueOpndHere(OOC_SSA__Opnd opnd);
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__OpndDesc_IsValueOpndHere)(OOC_SSA__Opnd opnd);
 extern OOC_SSA__Result OOC_SSA__NewResult(OOC_SSA__Instr instr, OOC_INT8 _class, OOC_INT8 subclass);
 extern void OOC_SSA__ResultDesc_DeleteResult(OOC_SSA__Result res);
-#define _TBN_OOC_SSA__ResultDesc_DeleteResult 3
+#define _TBN_OOC_SSA__ResultDesc_DeleteResult 4
 typedef void (*_TBP_OOC_SSA__ResultDesc_DeleteResult)(OOC_SSA__Result res);
 extern void OOC_SSA__ResultDesc_ReplaceUses(OOC_SSA__Result res, OOC_SSA__Result with);
-#define _TBN_OOC_SSA__ResultDesc_ReplaceUses 6
+#define _TBN_OOC_SSA__ResultDesc_ReplaceUses 7
 typedef void (*_TBP_OOC_SSA__ResultDesc_ReplaceUses)(OOC_SSA__Result res, OOC_SSA__Result with);
 extern OOC_INT32 OOC_SSA__ResultDesc_ResultIndex(OOC_SSA__Result result);
-#define _TBN_OOC_SSA__ResultDesc_ResultIndex 7
+#define _TBN_OOC_SSA__ResultDesc_ResultIndex 8
 typedef OOC_INT32 (*_TBP_OOC_SSA__ResultDesc_ResultIndex)(OOC_SSA__Result result);
+extern OOC_SymbolTable__ProcDecl OOC_SSA__ResultDesc_CalledProc(OOC_SSA__Result calledAdr);
+#define _TBN_OOC_SSA__ResultDesc_CalledProc 3
+typedef OOC_SymbolTable__ProcDecl (*_TBP_OOC_SSA__ResultDesc_CalledProc)(OOC_SSA__Result calledAdr);
 extern OOC_CHAR8 OOC_SSA__ResultDesc_IsBooleanConst(OOC_SSA__Result result, OOC_CHAR8 value);
-#define _TBN_OOC_SSA__ResultDesc_IsBooleanConst 4
+#define _TBN_OOC_SSA__ResultDesc_IsBooleanConst 5
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__ResultDesc_IsBooleanConst)(OOC_SSA__Result result, OOC_CHAR8 value);
 extern void OOC_SSA__ResultDesc_LogId(OOC_SSA__Result result, const OOC_CHAR8 msg__ref[], OOC_LEN msg_0d);
-#define _TBN_OOC_SSA__ResultDesc_LogId 5
+#define _TBN_OOC_SSA__ResultDesc_LogId 6
 typedef void (*_TBP_OOC_SSA__ResultDesc_LogId)(OOC_SSA__Result result, const OOC_CHAR8 msg__ref[], OOC_LEN msg_0d);
 extern void OOC_SSA__InstrDesc_SetSubclass(OOC_SSA__Instr instr, OOC_INT8 subclass);
-#define _TBN_OOC_SSA__InstrDesc_SetSubclass 37
+#define _TBN_OOC_SSA__InstrDesc_SetSubclass 38
 typedef void (*_TBP_OOC_SSA__InstrDesc_SetSubclass)(OOC_SSA__Instr instr, OOC_INT8 subclass);
 extern void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_SSA__InstrDesc_SetPos 36
+#define _TBN_OOC_SSA__InstrDesc_SetPos 37
 typedef void (*_TBP_OOC_SSA__InstrDesc_SetPos)(OOC_SSA__Instr instr, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern void OOC_SSA__InstrDesc_AddOpnd(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_AddOpnd 8
+#define _TBN_OOC_SSA__InstrDesc_AddOpnd 9
 typedef void (*_TBP_OOC_SSA__InstrDesc_AddOpnd)(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
 extern OOC_SSA__Opnd OOC_SSA__InstrDesc_AddOpndFct(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_AddOpndFct 9
+#define _TBN_OOC_SSA__InstrDesc_AddOpndFct 10
 typedef OOC_SSA__Opnd (*_TBP_OOC_SSA__InstrDesc_AddOpndFct)(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
 extern void OOC_SSA__InstrDesc_AddUniqueOpnd(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_AddUniqueOpnd 13
+#define _TBN_OOC_SSA__InstrDesc_AddUniqueOpnd 14
 typedef void (*_TBP_OOC_SSA__InstrDesc_AddUniqueOpnd)(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
 extern void OOC_SSA__InstrDesc_AddTypedOpnd(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class, OOC_SymbolTable__Type type, OOC_CHAR8 passByReference);
-#define _TBN_OOC_SSA__InstrDesc_AddTypedOpnd 12
+#define _TBN_OOC_SSA__InstrDesc_AddTypedOpnd 13
 typedef void (*_TBP_OOC_SSA__InstrDesc_AddTypedOpnd)(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class, OOC_SymbolTable__Type type, OOC_CHAR8 passByReference);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_AddResultSubclass(OOC_SSA__Instr instr, OOC_INT8 _class, OOC_INT8 subclass);
-#define _TBN_OOC_SSA__InstrDesc_AddResultSubclass 11
+#define _TBN_OOC_SSA__InstrDesc_AddResultSubclass 12
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_AddResultSubclass)(OOC_SSA__Instr instr, OOC_INT8 _class, OOC_INT8 subclass);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_AddResult(OOC_SSA__Instr instr, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_AddResult 10
+#define _TBN_OOC_SSA__InstrDesc_AddResult 11
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_AddResult)(OOC_SSA__Instr instr, OOC_INT8 _class);
 extern OOC_INT32 OOC_SSA__InstrDesc_SizeOpndList(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_SizeOpndList 38
+#define _TBN_OOC_SSA__InstrDesc_SizeOpndList 39
 typedef OOC_INT32 (*_TBP_OOC_SSA__InstrDesc_SizeOpndList)(OOC_SSA__Instr instr);
 extern OOC_INT32 OOC_SSA__InstrDesc_CountOpndClass(OOC_SSA__Instr instr, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_CountOpndClass 14
+#define _TBN_OOC_SSA__InstrDesc_CountOpndClass 15
 typedef OOC_INT32 (*_TBP_OOC_SSA__InstrDesc_CountOpndClass)(OOC_SSA__Instr instr, OOC_INT8 _class);
 extern OOC_INT32 OOC_SSA__InstrDesc_SizeResultList(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_SizeResultList 39
+#define _TBN_OOC_SSA__InstrDesc_SizeResultList 40
 typedef OOC_INT32 (*_TBP_OOC_SSA__InstrDesc_SizeResultList)(OOC_SSA__Instr instr);
 extern OOC_SSA__Opnd OOC_SSA__InstrDesc_NthOpnd(OOC_SSA__Instr instr, OOC_INT32 nth);
-#define _TBN_OOC_SSA__InstrDesc_NthOpnd 33
+#define _TBN_OOC_SSA__InstrDesc_NthOpnd 34
 typedef OOC_SSA__Opnd (*_TBP_OOC_SSA__InstrDesc_NthOpnd)(OOC_SSA__Instr instr, OOC_INT32 nth);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_NthArg(OOC_SSA__Instr instr, OOC_INT32 nth);
-#define _TBN_OOC_SSA__InstrDesc_NthArg 32
+#define _TBN_OOC_SSA__InstrDesc_NthArg 33
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_NthArg)(OOC_SSA__Instr instr, OOC_INT32 nth);
 extern OOC_SSA__Opnd OOC_SSA__InstrDesc_LastOpnd(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_LastOpnd 30
+#define _TBN_OOC_SSA__InstrDesc_LastOpnd 31
 typedef OOC_SSA__Opnd (*_TBP_OOC_SSA__InstrDesc_LastOpnd)(OOC_SSA__Instr instr);
 extern OOC_SSA__Opnd OOC_SSA__InstrDesc_GetOpndClass(OOC_SSA__Instr instr, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_GetOpndClass 23
+#define _TBN_OOC_SSA__InstrDesc_GetOpndClass 24
 typedef OOC_SSA__Opnd (*_TBP_OOC_SSA__InstrDesc_GetOpndClass)(OOC_SSA__Instr instr, OOC_INT8 _class);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_GetArgClass(OOC_SSA__Instr instr, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_GetArgClass 15
+#define _TBN_OOC_SSA__InstrDesc_GetArgClass 16
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_GetArgClass)(OOC_SSA__Instr instr, OOC_INT8 _class);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_GetArgStore(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetArgStore 16
+#define _TBN_OOC_SSA__InstrDesc_GetArgStore 17
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_GetArgStore)(OOC_SSA__Instr instr);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_NthResult(OOC_SSA__Instr instr, OOC_INT32 nth);
-#define _TBN_OOC_SSA__InstrDesc_NthResult 34
+#define _TBN_OOC_SSA__InstrDesc_NthResult 35
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_NthResult)(OOC_SSA__Instr instr, OOC_INT32 nth);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_GetResultClass(OOC_SSA__Instr instr, OOC_INT8 _class);
-#define _TBN_OOC_SSA__InstrDesc_GetResultClass 24
+#define _TBN_OOC_SSA__InstrDesc_GetResultClass 25
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_GetResultClass)(OOC_SSA__Instr instr, OOC_INT8 _class);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_GetResultStore(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetResultStore 25
+#define _TBN_OOC_SSA__InstrDesc_GetResultStore 26
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_GetResultStore)(OOC_SSA__Instr instr);
 extern void OOC_SSA__InstrDesc_GetOpcodeName(OOC_SSA__Instr instr, OOC_CHAR8 name[], OOC_LEN name_0d);
-#define _TBN_OOC_SSA__InstrDesc_GetOpcodeName 22
+#define _TBN_OOC_SSA__InstrDesc_GetOpcodeName 23
 typedef void (*_TBP_OOC_SSA__InstrDesc_GetOpcodeName)(OOC_SSA__Instr instr, OOC_CHAR8 name[], OOC_LEN name_0d);
 extern OOC_INT8 OOC_SSA__InstrDesc_GetResultType(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetResultType 26
+#define _TBN_OOC_SSA__InstrDesc_GetResultType 27
 typedef OOC_INT8 (*_TBP_OOC_SSA__InstrDesc_GetResultType)(OOC_SSA__Instr instr);
 extern OOC_SSA__Instr OOC_SSA__InstrDesc_GetLoopEnd(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetLoopEnd 20
+#define _TBN_OOC_SSA__InstrDesc_GetLoopEnd 21
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__InstrDesc_GetLoopEnd)(OOC_SSA__Instr instr);
 extern OOC_SSA__Result OOC_SSA__InstrDesc_GetBackwardFeed(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetBackwardFeed 17
+#define _TBN_OOC_SSA__InstrDesc_GetBackwardFeed 18
 typedef OOC_SSA__Result (*_TBP_OOC_SSA__InstrDesc_GetBackwardFeed)(OOC_SSA__Instr instr);
 extern OOC_SSA__Instr OOC_SSA__InstrDesc_GetLoopStart(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetLoopStart 21
+#define _TBN_OOC_SSA__InstrDesc_GetLoopStart 22
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__InstrDesc_GetLoopStart)(OOC_SSA__Instr instr);
 extern OOC_SSA__Instr OOC_SSA__InstrDesc_GetCollectTarget(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_GetCollectTarget 19
+#define _TBN_OOC_SSA__InstrDesc_GetCollectTarget 20
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__InstrDesc_GetCollectTarget)(OOC_SSA__Instr instr);
 extern OOC_INT32 OOC_SSA__InstrDesc_NumberOfPaths(OOC_SSA__Instr select);
-#define _TBN_OOC_SSA__InstrDesc_NumberOfPaths 35
+#define _TBN_OOC_SSA__InstrDesc_NumberOfPaths 36
 typedef OOC_INT32 (*_TBP_OOC_SSA__InstrDesc_NumberOfPaths)(OOC_SSA__Instr select);
 extern OOC_SSA__Instr OOC_SSA__InstrDesc_GetCollect(OOC_SSA__Instr select, OOC_SSA__ProcBlock pb, OOC_INT32 pathNum);
-#define _TBN_OOC_SSA__InstrDesc_GetCollect 18
+#define _TBN_OOC_SSA__InstrDesc_GetCollect 19
 typedef OOC_SSA__Instr (*_TBP_OOC_SSA__InstrDesc_GetCollect)(OOC_SSA__Instr select, OOC_SSA__ProcBlock pb, OOC_INT32 pathNum);
 extern void OOC_SSA__InstrDesc_LogOpcode(OOC_SSA__Instr instr, const OOC_CHAR8 msg__ref[], OOC_LEN msg_0d);
-#define _TBN_OOC_SSA__InstrDesc_LogOpcode 31
+#define _TBN_OOC_SSA__InstrDesc_LogOpcode 32
 typedef void (*_TBP_OOC_SSA__InstrDesc_LogOpcode)(OOC_SSA__Instr instr, const OOC_CHAR8 msg__ref[], OOC_LEN msg_0d);
 extern OOC_CHAR8 OOC_SSA__InstrDesc_IsConst(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_IsConst 27
+#define _TBN_OOC_SSA__InstrDesc_IsConst 28
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__InstrDesc_IsConst)(OOC_SSA__Instr instr);
 extern OOC_CHAR8 OOC_SSA__InstrDesc_UniqueResult(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_UniqueResult 40
+#define _TBN_OOC_SSA__InstrDesc_UniqueResult 41
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__InstrDesc_UniqueResult)(OOC_SSA__Instr instr);
 extern OOC_CHAR8 OOC_SSA__InstrDesc_IsSync(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_IsSync 29
+#define _TBN_OOC_SSA__InstrDesc_IsSync 30
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__InstrDesc_IsSync)(OOC_SSA__Instr instr);
 extern OOC_CHAR8 OOC_SSA__InstrDesc_IsSwitchStatm(OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA__InstrDesc_IsSwitchStatm 28
+#define _TBN_OOC_SSA__InstrDesc_IsSwitchStatm 29
 typedef OOC_CHAR8 (*_TBP_OOC_SSA__InstrDesc_IsSwitchStatm)(OOC_SSA__Instr instr);
 extern OOC_SSA__ProcBlock OOC_SSA__NewProcBlock(OOC_IR__Procedure proc);
 extern OOC_SSA__Instr OOC_SSA__ProcBlockDesc_AddInstr(OOC_SSA__ProcBlock pb, OOC_INT8 opcode, OOC_INT8 subclass);
@@ -378,8 +381,8 @@ typedef OOC_SSA__Instr (*_TBP_OOC_SSA__ProcBlockDesc_GetEnter)(OOC_SSA__ProcBloc
 extern void OOC_SSA__ProcBlockDesc_Destroy(OOC_SSA__ProcBlock pb);
 #define _TBN_OOC_SSA__ProcBlockDesc_Destroy 8
 typedef void (*_TBP_OOC_SSA__ProcBlockDesc_Destroy)(OOC_SSA__ProcBlock pb);
-extern void OOC_OOC_SSA_init();
-extern void OOC_OOC_SSA_init0();
+extern void OOC_OOC_SSA_init(void);
+extern void OOC_OOC_SSA_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA__Node;
@@ -403,10 +406,10 @@ extern RT0__StructDesc _td_OOC_SSA__AddressDesc;
 extern RT0__StructDesc _td_OOC_SSA__ProcBlock;
 extern RT0__StructDesc _td_OOC_SSA__ProcBlockDesc;
 extern RT0__StructDesc _td_OOC_SSA__7402;
-extern RT0__StructDesc _td_OOC_SSA__16722;
-extern RT0__StructDesc _td_OOC_SSA__25741;
-extern RT0__StructDesc _td_OOC_SSA__30995;
-extern RT0__StructDesc _td_OOC_SSA__31027;
+extern RT0__StructDesc _td_OOC_SSA__17228;
+extern RT0__StructDesc _td_OOC_SSA__26247;
+extern RT0__StructDesc _td_OOC_SSA__31501;
+extern RT0__StructDesc _td_OOC_SSA__31533;
 #endif /* _MODULE_OOC_SSA_ */
 
 /* --- */

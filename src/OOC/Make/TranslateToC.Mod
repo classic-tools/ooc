@@ -1,4 +1,4 @@
-(* 	$Id: TranslateToC.Mod,v 1.19 2003/04/10 23:41:46 mva Exp $	 *)
+(* 	$Id: TranslateToC.Mod,v 1.20 2003/04/14 19:20:54 mva Exp $	 *)
 MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -275,7 +275,7 @@ RAISES IO.Error;
                                                   errList, 
                                                   ConstFold.NewConstFold()));
       IF errList.NoErrors() THEN
-        CheckUses.CheckUses(module, pragmaHistory, errList);
+        CheckUses.CheckUses(module, symTab, pragmaHistory, errList);
       END;
       
       IF writeIR THEN

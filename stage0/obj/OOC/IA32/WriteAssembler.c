@@ -44,9 +44,9 @@ l13:
           _assert(0u, 127, 3442);
           goto l32;
 l15:
-          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3253)))), Object_BigInt__BigIntDesc_ToString)),Object_BigInt__BigIntDesc_ToString)((Object_BigInt__BigInt)i0);
+          i0 = (OOC_INT32)Object_BigInt__BigIntDesc_ToString((Object_BigInt__BigInt)i0);
           string = (Object__String)i0;
-          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3301)))), &_td_Object__String8Desc, 3301)), 3309)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3301)))), &_td_Object__String8Desc, 3301)));
+          i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3301)))), &_td_Object__String8Desc, 3301)));
           chars = (Object__CharsLatin1)i0;
           _copy_8((const void*)(_check_pointer(i0, 3347)),(void*)(OOC_INT32)str,str_0d);
           Strings__Insert("$", 2, 0, (void*)(OOC_INT32)str, str_0d);
@@ -61,7 +61,7 @@ l19:
           i1 = (OOC_INT32)w;
           i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2951)))), OOC_IA32_Writer__WriterDesc_GetStringLabel)),OOC_IA32_Writer__WriterDesc_GetStringLabel)((OOC_IA32_Writer__Writer)i1, (Object_Boxed__String)i0);
           s = (Object__String)i0;
-          i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3009)))), &_td_Object__String8Desc, 3009)), 3017)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3009)))), &_td_Object__String8Desc, 3009)));
+          i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3009)))), &_td_Object__String8Desc, 3009)));
           chars = (Object__CharsLatin1)i0;
           _copy_8((const void*)(_check_pointer(i0, 3057)),(void*)(OOC_INT32)str,str_0d);
           goto l23;
@@ -107,9 +107,8 @@ l32:
       default:
         i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4034))+8);
         Log__Type("arg.instr", 10, (void*)i1);
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4057))+8);
         i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4057))+8);
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4064)))), OOC_SSA__InstrDesc_LogOpcode)),OOC_SSA__InstrDesc_LogOpcode)((OOC_SSA__Instr)i0, "opcode", 7);
+        OOC_SSA__InstrDesc_LogOpcode((OOC_SSA__Instr)i0, "opcode", 7);
         _assert(0u, 127, 4098);
         goto l12;
       }
@@ -117,7 +116,7 @@ l9:
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3695))+44);
       i0 = (OOC_INT32)OOC_C_Naming__NameOfDeclaration((OOC_SymbolTable__Declaration)i0);
       s = (Object__String)i0;
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3730)))), &_td_Object__String8Desc, 3730)), 3738)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3730)))), &_td_Object__String8Desc, 3730)));
+      i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3730)))), &_td_Object__String8Desc, 3730)));
       chars = (Object__CharsLatin1)i0;
       _copy_8((const void*)(_check_pointer(i0, 3772)),(void*)(OOC_INT32)str,str_0d);
       goto l12;
@@ -408,9 +407,8 @@ l18:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7775))+8);
   i0 = (OOC_INT32)OOC_SSA_IRtoSSA__StatmSeq((OOC_SSA__ProcBlock)i1, (OOC_SSA__Result)i2, (OOC_IR__StatementSeq)i0);
   s = (OOC_SSA__Result)i0;
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7794));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7794));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7808)))), OOC_SSA__InstrDesc_AddOpnd)),OOC_SSA__InstrDesc_AddOpnd)((OOC_SSA__Instr)i1, (OOC_SSA__Result)i0, 2);
+  OOC_SSA__InstrDesc_AddOpnd((OOC_SSA__Instr)i1, (OOC_SSA__Result)i0, 2);
   OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody_Write("initial", 8, "dce-pre", 8);
   i0 = (OOC_INT32)pb;
   OOC_SSA_DeadCodeElimination__Transform((OOC_SSA__ProcBlock)i0);
@@ -418,7 +416,7 @@ l18:
   i0 = (OOC_INT32)pb;
   i0 = (OOC_INT32)OOC_SSA_Destore__New((OOC_SSA__ProcBlock)i0);
   destore = (OOC_SSA_Destore__State)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8077)))), OOC_SSA_Destore__StateDesc_Transform)),OOC_SSA_Destore__StateDesc_Transform)((OOC_SSA_Destore__State)i0);
+  OOC_SSA_Destore__StateDesc_Transform((OOC_SSA_Destore__State)i0);
   OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody_Write("destore-post", 13, "dce-pre", 8);
   i0 = (OOC_INT32)pb;
   OOC_SSA_DeadCodeElimination__Transform((OOC_SSA__ProcBlock)i0);
@@ -436,8 +434,8 @@ l3_loop:
   case 42:
     i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8420))+24);
     i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 8429));
-    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8402)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i1, (OOC_SSA__Result)i3);
-    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8446)))), OOC_SSA__ProcBlockDesc_DeleteInstr)),OOC_SSA__ProcBlockDesc_DeleteInstr)((OOC_SSA__ProcBlock)i0, (OOC_SSA__Instr)i1);
+    OOC_SSA__ResultDesc_ReplaceUses((OOC_SSA__Result)i1, (OOC_SSA__Result)i3);
+    OOC_SSA__ProcBlockDesc_DeleteInstr((OOC_SSA__ProcBlock)i0, (OOC_SSA__Instr)i1);
     goto l7;
   default:
     goto l7;

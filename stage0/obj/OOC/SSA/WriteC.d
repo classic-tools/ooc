@@ -29,7 +29,7 @@
 #define OOC_SSA_WriteC__enableLoopRewriting OOC_TRUE
 #define OOC_SSA_WriteC__enableDebugOutput OOC_FALSE
 #define OOC_SSA_WriteC__prefixPreloadVar "_c"
-static OOC_SSA_WriteC__Visitor OOC_SSA_WriteC__NewVisitor();
+static OOC_SSA_WriteC__Visitor OOC_SSA_WriteC__NewVisitor(void);
 static OOC_INT8 OOC_SSA_WriteC__SubclassToBasicType(OOC_SSA__Result res);
 static OOC_SSA_WriteC__Writer OOC_SSA_WriteC__NewWriter(OOC_SSA_WriteC__Translator translator, OOC_C_DeclWriter__Writer cWriter, OOC_SSA__ProcBlock procBlock, ADT_Dictionary__Dictionary registerMap, ADT_Dictionary__Dictionary jmpbufMap);
 static void OOC_SSA_WriteC__Fixup(OOC_SSA__ProcBlock pb, ADT_Dictionary__Dictionary *jmpbufMap);

@@ -312,7 +312,7 @@ void OOC_AST_ExtTree__Init(OOC_AST_ExtTree__Builder b) {
   ;
 }
 
-OOC_AST_ExtTree__Builder OOC_AST_ExtTree__New() {
+OOC_AST_ExtTree__Builder OOC_AST_ExtTree__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_AST_ExtTree__Builder.baseTypes[0]);
@@ -420,7 +420,7 @@ l8:
 }
 
 void OOC_AST_ExtTree__IdentDefDesc_AttachDocString(OOC_AST_ExtTree__IdentDef identDef, OOC_Doc__Document docString) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)identDef;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16637))+8);
@@ -430,10 +430,9 @@ void OOC_AST_ExtTree__IdentDefDesc_AttachDocString(OOC_AST_ExtTree__IdentDef ide
   *(OOC_INT32*)((_check_pointer(i0, 16729))+8) = i1;
   goto l4;
 l3:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16675))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16675))+8);
-  i2 = (OOC_INT32)docString;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 16686)))), OOC_Doc__DocumentDesc_Merge)),OOC_Doc__DocumentDesc_Merge)((OOC_Doc__Document)i0, (OOC_Doc__Document)i2);
+  i1 = (OOC_INT32)docString;
+  OOC_Doc__DocumentDesc_Merge((OOC_Doc__Document)i0, (OOC_Doc__Document)i1);
 l4:
   return;
   ;
@@ -463,7 +462,7 @@ OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_ModuleIdent(OOC_AST_ExtTree__
 }
 
 void OOC_AST_ExtTree__ModuleIdentDesc_AttachDocString(OOC_AST_ExtTree__ModuleIdent moduleIdent, OOC_Doc__Document docString) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)moduleIdent;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17255))+4);
@@ -473,10 +472,9 @@ void OOC_AST_ExtTree__ModuleIdentDesc_AttachDocString(OOC_AST_ExtTree__ModuleIde
   *(OOC_INT32*)((_check_pointer(i0, 17353))+4) = i1;
   goto l4;
 l3:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17296))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17296))+4);
-  i2 = (OOC_INT32)docString;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 17307)))), OOC_Doc__DocumentDesc_Merge)),OOC_Doc__DocumentDesc_Merge)((OOC_Doc__Document)i0, (OOC_Doc__Document)i2);
+  i1 = (OOC_INT32)docString;
+  OOC_Doc__DocumentDesc_Merge((OOC_Doc__Document)i0, (OOC_Doc__Document)i1);
 l4:
   return;
   ;

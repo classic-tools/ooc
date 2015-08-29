@@ -42,7 +42,7 @@ void OOC_Config_Pragmas_StdPragmas__CreateVariables(OOC_Config_Pragmas__Section 
   i1 = (OOC_INT32)Config_Value_String__New("OOC", 4);
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3670)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, "COMPILER", 9, (Config_Value__Value)i1);
   OOC_Config_Pragmas_StdPragmas__compiler = (Config_Section_Options__Option)i1;
-  i1 = (OOC_INT32)Config_Value_String__New("2.0.7", 6);
+  i1 = (OOC_INT32)Config_Value_String__New("2.0.8", 6);
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3744)))), Config_Section_Options__SectionDesc_Set)),Config_Section_Options__SectionDesc_Set)((Config_Section_Options__Section)i0, "COMPILER_VERSION", 17, (Config_Value__Value)i1);
   OOC_Config_Pragmas_StdPragmas__compilerVersion = (Config_Section_Options__Option)i1;
   i1 = (OOC_INT32)Config_Value_Integer__New(2);

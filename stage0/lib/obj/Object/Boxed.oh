@@ -140,8 +140,8 @@ extern void Object_Boxed__StringDesc_Load(Object_Boxed__String v, ADT_Storable__
 #define _TBN_Object_Boxed__StringDesc_Load 4
 typedef void (*_TBP_Object_Boxed__StringDesc_Load)(Object_Boxed__String v, ADT_Storable__Reader r);
 extern Object_Boxed__String Object_Boxed__ParseString(const OOC_CHAR8 str[], OOC_LEN str_0d);
-extern void OOC_Object_Boxed_init();
-extern void OOC_Object_Boxed_init0();
+extern void OOC_Object_Boxed_init(void);
+extern void OOC_Object_Boxed_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Object_Boxed__Object;

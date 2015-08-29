@@ -50,12 +50,12 @@ extern void XML_Error__ContextDesc_SetString(XML_Error__Context context, OOC_INT
 #define _TBN_XML_Error__ContextDesc_SetString 1
 typedef void (*_TBP_XML_Error__ContextDesc_SetString)(XML_Error__Context context, OOC_INT32 code, const Msg__String str__ref, OOC_LEN str_0d);
 extern Msg__Msg XML_Error__New(XML_Error__Context context, OOC_INT32 code);
-extern XML_Error__List XML_Error__NewList();
+extern XML_Error__List XML_Error__NewList(void);
 extern void XML_Error__ListDesc_Write(XML_Error__List errList, Channel__Channel ch);
 #define _TBN_XML_Error__ListDesc_Write 2
 typedef void (*_TBP_XML_Error__ListDesc_Write)(XML_Error__List errList, Channel__Channel ch);
-extern void OOC_XML_Error_init();
-extern void OOC_XML_Error_init0();
+extern void OOC_XML_Error_init(void);
+extern void OOC_XML_Error_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_Error__Mapping;

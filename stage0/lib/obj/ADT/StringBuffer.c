@@ -147,7 +147,7 @@ ADT_StringBuffer__CharsLatin1 ADT_StringBuffer__StringBufferDesc_CharsLatin1(ADT
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l3;
   i1 = *(OOC_INT32*)((_check_pointer(i0, 4128))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4111)))), ADT_StringBuffer__StringBufferDesc_EnsureCapacity)),ADT_StringBuffer__StringBufferDesc_EnsureCapacity)((ADT_StringBuffer__StringBuffer)i0, (i1+1));
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i0, (i1+1));
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4147))+8);
   i1 = _check_pointer(i1, 4153);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
@@ -205,7 +205,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendLatin1Region(ADT_StringBuffer__Str
   len = i2;
   i3 = (OOC_INT32)b;
   i4 = *(OOC_INT32*)((_check_pointer(i3, 4752))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 4735)))), ADT_StringBuffer__StringBufferDesc_EnsureCapacity)),ADT_StringBuffer__StringBufferDesc_EnsureCapacity)((ADT_StringBuffer__StringBuffer)i3, (i4+i2));
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i3, (i4+i2));
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4775))+8);
   i4 = i4!=(OOC_INT32)0;
   if (i4) goto l11;
@@ -275,7 +275,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendLatin1Char(ADT_StringBuffer__Strin
 
   i0 = (OOC_INT32)b;
   i1 = *(OOC_INT32*)((_check_pointer(i0, 5517))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5500)))), ADT_StringBuffer__StringBufferDesc_EnsureCapacity)),ADT_StringBuffer__StringBufferDesc_EnsureCapacity)((ADT_StringBuffer__StringBuffer)i0, (i1+1));
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i0, (i1+1));
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5538))+8);
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l3;
@@ -313,11 +313,11 @@ void ADT_StringBuffer__StringBufferDesc_AppendUCS4Region(ADT_StringBuffer__Strin
   len = i1;
   i2 = (OOC_INT32)b;
   i3 = *(OOC_INT32*)((_check_pointer(i2, 5991))+4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5974)))), ADT_StringBuffer__StringBufferDesc_EnsureCapacity)),ADT_StringBuffer__StringBufferDesc_EnsureCapacity)((ADT_StringBuffer__StringBuffer)i2, (i3+i1));
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i2, (i3+i1));
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6014))+12);
   i3 = i3==(OOC_INT32)0;
   if (!i3) goto l4;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6041)))), ADT_StringBuffer__StringBufferDesc_ConvertTo32)),ADT_StringBuffer__StringBufferDesc_ConvertTo32)((ADT_StringBuffer__StringBuffer)i2);
+  ADT_StringBuffer__StringBufferDesc_ConvertTo32((ADT_StringBuffer__StringBuffer)i2);
 l4:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6130))+12);
   i2 = *(OOC_INT32*)((_check_pointer(i2, 6139))+4);
@@ -356,7 +356,7 @@ l6:
   _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6644)))), 6644);
   goto l16;
 l11:
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6684)))), Object__String32Desc_CharsUCS4)),Object__String32Desc_CharsUCS4)((Object__String32)i0);
+  i1 = (OOC_INT32)Object__String32Desc_CharsUCS4((Object__String32)i0);
   c32 = (Object__CharsUCS4)i1;
   i2 = (OOC_INT32)b;
   i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6728)), 0);
@@ -364,7 +364,7 @@ l11:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6707)))), ADT_StringBuffer__StringBufferDesc_AppendUCS4Region)),ADT_StringBuffer__StringBufferDesc_AppendUCS4Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(_check_pointer(i1, 6728)), i3, 0, i0);
   goto l16;
 l13:
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6574)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
+  i1 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
   c8 = (Object__CharsLatin1)i1;
   i2 = (OOC_INT32)b;
   i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6621)), 0);
@@ -543,7 +543,7 @@ l6:
   i1 = (OOC_INT32)b;
   i2 = *(OOC_INT32*)((_check_pointer(i1, 9059))+4);
   i3 = *(OOC_INT32*)(_check_pointer(i0, 9068));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9042)))), ADT_StringBuffer__StringBufferDesc_EnsureCapacity)),ADT_StringBuffer__StringBufferDesc_EnsureCapacity)((ADT_StringBuffer__StringBuffer)i1, (i2+i3));
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i1, (i2+i3));
   i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9090)))), &_td_Object__String8Desc);
   if (i2) goto l32;
   i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9612)))), &_td_Object__String32Desc);
@@ -551,12 +551,12 @@ l6:
   _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9609)))), 9609);
   goto l69;
 l11:
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9649)))), Object__String32Desc_CharsUCS4)),Object__String32Desc_CharsUCS4)((Object__String32)i0);
+  i2 = (OOC_INT32)Object__String32Desc_CharsUCS4((Object__String32)i0);
   c32 = (Object__CharsUCS4)i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9676))+12);
   i3 = i3==(OOC_INT32)0;
   if (!i3) goto l14;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9707)))), ADT_StringBuffer__StringBufferDesc_ConvertTo32)),ADT_StringBuffer__StringBufferDesc_ConvertTo32)((ADT_StringBuffer__StringBuffer)i1);
+  ADT_StringBuffer__StringBufferDesc_ConvertTo32((ADT_StringBuffer__StringBuffer)i1);
 l14:
   i3 = *(OOC_INT32*)((_check_pointer(i1, 9752))+4);
   i3 = i3-1;
@@ -599,7 +599,7 @@ l25_loop:
   if (i6) goto l25_loop;
   goto l69;
 l32:
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9125)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
+  i2 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
   c8 = (Object__CharsLatin1)i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9154))+8);
   i3 = i3!=(OOC_INT32)0;

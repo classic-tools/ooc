@@ -430,8 +430,7 @@ l5:
 l7:
   if (!i1) goto l11;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8487));
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8487));
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8499)))), XML_InputBuffer__BufferDesc_NextBlock)),XML_InputBuffer__BufferDesc_NextBlock)((XML_InputBuffer__Buffer)i2);
+  i1 = XML_InputBuffer__BufferDesc_NextBlock((XML_InputBuffer__Buffer)i1);
   *(OOC_UINT8*)((_check_pointer(i0, 8465))+4) = (!i1);
   goto l11;
 l10:
@@ -544,12 +543,11 @@ l32:
 }
 
 void XML_UnicodeBuffer__InputDesc_Close(XML_UnicodeBuffer__Input in) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)in;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10726));
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10726));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10738)))), XML_InputBuffer__BufferDesc_Close)),XML_InputBuffer__BufferDesc_Close)((XML_InputBuffer__Buffer)i2);
+  XML_InputBuffer__BufferDesc_Close((XML_InputBuffer__Buffer)i1);
   *(OOC_INT32*)(_check_pointer(i0, 10753)) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 10780))+12) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 10802))+20) = 0;
@@ -584,7 +582,7 @@ void XML_UnicodeBuffer__InputDesc_SetCodec(XML_UnicodeBuffer__Input in, XML_Unic
   *(OOC_INT32*)((_check_pointer(i0, 11245))+32) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 11271))+24) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 11300))+28) = 0;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11335)))), XML_UnicodeBuffer__InputDesc_NextBlock)),XML_UnicodeBuffer__InputDesc_NextBlock)((XML_UnicodeBuffer__Input)i0);
+  i1 = XML_UnicodeBuffer__InputDesc_NextBlock((XML_UnicodeBuffer__Input)i0);
   dummy = i1;
   i1 = autoDetect;
   *(OOC_UINT8*)((_check_pointer(i0, 11356))+16) = i1;
@@ -594,8 +592,6 @@ void XML_UnicodeBuffer__InputDesc_SetCodec(XML_UnicodeBuffer__Input in, XML_Unic
 
 void XML_UnicodeBuffer__InitInput(XML_UnicodeBuffer__Input input, OOC_CHAR8 _new, IO__ByteChannel reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList) {
   register OOC_INT32 i0,i1,i2;
-  OOC_CHAR8 autoDetect;
-  OOC_INT32 skip;
   OOC_CHAR8 encoding[256];
 
   i0 = _new;
@@ -614,7 +610,6 @@ l4:
   *(OOC_UINT8*)((_check_pointer(i0, 11914))+4) = 0u;
   i1 = (OOC_INT32)errList;
   *(OOC_INT32*)((_check_pointer(i0, 11949))+36) = i1;
-  autoDetect = 0u;
   i1 = (OOC_INT32)codecFactory;
   i1 = i1==0;
   if (i1) goto l7;
@@ -622,15 +617,13 @@ l4:
   goto l8;
 l7:
   i1 = XML_UnicodeBuffer__AutodetectEnc((XML_UnicodeBuffer__Input)i0, (void*)(OOC_INT32)encoding, 256);
-  skip = i1;
   i1 = (OOC_INT32)XML_UnicodeCodec__GetFactory((void*)(OOC_INT32)encoding, 256);
   codecFactory = (XML_UnicodeCodec__Factory)i1;
   _assert((i1!=0), 127, 12138);
-  autoDetect = 1u;
   i1=1u;
 l8:
   i2 = (OOC_INT32)codecFactory;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 12215)))), XML_UnicodeBuffer__InputDesc_SetCodec)),XML_UnicodeBuffer__InputDesc_SetCodec)((XML_UnicodeBuffer__Input)i0, (XML_UnicodeCodec__Factory)i2, i1);
+  XML_UnicodeBuffer__InputDesc_SetCodec((XML_UnicodeBuffer__Input)i0, (XML_UnicodeCodec__Factory)i2, i1);
   return;
   ;
 }

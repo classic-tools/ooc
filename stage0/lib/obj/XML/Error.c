@@ -161,7 +161,7 @@ Msg__Msg XML_Error__New(XML_Error__Context context, OOC_INT32 code) {
   ;
 }
 
-XML_Error__List XML_Error__NewList() {
+XML_Error__List XML_Error__NewList(void) {
   register OOC_INT32 i0,i1;
   XML_Error__List list;
 
@@ -202,14 +202,14 @@ void XML_Error__ListDesc_Write(XML_Error__List errList, Channel__Channel ch) {
       i0 = found;
       if (!i0) goto l8;
 l3_loop:
-      i0 = pos;
-      i1 = Strings__Length((void*)(OOC_INT32)pattern, pattern_0d);
-      Strings__Delete((void*)(OOC_INT32)text, text_0d, i0, i1);
+      i0 = Strings__Length((void*)(OOC_INT32)pattern, pattern_0d);
+      i1 = pos;
+      Strings__Delete((void*)(OOC_INT32)text, text_0d, i1, i0);
       i0 = pos;
       Strings__Insert((void*)(OOC_INT32)repl, repl_0d, i0, (void*)(OOC_INT32)text, text_0d);
-      i0 = pos;
-      i1 = Strings__Length((void*)(OOC_INT32)repl, repl_0d);
-      i0 = i0+i1;
+      i0 = Strings__Length((void*)(OOC_INT32)repl, repl_0d);
+      i1 = pos;
+      i0 = i1+i0;
       pos = i0;
       Strings__FindNext((void*)(OOC_INT32)pattern, pattern_0d, (void*)(OOC_INT32)text, text_0d, i0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
       i0 = found;
@@ -287,8 +287,7 @@ l24:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6270))+12);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6278)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i2, (void*)(OOC_INT32)repl1, 1024);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6310))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6310))+12);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6324)))), &_td_URI_Scheme_File__URIDesc, 6324)), 6328)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6324)))), &_td_URI_Scheme_File__URIDesc, 6324)), (void*)(OOC_INT32)repl2, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6324)))), &_td_URI_Scheme_File__URIDesc, 6324)), (void*)(OOC_INT32)repl2, 1024);
   Strings__Insert("file_name=", 11, 0, (void*)(OOC_INT32)repl2, 1024);
   prev = (Msg__Msg)(OOC_INT32)0;
   prevURI = (URI__URI)(OOC_INT32)0;

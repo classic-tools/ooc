@@ -36,7 +36,7 @@ typedef struct OOC_Config_Repositories__ErrorContextDesc {
 extern void OOC_Config_Repositories__ErrorContextDesc_GetTemplate(OOC_Config_Repositories__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_OOC_Config_Repositories__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_Config_Repositories__ErrorContextDesc_GetTemplate)(OOC_Config_Repositories__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-extern OOC_Config_Repositories__Section OOC_Config_Repositories__New();
+extern OOC_Config_Repositories__Section OOC_Config_Repositories__New(void);
 extern void OOC_Config_Repositories__InitRepositoryEntry(OOC_Config_Repositories__RepositoryEntry re, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern OOC_Repository__Repository OOC_Config_Repositories__RepositoryEntryDesc_ProcessElement(OOC_Config_Repositories__RepositoryEntry re, Config_Parser__Element node, XML_Locator__ErrorListener errorListener, OOC_Repository__Repository baseRep);
 #define _TBN_OOC_Config_Repositories__RepositoryEntryDesc_ProcessElement 0
@@ -57,8 +57,8 @@ typedef URI__URI (*_TBP_OOC_Config_Repositories__SectionDesc_GetResource)(OOC_Co
 extern Object__StringArrayPtr OOC_Config_Repositories__SectionDesc_GetIncludePaths(OOC_Config_Repositories__Section s);
 #define _TBN_OOC_Config_Repositories__SectionDesc_GetIncludePaths 2
 typedef Object__StringArrayPtr (*_TBP_OOC_Config_Repositories__SectionDesc_GetIncludePaths)(OOC_Config_Repositories__Section s);
-extern void OOC_OOC_Config_Repositories_init();
-extern void OOC_OOC_Config_Repositories_init0();
+extern void OOC_OOC_Config_Repositories_init(void);
+extern void OOC_OOC_Config_Repositories_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_Repositories__Section;

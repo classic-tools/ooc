@@ -204,10 +204,10 @@ OOC_INT8 Real0__FormatReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0d, OOC_INT32
   OOC_INT32 startOfExp;
   OOC_INT32 exp;
   OOC_CHAR8 expNegative;
-  auto OOC_INT32 Real0__FormatReal_NonZeroDigit();
+  auto OOC_INT32 Real0__FormatReal_NonZeroDigit(void);
   auto OOC_CHAR8 Real0__FormatReal_LessOrEqual(const OOC_CHAR8 upperBound__ref[], OOC_LEN upperBound_0d);
     
-    OOC_INT32 Real0__FormatReal_NonZeroDigit() {
+    OOC_INT32 Real0__FormatReal_NonZeroDigit(void) {
       register OOC_INT32 i0,i1,i2;
 
       i = 0;
@@ -927,7 +927,7 @@ l55:
 }
 
 void Real0__FormatForFixed(OOC_CHAR8 s[], OOC_LEN s_0d, OOC_INT16 place) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5;
   OOC_INT16 point;
   OOC_INT16 suffix;
   auto OOC_CHAR8 Real0__FormatForFixed_NotZero(OOC_CHAR8 s[], OOC_LEN s_0d, OOC_INT16 pos);
@@ -965,7 +965,7 @@ l15:
 
   i0 = place;
   i1 = i0<0;
-  if (!i1) goto l64;
+  if (!i1) goto l65;
   point = 1;
   i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT16, 11073)));
   i1 = i1!=46u;
@@ -981,146 +981,142 @@ l6_loop:
   i2 = i2!=46u;
   if (i2) goto l6_loop;
 l11:
-  i0 = i1+i0;
-  i1 = i0>=0;
-  if (i1) goto l14;
+  i2 = i1+i0;
+  i3 = i2>=0;
+  if (i3) goto l14;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT8, 12356))) = 48u;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(2, s_0d, OOC_UINT8, 12369))) = 0u;
-  goto l63;
+  
+  goto l64;
 l14:
-  i0 = i0+1;
-  suffix = i0;
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 11448)));
-  i1 = i1==46u;
-  if (!i1) goto l18;
-  i0 = i0+1;
-  suffix = i0;
+  i3 = i2+1;
+  suffix = i3;
+  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i3, s_0d, OOC_UINT16, 11448)));
+  i4 = i4==46u;
+  if (!i4) goto l18;
+  i3 = i3+1;
+  suffix = i3;
   
 l18:
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 11501)));
-  i1 = (OOC_UINT8)i1>(OOC_UINT8)53u;
-  if (i1) goto l33;
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 11533)));
-  i1 = i1==53u;
-  if (i1) goto l23;
-  i0=0u;
-  goto l34;
+  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i3, s_0d, OOC_UINT16, 11501)));
+  i4 = (OOC_UINT8)i4>(OOC_UINT8)53u;
+  if (i4) goto l33;
+  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i3, s_0d, OOC_UINT16, 11533)));
+  i4 = i4==53u;
+  if (i4) goto l23;
+  i3=0u;
+  goto l35;
 l23:
-  i0 = Real0__FormatForFixed_NotZero((void*)(OOC_INT32)s, s_0d, (i0+1));
-  if (i0) goto l30;
-  i0 = place;
-  i1 = point;
-  i0 = i1+i0;
-  i1 = i0!=0;
-  if (i1) goto l28;
-  i0=0u;
-  goto l34;
+  i3 = Real0__FormatForFixed_NotZero((void*)(OOC_INT32)s, s_0d, (i3+1));
+  if (i3) goto l30;
+  i3 = i2!=0;
+  if (i3) goto l28;
+  i3=0u;
+  goto l35;
 l28:
-  i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 11633)));
-  i0 = _odd(i0);
+  i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11633)));
+  i3 = _odd(i3);
   
-  goto l34;
+  goto l35;
 l30:
-  i0=1u;
-  goto l34;
+  i3=1u;
+  goto l35;
 l33:
-  i0=1u;
-l34:
-  i1 = place;
-  if (!i0) goto l50;
-  i0 = point;
-  i2 = i0+i1;
+  i3=1u;
+l35:
+  if (!i3) goto l51;
   i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11736)));
   i3 = i3==57u;
-  if (!i3) goto l45;
-l40_loop:
+  if (!i3) goto l46;
+l41_loop:
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11751))) = 48u;
   i2 = i2-1;
   i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11736)));
   i3 = i3==57u;
-  if (i3) goto l40_loop;
-l45:
+  if (i3) goto l41_loop;
+l46:
   i3 = i2==0;
-  if (i3) goto l48;
-  i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11939)));
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11921))) = (i0+1);
-  goto l50;
-l48:
+  if (i3) goto l49;
+  i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11939)));
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 11921))) = (i3+1);
+  
+  goto l51;
+l49:
   Strings__Insert("1", 2, 1, (void*)(OOC_INT32)s, s_0d);
-  point = (i0+1);
-l50:
-  i0 = point;
-  i0 = (i0+i1)+1;
-  i1 = i0==1;
-  if (i1) goto l61;
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 12230)));
-  i1 = i1!=46u;
-  if (!i1) goto l63;
-l55_loop:
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 12245))) = 48u;
-  i0 = i0+1;
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 12230)));
-  i1 = i1!=46u;
-  if (i1) goto l55_loop;
-  goto l63;
-l61:
+  i1 = i1+1;
+  
+l51:
+  i2 = (i1+i0)+1;
+  i3 = i2==1;
+  if (i3) goto l62;
+  i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12230)));
+  i3 = i3!=46u;
+  if (!i3) goto l64;
+l56_loop:
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12245))) = 48u;
+  i2 = i2+1;
+  i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12230)));
+  i3 = i3!=46u;
+  if (i3) goto l56_loop;
+  goto l64;
+l62:
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT8, 12175))) = 48u;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(2, s_0d, OOC_UINT8, 12188))) = 0u;
-l63:
-  i0 = point;
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 12398))) = 0u;
 l64:
-  i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT8, 12492)));
-  i0 = i0==43u;
-  if (i0) goto l67;
-  i0=0;
-  goto l68;
-l67:
-  i0=1;
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 12398))) = 0u;
+l65:
+  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT8, 12492)));
+  i1 = i1==43u;
+  if (i1) goto l68;
+  i1=0;
+  goto l69;
 l68:
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT16, 12599)));
-  i1 = i1!=0u;
-  if (i1) goto l71;
-  i1=0;i2=1;
-  goto l81;
-l71:
-  i1=1;i2=0;i3=0;
-l72_loop:
-  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 12629)));
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i1-i0), s_0d, OOC_UINT16, 12619))) = i4;
-  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 12669)));
-  i4 = i4==46u;
-  i1 = i1+1;
-  if (i4) goto l75;
-  i4=i3;
-  goto l76;
-l75:
-  i4=1;
-l76:
-  i2 = i2+i3;
-  i3 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 12599)));
-  i3 = i3!=0u;
-  if (!i3) goto l80;
-  i3=i4;
-  goto l72_loop;
-l80:
-  {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-l81:
-  i3 = place;
-  i4 = i1<i3;
-  if (i4) goto l84;
-  i1=i2;
-  goto l90;
-l84:
-  {register OOC_INT32 h0=i1;i1=i2;i2=h0;}
-l85_loop:
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i1-i0), s_0d, OOC_UINT16, 12772))) = 48u;
+  i1=1;
+l69:
+  i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT16, 12599)));
+  i2 = i2!=0u;
+  if (i2) goto l72;
+  i2=0;i3=1;
+  goto l82;
+l72:
+  i2=1;i3=0;i4=0;
+l73_loop:
+  i5 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12629)));
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i2-i1), s_0d, OOC_UINT16, 12619))) = i5;
+  i5 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12669)));
+  i5 = i5==46u;
   i2 = i2+1;
-  i1 = i1+1;
-  i4 = i2<i3;
-  if (i4) goto l85_loop;
+  if (i5) goto l76;
+  i5=i4;
+  goto l77;
+l76:
+  i5=1;
+l77:
+  i3 = i3+i4;
+  i4 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 12599)));
+  i4 = i4!=0u;
+  if (!i4) goto l81;
+  i4=i5;
+  goto l73_loop;
+l81:
+  {register OOC_INT32 h0=i2;i2=i3;i3=h0;}
+l82:
+  i4 = i2<i0;
+  if (i4) goto l85;
+  i0=i3;
+  goto l91;
+l85:
+  {register OOC_INT32 h0=i2;i2=i3;i3=h0;}
+l86_loop:
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i2-i1), s_0d, OOC_UINT16, 12772))) = 48u;
+  i3 = i3+1;
+  i2 = i2+1;
+  i4 = i3<i0;
+  if (i4) goto l86_loop;
 l90:
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i1-i0), s_0d, OOC_UINT16, 12822))) = 0u;
+  i0=i2;
+l91:
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i0-i1), s_0d, OOC_UINT16, 12822))) = 0u;
   return;
   ;
 }

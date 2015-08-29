@@ -9,7 +9,7 @@ ADT_Dictionary__Dictionary OOC_SymbolTable_Exports__GetExports(OOC_SymbolTable__
   auto void OOC_SymbolTable_Exports__GetExports_MarkList(OOC_SymbolTable__Item root);
     
     void OOC_SymbolTable_Exports__GetExports_MarkReferencedImports(OOC_Doc__Document doc) {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5;
+      register OOC_INT32 i0,i1,i2,i3,i4;
       OOC_INT32 i;
 
       i0 = (OOC_INT32)doc;
@@ -30,13 +30,13 @@ l5:
       if (!i2) goto l15;
       i2=0;
 l9_loop:
-      i3 = (OOC_INT32)dict;
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1834))+16);
-      i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i4, 1851));
-      i4 = _check_pointer(i4, 1858);
-      i5 = OOC_ARRAY_LENGTH(i4, 0);
-      i4 = (OOC_INT32)*(OOC_INT32*)(i4+(_check_index(i2, i5, OOC_UINT32, 1858))*4);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1824)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i3, (Object__Object)(_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 1866)))), &_td_OOC_SymbolTable__ImportDesc, 1866)), (Object__Object)(OOC_INT32)0);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1834))+16);
+      i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 1851));
+      i3 = _check_pointer(i3, 1858);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 1858))*4);
+      i4 = (OOC_INT32)dict;
+      ADT_Dictionary__DictionaryDesc_Set((ADT_Dictionary__Dictionary)i4, (Object__Object)(_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1866)))), &_td_OOC_SymbolTable__ImportDesc, 1866)), (Object__Object)(OOC_INT32)0);
       i2 = i2+1;
       i = i2;
       i3 = i2<i1;
@@ -62,11 +62,11 @@ l15:
 
               i0 = (OOC_INT32)dict;
               i1 = (OOC_INT32)type;
-              i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2201)))), ADT_Dictionary__DictionaryDesc_HasKey)),ADT_Dictionary__DictionaryDesc_HasKey)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
+              i0 = ADT_Dictionary__DictionaryDesc_HasKey((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
               i0 = !i0;
               if (!i0) goto l53;
               i0 = (OOC_INT32)dict;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2238)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1, (Object__Object)(OOC_INT32)0);
+              ADT_Dictionary__DictionaryDesc_Set((ADT_Dictionary__Dictionary)i0, (Object__Object)i1, (Object__Object)(OOC_INT32)0);
               i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2277))+20);
               i0 = i0!=(OOC_INT32)0;
               if (!i0) goto l5;
@@ -169,11 +169,11 @@ l53:
 
           i0 = (OOC_INT32)dict;
           i1 = (OOC_INT32)item;
-          i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3967)))), ADT_Dictionary__DictionaryDesc_HasKey)),ADT_Dictionary__DictionaryDesc_HasKey)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
+          i0 = ADT_Dictionary__DictionaryDesc_HasKey((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
           i0 = !i0;
           if (!i0) goto l31;
           i0 = (OOC_INT32)dict;
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4002)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1, (Object__Object)(OOC_INT32)0);
+          ADT_Dictionary__DictionaryDesc_Set((ADT_Dictionary__Dictionary)i0, (Object__Object)i1, (Object__Object)(OOC_INT32)0);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4069))+28);
           OOC_SymbolTable_Exports__GetExports_MarkReferencedImports((OOC_Doc__Document)i0);
           i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4113)))), &_td_OOC_SymbolTable__ImportDesc);
@@ -208,7 +208,7 @@ l24:
           OOC_SymbolTable_Exports__GetExports_MarkList_MarkDecl_MarkType((OOC_SymbolTable__Type)i0);
           goto l31;
 l28:
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4215))+52);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4215))+56);
           OOC_SymbolTable_Exports__GetExports_MarkList_MarkDecl_MarkType((OOC_SymbolTable__Type)i0);
 l31:
           return;

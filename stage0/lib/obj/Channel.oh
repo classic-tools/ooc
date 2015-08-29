@@ -108,8 +108,8 @@ typedef void (*_TBP_Channel__ChannelDesc_Close)(Channel__Channel ch);
 extern void Channel__ChannelDesc_ClearError(Channel__Channel ch);
 #define _TBN_Channel__ChannelDesc_ClearError 0
 typedef void (*_TBP_Channel__ChannelDesc_ClearError)(Channel__Channel ch);
-extern void OOC_Channel_init();
-extern void OOC_Channel_init0();
+extern void OOC_Channel_init(void);
+extern void OOC_Channel_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Channel__Channel;

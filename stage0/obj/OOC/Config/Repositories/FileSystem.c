@@ -29,7 +29,7 @@ l6:
   ;
 }
 
-static OOC_Config_Repositories_FileSystem__RepositoryEntry OOC_Config_Repositories_FileSystem__NewRepositoryEntry() {
+static OOC_Config_Repositories_FileSystem__RepositoryEntry OOC_Config_Repositories_FileSystem__NewRepositoryEntry(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Config_Repositories_FileSystem__RepositoryEntry.baseTypes[0]);
@@ -93,10 +93,10 @@ l3_loop:
   if (i2) goto l3_loop;
 l8:
   i0 = (OOC_INT32)node;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3078)))), Config_Parser__NodeDesc_HasNoElementContent)),Config_Parser__NodeDesc_HasNoElementContent)((Config_Parser__Node)i0);
+  i1 = Config_Parser__NodeDesc_HasNoElementContent((Config_Parser__Node)i0);
   i1 = !i1;
   if (i1) goto l22;
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3183)))), Config_Parser__NodeDesc_GetCharDataContent)),Config_Parser__NodeDesc_GetCharDataContent)((Config_Parser__Node)i0);
+  i1 = (OOC_INT32)Config_Parser__NodeDesc_GetCharDataContent((Config_Parser__Node)i0);
   parserString = (XML_UnicodeBuffer__CharArray)i1;
   i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3244)), 0);
   LongStrings__Short((void*)(_check_pointer(i1, 3244)), i2, 63u, (void*)(OOC_INT32)str8, 4096);

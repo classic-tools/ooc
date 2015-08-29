@@ -96,7 +96,7 @@ l3:
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3373));
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 3373));
   i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3379)))), Channel__ChannelDesc_Length)),Channel__ChannelDesc_Length)((Channel__Channel)i2);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3393)))), ProgramArgs__ReaderDesc_Pos)),ProgramArgs__ReaderDesc_Pos)((ProgramArgs__Reader)i0);
+  i0 = ProgramArgs__ReaderDesc_Pos((ProgramArgs__Reader)i0);
   i0 = i1-i0;
   i1 = i0<0;
   if (i1) goto l6;
@@ -287,7 +287,7 @@ l7:
   i1 = start;
   i4=i1;i3=0;
 l8_loop:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5554)))), ProgramArgs__ReaderDesc_ReadByte)),ProgramArgs__ReaderDesc_ReadByte)((ProgramArgs__Reader)i2, (void*)((OOC_INT32)x+(_check_index(i4, x_0d, OOC_UINT32, 5567))));
+  ProgramArgs__ReaderDesc_ReadByte((ProgramArgs__Reader)i2, (void*)((OOC_INT32)x+(_check_index(i4, x_0d, OOC_UINT32, 5567))));
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 5590))+4);
   i5 = i5==(OOC_INT32)0;
   if (!i5) goto l12;

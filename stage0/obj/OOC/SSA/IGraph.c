@@ -48,7 +48,7 @@ static void OOC_SSA_IGraph__InitGraph(OOC_SSA_IGraph__Graph g, OOC_INT32 size) {
   i1 = (OOC_INT32)g;
   *(OOC_INT32*)(_check_pointer(i1, 2678)) = ((OOC_INT32)RT0__NewObject(_td_OOC_SSA_IGraph__BitMatrix.baseTypes[0], i0, (((i0+32)-1)>>5)));
   *(OOC_INT32*)((_check_pointer(i1, 2731))+4) = i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2752)))), OOC_SSA_IGraph__GraphDesc_Clear)),OOC_SSA_IGraph__GraphDesc_Clear)((OOC_SSA_IGraph__Graph)i1);
+  OOC_SSA_IGraph__GraphDesc_Clear((OOC_SSA_IGraph__Graph)i1);
   return;
   ;
 }
@@ -257,7 +257,7 @@ void OOC_SSA_IGraph__GraphDesc_AddToLive(OOC_SSA_IGraph__Graph g, OOC_INT32 res,
   i0 = (OOC_INT32)g;
   i1 = res;
   i2 = (OOC_INT32)live;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4809)))), OOC_SSA_IGraph__GraphDesc_Interfere)),OOC_SSA_IGraph__GraphDesc_Interfere)((OOC_SSA_IGraph__Graph)i0, i1, (OOC_SSA_IGraph__Vector)i2);
+  OOC_SSA_IGraph__GraphDesc_Interfere((OOC_SSA_IGraph__Graph)i0, i1, (OOC_SSA_IGraph__Vector)i2);
   i0 = _check_pointer(i2, 4848);
   i3 = i1>>5;
   i4 = OOC_ARRAY_LENGTH(i0, 0);
@@ -316,7 +316,6 @@ OOC_CHAR8 OOC_SSA_IGraph__GraphDesc_Conflicts(OOC_SSA_IGraph__Graph g, OOC_INT32
 
 void OOC_SSA_IGraph__GraphDesc_MergeVector(OOC_SSA_IGraph__Graph g, OOC_SSA_IGraph__Vector source, OOC_SSA_IGraph__Vector dest) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;
-  OOC_INT32 i;
 
   i0 = (OOC_INT32)source;
   i1 = (OOC_INT32)dest;
@@ -324,18 +323,16 @@ void OOC_SSA_IGraph__GraphDesc_MergeVector(OOC_SSA_IGraph__Graph g, OOC_SSA_IGra
   i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 5820)), 0);
   _assert((i2==i3), 127, 5787);
   i2 = (OOC_INT32)g;
-  i = 0;
   i3 = *(OOC_INT32*)((_check_pointer(i2, 5844))+4);
   i4 = 0<i3;
   if (!i4) goto l11;
   i4=0;
 l3_loop:
-  i5 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5866)))), OOC_SSA_IGraph__GraphDesc_In)),OOC_SSA_IGraph__GraphDesc_In)((OOC_SSA_IGraph__Graph)i2, i4, (OOC_SSA_IGraph__Vector)i0);
+  i5 = OOC_SSA_IGraph__GraphDesc_In((OOC_SSA_IGraph__Graph)i2, i4, (OOC_SSA_IGraph__Vector)i0);
   if (!i5) goto l6;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5897)))), OOC_SSA_IGraph__GraphDesc_AddToLive)),OOC_SSA_IGraph__GraphDesc_AddToLive)((OOC_SSA_IGraph__Graph)i2, i4, (OOC_SSA_IGraph__Vector)i1);
+  OOC_SSA_IGraph__GraphDesc_AddToLive((OOC_SSA_IGraph__Graph)i2, i4, (OOC_SSA_IGraph__Vector)i1);
 l6:
   i4 = i4+1;
-  i = i4;
   i5 = i4<i3;
   if (i5) goto l3_loop;
 l11:

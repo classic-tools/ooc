@@ -95,8 +95,8 @@ extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, const OOC_
 extern void OOC_Package__RemovePkgInfoCmd(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 uninstall__ref[], OOC_LEN uninstall_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern OOC_Package__Package OOC_Package__GetPkgInfo(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Error__List *errList);
 extern OOC_CHAR8 OOC_Package__UpdateRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
-extern void OOC_OOC_Package_init();
-extern void OOC_OOC_Package_init0();
+extern void OOC_OOC_Package_init(void);
+extern void OOC_OOC_Package_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Package__URIBuffer;

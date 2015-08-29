@@ -48,7 +48,7 @@ typedef void (*_TBP_Config_Source_CmdLine__ErrorContextDesc_GetTemplate)(Config_
 extern void Config_Source_CmdLine__CommandDesc_DoNotWrite(Config_Source_CmdLine__Command command);
 #define _TBN_Config_Source_CmdLine__CommandDesc_DoNotWrite 0
 typedef void (*_TBP_Config_Source_CmdLine__CommandDesc_DoNotWrite)(Config_Source_CmdLine__Command command);
-extern Config_Source_CmdLine__CmdLine Config_Source_CmdLine__New();
+extern Config_Source_CmdLine__CmdLine Config_Source_CmdLine__New(void);
 extern Config_Source_CmdLine__OptionTemplate Config_Source_CmdLine__CmdLineDesc_AddOptionTemplate(Config_Source_CmdLine__CmdLine cmdLine, const OOC_CHAR8 names__ref[], OOC_LEN names_0d, const Config_Value__String transformation__ref, OOC_LEN transformation_0d);
 #define _TBN_Config_Source_CmdLine__CmdLineDesc_AddOptionTemplate 1
 typedef Config_Source_CmdLine__OptionTemplate (*_TBP_Config_Source_CmdLine__CmdLineDesc_AddOptionTemplate)(Config_Source_CmdLine__CmdLine cmdLine, const OOC_CHAR8 names__ref[], OOC_LEN names_0d, const Config_Value__String transformation__ref, OOC_LEN transformation_0d);
@@ -67,8 +67,8 @@ typedef Msg__Msg (*_TBP_Config_Source_CmdLine__CmdLineDesc_Parse)(Config_Source_
 extern void Config_Source_CmdLine__CmdLineDesc_Write(Config_Source_CmdLine__CmdLine cmdLine, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 #define _TBN_Config_Source_CmdLine__CmdLineDesc_Write 0
 typedef void (*_TBP_Config_Source_CmdLine__CmdLineDesc_Write)(Config_Source_CmdLine__CmdLine cmdLine, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
-extern void OOC_Config_Source_CmdLine_init();
-extern void OOC_Config_Source_CmdLine_init0();
+extern void OOC_Config_Source_CmdLine_init(void);
+extern void OOC_Config_Source_CmdLine_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Source_CmdLine__OptionTemplate;

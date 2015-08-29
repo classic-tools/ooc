@@ -95,19 +95,19 @@ extern void XML_Builder__BuilderDesc_Comment(XML_Builder__Builder b, XML_DTD__St
 #define _TBN_XML_Builder__BuilderDesc_Comment 3
 typedef void (*_TBP_XML_Builder__BuilderDesc_Comment)(XML_Builder__Builder b, XML_DTD__StringVar chars, OOC_LEN chars_0d, OOC_INT32 charsStart, OOC_INT32 charsEnd);
 extern void XML_Builder__Init(XML_Builder__Builder b);
-extern XML_Builder__Builder XML_Builder__New();
+extern XML_Builder__Builder XML_Builder__New(void);
 extern void XML_Builder__InitAttribute(XML_Builder__Attribute attr, XML_DTD__NamespaceDeclaration namespaceDecl, XML_UnicodeBuffer__CharArray localName, XML_DTD__AttrDecl attrDecl, XML_DTD__AttValue value, OOC_CHAR8 specified, XML_Locator__Locator locator);
 extern XML_Builder__Attribute XML_Builder__NewAttribute(XML_DTD__NamespaceDeclaration namespaceDecl, XML_UnicodeBuffer__CharArray localName, XML_DTD__AttrDecl attrDecl, XML_DTD__AttValue value, OOC_CHAR8 specified, XML_Locator__Locator locator);
 extern void XML_Builder__InitAttributeList(XML_Builder__AttributeList attrList);
-extern XML_Builder__AttributeList XML_Builder__NewAttributeList();
+extern XML_Builder__AttributeList XML_Builder__NewAttributeList(void);
 extern void XML_Builder__AttributeListDesc_Clear(XML_Builder__AttributeList attrList);
 #define _TBN_XML_Builder__AttributeListDesc_Clear 1
 typedef void (*_TBP_XML_Builder__AttributeListDesc_Clear)(XML_Builder__AttributeList attrList);
 extern void XML_Builder__AttributeListDesc_Append(XML_Builder__AttributeList attrList, XML_Builder__Attribute attr);
 #define _TBN_XML_Builder__AttributeListDesc_Append 0
 typedef void (*_TBP_XML_Builder__AttributeListDesc_Append)(XML_Builder__AttributeList attrList, XML_Builder__Attribute attr);
-extern void OOC_XML_Builder_init();
-extern void OOC_XML_Builder_init0();
+extern void OOC_XML_Builder_init(void);
+extern void OOC_XML_Builder_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_Builder__Builder;

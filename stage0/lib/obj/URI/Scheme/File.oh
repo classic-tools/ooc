@@ -35,11 +35,11 @@ typedef void (*_TBP_URI_Scheme_File__URIDesc_GetPath)(URI_Scheme_File__URI file,
 extern IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, OOC_INT8 mode);
 #define _TBN_URI_Scheme_File__URIDesc_GetChannel 3
 typedef IO__ByteChannel (*_TBP_URI_Scheme_File__URIDesc_GetChannel)(URI_Scheme_File__URI file, OOC_INT8 mode);
-extern URI_Scheme_File__URI URI_Scheme_File__NewPrototype();
-extern URI_Scheme_File__URI URI_Scheme_File__GetCwd();
+extern URI_Scheme_File__URI URI_Scheme_File__NewPrototype(void);
+extern URI_Scheme_File__URI URI_Scheme_File__GetCwd(void);
 extern URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], OOC_LEN filePath_0d);
-extern void OOC_URI_Scheme_File_init();
-extern void OOC_URI_Scheme_File_init0();
+extern void OOC_URI_Scheme_File_init(void);
+extern void OOC_URI_Scheme_File_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Scheme_File__URI;

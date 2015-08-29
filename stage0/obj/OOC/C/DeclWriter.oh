@@ -305,8 +305,8 @@ typedef void (*_TBP_OOC_C_DeclWriter__DefineDesc_Write)(OOC_C_DeclWriter__Define
 extern void OOC_C_DeclWriter__WriterDesc_WriteTypeCast(OOC_C_DeclWriter__Writer w, OOC_C_DeclWriter__Type t);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_WriteTypeCast 26
 typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_WriteTypeCast)(OOC_C_DeclWriter__Writer w, OOC_C_DeclWriter__Type t);
-extern void OOC_OOC_C_DeclWriter_init();
-extern void OOC_OOC_C_DeclWriter_init0();
+extern void OOC_OOC_C_DeclWriter_init(void);
+extern void OOC_OOC_C_DeclWriter_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_C_DeclWriter__Type;
@@ -339,7 +339,7 @@ extern RT0__StructDesc _td_OOC_C_DeclWriter__11591;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__12492;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__25838;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__25995;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__30419;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__30531;
 #endif /* _MODULE_OOC_C_DeclWriter_ */
 
 /* --- */

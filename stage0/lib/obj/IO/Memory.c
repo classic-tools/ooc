@@ -14,7 +14,7 @@ static void IO_Memory__Init(IO_Memory__Channel ch) {
   ;
 }
 
-IO_Memory__Channel IO_Memory__Open() {
+IO_Memory__Channel IO_Memory__Open(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_IO_Memory__Channel.baseTypes[0]);

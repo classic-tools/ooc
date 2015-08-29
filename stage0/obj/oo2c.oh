@@ -6,8 +6,8 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-extern void OOC_oo2c_init();
-extern void OOC_oo2c_init0();
+extern void OOC_oo2c_init(void);
+extern void OOC_oo2c_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_oo2c__5365;

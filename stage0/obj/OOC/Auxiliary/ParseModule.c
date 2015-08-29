@@ -34,11 +34,11 @@ l5:
 l6:
   i6 = (OOC_INT32)OOC_Config__pragmas;
   OOC_Scanner__ScanInput((OOC_Scanner_Builder__Builder)i3, (OOC_Config_Pragmas__Section)i6, i5);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2406)))), OOC_Scanner_InputBuffer__BufferDesc_Close)),OOC_Scanner_InputBuffer__BufferDesc_Close)((OOC_Scanner_InputBuffer__Buffer)i1);
+  OOC_Scanner_InputBuffer__BufferDesc_Close((OOC_Scanner_InputBuffer__Buffer)i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2452))+4);
   *pragmaHistory = (OOC_Config_Pragmas__History)i1;
   *ast = (OOC_AST__Node)(OOC_INT32)0;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2510)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
+  i1 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (i1) goto l9;
   i1=(OOC_INT32)0;
   goto l17;
@@ -67,7 +67,7 @@ l16:
   
 l17:
   *symTab = (OOC_SymbolTable__Module)(OOC_INT32)0;
-  i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3017)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
+  i3 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (!i3) goto l35;
   i3 = (OOC_INT32)OOC_SymbolTable_Builder__New();
   stb = (OOC_SymbolTable_Builder__Builder)i3;
@@ -79,11 +79,11 @@ l17:
   *symTab = (OOC_SymbolTable__Module)i1;
   i3 = createNamespace;
   if (!i3) goto l35;
-  i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3273)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
+  i3 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (!i3) goto l24;
   OOC_SymbolTable_CreateNamespace__CreateNamespace((OOC_SymbolTable__Module)i1, (OOC_Error__List)i2);
 l24:
-  i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3387)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
+  i3 = OOC_Error__ListDesc_NoErrors((OOC_Error__List)i2);
   if (i3) goto l27;
   i3=0u;
   goto l29;

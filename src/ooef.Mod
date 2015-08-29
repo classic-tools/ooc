@@ -1,4 +1,4 @@
-(* 	$Id: ooef.Mod,v 1.2 2002/12/02 21:14:47 mva Exp $	 *)
+(* 	$Id: ooef.Mod,v 1.3 2003/04/14 19:30:08 mva Exp $	 *)
 MODULE ooef;  
 (*  Filter to convert error messages emitted by oo2c into other formats.
     Copyright (C) 1995-1999, 2002  Michael van Acken
@@ -25,7 +25,7 @@ IMPORT
   CharClass, IntStr,
   Config:Section:Arguments, Config:Section:Options,
   Config:Value:Boolean, Config:Value:Integer,
-  OOC:Config, E := OOC:Error, OOC:Repository;
+  OOC:Config, OOC:Config:CCompiler, E := OOC:Error, OOC:Repository;
 
 CONST
   eol = CharClass.eol;
@@ -552,6 +552,8 @@ PROCEDURE NewConfig;
     help := Config.AddOption("help", Boolean.New(FALSE));
     Config.AddCmdLine("-h,--help",
                       "<options><set name='help'>TRUE</set></options>");
+    
+    CCompiler.RegisterConfig;  (* make oo2c options known *)
   END NewConfig;
 
 BEGIN

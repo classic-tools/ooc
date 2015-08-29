@@ -298,9 +298,9 @@ l106:
   uri = (URI__URI)i0;
   i1 = (OOC_INT32)schemeId;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6545)))), URI__URIDesc_SetSchemeId)),URI__URIDesc_SetSchemeId)((URI__URI)i0, (URI_String__StringPtr)i1);
-  i1 = i;
-  i2 = Strings__Length((void*)(OOC_INT32)str, str_0d);
-  i1 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i1, i2);
+  i1 = Strings__Length((void*)(OOC_INT32)str, str_0d);
+  i2 = i;
+  i1 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i2, i1);
   substr = (URI_String__StringPtr)i1;
   i2 = i;
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6652)))), &_td_URI__OpaqueURIDesc, 6652)), 6662)))), URI__OpaqueURIDesc_ParseOpaquePart)),URI__OpaqueURIDesc_ParseOpaquePart)((URI__OpaqueURI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6652)))), &_td_URI__OpaqueURIDesc, 6652)), (URI_String__StringPtr)i1, i2);

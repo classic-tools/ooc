@@ -11,7 +11,7 @@ static void Config_Source_Environment__Init(Config_Source_Environment__Environme
   ;
 }
 
-Config_Source_Environment__Environment Config_Source_Environment__New() {
+Config_Source_Environment__Environment Config_Source_Environment__New(void) {
   register OOC_INT32 i0;
   Config_Source_Environment__Environment env;
 

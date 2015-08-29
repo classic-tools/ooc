@@ -121,7 +121,7 @@ static void Config_Source_CmdLine__Init(Config_Source_CmdLine__CmdLine cmdLine) 
   ;
 }
 
-Config_Source_CmdLine__CmdLine Config_Source_CmdLine__New() {
+Config_Source_CmdLine__CmdLine Config_Source_CmdLine__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Source_CmdLine__CmdLine.baseTypes[0]);
@@ -408,21 +408,19 @@ l19:
       argList = (Config_Source_CmdLine__ArgList)i1;
       i0=i1;
 l20:
-      i0 = _check_pointer(i0, 13986);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      i3 = Strings__Length((void*)(OOC_INT32)arg, arg_0d);
-      *(OOC_INT32*)(i0+(_check_index(i2, i1, OOC_UINT32, 13986))*4) = ((OOC_INT32)RT0__NewObject(_td_Config_Value__StringPtr.baseTypes[0], (i3+1)));
-      i0 = (OOC_INT32)argList;
+      i1 = _check_pointer(i0, 13986);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      i4 = Strings__Length((void*)(OOC_INT32)arg, arg_0d);
+      *(OOC_INT32*)(i1+(_check_index(i2, i3, OOC_UINT32, 13986))*4) = ((OOC_INT32)RT0__NewObject(_td_Config_Value__StringPtr.baseTypes[0], (i4+1)));
       i1 = _check_pointer(i0, 14046);
-      i2 = OOC_ARRAY_LENGTH(i1, 0);
-      i3 = numArgs;
-      i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i3, i2, OOC_UINT32, 14046))*4);
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i2, i3, OOC_UINT32, 14046))*4);
       i0 = _check_pointer(i0, 14046);
-      i2 = OOC_ARRAY_LENGTH(i0, 0);
-      i0 = (OOC_INT32)*(OOC_INT32*)(i0+(_check_index(i3, i2, OOC_UINT32, 14046))*4);
+      i3 = OOC_ARRAY_LENGTH(i0, 0);
+      i0 = (OOC_INT32)*(OOC_INT32*)(i0+(_check_index(i2, i3, OOC_UINT32, 14046))*4);
       i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 14055)), 0);
       _copy_8((const void*)(OOC_INT32)arg,(void*)(_check_pointer(i1, 14055)),i0);
-      numArgs = (i3+1);
+      numArgs = (i2+1);
       return;
       ;
     }
@@ -613,76 +611,69 @@ l33_loop:
   i1 = (OOC_INT32)argList;
   i1 = _check_pointer(i1, 16263);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i0 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i0, i2, OOC_UINT32, 16263))*4);
-  arg = (Config_Value__StringPtr)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 16386)), 0);
-  i0 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_Parse_FindOptionTemplate((void*)(_check_pointer(i0, 16386)), i1);
-  cmd = (Config_Source_CmdLine__OptionTemplate)i0;
-  i1 = i0!=(OOC_INT32)0;
-  if (i1) goto l83;
-  i0 = (OOC_INT32)cmdLine;
-  i1 = *(OOC_UINT8*)((_check_pointer(i0, 16538))+4);
-  if (i1) goto l38;
-  i1=0u;
+  i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i0, i2, OOC_UINT32, 16263))*4);
+  arg = (Config_Value__StringPtr)i1;
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 16386)), 0);
+  i2 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_Parse_FindOptionTemplate((void*)(_check_pointer(i1, 16386)), i2);
+  cmd = (Config_Source_CmdLine__OptionTemplate)i2;
+  i3 = i2!=(OOC_INT32)0;
+  if (i3) goto l83;
+  i2 = (OOC_INT32)cmdLine;
+  i3 = *(OOC_UINT8*)((_check_pointer(i2, 16538))+4);
+  if (i3) goto l38;
+  i3=0u;
   goto l40;
 l38:
-  i1 = (OOC_INT32)arg;
-  i1 = (
+  i3 = (
   _cmp8((const void*)(_check_pointer(i1, 16561)),(const void*)"--"))==0;
   
 l40:
-  if (i1) goto l81;
-  i1 = *(OOC_UINT8*)((_check_pointer(i0, 16640))+5);
-  if (i1) goto l44;
-  i1=0u;
+  if (i3) goto l81;
+  i3 = *(OOC_UINT8*)((_check_pointer(i2, 16640))+5);
+  if (i3) goto l44;
+  i3=0u;
   goto l46;
 l44:
-  i1 = (OOC_INT32)arg;
-  i1 = _check_pointer(i1, 16667);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i1 = *(OOC_UINT8*)(i1+(_check_index(0, i2, OOC_UINT8, 16667)));
-  i1 = i1==45u;
+  i3 = _check_pointer(i1, 16667);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i3 = *(OOC_UINT8*)(i3+(_check_index(0, i4, OOC_UINT8, 16667)));
+  i3 = i3==45u;
   
 l46:
-  if (i1) goto l48;
-  i1=0u;
+  if (i3) goto l48;
+  i3=0u;
   goto l50;
 l48:
-  i1 = (OOC_INT32)arg;
-  i1 = _check_pointer(i1, 16684);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i1 = *(OOC_UINT8*)(i1+(_check_index(1, i2, OOC_UINT8, 16684)));
-  i1 = i1!=45u;
+  i3 = _check_pointer(i1, 16684);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i3 = *(OOC_UINT8*)(i3+(_check_index(1, i4, OOC_UINT8, 16684)));
+  i3 = i3!=45u;
   
 l50:
-  if (i1) goto l60;
-  i0 = *(OOC_UINT8*)((_check_pointer(i0, 17446))+6);
-  if (i0) goto l54;
-  i0=0u;
+  if (i3) goto l60;
+  i2 = *(OOC_UINT8*)((_check_pointer(i2, 17446))+6);
+  if (i2) goto l54;
+  i2=0u;
   goto l56;
 l54:
-  i0 = (OOC_INT32)arg;
-  i0 = _check_pointer(i0, 17475);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
-  i0 = *(OOC_UINT8*)(i0+(_check_index(0, i1, OOC_UINT8, 17475)));
-  i0 = i0==45u;
+  i2 = _check_pointer(i1, 17475);
+  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i2 = *(OOC_UINT8*)(i2+(_check_index(0, i3, OOC_UINT8, 17475)));
+  i2 = i2==45u;
   
 l56:
-  if (i0) goto l58;
-  i0 = i;
+  if (i2) goto l58;
   restArg = i0;
   goto l87;
 l58:
-  i0 = (OOC_INT32)arg;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 17537)), 0);
-  i0 = (OOC_INT32)Config_Source_CmdLine__ErrorString(4, (void*)(_check_pointer(i0, 17537)), i1);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i1, 17537)), 0);
+  i0 = (OOC_INT32)Config_Source_CmdLine__ErrorString(4, (void*)(_check_pointer(i1, 17537)), i0);
   return (Msg__Msg)i0;
   goto l87;
 l60:
   _copy_8((const void*)"-?",(void*)(OOC_INT32)singleCharCmd,3);
   j = 1;
-  i0 = (OOC_INT32)arg;
-  i0 = _check_pointer(i0, 16880);
+  i0 = _check_pointer(i1, 16880);
   i1 = OOC_ARRAY_LENGTH(i0, 0);
   i0 = *(OOC_UINT8*)(i0+(_check_index(1, i1, OOC_UINT32, 16880)));
   i0 = i0!=0u;
@@ -727,13 +718,11 @@ l74:
   if (i1) goto l63_loop;
   goto l87;
 l81:
-  i0 = i;
   restArg = (i0+1);
   goto l87;
 l83:
-  i1 = (OOC_INT32)arg;
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 16446)), 0);
-  i0 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_Parse_EvalOption((void*)(_check_pointer(i1, 16446)), i2, (Config_Source_CmdLine__OptionTemplate)i0, (void*)(OOC_INT32)&i);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i1, 16446)), 0);
+  i0 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_Parse_EvalOption((void*)(_check_pointer(i1, 16446)), i0, (Config_Source_CmdLine__OptionTemplate)i2, (void*)(OOC_INT32)&i);
   msg = (Msg__Msg)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l87;

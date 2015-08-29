@@ -1,4 +1,4 @@
-(* 	$Id: Opcode.Mod,v 1.94 2003/03/10 22:50:50 mva Exp $	 *)
+(* 	$Id: Opcode.Mod,v 1.95 2003/04/14 19:21:38 mva Exp $	 *)
 MODULE OOC:SSA:Opcode;
 (*  This modules defines opcodes for SSA instructions.
     Copyright (C) 2001-2003  Michael van Acken
@@ -482,9 +482,12 @@ CONST
   
   
   call* = 55;
-  (**Used to call a procedure or a function.  The first argument is the
-     address of the procedure to be called, followed by the call's arguments.
-     This opcode is used both for normal and type-bound procedures.  *)
+  (**Used to call a procedure or a function.  The first argument is the address
+     of the procedure to be called, followed by the call's arguments.  This
+     opcode is used both for normal and type-bound procedures.  The address can
+     be almost any address expression, and a @oconst{declRef} instruction may
+     be used as a shorthand notation for the referenced procedure declaration's
+     address.  *)
   
   getLengthHeap* = 56;
   (**Retrieves the length of an open array variable on the heap for a given

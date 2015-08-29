@@ -226,7 +226,7 @@ l12:
   ;
 }
 
-OOC_Doc__InlineList OOC_Doc__NewInlineList() {
+OOC_Doc__InlineList OOC_Doc__NewInlineList(void) {
   register OOC_INT32 i0;
   OOC_Doc__InlineList il;
 
@@ -258,7 +258,7 @@ l4:
   ;
 }
 
-OOC_Doc__BlockList OOC_Doc__NewBlockList() {
+OOC_Doc__BlockList OOC_Doc__NewBlockList(void) {
   register OOC_INT32 i0;
   OOC_Doc__BlockList bl;
 
@@ -1729,7 +1729,7 @@ void OOC_Doc__ItemizeDesc_NodeName(OOC_Doc__Itemize i, OOC_CHAR8 name[], OOC_LEN
 }
 
 void OOC_Doc__ItemizeDesc_Normalize(OOC_Doc__Itemize i) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)i;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28431))+20);
@@ -1739,8 +1739,7 @@ void OOC_Doc__ItemizeDesc_Normalize(OOC_Doc__Itemize i) {
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l4;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28510))+24);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28510))+24);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 28516)))), OOC_Doc__ItemDesc_Normalize)),OOC_Doc__ItemDesc_Normalize)((OOC_Doc__Item)i2);
+  OOC_Doc__ItemDesc_Normalize((OOC_Doc__Item)i1);
 l4:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28562))+28);
   OOC_Doc__NormalizeBlockList((OOC_Doc__BlockElement)i1);
@@ -1844,15 +1843,14 @@ void OOC_Doc__EnumerateDesc_NodeName(OOC_Doc__Enumerate e, OOC_CHAR8 name[], OOC
 }
 
 void OOC_Doc__EnumerateDesc_Normalize(OOC_Doc__Enumerate e) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)e;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30137))+28);
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l4;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30163))+28);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30163))+28);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 30169)))), OOC_Doc__ItemDesc_Normalize)),OOC_Doc__ItemDesc_Normalize)((OOC_Doc__Item)i2);
+  OOC_Doc__ItemDesc_Normalize((OOC_Doc__Item)i1);
 l4:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 30215))+32);
   OOC_Doc__NormalizeBlockList((OOC_Doc__BlockElement)i1);
@@ -2019,14 +2017,13 @@ void OOC_Doc__TableRowDesc_NodeName(OOC_Doc__TableRow tr, OOC_CHAR8 name[], OOC_
 }
 
 void OOC_Doc__TableRowDesc_Normalize(OOC_Doc__TableRow tr) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)tr;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 32803))+20);
   OOC_Doc__NormalizeBlockList((OOC_Doc__BlockElement)i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 32829))+24);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 32829))+24);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 32835)))), OOC_Doc__ItemDesc_Normalize)),OOC_Doc__ItemDesc_Normalize)((OOC_Doc__Item)i2);
+  OOC_Doc__ItemDesc_Normalize((OOC_Doc__Item)i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 32854))+24);
   *(OOC_UINT8*)((_check_pointer(i1, 32860))+16) = 0u;
   *(OOC_UINT8*)((_check_pointer(i0, 32887))+16) = 1u;
@@ -2157,7 +2154,7 @@ static OOC_Doc__InlineElement OOC_Doc__ExtractSummary(OOC_Doc__BlockElement bloc
   auto OOC_Doc__InlineElement OOC_Doc__ExtractSummary_Extract(OOC_Doc__InlineElement inlineList);
     
     OOC_Doc__InlineElement OOC_Doc__ExtractSummary_Extract(OOC_Doc__InlineElement inlineList) {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5;
+      register OOC_INT32 i0,i1,i2,i3,i4;
       OOC_Doc__InlineList resultList;
       OOC_Doc__InlineElement _inline;
       OOC_Doc__Text newText;
@@ -2229,37 +2226,37 @@ l7_loop:
       _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 36099)))), 36099);
       goto l34;
 l20:
-      i2 = (OOC_INT32)resultList;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36162))+16);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36175))+20);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36162))+16);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36175))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36228))+24);
-      i0 = (OOC_INT32)OOC_Doc__NewUref((OOC_Doc__InlineElement)i3, (OOC_Doc__InlineElement)i4, (OOC_Doc__InlineElement)i0);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 36137)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
+      i0 = (OOC_INT32)OOC_Doc__NewUref((OOC_Doc__InlineElement)i2, (OOC_Doc__InlineElement)i3, (OOC_Doc__InlineElement)i0);
+      i2 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
       goto l34;
 l22:
-      i2 = (OOC_INT32)resultList;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36060))+16);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36060))+16);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36077))+20);
-      i0 = (OOC_INT32)OOC_Doc__NewEmail((OOC_Doc__InlineElement)i3, (OOC_Doc__InlineElement)i0);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 36034)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
+      i0 = (OOC_INT32)OOC_Doc__NewEmail((OOC_Doc__InlineElement)i2, (OOC_Doc__InlineElement)i0);
+      i2 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
       goto l34;
 l24:
-      i2 = (OOC_INT32)resultList;
-      i3 = *(OOC_INT32*)((_check_pointer(i0, 35901))+16);
+      i2 = *(OOC_INT32*)((_check_pointer(i0, 35901))+16);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 35971))+20);
       i0 = (OOC_INT32)OOC_Doc__ExtractSummary_Extract((OOC_Doc__InlineElement)i0);
-      i0 = (OOC_INT32)OOC_Doc__NewMarkedInline(i3, (OOC_Doc__InlineElement)i0);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 35868)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
+      i0 = (OOC_INT32)OOC_Doc__NewMarkedInline(i2, (OOC_Doc__InlineElement)i0);
+      i2 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
       goto l34;
 l26:
-      i2 = (OOC_INT32)resultList;
-      i3 = *(OOC_INT32*)((_check_pointer(i0, 35612))+16);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 35679))+20);
-      i4 = (OOC_INT32)OOC_Doc__ExtractSummary_Extract((OOC_Doc__InlineElement)i4);
-      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 35744))+24);
-      i3 = (OOC_INT32)OOC_Doc__NewOberonRef(i3, (OOC_Doc__InlineElement)i4, (ADT_Storable__Object)i5);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 35582)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i3);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 35776))+4);
+      i2 = *(OOC_INT32*)((_check_pointer(i0, 35612))+16);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 35679))+20);
+      i3 = (OOC_INT32)OOC_Doc__ExtractSummary_Extract((OOC_Doc__InlineElement)i3);
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 35744))+24);
+      i2 = (OOC_INT32)OOC_Doc__NewOberonRef(i2, (OOC_Doc__InlineElement)i3, (ADT_Storable__Object)i4);
+      i3 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i3, (OOC_Doc__InlineElement)i2);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 35776))+4);
       _copy_block((_check_pointer(i0, 35808)),(_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 35783)))), &_td_OOC_Doc__OberonRefDesc, 35783)), 35793)),12);
       goto l34;
 l28:
@@ -2283,15 +2280,15 @@ l28:
       *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 35441))) = 0u;
       done = 1u;
 l31:
-      i0 = (OOC_INT32)resultList;
-      i2 = (OOC_INT32)newText;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 35512)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i0, (OOC_Doc__InlineElement)i2);
+      i0 = (OOC_INT32)newText;
+      i2 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
       goto l34;
 l33:
-      i2 = (OOC_INT32)resultList;
       i0 = *(OOC_INT32*)((_check_pointer(i0, 35243))+16);
       i0 = (OOC_INT32)OOC_Doc__NewGlyph(i0);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 35217)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
+      i2 = (OOC_INT32)resultList;
+      OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
 l34:
       i0 = (OOC_INT32)_inline;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 36281))+12);

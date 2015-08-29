@@ -49,7 +49,7 @@ void OOC_SSA_Schedule__BlockDesc_SetInfo(OOC_SSA_Schedule__Block b, OOC_SSA_Sche
   i2 = i0!=(OOC_INT32)0;
   if (!i2) goto l8;
 l3_loop:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6395)))), OOC_SSA_Schedule__BlockDesc_SetInfo)),OOC_SSA_Schedule__BlockDesc_SetInfo)((OOC_SSA_Schedule__Block)i0, (OOC_SSA_Schedule__Info)i1);
+  OOC_SSA_Schedule__BlockDesc_SetInfo((OOC_SSA_Schedule__Block)i0, (OOC_SSA_Schedule__Info)i1);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6435));
   nested = (OOC_SSA_Schedule__Block)i0;
   i2 = i0!=(OOC_INT32)0;
@@ -491,20 +491,15 @@ static OOC_SSA_Schedule__JumpBlock OOC_SSA_Schedule__TransferInstructions(OOC_SS
 
       i0 = (OOC_INT32)select;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 12833))+8);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 12833))+8);
-      i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 12840)))), OOC_SSA__InstrDesc_IsSwitchStatm)),OOC_SSA__InstrDesc_IsSwitchStatm)((OOC_SSA__Instr)i2);
+      i1 = OOC_SSA__InstrDesc_IsSwitchStatm((OOC_SSA__Instr)i1);
       if (i1) goto l3;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13836))+8);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13874))+8);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 13881))+24);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 13891))+8);
       i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 13901));
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13874))+8);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 13881))+24);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 13891))+8);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 13843))+24);
-      i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 13901));
-      i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 13906)))), OOC_SSA__ResultDesc_IsBooleanConst)),OOC_SSA__ResultDesc_IsBooleanConst)((OOC_SSA__Result)i3, 1u);
+      i2 = OOC_SSA__ResultDesc_IsBooleanConst((OOC_SSA__Result)i2, 1u);
       i3 = (OOC_INT32)block;
       i1 = (OOC_INT32)OOC_SSA_Schedule__NewBranchBlock((OOC_SSA_Schedule__Block)i3, (OOC_SSA__Opnd)i1, i2);
       branch = (OOC_SSA_Schedule__BranchBlock)i1;
@@ -535,8 +530,7 @@ static OOC_SSA_Schedule__JumpBlock OOC_SSA_Schedule__TransferInstructions(OOC_SS
       goto l20;
 l3:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 12940))+8);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 12940))+8);
-      i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 12947)))), OOC_SSA__InstrDesc_CountOpndClass)),OOC_SSA__InstrDesc_CountOpndClass)((OOC_SSA__Instr)i2, 16);
+      i1 = OOC_SSA__InstrDesc_CountOpndClass((OOC_SSA__Instr)i1, 16);
       paths = i1;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13026))+8);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 13033))+24);
@@ -631,7 +625,7 @@ l20:
       OOC_SSA_Schedule__SetJump((void*)((_check_pointer(i2, 14971))+48), (OOC_SSA_Schedule__Block)i2, (OOC_SSA_Schedule__Block)i1);
       i1 = (OOC_INT32)OOC_SSA_Schedule__NewJumpBlock((OOC_SSA_Schedule__Block)i1);
       out = (OOC_SSA_Schedule__JumpBlock)i1;
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 15335)))), OOC_SSA__InstrDesc_NthOpnd)),OOC_SSA__InstrDesc_NthOpnd)((OOC_SSA__Instr)i0, 2);
+      i0 = (OOC_INT32)OOC_SSA__InstrDesc_NthOpnd((OOC_SSA__Instr)i0, 2);
       opnd = (OOC_SSA__Opnd)i0;
       i2 = i0!=(OOC_INT32)0;
       if (i2) goto l3;
@@ -1034,16 +1028,15 @@ l12:
 l15_loop:
           i3 = i1!=(OOC_INT32)0;
           if (i3) goto l18;
-          i2=0u;
+          i3=0u;
           goto l20;
 l18:
-          i2 = OOC_SSA_Schedule__Schedule_ArrangeBlock_In((OOC_SSA_Schedule__Block)i2, (OOC_SSA_Schedule__Block)i1);
+          i3 = OOC_SSA_Schedule__Schedule_ArrangeBlock_In((OOC_SSA_Schedule__Block)i2, (OOC_SSA_Schedule__Block)i1);
           
 l20:
-          if (i2) goto l22;
-          i1 = (OOC_INT32)ready;
-          b = (OOC_SSA_Schedule__Block)i1;
-          
+          if (i3) goto l22;
+          b = (OOC_SSA_Schedule__Block)i2;
+          i1=i2;
           goto l23;
 l22:
           b = (OOC_SSA_Schedule__Block)i1;
@@ -1253,7 +1246,7 @@ l12:
 
       i0 = (OOC_INT32)*b;
       i1 = i0!=(OOC_INT32)0;
-      if (!i1) goto l48;
+      if (!i1) goto l49;
       i1 = *(OOC_INT32*)((_check_pointer(i0, 23424))+36);
       d = i1;
       i2 = *(OOC_UINT8*)((_check_pointer(i0, 23448))+28);
@@ -1277,55 +1270,54 @@ l13:
 l17:
       i1=i2;
 l19:
-      i1 = i1==0;
-      if (i1) goto l22;
-      i0=0u;
+      i2 = i1==0;
+      if (i2) goto l22;
+      i2=0u;
       goto l24;
 l22:
-      i0 = OOC_SSA_Schedule__Schedule_RemoveUnreachable_ContainsEndOfBlock((OOC_SSA_Schedule__Block)i0);
+      i2 = OOC_SSA_Schedule__Schedule_RemoveUnreachable_ContainsEndOfBlock((OOC_SSA_Schedule__Block)i0);
       
 l24:
-      if (!i0) goto l26;
-      i0 = d;
-      d = (i0+1);
-l26:
-      i0 = d;
-      i1 = (OOC_INT32)*b;
-      i0 = i0==0;
-      if (!i0) goto l44;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24051))+32);
+      if (!i2) goto l27;
+      i1 = i1+1;
+      d = i1;
+      
+l27:
+      i1 = i1==0;
+      if (!i1) goto l45;
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24051))+32);
       _assert((i2==(OOC_INT32)0), 127, 24042);
-      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24178)))), &_td_OOC_SSA_Schedule__JumpBlockDesc);
-      if (i2) goto l42;
-      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24239)))), &_td_OOC_SSA_Schedule__BranchBlockDesc);
-      if (i2) goto l40;
-      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24339)))), &_td_OOC_SSA_Schedule__SwitchBlockDesc);
-      if (i2) goto l38;
-      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24397)))), &_td_OOC_SSA_Schedule__DeadEndBlockDesc);
-      if (i2) goto l44;
-      _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24394)))), 24394);
-      goto l44;
-l38:
+      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 24178)))), &_td_OOC_SSA_Schedule__JumpBlockDesc);
+      if (i2) goto l43;
+      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 24239)))), &_td_OOC_SSA_Schedule__BranchBlockDesc);
+      if (i2) goto l41;
+      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 24339)))), &_td_OOC_SSA_Schedule__SwitchBlockDesc);
+      if (i2) goto l39;
+      i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 24397)))), &_td_OOC_SSA_Schedule__DeadEndBlockDesc);
+      if (i2) goto l45;
+      _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 24394)))), 24394);
+      goto l45;
+l39:
       _assert(0u, 127, 24368);
-      goto l44;
-l40:
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24280))+48);
+      goto l45;
+l41:
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24280))+48);
       OOC_SSA_Schedule__ClearJump((OOC_SSA_Schedule__Jump)i2);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24313))+60);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24313))+60);
       OOC_SSA_Schedule__ClearJump((OOC_SSA_Schedule__Jump)i2);
-      goto l44;
-l42:
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24217))+48);
+      goto l45;
+l43:
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24217))+48);
       OOC_SSA_Schedule__ClearJump((OOC_SSA_Schedule__Jump)i2);
-l44:
-      OOC_SSA_Schedule__Schedule_RemoveUnreachable((void*)((_check_pointer(i1, 24506))+16));
-      OOC_SSA_Schedule__Schedule_RemoveUnreachable((void*)(_check_pointer(i1, 24546)));
-      if (!i0) goto l48;
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24610))+16);
-      _assert((i0==(OOC_INT32)0), 127, 24601);
-      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 24644));
+l45:
+      OOC_SSA_Schedule__Schedule_RemoveUnreachable((void*)((_check_pointer(i0, 24506))+16));
+      OOC_SSA_Schedule__Schedule_RemoveUnreachable((void*)(_check_pointer(i0, 24546)));
+      if (!i1) goto l49;
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 24610))+16);
+      _assert((i1==(OOC_INT32)0), 127, 24601);
+      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 24644));
       *b = (OOC_SSA_Schedule__Block)i0;
-l48:
+l49:
       return;
       ;
     }

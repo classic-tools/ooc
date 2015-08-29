@@ -92,10 +92,10 @@ void ADT_Object_Storage__ReaderDesc_ReadObject(ADT_Object_Storage__Reader r, ADT
   OOC_INT32 ref;
   OOC_INT32 tref;
   RT0__Module module;
-  auto OOC_INT32 ADT_Object_Storage__ReaderDesc_ReadObject_ReadType();
+  auto OOC_INT32 ADT_Object_Storage__ReaderDesc_ReadObject_ReadType(void);
   auto void ADT_Object_Storage__ReaderDesc_ReadObject_ExtendObjTab(ADT_Object_Storage__ObjectArray *tab);
     
-    OOC_INT32 ADT_Object_Storage__ReaderDesc_ReadObject_ReadType() {
+    OOC_INT32 ADT_Object_Storage__ReaderDesc_ReadObject_ReadType(void) {
       register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
       OOC_INT32 tref;
       OOC_INT32 len;
@@ -141,19 +141,17 @@ l8:
       i1 = i0<0;
       if (i1) goto l33;
       i1 = (OOC_INT32)r;
-      i1 = *(OOC_INT32*)((_check_pointer(i1, 5318))+16);
-      i0 = i0!=i1;
-      if (!i0) goto l5;
+      i2 = *(OOC_INT32*)((_check_pointer(i1, 5318))+16);
+      i2 = i0!=i2;
+      if (!i2) goto l5;
       IO__RaiseFormatError((Object__String)((OOC_INT32)_c0));
       return 0;
 l5:
-      i0 = (OOC_INT32)r;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5450))+20);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 5459)), 0);
-      i2 = tref;
-      i1 = i2==i1;
-      if (!i1) goto l8;
-      ADT_Object_Storage__ReaderDesc_ReadObject_ReadType_ExtendTypeTab((void*)((_check_pointer(i0, 5494))+20));
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5450))+20);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5459)), 0);
+      i0 = i0==i2;
+      if (!i0) goto l8;
+      ADT_Object_Storage__ReaderDesc_ReadObject_ReadType_ExtendTypeTab((void*)((_check_pointer(i1, 5494))+20));
 l8:
       i0 = (OOC_INT32)r;
       i1 = *(OOC_INT32*)((_check_pointer(i0, 5532))+16);
@@ -180,79 +178,73 @@ l8:
       goto l20;
 l11:
       i0 = (OOC_INT32)r;
-      i0 = Strings__Length((void*)((_check_pointer(i0, 5776))+24), 256);
-      i0 = i0+1;
-      len = i0;
-      i1 = (OOC_INT32)r;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5803))+20);
+      i1 = Strings__Length((void*)((_check_pointer(i0, 5776))+24), 256);
+      i1 = i1+1;
+      len = i1;
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5803))+20);
       i2 = _check_pointer(i2, 5812);
       i3 = OOC_ARRAY_LENGTH(i2, 0);
       i4 = tref;
-      *(OOC_INT32*)((i2+((_check_index(i4, i3, OOC_UINT32, 5812))*12))+4) = ((OOC_INT32)RT0__NewObject(_td_RT0__Name.baseTypes[0], i0));
+      *(OOC_INT32*)((i2+((_check_index(i4, i3, OOC_UINT32, 5812))*12))+4) = ((OOC_INT32)RT0__NewObject(_td_RT0__Name.baseTypes[0], i1));
       i = 0;
-      i2 = 0<i0;
+      i2 = 0<i1;
       if (!i2) goto l19;
       i2=0;
 l14_loop:
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5884))+20);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5884))+20);
       i3 = _check_pointer(i3, 5892);
       i5 = OOC_ARRAY_LENGTH(i3, 0);
       i3 = (OOC_INT32)*(OOC_INT32*)((i3+((_check_index(i4, i5, OOC_UINT32, 5892))*12))+4);
-      i5 = *(OOC_UINT8*)(((_check_pointer(i1, 5917))+24)+(_check_index(i2, 256, OOC_UINT32, 5922)));
+      i5 = *(OOC_UINT8*)(((_check_pointer(i0, 5917))+24)+(_check_index(i2, 256, OOC_UINT32, 5922)));
       *(OOC_UINT8*)((_check_pointer(i3, 5909))+i2) = i5;
       i2 = i2+1;
       i = i2;
-      i3 = i2<i0;
+      i3 = i2<i1;
       if (i3) goto l14_loop;
 l19:
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5953)))), IO_BinaryRider__ReaderDesc_ReadString)),IO_BinaryRider__ReaderDesc_ReadString)((IO_BinaryRider__Reader)i1, (void*)((_check_pointer(i1, 5968))+24), 256);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5953)))), IO_BinaryRider__ReaderDesc_ReadString)),IO_BinaryRider__ReaderDesc_ReadString)((IO_BinaryRider__Reader)i0, (void*)((_check_pointer(i0, 5968))+24), 256);
       tp = (RT0__Struct)(OOC_INT32)0;
       i0=(OOC_INT32)0;
 l20:
-      i1 = i0==(OOC_INT32)0;
-      if (i1) goto l23;
       i1 = (OOC_INT32)r;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6409))+20);
-      i1 = _check_pointer(i1, 6418);
-      i2 = OOC_ARRAY_LENGTH(i1, 0);
-      i3 = tref;
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6440))+12);
-      *(OOC_INT32*)((i1+((_check_index(i3, i2, OOC_UINT32, 6418))*12))+8) = i4;
+      i2 = tref;
+      i3 = i0==(OOC_INT32)0;
+      if (i3) goto l23;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6409))+20);
+      i3 = _check_pointer(i3, 6418);
+      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6440))+12);
+      *(OOC_INT32*)((i3+((_check_index(i2, i4, OOC_UINT32, 6418))*12))+8) = i5;
       goto l32;
 l23:
-      i1 = (OOC_INT32)r;
-      i1 = Strings__Length((void*)((_check_pointer(i1, 6223))+24), 256);
-      i1 = i1+1;
-      len = i1;
-      i2 = (OOC_INT32)r;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6250))+20);
-      i3 = _check_pointer(i3, 6259);
-      i4 = OOC_ARRAY_LENGTH(i3, 0);
-      i5 = tref;
-      *(OOC_INT32*)((i3+((_check_index(i5, i4, OOC_UINT32, 6259))*12))+8) = ((OOC_INT32)RT0__NewObject(_td_RT0__Name.baseTypes[0], i1));
-      i = 0;
-      i3 = 0<i1;
-      if (!i3) goto l32;
-      i3=0;
-l26_loop:
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6329))+20);
-      i4 = _check_pointer(i4, 6337);
-      i6 = OOC_ARRAY_LENGTH(i4, 0);
-      i4 = (OOC_INT32)*(OOC_INT32*)((i4+((_check_index(i5, i6, OOC_UINT32, 6337))*12))+8);
-      i6 = *(OOC_UINT8*)(((_check_pointer(i2, 6360))+24)+(_check_index(i3, 256, OOC_UINT32, 6365)));
-      *(OOC_UINT8*)((_check_pointer(i4, 6352))+i3) = i6;
+      i3 = Strings__Length((void*)((_check_pointer(i1, 6223))+24), 256);
       i3 = i3+1;
-      i = i3;
-      i4 = i3<i1;
-      if (i4) goto l26_loop;
+      len = i3;
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6250))+20);
+      i4 = _check_pointer(i4, 6259);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      *(OOC_INT32*)((i4+((_check_index(i2, i5, OOC_UINT32, 6259))*12))+8) = ((OOC_INT32)RT0__NewObject(_td_RT0__Name.baseTypes[0], i3));
+      i = 0;
+      i4 = 0<i3;
+      if (!i4) goto l32;
+      i4=0;
+l26_loop:
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6329))+20);
+      i5 = _check_pointer(i5, 6337);
+      i6 = OOC_ARRAY_LENGTH(i5, 0);
+      i5 = (OOC_INT32)*(OOC_INT32*)((i5+((_check_index(i2, i6, OOC_UINT32, 6337))*12))+8);
+      i6 = *(OOC_UINT8*)(((_check_pointer(i1, 6360))+24)+(_check_index(i4, 256, OOC_UINT32, 6365)));
+      *(OOC_UINT8*)((_check_pointer(i5, 6352))+i4) = i6;
+      i4 = i4+1;
+      i = i4;
+      i5 = i4<i3;
+      if (i5) goto l26_loop;
 l32:
-      i1 = (OOC_INT32)r;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6469))+20);
       i1 = _check_pointer(i1, 6478);
-      i2 = OOC_ARRAY_LENGTH(i1, 0);
-      i3 = tref;
-      *(OOC_INT32*)(i1+((_check_index(i3, i2, OOC_UINT32, 6478))*12)) = i0;
-      return i3;
+      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      *(OOC_INT32*)(i1+((_check_index(i2, i3, OOC_UINT32, 6478))*12)) = i0;
+      return i2;
       goto l38;
 l33:
       i1 = (OOC_INT32)r;
@@ -426,7 +418,7 @@ l16:
 }
 
 void ADT_Object_Storage__WriterDesc_WriteObject(ADT_Object_Storage__Writer w, ADT_Storable__Object obj) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3;
   RT0__Struct type;
   OOC_INT32 tref;
   auto OOC_INT32 ADT_Object_Storage__WriterDesc_WriteObject_LookupType(ADT_Object_Storage__Writer w, RT0__Name module, RT0__Name type);
@@ -604,15 +596,13 @@ l52:
   if (i1) goto l10;
   i1 = (OOC_INT32)w;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10131))+20);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10131))+20);
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10140)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_HasKey)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_HasKey)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i3, (Object__Object)i0);
+  i2 = ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_HasKey((ADT_Dictionary_AddressKey_IntValue__Dictionary)i2, (Object__Object)i0);
   if (i2) goto l8;
   i2 = *(OOC_INT32*)((_check_pointer(i1, 10294))+8);
   *(OOC_INT32*)((_check_pointer(i1, 10294))+8) = (i2+1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10318))+20);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10318))+20);
-  i4 = *(OOC_INT32*)((_check_pointer(i1, 10340))+8);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10327)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i3, (Object__Object)i0, i4);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 10340))+8);
+  ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Set((ADT_Dictionary_AddressKey_IntValue__Dictionary)i2, (Object__Object)i0, i3);
   i2 = *(OOC_INT32*)((_check_pointer(i1, 10377))+8);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10364)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, i2);
   i0 = (OOC_INT32)RT0__TypeOf((void*)i0);
@@ -640,8 +630,7 @@ l7:
   goto l11;
 l8:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10209))+20);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10209))+20);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10218)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Get)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Get)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i3, (Object__Object)i0);
+  i0 = ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Get((ADT_Dictionary_AddressKey_IntValue__Dictionary)i2, (Object__Object)i0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10195)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, (-i0));
   goto l11;
 l10:
@@ -684,8 +673,7 @@ l8:
   *(OOC_INT32*)((_check_pointer(i0, 11134))+12) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 11160))+16) = 0;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11185))+20);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11185))+20);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11194)))), ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy)),ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy)((ADT_Dictionary_AddressKey_IntValue__Dictionary)i2);
+  ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy((ADT_Dictionary_AddressKey_IntValue__Dictionary)i1);
   *(OOC_INT32*)((_check_pointer(i0, 11212))+20) = 0;
   *(OOC_INT32*)((_check_pointer(i0, 11235))+8) = 0;
   return;

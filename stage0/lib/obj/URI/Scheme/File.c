@@ -109,7 +109,7 @@ IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, O
   Object__String8 s;
 
   i0 = (OOC_INT32)file;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5728)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)filePath, 2048);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)filePath, 2048);
   i0 = (OOC_INT32)Object__NewLatin1((void*)(OOC_INT32)filePath, 2048);
   s = (Object__String8)i0;
   i1 = mode;
@@ -135,7 +135,7 @@ l6:
   ;
 }
 
-URI_Scheme_File__URI URI_Scheme_File__NewPrototype() {
+URI_Scheme_File__URI URI_Scheme_File__NewPrototype(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)URI_String__Copy("file", 5);
@@ -144,7 +144,7 @@ URI_Scheme_File__URI URI_Scheme_File__NewPrototype() {
   ;
 }
 
-URI_Scheme_File__URI URI_Scheme_File__GetCwd() {
+URI_Scheme_File__URI URI_Scheme_File__GetCwd(void) {
   register OOC_INT32 i0;
   OOC_CHAR8 path[4096];
   Msg__Msg res;

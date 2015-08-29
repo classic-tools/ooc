@@ -13,7 +13,7 @@ typedef struct URI_Scheme_CurrentDoc__CurrentDocDesc {
   URI_String__StringPtr schemeId;
 } URI_Scheme_CurrentDoc__CurrentDocDesc;
 extern void URI_Scheme_CurrentDoc__Init(URI_Scheme_CurrentDoc__CurrentDoc uri);
-extern URI_Scheme_CurrentDoc__CurrentDoc URI_Scheme_CurrentDoc__New();
+extern URI_Scheme_CurrentDoc__CurrentDoc URI_Scheme_CurrentDoc__New(void);
 extern URI__URI URI_Scheme_CurrentDoc__CurrentDocDesc_Clone(URI_Scheme_CurrentDoc__CurrentDoc uri);
 #define _TBN_URI_Scheme_CurrentDoc__CurrentDocDesc_Clone 1
 typedef URI__URI (*_TBP_URI_Scheme_CurrentDoc__CurrentDocDesc_Clone)(URI_Scheme_CurrentDoc__CurrentDoc uri);
@@ -26,8 +26,8 @@ typedef void (*_TBP_URI_Scheme_CurrentDoc__CurrentDocDesc_WriteXML)(URI_Scheme_C
 extern void URI_Scheme_CurrentDoc__CurrentDocDesc_GetString(URI_Scheme_CurrentDoc__CurrentDoc uri, OOC_CHAR8 str[], OOC_LEN str_0d);
 #define _TBN_URI_Scheme_CurrentDoc__CurrentDocDesc_GetString 4
 typedef void (*_TBP_URI_Scheme_CurrentDoc__CurrentDocDesc_GetString)(URI_Scheme_CurrentDoc__CurrentDoc uri, OOC_CHAR8 str[], OOC_LEN str_0d);
-extern void OOC_URI_Scheme_CurrentDoc_init();
-extern void OOC_URI_Scheme_CurrentDoc_init0();
+extern void OOC_URI_Scheme_CurrentDoc_init(void);
+extern void OOC_URI_Scheme_CurrentDoc_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Scheme_CurrentDoc__CurrentDoc;

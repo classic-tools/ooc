@@ -7,7 +7,7 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-#define OOC_Config_Pragmas_StdPragmas__defaultCompilerVersion "2.0.7"
+#define OOC_Config_Pragmas_StdPragmas__defaultCompilerVersion "2.0.8"
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__warnings;
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__assertions;
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__stackCheck;
@@ -30,8 +30,8 @@ extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__targetInteg
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__targetAddress;
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__targetByteOrder;
 extern void OOC_Config_Pragmas_StdPragmas__CreateVariables(OOC_Config_Pragmas__Section s);
-extern void OOC_OOC_Config_Pragmas_StdPragmas_init();
-extern void OOC_OOC_Config_Pragmas_StdPragmas_init0();
+extern void OOC_OOC_Config_Pragmas_StdPragmas_init(void);
+extern void OOC_OOC_Config_Pragmas_StdPragmas_init0(void);
 
 /* run-time meta data */
 #endif /* _MODULE_OOC_Config_Pragmas_StdPragmas_ */

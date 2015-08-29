@@ -556,18 +556,20 @@ l21:
   *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 7079))) = 0u;
   *deco = (OOC_Doc_Decoration__Decoration)(OOC_INT32)0;
   i0 = OOC_Doc_Decoration__Remove_IsDotLine((OOC_Scanner_InputBuffer__CharArray)i1);
-  if (!i0) goto l24;
-  i0 = (OOC_INT32)str;
-  i0 = (OOC_INT32)OOC_Doc_Decoration__Remove_GetDotLineIndent((OOC_Scanner_InputBuffer__CharArray)i0);
-  *deco = (OOC_Doc_Decoration__Decoration)i0;
+  if (i0) goto l24;
+  i0=(OOC_INT32)0;
+  goto l25;
 l24:
-  i0 = (OOC_INT32)*deco;
+  i0 = (OOC_INT32)OOC_Doc_Decoration__Remove_GetDotLineIndent((OOC_Scanner_InputBuffer__CharArray)i1);
+  *deco = (OOC_Doc_Decoration__Decoration)i0;
+  
+l25:
   i0 = i0==(OOC_INT32)0;
-  if (!i0) goto l27;
+  if (!i0) goto l28;
   i0 = (OOC_INT32)str;
   i0 = (OOC_INT32)OOC_Doc_Decoration__Remove_GetPlainIndent((OOC_Scanner_InputBuffer__CharArray)i0);
   *deco = (OOC_Doc_Decoration__Decoration)i0;
-l27:
+l28:
   i0 = (OOC_INT32)str;
   return (OOC_Scanner_InputBuffer__CharArray)i0;
   ;

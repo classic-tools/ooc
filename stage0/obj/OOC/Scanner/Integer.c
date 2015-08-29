@@ -49,7 +49,7 @@ l4:
 }
 
 Msg__Msg OOC_Scanner_Integer__Convert16(OOC_Scanner_InputBuffer__CharArray str, OOC_INT32 *_int) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5;
   OOC_INT32 spos;
   OOC_INT32 epos;
   auto OOC_INT16 OOC_Scanner_Integer__Convert16_GetDigit(OOC_CHAR8 c);
@@ -105,46 +105,42 @@ l4_loop:
 l9:
   i3 = (i1-i2)>7;
   if (i3) goto l30;
-  i1 = i2<=i1;
-  if (!i1) goto l31;
-  i0 = _check_pointer(i0, 2027);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
-  i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 2027)));
-  i0 = OOC_Scanner_Integer__Convert16_GetDigit(i0);
-  i1 = spos;
-  *_int = i0;
-  i1 = i1+1;
-  i2 = epos;
-  spos = i1;
-  i3 = (i2-i1)==6;
-  if (i3) goto l16;
-  i3=0u;
+  i3 = i2<=i1;
+  if (!i3) goto l31;
+  i3 = _check_pointer(i0, 2027);
+  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 2027)));
+  i3 = OOC_Scanner_Integer__Convert16_GetDigit(i3);
+  *_int = i3;
+  i2 = i2+1;
+  spos = i2;
+  i4 = (i1-i2)==6;
+  if (i4) goto l16;
+  i4=0u;
   goto l18;
 l16:
-  i3 = i0>=8;
+  i4 = i3>=8;
   
 l18:
-  if (!i3) goto l20;
-  i3 = (OOC_INT32)OOC_Scanner_Integer__integerContext;
-  i3 = (OOC_INT32)OOC_Error__New((OOC_Error__Context)i3, 2);
-  return (Msg__Msg)i3;
+  if (!i4) goto l20;
+  i4 = (OOC_INT32)OOC_Scanner_Integer__integerContext;
+  i4 = (OOC_INT32)OOC_Error__New((OOC_Error__Context)i4, 2);
+  return (Msg__Msg)i4;
 l20:
-  i2 = i1<=i2;
-  if (!i2) goto l31;
+  i4 = i2<=i1;
+  if (!i4) goto l31;
+  {register OOC_INT32 h0=i2;i2=i3;i3=h0;}
 l23_loop:
-  i2 = (OOC_INT32)str;
-  i2 = _check_pointer(i2, 2576);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
-  i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 2576)));
-  i1 = OOC_Scanner_Integer__Convert16_GetDigit(i1);
-  i0 = (i0*16)+i1;
-  i1 = spos;
-  *_int = i0;
-  i1 = i1+1;
-  spos = i1;
-  i2 = epos;
-  i2 = i1<=i2;
-  if (i2) goto l23_loop;
+  i4 = _check_pointer(i0, 2576);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i4 = *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT32, 2576)));
+  i4 = OOC_Scanner_Integer__Convert16_GetDigit(i4);
+  i2 = (i2*16)+i4;
+  *_int = i2;
+  i3 = i3+1;
+  spos = i3;
+  i4 = i3<=i1;
+  if (i4) goto l23_loop;
   goto l31;
 l30:
   *_int = 1;

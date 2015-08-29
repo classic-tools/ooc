@@ -210,9 +210,9 @@ l5_loop:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 12282)))), Msg__AttributeDesc_ReplacementText)),Msg__AttributeDesc_ReplacementText)((Msg__Attribute)i1, (void*)(OOC_INT32)insert, 16384);
   i2 = pos;
   LongStrings__Insert((void*)(OOC_INT32)insert, 16384, i2, (void*)(OOC_INT32)text, text_0d);
-  i2 = pos;
-  i3 = LongStrings__Length((void*)(OOC_INT32)insert, 16384);
-  LongStrings__FindNext((void*)(OOC_INT32)attrName, 131, (void*)(OOC_INT32)text, text_0d, (i2+i3), (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+  i2 = LongStrings__Length((void*)(OOC_INT32)insert, 16384);
+  i3 = pos;
+  LongStrings__FindNext((void*)(OOC_INT32)attrName, 131, (void*)(OOC_INT32)text, text_0d, (i3+i2), (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
   i2 = found;
   if (i2) goto l5_loop;
 l10:
@@ -284,7 +284,7 @@ void Msg__InitMsgList(Msg__MsgList l) {
   ;
 }
 
-Msg__MsgList Msg__NewMsgList() {
+Msg__MsgList Msg__NewMsgList(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Msg__MsgList.baseTypes[0]);

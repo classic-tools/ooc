@@ -33,8 +33,8 @@ extern void LongStrings__FindDiff(const OOC_CHAR16 stringVal1__ref[], OOC_LEN st
 extern void LongStrings__Capitalize(OOC_CHAR16 stringVar[], OOC_LEN stringVar_0d);
 extern void LongStrings__Long(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, OOC_CHAR16 destination[], OOC_LEN destination_0d);
 extern void LongStrings__Short(const OOC_CHAR16 source__ref[], OOC_LEN source_0d, OOC_CHAR8 repl, OOC_CHAR8 destination[], OOC_LEN destination_0d);
-extern void OOC_LongStrings_init();
-extern void OOC_LongStrings_init0();
+extern void OOC_LongStrings_init(void);
+extern void OOC_LongStrings_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_LongStrings__2026;

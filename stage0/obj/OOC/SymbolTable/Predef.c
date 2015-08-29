@@ -280,21 +280,19 @@ l4:
 
 OOC_SymbolTable__Type OOC_SymbolTable_Predef__SmallestIntType(Object_BigInt__BigInt value) {
   register OOC_INT32 i0,i1,i2;
-  OOC_INT16 i;
 
   i0 = (OOC_INT32)value;
-  i = 4;
   i1=4;
 l1_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_SymbolTable_Predef__minConst+(_check_index(i1, 18, OOC_UINT16, 14111))*4);
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14098)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i0, (Object__Object)i2);
+  i2 = Object_BigInt__BigIntDesc_Cmp((Object_BigInt__BigInt)i0, (Object__Object)i2);
   i2 = i2>=0;
   if (i2) goto l4;
   i2=0u;
   goto l6;
 l4:
   i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)OOC_SymbolTable_Predef__maxConst+(_check_index(i1, 18, OOC_UINT16, 14143))*4);
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14130)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i0, (Object__Object)i2);
+  i2 = Object_BigInt__BigIntDesc_Cmp((Object_BigInt__BigInt)i0, (Object__Object)i2);
   i2 = i2<=0;
   
 l6:
@@ -303,7 +301,6 @@ l6:
   return (OOC_SymbolTable__Type)i2;
 l8:
   i1 = i1+1;
-  i = i1;
   i2 = i1<=7;
   if (i2) goto l1_loop;
 l12:
@@ -311,10 +308,10 @@ l12:
   ;
 }
 
-static void OOC_SymbolTable_Predef__Init() {
+static void OOC_SymbolTable_Predef__Init(void) {
   register OOC_INT32 i0,i1;
 
-  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__34301.baseTypes[0], 18));
+  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__34824.baseTypes[0], 18));
   i0=0;
 l1_loop:
   *(OOC_INT32*)((OOC_INT32)OOC_SymbolTable_Predef__minConst+(_check_index(i0, 18, OOC_UINT32, 14375))*4) = (OOC_INT32)0;

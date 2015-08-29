@@ -57,7 +57,7 @@ void Config_Section__SectionDesc_DumpContent(Config_Section__Section s, Channel_
   ;
 }
 
-Config_Section__SectionList Config_Section__NewSectionList() {
+Config_Section__SectionList Config_Section__NewSectionList(void) {
   register OOC_INT32 i0;
   Config_Section__SectionList sl;
 
@@ -223,9 +223,9 @@ l6_loop:
   
   goto l21;
 l11:
-  i1 = (OOC_INT32)sl;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3754))+28);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3743)))), Config_Section__SectionListDesc_Get)),Config_Section__SectionListDesc_Get)((Config_Section__SectionList)i1, (XML_UnicodeBuffer__CharArray)i2);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3754))+28);
+  i2 = (OOC_INT32)sl;
+  i1 = (OOC_INT32)Config_Section__SectionListDesc_Get((Config_Section__SectionList)i2, (XML_UnicodeBuffer__CharArray)i1);
   s = (Config_Section__Section)i1;
   i2 = i1==(OOC_INT32)0;
   if (i2) goto l14;
@@ -246,7 +246,7 @@ l14:
   
   goto l21;
 l17:
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3620)))), Config_Parser__NodeDesc_IsWhitespace)),Config_Parser__NodeDesc_IsWhitespace)((Config_Parser__Node)i0);
+  i1 = Config_Parser__NodeDesc_IsWhitespace((Config_Parser__Node)i0);
   i1 = !i1;
   if (!i1) goto l21;
   Config_Section__SectionListDesc_ProcessElements_Err(2, (Config_Parser__Node)i0);

@@ -348,7 +348,7 @@ OOC_Scanner_InputBuffer__Buffer OOC_Repository__ModuleDesc_GetInputBuffer(OOC_Re
 }
 
 URI__HierarchicalURI OOC_Repository__ModuleDesc_GetURI(OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 allowRelative) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = fileId;
   i0 = i0==11;
@@ -376,11 +376,10 @@ l9:
   goto l12;
 l11:
   i0 = (OOC_INT32)m;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16396))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 16426));
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 16434))+4);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 16426));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16434))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16396))+12);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 16404)))), OOC_SymbolTable__ModuleDesc_GetExternalSource)),OOC_SymbolTable__ModuleDesc_GetExternalSource)((OOC_SymbolTable__Module)i0, (URI__HierarchicalURI)i2);
+  i0 = (OOC_INT32)OOC_SymbolTable__ModuleDesc_GetExternalSource((OOC_SymbolTable__Module)i0, (URI__HierarchicalURI)i1);
   return (URI__HierarchicalURI)i0;
 l12:
   _failed_function(15823); return 0;

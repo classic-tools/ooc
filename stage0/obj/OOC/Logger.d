@@ -6,7 +6,7 @@ static OOC_INT32 OOC_Logger__indentMake;
 #define OOC_Logger__logMake OOC_FALSE
 OOC_CHAR8 OOC_Logger__silence;
 static void OOC_Logger__WriteURI(URI__URI uri);
-static void OOC_Logger__IndentMake();
+static void OOC_Logger__IndentMake(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

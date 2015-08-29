@@ -9,8 +9,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern OOC_CHAR8 OOC_Make_LinkProgramC__Run(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Object__String forLibrary);
-extern void OOC_OOC_Make_LinkProgramC_init();
-extern void OOC_OOC_Make_LinkProgramC_init0();
+extern void OOC_OOC_Make_LinkProgramC_init(void);
+extern void OOC_OOC_Make_LinkProgramC_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_LinkProgramC__1256;

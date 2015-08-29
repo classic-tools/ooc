@@ -45,8 +45,8 @@ typedef void (*_TBP_IO_Buffer__ChannelDesc_Close)(IO_Buffer__Channel ch);
 extern void IO_Buffer__ChannelDesc_CloseAndRegister(IO_Buffer__Channel ch);
 #define _TBN_IO_Buffer__ChannelDesc_CloseAndRegister 1
 typedef void (*_TBP_IO_Buffer__ChannelDesc_CloseAndRegister)(IO_Buffer__Channel ch);
-extern void OOC_IO_Buffer_init();
-extern void OOC_IO_Buffer_init0();
+extern void OOC_IO_Buffer_init(void);
+extern void OOC_IO_Buffer_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_Buffer__Channel;

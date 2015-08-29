@@ -34,7 +34,7 @@ l4:
   i1 = LongStrings__Length((void*)(_check_pointer(i0, 1891)), i1);
   len16 = i1;
   i2 = (OOC_INT32)XML_UnicodeCodec_UTF8__factory;
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1920)))), XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)),XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)((XML_UnicodeCodec_UTF8__Factory)i2);
+  i2 = (OOC_INT32)XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec((XML_UnicodeCodec_UTF8__Factory)i2);
   codec = (XML_UnicodeCodec__Codec)i2;
   i3 = i1!=0;
   if (i3) goto l3;
@@ -106,14 +106,12 @@ l28:
   goto l31;
 l30:
   _copy_8((const void*)"%HH",(void*)(OOC_INT32)repl,4);
-  i0 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2752)));
-  i0 = XML_EntityResolver__NormalizeURI_ToHex((i0>>4));
-  *(OOC_UINT8*)((OOC_INT32)repl+(_check_index(1, 4, OOC_UINT8, 2729))) = i0;
-  i0 = i;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2801)));
-  i0 = XML_EntityResolver__NormalizeURI_ToHex((_mod(i0,16)));
-  *(OOC_UINT8*)((OOC_INT32)repl+(_check_index(2, 4, OOC_UINT8, 2778))) = i0;
-  i0 = i;
+  i1 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2752)));
+  i1 = XML_EntityResolver__NormalizeURI_ToHex((i1>>4));
+  *(OOC_UINT8*)((OOC_INT32)repl+(_check_index(1, 4, OOC_UINT8, 2729))) = i1;
+  i1 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2801)));
+  i1 = XML_EntityResolver__NormalizeURI_ToHex((_mod(i1,16)));
+  *(OOC_UINT8*)((OOC_INT32)repl+(_check_index(2, 4, OOC_UINT8, 2778))) = i1;
   Strings__Delete((void*)(OOC_INT32)str8, 8192, i0, 1);
   Strings__Insert((void*)(OOC_INT32)repl, 4, i0, (void*)(OOC_INT32)str8, 8192);
   i0 = i0+3;
@@ -165,7 +163,7 @@ l11:
   ;
 }
 
-XML_EntityResolver__Resolver XML_EntityResolver__New() {
+XML_EntityResolver__Resolver XML_EntityResolver__New(void) {
 
   return (XML_EntityResolver__Resolver)((OOC_INT32)RT0__NewObject(_td_XML_EntityResolver__Resolver.baseTypes[0]));
   ;

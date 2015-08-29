@@ -28,7 +28,7 @@ typedef struct ADT_Dictionary_AddressKey_IntValue__DictionaryDesc {
   ADT_Dictionary_AddressKey_IntValue__Table table;
 } ADT_Dictionary_AddressKey_IntValue__DictionaryDesc;
 extern void ADT_Dictionary_AddressKey_IntValue__Init(ADT_Dictionary_AddressKey_IntValue__Dictionary dict);
-extern ADT_Dictionary_AddressKey_IntValue__Dictionary ADT_Dictionary_AddressKey_IntValue__New();
+extern ADT_Dictionary_AddressKey_IntValue__Dictionary ADT_Dictionary_AddressKey_IntValue__New(void);
 extern void ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy(ADT_Dictionary_AddressKey_IntValue__Dictionary dict);
 #define _TBN_ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy 3
 typedef void (*_TBP_ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Destroy)(ADT_Dictionary_AddressKey_IntValue__Dictionary dict);
@@ -62,8 +62,8 @@ typedef void (*_TBP_ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Store)(AD
 extern void ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Load(ADT_Dictionary_AddressKey_IntValue__Dictionary dict, ADT_Storable__Reader r);
 #define _TBN_ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Load 4
 typedef void (*_TBP_ADT_Dictionary_AddressKey_IntValue__DictionaryDesc_Load)(ADT_Dictionary_AddressKey_IntValue__Dictionary dict, ADT_Storable__Reader r);
-extern void OOC_ADT_Dictionary_AddressKey_IntValue_init();
-extern void OOC_ADT_Dictionary_AddressKey_IntValue_init0();
+extern void OOC_ADT_Dictionary_AddressKey_IntValue_init(void);
+extern void OOC_ADT_Dictionary_AddressKey_IntValue_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_Dictionary_AddressKey_IntValue__Entry;

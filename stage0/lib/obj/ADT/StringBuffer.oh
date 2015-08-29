@@ -70,8 +70,8 @@ typedef void (*_TBP_ADT_StringBuffer__StringBufferDesc_Insert)(ADT_StringBuffer_
 extern void ADT_StringBuffer__StringBufferDesc_Delete(ADT_StringBuffer__StringBuffer b, OOC_INT32 start, OOC_INT32 end);
 #define _TBN_ADT_StringBuffer__StringBufferDesc_Delete 16
 typedef void (*_TBP_ADT_StringBuffer__StringBufferDesc_Delete)(ADT_StringBuffer__StringBuffer b, OOC_INT32 start, OOC_INT32 end);
-extern void OOC_ADT_StringBuffer_init();
-extern void OOC_ADT_StringBuffer_init0();
+extern void OOC_ADT_StringBuffer_init(void);
+extern void OOC_ADT_StringBuffer_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_StringBuffer__1005;

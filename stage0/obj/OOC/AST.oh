@@ -176,8 +176,8 @@ typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LinkObjFlag)(OOC_AST__Builder 
 extern OOC_AST__Node OOC_AST__BuilderDesc_LinkLibFlag(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
 #define _TBN_OOC_AST__BuilderDesc_LinkLibFlag 19
 typedef OOC_AST__Node (*_TBP_OOC_AST__BuilderDesc_LinkLibFlag)(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt);
-extern void OOC_OOC_AST_init();
-extern void OOC_OOC_AST_init0();
+extern void OOC_OOC_AST_init(void);
+extern void OOC_OOC_AST_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_AST__Node;

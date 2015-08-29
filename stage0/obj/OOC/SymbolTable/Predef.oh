@@ -78,8 +78,8 @@ extern OOC_SymbolTable__PredefType OOC_SymbolTable_Predef__GetType(OOC_INT16 id)
 extern Object_Boxed__Object OOC_SymbolTable_Predef__GetMin(OOC_SymbolTable__Type type);
 extern Object_Boxed__Object OOC_SymbolTable_Predef__GetMax(OOC_SymbolTable__Type type);
 extern OOC_SymbolTable__Type OOC_SymbolTable_Predef__SmallestIntType(Object_BigInt__BigInt value);
-extern void OOC_OOC_SymbolTable_Predef_init();
-extern void OOC_OOC_SymbolTable_Predef_init0();
+extern void OOC_OOC_SymbolTable_Predef_init(void);
+extern void OOC_OOC_SymbolTable_Predef_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_Predef__3734;

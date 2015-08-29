@@ -69,8 +69,8 @@ typedef void (*_TBP_OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir)(OOC_R
 extern IO__ByteChannel OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel 7
 typedef IO__ByteChannel (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
-extern void OOC_OOC_Repository_FileSystem_init();
-extern void OOC_OOC_Repository_FileSystem_init0();
+extern void OOC_OOC_Repository_FileSystem_init(void);
+extern void OOC_OOC_Repository_FileSystem_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__Repository;

@@ -14,21 +14,17 @@ static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config
   ;
 }
 
-OOC_Config_Pragmas__Section OOC_Config_Pragmas__New() {
+OOC_Config_Pragmas__Section OOC_Config_Pragmas__New(void) {
   register OOC_INT32 i0,i1,i2;
-  OOC_Config_Pragmas__Section s;
-  Config_Value__PrototypeList prototypeList;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Config_Pragmas__Section.baseTypes[0]);
-  s = (OOC_Config_Pragmas__Section)i0;
   i1 = (OOC_INT32)Config_Value__NewPrototypeList();
-  prototypeList = (Config_Value__PrototypeList)i1;
   i2 = (OOC_INT32)Config_Value_Boolean__New(0u);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2089)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i1, "boolean", 8, (Config_Value__Value)i2);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "boolean", 8, (Config_Value__Value)i2);
   i2 = (OOC_INT32)Config_Value_Integer__New(0);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2165)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i1, "integer", 8, (Config_Value__Value)i2);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "integer", 8, (Config_Value__Value)i2);
   i2 = (OOC_INT32)Config_Value_String__New("", 1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2237)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i1, "string", 7, (Config_Value__Value)i2);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "string", 7, (Config_Value__Value)i2);
   OOC_Config_Pragmas__Init((OOC_Config_Pragmas__Section)i0, ((OOC_CHAR16[]){112,114,97,103,109,97,115,0}), 8, (Config_Value__PrototypeList)i1);
   return (OOC_Config_Pragmas__Section)i0;
   ;
@@ -46,12 +42,10 @@ void OOC_Config_Pragmas__SectionDesc_Copy(OOC_Config_Pragmas__Section s, Config_
 
 OOC_Config_Pragmas__Section OOC_Config_Pragmas__SectionDesc_Clone(OOC_Config_Pragmas__Section s) {
   register OOC_INT32 i0,i1;
-  OOC_Config_Pragmas__Section _new;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Config_Pragmas__Section.baseTypes[0]);
-  _new = (OOC_Config_Pragmas__Section)i0;
   i1 = (OOC_INT32)s;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2549)))), OOC_Config_Pragmas__SectionDesc_Copy)),OOC_Config_Pragmas__SectionDesc_Copy)((OOC_Config_Pragmas__Section)i1, (Config_Section_Options__Section)i0);
+  OOC_Config_Pragmas__SectionDesc_Copy((OOC_Config_Pragmas__Section)i1, (Config_Section_Options__Section)i0);
   return (OOC_Config_Pragmas__Section)i0;
   ;
 }

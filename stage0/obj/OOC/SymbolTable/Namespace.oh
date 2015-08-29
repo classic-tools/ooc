@@ -73,8 +73,8 @@ typedef OOC_SymbolTable__ProcDecl (*_TBP_OOC_SymbolTable_Namespace__ExtendedDesc
 extern void OOC_SymbolTable_Namespace__ExtendedDesc_CheckRestrictions(OOC_SymbolTable_Namespace__Extended ns, OOC_SymbolTable__Record record, OOC_Error__List errList);
 #define _TBN_OOC_SymbolTable_Namespace__ExtendedDesc_CheckRestrictions 5
 typedef void (*_TBP_OOC_SymbolTable_Namespace__ExtendedDesc_CheckRestrictions)(OOC_SymbolTable_Namespace__Extended ns, OOC_SymbolTable__Record record, OOC_Error__List errList);
-extern void OOC_OOC_SymbolTable_Namespace_init();
-extern void OOC_OOC_SymbolTable_Namespace_init0();
+extern void OOC_OOC_SymbolTable_Namespace_init(void);
+extern void OOC_OOC_SymbolTable_Namespace_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_Namespace__Namespace;

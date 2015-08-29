@@ -6,8 +6,8 @@ void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTab
   register OOC_INT32 i0,i1;
   IO_TextRider__Writer w;
   ADT_ArrayList__ArrayList tdNames;
-  auto void OOC_C_RuntimeData__Write_Nli();
-  auto void OOC_C_RuntimeData__Write_CNli();
+  auto void OOC_C_RuntimeData__Write_Nli(void);
+  auto void OOC_C_RuntimeData__Write_CNli(void);
   auto void OOC_C_RuntimeData__Write_WriteForm(const OOC_CHAR8 form__ref[], OOC_LEN form_0d);
   auto void OOC_C_RuntimeData__Write_WriteDescrVariable(OOC_SymbolTable__Type type);
   auto void OOC_C_RuntimeData__Write_WriteName(OOC_SymbolTable__Type type);
@@ -19,7 +19,7 @@ void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTab
   auto void OOC_C_RuntimeData__Write_ModuleDescr(OOC_SymbolTable__Module module, ADT_ArrayList__ArrayList tdNames);
   auto void OOC_C_RuntimeData__Write_ModuleInit(OOC_SymbolTable__Module module);
     
-    void OOC_C_RuntimeData__Write_Nli() {
+    void OOC_C_RuntimeData__Write_Nli(void) {
       register OOC_INT32 i0;
 
       i0 = (OOC_INT32)w;
@@ -29,7 +29,7 @@ void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTab
     }
 
     
-    void OOC_C_RuntimeData__Write_CNli() {
+    void OOC_C_RuntimeData__Write_CNli(void) {
       register OOC_INT32 i0;
 
       i0 = (OOC_INT32)w;
@@ -194,7 +194,7 @@ l4:
       OOC_C_RuntimeData__Write_WriteForm("strArray", 9);
       goto l6;
 l5:
-      i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3220)))), OOC_SymbolTable__ArrayDesc_GetNonOpenElementType)),OOC_SymbolTable__ArrayDesc_GetNonOpenElementType)((OOC_SymbolTable__Array)i0);
+      i1 = (OOC_INT32)OOC_SymbolTable__ArrayDesc_GetNonOpenElementType((OOC_SymbolTable__Array)i0);
       base = (OOC_SymbolTable__Type)i1;
       i2 = (OOC_INT32)w;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3258)))), IO_TextRider__WriterDesc_WriteString)),IO_TextRider__WriterDesc_WriteString)((IO_TextRider__Writer)i2, "(RT0__Struct[]){", 17);
@@ -216,7 +216,7 @@ l5:
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3581)))), IO_TextRider__WriterDesc_WriteLInt)),IO_TextRider__WriterDesc_WriteLInt)((IO_TextRider__Writer)i2, i1, 0);
       OOC_C_RuntimeData__Write_CNli();
       i1 = (OOC_INT32)w;
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3656)))), OOC_SymbolTable__ArrayDesc_GetOpenDimensions)),OOC_SymbolTable__ArrayDesc_GetOpenDimensions)((OOC_SymbolTable__Array)i0);
+      i0 = OOC_SymbolTable__ArrayDesc_GetOpenDimensions((OOC_SymbolTable__Array)i0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3638)))), IO_TextRider__WriterDesc_WriteLInt)),IO_TextRider__WriterDesc_WriteLInt)((IO_TextRider__Writer)i1, i0, 0);
       OOC_C_RuntimeData__Write_CNli();
       OOC_C_RuntimeData__Write_WriteForm("strOpenArray", 13);
@@ -286,9 +286,8 @@ l3_loop:
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5081)))), IO_TextRider__WriterDesc_WriteChar)),IO_TextRider__WriterDesc_WriteChar)((IO_TextRider__Writer)i2, 44u);
 l6:
           i2 = (OOC_INT32)record;
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 5139))+44);
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 5139))+44);
-          i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 5154)))), &_td_OOC_SymbolTable_Namespace__ExtendedDesc, 5154)), 5163)))), OOC_SymbolTable_Namespace__ExtendedDesc_GetTBProcByIndex)),OOC_SymbolTable_Namespace__ExtendedDesc_GetTBProcByIndex)((OOC_SymbolTable_Namespace__Extended)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5154)))), &_td_OOC_SymbolTable_Namespace__ExtendedDesc, 5154)), i1);
+          i2 = (OOC_INT32)OOC_SymbolTable_Namespace__ExtendedDesc_GetTBProcByIndex((OOC_SymbolTable_Namespace__Extended)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5154)))), &_td_OOC_SymbolTable_Namespace__ExtendedDesc, 5154)), i1);
           proc = (OOC_SymbolTable__ProcDecl)i2;
           _assert((i2!=(OOC_INT32)0), 127, 5197);
           i3 = (OOC_INT32)w;
@@ -464,18 +463,16 @@ l15:
 l20:
       i1 = *(OOC_UINT8*)((_check_pointer(i0, 7101))+30);
       if (i1) goto l23;
-      i0=0u;
+      i1=0u;
       goto l25;
 l23:
-      i0 = OOC_C_RuntimeData__Write_Traverse_IsParameter((OOC_SymbolTable__Item)i0);
-      i0 = !i0;
+      i1 = OOC_C_RuntimeData__Write_Traverse_IsParameter((OOC_SymbolTable__Item)i0);
+      i1 = !i1;
       
 l25:
-      if (!i0) goto l28;
-      i0 = (OOC_INT32)item;
+      if (!i1) goto l28;
       OOC_C_RuntimeData__Write_ArrayTypeDescr((OOC_SymbolTable__Array)i0);
 l28:
-      i0 = (OOC_INT32)item;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7626))+8);
       nested = (OOC_SymbolTable__Item)i0;
       i1 = i0!=(OOC_INT32)0;

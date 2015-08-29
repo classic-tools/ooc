@@ -20,9 +20,9 @@ extern void OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate(OOC_Sy
 typedef void (*_TBP_OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate)(OOC_SymbolTable_CreateNamespace__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern OOC_SymbolTable__Declaration OOC_SymbolTable_CreateNamespace__ResolveQualident(OOC_SymbolTable__Namespace ns, OOC_SymbolTable__Item contextOfUse, OOC_SymbolTable__Name module, OOC_SymbolTable__Name ident);
 extern void OOC_SymbolTable_CreateNamespace__CreateNamespace(OOC_SymbolTable__Module root, OOC_Error__List errList);
-extern void OOC_SymbolTable_CreateNamespace__Init();
-extern void OOC_OOC_SymbolTable_CreateNamespace_init();
-extern void OOC_OOC_SymbolTable_CreateNamespace_init0();
+extern void OOC_SymbolTable_CreateNamespace__Init(void);
+extern void OOC_OOC_SymbolTable_CreateNamespace_init(void);
+extern void OOC_OOC_SymbolTable_CreateNamespace_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContext;

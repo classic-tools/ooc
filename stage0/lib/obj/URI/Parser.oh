@@ -10,8 +10,8 @@
 #include <Exception.oh>
 extern URI__URI URI_Parser__NewURI(const URI_String__String str__ref, OOC_LEN str_0d, URI__HierarchicalURI baseURI, Msg__Msg *res);
 extern URI__Reference URI_Parser__NewReference(const URI_String__String str__ref, OOC_LEN str_0d, URI__HierarchicalURI baseURI, URI__Fragment fragmentPrototype, Msg__Msg *res);
-extern void OOC_URI_Parser_init();
-extern void OOC_URI_Parser_init0();
+extern void OOC_URI_Parser_init(void);
+extern void OOC_URI_Parser_init0(void);
 
 /* run-time meta data */
 #endif /* _MODULE_URI_Parser_ */

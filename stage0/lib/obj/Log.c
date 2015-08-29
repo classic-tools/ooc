@@ -2,7 +2,7 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-OOC_CHAR8 Log__Done() {
+OOC_CHAR8 Log__Done(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Log__writer;
@@ -11,7 +11,7 @@ OOC_CHAR8 Log__Done() {
   ;
 }
 
-void Log__ClearError() {
+void Log__ClearError(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Log__writer;
@@ -37,7 +37,7 @@ l4:
   ;
 }
 
-void Log__Flush() {
+void Log__Flush(void) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)Log__writer;
@@ -353,7 +353,7 @@ void Log__Msg(const OOC_CHAR8 msg[], OOC_LEN msg_0d) {
   ;
 }
 
-void Log__Ln() {
+void Log__Ln(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Log__writer;

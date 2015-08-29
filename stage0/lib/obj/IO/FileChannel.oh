@@ -51,8 +51,8 @@ typedef void (*_TBP_IO_FileChannel__ChannelDesc_SetPos)(IO_FileChannel__Channel 
 extern OOC_INT32 IO_FileChannel__ChannelDesc_FileDescriptor(IO_FileChannel__Channel ch);
 #define _TBN_IO_FileChannel__ChannelDesc_FileDescriptor 2
 typedef OOC_INT32 (*_TBP_IO_FileChannel__ChannelDesc_FileDescriptor)(IO_FileChannel__Channel ch);
-extern void OOC_IO_FileChannel_init();
-extern void OOC_IO_FileChannel_init0();
+extern void OOC_IO_FileChannel_init(void);
+extern void OOC_IO_FileChannel_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_FileChannel__Channel;

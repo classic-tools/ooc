@@ -9,7 +9,7 @@ typedef OOC_CHAR8 OOC_C_Naming__Buffer[2048];
 static ADT_Dictionary__Dictionary OOC_C_Naming__keywords;
 static Object__String OOC_C_Naming__rwPrefix;
 static Object__String OOC_C_Naming__tdPrefix;
-static void OOC_C_Naming__Init();
+static void OOC_C_Naming__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

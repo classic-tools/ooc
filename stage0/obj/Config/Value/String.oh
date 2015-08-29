@@ -26,8 +26,8 @@ typedef Config_Value_String__Value (*_TBP_Config_Value_String__ValueDesc_Clone)(
 extern void Config_Value_String__ValueDesc_DefiningModule(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
 #define _TBN_Config_Value_String__ValueDesc_DefiningModule 1
 typedef void (*_TBP_Config_Value_String__ValueDesc_DefiningModule)(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d);
-extern void OOC_Config_Value_String_init();
-extern void OOC_Config_Value_String_init0();
+extern void OOC_Config_Value_String_init(void);
+extern void OOC_Config_Value_String_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Value_String__Value;

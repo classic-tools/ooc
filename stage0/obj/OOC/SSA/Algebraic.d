@@ -15,7 +15,7 @@ static Object_BigInt__BigInt OOC_SSA_Algebraic__intTwo;
 static Object_BigInt__BigInt OOC_SSA_Algebraic__power2[64];
 static OOC_INT32 OOC_SSA_Algebraic__IsPowerOf2(Object_BigInt__BigInt value);
 static OOC_CHAR8 OOC_SSA_Algebraic__IsNMinus1(OOC_SSA__Result res);
-static void OOC_SSA_Algebraic__Init();
+static void OOC_SSA_Algebraic__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

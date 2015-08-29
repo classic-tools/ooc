@@ -11,8 +11,8 @@ typedef struct Config__ConfigDesc {
   char __dummy;
 } Config__ConfigDesc;
 extern void Config__InitConfig(Config__Config config);
-extern void OOC_Config_init();
-extern void OOC_Config_init0();
+extern void OOC_Config_init(void);
+extern void OOC_Config_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config__Config;

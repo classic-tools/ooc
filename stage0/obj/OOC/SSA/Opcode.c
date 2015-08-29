@@ -86,7 +86,7 @@ void OOC_SSA_Opcode__GetSubclassName(OOC_INT8 subclass, OOC_CHAR8 name[], OOC_LE
     _copy_8((const void*)"r64",(void*)(OOC_INT32)scstr,16);
     goto l15;
   default:
-    _failed_case(i0, 33635);
+    _failed_case(i0, 33825);
     goto l15;
   }
 l15:
@@ -364,7 +364,7 @@ void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[
     _copy_8((const void*)"noop",(void*)(OOC_INT32)cstr,32);
     goto l90;
   default:
-    _failed_case(i0, 34324);
+    _failed_case(i0, 34514);
     goto l90;
   }
 l90:
@@ -384,18 +384,18 @@ OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)type;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 37817)))), &_td_OOC_SymbolTable__PredefTypeDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38007)))), &_td_OOC_SymbolTable__PredefTypeDesc);
   if (i1) goto l19;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38594)))), &_td_OOC_SymbolTable__ArrayDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38784)))), &_td_OOC_SymbolTable__ArrayDesc);
   if (i1) goto l17;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38641)))), &_td_OOC_SymbolTable__RecordDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38831)))), &_td_OOC_SymbolTable__RecordDesc);
   if (i1) goto l15;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38689)))), &_td_OOC_SymbolTable__PointerDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38879)))), &_td_OOC_SymbolTable__PointerDesc);
   if (i1) goto l13;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38741)))), &_td_OOC_SymbolTable__FormalParsDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 38931)))), &_td_OOC_SymbolTable__FormalParsDesc);
   if (i1) goto l11;
   Log__Type("++ Unknown type in TypeToSubclass", 34, (void*)i0);
-  _assert(0u, 127, 38860);
+  _assert(0u, 127, 39050);
   goto l39;
 l11:
   return 9;
@@ -410,7 +410,7 @@ l17:
   return 0;
   goto l39;
 l19:
-  i0 = *(OOC_INT16*)((_check_pointer(i0, 37852))+32);
+  i0 = *(OOC_INT16*)((_check_pointer(i0, 38042))+32);
   switch (i0) {
   case 17:
     return 0;
@@ -463,11 +463,11 @@ l19:
     return 9;
     goto l39;
   default:
-    _failed_case(i0, 37843);
+    _failed_case(i0, 38033);
     goto l39;
   }
 l39:
-  _failed_function(37752); return 0;
+  _failed_function(37942); return 0;
   ;
 }
 

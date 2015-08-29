@@ -2,7 +2,7 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-static OOC_SSA_Stats__Stats OOC_SSA_Stats__NewStats() {
+static OOC_SSA_Stats__Stats OOC_SSA_Stats__NewStats(void) {
   register OOC_INT32 i0,i1,i2;
   OOC_SSA_Stats__Stats st;
   OOC_INT32 i;
@@ -31,19 +31,19 @@ void OOC_SSA_Stats__AddProcBlock(Object__String label, OOC_SSA__ProcBlock pb) {
 
   i0 = (OOC_INT32)OOC_SSA_Stats__stage;
   i1 = (OOC_INT32)label;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 790)))), ADT_Dictionary__DictionaryDesc_HasKey)),ADT_Dictionary__DictionaryDesc_HasKey)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
+  i0 = ADT_Dictionary__DictionaryDesc_HasKey((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
   if (i0) goto l3;
   i0 = (OOC_INT32)OOC_SSA_Stats__NewStats();
   st = (OOC_SSA_Stats__Stats)i0;
   i2 = (OOC_INT32)OOC_SSA_Stats__stage;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 909)))), ADT_Dictionary__DictionaryDesc_Set)),ADT_Dictionary__DictionaryDesc_Set)((ADT_Dictionary__Dictionary)i2, (Object__Object)i1, (Object__Object)i0);
+  ADT_Dictionary__DictionaryDesc_Set((ADT_Dictionary__Dictionary)i2, (Object__Object)i1, (Object__Object)i0);
   i2 = (OOC_INT32)OOC_SSA_Stats__labels;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 938)))), ADT_ArrayList__ArrayListDesc_Append)),ADT_ArrayList__ArrayListDesc_Append)((ADT_ArrayList__ArrayList)i2, (Object__Object)i1);
   
   goto l4;
 l3:
   i0 = (OOC_INT32)OOC_SSA_Stats__stage;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 828)))), ADT_Dictionary__DictionaryDesc_Get)),ADT_Dictionary__DictionaryDesc_Get)((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
+  i0 = (OOC_INT32)ADT_Dictionary__DictionaryDesc_Get((ADT_Dictionary__Dictionary)i0, (Object__Object)i1);
   obj = (Object__Object)i0;
   i0 = _type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 857)))), &_td_OOC_SSA_Stats__StatsDesc, 857);
   st = (OOC_SSA_Stats__Stats)i0;
@@ -70,7 +70,7 @@ l12:
   ;
 }
 
-void OOC_SSA_Stats__Write() {
+void OOC_SSA_Stats__Write(void) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10;
   OOC_SSA_Stats__Stats *stList;
   OOC_INT32 *total;
@@ -83,8 +83,8 @@ void OOC_SSA_Stats__Write() {
   OOC_INT32 o[1044];
   OOC_CHAR8 str[64];
   auto void OOC_SSA_Stats__Write_Pad(OOC_INT32 l, OOC_INT32 to);
-  auto void OOC_SSA_Stats__Write_Sort();
-  auto void OOC_SSA_Stats__Write_Sep();
+  auto void OOC_SSA_Stats__Write_Sort(void);
+  auto void OOC_SSA_Stats__Write_Sep(void);
     
     void OOC_SSA_Stats__Write_Pad(OOC_INT32 l, OOC_INT32 to) {
       register OOC_INT32 i0,i1,i2;
@@ -104,15 +104,15 @@ l8:
     }
 
     
-    void OOC_SSA_Stats__Write_Sort() {
-      register OOC_INT32 i0,i1;
+    void OOC_SSA_Stats__Write_Sort(void) {
+      register OOC_INT32 i0,i1,i2;
       OOC_INT32 i;
       OOC_INT32 j;
       auto OOC_INT32 OOC_SSA_Stats__Write_Sort_Best(OOC_INT32 start);
       auto void OOC_SSA_Stats__Write_Sort_Swap(OOC_INT32 *a, OOC_INT32 *b);
         
         OOC_INT32 OOC_SSA_Stats__Write_Sort_Best(OOC_INT32 start) {
-          register OOC_INT32 i0,i1;
+          register OOC_INT32 i0,i1,i2,i3;
           OOC_INT32 best;
           OOC_INT32 i;
           auto OOC_CHAR8 OOC_SSA_Stats__Write_Sort_Best_Larger(OOC_INT32 a, OOC_INT32 b);
@@ -204,44 +204,43 @@ l11:
 
           i0 = start;
           best = i0;
-          i0 = i0+1;
-          i = i0;
-          i1 = i0<=1043;
-          if (!i1) goto l11;
-l3_loop:
-          i1 = best;
-          i0 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 2604))*4);
-          i1 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i1, 1044, OOC_UINT32, 2610))*4);
-          i0 = OOC_SSA_Stats__Write_Sort_Best_Larger(i0, i1);
-          if (!i0) goto l6;
-          i0 = i;
+          i1 = i0+1;
+          i = i1;
+          i2 = i1<=1043;
+          if (!i2) goto l13;
+          {register OOC_INT32 h0=i0;i0=i1;i1=h0;}
+l4_loop:
+          i2 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 2604))*4);
+          i3 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i1, 1044, OOC_UINT32, 2610))*4);
+          i2 = OOC_SSA_Stats__Write_Sort_Best_Larger(i2, i3);
+          if (!i2) goto l8;
           best = i0;
-l6:
-          i0 = i;
+          i1=i0;
+l8:
           i0 = i0+1;
           i = i0;
-          i1 = i0<=1043;
-          if (i1) goto l3_loop;
-l11:
-          i0 = (OOC_INT32)stList;
-          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2696)), 0);
-          i0 = i0==0;
-          if (i0) goto l14;
-          i0 = best;
-          i0 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 2716))*4);
-          i0 = OOC_SSA_Stats__Write_Sort_Best_AllZero(i0);
+          i2 = i0<=1043;
+          if (i2) goto l4_loop;
+l12:
+          i0=i1;
+l13:
+          i1 = (OOC_INT32)stList;
+          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2696)), 0);
+          i1 = i1==0;
+          if (i1) goto l16;
+          i1 = *(OOC_INT32*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 2716))*4);
+          i1 = OOC_SSA_Stats__Write_Sort_Best_AllZero(i1);
           
-          goto l16;
-l14:
-          i0=1u;
+          goto l18;
 l16:
-          if (i0) goto l18;
-          i0 = best;
-          return i0;
-          goto l19;
+          i1=1u;
 l18:
+          if (i1) goto l20;
+          return i0;
+          goto l21;
+l20:
           return (-1);
-l19:
+l21:
           _failed_function(1664); return 0;
           ;
         }
@@ -271,12 +270,11 @@ l5:
 l6_loop:
       i1 = i0==1043;
       if (i1) goto l15;
-      i0 = OOC_SSA_Stats__Write_Sort_Best(i0);
-      j = i0;
-      i1 = i0<0;
-      if (i1) goto l15;
-      i1 = i;
-      OOC_SSA_Stats__Write_Sort_Swap((void*)((OOC_INT32)o+(_check_index(i1, 1044, OOC_UINT32, 3221))*4), (void*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 3227))*4));
+      i1 = OOC_SSA_Stats__Write_Sort_Best(i0);
+      j = i1;
+      i2 = i1<0;
+      if (i2) goto l15;
+      OOC_SSA_Stats__Write_Sort_Swap((void*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 3221))*4), (void*)((OOC_INT32)o+(_check_index(i1, 1044, OOC_UINT32, 3227))*4));
 l13:
       i0 = i;
       i0 = i0+1;
@@ -284,23 +282,20 @@ l13:
       
       goto l6_loop;
 l15:
-      i0 = i;
-      i0 = i0<1044;
-      if (!i0) goto l23;
+      i1 = i0<1044;
+      if (!i1) goto l23;
 l18_loop:
-      i0 = i;
       *(OOC_INT32*)((OOC_INT32)o+(_check_index(i0, 1044, OOC_UINT32, 3331))*4) = (-1);
       i0 = i0+1;
-      i = i0;
-      i0 = i0<1044;
-      if (i0) goto l18_loop;
+      i1 = i0<1044;
+      if (i1) goto l18_loop;
 l23:
       return;
       ;
     }
 
     
-    void OOC_SSA_Stats__Write_Sep() {
+    void OOC_SSA_Stats__Write_Sep(void) {
       register OOC_INT32 i0,i1,i2;
 
       i0 = (OOC_INT32)stList;
@@ -334,13 +329,13 @@ l8:
   if (!i3) goto l8;
   i3=0;
 l3_loop:
-  i4 = (OOC_INT32)OOC_SSA_Stats__stage;
-  i5 = (OOC_INT32)OOC_SSA_Stats__labels;
-  i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i5, 3691));
-  i5 = _check_pointer(i5, 3697);
-  i6 = OOC_ARRAY_LENGTH(i5, 0);
-  i5 = (OOC_INT32)*(OOC_INT32*)(i5+(_check_index(i3, i6, OOC_UINT32, 3697))*4);
-  i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 3680)))), ADT_Dictionary__DictionaryDesc_Get)),ADT_Dictionary__DictionaryDesc_Get)((ADT_Dictionary__Dictionary)i4, (Object__Object)i5);
+  i4 = (OOC_INT32)OOC_SSA_Stats__labels;
+  i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i4, 3691));
+  i4 = _check_pointer(i4, 3697);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i4 = (OOC_INT32)*(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 3697))*4);
+  i5 = (OOC_INT32)OOC_SSA_Stats__stage;
+  i4 = (OOC_INT32)ADT_Dictionary__DictionaryDesc_Get((ADT_Dictionary__Dictionary)i5, (Object__Object)i4);
   obj = (Object__Object)i4;
   i5 = _check_pointer(i1, 3715);
   i6 = OOC_ARRAY_LENGTH(i5, 0);

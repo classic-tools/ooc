@@ -115,8 +115,8 @@ typedef OOC_INT32 (*_TBP_Object__String8Desc_IndexOf)(Object__String8 s, OOC_CHA
 extern OOC_INT32 Object__String32Desc_IndexOf(Object__String32 s, OOC_CHAR32 _char, OOC_INT32 pos);
 #define _TBN_Object__String32Desc_IndexOf 6
 typedef OOC_INT32 (*_TBP_Object__String32Desc_IndexOf)(Object__String32 s, OOC_CHAR32 _char, OOC_INT32 pos);
-extern void OOC_Object_init();
-extern void OOC_Object_init0();
+extern void OOC_Object_init(void);
+extern void OOC_Object_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Object__Object;

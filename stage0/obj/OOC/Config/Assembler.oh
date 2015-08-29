@@ -8,8 +8,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_OOC_Config_Assembler_init();
-extern void OOC_OOC_Config_Assembler_init0();
+extern void OOC_OOC_Config_Assembler_init(void);
+extern void OOC_OOC_Config_Assembler_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_Assembler__1005;

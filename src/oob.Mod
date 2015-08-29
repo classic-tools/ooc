@@ -1,4 +1,4 @@
-(* 	$Id: oob.Mod,v 1.12 2003/02/01 17:29:34 mva Exp $	 *)
+(* 	$Id: oob.Mod,v 1.13 2003/04/14 19:30:09 mva Exp $	 *)
 MODULE oob;
 (*  Symbol file browser.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -21,7 +21,7 @@ MODULE oob;
 *)
 
 IMPORT
-  Ascii, Err, Out, StdChannels, Strings, IO,
+  Ascii, Err, Out, StdChannels, Strings, IO, OOC:Config:CCompiler,
   Config:Section:Options, Config:Section:Arguments, Config:Value:Boolean,
   OOC:Config, E := OOC:Error, Rep := OOC:Repository, Sym := OOC:SymbolTable,
   OOC:Logger, OOC:Doc, OOC:Doc:Output:Text, OOC:SymbolTable:ImportModules,
@@ -442,6 +442,8 @@ PROCEDURE NewConfig;
     extendRecords := Config.AddOption("extendRecords", Boolean.New(FALSE));
     Config.AddCmdLine("-x,--extended",
                       "<options><set name='extendRecords'>TRUE</set></options>");
+
+    CCompiler.RegisterConfig;  (* make oo2c options known *)
   END NewConfig;
 
 BEGIN

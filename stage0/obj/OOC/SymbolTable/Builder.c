@@ -11,7 +11,7 @@ void OOC_SymbolTable_Builder__Init(OOC_SymbolTable_Builder__Builder b) {
   ;
 }
 
-OOC_SymbolTable_Builder__Builder OOC_SymbolTable_Builder__New() {
+OOC_SymbolTable_Builder__Builder OOC_SymbolTable_Builder__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable_Builder__Builder.baseTypes[0]);
@@ -317,10 +317,10 @@ OOC_SymbolTable__Module OOC_SymbolTable_Builder__BuilderDesc_NewModule(OOC_Symbo
   bodyDecl = (OOC_SymbolTable__ProcDecl)i0;
   i2 = (OOC_INT32)name;
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11740)))), OOC_SymbolTable_Builder__BuilderDesc_NewFormalPars)),OOC_SymbolTable_Builder__BuilderDesc_NewFormalPars)((OOC_SymbolTable_Builder__Builder)i1, (OOC_SymbolTable__Item)i0, (OOC_SymbolTable__Position)i2, (OOC_SymbolTable__Type)(OOC_INT32)0);
-  *(OOC_INT32*)((_check_pointer(i0, 11723))+52) = i1;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11795))+52);
+  *(OOC_INT32*)((_check_pointer(i0, 11723))+56) = i1;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11795))+56);
   *(OOC_INT32*)((_check_pointer(i1, 11807))+44) = ((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__VarDeclArray.baseTypes[0], 0));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11838))+52);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11838))+56);
   *(OOC_INT32*)((_check_pointer(i1, 11850))+52) = ((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__ExceptionNameArray.baseTypes[0], 0));
   i1 = (OOC_INT32)docString;
   i3 = _class;
@@ -441,7 +441,7 @@ l55:
 
     
     void OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName(OOC_SymbolTable__Item item) {
-      register OOC_INT32 i0,i1,i2,i3,i4;
+      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
       OOC_SymbolTable__Record record;
       OOC_SymbolTable__TypeDecl pointerDecl;
       OOC_SymbolTable__Name pointerName;
@@ -555,7 +555,7 @@ l3_loop:
           i4=0u;
           goto l17;
 l8:
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14841))+52);
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14841))+56);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 14852))+32);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 14861))+44);
           i4 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_SameType((OOC_SymbolTable__Name)i1, (OOC_SymbolTable__Type)i4);
@@ -564,7 +564,7 @@ l8:
           i4=0u;
           goto l17;
 l12:
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14950))+52);
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14950))+56);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 14961))+32);
           i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 14970))+44);
           i4 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_SameType((OOC_SymbolTable__Name)i2, (OOC_SymbolTable__Type)i4);
@@ -591,8 +591,8 @@ l25:
       if (!i1) goto l46;
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 15222)))), &_td_OOC_SymbolTable__TypeDeclDesc);
       if (i1) goto l8;
-      i0 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 16299)))), &_td_OOC_SymbolTable__ProcDeclDesc);
-      if (!i0) goto l37;
+      i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 16299)))), &_td_OOC_SymbolTable__ProcDeclDesc);
+      if (!i1) goto l37;
       return;
       goto l37;
 l8:
@@ -602,70 +602,64 @@ l8:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15387))+4);
       _assert((OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15396)))), &_td_OOC_SymbolTable__ModuleDesc)), 127, 15375);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15438))+40);
-      record = (OOC_SymbolTable__Record)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15449)))), &_td_OOC_SymbolTable__RecordDesc, 15449));
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15519))+16);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15505))+4);
-      i0 = (OOC_INT32)OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_GetPointerDecl((OOC_SymbolTable__Item)i0, (OOC_SymbolTable__Name)i1);
-      pointerDecl = (OOC_SymbolTable__TypeDecl)i0;
-      i1 = i0!=(OOC_INT32)0;
-      if (i1) goto l13;
+      i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15449)))), &_td_OOC_SymbolTable__RecordDesc, 15449);
+      record = (OOC_SymbolTable__Record)i1;
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15519))+16);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15505))+4);
+      i2 = (OOC_INT32)OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_GetPointerDecl((OOC_SymbolTable__Item)i3, (OOC_SymbolTable__Name)i2);
+      pointerDecl = (OOC_SymbolTable__TypeDecl)i2;
+      i3 = i2!=(OOC_INT32)0;
+      if (i3) goto l13;
       pointerName = (OOC_SymbolTable__Name)(OOC_INT32)0;
-      i0=(OOC_INT32)0;
+      i4=(OOC_INT32)0;
       goto l15;
 l13:
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15608))+16);
-      pointerName = (OOC_SymbolTable__Name)i0;
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 15608))+16);
+      pointerName = (OOC_SymbolTable__Name)i4;
       
 l15:
-      if (i1) goto l21;
-      i1 = (OOC_INT32)record;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15756))+36);
-      i1 = i1!=(OOC_INT32)0;
-      if (i1) goto l19;
-      i1 = (OOC_INT32)item;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15827))+4);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15881))+16);
-      i0 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_HasTypeBoundProcedures((OOC_SymbolTable__Item)i2, (OOC_SymbolTable__Name)i1, (OOC_SymbolTable__Name)i0);
+      if (i3) goto l21;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15756))+36);
+      i3 = i3!=(OOC_INT32)0;
+      if (i3) goto l19;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15827))+4);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15881))+16);
+      i3 = OOC_SymbolTable_Builder__BuilderDesc_Finalize_SetClassName_HasTypeBoundProcedures((OOC_SymbolTable__Item)i3, (OOC_SymbolTable__Name)i5, (OOC_SymbolTable__Name)i4);
       
       goto l23;
 l19:
-      i0=1u;
+      i3=1u;
       goto l23;
 l21:
-      i0=1u;
+      i3=1u;
 l23:
-      if (!i0) goto l37;
-      i0 = (OOC_INT32)record;
-      i1 = (OOC_INT32)item;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 15947))+16);
-      *(OOC_INT32*)((_check_pointer(i0, 15928))+52) = i2;
-      i2 = (OOC_INT32)pointerName;
-      i3 = i2!=(OOC_INT32)0;
       if (!i3) goto l37;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 16042))+12);
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 16042))+12);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16054))+16);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 16060))+12);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16054))+16);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16060))+12);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 16047)), 0);
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 16065)), 0);
-      Strings__FindNext((void*)(_check_pointer(i3, 16047)), i2, (void*)(_check_pointer(i4, 16065)), i1, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
-      i1 = found;
-      if (i1) goto l29;
-      i1=0u;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15947))+16);
+      *(OOC_INT32*)((_check_pointer(i1, 15928))+52) = i3;
+      i3 = i4!=(OOC_INT32)0;
+      if (!i3) goto l37;
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 16042))+12);
+      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 16042))+12);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16054))+16);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 16060))+12);
+      i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16054))+16);
+      i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 16060))+12);
+      i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 16047)), 0);
+      i6 = OOC_ARRAY_LENGTH((_check_pointer(i6, 16065)), 0);
+      Strings__FindNext((void*)(_check_pointer(i3, 16047)), i4, (void*)(_check_pointer(i5, 16065)), i6, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
+      i3 = found;
+      if (i3) goto l29;
+      i3=0u;
       goto l31;
 l29:
-      i1 = pos;
-      i1 = i1==0;
+      i3 = pos;
+      i3 = i3==0;
       
 l31:
-      if (!i1) goto l37;
-      i1 = (OOC_INT32)pointerDecl;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 16210))+16);
-      *(OOC_INT32*)((_check_pointer(i0, 16184))+52) = i1;
+      if (!i3) goto l37;
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 16210))+16);
+      *(OOC_INT32*)((_check_pointer(i1, 16184))+52) = i2;
 l37:
-      i0 = (OOC_INT32)item;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16428))+8);
       ptr = (OOC_SymbolTable__Item)i0;
       i1 = i0!=(OOC_INT32)0;
@@ -949,7 +943,7 @@ void OOC_OOC_SymbolTable_Builder_init(void) {
   register OOC_INT32 i0,i1,i2,i3,i4;
 
   OOC_SymbolTable_Builder__doAutoImport = 0;
-  _copy_8((const void*)"OOC4",(void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber,5);
+  _copy_8((const void*)"OOC5",(void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber,5);
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable_Builder__2840.baseTypes[0], 3);
   OOC_SymbolTable_Builder__autoImport = (void*)i0;
   i1 = _check_pointer(i0, 20062);

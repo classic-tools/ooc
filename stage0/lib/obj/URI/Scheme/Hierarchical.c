@@ -40,12 +40,10 @@ void URI_Scheme_Hierarchical__ParameterDesc_Copy(URI_Scheme_Hierarchical__Parame
 
 URI_Scheme_Hierarchical__Parameter URI_Scheme_Hierarchical__ParameterDesc_Clone(URI_Scheme_Hierarchical__Parameter param) {
   register OOC_INT32 i0,i1;
-  URI_Scheme_Hierarchical__Parameter copy;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_URI_Scheme_Hierarchical__Parameter.baseTypes[0]);
-  copy = (URI_Scheme_Hierarchical__Parameter)i0;
   i1 = (OOC_INT32)param;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3164)))), URI_Scheme_Hierarchical__ParameterDesc_Copy)),URI_Scheme_Hierarchical__ParameterDesc_Copy)((URI_Scheme_Hierarchical__Parameter)i1, (URI_Scheme_Hierarchical__Parameter)i0);
+  URI_Scheme_Hierarchical__ParameterDesc_Copy((URI_Scheme_Hierarchical__Parameter)i1, (URI_Scheme_Hierarchical__Parameter)i0);
   return (URI_Scheme_Hierarchical__Parameter)i0;
   ;
 }
@@ -148,8 +146,8 @@ void URI_Scheme_Hierarchical__SegmentDesc_Copy(URI_Scheme_Hierarchical__Segment 
   i2 = i1!=0;
   if (!i2) goto l8;
 l3_loop:
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4639)))), URI_Scheme_Hierarchical__ParameterDesc_Clone)),URI_Scheme_Hierarchical__ParameterDesc_Clone)((URI_Scheme_Hierarchical__Parameter)i1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4615)))), URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)),URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)((URI_Scheme_Hierarchical__Segment)i0, (URI_Scheme_Hierarchical__Parameter)i2);
+  i2 = (OOC_INT32)URI_Scheme_Hierarchical__ParameterDesc_Clone((URI_Scheme_Hierarchical__Parameter)i1);
+  URI_Scheme_Hierarchical__SegmentDesc_AppendParameter((URI_Scheme_Hierarchical__Segment)i0, (URI_Scheme_Hierarchical__Parameter)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 4671));
   param = (URI_Scheme_Hierarchical__Parameter)i1;
   i2 = i1!=0;
@@ -161,12 +159,10 @@ l8:
 
 URI_Scheme_Hierarchical__Segment URI_Scheme_Hierarchical__SegmentDesc_Clone(URI_Scheme_Hierarchical__Segment segm) {
   register OOC_INT32 i0,i1;
-  URI_Scheme_Hierarchical__Segment copy;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_URI_Scheme_Hierarchical__Segment.baseTypes[0]);
-  copy = (URI_Scheme_Hierarchical__Segment)i0;
   i1 = (OOC_INT32)segm;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4802)))), URI_Scheme_Hierarchical__SegmentDesc_Copy)),URI_Scheme_Hierarchical__SegmentDesc_Copy)((URI_Scheme_Hierarchical__Segment)i1, (URI_Scheme_Hierarchical__Segment)i0);
+  URI_Scheme_Hierarchical__SegmentDesc_Copy((URI_Scheme_Hierarchical__Segment)i1, (URI_Scheme_Hierarchical__Segment)i0);
   return (URI_Scheme_Hierarchical__Segment)i0;
   ;
 }
@@ -189,7 +185,7 @@ void URI_Scheme_Hierarchical__SegmentDesc_WriteXML(URI_Scheme_Hierarchical__Segm
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l8;
 l3_loop:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5159)))), URI_Scheme_Hierarchical__ParameterDesc_WriteXML)),URI_Scheme_Hierarchical__ParameterDesc_WriteXML)((URI_Scheme_Hierarchical__Parameter)i1, (TextRider__Writer)i0);
+  URI_Scheme_Hierarchical__ParameterDesc_WriteXML((URI_Scheme_Hierarchical__Parameter)i1, (TextRider__Writer)i0);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 5195));
   param = (URI_Scheme_Hierarchical__Parameter)i1;
   i2 = i1!=(OOC_INT32)0;
@@ -215,7 +211,7 @@ void URI_Scheme_Hierarchical__SegmentDesc_Append(URI_Scheme_Hierarchical__Segmen
   if (!i1) goto l8;
 l3_loop:
   Strings__Append(";", 2, (void*)(OOC_INT32)str, str_0d);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5538)))), URI_Scheme_Hierarchical__ParameterDesc_Append)),URI_Scheme_Hierarchical__ParameterDesc_Append)((URI_Scheme_Hierarchical__Parameter)i0, (void*)(OOC_INT32)str, str_0d);
+  URI_Scheme_Hierarchical__ParameterDesc_Append((URI_Scheme_Hierarchical__Parameter)i0, (void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5574));
   param = (URI_Scheme_Hierarchical__Parameter)i0;
   i1 = i0!=(OOC_INT32)0;
@@ -378,7 +374,7 @@ l3:
   i2 = i0!=(OOC_INT32)0;
   if (!i2) goto l12;
 l6_loop:
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8250)))), URI_Scheme_Hierarchical__SegmentDesc_Clone)),URI_Scheme_Hierarchical__SegmentDesc_Clone)((URI_Scheme_Hierarchical__Segment)i0);
+  i2 = (OOC_INT32)URI_Scheme_Hierarchical__SegmentDesc_Clone((URI_Scheme_Hierarchical__Segment)i0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8229)))), URI_Scheme_Hierarchical__GenericDesc_AppendSegment)),URI_Scheme_Hierarchical__GenericDesc_AppendSegment)((URI_Scheme_Hierarchical__Generic)i1, (URI_Scheme_Hierarchical__Segment)i2);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 8282));
   segm = (URI_Scheme_Hierarchical__Segment)i0;
@@ -545,7 +541,7 @@ l50:
   i4 = (OOC_INT32)URI_String__Extract((void*)(_check_pointer(i3, 9550)), i7, i4, i8);
   i4 = (OOC_INT32)URI_String__Unescape((URI_String__StringPtr)i4);
   i4 = (OOC_INT32)URI_Scheme_Hierarchical__NewParameter((URI_String__StringPtr)i4);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 9476)))), URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)),URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)((URI_Scheme_Hierarchical__Segment)i6, (URI_Scheme_Hierarchical__Parameter)i4);
+  URI_Scheme_Hierarchical__SegmentDesc_AppendParameter((URI_Scheme_Hierarchical__Segment)i6, (URI_Scheme_Hierarchical__Parameter)i4);
   i4 = _check_pointer(i3, 9318);
   i7 = OOC_ARRAY_LENGTH(i4, 0);
   i8 = i;
@@ -917,7 +913,7 @@ l47:
   if (!i0) goto l56;
   i0=i1;
 l50_loop:
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 13751)))), URI_Scheme_Hierarchical__SegmentDesc_Clone)),URI_Scheme_Hierarchical__SegmentDesc_Clone)((URI_Scheme_Hierarchical__Segment)i0);
+  i1 = (OOC_INT32)URI_Scheme_Hierarchical__SegmentDesc_Clone((URI_Scheme_Hierarchical__Segment)i0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 13731)))), URI_Scheme_Hierarchical__GenericDesc_AppendSegment)),URI_Scheme_Hierarchical__GenericDesc_AppendSegment)((URI_Scheme_Hierarchical__Generic)i2, (URI_Scheme_Hierarchical__Segment)i1);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 13787));
   ptr = (URI_Scheme_Hierarchical__Segment)i0;
@@ -973,7 +969,7 @@ l10:
   i3 = i2!=0;
   if (!i3) goto l18;
 l13_loop:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 14643)))), URI_Scheme_Hierarchical__SegmentDesc_WriteXML)),URI_Scheme_Hierarchical__SegmentDesc_WriteXML)((URI_Scheme_Hierarchical__Segment)i2, (TextRider__Writer)i0);
+  URI_Scheme_Hierarchical__SegmentDesc_WriteXML((URI_Scheme_Hierarchical__Segment)i2, (TextRider__Writer)i0);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 14677));
   segm = (URI_Scheme_Hierarchical__Segment)i2;
   i3 = i2!=0;
@@ -1021,7 +1017,7 @@ l8_loop:
   if (!i2) goto l11;
   Strings__Append("/", 2, (void*)(OOC_INT32)str, str_0d);
 l11:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 15360)))), URI_Scheme_Hierarchical__SegmentDesc_Append)),URI_Scheme_Hierarchical__SegmentDesc_Append)((URI_Scheme_Hierarchical__Segment)i1, (void*)(OOC_INT32)str, str_0d);
+  URI_Scheme_Hierarchical__SegmentDesc_Append((URI_Scheme_Hierarchical__Segment)i1, (void*)(OOC_INT32)str, str_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 15396));
   segm = (URI_Scheme_Hierarchical__Segment)i1;
   i2 = i1!=(OOC_INT32)0;

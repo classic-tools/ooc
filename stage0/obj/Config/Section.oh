@@ -39,7 +39,7 @@ typedef void (*_TBP_Config_Section__SectionDesc_ProcessElements)(Config_Section_
 extern void Config_Section__SectionDesc_DumpContent(Config_Section__Section s, Channel__Channel ch);
 #define _TBN_Config_Section__SectionDesc_DumpContent 0
 typedef void (*_TBP_Config_Section__SectionDesc_DumpContent)(Config_Section__Section s, Channel__Channel ch);
-extern Config_Section__SectionList Config_Section__NewSectionList();
+extern Config_Section__SectionList Config_Section__NewSectionList(void);
 extern void Config_Section__SectionListDesc_Add(Config_Section__SectionList sl, Config_Section__Section section);
 #define _TBN_Config_Section__SectionListDesc_Add 0
 typedef void (*_TBP_Config_Section__SectionListDesc_Add)(Config_Section__SectionList sl, Config_Section__Section section);
@@ -52,8 +52,8 @@ typedef void (*_TBP_Config_Section__SectionListDesc_ProcessElements)(Config_Sect
 extern void Config_Section__SectionListDesc_DumpContent(Config_Section__SectionList sl, Channel__Channel ch);
 #define _TBN_Config_Section__SectionListDesc_DumpContent 1
 typedef void (*_TBP_Config_Section__SectionListDesc_DumpContent)(Config_Section__SectionList sl, Channel__Channel ch);
-extern void OOC_Config_Section_init();
-extern void OOC_Config_Section_init0();
+extern void OOC_Config_Section_init(void);
+extern void OOC_Config_Section_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Section__Section;

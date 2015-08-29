@@ -32,7 +32,7 @@ extern OOC_INT8 OOC_SymbolTable_Builder__doAutoImport;
 #define OOC_SymbolTable_Builder__magicNumberSize 4
 extern OOC_CHAR8 OOC_SymbolTable_Builder__magicNumber[5];
 extern void OOC_SymbolTable_Builder__Init(OOC_SymbolTable_Builder__Builder b);
-extern OOC_SymbolTable_Builder__Builder OOC_SymbolTable_Builder__New();
+extern OOC_SymbolTable_Builder__Builder OOC_SymbolTable_Builder__New(void);
 extern void OOC_SymbolTable_Builder__BuilderDesc_SetClass(OOC_SymbolTable_Builder__Builder b, OOC_INT8 _class);
 #define _TBN_OOC_SymbolTable_Builder__BuilderDesc_SetClass 18
 typedef void (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_SetClass)(OOC_SymbolTable_Builder__Builder b, OOC_INT8 _class);
@@ -93,8 +93,8 @@ typedef void (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)(OOC_S
 extern OOC_SymbolTable__Module OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch);
 #define _TBN_OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable 17
 typedef OOC_SymbolTable__Module (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch);
-extern void OOC_OOC_SymbolTable_Builder_init();
-extern void OOC_OOC_SymbolTable_Builder_init0();
+extern void OOC_OOC_SymbolTable_Builder_init(void);
+extern void OOC_OOC_SymbolTable_Builder_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__Builder;

@@ -2,7 +2,7 @@
 #include <OOC/SSA/Blocker.oh>
 #include <OOC/SSA/Opcode.oh>
 static void OOC_SSA_CSE__InitPartition(OOC_SSA_CSE__Partition p);
-static OOC_SSA_CSE__Partition OOC_SSA_CSE__NewPartition();
+static OOC_SSA_CSE__Partition OOC_SSA_CSE__NewPartition(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

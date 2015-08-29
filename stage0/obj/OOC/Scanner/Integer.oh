@@ -19,8 +19,8 @@ extern void OOC_Scanner_Integer__ErrorContextDesc_GetTemplate(OOC_Scanner_Intege
 typedef void (*_TBP_OOC_Scanner_Integer__ErrorContextDesc_GetTemplate)(OOC_Scanner_Integer__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern Msg__Msg OOC_Scanner_Integer__Convert10(OOC_Scanner_InputBuffer__CharArray str, OOC_INT32 *_int);
 extern Msg__Msg OOC_Scanner_Integer__Convert16(OOC_Scanner_InputBuffer__CharArray str, OOC_INT32 *_int);
-extern void OOC_OOC_Scanner_Integer_init();
-extern void OOC_OOC_Scanner_Integer_init0();
+extern void OOC_OOC_Scanner_Integer_init(void);
+extern void OOC_OOC_Scanner_Integer_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Scanner_Integer__ErrorContext;

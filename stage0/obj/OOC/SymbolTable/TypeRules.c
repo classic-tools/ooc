@@ -1492,7 +1492,7 @@ l30:
   size = i3;
   
 l36:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 25389)))), OOC_SymbolTable__FieldDeclDesc_SetOffset)),OOC_SymbolTable__FieldDeclDesc_SetOffset)((OOC_SymbolTable__FieldDecl)i1, i3);
+  OOC_SymbolTable__FieldDeclDesc_SetOffset((OOC_SymbolTable__FieldDecl)i1, i3);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 25440))+40);
   i4 = *(OOC_INT32*)((_check_pointer(i4, 25446))+24);
   i3 = i3+i4;
@@ -1500,7 +1500,7 @@ l36:
   
   goto l43;
 l37:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 24946)))), OOC_SymbolTable__FieldDeclDesc_SetOffset)),OOC_SymbolTable__FieldDeclDesc_SetOffset)((OOC_SymbolTable__FieldDecl)i1, 0);
+  OOC_SymbolTable__FieldDeclDesc_SetOffset((OOC_SymbolTable__FieldDecl)i1, 0);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 24987))+40);
   i4 = *(OOC_INT32*)((_check_pointer(i4, 24993))+24);
   i4 = i4>i3;

@@ -8,8 +8,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern void OOC_SSA_Algebraic__Transform(OOC_SSA__ProcBlock pb, OOC_CHAR8 enableSubstitution);
-extern void OOC_OOC_SSA_Algebraic_init();
-extern void OOC_OOC_SSA_Algebraic_init0();
+extern void OOC_OOC_SSA_Algebraic_init(void);
+extern void OOC_OOC_SSA_Algebraic_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_Algebraic__Worklist;

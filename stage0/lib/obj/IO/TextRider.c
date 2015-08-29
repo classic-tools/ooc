@@ -200,7 +200,7 @@ l14:
     OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4573)))), IO_TextRider__WriterDesc_WriteString)),IO_TextRider__WriterDesc_WriteString)((IO_TextRider__Writer)i0, "[TextRider.WriteObject: String32 not implemented]", 50);
     goto l17;
 l16:
-    i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4461)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
+    i1 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
     chars = (Object__CharsLatin1)i1;
     i2 = (OOC_INT32)w;
     i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 4493));

@@ -2,7 +2,7 @@
 #include <Strings.oh>
 static OOC_INT8 IO_BinaryRider__systemByteOrder;
 static void IO_BinaryRider__SetDefaultByteOrder(OOC_CHAR8 x[], OOC_LEN x_0d);
-static void IO_BinaryRider__Init();
+static void IO_BinaryRider__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

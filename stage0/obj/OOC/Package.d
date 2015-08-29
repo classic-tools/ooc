@@ -47,14 +47,14 @@ static Object__String OOC_Package__stringType;
 #define OOC_Package__unknownType 16
 #define OOC_Package__invalidValue 17
 static OOC_Package__ErrorContext OOC_Package__packageContext;
-static OOC_Package__Version OOC_Package__NewVersion();
-static OOC_Package__Executable OOC_Package__NewExecutable();
-static OOC_Package__Library OOC_Package__NewLibrary();
+static OOC_Package__Version OOC_Package__NewVersion(void);
+static OOC_Package__Executable OOC_Package__NewExecutable(void);
+static OOC_Package__Library OOC_Package__NewLibrary(void);
 static void OOC_Package__InitFileData(OOC_Package__FileData fdata);
-static OOC_Package__FileSet OOC_Package__NewFileSet();
+static OOC_Package__FileSet OOC_Package__NewFileSet(void);
 static void OOC_Package__MergeConfig(OOC_Repository__PkgInfo pkg, Config_Section_Options__Section options, Config_Section_Options__Section pragmas);
-static OOC_Package__Package OOC_Package__NewPackage();
-static OOC_Package__Repository OOC_Package__NewRepository();
+static OOC_Package__Package OOC_Package__NewPackage(void);
+static OOC_Package__Repository OOC_Package__NewRepository(void);
 static Object__String OOC_Package__StringAttr(XML_Builder__Attribute att);
 static OOC_CHAR8 OOC_Package__AtElement(Config_Parser__Node node, const OOC_CHAR16 elementName__ref[], OOC_LEN elementName_0d);
 static void OOC_Package__ParseKeyValue(Config_Parser__Element elem, ADT_ArrayList__ArrayList list, Config_Section_Options__Section options, Object__String defaultType, XML_Locator__ErrorListener errorListener, OOC_Error__List errList);

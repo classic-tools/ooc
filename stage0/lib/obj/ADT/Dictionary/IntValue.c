@@ -16,7 +16,7 @@ void ADT_Dictionary_IntValue__Init(ADT_Dictionary_IntValue__Dictionary dict) {
   ;
 }
 
-ADT_Dictionary_IntValue__Dictionary ADT_Dictionary_IntValue__New() {
+ADT_Dictionary_IntValue__Dictionary ADT_Dictionary_IntValue__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary_IntValue__Dictionary.baseTypes[0]);

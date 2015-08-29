@@ -2,7 +2,7 @@
 #include <LongStrings.oh>
 #include <XML/UnicodeCodec/Latin1.oh>
 static void Config_Parser__InitBuilder(Config_Parser__Builder b);
-static Config_Parser__Builder Config_Parser__NewBuilder();
+static Config_Parser__Builder Config_Parser__NewBuilder(void);
 static void Config_Parser__InitNode(Config_Parser__Node node, Config_Parser__Element parent, XML_Locator__Locator l, struct XML_Locator__Position *pos, RT0__Struct pos__tag);
 static void Config_Parser__InitElement(Config_Parser__Element e, Config_Parser__Element parent, struct XML_Locator__Position *pos, RT0__Struct pos__tag, XML_UnicodeBuffer__CharArray name, XML_Builder__AttributeList attrList);
 static Config_Parser__Element Config_Parser__NewElement(Config_Parser__Element parent, struct XML_Locator__Position *pos, RT0__Struct pos__tag, XML_UnicodeBuffer__CharArray name, XML_Builder__AttributeList attrList);

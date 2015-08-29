@@ -355,7 +355,7 @@ void OOC_C_IRtoC__InitTranslator(OOC_C_IRtoC__Translator t) {
   ;
 }
 
-OOC_C_IRtoC__Translator OOC_C_IRtoC__NewTranslator() {
+OOC_C_IRtoC__Translator OOC_C_IRtoC__NewTranslator(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_C_IRtoC__Translator.baseTypes[0]);

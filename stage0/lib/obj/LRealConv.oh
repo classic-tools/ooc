@@ -18,8 +18,8 @@ extern OOC_REAL64 LRealConv__ValueReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0
 extern OOC_INT16 LRealConv__LengthFloatReal(OOC_REAL64 real, OOC_INT16 sigFigs);
 extern OOC_INT16 LRealConv__LengthEngReal(OOC_REAL64 real, OOC_INT16 sigFigs);
 extern OOC_INT16 LRealConv__LengthFixedReal(OOC_REAL64 real, OOC_INT16 place);
-extern void OOC_LRealConv_init();
-extern void OOC_LRealConv_init0();
+extern void OOC_LRealConv_init(void);
+extern void OOC_LRealConv_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_LRealConv__2120;

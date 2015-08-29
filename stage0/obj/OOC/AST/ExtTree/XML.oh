@@ -9,8 +9,8 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern void OOC_AST_ExtTree_XML__Write(IO__ByteChannel cw, OOC_AST_ExtTree__Module m);
-extern void OOC_OOC_AST_ExtTree_XML_init();
-extern void OOC_OOC_AST_ExtTree_XML_init0();
+extern void OOC_OOC_AST_ExtTree_XML_init(void);
+extern void OOC_OOC_AST_ExtTree_XML_init0(void);
 
 /* run-time meta data */
 #endif /* _MODULE_OOC_AST_ExtTree_XML_ */

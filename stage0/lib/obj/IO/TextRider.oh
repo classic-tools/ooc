@@ -74,8 +74,8 @@ typedef void (*_TBP_IO_TextRider__WriterDesc_WriteSet)(IO_TextRider__Writer w, O
 extern void IO_TextRider__WriterDesc_WriteLn(IO_TextRider__Writer w);
 #define _TBN_IO_TextRider__WriterDesc_WriteLn 9
 typedef void (*_TBP_IO_TextRider__WriterDesc_WriteLn)(IO_TextRider__Writer w);
-extern void OOC_IO_TextRider_init();
-extern void OOC_IO_TextRider_init0();
+extern void OOC_IO_TextRider_init(void);
+extern void OOC_IO_TextRider_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_TextRider__Writer;

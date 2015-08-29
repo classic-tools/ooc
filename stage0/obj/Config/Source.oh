@@ -16,8 +16,8 @@ extern void Config_Source__Init(Config_Source__Source src);
 extern void Config_Source__SourceDesc_Write(Config_Source__Source source, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 #define _TBN_Config_Source__SourceDesc_Write 0
 typedef void (*_TBP_Config_Source__SourceDesc_Write)(Config_Source__Source source, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
-extern void OOC_Config_Source_init();
-extern void OOC_Config_Source_init0();
+extern void OOC_Config_Source_init(void);
+extern void OOC_Config_Source_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Source__Source;

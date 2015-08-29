@@ -28,8 +28,8 @@ extern OOC_CHAR8 URI_CharClass__SkipPChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_I
 extern OOC_CHAR8 URI_CharClass__SkipURIC(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
 extern OOC_CHAR8 URI_CharClass__SkipMember(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos, const OOC_CHAR8 set__ref[], OOC_LEN set_0d);
 extern OOC_CHAR8 URI_CharClass__SkipAuthChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos);
-extern void OOC_URI_CharClass_init();
-extern void OOC_URI_CharClass_init0();
+extern void OOC_URI_CharClass_init(void);
+extern void OOC_URI_CharClass_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_CharClass__2132;

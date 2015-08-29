@@ -58,7 +58,7 @@ extern OOC_PTR RT0__NewObject(RT0__Struct td, ...);
 extern RT0__Struct RT0__TypeOf(OOC_PTR ptr);
 extern OOC_PTR RT0__NewBlock(OOC_INT32 bytes);
 extern void RT0__FreeBlock(OOC_PTR ptr);
-extern void RT0__CollectGarbage();
+extern void RT0__CollectGarbage(void);
 extern void NORETURN RT0__ErrorIndexOutOfRange(RT0__Module mid, OOC_INT32 pos, OOC_INT32 index, OOC_INT32 length) NORETURN2;
 extern void NORETURN RT0__ErrorDerefOfNil(RT0__Module mid, OOC_INT32 pos) NORETURN2;
 extern void NORETURN RT0__ErrorFailedTypeGuard(RT0__Module mid, OOC_INT32 pos, RT0__Struct typeTag) NORETURN2;
@@ -72,8 +72,8 @@ extern void RT0__RegisterModule(RT0__Module mid);
 extern RT0__Module RT0__ThisModule(const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern RT0__Struct RT0__ThisType(RT0__Module mid, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
 extern OOC_CHAR8 RT0__GetEnv(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, OOC_CHAR8 value[], OOC_LEN value_0d);
-extern void OOC_RT0_init();
-extern void OOC_RT0_init0();
+extern void OOC_RT0_init(void);
+extern void OOC_RT0_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_RT0__Name;

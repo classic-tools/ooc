@@ -38,8 +38,8 @@ extern void OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures(OOC_Make
 #define _TBN_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures 3
 typedef void (*_TBP_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures)(OOC_Make_TranslateToC__Translator t);
 extern OOC_Error__List OOC_Make_TranslateToC__Run(OOC_Repository__Module m, Object__String libraryName, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToC__Translator translator);
-extern void OOC_OOC_Make_TranslateToC_init();
-extern void OOC_OOC_Make_TranslateToC_init0();
+extern void OOC_OOC_Make_TranslateToC_init(void);
+extern void OOC_OOC_Make_TranslateToC_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;

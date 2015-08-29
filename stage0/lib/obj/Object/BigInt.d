@@ -18,7 +18,7 @@ static Object_BigInt__BigInt Object_BigInt__DivRem1(Object_BigInt__BigInt a, OOC
 static Object_BigInt__BigInt Object_BigInt__MulAdd1(Object_BigInt__BigInt a, OOC_INT16 n, OOC_INT16 add);
 static Object_BigInt__BigInt Object_BigInt__DivRemAbs(Object_BigInt__BigInt v1, Object_BigInt__BigInt _w1, Object_BigInt__BigInt *rem);
 static void Object_BigInt__DivRem(Object_BigInt__BigInt a, Object_BigInt__BigInt b, Object_BigInt__BigInt *div, Object_BigInt__BigInt *rem);
-static void Object_BigInt__Init();
+static void Object_BigInt__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

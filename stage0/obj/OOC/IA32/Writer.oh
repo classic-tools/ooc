@@ -60,8 +60,8 @@ typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_WriteStringData)(OOC_IA32_Writer
 extern void OOC_IA32_Writer__WriterDesc_Close(OOC_IA32_Writer__Writer w);
 #define _TBN_OOC_IA32_Writer__WriterDesc_Close 0
 typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Close)(OOC_IA32_Writer__Writer w);
-extern void OOC_OOC_IA32_Writer_init();
-extern void OOC_OOC_IA32_Writer_init0();
+extern void OOC_OOC_IA32_Writer_init(void);
+extern void OOC_OOC_IA32_Writer_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IA32_Writer__Writer;

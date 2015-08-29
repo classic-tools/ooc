@@ -70,8 +70,8 @@ typedef void (*_TBP_ProgramArgs__ChannelDesc_Flush)(ProgramArgs__Channel ch);
 extern void ProgramArgs__ChannelDesc_Close(ProgramArgs__Channel ch);
 #define _TBN_ProgramArgs__ChannelDesc_Close 1
 typedef void (*_TBP_ProgramArgs__ChannelDesc_Close)(ProgramArgs__Channel ch);
-extern void OOC_ProgramArgs_init();
-extern void OOC_ProgramArgs_init0();
+extern void OOC_ProgramArgs_init(void);
+extern void OOC_ProgramArgs_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ProgramArgs__Channel;

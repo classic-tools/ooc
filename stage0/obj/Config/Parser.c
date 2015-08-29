@@ -15,7 +15,7 @@ static void Config_Parser__InitBuilder(Config_Parser__Builder b) {
   ;
 }
 
-static Config_Parser__Builder Config_Parser__NewBuilder() {
+static Config_Parser__Builder Config_Parser__NewBuilder(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Parser__Builder.baseTypes[0]);
@@ -132,19 +132,18 @@ void Config_Parser__BuilderDesc_StartElement(Config_Parser__Builder b, XML_DTD__
 }
 
 void Config_Parser__BuilderDesc_Attribute(Config_Parser__Builder b, XML_DTD__NamespaceDeclaration namespaceURI, XML_UnicodeBuffer__CharArray localName, XML_DTD__AttrDecl attrDecl, XML_DTD__AttValue value, OOC_CHAR8 specified) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
 
   i0 = (OOC_INT32)b;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4148))+40);
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4289));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4148))+40);
-  i3 = (OOC_INT32)namespaceURI;
-  i4 = (OOC_INT32)localName;
-  i5 = (OOC_INT32)attrDecl;
-  i6 = (OOC_INT32)value;
-  i7 = specified;
-  i2 = (OOC_INT32)XML_Builder__NewAttribute((XML_DTD__NamespaceDeclaration)i3, (XML_UnicodeBuffer__CharArray)i4, (XML_DTD__AttrDecl)i5, (XML_DTD__AttValue)i6, i7, (XML_Locator__Locator)i2);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4162)))), XML_Builder__AttributeListDesc_Append)),XML_Builder__AttributeListDesc_Append)((XML_Builder__AttributeList)i0, (XML_Builder__Attribute)i2);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4289));
+  i2 = (OOC_INT32)namespaceURI;
+  i3 = (OOC_INT32)localName;
+  i4 = (OOC_INT32)attrDecl;
+  i5 = (OOC_INT32)value;
+  i6 = specified;
+  i0 = (OOC_INT32)XML_Builder__NewAttribute((XML_DTD__NamespaceDeclaration)i2, (XML_UnicodeBuffer__CharArray)i3, (XML_DTD__AttrDecl)i4, (XML_DTD__AttValue)i5, i6, (XML_Locator__Locator)i0);
+  XML_Builder__AttributeListDesc_Append((XML_Builder__AttributeList)i1, (XML_Builder__Attribute)i0);
   return;
   ;
 }
@@ -305,12 +304,11 @@ Config_Parser__Parser Config_Parser__NewChannel(IO__ByteChannel ch) {
 }
 
 void Config_Parser__ParserDesc_ParseDocument(Config_Parser__Parser p) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)p;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6517));
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6517));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6528)))), XML_Parser__ParserDesc_ParseDocument)),XML_Parser__ParserDesc_ParseDocument)((XML_Parser__Parser)i2);
+  XML_Parser__ParserDesc_ParseDocument((XML_Parser__Parser)i1);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6563))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6572))+8);
   *(OOC_INT32*)((_check_pointer(i0, 6552))+12) = i1;

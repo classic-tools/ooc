@@ -107,8 +107,8 @@ typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_AppendPath)(URI_Scheme_
 extern void URI_Scheme_Hierarchical__GenericDesc_GetString(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
 #define _TBN_URI_Scheme_Hierarchical__GenericDesc_GetString 4
 typedef void (*_TBP_URI_Scheme_Hierarchical__GenericDesc_GetString)(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d);
-extern void OOC_URI_Scheme_Hierarchical_init();
-extern void OOC_URI_Scheme_Hierarchical_init0();
+extern void OOC_URI_Scheme_Hierarchical_init(void);
+extern void OOC_URI_Scheme_Hierarchical_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Scheme_Hierarchical__Parameter;

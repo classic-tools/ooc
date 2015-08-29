@@ -183,8 +183,8 @@ extern URI__URIAttribute URI__NewURIAttribute(const Msg__String name__ref, OOC_L
 extern void URI__URIAttributeDesc_ReplacementText(URI__URIAttribute attr, Msg__LString text, OOC_LEN text_0d);
 #define _TBN_URI__URIAttributeDesc_ReplacementText 0
 typedef void (*_TBP_URI__URIAttributeDesc_ReplacementText)(URI__URIAttribute attr, Msg__LString text, OOC_LEN text_0d);
-extern void OOC_URI_init();
-extern void OOC_URI_init0();
+extern void OOC_URI_init(void);
+extern void OOC_URI_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI__URI;

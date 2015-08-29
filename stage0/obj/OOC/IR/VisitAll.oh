@@ -186,8 +186,8 @@ typedef void (*_TBP_OOC_IR_VisitAll__VisitorDesc_VisitProcedure)(OOC_IR_VisitAll
 extern void OOC_IR_VisitAll__VisitorDesc_VisitModule(OOC_IR_VisitAll__Visitor v, OOC_IR__Module module);
 #define _TBN_OOC_IR_VisitAll__VisitorDesc_VisitModule 28
 typedef void (*_TBP_OOC_IR_VisitAll__VisitorDesc_VisitModule)(OOC_IR_VisitAll__Visitor v, OOC_IR__Module module);
-extern void OOC_OOC_IR_VisitAll_init();
-extern void OOC_OOC_IR_VisitAll_init0();
+extern void OOC_OOC_IR_VisitAll_init(void);
+extern void OOC_OOC_IR_VisitAll_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IR_VisitAll__Visitor;

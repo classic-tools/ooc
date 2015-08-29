@@ -95,18 +95,18 @@ OOC_AST__Node OOC_Parser__Module(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_
   auto void OOC_Parser__Module_Err(OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
   auto void OOC_Parser__Module_ErrEndPos(OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
   auto void OOC_Parser__Module_ErrStringAttrib(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, OOC_CHAR8 str[], OOC_LEN str_0d);
-  auto void OOC_Parser__Module_NextSym();
+  auto void OOC_Parser__Module_NextSym(void);
   auto OOC_AST__Node OOC_Parser__Module_CheckSym(OOC_INT8 symId);
   auto OOC_AST__Node OOC_Parser__Module_MultiPartIdent(OOC_Scanner_InputBuffer__CharArray *name);
   auto OOC_AST__Node OOC_Parser__Module_Flags(OOC_INT8 context);
   auto OOC_AST__Node OOC_Parser__Module_IdentDef(OOC_INT32 level, OOC_CHAR8 noReadOnly, OOC_CHAR8 noMark, OOC_Scanner_InputBuffer__CharArray *name);
   auto OOC_AST__Node OOC_Parser__Module_ImportList(OOC_Scanner_InputBuffer__CharArray moduleName);
-  auto OOC_AST__Node OOC_Parser__Module_Expr();
-  auto OOC_AST__Node OOC_Parser__Module_Designator();
-  auto OOC_AST__Node OOC_Parser__Module_Expr();
-  auto OOC_AST__Node OOC_Parser__Module_Qualident();
+  auto OOC_AST__Node OOC_Parser__Module_Expr(void);
+  auto OOC_AST__Node OOC_Parser__Module_Designator(void);
+  auto OOC_AST__Node OOC_Parser__Module_Expr(void);
+  auto OOC_AST__Node OOC_Parser__Module_Qualident(void);
   auto OOC_AST__Node OOC_Parser__Module_Type(OOC_INT32 level);
-  auto OOC_AST__Node OOC_Parser__Module_FormalPars();
+  auto OOC_AST__Node OOC_Parser__Module_FormalPars(void);
   auto OOC_AST__Node OOC_Parser__Module_Type(OOC_INT32 level);
   auto OOC_AST__Node OOC_Parser__Module_Body(OOC_INT32 level, OOC_Scanner_InputBuffer__CharArray headName);
     
@@ -128,7 +128,7 @@ OOC_AST__Node OOC_Parser__Module(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6878)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "column", 7, i1);
       i0 = (OOC_INT32)errList;
       i1 = (OOC_INT32)lastError;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6931)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i0, (Msg__Msg)i1);
+      OOC_Error__ListDesc_Append((OOC_Error__List)i0, (Msg__Msg)i1);
       return;
       ;
     }
@@ -154,7 +154,7 @@ OOC_AST__Node OOC_Parser__Module(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7477)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "column", 7, (i2+i1));
       i0 = (OOC_INT32)errList;
       i1 = (OOC_INT32)lastError;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7539)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i0, (Msg__Msg)i1);
+      OOC_Error__ListDesc_Append((OOC_Error__List)i0, (Msg__Msg)i1);
       return;
       ;
     }
@@ -173,7 +173,7 @@ OOC_AST__Node OOC_Parser__Module(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_
     }
 
     
-    void OOC_Parser__Module_NextSym() {
+    void OOC_Parser__Module_NextSym(void) {
       register OOC_INT32 i0,i1;
       OOC_Doc__Document document;
 
@@ -232,21 +232,21 @@ l26:
 
     
     OOC_AST__Node OOC_Parser__Module_CheckSym(OOC_INT8 symId) {
-      register OOC_INT32 i0,i1,i2;
+      register OOC_INT32 i0,i1,i2,i3;
 
       i0 = (OOC_INT32)sym;
-      i0 = *(OOC_INT8*)((_check_pointer(i0, 9012))+4);
-      i1 = symId;
-      i0 = i0!=i1;
-      if (!i0) goto l62;
-      i0 = OOC_Scanner_Symbol__IsKeyword(i1);
-      if (i0) goto l21;
-      i0 = i1==45;
-      if (i0) goto l19;
-      i0 = i1==72;
-      if (i0) goto l17;
+      i1 = *(OOC_INT8*)((_check_pointer(i0, 9012))+4);
+      i2 = symId;
+      i1 = i1!=i2;
+      if (!i1) goto l62;
+      i1 = OOC_Scanner_Symbol__IsKeyword(i2);
+      if (i1) goto l21;
+      i1 = i2==45;
+      if (i1) goto l19;
+      i1 = i2==72;
+      if (i1) goto l17;
 l9:
-      switch (i1) {
+      switch (i2) {
       case 46:
       case 20:
       case 19:
@@ -257,49 +257,44 @@ l9:
       case 22:
       case 23:
       case 24:
-        i0 = (OOC_INT32)prevSym;
-        i2 = i0!=(OOC_INT32)0;
-        if (i2) goto l13;
-        i0 = (OOC_INT32)sym;
+        i1 = (OOC_INT32)prevSym;
+        i3 = i1!=(OOC_INT32)0;
+        if (i3) goto l13;
         OOC_Parser__Module_Err(3, (OOC_Scanner_Builder_BasicList__Symbol)i0);
         goto l16;
 l13:
-        OOC_Parser__Module_ErrEndPos(3, (OOC_Scanner_Builder_BasicList__Symbol)i0);
+        OOC_Parser__Module_ErrEndPos(3, (OOC_Scanner_Builder_BasicList__Symbol)i1);
         goto l16;
       default:
-        i0 = (OOC_INT32)sym;
         OOC_Parser__Module_Err(3, (OOC_Scanner_Builder_BasicList__Symbol)i0);
         goto l16;
       }
 l16:
       i0 = (OOC_INT32)lastError;
-      i2 = (OOC_INT32)Msg__GetStringPtr((void*)((OOC_INT32)OOC_Scanner_Symbol__representation+((_check_index(i1, 81, OOC_UINT8, 9959))*10)), 10);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9857)))), Msg__MsgDesc_SetStringAttrib)),Msg__MsgDesc_SetStringAttrib)((Msg__Msg)i0, "sym_name", 9, (Msg__StringPtr)i2);
+      i1 = (OOC_INT32)Msg__GetStringPtr((void*)((OOC_INT32)OOC_Scanner_Symbol__representation+((_check_index(i2, 81, OOC_UINT8, 9959))*10)), 10);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9857)))), Msg__MsgDesc_SetStringAttrib)),Msg__MsgDesc_SetStringAttrib)((Msg__Msg)i0, "sym_name", 9, (Msg__StringPtr)i1);
       goto l22;
 l17:
-      i0 = (OOC_INT32)sym;
       OOC_Parser__Module_Err(1, (OOC_Scanner_Builder_BasicList__Symbol)i0);
       goto l22;
 l19:
-      i0 = (OOC_INT32)sym;
       OOC_Parser__Module_Err(4, (OOC_Scanner_Builder_BasicList__Symbol)i0);
       goto l22;
 l21:
-      i0 = (OOC_INT32)sym;
       OOC_Parser__Module_Err(2, (OOC_Scanner_Builder_BasicList__Symbol)i0);
       i0 = (OOC_INT32)lastError;
-      i2 = (OOC_INT32)Msg__GetStringPtr((void*)((OOC_INT32)OOC_Scanner_Symbol__representation+((_check_index(i1, 81, OOC_UINT8, 9229))*10)), 10);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9127)))), Msg__MsgDesc_SetStringAttrib)),Msg__MsgDesc_SetStringAttrib)((Msg__Msg)i0, "sym_name", 9, (Msg__StringPtr)i2);
+      i1 = (OOC_INT32)Msg__GetStringPtr((void*)((OOC_INT32)OOC_Scanner_Symbol__representation+((_check_index(i2, 81, OOC_UINT8, 9229))*10)), 10);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9127)))), Msg__MsgDesc_SetStringAttrib)),Msg__MsgDesc_SetStringAttrib)((Msg__Msg)i0, "sym_name", 9, (Msg__StringPtr)i1);
 l22:
-      i0 = i1==36;
+      i0 = i2==36;
       if (i0) goto l25;
       i0=0u;
       goto l31;
 l25:
       i0 = (OOC_INT32)sym;
-      i2 = *(OOC_INT8*)((_check_pointer(i0, 10039))+4);
-      i2 = i2==9;
-      if (i2) goto l28;
+      i1 = *(OOC_INT8*)((_check_pointer(i0, 10039))+4);
+      i1 = i1==9;
+      if (i1) goto l28;
       i0 = *(OOC_INT8*)((_check_pointer(i0, 10065))+4);
       i0 = i0==20;
       
@@ -308,7 +303,7 @@ l28:
       i0=1u;
 l31:
       if (i0) goto l37;
-      i0 = i1==9;
+      i0 = i2==9;
       if (i0) goto l35;
       i0=0u;
       goto l39;
@@ -322,21 +317,21 @@ l37:
       i0=1u;
 l39:
       if (i0) goto l57;
-      i0 = 25<=i1;
+      i0 = 25<=i2;
       if (i0) goto l43;
       i0=0u;
       goto l45;
 l43:
-      i0 = i1<=31;
+      i0 = i2<=31;
       
 l45:
       if (i0) goto l51;
-      i0 = 48<=i1;
+      i0 = 48<=i2;
       if (i0) goto l49;
       i0=0u;
       goto l53;
 l49:
-      i0 = i1<=71;
+      i0 = i2<=71;
       
       goto l53;
 l51:
@@ -383,19 +378,18 @@ l62:
 
           i0 = (OOC_INT32)*name;
           i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 11048)), 0);
-          i0 = Strings__Length((void*)(_check_pointer(i0, 11048)), i1);
-          i1 = (OOC_INT32)sym;
-          i2 = *(OOC_INT32*)((_check_pointer(i1, 11054))+12);
-          i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Scanner_InputBuffer__CharArray.baseTypes[0], ((i0+i2)+1));
-          _new = (OOC_Scanner_InputBuffer__CharArray)i0;
-          i2 = (OOC_INT32)*name;
-          i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 11088)), 0);
-          _copy_8((const void*)(_check_pointer(i2, 11082)),(void*)(_check_pointer(i0, 11088)),i3);
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11119))+8);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11119))+8);
-          i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 11130)), 0);
-          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 11124)), 0);
-          Strings__Append((void*)(_check_pointer(i2, 11124)), i1, (void*)(_check_pointer(i0, 11130)), i3);
+          i1 = Strings__Length((void*)(_check_pointer(i0, 11048)), i1);
+          i2 = (OOC_INT32)sym;
+          i3 = *(OOC_INT32*)((_check_pointer(i2, 11054))+12);
+          i1 = (OOC_INT32)RT0__NewObject(_td_OOC_Scanner_InputBuffer__CharArray.baseTypes[0], ((i1+i3)+1));
+          _new = (OOC_Scanner_InputBuffer__CharArray)i1;
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 11088)), 0);
+          _copy_8((const void*)(_check_pointer(i0, 11082)),(void*)(_check_pointer(i1, 11088)),i3);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11119))+8);
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11119))+8);
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 11130)), 0);
+          i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 11124)), 0);
+          Strings__Append((void*)(_check_pointer(i0, 11124)), i2, (void*)(_check_pointer(i1, 11130)), i3);
           i0 = (OOC_INT32)nl;
           i1 = (OOC_INT32)node;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11144)))), OOC_AST__NodeListDesc_Append)),OOC_AST__NodeListDesc_Append)((OOC_AST__NodeList)i0, (OOC_AST__Node)i1);
@@ -487,8 +481,8 @@ l15:
       OOC_AST__NodeList flagList;
       OOC_AST__Node rBrak;
       auto OOC_CHAR8 OOC_Parser__Module_Flags_Ident(const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
-      auto OOC_AST__Node OOC_Parser__Module_Flags_Flag();
-      auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags();
+      auto OOC_AST__Node OOC_Parser__Module_Flags_Flag(void);
+      auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags(void);
         
         OOC_CHAR8 OOC_Parser__Module_Flags_Ident(const OOC_CHAR8 name__ref[], OOC_LEN name_0d) {
           register OOC_INT32 i0,i1;
@@ -512,29 +506,24 @@ l4:
         }
 
         
-        OOC_AST__Node OOC_Parser__Module_Flags_Flag() {
+        OOC_AST__Node OOC_Parser__Module_Flags_Flag(void) {
           register OOC_INT32 i0,i1,i2,i3;
           OOC_AST__Node procId;
           OOC_AST__Node eql;
           OOC_AST__Node number;
 
           i0 = context;
-          i0 = i0==6;
-          if (i0) goto l3;
-          i0=0u;
+          i1 = i0==6;
+          if (i1) goto l3;
+          i2=0u;
           goto l5;
 l3:
-          i0 = OOC_Parser__Module_Flags_Ident("PROC_ID", 8);
+          i2 = OOC_Parser__Module_Flags_Ident("PROC_ID", 8);
           
 l5:
-          if (i0) goto l31;
-          i0 = context;
-          i1 = i0==0;
-          if (i1) goto l9;
-          i1 = i0==6;
-          
-          goto l11;
-l9:
+          if (i2) goto l31;
+          i2 = i0==0;
+          if (!i2) goto l11;
           i1=1u;
 l11:
           if (i1) goto l13;
@@ -593,7 +582,7 @@ l32:
         }
 
         
-        OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags() {
+        OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags(void) {
           register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
           OOC_AST__Node external;
           OOC_AST__Node callConv;
@@ -602,10 +591,10 @@ l32:
           OOC_AST__Node link;
           OOC_AST__NodeList linkSections;
           OOC_AST__Node end;
-          auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_CheckString();
-          auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_LinkSection();
+          auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_CheckString(void);
+          auto OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_LinkSection(void);
             
-            OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_CheckString() {
+            OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_CheckString(void) {
               register OOC_INT32 i0;
 
               i0 = (OOC_INT32)sym;
@@ -624,7 +613,7 @@ l4:
             }
 
             
-            OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_LinkSection() {
+            OOC_AST__Node OOC_Parser__Module_Flags_ModuleFlags_LinkSection(void) {
               register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
               OOC_AST__Node kw;
               OOC_AST__Node string;
@@ -635,9 +624,9 @@ l4:
               OOC_AST__Node lParen;
               OOC_AST__NodeList dependences;
               OOC_AST__Node rParen;
-              auto void OOC_Parser__Module_Flags_ModuleFlags_LinkSection_Options();
+              auto void OOC_Parser__Module_Flags_ModuleFlags_LinkSection_Options(void);
                 
-                void OOC_Parser__Module_Flags_ModuleFlags_LinkSection_Options() {
+                void OOC_Parser__Module_Flags_ModuleFlags_LinkSection_Options(void) {
                   register OOC_INT32 i0;
 
                   addOptions = (OOC_AST__Node)(OOC_INT32)0;
@@ -1016,9 +1005,9 @@ l25:
       OOC_AST__Node import;
       OOC_AST__NodeList imports;
       OOC_AST__Node scolon;
-      auto OOC_AST__Node OOC_Parser__Module_ImportList_ImportDecl();
+      auto OOC_AST__Node OOC_Parser__Module_ImportList_ImportDecl(void);
         
-        OOC_AST__Node OOC_Parser__Module_ImportList_ImportDecl() {
+        OOC_AST__Node OOC_Parser__Module_ImportList_ImportDecl(void) {
           register OOC_INT32 i0,i1,i2,i3,i4,i5;
           OOC_AST__Node alias;
           OOC_AST__Node becomes;
@@ -1098,7 +1087,7 @@ l6:
     }
 
     
-    OOC_AST__Node OOC_Parser__Module_Designator() {
+    OOC_AST__Node OOC_Parser__Module_Designator(void) {
       register OOC_INT32 i0,i1,i2,i3,i4;
       OOC_AST__Node x;
       OOC_AST__Node op;
@@ -1207,28 +1196,28 @@ l26:
     }
 
     
-    OOC_AST__Node OOC_Parser__Module_Expr() {
+    OOC_AST__Node OOC_Parser__Module_Expr(void) {
       register OOC_INT32 i0,i1,i2,i3;
       OOC_AST__Node x;
       OOC_AST__Node op;
       OOC_AST__Node y;
-      auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr();
+      auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr(void);
         
-        OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr() {
+        OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr(void) {
           register OOC_INT32 i0,i1,i2,i3;
           OOC_AST__Node op;
           OOC_AST__Node y;
           OOC_AST__Node x;
-          auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term();
+          auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term(void);
             
-            OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term() {
+            OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term(void) {
               register OOC_INT32 i0,i1,i2,i3;
               OOC_AST__Node x;
               OOC_AST__Node op;
               OOC_AST__Node y;
-              auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor();
+              auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor(void);
                 
-                OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor() {
+                OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor(void) {
                   register OOC_INT32 i0,i1,i2,i3;
                   OOC_AST__Node factor;
                   OOC_AST__Node lParen;
@@ -1243,9 +1232,9 @@ l26:
                       OOC_AST__Node lBrace;
                       OOC_AST__NodeList elementList;
                       OOC_AST__Node rBrace;
-                      auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor_Set_Element();
+                      auto OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor_Set_Element(void);
                         
-                        OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor_Set_Element() {
+                        OOC_AST__Node OOC_Parser__Module_Expr_SimpleExpr_Term_Factor_Set_Element(void) {
                           register OOC_INT32 i0,i1,i2,i3;
                           OOC_AST__Node lExpr;
                           OOC_AST__Node upto;
@@ -1554,7 +1543,7 @@ l8:
     }
 
     
-    OOC_AST__Node OOC_Parser__Module_Qualident() {
+    OOC_AST__Node OOC_Parser__Module_Qualident(void) {
       register OOC_INT32 i0,i1,i2,i3;
       OOC_AST__Node module;
       OOC_AST__Node period;
@@ -1582,7 +1571,7 @@ l4:
     }
 
     
-    OOC_AST__Node OOC_Parser__Module_FormalPars() {
+    OOC_AST__Node OOC_Parser__Module_FormalPars(void) {
       register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;
       OOC_AST__Node oldLastIdentDef;
       OOC_AST__Node flags;
@@ -1593,9 +1582,9 @@ l4:
       OOC_AST__Node result;
       OOC_AST__Node raises;
       OOC_AST__NodeList raisesList;
-      auto OOC_AST__Node OOC_Parser__Module_FormalPars_FPSection();
+      auto OOC_AST__Node OOC_Parser__Module_FormalPars_FPSection(void);
         
-        OOC_AST__Node OOC_Parser__Module_FormalPars_FPSection() {
+        OOC_AST__Node OOC_Parser__Module_FormalPars_FPSection(void) {
           register OOC_INT32 i0,i1,i2,i3,i4;
           OOC_AST__Node var;
           OOC_AST__NodeList fpList;
@@ -1760,12 +1749,12 @@ l37:
     OOC_AST__Node OOC_Parser__Module_Type(OOC_INT32 level) {
       register OOC_INT32 i0,i1,i2;
       OOC_AST__Node type;
-      auto OOC_AST__Node OOC_Parser__Module_Type_ArrayType();
-      auto OOC_AST__Node OOC_Parser__Module_Type_RecordType();
-      auto OOC_AST__Node OOC_Parser__Module_Type_PointerType();
-      auto OOC_AST__Node OOC_Parser__Module_Type_ProcType();
+      auto OOC_AST__Node OOC_Parser__Module_Type_ArrayType(void);
+      auto OOC_AST__Node OOC_Parser__Module_Type_RecordType(void);
+      auto OOC_AST__Node OOC_Parser__Module_Type_PointerType(void);
+      auto OOC_AST__Node OOC_Parser__Module_Type_ProcType(void);
         
-        OOC_AST__Node OOC_Parser__Module_Type_ArrayType() {
+        OOC_AST__Node OOC_Parser__Module_Type_ArrayType(void) {
           register OOC_INT32 i0,i1,i2,i3,i4,i5;
           OOC_AST__Node array;
           OOC_AST__Node flags;
@@ -1807,7 +1796,7 @@ l9:
         }
 
         
-        OOC_AST__Node OOC_Parser__Module_Type_RecordType() {
+        OOC_AST__Node OOC_Parser__Module_Type_RecordType(void) {
           register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
           OOC_AST__Node record;
           OOC_AST__Node flags;
@@ -1816,9 +1805,9 @@ l9:
           OOC_AST__Node rParen;
           OOC_AST__NodeList fieldLists;
           OOC_AST__Node end;
-          auto OOC_AST__Node OOC_Parser__Module_Type_RecordType_FieldList();
+          auto OOC_AST__Node OOC_Parser__Module_Type_RecordType_FieldList(void);
             
-            OOC_AST__Node OOC_Parser__Module_Type_RecordType_FieldList() {
+            OOC_AST__Node OOC_Parser__Module_Type_RecordType_FieldList(void) {
               register OOC_INT32 i0,i1,i2,i3;
               OOC_AST__NodeList identList;
               OOC_Scanner_InputBuffer__CharArray dummy;
@@ -1914,7 +1903,7 @@ l14:
         }
 
         
-        OOC_AST__Node OOC_Parser__Module_Type_PointerType() {
+        OOC_AST__Node OOC_Parser__Module_Type_PointerType(void) {
           register OOC_INT32 i0,i1,i2,i3,i4;
           OOC_AST__Node pointer;
           OOC_AST__Node flags;
@@ -1937,7 +1926,7 @@ l14:
         }
 
         
-        OOC_AST__Node OOC_Parser__Module_Type_ProcType() {
+        OOC_AST__Node OOC_Parser__Module_Type_ProcType(void) {
           register OOC_INT32 i0,i1,i2;
           OOC_AST__Node procedure;
           OOC_AST__Node formalPars;
@@ -2082,19 +2071,19 @@ l51:
       OOC_Scanner_Builder_BasicList__Symbol ptr;
       OOC_AST__Node name;
       OOC_Scanner_InputBuffer__CharArray tailName;
-      auto OOC_AST__NodeList OOC_Parser__Module_Body_DeclSeq();
-      auto OOC_AST__NodeList OOC_Parser__Module_Body_StatementSeq();
+      auto OOC_AST__NodeList OOC_Parser__Module_Body_DeclSeq(void);
+      auto OOC_AST__NodeList OOC_Parser__Module_Body_StatementSeq(void);
       auto void OOC_Parser__Module_Body_CheckName(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray head, OOC_Scanner_InputBuffer__CharArray tail);
         
-        OOC_AST__NodeList OOC_Parser__Module_Body_DeclSeq() {
+        OOC_AST__NodeList OOC_Parser__Module_Body_DeclSeq(void) {
           register OOC_INT32 i0,i1;
           OOC_AST__NodeList nl;
-          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ConstDecl();
-          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_TypeDecl();
-          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_VarDecl();
-          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl();
+          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ConstDecl(void);
+          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_TypeDecl(void);
+          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_VarDecl(void);
+          auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl(void);
             
-            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ConstDecl() {
+            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ConstDecl(void) {
               register OOC_INT32 i0,i1,i2,i3,i4;
               OOC_AST__Node identDef;
               OOC_Scanner_InputBuffer__CharArray dummy;
@@ -2118,7 +2107,7 @@ l51:
             }
 
             
-            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_TypeDecl() {
+            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_TypeDecl(void) {
               register OOC_INT32 i0,i1,i2,i3,i4;
               OOC_AST__Node identDef;
               OOC_Scanner_InputBuffer__CharArray dummy;
@@ -2143,7 +2132,7 @@ l51:
             }
 
             
-            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_VarDecl() {
+            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_VarDecl(void) {
               register OOC_INT32 i0,i1,i2,i3,i4;
               OOC_AST__NodeList identList;
               OOC_Scanner_InputBuffer__CharArray dummy;
@@ -2190,7 +2179,7 @@ l10:
             }
 
             
-            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl() {
+            OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl(void) {
               register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
               OOC_AST__Node proc;
               OOC_AST__Node arrow;
@@ -2202,9 +2191,9 @@ l10:
               OOC_AST__Node semicolon1;
               OOC_AST__Node body;
               OOC_AST__Node semicolon2;
-              auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl_Receiver();
+              auto OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl_Receiver(void);
                 
-                OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl_Receiver() {
+                OOC_AST__Node OOC_Parser__Module_Body_DeclSeq_ProcDecl_Receiver(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
                   OOC_AST__Node lParen;
                   OOC_AST__Node var;
@@ -2400,26 +2389,26 @@ l46:
         }
 
         
-        OOC_AST__NodeList OOC_Parser__Module_Body_StatementSeq() {
+        OOC_AST__NodeList OOC_Parser__Module_Body_StatementSeq(void) {
           register OOC_INT32 i0,i1;
           OOC_AST__NodeList list;
-          auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement();
+          auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement(void);
             
-            OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement() {
+            OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement(void) {
               register OOC_INT32 i0;
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ProcCallOrAssignment();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_IfStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_CaseStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WhileStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_RepeatStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ForStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_LoopStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WithStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ExitStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ReturnStatm();
-              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_TryStatm();
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ProcCallOrAssignment(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_IfStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_CaseStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WhileStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_RepeatStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ForStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_LoopStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WithStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ExitStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ReturnStatm(void);
+              auto OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_TryStatm(void);
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ProcCallOrAssignment() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ProcCallOrAssignment(void) {
                   register OOC_INT32 i0,i1,i2,i3;
                   OOC_AST__Node design;
                   OOC_AST__Node becomes;
@@ -2450,7 +2439,7 @@ l4:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_IfStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_IfStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4;
                   OOC_AST__NodeList guardList;
                   OOC_AST__Node _else;
@@ -2499,7 +2488,7 @@ l10:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_CaseStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_CaseStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
                   OOC_AST__Node _case;
                   OOC_AST__Node expr;
@@ -2619,7 +2608,7 @@ l13:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WhileStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WhileStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4,i5;
                   OOC_AST__Node _while;
                   OOC_AST__Node guard;
@@ -2644,7 +2633,7 @@ l13:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_RepeatStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_RepeatStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4;
                   OOC_AST__Node repeat;
                   OOC_AST__NodeList statmSeq;
@@ -2666,7 +2655,7 @@ l13:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ForStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ForStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11;
                   OOC_AST__Node _for;
                   OOC_AST__Node ident;
@@ -2720,7 +2709,7 @@ l4:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_LoopStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_LoopStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3;
                   OOC_AST__Node loop;
                   OOC_AST__NodeList statmSeq;
@@ -2739,7 +2728,7 @@ l4:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WithStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_WithStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4;
                   OOC_AST__NodeList guardList;
                   OOC_AST__Node var;
@@ -2799,7 +2788,7 @@ l10:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ExitStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ExitStatm(void) {
                   register OOC_INT32 i0,i1;
                   OOC_AST__Node exit;
 
@@ -2812,7 +2801,7 @@ l10:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ReturnStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_ReturnStatm(void) {
                   register OOC_INT32 i0,i1,i2;
                   OOC_AST__Node _return;
                   OOC_AST__Node expr;
@@ -2838,7 +2827,7 @@ l4:
                 }
 
                 
-                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_TryStatm() {
+                OOC_AST__Node OOC_Parser__Module_Body_StatementSeq_Statement_TryStatm(void) {
                   register OOC_INT32 i0,i1,i2,i3,i4;
                   OOC_AST__Node _try;
                   OOC_AST__NodeList statmSeq;

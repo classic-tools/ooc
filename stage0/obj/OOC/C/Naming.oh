@@ -16,8 +16,8 @@ extern Object__String OOC_C_Naming__NameOfType(OOC_SymbolTable__Type type);
 extern Object__String OOC_C_Naming__NameOfTypeDescriptor(OOC_SymbolTable__Type type);
 extern Object__String OOC_C_Naming__NameOfTypeBoundIndex(OOC_SymbolTable__ProcDecl proc);
 extern Object__String OOC_C_Naming__NameOfTypeBoundSignature(OOC_SymbolTable__ProcDecl proc);
-extern void OOC_OOC_C_Naming_init();
-extern void OOC_OOC_C_Naming_init0();
+extern void OOC_OOC_C_Naming_init(void);
+extern void OOC_OOC_C_Naming_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_C_Naming__Buffer;

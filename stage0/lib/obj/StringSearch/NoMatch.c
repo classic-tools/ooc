@@ -58,7 +58,7 @@ static void StringSearch_NoMatch__InitFactory(StringSearch_NoMatch__Factory f) {
   ;
 }
 
-static StringSearch_NoMatch__Factory StringSearch_NoMatch__NewFactory() {
+static StringSearch_NoMatch__Factory StringSearch_NoMatch__NewFactory(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_StringSearch_NoMatch__Factory.baseTypes[0]);

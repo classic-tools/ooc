@@ -16,7 +16,7 @@ typedef struct IO_Memory__ChannelDesc {
   OOC_INT32 length;
   IO_Memory__Data data;
 } IO_Memory__ChannelDesc;
-extern IO_Memory__Channel IO_Memory__Open();
+extern IO_Memory__Channel IO_Memory__Open(void);
 extern void IO_Memory__ChannelDesc_SetBlocking(IO_Memory__Channel ch, OOC_CHAR8 block);
 #define _TBN_IO_Memory__ChannelDesc_SetBlocking 5
 typedef void (*_TBP_IO_Memory__ChannelDesc_SetBlocking)(IO_Memory__Channel ch, OOC_CHAR8 block);
@@ -35,8 +35,8 @@ typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Write)(IO_Memory__Channel ch, co
 extern void IO_Memory__ChannelDesc_Fingerprint(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
 #define _TBN_IO_Memory__ChannelDesc_Fingerprint 11
 typedef void (*_TBP_IO_Memory__ChannelDesc_Fingerprint)(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
-extern void OOC_IO_Memory_init();
-extern void OOC_IO_Memory_init0();
+extern void OOC_IO_Memory_init(void);
+extern void OOC_IO_Memory_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_Memory__927;

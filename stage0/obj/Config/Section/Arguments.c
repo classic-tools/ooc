@@ -129,7 +129,7 @@ l3_loop:
   _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3422)))), 3422);
   goto l41;
 l8:
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3465)))), Config_Parser__NodeDesc_IsWhitespace)),Config_Parser__NodeDesc_IsWhitespace)((Config_Parser__Node)i0);
+  i1 = Config_Parser__NodeDesc_IsWhitespace((Config_Parser__Node)i0);
   i1 = !i1;
   if (!i1) goto l41;
   Config_Section_Arguments__SectionDesc_ProcessElements_Err(1, (Config_Parser__Node)i0);
@@ -178,7 +178,7 @@ l19_loop:
   if (i2) goto l19_loop;
 l24:
   i0 = (OOC_INT32)node;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2660)))), Config_Parser__NodeDesc_HasNoElementContent)),Config_Parser__NodeDesc_HasNoElementContent)((Config_Parser__Node)i0);
+  i1 = Config_Parser__NodeDesc_HasNoElementContent((Config_Parser__Node)i0);
   i1 = !i1;
   if (i1) goto l38;
   i1 = (OOC_INT32)s;
@@ -212,7 +212,7 @@ l31_loop:
 l36:
   *(OOC_INT32*)((_check_pointer(i1, 2973))+4) = i2;
 l37:
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3040)))), Config_Parser__NodeDesc_GetCharDataContent)),Config_Parser__NodeDesc_GetCharDataContent)((Config_Parser__Node)i0);
+  i0 = (OOC_INT32)Config_Parser__NodeDesc_GetCharDataContent((Config_Parser__Node)i0);
   parserString = (XML_UnicodeBuffer__CharArray)i0;
   i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3107)), 0);
   LongStrings__Short((void*)(_check_pointer(i0, 3107)), i2, 63u, (void*)(OOC_INT32)valueString, 1024);

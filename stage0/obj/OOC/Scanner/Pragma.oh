@@ -49,8 +49,8 @@ extern void OOC_Scanner_Pragma__ErrorContextDesc_GetTemplate(OOC_Scanner_Pragma_
 typedef void (*_TBP_OOC_Scanner_Pragma__ErrorContextDesc_GetTemplate)(OOC_Scanner_Pragma__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern void OOC_Scanner_Pragma__Init(struct OOC_Scanner_Pragma__State *state, RT0__Struct state__tag, OOC_Scanner_Builder__Builder builder, OOC_Config_Pragmas__Section defaultPragmas);
 extern void OOC_Scanner_Pragma__AddSymbol(struct OOC_Scanner_Pragma__State *state, RT0__Struct state__tag, OOC_INT8 *inputMode, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
-extern void OOC_OOC_Scanner_Pragma_init();
-extern void OOC_OOC_Scanner_Pragma_init0();
+extern void OOC_OOC_Scanner_Pragma_init(void);
+extern void OOC_OOC_Scanner_Pragma_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ConditionStack;

@@ -3,7 +3,7 @@
 #include <setjmp.h>
 
 void Config_Simple__Init(Config_Simple__Config config, const OOC_CHAR8 defaultConfigFile__ref[], OOC_LEN defaultConfigFile_0d) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
   OOC_ALLOCATE_VPAR(defaultConfigFile,OOC_CHAR8 ,defaultConfigFile_0d)
 
   OOC_INITIALIZE_VPAR(defaultConfigFile__ref,defaultConfigFile,OOC_CHAR8 ,defaultConfigFile_0d)
@@ -27,17 +27,14 @@ l4:
   i1 = (OOC_INT32)Config_Value__NewPrototypeList();
   *(OOC_INT32*)((_check_pointer(i0, 1340))+20) = i1;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1390))+20);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1390))+20);
-  i3 = (OOC_INT32)Config_Value_String__New("", 1);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1400)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i2, "string", 7, (Config_Value__Value)i3);
+  i2 = (OOC_INT32)Config_Value_String__New("", 1);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "string", 7, (Config_Value__Value)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1464))+20);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1464))+20);
-  i3 = (OOC_INT32)Config_Value_Integer__New(0);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1474)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i2, "integer", 8, (Config_Value__Value)i3);
+  i2 = (OOC_INT32)Config_Value_Integer__New(0);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "integer", 8, (Config_Value__Value)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1539))+20);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1539))+20);
-  i3 = (OOC_INT32)Config_Value_Boolean__New(0u);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1549)))), Config_Value__PrototypeListDesc_RegisterPrototype)),Config_Value__PrototypeListDesc_RegisterPrototype)((Config_Value__PrototypeList)i2, "boolean", 8, (Config_Value__Value)i3);
+  i2 = (OOC_INT32)Config_Value_Boolean__New(0u);
+  Config_Value__PrototypeListDesc_RegisterPrototype((Config_Value__PrototypeList)i1, "boolean", 8, (Config_Value__Value)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1666))+20);
   i1 = (OOC_INT32)Config_Section_Options__New(((OOC_CHAR16[]){111,112,116,105,111,110,115,0}), 8, (Config_Value__PrototypeList)i1);
   *(OOC_INT32*)((_check_pointer(i0, 1623))+24) = i1;
@@ -46,13 +43,11 @@ l4:
   i1 = (OOC_INT32)Config_Section__NewSectionList();
   *(OOC_INT32*)((_check_pointer(i0, 1743))+32) = i1;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1796))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1796))+32);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1822))+24);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1809)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1822))+24);
+  Config_Section__SectionListDesc_Add((Config_Section__SectionList)i1, (Config_Section__Section)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1844))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1844))+32);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1870))+28);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1857)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1870))+28);
+  Config_Section__SectionListDesc_Add((Config_Section__SectionList)i1, (Config_Section__Section)i2);
   *(OOC_INT32*)((_check_pointer(i0, 1899))+36) = 0;
   return;
   ;
@@ -98,23 +93,22 @@ void Config_Simple__ConfigDesc_Read(Config_Simple__Config config, Msg__MsgList e
   auto void Config_Simple__ConfigDesc_Read_EvaluateSource(Config_Source__Source source);
     
     void Config_Simple__ConfigDesc_Read_EvaluateFile(Config_Value__StringPtr fileName) {
-      register OOC_INT32 i0,i1,i2,i3;
+      register OOC_INT32 i0,i1,i2;
       Config_Parser__Parser p;
 
       i0 = (OOC_INT32)fileName;
       i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2825)), 0);
       i0 = (OOC_INT32)Config_Parser__NewFile((void*)(_check_pointer(i0, 2825)), i1);
       p = (Config_Parser__Parser)i0;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3040)))), Config_Parser__ParserDesc_ParseDocument)),Config_Parser__ParserDesc_ParseDocument)((Config_Parser__Parser)i0);
+      Config_Parser__ParserDesc_ParseDocument((Config_Parser__Parser)i0);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3070))+8);
       i1 = *(OOC_INT32*)(_check_pointer(i1, 3079));
       i1 = i1==0;
       if (!i1) goto l4;
       i1 = (OOC_INT32)config;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3114))+32);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3147))+12);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3114))+32);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3127)))), Config_Section__SectionListDesc_ProcessElements)),Config_Section__SectionListDesc_ProcessElements)((Config_Section__SectionList)i1, (Config_Parser__Element)i3, ((OOC_CHAR16[]){99,111,110,102,105,103,117,114,97,116,105,111,110,0}), 14, (Config_Parser__Parser)i0);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3147))+12);
+      Config_Section__SectionListDesc_ProcessElements((Config_Section__SectionList)i1, (Config_Parser__Element)i2, ((OOC_CHAR16[]){99,111,110,102,105,103,117,114,97,116,105,111,110,0}), 14, (Config_Parser__Parser)i0);
 l4:
       i1 = (OOC_INT32)errList;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3208))+8);
@@ -125,7 +119,7 @@ l4:
 
     
     void Config_Simple__ConfigDesc_Read_EvaluateSource(Config_Source__Source source) {
-      register OOC_INT32 i0,i1,i2,i3;
+      register OOC_INT32 i0,i1,i2;
       IO_Memory__Channel buffer;
       Config_Parser__Parser p;
 
@@ -133,19 +127,18 @@ l4:
       buffer = (IO_Memory__Channel)i0;
       i1 = (OOC_INT32)source;
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3428)))), Config_Source__SourceDesc_Write)),Config_Source__SourceDesc_Write)((Config_Source__Source)i1, (IO__ByteChannel)i0, ((OOC_CHAR16[]){99,111,110,102,105,103,117,114,97,116,105,111,110,0}), 14);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3468)))), IO_Memory__ChannelDesc_SetPos)),IO_Memory__ChannelDesc_SetPos)((IO_Memory__Channel)i0, 0);
+      IO_Memory__ChannelDesc_SetPos((IO_Memory__Channel)i0, 0);
       i0 = (OOC_INT32)Config_Parser__NewChannel((IO__ByteChannel)i0);
       p = (Config_Parser__Parser)i0;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3783)))), Config_Parser__ParserDesc_ParseDocument)),Config_Parser__ParserDesc_ParseDocument)((Config_Parser__Parser)i0);
+      Config_Parser__ParserDesc_ParseDocument((Config_Parser__Parser)i0);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3813))+8);
       i1 = *(OOC_INT32*)(_check_pointer(i1, 3822));
       i1 = i1==0;
       if (!i1) goto l4;
       i1 = (OOC_INT32)config;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3857))+32);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3890))+12);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3857))+32);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3870)))), Config_Section__SectionListDesc_ProcessElements)),Config_Section__SectionListDesc_ProcessElements)((Config_Section__SectionList)i1, (Config_Parser__Element)i3, ((OOC_CHAR16[]){99,111,110,102,105,103,117,114,97,116,105,111,110,0}), 14, (Config_Parser__Parser)i0);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3890))+12);
+      Config_Section__SectionListDesc_ProcessElements((Config_Section__SectionList)i1, (Config_Parser__Element)i2, ((OOC_CHAR16[]){99,111,110,102,105,103,117,114,97,116,105,111,110,0}), 14, (Config_Parser__Parser)i0);
 l4:
       i1 = (OOC_INT32)errList;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3951))+8);
@@ -157,8 +150,7 @@ l4:
 
   i0 = (OOC_INT32)config;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4018))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4018))+12);
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4027)))), Config_Source_Environment__EnvironmentDesc_Parse)),Config_Source_Environment__EnvironmentDesc_Parse)((Config_Source_Environment__Environment)i2);
+  i1 = (OOC_INT32)Config_Source_Environment__EnvironmentDesc_Parse((Config_Source_Environment__Environment)i1);
   errMsg = (Msg__Msg)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l3;
@@ -166,9 +158,8 @@ l4:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4072)))), Msg__MsgListDesc_Append)),Msg__MsgListDesc_Append)((Msg__MsgList)i2, (Msg__Msg)i1);
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4120))+16);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4120))+16);
-  i3 = (OOC_INT32)ProgramArgs__args;
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4129)))), Config_Source_CmdLine__CmdLineDesc_Parse)),Config_Source_CmdLine__CmdLineDesc_Parse)((Config_Source_CmdLine__CmdLine)i2, (Channel__Channel)i3);
+  i2 = (OOC_INT32)ProgramArgs__args;
+  i1 = (OOC_INT32)Config_Source_CmdLine__CmdLineDesc_Parse((Config_Source_CmdLine__CmdLine)i1, (Channel__Channel)i2);
   errMsg = (Msg__Msg)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l6;
@@ -209,7 +200,7 @@ l21:
 l25:
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l33;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4695)))), Config_Source_Environment__CommandDesc_DoNotWrite)),Config_Source_Environment__CommandDesc_DoNotWrite)((Config_Source_Environment__Command)i1);
+  Config_Source_Environment__CommandDesc_DoNotWrite((Config_Source_Environment__Command)i1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4727))+8);
   i2 = (
   _cmp8((const void*)(_check_pointer(i2, 4737)),(const void*)""))==0;
@@ -233,7 +224,7 @@ l38_loop:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5373))+8);
   i2 = i2==i3;
   if (!i2) goto l48;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5422)))), Config_Source_CmdLine__CommandDesc_DoNotWrite)),Config_Source_CmdLine__CommandDesc_DoNotWrite)((Config_Source_CmdLine__Command)i1);
+  Config_Source_CmdLine__CommandDesc_DoNotWrite((Config_Source_CmdLine__Command)i1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5465))+8);
   i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5474)), 0);
   i2 = i2>=1;

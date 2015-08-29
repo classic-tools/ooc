@@ -29,8 +29,8 @@ extern void OOC_SSA_CSE__PartitionDesc_Add(OOC_SSA_CSE__Partition p, OOC_SSA__In
 #define _TBN_OOC_SSA_CSE__PartitionDesc_Add 3
 typedef void (*_TBP_OOC_SSA_CSE__PartitionDesc_Add)(OOC_SSA_CSE__Partition p, OOC_SSA__Instr instr);
 extern void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb);
-extern void OOC_OOC_SSA_CSE_init();
-extern void OOC_OOC_SSA_CSE_init0();
+extern void OOC_OOC_SSA_CSE_init(void);
+extern void OOC_OOC_SSA_CSE_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_CSE__997;

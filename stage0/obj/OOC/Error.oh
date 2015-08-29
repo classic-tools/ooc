@@ -53,8 +53,8 @@ typedef void (*_TBP_OOC_Error__ListDesc_SetAdjustCharPos)(OOC_Error__List errLis
 extern void OOC_Error__ListDesc_Write(OOC_Error__List errList, Channel__Channel ch);
 #define _TBN_OOC_Error__ListDesc_Write 4
 typedef void (*_TBP_OOC_Error__ListDesc_Write)(OOC_Error__List errList, Channel__Channel ch);
-extern void OOC_OOC_Error_init();
-extern void OOC_OOC_Error_init0();
+extern void OOC_OOC_Error_init(void);
+extern void OOC_OOC_Error_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Error__Context;

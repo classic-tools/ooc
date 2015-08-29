@@ -31,8 +31,8 @@ extern void Strings__FindNext(const OOC_CHAR8 pattern__ref[], OOC_LEN pattern_0d
 extern void Strings__FindPrev(const OOC_CHAR8 pattern__ref[], OOC_LEN pattern_0d, const OOC_CHAR8 stringToSearch__ref[], OOC_LEN stringToSearch_0d, OOC_INT16 startPos, OOC_CHAR8 *patternFound, OOC_INT16 *posOfPattern);
 extern void Strings__FindDiff(const OOC_CHAR8 stringVal1__ref[], OOC_LEN stringVal1_0d, const OOC_CHAR8 stringVal2__ref[], OOC_LEN stringVal2_0d, OOC_CHAR8 *differenceFound, OOC_INT16 *posOfDifference);
 extern void Strings__Capitalize(OOC_CHAR8 stringVar[], OOC_LEN stringVar_0d);
-extern void OOC_Strings_init();
-extern void OOC_Strings_init0();
+extern void OOC_Strings_init(void);
+extern void OOC_Strings_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Strings__2019;

@@ -60,7 +60,7 @@ l16:
 }
 
 static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray str, OOC_Error__List errList) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
   OOC_Doc_Input_Texinfo__Token tokenList;
   OOC_Doc_Input_Texinfo__Token tokenTail;
   OOC_INT32 pos;
@@ -78,10 +78,10 @@ static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_
   auto void OOC_Doc_Input_Texinfo__Tokenize_Append(OOC_Doc_Input_Texinfo__Token t);
   auto void OOC_Doc_Input_Texinfo__Tokenize_InitToken(OOC_Doc_Input_Texinfo__Token t, OOC_INT32 id);
   auto void OOC_Doc_Input_Texinfo__Tokenize_AddToken(OOC_INT32 id);
-  auto void OOC_Doc_Input_Texinfo__Tokenize_AddText();
+  auto void OOC_Doc_Input_Texinfo__Tokenize_AddText(void);
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_LookingAt(const OOC_CHAR8 pattern__ref[], OOC_LEN pattern_0d);
-  auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_OutOfBandCommand();
-  auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_IsTextChar();
+  auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_OutOfBandCommand(void);
+  auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_IsTextChar(void);
   auto void OOC_Doc_Input_Texinfo__Tokenize_Newline(OOC_INT32 incr);
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_BeginningOfLine(OOC_INT32 pos);
     
@@ -104,7 +104,7 @@ static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6049)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "column", 7, i1);
       i0 = (OOC_INT32)errList;
       i1 = (OOC_INT32)lastError;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6102)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i0, (Msg__Msg)i1);
+      OOC_Error__ListDesc_Append((OOC_Error__List)i0, (Msg__Msg)i1);
       return;
       ;
     }
@@ -166,7 +166,7 @@ l4:
     }
 
     
-    void OOC_Doc_Input_Texinfo__Tokenize_AddText() {
+    void OOC_Doc_Input_Texinfo__Tokenize_AddText(void) {
       register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
       OOC_Doc_Input_Texinfo__Token t;
       OOC_INT32 j;
@@ -266,7 +266,7 @@ l17:
     }
 
     
-    OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_OutOfBandCommand() {
+    OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_OutOfBandCommand(void) {
       register OOC_INT32 i0;
 
       i0 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("---", 4);
@@ -289,7 +289,7 @@ l8:
     }
 
     
-    OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_IsTextChar() {
+    OOC_CHAR8 OOC_Doc_Input_Texinfo__Tokenize_IsTextChar(void) {
       register OOC_INT32 i0,i1,i2;
 
       i0 = (OOC_INT32)str;
@@ -434,23 +434,23 @@ l3_loop:
   i0 = pos;
   i1 = currLinePos;
   i2 = currLineTab;
-  i1 = (i0-i1)+i2;
+  i3 = (i0-i1)+i2;
   startPos = i0;
-  startColumn = i1;
-  i3 = (OOC_INT32)str;
-  i4 = _check_pointer(i3, 8619);
-  i5 = OOC_ARRAY_LENGTH(i4, 0);
-  i4 = *(OOC_UINT8*)(i4+(_check_index(i0, i5, OOC_UINT32, 8619)));
-  switch (i4) {
+  startColumn = i3;
+  i4 = (OOC_INT32)str;
+  i5 = _check_pointer(i4, 8619);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
+  i5 = *(OOC_UINT8*)(i5+(_check_index(i0, i6, OOC_UINT32, 8619)));
+  switch (i5) {
   case 64u:
     i0 = i0+1;
     pos = i0;
-    i1 = _check_pointer(i3, 8788);
+    i1 = _check_pointer(i4, 8788);
     i2 = OOC_ARRAY_LENGTH(i1, 0);
     i1 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT32, 8788)));
     i1 = CharClass__IsLetter(i1);
     if (i1) goto l8;
-    i1 = _check_pointer(i3, 9187);
+    i1 = _check_pointer(i4, 9187);
     i2 = OOC_ARRAY_LENGTH(i1, 0);
     i1 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT32, 9187)));
     *(OOC_UINT8*)((OOC_INT32)name+(_check_index(0, 16, OOC_UINT8, 9177))) = i1;
@@ -464,9 +464,9 @@ l8:
 l9_loop:
     i2 = i0<15;
     if (!i2) goto l13;
-    i2 = _check_pointer(i3, 8935);
-    i4 = OOC_ARRAY_LENGTH(i2, 0);
-    i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i4, OOC_UINT32, 8935)));
+    i2 = _check_pointer(i4, 8935);
+    i3 = OOC_ARRAY_LENGTH(i2, 0);
+    i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 8935)));
     *(OOC_UINT8*)((OOC_INT32)name+(_check_index(i0, 16, OOC_UINT32, 8925))) = i2;
     i0 = i0+1;
     i = i0;
@@ -474,9 +474,9 @@ l9_loop:
 l13:
     i1 = i1+1;
     pos = i1;
-    i2 = _check_pointer(i3, 9043);
-    i4 = OOC_ARRAY_LENGTH(i2, 0);
-    i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i4, OOC_UINT32, 9043)));
+    i2 = _check_pointer(i4, 9043);
+    i3 = OOC_ARRAY_LENGTH(i2, 0);
+    i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 9043)));
     i2 = CharClass__IsLetter(i2);
     i2 = !i2;
     if (!i2) goto l9_loop;
@@ -582,22 +582,20 @@ l60:
     pos = (i0+1);
     goto l103;
   case 3u:
-    i = i1;
-    currLineTab = (i2+((8-(_mod(i1,8)))-1));
+    i = i3;
+    currLineTab = (i2+((8-(_mod(i3,8)))-1));
     pos = (i0+1);
     goto l103;
   default:
-    i0 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("---", 4);
-    if (i0) goto l101;
-    i0 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("``", 3);
-    if (i0) goto l99;
-    i0 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("\047\047", 3);
-    if (i0) goto l97;
-    i0 = (OOC_INT32)str;
-    i0 = _check_pointer(i0, 11345);
-    i1 = OOC_ARRAY_LENGTH(i0, 0);
-    i2 = pos;
-    i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 11345)));
+    i2 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("---", 4);
+    if (i2) goto l101;
+    i2 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("``", 3);
+    if (i2) goto l99;
+    i2 = OOC_Doc_Input_Texinfo__Tokenize_LookingAt("\047\047", 3);
+    if (i2) goto l97;
+    i2 = _check_pointer(i4, 11345);
+    i3 = OOC_ARRAY_LENGTH(i2, 0);
+    i0 = *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 11345)));
     i0 = i0!=0u;
     if (i0) goto l73;
     i0=0u;
@@ -616,24 +614,22 @@ l77:
 l79:
     if (!i0) goto l96;
 l80_loop:
-    i0 = (OOC_INT32)str;
-    i1 = _check_pointer(i0, 11416);
-    i2 = OOC_ARRAY_LENGTH(i1, 0);
-    i3 = pos;
-    i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 11416)));
-    i1 = i1==9u;
-    if (!i1) goto l83;
-    i1 = currLinePos;
-    i2 = currLineTab;
-    i1 = (i3-i1)+i2;
-    i = i1;
-    currLineTab = (i2+((8-(_mod(i1,8)))-1));
-l83:
-    i1 = i3+1;
-    pos = i1;
-    i0 = _check_pointer(i0, 11345);
+    i0 = _check_pointer(i4, 11416);
     i2 = OOC_ARRAY_LENGTH(i0, 0);
-    i0 = *(OOC_UINT8*)(i0+(_check_index(i1, i2, OOC_UINT32, 11345)));
+    i3 = pos;
+    i0 = *(OOC_UINT8*)(i0+(_check_index(i3, i2, OOC_UINT32, 11416)));
+    i0 = i0==9u;
+    if (!i0) goto l83;
+    i0 = currLineTab;
+    i2 = (i3-i1)+i0;
+    i = i2;
+    currLineTab = (i0+((8-(_mod(i2,8)))-1));
+l83:
+    i0 = i3+1;
+    pos = i0;
+    i2 = _check_pointer(i4, 11345);
+    i3 = OOC_ARRAY_LENGTH(i2, 0);
+    i0 = *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 11345)));
     i0 = i0!=0u;
     if (i0) goto l86;
     i0=0u;
@@ -962,20 +958,19 @@ OOC_Doc__Document OOC_Doc_Input_Texinfo__Parse(OOC_Scanner_Builder_BasicList__Sy
   OOC_Doc_Input_Texinfo__Token tokenList;
   OOC_Doc_Input_Texinfo__Token token;
   OOC_Doc__BlockElement blockList;
-  OOC_Doc__Document document;
   Msg__Msg lastError;
   struct OOC_Doc__Position bufferPos;
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_IsInlineToken(OOC_Doc_Input_Texinfo__Token t);
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_IsBlockToken(OOC_Doc_Input_Texinfo__Token t);
   auto void OOC_Doc_Input_Texinfo__Parse_Err(OOC_INT32 code);
-  auto void OOC_Doc_Input_Texinfo__Parse_NextToken();
+  auto void OOC_Doc_Input_Texinfo__Parse_NextToken(void);
   auto void OOC_Doc_Input_Texinfo__Parse_CheckToken(OOC_INT8 id);
-  auto void OOC_Doc_Input_Texinfo__Parse_SkipWhitespace();
+  auto void OOC_Doc_Input_Texinfo__Parse_SkipWhitespace(void);
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_IdToChar(OOC_INT8 id);
   auto OOC_INT32 OOC_Doc_Input_Texinfo__Parse_IdToGlyph(OOC_INT8 id);
   auto OOC_INT32 OOC_Doc_Input_Texinfo__Parse_IdToMark(OOC_INT8 id);
   auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_IsOberonRef(OOC_INT32 mark);
-  auto OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList();
+  auto OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList(void);
     
     OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_IsInlineToken(OOC_Doc_Input_Texinfo__Token t) {
       register OOC_INT32 i0,i1;
@@ -1049,13 +1044,13 @@ l4:
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 15022)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "column", 7, i1);
       i0 = (OOC_INT32)errList;
       i1 = (OOC_INT32)lastError;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 15077)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i0, (Msg__Msg)i1);
+      OOC_Error__ListDesc_Append((OOC_Error__List)i0, (Msg__Msg)i1);
       return;
       ;
     }
 
     
-    void OOC_Doc_Input_Texinfo__Parse_NextToken() {
+    void OOC_Doc_Input_Texinfo__Parse_NextToken(void) {
       register OOC_INT32 i0,i1;
 
       i0 = (OOC_INT32)token;
@@ -1100,8 +1095,8 @@ l9:
     }
 
     
-    void OOC_Doc_Input_Texinfo__Parse_SkipWhitespace() {
-      register OOC_INT32 i0,i1;
+    void OOC_Doc_Input_Texinfo__Parse_SkipWhitespace(void) {
+      register OOC_INT32 i0,i1,i2;
       auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS(OOC_CHAR8 str[], OOC_LEN str_0d);
         
         OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS(OOC_CHAR8 str[], OOC_LEN str_0d) {
@@ -1154,18 +1149,17 @@ l3:
       
 l5:
       if (i1) goto l7;
-      i0=0u;
+      i1=0u;
       goto l9;
 l7:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 15933)), 0);
-      i0 = OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS((void*)(_check_pointer(i1, 15933)), i0);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 15933)), 0);
+      i1 = OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS((void*)(_check_pointer(i1, 15933)), i2);
       
 l9:
-      if (!i0) goto l24;
+      if (!i1) goto l24;
 l11_loop:
-      i0 = (OOC_INT32)token;
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 15961));
       token = (OOC_Doc_Input_Texinfo__Token)i0;
       i1 = *(OOC_INT8*)((_check_pointer(i0, 15883))+5);
@@ -1179,16 +1173,16 @@ l14:
       
 l16:
       if (i1) goto l18;
-      i0=0u;
+      i1=0u;
       goto l20;
 l18:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 15933)), 0);
-      i0 = OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS((void*)(_check_pointer(i1, 15933)), i0);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15928))+20);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 15933)), 0);
+      i1 = OOC_Doc_Input_Texinfo__Parse_SkipWhitespace_OnlyWS((void*)(_check_pointer(i1, 15933)), i2);
       
 l20:
-      if (i0) goto l11_loop;
+      if (i1) goto l11_loop;
 l24:
       return;
       ;
@@ -1337,19 +1331,19 @@ l4:
     }
 
     
-    OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList() {
-      register OOC_INT32 i0,i1,i2,i3;
+    OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList(void) {
+      register OOC_INT32 i0,i1,i2;
       OOC_CHAR8 noIndent;
       OOC_Doc__BlockList list;
       OOC_Doc__InlineElement inlineText;
       auto OOC_Doc__InlineElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList(OOC_CHAR8 isArg, OOC_CHAR8 ignoreParagraph, OOC_CHAR8 exitAfterEOL);
-      auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine();
+      auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine(void);
       auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_CheckEnd(OOC_INT8 id);
-      auto OOC_Doc__Itemize OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize();
-      auto OOC_Doc__Enumerate OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate();
-      auto OOC_Doc__Example OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example();
-      auto OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond();
-      auto OOC_Doc__Table OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table();
+      auto OOC_Doc__Itemize OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize(void);
+      auto OOC_Doc__Enumerate OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate(void);
+      auto OOC_Doc__Example OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example(void);
+      auto OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond(void);
+      auto OOC_Doc__Table OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table(void);
         
         OOC_Doc__InlineElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList(OOC_CHAR8 isArg, OOC_CHAR8 ignoreParagraph, OOC_CHAR8 exitAfterEOL) {
           register OOC_INT32 i0,i1,i2,i3,i4;
@@ -1359,12 +1353,12 @@ l4:
           OOC_Doc_Input_Texinfo__Token posToken;
           OOC_Doc__InlineElement inlineText;
           auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_AddText(const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
-          auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer();
+          auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer(void);
           auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_AddInline(OOC_Doc__InlineElement i);
-          auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_EndOfArguments();
+          auto OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_EndOfArguments(void);
           auto void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_CheckNumOfArgs(OOC_INT8 id, OOC_INT32 num);
-          auto OOC_Doc__Email OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Email();
-          auto OOC_Doc__Uref OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Uref();
+          auto OOC_Doc__Email OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Email(void);
+          auto OOC_Doc__Uref OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Uref(void);
             
             void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_AddText(const OOC_CHAR8 str__ref[], OOC_LEN str_0d) {
               register OOC_INT32 i0,i1,i2;
@@ -1382,7 +1376,7 @@ l4:
               OOC_Doc__SetPosition((void*)(OOC_INT32)&bufferPos, (RT0__Struct)((OOC_INT32)&_td_OOC_Doc__Position), i1, i2, i0);
 l3:
               i0 = (OOC_INT32)buffer;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18388)))), OOC_Doc_TextBuffer__BufferDesc_Append)),OOC_Doc_TextBuffer__BufferDesc_Append)((OOC_Doc_TextBuffer__Buffer)i0, (void*)(OOC_INT32)str, str_0d);
+              OOC_Doc_TextBuffer__BufferDesc_Append((OOC_Doc_TextBuffer__Buffer)i0, (void*)(OOC_INT32)str, str_0d);
               i0 = (OOC_INT32)token;
               i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18422));
               i0 = *(OOC_UINT8*)((_check_pointer(i0, 18428))+4);
@@ -1397,28 +1391,28 @@ l6:
 l8:
               if (!i0) goto l10;
               i0 = (OOC_INT32)buffer;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18477)))), OOC_Doc_TextBuffer__BufferDesc_AppendEOL)),OOC_Doc_TextBuffer__BufferDesc_AppendEOL)((OOC_Doc_TextBuffer__Buffer)i0);
+              OOC_Doc_TextBuffer__BufferDesc_AppendEOL((OOC_Doc_TextBuffer__Buffer)i0);
 l10:
               return;
               ;
             }
 
             
-            void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer() {
+            void OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer(void) {
               register OOC_INT32 i0,i1,i2;
 
               i0 = (OOC_INT32)buffer;
               i1 = *(OOC_INT32*)((_check_pointer(i0, 18594))+4);
               i1 = i1!=0;
               if (!i1) goto l4;
-              i1 = (OOC_INT32)list;
-              i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18655));
+              i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18655));
               i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 18655));
               i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 18660)), 0);
-              i0 = (OOC_INT32)OOC_Doc__NewText((void*)(_check_pointer(i2, 18660)), i0, (void*)(OOC_INT32)&bufferPos, (RT0__Struct)((OOC_INT32)&_td_OOC_Doc__Position));
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18626)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i1, (OOC_Doc__InlineElement)i0);
+              i2 = (OOC_INT32)list;
+              i0 = (OOC_INT32)OOC_Doc__NewText((void*)(_check_pointer(i1, 18660)), i0, (void*)(OOC_INT32)&bufferPos, (RT0__Struct)((OOC_INT32)&_td_OOC_Doc__Position));
+              OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i2, (OOC_Doc__InlineElement)i0);
               i0 = (OOC_INT32)buffer;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18694)))), OOC_Doc_TextBuffer__BufferDesc_Clear)),OOC_Doc_TextBuffer__BufferDesc_Clear)((OOC_Doc_TextBuffer__Buffer)i0);
+              OOC_Doc_TextBuffer__BufferDesc_Clear((OOC_Doc_TextBuffer__Buffer)i0);
 l4:
               return;
               ;
@@ -1431,19 +1425,19 @@ l4:
               OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer();
               i0 = (OOC_INT32)list;
               i1 = (OOC_INT32)i;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18942)))), OOC_Doc__InlineListDesc_Append)),OOC_Doc__InlineListDesc_Append)((OOC_Doc__InlineList)i0, (OOC_Doc__InlineElement)i1);
+              OOC_Doc__InlineListDesc_Append((OOC_Doc__InlineList)i0, (OOC_Doc__InlineElement)i1);
               i0 = (OOC_INT32)token;
               i0 = *(OOC_UINT8*)((_check_pointer(i0, 18974))+4);
               if (!i0) goto l4;
               i0 = (OOC_INT32)buffer;
-              OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19003)))), OOC_Doc_TextBuffer__BufferDesc_AppendEOL)),OOC_Doc_TextBuffer__BufferDesc_AppendEOL)((OOC_Doc_TextBuffer__Buffer)i0);
+              OOC_Doc_TextBuffer__BufferDesc_AppendEOL((OOC_Doc_TextBuffer__Buffer)i0);
 l4:
               return;
               ;
             }
 
             
-            OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_EndOfArguments() {
+            OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_EndOfArguments(void) {
               register OOC_INT32 i0,i1;
 
               i0 = (OOC_INT32)token;
@@ -1500,7 +1494,7 @@ l4:
             }
 
             
-            OOC_Doc__Email OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Email() {
+            OOC_Doc__Email OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Email(void) {
               register OOC_INT32 i0,i1,i2;
               OOC_Doc__InlineElement displayed;
 
@@ -1548,7 +1542,7 @@ l17:
             }
 
             
-            OOC_Doc__Uref OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Uref() {
+            OOC_Doc__Uref OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_Uref(void) {
               register OOC_INT32 i0,i1,i2,i3;
               OOC_Doc__InlineElement replacement;
 
@@ -1626,30 +1620,29 @@ l1_loop:
           case 7 ... 25:
             OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_FlushBuffer();
             i1 = (OOC_INT32)token;
-            i1 = *(OOC_INT8*)((_check_pointer(i1, 21993))+5);
-            i1 = OOC_Doc_Input_Texinfo__Parse_IdToMark(i1);
-            mark = i1;
-            i2 = (OOC_INT32)token;
-            posToken = (OOC_Doc_Input_Texinfo__Token)i2;
+            i2 = *(OOC_INT8*)((_check_pointer(i1, 21993))+5);
+            i2 = OOC_Doc_Input_Texinfo__Parse_IdToMark(i2);
+            mark = i2;
+            posToken = (OOC_Doc_Input_Texinfo__Token)i1;
             OOC_Doc_Input_Texinfo__Parse_NextToken();
             OOC_Doc_Input_Texinfo__Parse_CheckToken(43);
-            i2 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList(0u, 0u, 0u);
-            inlineText = (OOC_Doc__InlineElement)i2;
+            i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList(0u, 0u, 0u);
+            inlineText = (OOC_Doc__InlineElement)i1;
             OOC_Doc_Input_Texinfo__Parse_CheckToken(44);
-            i3 = 12<=i1;
+            i3 = 12<=i2;
             if (i3) goto l8;
             i3=0u;
             goto l10;
 l8:
-            i3 = i1<=18;
+            i3 = i2<=18;
             
 l10:
             if (i3) goto l12;
-            i1 = (OOC_INT32)OOC_Doc__NewMarkedInline(i1, (OOC_Doc__InlineElement)i2);
+            i1 = (OOC_INT32)OOC_Doc__NewMarkedInline(i2, (OOC_Doc__InlineElement)i1);
             OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_AddInline((OOC_Doc__InlineElement)i1);
             goto l35;
 l12:
-            i1 = (OOC_INT32)OOC_Doc__NewOberonRef(i1, (OOC_Doc__InlineElement)i2, (ADT_Storable__Object)(OOC_INT32)0);
+            i1 = (OOC_INT32)OOC_Doc__NewOberonRef(i2, (OOC_Doc__InlineElement)i1, (ADT_Storable__Object)(OOC_INT32)0);
             OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList_AddInline((OOC_Doc__InlineElement)i1);
             i1 = (OOC_INT32)list;
             i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 22401))+4);
@@ -1738,7 +1731,7 @@ l43:
         }
 
         
-        OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine() {
+        OOC_CHAR8 OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine(void) {
           register OOC_INT32 i0,i1;
 
           i0 = (OOC_INT32)token;
@@ -1878,7 +1871,7 @@ l21:
         }
 
         
-        OOC_Doc__Itemize OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize() {
+        OOC_Doc__Itemize OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize(void) {
           register OOC_INT32 i0,i1,i2,i3,i4;
           OOC_Doc__InlineElement mark;
           struct OOC_Doc__Position pos;
@@ -1938,10 +1931,9 @@ l17:
           goto l22;
 l19:
           _copy_8((const void*)"x",(void*)(OOC_INT32)str2,2);
-          i0 = *(OOC_INT8*)((_check_pointer(i0, 26139))+5);
-          i0 = OOC_Doc_Input_Texinfo__Parse_IdToChar(i0);
-          *(OOC_UINT8*)((OOC_INT32)str2+(_check_index(0, 2, OOC_UINT8, 26117))) = i0;
-          i0 = (OOC_INT32)token;
+          i1 = *(OOC_INT8*)((_check_pointer(i0, 26139))+5);
+          i1 = OOC_Doc_Input_Texinfo__Parse_IdToChar(i1);
+          *(OOC_UINT8*)((OOC_INT32)str2+(_check_index(0, 2, OOC_UINT8, 26117))) = i1;
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 26184))+20);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 26184))+20);
           i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 26189)), 0);
@@ -1994,7 +1986,7 @@ l34_loop:
           itemText = (OOC_Doc__BlockElement)i3;
           i4 = OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine();
           i3 = (OOC_INT32)OOC_Doc__NewItem(i4, (OOC_Doc__BlockElement)i3);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 26903)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
+          OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
           i3 = (OOC_INT32)token;
           i3 = *(OOC_INT8*)((_check_pointer(i3, 26805))+5);
           i3 = i3==36;
@@ -2009,7 +2001,7 @@ l39:
         }
 
         
-        OOC_Doc__Enumerate OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate() {
+        OOC_Doc__Enumerate OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate(void) {
           register OOC_INT32 i0,i1,i2,i3,i4;
           OOC_INT8 mode;
           OOC_INT32 start;
@@ -2090,15 +2082,14 @@ l22:
           if (i0) goto l34;
           i0 = (OOC_INT32)token;
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28135))+20);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28135))+20);
-          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 28139)), 0);
-          i0 = Strings__Length((void*)(_check_pointer(i2, 28139)), i0);
-          i0 = (i0-i1)==1;
-          if (i0) goto l27;
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28135))+20);
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 28139)), 0);
+          i2 = Strings__Length((void*)(_check_pointer(i2, 28139)), i3);
+          i2 = (i2-i1)==1;
+          if (i2) goto l27;
           i0=(-1);
           goto l36;
 l27:
-          i0 = (OOC_INT32)token;
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 28187))+20);
           i2 = _check_pointer(i2, 28191);
           i3 = OOC_ARRAY_LENGTH(i2, 0);
@@ -2174,7 +2165,7 @@ l52_loop:
           itemText = (OOC_Doc__BlockElement)i3;
           i4 = OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine();
           i3 = (OOC_INT32)OOC_Doc__NewItem(i4, (OOC_Doc__BlockElement)i3);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 29151)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
+          OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
           i3 = (OOC_INT32)token;
           i3 = *(OOC_INT8*)((_check_pointer(i3, 29053))+5);
           i3 = i3==36;
@@ -2190,7 +2181,7 @@ l57:
         }
 
         
-        OOC_Doc__Example OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example() {
+        OOC_Doc__Example OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example(void) {
           register OOC_INT32 i0,i1;
 
           OOC_Doc_Input_Texinfo__Parse_NextToken();
@@ -2210,7 +2201,7 @@ l3:
         }
 
         
-        OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond() {
+        OOC_Doc__BlockElement OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond(void) {
           register OOC_INT32 i0,i1;
           OOC_INT8 cmdId;
 
@@ -2251,7 +2242,7 @@ l8:
         }
 
         
-        OOC_Doc__Table OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table() {
+        OOC_Doc__Table OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table(void) {
           register OOC_INT32 i0,i1,i2,i3;
           OOC_INT32 mark;
           OOC_Doc__BlockList rowList;
@@ -2336,7 +2327,7 @@ l27:
           
 l28:
           i3 = (OOC_INT32)OOC_Doc__NewFirstColumn(0u, (OOC_Doc__InlineElement)i3);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 31909)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
+          OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i2, (OOC_Doc__BlockElement)i3);
           i3 = (OOC_INT32)token;
           i3 = *(OOC_INT8*)((_check_pointer(i3, 31978))+5);
           i3 = i3!=37;
@@ -2347,7 +2338,7 @@ l33:
           i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 32130));
           i3 = (OOC_INT32)OOC_Doc__NewItem(0u, (OOC_Doc__BlockElement)i3);
           i2 = (OOC_INT32)OOC_Doc__NewTableRow(0u, (OOC_Doc__BlockElement)i2, (OOC_Doc__Item)i3);
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 32069)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i2);
+          OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i2);
           i2 = (OOC_INT32)token;
           i3 = *(OOC_INT8*)((_check_pointer(i2, 31358))+5);
           i3 = i3!=35;
@@ -2388,30 +2379,30 @@ l1_loop:
         OOC_Doc_Input_Texinfo__Parse_NextToken();
         goto l1_loop;
       case 29:
-        i0 = (OOC_INT32)list;
-        i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize();
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 32652)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Itemize();
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         goto l1_loop;
       case 30:
-        i0 = (OOC_INT32)list;
-        i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate();
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 32720)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Enumerate();
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         goto l1_loop;
       case 28:
-        i0 = (OOC_INT32)list;
-        i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example();
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 32788)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Example();
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         goto l1_loop;
       case 32:
       case 33:
-        i0 = (OOC_INT32)list;
-        i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond();
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 32867)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_PCond();
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         goto l1_loop;
       case 34:
-        i0 = (OOC_INT32)list;
-        i1 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table();
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 32929)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_Table();
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         goto l1_loop;
       default:
         i1 = *(OOC_INT8*)((_check_pointer(i0, 33041))+5);
@@ -2433,12 +2424,11 @@ l17:
         if (i0) goto l25;
         i0 = (OOC_INT32)OOC_Doc_Input_Texinfo__Parse_ParseBlockList_ParseInlineList(0u, 0u, 0u);
         inlineText = (OOC_Doc__InlineElement)i0;
-        i0 = (OOC_INT32)list;
         i1 = OOC_Doc_Input_Texinfo__Parse_ParseBlockList_AtEmptyLine();
-        i2 = (OOC_INT32)inlineText;
-        i3 = noIndent;
-        i1 = (OOC_INT32)OOC_Doc__NewParagraph(i1, (OOC_Doc__InlineElement)i2, i3);
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 33300)))), OOC_Doc__BlockListDesc_Append)),OOC_Doc__BlockListDesc_Append)((OOC_Doc__BlockList)i0, (OOC_Doc__BlockElement)i1);
+        i2 = noIndent;
+        i0 = (OOC_INT32)OOC_Doc__NewParagraph(i1, (OOC_Doc__InlineElement)i0, i2);
+        i1 = (OOC_INT32)list;
+        OOC_Doc__BlockListDesc_Append((OOC_Doc__BlockList)i1, (OOC_Doc__BlockElement)i0);
         noIndent = 0u;
         goto l1_loop;
 l22:
@@ -2489,15 +2479,14 @@ l7:
   i1 = (OOC_INT32)blockList;
   i2 = (OOC_INT32)decoration;
   i0 = (OOC_INT32)OOC_Doc__NewDocument((OOC_Doc__BlockElement)i1, (OOC_Doc_Decoration__Decoration)i2, i0);
-  document = (OOC_Doc__Document)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 34109)))), OOC_Doc__DocumentDesc_Normalize)),OOC_Doc__DocumentDesc_Normalize)((OOC_Doc__Document)i0);
+  OOC_Doc__DocumentDesc_Normalize((OOC_Doc__Document)i0);
   return (OOC_Doc__Document)i0;
 l8:
   _failed_function(14077); return 0;
   ;
 }
 
-static void OOC_Doc_Input_Texinfo__Init() {
+static void OOC_Doc_Input_Texinfo__Init(void) {
   register OOC_INT32 i0,i1;
   OOC_INT32 i;
   auto void OOC_Doc_Input_Texinfo__Init_Register(OOC_INT32 cmdId, const OOC_CHAR8 name__ref[], OOC_LEN name_0d);

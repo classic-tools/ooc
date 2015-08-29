@@ -33,8 +33,8 @@ extern OOC_INT32 IO_StdChannels__ChannelDesc_FileDescriptor(IO_StdChannels__Chan
 #define _TBN_IO_StdChannels__ChannelDesc_FileDescriptor 2
 typedef OOC_INT32 (*_TBP_IO_StdChannels__ChannelDesc_FileDescriptor)(IO_StdChannels__Channel ch);
 extern void NORETURN IO_StdChannels__IOError(Object__String suffix) NORETURN2;
-extern void OOC_IO_StdChannels_init();
-extern void OOC_IO_StdChannels_init0();
+extern void OOC_IO_StdChannels_init(void);
+extern void OOC_IO_StdChannels_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_StdChannels__Channel;

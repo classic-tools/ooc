@@ -11,7 +11,7 @@ void URI_Scheme_CurrentDoc__Init(URI_Scheme_CurrentDoc__CurrentDoc uri) {
   ;
 }
 
-URI_Scheme_CurrentDoc__CurrentDoc URI_Scheme_CurrentDoc__New() {
+URI_Scheme_CurrentDoc__CurrentDoc URI_Scheme_CurrentDoc__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_URI_Scheme_CurrentDoc__CurrentDoc.baseTypes[0]);

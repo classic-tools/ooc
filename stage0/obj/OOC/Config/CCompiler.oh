@@ -15,15 +15,15 @@ extern Config_Section_Options__Option OOC_Config_CCompiler__installData;
 extern Config_Section_Options__Option OOC_Config_CCompiler__uninstall;
 extern Config_Section_Options__Option OOC_Config_CCompiler__bindir;
 extern Config_Section_Options__Option OOC_Config_CCompiler__oocdir;
-extern OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool();
+extern OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool(void);
 extern void OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern void OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern void OOC_Config_CCompiler__InstallDirectoryCmd(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern void OOC_Config_CCompiler__InstallProgramCmd(URI__URI file, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern void OOC_Config_CCompiler__UninstallProgramCmd(Object__String path, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_Config_CCompiler__RegisterConfig();
-extern void OOC_OOC_Config_CCompiler_init();
-extern void OOC_OOC_Config_CCompiler_init0();
+extern void OOC_Config_CCompiler__RegisterConfig(void);
+extern void OOC_OOC_Config_CCompiler_init(void);
+extern void OOC_OOC_Config_CCompiler_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_CCompiler__1405;

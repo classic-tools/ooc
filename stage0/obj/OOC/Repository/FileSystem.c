@@ -153,7 +153,7 @@ l7:
   i1 = (OOC_INT32)srcFileOverride;
   i2 = i1!=(OOC_INT32)0;
   if (i2) goto l17;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4021)))), &_td_URI_Scheme_File__URIDesc, 4021)), 4025)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4021)))), &_td_URI_Scheme_File__URIDesc, 4021)), (void*)(OOC_INT32)str, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4021)))), &_td_URI_Scheme_File__URIDesc, 4021)), (void*)(OOC_INT32)str, 1024);
   i0 = Files__Exists((void*)(OOC_INT32)str, 1024);
   if (i0) goto l15;
   i0 = (OOC_INT32)OOC_Repository_FileSystem__RepositoryDesc_GetModule_GetURI(1, (void*)(OOC_INT32)&res);
@@ -161,7 +161,7 @@ l7:
   i1 = (OOC_INT32)res;
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l13;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4341)))), &_td_URI_Scheme_File__URIDesc, 4341)), 4345)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4341)))), &_td_URI_Scheme_File__URIDesc, 4341)), (void*)(OOC_INT32)str, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4341)))), &_td_URI_Scheme_File__URIDesc, 4341)), (void*)(OOC_INT32)str, 1024);
   i0 = Files__Exists((void*)(OOC_INT32)str, 1024);
   if (i0) goto l11;
   return (OOC_Repository_FileSystem__Module)(OOC_INT32)0;
@@ -236,7 +236,7 @@ l11:
   i1 = (OOC_INT32)res;
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l18;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5438)))), &_td_URI_Scheme_File__URIDesc, 5438)), 5442)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5438)))), &_td_URI_Scheme_File__URIDesc, 5438)), (void*)(OOC_INT32)str, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5438)))), &_td_URI_Scheme_File__URIDesc, 5438)), (void*)(OOC_INT32)str, 1024);
   i1 = Files__Exists((void*)(OOC_INT32)str, 1024);
   if (i1) goto l16;
   return (URI__URI)(OOC_INT32)0;
@@ -306,11 +306,9 @@ l10:
   i1 = *(OOC_INT8*)((_check_pointer(i0, 6423))+16);
   _assert((i1==4), 127, 6415);
   Strings__Append("lib", 4, (void*)(OOC_INT32)path, path_0d);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6511))+12);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6518))+48);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6511))+12);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6518))+48);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6538)))), &_td_Object__String8Desc, 6538)), 6546)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6538)))), &_td_Object__String8Desc, 6538)));
+  i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6538)))), &_td_Object__String8Desc, 6538)));
   chars = (Object__CharsLatin1)i0;
   _copy_8((const void*)(_check_pointer(i0, 6578)),(void*)(OOC_INT32)str,1024);
 l11:
@@ -384,9 +382,9 @@ void OOC_Repository_FileSystem__ModuleDesc_GetTimeStamp(OOC_Repository_FileSyste
 
   i0 = (OOC_INT32)m;
   i1 = fileId;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7797)))), OOC_Repository_FileSystem__ModuleDesc_GetURI)),OOC_Repository_FileSystem__ModuleDesc_GetURI)((OOC_Repository_FileSystem__Module)i0, i1, 0u);
+  i0 = (OOC_INT32)OOC_Repository_FileSystem__ModuleDesc_GetURI((OOC_Repository_FileSystem__Module)i0, i1, 0u);
   uri = (URI__URI)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7839)))), &_td_URI_Scheme_File__URIDesc, 7839)), 7843)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7839)))), &_td_URI_Scheme_File__URIDesc, 7839)), (void*)(OOC_INT32)path, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7839)))), &_td_URI_Scheme_File__URIDesc, 7839)), (void*)(OOC_INT32)path, 1024);
   i0 = (OOC_INT32)ts__tag;
   Files__GetModTime((void*)(OOC_INT32)path, 1024, (void*)(OOC_INT32)ts, (RT0__Struct)i0, (void*)(OOC_INT32)&res);
   i1 = (OOC_INT32)res;
@@ -405,9 +403,9 @@ OOC_CHAR8 OOC_Repository_FileSystem__ModuleDesc_FileExists(OOC_Repository_FileSy
 
   i0 = (OOC_INT32)m;
   i1 = fileId;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8134)))), OOC_Repository_FileSystem__ModuleDesc_GetURI)),OOC_Repository_FileSystem__ModuleDesc_GetURI)((OOC_Repository_FileSystem__Module)i0, i1, 0u);
+  i0 = (OOC_INT32)OOC_Repository_FileSystem__ModuleDesc_GetURI((OOC_Repository_FileSystem__Module)i0, i1, 0u);
   uri = (URI__URI)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8176)))), &_td_URI_Scheme_File__URIDesc, 8176)), 8180)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8176)))), &_td_URI_Scheme_File__URIDesc, 8176)), (void*)(OOC_INT32)path, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8176)))), &_td_URI_Scheme_File__URIDesc, 8176)), (void*)(OOC_INT32)path, 1024);
   i0 = Files__Exists((void*)(OOC_INT32)path, 1024);
   return i0;
   ;
@@ -420,14 +418,14 @@ OOC_Scanner_InputBuffer__Buffer OOC_Repository_FileSystem__ModuleDesc_GetInputBu
   OOC_Error__List errList;
 
   i0 = (OOC_INT32)m;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8503)))), OOC_Repository_FileSystem__ModuleDesc_GetURI)),OOC_Repository_FileSystem__ModuleDesc_GetURI)((OOC_Repository_FileSystem__Module)i0, 0, 1u);
+  i0 = (OOC_INT32)OOC_Repository_FileSystem__ModuleDesc_GetURI((OOC_Repository_FileSystem__Module)i0, 0, 1u);
   modURI = (URI__URI)i0;
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8556)))), &_td_URI_Scheme_File__URIDesc);
   if (i1) goto l3;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8638)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)str, 1024);
   goto l4;
 l3:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8598)))), &_td_URI_Scheme_File__URIDesc, 8598)), 8602)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8598)))), &_td_URI_Scheme_File__URIDesc, 8598)), (void*)(OOC_INT32)str, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8598)))), &_td_URI_Scheme_File__URIDesc, 8598)), (void*)(OOC_INT32)str, 1024);
 l4:
   i1 = (OOC_INT32)OOC_Error__NewList((void*)(OOC_INT32)str, 1024);
   errList = (OOC_Error__List)i1;
@@ -448,9 +446,9 @@ void OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir(OOC_Repository_FileSy
 
   i0 = (OOC_INT32)m;
   i1 = fileId;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9068)))), OOC_Repository_FileSystem__ModuleDesc_GetURI)),OOC_Repository_FileSystem__ModuleDesc_GetURI)((OOC_Repository_FileSystem__Module)i0, i1, 1u);
+  i0 = (OOC_INT32)OOC_Repository_FileSystem__ModuleDesc_GetURI((OOC_Repository_FileSystem__Module)i0, i1, 1u);
   uri = (URI__URI)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9109)))), &_td_URI_Scheme_File__URIDesc, 9109)), 9113)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9109)))), &_td_URI_Scheme_File__URIDesc, 9109)), (void*)(OOC_INT32)path, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9109)))), &_td_URI_Scheme_File__URIDesc, 9109)), (void*)(OOC_INT32)path, 1024);
   OS_Path__dirname((void*)(OOC_INT32)path, 1024, (void*)(OOC_INT32)str, 1024);
   OS_Files__makedirs((void*)(OOC_INT32)str, 1024, 511, (void*)(OOC_INT32)&res);
   i0 = (OOC_INT32)res;
@@ -471,8 +469,8 @@ IO__ByteChannel OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel(OOC_Repos
 
   i0 = (OOC_INT32)m;
   i1 = fileId;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9544)))), OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir)),OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir)((OOC_Repository_FileSystem__Module)i0, i1);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9584)))), OOC_Repository_FileSystem__ModuleDesc_GetURI)),OOC_Repository_FileSystem__ModuleDesc_GetURI)((OOC_Repository_FileSystem__Module)i0, i1, 1u);
+  OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir((OOC_Repository_FileSystem__Module)i0, i1);
+  i0 = (OOC_INT32)OOC_Repository_FileSystem__ModuleDesc_GetURI((OOC_Repository_FileSystem__Module)i0, i1, 1u);
   uri = (URI__URI)i0;
   OOC_Logger__WriteFile((URI__URI)i0);
   i1 = makeTmp;

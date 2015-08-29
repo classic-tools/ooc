@@ -58,8 +58,8 @@ typedef void (*_TBP_Config_Section_Options__SectionDesc_ProcessElements)(Config_
 extern void Config_Section_Options__SectionDesc_DumpContent(Config_Section_Options__Section s, Channel__Channel ch);
 #define _TBN_Config_Section_Options__SectionDesc_DumpContent 0
 typedef void (*_TBP_Config_Section_Options__SectionDesc_DumpContent)(Config_Section_Options__Section s, Channel__Channel ch);
-extern void OOC_Config_Section_Options_init();
-extern void OOC_Config_Section_Options_init0();
+extern void OOC_Config_Section_Options_init(void);
+extern void OOC_Config_Section_Options_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Section_Options__Section;

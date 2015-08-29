@@ -64,8 +64,8 @@ typedef XML_UnicodeCodec__Codec (*_TBP_XML_UnicodeCodec_UTF16__FactoryBEDesc_New
 extern void XML_UnicodeCodec_UTF16__FactoryBEDesc_GetEncodingName(XML_UnicodeCodec_UTF16__FactoryBE f, OOC_CHAR8 name[], OOC_LEN name_0d);
 #define _TBN_XML_UnicodeCodec_UTF16__FactoryBEDesc_GetEncodingName 0
 typedef void (*_TBP_XML_UnicodeCodec_UTF16__FactoryBEDesc_GetEncodingName)(XML_UnicodeCodec_UTF16__FactoryBE f, OOC_CHAR8 name[], OOC_LEN name_0d);
-extern void OOC_XML_UnicodeCodec_UTF16_init();
-extern void OOC_XML_UnicodeCodec_UTF16_init0();
+extern void OOC_XML_UnicodeCodec_UTF16_init(void);
+extern void OOC_XML_UnicodeCodec_UTF16_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_UnicodeCodec_UTF16__Codec;

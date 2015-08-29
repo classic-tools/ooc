@@ -29,7 +29,7 @@ typedef struct Config_Source_Environment__EnvironmentDesc {
   Config_Source_Environment__VariableTemplate variableTemplates;
   Config_Source_Environment__Command commandList;
 } Config_Source_Environment__EnvironmentDesc;
-extern Config_Source_Environment__Environment Config_Source_Environment__New();
+extern Config_Source_Environment__Environment Config_Source_Environment__New(void);
 extern void Config_Source_Environment__CommandDesc_DoNotWrite(Config_Source_Environment__Command command);
 #define _TBN_Config_Source_Environment__CommandDesc_DoNotWrite 0
 typedef void (*_TBP_Config_Source_Environment__CommandDesc_DoNotWrite)(Config_Source_Environment__Command command);
@@ -42,8 +42,8 @@ typedef Msg__Msg (*_TBP_Config_Source_Environment__EnvironmentDesc_Parse)(Config
 extern void Config_Source_Environment__EnvironmentDesc_Write(Config_Source_Environment__Environment env, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 #define _TBN_Config_Source_Environment__EnvironmentDesc_Write 0
 typedef void (*_TBP_Config_Source_Environment__EnvironmentDesc_Write)(Config_Source_Environment__Environment env, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
-extern void OOC_Config_Source_Environment_init();
-extern void OOC_Config_Source_Environment_init0();
+extern void OOC_Config_Source_Environment_init(void);
+extern void OOC_Config_Source_Environment_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Source_Environment__VariableTemplate;

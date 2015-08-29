@@ -241,6 +241,7 @@ typedef struct OOC_IR__SelectProcDesc {
   OOC_SymbolTable__ProcDecl tbProc;
   OOC_Scanner_Builder_BasicList__Symbol tbProcSym;
   OOC_CHAR8 isStaticCall;
+  OOC_CHAR8 isSuperCall;
 } OOC_IR__SelectProcDesc;
 typedef struct OOC_IR__SetMemberDesc *OOC_IR__SetMember;
 typedef struct OOC_IR__SetMemberDesc {
@@ -1254,8 +1255,8 @@ typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewOperator)(OOC_IR__Build
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewCall(OOC_IR__Builder b, OOC_IR__Expression design, OOC_IR__ExpressionList arguments, OOC_CHAR8 isFunctionCall, OOC_Scanner_Builder_BasicList__Symbol endOfArgsSym);
 #define _TBN_OOC_IR__BuilderDesc_NewCall 26
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewCall)(OOC_IR__Builder b, OOC_IR__Expression design, OOC_IR__ExpressionList arguments, OOC_CHAR8 isFunctionCall, OOC_Scanner_Builder_BasicList__Symbol endOfArgsSym);
-extern void OOC_OOC_IR_init();
-extern void OOC_OOC_IR_init0();
+extern void OOC_OOC_IR_init(void);
+extern void OOC_OOC_IR_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IR__Node;
@@ -1342,7 +1343,7 @@ extern RT0__StructDesc _td_OOC_IR__Var;
 extern RT0__StructDesc _td_OOC_IR__VarDesc;
 extern RT0__StructDesc _td_OOC_IR__Statement;
 extern RT0__StructDesc _td_OOC_IR__LoopStatm;
-extern RT0__StructDesc _td_OOC_IR__24017;
+extern RT0__StructDesc _td_OOC_IR__24245;
 extern RT0__StructDesc _td_OOC_IR__StatementSeq;
 extern RT0__StructDesc _td_OOC_IR__StatementDesc;
 extern RT0__StructDesc _td_OOC_IR__Assert;
@@ -1366,11 +1367,11 @@ extern RT0__StructDesc _td_OOC_IR__ForStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__IfStatm;
 extern RT0__StructDesc _td_OOC_IR__IfStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Case;
-extern RT0__StructDesc _td_OOC_IR__28676;
+extern RT0__StructDesc _td_OOC_IR__28904;
 extern RT0__StructDesc _td_OOC_IR__CaseLabels;
 extern RT0__StructDesc _td_OOC_IR__CaseDesc;
 extern RT0__StructDesc _td_OOC_IR__CaseStatm;
-extern RT0__StructDesc _td_OOC_IR__29002;
+extern RT0__StructDesc _td_OOC_IR__29230;
 extern RT0__StructDesc _td_OOC_IR__CaseList;
 extern RT0__StructDesc _td_OOC_IR__CaseStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__LoopStatmDesc;
@@ -1383,7 +1384,7 @@ extern RT0__StructDesc _td_OOC_IR__RepeatStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Return;
 extern RT0__StructDesc _td_OOC_IR__ReturnDesc;
 extern RT0__StructDesc _td_OOC_IR__CatchClause;
-extern RT0__StructDesc _td_OOC_IR__30471;
+extern RT0__StructDesc _td_OOC_IR__30699;
 extern RT0__StructDesc _td_OOC_IR__CatchList;
 extern RT0__StructDesc _td_OOC_IR__CatchClauseDesc;
 extern RT0__StructDesc _td_OOC_IR__TryStatm;
@@ -1393,7 +1394,7 @@ extern RT0__StructDesc _td_OOC_IR__WhileStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__WithStatm;
 extern RT0__StructDesc _td_OOC_IR__WithStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Procedure;
-extern RT0__StructDesc _td_OOC_IR__32011;
+extern RT0__StructDesc _td_OOC_IR__32239;
 extern RT0__StructDesc _td_OOC_IR__ProcedureList;
 extern RT0__StructDesc _td_OOC_IR__ProcedureDesc;
 extern RT0__StructDesc _td_OOC_IR__Module;
@@ -1410,10 +1411,10 @@ extern RT0__StructDesc _td_OOC_IR__VisitorDesc;
 extern RT0__StructDesc _td_OOC_IR__ConstFoldDesc;
 extern RT0__StructDesc _td_OOC_IR__ErrorContext;
 extern RT0__StructDesc _td_OOC_IR__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_IR__38206;
-extern RT0__StructDesc _td_OOC_IR__38414;
-extern RT0__StructDesc _td_OOC_IR__56094;
-extern RT0__StructDesc _td_OOC_IR__56459;
+extern RT0__StructDesc _td_OOC_IR__38434;
+extern RT0__StructDesc _td_OOC_IR__38642;
+extern RT0__StructDesc _td_OOC_IR__56322;
+extern RT0__StructDesc _td_OOC_IR__56687;
 #endif /* _MODULE_OOC_IR_ */
 
 /* --- */

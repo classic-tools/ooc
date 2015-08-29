@@ -818,9 +818,9 @@ void XML_Writer__WriterDesc_AttrObject(XML_Writer__Writer w, const OOC_CHAR16 na
   Object__CharsLatin1 chars;
 
   i0 = (OOC_INT32)value;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10489)))), Object__StringDesc_ToString)),Object__StringDesc_ToString)((Object__String)i0);
+  i0 = (OOC_INT32)Object__StringDesc_ToString((Object__String)i0);
   s = (Object__String)i0;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10524)))), &_td_Object__String8Desc, 10524)), 10532)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10524)))), &_td_Object__String8Desc, 10524)));
+  i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10524)))), &_td_Object__String8Desc, 10524)));
   chars = (Object__CharsLatin1)i0;
   i1 = (OOC_INT32)w;
   i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 10582)), 0);

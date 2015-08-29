@@ -53,7 +53,7 @@ URI_String__StringPtr URI_String__Copy(const URI_String__String str__ref, OOC_LE
 }
 
 URI_String__StringPtr URI_String__Unescape(URI_String__StringPtr str) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;
   OOC_INT16 i;
   URI_String__StringPtr res;
   OOC_INT16 j;
@@ -133,77 +133,70 @@ l17:
   res = (URI_String__StringPtr)i1;
   i = 0;
   j = 0;
-  i0 = _check_pointer(i0, 2412);
-  i2 = OOC_ARRAY_LENGTH(i0, 0);
-  i0 = *(OOC_UINT8*)(i0+(_check_index(0, i2, OOC_UINT16, 2412)));
-  i0 = i0!=0u;
-  if (i0) goto l22;
-  i0=i1;i1=0;
+  i2 = _check_pointer(i0, 2412);
+  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i2 = *(OOC_UINT8*)(i2+(_check_index(0, i3, OOC_UINT16, 2412)));
+  i2 = i2!=0u;
+  if (i2) goto l22;
+  i0=0;
   goto l35;
 l22:
-  i0=0;i2=0;
+  i2=0;i3=0;
 l23_loop:
-  i3 = (OOC_INT32)str;
-  i4 = _check_pointer(i3, 2440);
+  i4 = _check_pointer(i0, 2440);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
-  i4 = *(OOC_UINT8*)(i4+(_check_index(i0, i5, OOC_UINT16, 2440)));
+  i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 2440)));
   i4 = i4==37u;
   if (i4) goto l26;
   i4 = _check_pointer(i1, 2636);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
-  i3 = _check_pointer(i3, 2646);
-  i6 = OOC_ARRAY_LENGTH(i3, 0);
-  i3 = *(OOC_UINT8*)(i3+(_check_index(i0, i6, OOC_UINT16, 2646)));
-  *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 2636))) = i3;
-  i0 = i0+1;
-  i = i0;
+  i6 = _check_pointer(i0, 2646);
+  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i6 = *(OOC_UINT8*)(i6+(_check_index(i2, i7, OOC_UINT16, 2646)));
+  *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 2636))) = i6;
+  i2 = i2+1;
+  i = i2;
   
   goto l30;
 l26:
-  i1 = _check_pointer(i1, 2469);
-  i4 = OOC_ARRAY_LENGTH(i1, 0);
-  i3 = _check_pointer(i3, 2488);
-  i5 = OOC_ARRAY_LENGTH(i3, 0);
-  i0 = *(OOC_UINT8*)(i3+(_check_index((i0+1), i5, OOC_UINT16, 2488)));
-  i0 = URI_String__Unescape_Hex(i0);
-  i3 = (OOC_INT32)str;
-  i3 = _check_pointer(i3, 2507);
-  i5 = i;
-  i6 = OOC_ARRAY_LENGTH(i3, 0);
-  i3 = *(OOC_UINT8*)(i3+(_check_index((i5+2), i6, OOC_UINT16, 2507)));
-  i3 = URI_String__Unescape_Hex(i3);
-  *(OOC_UINT8*)(i1+(_check_index(i2, i4, OOC_UINT16, 2469))) = ((i0*16)+i3);
-  i0 = (OOC_INT32)res;
-  i1 = _check_pointer(i0, 2533);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i3 = j;
-  i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 2533)));
-  i1 = i1==0u;
-  if (!i1) goto l29;
-  i1 = _check_pointer(i0, 2563);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
-  *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 2563))) = 32u;
+  i4 = _check_pointer(i1, 2469);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i6 = _check_pointer(i0, 2488);
+  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i6 = *(OOC_UINT8*)(i6+(_check_index((i2+1), i7, OOC_UINT16, 2488)));
+  i6 = URI_String__Unescape_Hex(i6);
+  i7 = _check_pointer(i0, 2507);
+  i8 = OOC_ARRAY_LENGTH(i7, 0);
+  i7 = *(OOC_UINT8*)(i7+(_check_index((i2+2), i8, OOC_UINT16, 2507)));
+  i7 = URI_String__Unescape_Hex(i7);
+  *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 2469))) = ((i6*16)+i7);
+  i4 = _check_pointer(i1, 2533);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i4 = *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 2533)));
+  i4 = i4==0u;
+  if (!i4) goto l29;
+  i4 = _check_pointer(i1, 2563);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  *(OOC_UINT8*)(i4+(_check_index(i3, i5, OOC_UINT16, 2563))) = 32u;
 l29:
-  i1 = i;
-  i1 = i1+3;
-  i = i1;
-  i2=i3;{register OOC_INT32 h0=i0;i0=i1;i1=h0;}
+  i2 = i2+3;
+  i = i2;
+  
 l30:
-  i2 = i2+1;
-  j = i2;
-  i3 = (OOC_INT32)str;
-  i3 = _check_pointer(i3, 2412);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
-  i3 = *(OOC_UINT8*)(i3+(_check_index(i0, i4, OOC_UINT16, 2412)));
-  i3 = i3!=0u;
-  if (i3) goto l23_loop;
+  i3 = i3+1;
+  j = i3;
+  i4 = _check_pointer(i0, 2412);
+  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 2412)));
+  i4 = i4!=0u;
+  if (i4) goto l23_loop;
 l34:
-  i0=i1;i1=i2;
+  i0=i3;
 l35:
-  i2 = _check_pointer(i0, 2718);
+  i2 = _check_pointer(i1, 2718);
   i3 = OOC_ARRAY_LENGTH(i2, 0);
-  *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 2718))) = 0u;
-  return (URI_String__StringPtr)i0;
+  *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT16, 2718))) = 0u;
+  return (URI_String__StringPtr)i1;
   goto l37;
 l36:
   return (URI_String__StringPtr)i0;
@@ -213,7 +206,7 @@ l37:
 }
 
 void URI_String__AppendEscaped(const OOC_CHAR8 source__ref[], OOC_LEN source_0d, const OOC_CHAR8 unreserved__ref[], OOC_LEN unreserved_0d, OOC_CHAR8 dest[], OOC_LEN dest_0d) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1,i2,i3;
   OOC_ALLOCATE_VPAR(source,OOC_CHAR8 ,source_0d)
   OOC_ALLOCATE_VPAR(unreserved,OOC_CHAR8 ,unreserved_0d)
   OOC_INT16 i;
@@ -260,14 +253,11 @@ l7:
 l9:
   if (i2) goto l15;
   i2 = i1<dest_0d;
-  if (i2) goto l13;
-  i0=i1;
-  goto l25;
-l13:
-  i0 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 4081)));
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i1, dest_0d, OOC_UINT16, 4068))) = i0;
-  i0 = i1+1;
-  j = i0;
+  if (!i2) goto l25;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 4081)));
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i1, dest_0d, OOC_UINT16, 4068))) = i2;
+  i1 = i1+1;
+  j = i1;
   
   goto l25;
 l15:
@@ -275,35 +265,31 @@ l15:
   if (!i2) goto l18;
   *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i1, dest_0d, OOC_UINT16, 3775))) = 37u;
 l18:
-  i1 = i1+1;
-  i2 = i1<dest_0d;
-  if (!i2) goto l21;
-  i0 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 3875)));
-  i0 = URI_String__AppendEscaped_ToHex((i0>>4));
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i1, dest_0d, OOC_UINT16, 3848))) = i0;
+  i2 = i1+1;
+  i3 = i2<dest_0d;
+  if (!i3) goto l21;
+  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 3875)));
+  i3 = URI_String__AppendEscaped_ToHex((i3>>4));
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT16, 3848))) = i3;
 l21:
-  i0 = j;
-  i0 = i0+2;
-  i1 = i0<dest_0d;
-  if (!i1) goto l24;
-  i1 = i;
-  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT16, 3977)));
-  i1 = URI_String__AppendEscaped_ToHex((_mod(i1,16)));
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i0, dest_0d, OOC_UINT16, 3950))) = i1;
+  i2 = i1+2;
+  i3 = i2<dest_0d;
+  if (!i3) goto l24;
+  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 3977)));
+  i3 = URI_String__AppendEscaped_ToHex((_mod(i3,16)));
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT16, 3950))) = i3;
 l24:
-  i0 = j;
-  i0 = i0+3;
-  j = i0;
+  i1 = i1+3;
+  j = i1;
   
 l25:
-  i1 = i;
-  i1 = i1+1;
-  i = i1;
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT16, 3610)));
+  i0 = i0+1;
+  i = i0;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT16, 3610)));
   i2 = i2!=0u;
-  if (!i2) goto l30;
-  {register OOC_INT32 h0=i0;i0=i1;i1=h0;}
-  goto l4_loop;
+  if (i2) goto l4_loop;
+l29:
+  i0=i1;
 l30:
   i1 = i0<dest_0d;
   if (i1) goto l33;

@@ -35,8 +35,8 @@ typedef void (*_TBP_URI_Authority_ServerBased__AuthorityDesc_WriteXML)(URI_Autho
 extern void URI_Authority_ServerBased__AuthorityDesc_Append(URI_Authority_ServerBased__Authority auth, OOC_CHAR8 str[], OOC_LEN str_0d);
 #define _TBN_URI_Authority_ServerBased__AuthorityDesc_Append 0
 typedef void (*_TBP_URI_Authority_ServerBased__AuthorityDesc_Append)(URI_Authority_ServerBased__Authority auth, OOC_CHAR8 str[], OOC_LEN str_0d);
-extern void OOC_URI_Authority_ServerBased_init();
-extern void OOC_URI_Authority_ServerBased_init0();
+extern void OOC_URI_Authority_ServerBased_init(void);
+extern void OOC_URI_Authority_ServerBased_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Authority_ServerBased__Authority;

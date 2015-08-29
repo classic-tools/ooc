@@ -6,11 +6,11 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-typedef void (*Termination__Proc)();
+typedef void (*Termination__Proc)(void);
 extern void Termination__RegisterProc(Termination__Proc proc);
 extern void Termination__UnregisterProc(Termination__Proc proc);
-extern void OOC_Termination_init();
-extern void OOC_Termination_init0();
+extern void OOC_Termination_init(void);
+extern void OOC_Termination_init0(void);
 
 /* run-time meta data */
 #endif /* _MODULE_Termination_ */

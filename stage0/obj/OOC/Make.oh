@@ -57,7 +57,7 @@ extern void OOC_Make__ErrorContextDesc_GetTemplate(OOC_Make__ErrorContext contex
 #define _TBN_OOC_Make__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_Make__ErrorContextDesc_GetTemplate)(OOC_Make__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern void OOC_Make__InitRules(OOC_Make__Rules r);
-extern OOC_Make__Rules OOC_Make__NewRules();
+extern OOC_Make__Rules OOC_Make__NewRules(void);
 extern void OOC_Make__RulesDesc_SetBackend(OOC_Make__Rules r, OOC_INT32 backend);
 #define _TBN_OOC_Make__RulesDesc_SetBackend 6
 typedef void (*_TBP_OOC_Make__RulesDesc_SetBackend)(OOC_Make__Rules r, OOC_INT32 backend);
@@ -146,8 +146,8 @@ typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateLibrary)(OOC_Make__Rules r, O
 extern OOC_CHAR8 OOC_Make__RulesDesc_Update(OOC_Make__Rules r, OOC_Repository__Module module, OOC_INT8 fileId);
 #define _TBN_OOC_Make__RulesDesc_Update 10
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_Update)(OOC_Make__Rules r, OOC_Repository__Module module, OOC_INT8 fileId);
-extern void OOC_OOC_Make_init();
-extern void OOC_OOC_Make_init0();
+extern void OOC_OOC_Make_init(void);
+extern void OOC_OOC_Make_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make__ShellCommand;

@@ -1,4 +1,4 @@
-(* 	$Id: Namespace.Mod,v 1.8 2002/12/07 16:02:05 mva Exp $	 *)
+(* 	$Id: Namespace.Mod,v 1.9 2003/04/12 14:06:29 mva Exp $	 *)
 MODULE OOC:SymbolTable:Namespace;
 (*  Implements namespaces and semantic checks on them.
     Copyright (C) 2000-2002  Michael van Acken
@@ -440,6 +440,9 @@ PROCEDURE (ns: Extended) CheckRestrictions* (record: Sym.Record;
               ErrDecl (invalidTBProcExport, decl, errList)
             END;
             IF TR.IsValidRedefinition (base. formalPars, decl. formalPars) THEN
+              IF base.notRedefined THEN
+                base.notRedefined := FALSE;
+              END;
               base. CopyTBProcIndex (decl);
               IF (decl. name. pos < base. visibleFrom) THEN
                 ErrDecl (redefinitionBeforeBase, decl, errList)

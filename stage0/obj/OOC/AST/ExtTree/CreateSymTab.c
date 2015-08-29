@@ -288,7 +288,7 @@ void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitNodeList(OOC_AST_ExtTree_Cre
 }
 
 void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitModule(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST_ExtTree__Module module) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16,i17;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,i14,i15,i16;
   OOC_SymbolTable__Name moduleName;
   OOC_AST_ExtTree__ModuleFlags mf;
   OOC_INT8 _class;
@@ -373,8 +373,7 @@ l14:
   i4=2;
 l15:
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6780))+4);
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6780))+4);
-  i5 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 6790)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i6, 1u);
+  i5 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i5, 1u);
   str = (Object__String)i5;
   i5 = OOC_SymbolTable__StringToCallConv((Object__String)i5);
   callConv = i5;
@@ -417,8 +416,7 @@ l25_loop:
   i7 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 7945)))), &_td_OOC_AST_ExtTree__LinkLibFlagDesc);
   if (!i7) goto l60;
   i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7988))+4);
-  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7988))+4);
-  i7 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7997)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i8, 1u);
+  i7 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i7, 1u);
   str = (Object__String)i7;
   i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8032))+24);
   i8 = i8!=0;
@@ -428,8 +426,7 @@ l25_loop:
   goto l33;
 l32:
   i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8085))+24);
-  i9 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8085))+24);
-  i8 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i8, 8096)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i9, 0u);
+  i8 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i8, 0u);
   prefixOption = (Object__String)i8;
   
 l33:
@@ -441,8 +438,7 @@ l33:
   goto l37;
 l36:
   i9 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8246))+32);
-  i10 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8246))+32);
-  i9 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i9, 8257)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i10, 0u);
+  i9 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i9, 0u);
   suffixOption = (Object__String)i9;
   
 l37:
@@ -467,12 +463,7 @@ l42_loop:
   i15 = _check_pointer(i15, 8592);
   i16 = OOC_ARRAY_LENGTH(i15, 0);
   i15 = (OOC_INT32)*(OOC_INT32*)(i15+(_check_index(i12, i16, OOC_UINT32, 8592))*4);
-  i16 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 8575))+12);
-  i16 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i16, 8589))+4);
-  i16 = _check_pointer(i16, 8592);
-  i17 = OOC_ARRAY_LENGTH(i16, 0);
-  i16 = (OOC_INT32)*(OOC_INT32*)(i16+(_check_index(i12, i17, OOC_UINT32, 8592))*4);
-  i15 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i15, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i15, 8604)))), &_td_OOC_AST_ExtTree__TerminalDesc, 8604)), 8613)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)(_type_guard(i16, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i16, 8604)))), &_td_OOC_AST_ExtTree__TerminalDesc, 8604)), 1u);
+  i15 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)(_type_guard(i15, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i15, 8604)))), &_td_OOC_AST_ExtTree__TerminalDesc, 8604)), 1u);
   *(OOC_INT32*)(i13+(_check_index((i12>>1), i14, OOC_UINT32, 8561))*4) = i15;
   i12 = i12+2;
   j = i12;
@@ -486,14 +477,13 @@ l48:
   depList = (Object__StringArrayPtr)i6;
   
 l49:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8685)))), OOC_SymbolTable__ModuleDesc_AddLinkLib)),OOC_SymbolTable__ModuleDesc_AddLinkLib)((OOC_SymbolTable__Module)i1, (Object__String)i7, (Object__StringArrayPtr)i6, (Object__String)i8, (Object__String)i9);
+  OOC_SymbolTable__ModuleDesc_AddLinkLib((OOC_SymbolTable__Module)i1, (Object__String)i7, (Object__StringArrayPtr)i6, (Object__String)i8, (Object__String)i9);
   goto l60;
 l51:
   i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7232))+4);
-  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7232))+4);
-  i7 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7242)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i8, 1u);
+  i7 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i7, 1u);
   str = (Object__String)i7;
-  i7 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer((_type_guard(i7, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7292)))), &_td_Object__String8Desc, 7292)), 7300)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)(_type_guard(i7, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7292)))), &_td_Object__String8Desc, 7292)));
+  i7 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i7, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7292)))), &_td_Object__String8Desc, 7292)));
   chars = (Object__CharsLatin1)i7;
   i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 7360))+16);
   i9 = OOC_ARRAY_LENGTH((_check_pointer(i7, 7356)), 0);
@@ -513,8 +503,7 @@ l51:
   goto l55;
 l54:
   i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7554))+12);
-  i9 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7554))+12);
-  i8 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i8, 7565)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i9, 0u);
+  i8 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i8, 0u);
   prefixOption = (Object__String)i8;
   
 l55:
@@ -525,13 +514,12 @@ l55:
   i6=0;
   goto l59;
 l58:
-  i9 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7715))+20);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i6, 7715))+20);
-  i6 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i9, 7726)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i6, 0u);
+  i6 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i6, 0u);
   suffixOption = (Object__String)i6;
   
 l59:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7828)))), OOC_SymbolTable__ModuleDesc_AddLinkFile)),OOC_SymbolTable__ModuleDesc_AddLinkFile)((OOC_SymbolTable__Module)i1, (URI__HierarchicalURI)(_type_guard(i7, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7851)))), &_td_URI__HierarchicalURIDesc, 7851)), (Object__String)i8, (Object__String)i6);
+  OOC_SymbolTable__ModuleDesc_AddLinkFile((OOC_SymbolTable__Module)i1, (URI__HierarchicalURI)(_type_guard(i7, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i7, 7851)))), &_td_URI__HierarchicalURIDesc, 7851)), (Object__String)i8, (Object__String)i6);
 l60:
   i4 = i4+1;
   i = i4;
@@ -698,10 +686,10 @@ void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitConstDecl(OOC_AST_ExtTree_Cr
   i3 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetName((OOC_AST__Node)i3);
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10836))+12);
   i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i5, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i5, 10856)))), &_td_OOC_AST_ExtTree__TerminalDesc, 10856)), 10865));
-  i5 = *(OOC_INT32*)((_check_pointer(i5, 10870))+16);
   i6 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 10906));
   i6 = OOC_AST_ExtTree_CreateSymTab__ExportMark((OOC_AST__Node)i6);
   i7 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 10928));
+  i5 = *(OOC_INT32*)((_check_pointer(i5, 10870))+16);
   i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i7, 10938))+8);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10978))+8);
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10745)))), OOC_SymbolTable_Builder__BuilderDesc_NewConstDecl)),OOC_SymbolTable_Builder__BuilderDesc_NewConstDecl)((OOC_SymbolTable_Builder__Builder)i0, (OOC_SymbolTable__Item)i4, (OOC_SymbolTable__Name)i3, i5, i6, (OOC_Doc__Document)i7, (Object_Boxed__Object)0, (OOC_SymbolTable__PredefType)0, (OOC_AST__Node)i2);
@@ -919,8 +907,8 @@ l6:
       switch (i5) {
       case 43:
       case 44:
-        i4 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 13747)))), OOC_AST_ExtTree__TerminalDesc_GetString)),OOC_AST_ExtTree__TerminalDesc_GetString)((OOC_AST_ExtTree__Terminal)i4, 1u);
-        OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 13731)))), OOC_SymbolTable__ProcDeclDesc_SetLinkName)),OOC_SymbolTable__ProcDeclDesc_SetLinkName)((OOC_SymbolTable__ProcDecl)i2, (Object__String)i4);
+        i4 = (OOC_INT32)OOC_AST_ExtTree__TerminalDesc_GetString((OOC_AST_ExtTree__Terminal)i4, 1u);
+        OOC_SymbolTable__ProcDeclDesc_SetLinkName((OOC_SymbolTable__ProcDecl)i2, (Object__String)i4);
         goto l11;
       default:
         i4 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetName((OOC_AST__Node)i4);
@@ -993,7 +981,7 @@ l12:
   i5 = (OOC_INT32)OOC_AST_ExtTree_CreateSymTab__GetPosition((OOC_AST__Node)i5);
   i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 14514)))), OOC_SymbolTable_Builder__BuilderDesc_NewFormalPars)),OOC_SymbolTable_Builder__BuilderDesc_NewFormalPars)((OOC_SymbolTable_Builder__Builder)i6, (OOC_SymbolTable__Item)i1, (OOC_SymbolTable__Position)i5, (OOC_SymbolTable__Type)i3);
   formalPars = (OOC_SymbolTable__FormalPars)i3;
-  *(OOC_INT32*)((_check_pointer(i1, 14623))+52) = i3;
+  *(OOC_INT32*)((_check_pointer(i1, 14623))+56) = i3;
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14668))+8);
   i4 = i4!=0;
   if (!i4) goto l15;
@@ -1033,7 +1021,7 @@ l25:
   i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i7, 15127))+8);
   _assert(((
   _cmp8((const void*)(_check_pointer(i7, 15132)),(const void*)"..."))==0), 127, 15107);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 15166)))), OOC_SymbolTable__FormalParsDesc_EnableRestParameters)),OOC_SymbolTable__FormalParsDesc_EnableRestParameters)((OOC_SymbolTable__FormalPars)i3);
+  OOC_SymbolTable__FormalParsDesc_EnableRestParameters((OOC_SymbolTable__FormalPars)i3);
 l26:
   i6 = i6+2;
   i = i6;
@@ -1470,7 +1458,7 @@ l37:
 }
 
 OOC_SymbolTable__Module OOC_AST_ExtTree_CreateSymTab__CreateSymTab(OOC_AST__Node module, OOC_SymbolTable_Builder__Builder stb, Object__String libraryName, URI__HierarchicalURI baseURI, URI__HierarchicalURI rootURI) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3;
   OOC_AST_ExtTree_CreateSymTab__Visitor v;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_AST_ExtTree_CreateSymTab__Visitor.baseTypes[0]);
@@ -1487,9 +1475,8 @@ OOC_SymbolTable__Module OOC_AST_ExtTree_CreateSymTab__CreateSymTab(OOC_AST__Node
   i2 = (OOC_INT32)module;
   OOC_AST_ExtTree_CreateSymTab__Accept((OOC_AST_ExtTree_CreateSymTab__Visitor)i0, (OOC_AST__Node)i2);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21236))+12);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21236))+12);
-  i4 = (OOC_INT32)libraryName;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 21241)))), OOC_SymbolTable__ModuleDesc_SetLibraryName)),OOC_SymbolTable__ModuleDesc_SetLibraryName)((OOC_SymbolTable__Module)i3, (Object__String)i4);
+  i3 = (OOC_INT32)libraryName;
+  OOC_SymbolTable__ModuleDesc_SetLibraryName((OOC_SymbolTable__Module)i2, (Object__String)i3);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21291))+12);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21278)))), OOC_SymbolTable_Builder__BuilderDesc_Finalize)),OOC_SymbolTable_Builder__BuilderDesc_Finalize)((OOC_SymbolTable_Builder__Builder)i1, (OOC_SymbolTable__Module)i2);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21312))+12);

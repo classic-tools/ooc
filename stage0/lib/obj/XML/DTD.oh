@@ -247,7 +247,7 @@ typedef struct XML_DTD__NamespaceDeclarationDesc {
   XML_DTD__StringURI uri;
 } XML_DTD__NamespaceDeclarationDesc;
 extern void XML_DTD__InitDeclaration(XML_DTD__Declaration decl, XML_UnicodeBuffer__CharArray name);
-extern XML_DTD__Namespace XML_DTD__NewNamespace();
+extern XML_DTD__Namespace XML_DTD__NewNamespace(void);
 extern OOC_CHAR8 XML_DTD__NamespaceDesc_Add(XML_DTD__Namespace ns, XML_DTD__Declaration decl);
 #define _TBN_XML_DTD__NamespaceDesc_Add 0
 typedef OOC_CHAR8 (*_TBP_XML_DTD__NamespaceDesc_Add)(XML_DTD__Namespace ns, XML_DTD__Declaration decl);
@@ -388,9 +388,9 @@ extern XML_UnicodeBuffer__CharArray XML_DTD__GetString(OOC_CHAR16 string[], OOC_
 extern XML_UnicodeBuffer__CharArray XML_DTD__GetStringValue(const OOC_CHAR16 string__ref[], OOC_LEN string_0d);
 extern XML_DTD__StringURI XML_DTD__GetStringURI(OOC_CHAR8 string[], OOC_LEN string_0d, OOC_INT32 start, OOC_INT32 end);
 extern void XML_DTD__Init(XML_DTD__Builder b);
-extern XML_DTD__Builder XML_DTD__New();
-extern void OOC_XML_DTD_init();
-extern void OOC_XML_DTD_init0();
+extern XML_DTD__Builder XML_DTD__New(void);
+extern void OOC_XML_DTD_init(void);
+extern void OOC_XML_DTD_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_DTD__StringVar;

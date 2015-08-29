@@ -14,7 +14,7 @@ typedef struct OOC_SSA_Stats__StatsDesc {
 } OOC_SSA_Stats__StatsDesc;
 static ADT_Dictionary__Dictionary OOC_SSA_Stats__stage;
 static ADT_ArrayList__ArrayList OOC_SSA_Stats__labels;
-static OOC_SSA_Stats__Stats OOC_SSA_Stats__NewStats();
+static OOC_SSA_Stats__Stats OOC_SSA_Stats__NewStats(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

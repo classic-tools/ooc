@@ -149,8 +149,8 @@ typedef OOC_Repository__Module (*_TBP_OOC_Repository__RepositoryDesc_GetModuleBy
 extern OOC_SymbolTable__Module OOC_Repository__ModuleDesc_ReadSymbolFile(OOC_Repository__Module m);
 #define _TBN_OOC_Repository__ModuleDesc_ReadSymbolFile 11
 typedef OOC_SymbolTable__Module (*_TBP_OOC_Repository__ModuleDesc_ReadSymbolFile)(OOC_Repository__Module m);
-extern void OOC_OOC_Repository_init();
-extern void OOC_OOC_Repository_init0();
+extern void OOC_OOC_Repository_init(void);
+extern void OOC_OOC_Repository_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Repository__URIBuffer;

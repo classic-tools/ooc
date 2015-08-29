@@ -13,7 +13,7 @@ typedef struct StdChannels__ErrorContextDesc {
 } StdChannels__ErrorContextDesc;
 static StdChannels__ErrorContext StdChannels__errorContext;
 static Msg__Msg StdChannels__GetError(OOC_INT32 code);
-static void StdChannels__Flush();
+static void StdChannels__Flush(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

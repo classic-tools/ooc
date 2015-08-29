@@ -34,7 +34,7 @@ typedef struct OOC_Config_Pragmas__HistoryDesc {
   OOC_Config_Pragmas__CharPosArray pushes;
   OOC_INT32 numPushes;
 } OOC_Config_Pragmas__HistoryDesc;
-extern OOC_Config_Pragmas__Section OOC_Config_Pragmas__New();
+extern OOC_Config_Pragmas__Section OOC_Config_Pragmas__New(void);
 extern void OOC_Config_Pragmas__SectionDesc_Copy(OOC_Config_Pragmas__Section s, Config_Section_Options__Section dest);
 #define _TBN_OOC_Config_Pragmas__SectionDesc_Copy 3
 typedef void (*_TBP_OOC_Config_Pragmas__SectionDesc_Copy)(OOC_Config_Pragmas__Section s, Config_Section_Options__Section dest);
@@ -54,8 +54,8 @@ typedef void (*_TBP_OOC_Config_Pragmas__HistoryDesc_Push)(OOC_Config_Pragmas__Hi
 extern void OOC_Config_Pragmas__HistoryDesc_Pop(OOC_Config_Pragmas__History h, OOC_INT32 charPos);
 #define _TBN_OOC_Config_Pragmas__HistoryDesc_Pop 1
 typedef void (*_TBP_OOC_Config_Pragmas__HistoryDesc_Pop)(OOC_Config_Pragmas__History h, OOC_INT32 charPos);
-extern void OOC_OOC_Config_Pragmas_init();
-extern void OOC_OOC_Config_Pragmas_init0();
+extern void OOC_OOC_Config_Pragmas_init(void);
+extern void OOC_OOC_Config_Pragmas_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_Pragmas__Section;

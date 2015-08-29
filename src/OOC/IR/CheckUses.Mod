@@ -1,4 +1,4 @@
-(* 	$Id: CheckUses.Mod,v 1.10 2003/04/11 07:31:36 mva Exp $	 *)
+(* 	$Id: CheckUses.Mod,v 1.14 2003/04/14 19:20:55 mva Exp $	 *)
 MODULE OOC:IR:CheckUses;
 (*  Warn about uninitialized variables and unreachable code, 
     Copyright (C) 2003  Michael van Acken, Stewart Greenhill
@@ -24,9 +24,40 @@ IMPORT
   Object, Object:Boxed, ADT:Dictionary, DictInt := ADT:Dictionary:IntValue,
   ADT:ArrayList, Config:Value, Config:Value:Boolean, Msg,
   OOC:Config:Pragmas, OOC:Config:Pragmas:StdPragmas,
-  Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules, OOC:Error,
-  OOC:Scanner:Builder:BasicList, OOC:IR, OOC:IR:VisitAll;
+  Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules,
+  OOC:SymbolTable:Predef,
+  OOC:Error, OOC:Scanner:Builder:BasicList, OOC:IR, OOC:IR:VisitAll;
 
+
+(* Some notes on the dataflow analysis of this module:
+
+   @itemize @bullet
+   @item
+   It tracks reads and writes to nonlocal variables and variable parameters.
+
+   @item
+   Calls to and between nested procedures are taken into account.
+
+   @item
+   For read and write operations on tracked variables, it is precise down to
+   the level of statements and expressions.  That is, it can distinguish ``read
+   before write'' and ``write before read'' situations.
+
+   @item
+   A structured variable, like a records and an array, is treated like an
+   atomic variable.  The first assignment to one of its members is assumed to
+   define the whole value, with the effect that all following reads are assumed
+   to be valid.
+
+   @item
+   The algorithm distinguishes situations where no, all, or some paths leading
+   to a read have a defined value.
+
+   @item
+   For heap objects, only writes are tracked.  The information is used to
+   set @ofield{Sym.ProcDecl.nonlocalWrites}.
+   @end itemize  *)
+  
 CONST
   undefined = 0;
   maybeUndefined = 1;
@@ -36,7 +67,7 @@ TYPE
   Def = POINTER TO DefDesc;
   DefDesc = RECORD
     (Object.ObjectDesc)
-    class: DictInt.Dictionary;
+    class: DictInt.Dictionary;  (* of Sym.VarDecl or Sym.Type *)
     (* Set of variables that haven been seen at a given point in the
        statement sequence.  Each variables is classified as either
        @oconst{undefined}, @oconst{maybeUndefined}, or @oconst{defined}.  *)
@@ -64,7 +95,7 @@ TYPE
     (Object.ObjectDesc)
     callers: ArrayList.ArrayList;  (* of Sym.ProcDecl *)
     (* List of known callers of this procedure.  *)
-    inout: DictInt.Dictionary;  (* of Sym.VarDecl *)
+    inout: DictInt.Dictionary;  (* of Sym.VarDecl or Sym.Type *)
     (* Maps a variable to `w+scaleR*r', where `r' and `w' are one of the
        `xxxRead' and `xxxWrite' flags above.  Only nonlocal variables and
        variable parameters appear here.  If a variable is not in the
@@ -112,6 +143,9 @@ CONST
   endOfFunction = 4;
   deadTypeTest = 5;
   calleeUndefinedvar = 6;
+
+VAR
+  any: Sym.Type;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -214,7 +248,7 @@ PROCEDURE (def: Def) Copy(): Def;
     RETURN def2;
   END Copy;
 
-PROCEDURE (def: Def) GetClass(var: Sym.VarDecl): LONGINT;
+PROCEDURE (def: Def) GetClass(var: Sym.Item): LONGINT;
   BEGIN
     IF def.class.HasKey(var) THEN
       RETURN def.class.Get(var);
@@ -223,7 +257,7 @@ PROCEDURE (def: Def) GetClass(var: Sym.VarDecl): LONGINT;
     END;
   END GetClass;
 
-PROCEDURE (def: Def) SetClass(var: Sym.VarDecl; class: LONGINT);
+PROCEDURE (def: Def) SetClass(var: Sym.Item; class: LONGINT);
   BEGIN
     def.class.Set(var, class);
   END SetClass;
@@ -231,7 +265,7 @@ PROCEDURE (def: Def) SetClass(var: Sym.VarDecl; class: LONGINT);
 PROCEDURE (def: Def) Merge(def2: Def);
   VAR
     k: Object.ObjectArrayPtr;
-    v: Sym.VarDecl;
+    v: Sym.Item;
     i: LONGINT;
 
   PROCEDURE Merge(a, b: LONGINT): LONGINT;
@@ -250,13 +284,13 @@ PROCEDURE (def: Def) Merge(def2: Def);
     ELSIF ~def2.unreachable THEN  (* & ~def.unreachable *)
       k := def.class.Keys();
       FOR i := 0 TO LEN(k^)-1 DO
-        v := k[i](Sym.VarDecl);
+        v := k[i](Sym.Item);
         def.SetClass(v, Merge(def.GetClass(v), def2.GetClass(v)));
       END;
       
       k := def2.class.Keys();
       FOR i := 0 TO LEN(k^)-1 DO
-        v := k[i](Sym.VarDecl);
+        v := k[i](Sym.Item);
         def.SetClass(v, Merge(def.GetClass(v), def2.GetClass(v)));
       END;
     (* ELSE: ~def.unreachable & def2.unreachable *)
@@ -328,7 +362,7 @@ PROCEDURE NonlocalVar(localProc: Sym.ProcDecl; varDecl: Sym.VarDecl): BOOLEAN;
       RETURN TRUE;
     ELSE
       proc := varDecl.Procedure();
-      RETURN (proc # NIL) & (proc # localProc);
+      RETURN (proc # localProc);  (* proc=NIL for global variables *)
     END;
   END NonlocalVar;
 
@@ -350,12 +384,12 @@ PROCEDURE (pd: ProcData) SetReadFlag(varDecl: Sym.VarDecl; flag: LONGINT);
     END;
   END SetReadFlag;
 
-PROCEDURE (pd: ProcData) SetWriteFlag(varDecl: Sym.VarDecl; flag: LONGINT);
+PROCEDURE (pd: ProcData) SetWriteFlag(item: Sym.Item; flag: LONGINT);
   VAR
     oldFlag, newFlag: LONGINT;
   BEGIN
-    IF pd.inout.HasKey(varDecl) THEN
-      oldFlag := pd.inout.Get(varDecl);
+    IF pd.inout.HasKey(item) THEN
+      oldFlag := pd.inout.Get(item);
     ELSE
       oldFlag := doesNotWrite + doesNotRead*scaleR;
     END;
@@ -363,7 +397,7 @@ PROCEDURE (pd: ProcData) SetWriteFlag(varDecl: Sym.VarDecl; flag: LONGINT);
     
     IF (newFlag # oldFlag) THEN
       ASSERT(oldFlag > newFlag);
-      pd.inout.Set(varDecl, newFlag);
+      pd.inout.Set(item, newFlag);
       pd.updatedInOut := TRUE;
     END;
   END SetWriteFlag;
@@ -448,11 +482,26 @@ PROCEDURE (v: Visitor) VisitVar* (var: IR.Var);
 PROCEDURE (v: Visitor) VisitDeref* (deref: IR.Deref);
   VAR
     oldMode: SHORTINT;
+    pb: Object.Object;
   BEGIN
-    oldMode := v.mode;
-    v.mode := read;
-    v.VisitDeref^(deref);
-    v.mode := oldMode;
+    CASE v.pass OF
+    | passCollectWrites:
+      IF (v.mode >= write) THEN
+        pb := v.knownProcs.Get(v.localProc);
+        pb(ProcData).inout.Set(deref.type, doesWrite);
+      END;
+
+    | passAnalyzeCalls, passEmitWarnings:
+      IF (v.mode = read) THEN
+        deref.pointer.Accept(v);
+      ELSE
+        v.def.SetClass(deref.type, defined);
+        oldMode := v.mode;
+        v.mode := read;
+        deref.pointer.Accept(v);
+        v.mode := oldMode;
+      END;
+    END;
   END VisitDeref;
 
 PROCEDURE (v: Visitor) VisitIndex* (index: IR.Index);
@@ -488,10 +537,17 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
     
     CASE v.pass OF
     | passCollectWrites:
+      IF ~(call.design IS IR.ProcedureRef) OR
+         call.design(IR.ProcedureRef).decl(Sym.ProcDecl).nonlocalWrites THEN
+        v.localProcData.inout.Set(any, doesWrite);  (* assume worst *)
+      END;
+      
       FOR i := 0 TO LEN(call.arguments^)-1 DO
         IF (call.formalPars[i] # NIL) & call.formalPars[i].isVarParam THEN
-          v.mode := write;
-          call.arguments[i](IR.Adr).design.Accept(v);
+          IF ~(call.arguments[i] IS IR.Const) THEN (* avoid NIL to VAR param *)
+            v.mode := write;
+            call.arguments[i](IR.Adr).design.Accept(v);
+          END;
         ELSE
           v.mode := read;
           call.arguments[i].Accept(v);
@@ -505,6 +561,11 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
         obj := v.knownProcs.Get(call.design(IR.ProcedureRef).decl);
         inout := obj(ProcData).inout;
       ELSE
+        IF ~(call.design IS IR.ProcedureRef) OR
+           call.design(IR.ProcedureRef).decl(Sym.ProcDecl).nonlocalWrites THEN
+          v.def.SetClass(any, defined);  (* can write anything *)
+        END;
+      
         callee := NIL;
         inout := NIL;
       END;
@@ -516,26 +577,28 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
         IF (call.formalPars[i] = NIL) THEN
           (* ignore *)
         ELSIF call.formalPars[i].isVarParam THEN
-          design := call.arguments[i](IR.Adr).design;
-          IF (inout = NIL) THEN  (* no info on caller, assume write *)
-            writeList.Append(design);
-          ELSIF inout.HasKey(call.formalPars[i]) THEN
-            class := inout.Get(call.formalPars[i]);
-            CASE class DIV scaleR OF
-            | doesRead:
-              readList.Append(design);
-            | doesNotRead:
-              (* ignore *)
-            END;
-            
-            CASE class MOD scaleR OF
-            | doesWrite:
+          IF ~(call.arguments[i] IS IR.Const) THEN (* avoid NIL to VAR param *)
+            design := call.arguments[i](IR.Adr).design;
+            IF (inout = NIL) THEN  (* no info on caller, assume write *)
               writeList.Append(design);
-            | mayWrite:
-              writeMaybeDict.Set(design, 0);
-              writeList.Append(design);
-            | doesNotWrite:
-              (* ignore *)
+            ELSIF inout.HasKey(call.formalPars[i]) THEN
+              class := inout.Get(call.formalPars[i]);
+              CASE class DIV scaleR OF
+              | doesRead:
+                readList.Append(design);
+              | doesNotRead:
+                (* ignore *)
+              END;
+              
+              CASE class MOD scaleR OF
+              | doesWrite:
+                writeList.Append(design);
+              | mayWrite:
+                writeMaybeDict.Set(design, 0);
+                writeList.Append(design);
+              | doesNotWrite:
+                (* ignore *)
+              END;
             END;
           END;
         ELSE
@@ -551,28 +614,32 @@ PROCEDURE (v: Visitor) VisitCall* (call: IR.Call);
       IF (inout # NIL) THEN
         k := inout.Keys();
         FOR i := 0 TO LEN(k^)-1 DO
-          varDecl := k[i](Sym.VarDecl);
-          IF (varDecl.Procedure() # callee) THEN
-            class := inout.Get(varDecl);
-            
-            CASE class DIV scaleR OF
-            | doesRead:
-              v.mode := read;
-              VisitVarDecl(v, varDecl, call.sym, TRUE);
-            | doesNotRead:
-              (* ignore *)
+          IF (k[i] IS Sym.VarDecl) THEN
+            varDecl := k[i](Sym.VarDecl);
+            IF (varDecl.Procedure() # callee) THEN
+              class := inout.Get(varDecl);
+              
+              CASE class DIV scaleR OF
+              | doesRead:
+                v.mode := read;
+                VisitVarDecl(v, varDecl, call.sym, TRUE);
+              | doesNotRead:
+                (* ignore *)
+              END;
+              
+              CASE class MOD scaleR OF
+              | doesWrite:
+                v.mode := write;
+                VisitVarDecl(v, varDecl, call.sym, TRUE);
+              | mayWrite:
+                v.mode := writeMaybe;
+                VisitVarDecl(v, varDecl, call.sym, TRUE);
+              | doesNotWrite:
+                (* ignore *)
+              END;
             END;
-            
-            CASE class MOD scaleR OF
-            | doesWrite:
-              v.mode := write;
-              VisitVarDecl(v, varDecl, call.sym, TRUE);
-            | mayWrite:
-              v.mode := writeMaybe;
-              VisitVarDecl(v, varDecl, call.sym, TRUE);
-            | doesNotWrite:
-              (* ignore *)
-            END;
+          ELSE  (* k[i] IS Sym.Type *)
+            v.def.SetClass(k[i](Sym.Type), defined);
           END;
         END;
       END;
@@ -609,8 +676,9 @@ PROCEDURE TransitiveWriteClosure(knownProcs: Dictionary.Dictionary;
         callerDecl := pd.callers.array[j](Sym.ProcDecl);
         obj := knownProcs.Get(callerDecl);
         pdCaller := obj(ProcData);
-        IF ~pdCaller.inout.HasKey(k[i]) & NonlocalVar(callerDecl,
-                                                      k[i](Sym.VarDecl)) THEN
+        IF ~pdCaller.inout.HasKey(k[i]) &
+           ((k[i] IS Sym.Type) OR
+            NonlocalVar(callerDecl, k[i](Sym.VarDecl))) THEN
           pdCaller.inout.Set(k[i], doesWrite);
           TransitiveWriteClosure(knownProcs, pdCaller);
         END;
@@ -618,8 +686,8 @@ PROCEDURE TransitiveWriteClosure(knownProcs: Dictionary.Dictionary;
     END;
   END TransitiveWriteClosure;
 
-PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
-                     errList: Error.List);
+PROCEDURE CheckUses*(module: IR.Module; moduleDecl: Sym.Module;
+                     pragmaHistory: Pragmas.History; errList: Error.List);
   VAR
     i, inWorklist: LONGINT;
     def: Def;
@@ -765,6 +833,10 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
           def.Unreachable();
           
         | statm: IR.MoveBlock DO
+          IF (v.pass = passCollectWrites) THEN
+            v.localProcData.inout.Set(any, defined);  (* assume worst *)
+          END;
+          
           IF (statm.source IS IR.Adr) THEN
             CheckExpr(statm.source(IR.Adr).design);
           ELSE
@@ -779,6 +851,7 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
           IF (expr IS IR.Adr) THEN
             CheckDesign(expr(IR.Adr).design, write);
           ELSE
+            v.def.SetClass(any, defined);
             CheckExpr(statm.dest);
           END;
           
@@ -847,20 +920,41 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
       END;
     END CallersToWorklist;
 
-  PROCEDURE SetWriteFlags(pd: ProcData; def: Def);
+  PROCEDURE SetWriteFlags(localProc: Sym.ProcDecl; pd: ProcData; def: Def;
+                          VAR nonlocalWrites: BOOLEAN);
     VAR
       k: Object.ObjectArrayPtr;
       i: LONGINT;
+      item: Object.Object;
     BEGIN
+      nonlocalWrites := FALSE;
+            
+      k := pd.inout.Keys();
+      FOR i := 0 TO LEN(k^)-1 DO
+        IF ~def.class.HasKey(k[i]) THEN  (* is undefined *)
+          pd.SetWriteFlag(k[i](Sym.Item), doesNotWrite);
+        END;
+      END;
+      
       k := def.class.Keys();
       FOR i := 0 TO LEN(k^)-1 DO
-        CASE def.class.Get(k[i]) OF
-        | undefined:
-          pd.SetWriteFlag(k[i](Sym.VarDecl), doesNotWrite);
-        | maybeUndefined:
-          pd.SetWriteFlag(k[i](Sym.VarDecl), mayWrite);
-        | defined:
-          pd.SetWriteFlag(k[i](Sym.VarDecl), doesWrite);
+        item := k[i];
+        WITH item: Sym.VarDecl DO
+          IF NonlocalVar(localProc, item) THEN
+            CASE def.class.Get(item) OF
+            | undefined:
+              pd.SetWriteFlag(item, doesNotWrite);
+            | maybeUndefined:
+              nonlocalWrites := TRUE;
+              pd.SetWriteFlag(item, mayWrite);
+            | defined:
+              nonlocalWrites := TRUE;
+              pd.SetWriteFlag(item, doesWrite);
+            END;
+          END;
+        | item: Sym.Type DO
+          nonlocalWrites := TRUE;
+          pd.SetWriteFlag(item, doesWrite);
         END;
       END;
     END SetWriteFlags;
@@ -911,6 +1005,10 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
     END DumpInOut;*)
   
   BEGIN
+    IF (moduleDecl.class # Sym.mcStandard) THEN
+      RETURN;  (* nothing to check *)
+    END;
+    
     knownProcs := KnownProcs(module);
     
     NEW(v);
@@ -953,7 +1051,8 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
           def := NewDef();
           CheckStatmSeq(def, proc.statmSeq);
           v.procExit.Merge(def);
-          SetWriteFlags(v.localProcData, v.procExit);
+          SetWriteFlags(v.localProc, v.localProcData, v.procExit,
+                        proc.decl.nonlocalWrites);
           
           IF v.localProcData.updatedInOut THEN
             CallersToWorklist(pd(ProcData).callers);
@@ -983,4 +1082,5 @@ PROCEDURE CheckUses*(module: IR.Module; pragmaHistory: Pragmas.History;
 BEGIN
   NEW (checkUsesContext);
   Error.InitContext (checkUsesContext, "OOC:IR:CheckUses");
+  any := Predef.GetType(Predef.void);
 END OOC:IR:CheckUses.

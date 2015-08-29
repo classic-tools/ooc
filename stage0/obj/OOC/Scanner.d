@@ -14,7 +14,7 @@ static OOC_INT8 OOC_Scanner__kwSym[256][2];
 #define OOC_Scanner__illegalHexDigit 7
 #define OOC_Scanner__notWithinPragma 8
 static OOC_Scanner__ErrorContext OOC_Scanner__scannerContext;
-static void OOC_Scanner__InitKeywords();
+static void OOC_Scanner__InitKeywords(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

@@ -24,8 +24,8 @@ typedef void (*_TBP_OOC_Scanner_Builder__BuilderDesc_AddSymbol)(OOC_Scanner_Buil
 extern void OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory(OOC_Scanner_Builder__Builder b, OOC_Config_Pragmas__History pragmaHistory);
 #define _TBN_OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory 1
 typedef void (*_TBP_OOC_Scanner_Builder__BuilderDesc_SetPragmaHistory)(OOC_Scanner_Builder__Builder b, OOC_Config_Pragmas__History pragmaHistory);
-extern void OOC_OOC_Scanner_Builder_init();
-extern void OOC_OOC_Scanner_Builder_init0();
+extern void OOC_OOC_Scanner_Builder_init(void);
+extern void OOC_OOC_Scanner_Builder_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Scanner_Builder__Builder;

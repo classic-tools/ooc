@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.212 2003/04/06 12:11:14 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.213 2003/04/12 14:06:29 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -544,7 +544,11 @@ TYPE
     isStaticCall-: BOOLEAN;
     (**If @code{TRUE}, then this is a static call to the procedure indicated
        by @ofield{tbProc}.  No table lookup must be done, instead its
-       address must be used directly.  *)
+       address must be used directly.  Static calls are created for super calls
+       and as an optimization also for methods that are known to be never
+       redefined.  *)
+    isSuperCall-: BOOLEAN;
+    (**If @code{TRUE}, then this is a call like @samp{p.F^()}.  *)
   END;
 
 TYPE 
@@ -2252,13 +2256,14 @@ PROCEDURE (b: Builder) NewDeref* (sym: Symbol; design: Expression): Expression;
     WITH design: SelectProc DO (* super call of type-bound procedure *)
       design. tbProc := design. recordType. ns(Namespace.Extended).
           GetSuperProcByIndex (design. tbProc. tbProcIndex);
-      IF design.isStaticCall THEN
+      IF design.isSuperCall THEN
         RETURN b.ErrExpr(duplicateSuperCall, sym);
       ELSIF (design.tbProc = NIL) THEN
         RETURN b.ErrExpr(notDefinedInBaseType, sym);
       ELSE
         design. type := design. tbProc. formalPars;
         design. isStaticCall := TRUE;
+        design. isSuperCall := TRUE;
         IF design.tbProc.isAbstract THEN
           b.ErrSym(abstractSuperCall, sym);
         END;
@@ -2617,6 +2622,7 @@ PROCEDURE InitSelectProc (sp: SelectProc; sym: Symbol; receiver: Expression;
     sp. tbProc := tbProc;
     sp. tbProcSym := tbProcSym;
     sp. isStaticCall := isStaticCall;
+    sp. isSuperCall := FALSE;
   END InitSelectProc;
 
 PROCEDURE (b: Builder) NewSelectProc (sym: Symbol; receiver: Expression;
@@ -5075,7 +5081,8 @@ PROCEDURE (b: Builder) NewSelect* (sym: Symbol; var: Expression;
         RETURN b. NewSelectField (sym, varRef, decl(Sym.FieldDecl), name);
       ELSIF (decl IS Sym.ProcDecl) THEN
         RETURN b. NewSelectProc (sym, var, varRef. type(Sym.Record),
-                                 decl(Sym.ProcDecl), name, FALSE);
+                                 decl(Sym.ProcDecl), name,
+                                 decl(Sym.ProcDecl).notRedefined);
       ELSE
         ASSERT (FALSE);
       END;

@@ -76,8 +76,8 @@ extern void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType(OOC_AST_ExtT
 #define _TBN_OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType 30
 typedef void (*_TBP_OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType)(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST_ExtTree__ProcType procType);
 extern OOC_SymbolTable__Module OOC_AST_ExtTree_CreateSymTab__CreateSymTab(OOC_AST__Node module, OOC_SymbolTable_Builder__Builder stb, Object__String libraryName, URI__HierarchicalURI baseURI, URI__HierarchicalURI rootURI);
-extern void OOC_OOC_AST_ExtTree_CreateSymTab_init();
-extern void OOC_OOC_AST_ExtTree_CreateSymTab_init0();
+extern void OOC_OOC_AST_ExtTree_CreateSymTab_init(void);
+extern void OOC_OOC_AST_ExtTree_CreateSymTab_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_AST_ExtTree_CreateSymTab__Visitor;

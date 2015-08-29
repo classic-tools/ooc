@@ -517,7 +517,7 @@ void URI__RegisterScheme(URI__URI scheme) {
   auto void URI__RegisterScheme_Append(URI__List *list);
     
     void URI__RegisterScheme_Append(URI__List *list) {
-      register OOC_INT32 i0,i1,i2,i3,i4;
+      register OOC_INT32 i0,i1,i2,i3,i4,i5;
 
       i0 = (OOC_INT32)*list;
       i1 = i0==(OOC_INT32)0;
@@ -528,16 +528,15 @@ void URI__RegisterScheme(URI__URI scheme) {
       i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 21908));
       i3 = (OOC_INT32)scheme;
       i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 21927));
-      i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 21927));
+      i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 21927));
       i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 21918)), 0);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 21937)), 0);
-      i1 = URI__Equal((void*)(_check_pointer(i1, 21918)), i2, (void*)(_check_pointer(i4, 21937)), i3);
+      i5 = OOC_ARRAY_LENGTH((_check_pointer(i5, 21937)), 0);
+      i1 = URI__Equal((void*)(_check_pointer(i1, 21918)), i2, (void*)(_check_pointer(i4, 21937)), i5);
       if (i1) goto l5;
       URI__RegisterScheme_Append((void*)(_check_pointer(i0, 22007)));
       goto l8;
 l5:
-      i1 = (OOC_INT32)scheme;
-      *(OOC_INT32*)((_check_pointer(i0, 21957))+4) = i1;
+      *(OOC_INT32*)((_check_pointer(i0, 21957))+4) = i3;
       goto l8;
 l7:
       i0 = (OOC_INT32)RT0__NewObject(_td_URI__List.baseTypes[0]);

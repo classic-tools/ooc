@@ -23,8 +23,8 @@ extern OOC_INT8 Real0__FormatReal(const OOC_CHAR8 str__ref[], OOC_LEN str_0d, OO
 extern void Real0__NormalizeFloat(OOC_CHAR8 s[], OOC_LEN s_0d);
 extern void Real0__FormatForEng(OOC_CHAR8 s[], OOC_LEN s_0d);
 extern void Real0__FormatForFixed(OOC_CHAR8 s[], OOC_LEN s_0d, OOC_INT16 place);
-extern void OOC_Real0_init();
-extern void OOC_Real0_init0();
+extern void OOC_Real0_init(void);
+extern void OOC_Real0_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Real0__3861;

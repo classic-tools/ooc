@@ -1,4 +1,4 @@
-(* 	$Id: SymbolTable.Mod,v 1.61 2003/02/04 20:55:27 mva Exp $	 *)
+(* 	$Id: SymbolTable.Mod,v 1.63 2003/04/13 13:43:59 mva Exp $	 *)
 MODULE OOC:SymbolTable [OOC_EXTENSIONS];
 (*  Defines structure and entries of the symbol table.
     Copyright (C) 2000-2003  Michael van Acken
@@ -626,6 +626,15 @@ TYPE
        of another procedure.  *)
     isAbstract*: BOOLEAN;
     (**If @code{TRUE}, then the type-bound procedure is an abstract method.  *)
+    notRedefined*: BOOLEAN;
+    (**If @code{TRUE}, then this type-bound procedure is not redefined in the
+       local module and cannot be redefined in any client module.  *)
+    nonlocalWrites*: BOOLEAN;
+    (**If this field is @code{FALSE}, then a call to this function does not
+       change any values in nonlocal variables or on the heap.  That is, 
+       values taken from memory before a call to the function remain valid
+       after the call.  Unless proven otherwise, this field remains
+       @code{TRUE}.  *)
     tbProcIndex-: LONGINT;
     (**For type-bound procedures, this is the index of the procedure in the
        method table of its base record.  The first type-bound procedure has the
@@ -1830,6 +1839,8 @@ PROCEDURE InitProcDecl* (procDecl: ProcDecl; parent: Item; name: Name;
     procDecl. isTypeBound := isTypeBound;
     procDecl. isForwardDecl := isForwardDecl;
     procDecl. isAbstract := FALSE;
+    procDecl. notRedefined := FALSE;
+    procDecl. nonlocalWrites := TRUE;
     procDecl. tbProcIndex := -1;
     procDecl. ns := NIL;
     procDecl. formalPars := NIL;
@@ -1844,6 +1855,8 @@ PROCEDURE (procDecl: ProcDecl) Store* (w: Storable.Writer) RAISES IO.Error;
     w. WriteBool (procDecl. isTypeBound);
     w. WriteBool (procDecl. isForwardDecl);
     w. WriteBool (procDecl. isAbstract);
+    w. WriteBool (procDecl. notRedefined);
+    w. WriteBool (procDecl. nonlocalWrites);
     w. WriteNum (procDecl. tbProcIndex);
     w. WriteObject (procDecl. formalPars);
     w. WriteStr (procDecl. linkName);
@@ -1858,6 +1871,8 @@ PROCEDURE (procDecl: ProcDecl) Load* (r: Storable.Reader) RAISES IO.Error;
     r. ReadBool (procDecl. isTypeBound);
     r. ReadBool (procDecl. isForwardDecl);
     r. ReadBool (procDecl. isAbstract);
+    r. ReadBool (procDecl. notRedefined);
+    r. ReadBool (procDecl. nonlocalWrites);
     r. ReadNum (procDecl. tbProcIndex);
     procDecl. ns := NIL;
     r. ReadObject (obj);

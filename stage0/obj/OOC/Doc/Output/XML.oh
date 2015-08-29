@@ -15,8 +15,8 @@
 #include <Exception.oh>
 extern void OOC_Doc_Output_XML__WriteOberonDoc(XML_Writer__Writer w, OOC_Doc__Document document, OOC_SymbolTable__Module localModule, ADT_Dictionary__Dictionary rewriteMap, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary moduleDict);
 extern void OOC_Doc_Output_XML__Write(IO__ByteChannel cw, OOC_Doc__Document document, OOC_SymbolTable__Module localModule, ADT_Dictionary__Dictionary rewriteMap, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary moduleDict);
-extern void OOC_OOC_Doc_Output_XML_init();
-extern void OOC_OOC_Doc_Output_XML_init0();
+extern void OOC_OOC_Doc_Output_XML_init(void);
+extern void OOC_OOC_Doc_Output_XML_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Doc_Output_XML__1628;

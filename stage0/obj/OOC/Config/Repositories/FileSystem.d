@@ -10,7 +10,7 @@
 #define OOC_Config_Repositories_FileSystem__requireCharDataContent 2
 #define OOC_Config_Repositories_FileSystem__invalidURI 3
 static OOC_Config_Repositories_FileSystem__ErrorContext OOC_Config_Repositories_FileSystem__repositoriesContext;
-static OOC_Config_Repositories_FileSystem__RepositoryEntry OOC_Config_Repositories_FileSystem__NewRepositoryEntry();
+static OOC_Config_Repositories_FileSystem__RepositoryEntry OOC_Config_Repositories_FileSystem__NewRepositoryEntry(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

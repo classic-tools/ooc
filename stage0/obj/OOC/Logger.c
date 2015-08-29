@@ -12,7 +12,7 @@ static void OOC_Logger__WriteURI(URI__URI uri) {
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 372)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)str, 1024);
   goto l4;
 l3:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 339)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)str, 1024);
+  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)str, 1024);
 l4:
   i0 = OOC_Logger__silence;
   i0 = !i0;
@@ -105,7 +105,7 @@ l4:
   ;
 }
 
-static void OOC_Logger__IndentMake() {
+static void OOC_Logger__IndentMake(void) {
   register OOC_INT32 i0,i1,i2;
 
   Out__String("[make]", 7);

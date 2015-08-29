@@ -32,7 +32,7 @@ void IO__RaiseFormatError(Object__String msg) {
   ;
 }
 
-void IO__RaiseNotImplemented() {
+void IO__RaiseNotImplemented(void) {
   register OOC_INT32 i0;
   IO__NotImplemented e;
 

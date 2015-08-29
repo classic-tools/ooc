@@ -37,7 +37,7 @@ l5:
   ;
 }
 
-static OOC_SSA_CSE__Partition OOC_SSA_CSE__NewPartition() {
+static OOC_SSA_CSE__Partition OOC_SSA_CSE__NewPartition(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_SSA_CSE__Partition.baseTypes[0]);
@@ -176,12 +176,12 @@ void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb) {
   OOC_SSA_CSE__Partition pList;
   OOC_SSA__Instr instr;
   OOC_SSA_CSE__Partition p;
-  auto OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_AddPartition();
+  auto OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_AddPartition(void);
   auto OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_SplittedPartition(OOC_SSA_CSE__Partition p, OOC_INT32 opndIndex, OOC_SSA_CSE__Partition *touchedList);
   auto void OOC_SSA_CSE__Transform_Split(const OOC_SSA__Result iList__ref[], OOC_LEN iList_0d, OOC_INT32 size);
   auto void OOC_SSA_CSE__Transform_Replace(OOC_SSA_CSE__Partition p);
     
-    OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_AddPartition() {
+    OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_AddPartition(void) {
       register OOC_INT32 i0,i1;
       OOC_SSA_CSE__Partition p;
 
@@ -454,11 +454,11 @@ l27:
       originList = (OOC_SSA_CSE__Partition)i6;
       i5=i6;
 l30:
-      i7 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 8195)))), OOC_SSA__OpndDesc_OpndIndex)),OOC_SSA__OpndDesc_OpndIndex)((OOC_SSA__Opnd)i2);
+      i7 = OOC_SSA__OpndDesc_OpndIndex((OOC_SSA__Opnd)i2);
       i6 = (OOC_INT32)OOC_SSA_CSE__Transform_SplittedPartition((OOC_SSA_CSE__Partition)i6, i7, (void*)(OOC_INT32)&touched);
       p = (OOC_SSA_CSE__Partition)i6;
       i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 8242))+12);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 8234)))), OOC_SSA_CSE__PartitionDesc_Add)),OOC_SSA_CSE__PartitionDesc_Add)((OOC_SSA_CSE__Partition)i6, (OOC_SSA__Instr)i7);
+      OOC_SSA_CSE__PartitionDesc_Add((OOC_SSA_CSE__Partition)i6, (OOC_SSA__Instr)i7);
       
 l31:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 8290))+16);
@@ -572,7 +572,7 @@ l5:
           if (!i2) goto l17;
           
 l8_loop:
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9760)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i0, (OOC_SSA__Result)i1);
+          OOC_SSA__ResultDesc_ReplaceUses((OOC_SSA__Result)i0, (OOC_SSA__Result)i1);
           i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9798));
           rx = (OOC_SSA__Result)i0;
           i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 9820));
@@ -643,9 +643,9 @@ l17_loop:
       i3 = _type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 10392)))), &_td_OOC_SSA__InstrDesc, 10392);
       jInstr = (OOC_SSA__Instr)i3;
       i4 = (OOC_INT32)dd;
-      i5 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 10423)))), OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)),OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)((OOC_SSA_Blocker__DependenceData)i4, (OOC_SSA__Instr)i2, (OOC_SSA__Instr)i3);
+      i5 = OOC_SSA_Blocker__DependenceDataDesc_AvailableTo((OOC_SSA_Blocker__DependenceData)i4, (OOC_SSA__Instr)i2, (OOC_SSA__Instr)i3);
       if (i5) goto l27;
-      i4 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 10580)))), OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)),OOC_SSA_Blocker__DependenceDataDesc_AvailableTo)((OOC_SSA_Blocker__DependenceData)i4, (OOC_SSA__Instr)i3, (OOC_SSA__Instr)i2);
+      i4 = OOC_SSA_Blocker__DependenceDataDesc_AvailableTo((OOC_SSA_Blocker__DependenceData)i4, (OOC_SSA__Instr)i3, (OOC_SSA__Instr)i2);
       if (!i4) goto l29;
       OOC_SSA_CSE__Transform_Replace_ReplaceInstrWith((OOC_SSA__Instr)i2, (OOC_SSA__Instr)i3);
       i0 = (OOC_INT32)p;
@@ -694,7 +694,7 @@ l46:
 
 
   i0 = (OOC_INT32)pb;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11039)))), OOC_SSA__ProcBlockDesc_SetMarkers)),OOC_SSA__ProcBlockDesc_SetMarkers)((OOC_SSA__ProcBlock)i0, (OOC_SSA__Node)(OOC_INT32)0, 0);
+  OOC_SSA__ProcBlockDesc_SetMarkers((OOC_SSA__ProcBlock)i0, (OOC_SSA__Node)(OOC_INT32)0, 0);
   i = 0;
   i1=0;
 l1_loop:
@@ -719,9 +719,9 @@ l10:
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l30;
 l13_loop:
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11402)))), OOC_SSA__InstrDesc_IsConst)),OOC_SSA__InstrDesc_IsConst)((OOC_SSA__Instr)i0);
+  i1 = OOC_SSA__InstrDesc_IsConst((OOC_SSA__Instr)i0);
   if (i1) goto l16;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11422)))), OOC_SSA__InstrDesc_UniqueResult)),OOC_SSA__InstrDesc_UniqueResult)((OOC_SSA__Instr)i0);
+  i1 = OOC_SSA__InstrDesc_UniqueResult((OOC_SSA__Instr)i0);
   
   goto l18;
 l16:
@@ -748,7 +748,7 @@ l24:
   
 l25:
   i1 = (OOC_INT32)instr;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11820)))), OOC_SSA_CSE__PartitionDesc_Add)),OOC_SSA_CSE__PartitionDesc_Add)((OOC_SSA_CSE__Partition)i0, (OOC_SSA__Instr)i1);
+  OOC_SSA_CSE__PartitionDesc_Add((OOC_SSA_CSE__Partition)i0, (OOC_SSA__Instr)i1);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11854))+28);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;

@@ -331,7 +331,11 @@ typedef struct OOC_SymbolTable__ProcDeclDesc {
   OOC_CHAR8 isTypeBound;
   OOC_CHAR8 isForwardDecl;
   OOC_CHAR8 isAbstract;
-  OOC_CHAR8 __pad43;
+  OOC_CHAR8 notRedefined;
+  OOC_CHAR8 nonlocalWrites;
+  OOC_CHAR8 __pad45;
+  OOC_CHAR8 __pad46;
+  OOC_CHAR8 __pad47;
   OOC_INT32 tbProcIndex;
   OOC_SymbolTable__Namespace ns;
   OOC_SymbolTable__FormalPars formalPars;
@@ -762,8 +766,8 @@ typedef OOC_Scanner_InputBuffer__CharArray (*_TBP_OOC_SymbolTable__DeclarationDe
 extern OOC_SymbolTable__Namespace OOC_SymbolTable__DeclarationDesc_GetEmbeddedNamespace(OOC_SymbolTable__Declaration decl, OOC_CHAR8 followTypeNames);
 #define _TBN_OOC_SymbolTable__DeclarationDesc_GetEmbeddedNamespace 10
 typedef OOC_SymbolTable__Namespace (*_TBP_OOC_SymbolTable__DeclarationDesc_GetEmbeddedNamespace)(OOC_SymbolTable__Declaration decl, OOC_CHAR8 followTypeNames);
-extern void OOC_OOC_SymbolTable_init();
-extern void OOC_OOC_SymbolTable_init0();
+extern void OOC_OOC_SymbolTable_init(void);
+extern void OOC_OOC_SymbolTable_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable__Position;
@@ -828,10 +832,10 @@ extern RT0__StructDesc _td_OOC_SymbolTable__FieldDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Redirect;
 extern RT0__StructDesc _td_OOC_SymbolTable__RedirectDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__34312;
-extern RT0__StructDesc _td_OOC_SymbolTable__34301;
-extern RT0__StructDesc _td_OOC_SymbolTable__48153;
-extern RT0__StructDesc _td_OOC_SymbolTable__48784;
+extern RT0__StructDesc _td_OOC_SymbolTable__34835;
+extern RT0__StructDesc _td_OOC_SymbolTable__34824;
+extern RT0__StructDesc _td_OOC_SymbolTable__48676;
+extern RT0__StructDesc _td_OOC_SymbolTable__49307;
 #endif /* _MODULE_OOC_SymbolTable_ */
 
 /* --- */

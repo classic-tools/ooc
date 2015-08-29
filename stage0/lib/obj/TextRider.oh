@@ -238,8 +238,8 @@ extern void TextRider__InitWriter(TextRider__Writer w, Channel__Channel ch);
 extern TextRider__Writer TextRider__ConnectWriter(Channel__Channel ch);
 extern void TextRider__InitScanner(TextRider__Scanner s, Channel__Channel ch);
 extern TextRider__Scanner TextRider__ConnectScanner(Channel__Channel ch);
-extern void OOC_TextRider_init();
-extern void OOC_TextRider_init0();
+extern void OOC_TextRider_init(void);
+extern void OOC_TextRider_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_TextRider__Reader;

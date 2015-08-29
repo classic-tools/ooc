@@ -80,7 +80,7 @@ l16:
 }
 
 OOC_INT8 IntConv__FormatInt(const OOC_CHAR8 str__ref[], OOC_LEN str_0d) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5;
   OOC_ALLOCATE_VPAR(str,OOC_CHAR8 ,str_0d)
   OOC_INT16 index;
   OOC_INT8 prev;
@@ -135,115 +135,116 @@ l16:
   state = (ConvTypes__ScanState)i0;
   positive = 1u;
   start = (-1);
-  i0=0;i1=0;
+  i0=0;i1=(-1);i2=0;i3=1u;
 l1_loop:
-  i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5816)));
-  ch = i2;
-  i3 = (OOC_INT32)state;
-  i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 5834));
-  ((void (*)(OOC_CHAR8 ch, OOC_INT8 *cl, ConvTypes__ScanState *st))i3)(i2, (void*)(OOC_INT32)&_class, (void*)(OOC_INT32)&state);
-  i3 = _class;
-  switch (i3) {
+  i4 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5816)));
+  ch = i4;
+  i5 = (OOC_INT32)state;
+  i5 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i5, 5834));
+  ((void (*)(OOC_CHAR8 ch, OOC_INT8 *cl, ConvTypes__ScanState *st))i5)(i4, (void*)(OOC_INT32)&_class, (void*)(OOC_INT32)&state);
+  i5 = _class;
+  switch (i5) {
   case 0:
+    i2=i3;
     goto l59;
   case 1:
-    i1 = i2==45u;
-    if (i1) goto l18;
-    i1 = i2==43u;
-    if (i1) goto l16;
-    i1 = start;
-    i1 = i1<0;
-    if (i1) goto l11;
-    i1=0u;
+    i2 = i4==45u;
+    if (i2) goto l19;
+    i2 = i4==43u;
+    if (i2) goto l17;
+    i2 = i1<0;
+    if (i2) goto l11;
+    i2=0u;
     goto l13;
 l11:
-    i1 = i2!=48u;
+    i2 = i4!=48u;
     
 l13:
-    if (i1) goto l14;
-    goto l59;
-l14:
+    if (!i2) goto l16;
     start = i0;
-    goto l59;
+    i1=i0;
 l16:
-    positive = 1u;
+    i2=i3;
     goto l59;
-l18:
+l17:
+    positive = 1u;
+    i2=1u;
+    goto l59;
+l19:
     positive = 0u;
+    i2=0u;
     goto l59;
   case 2:
-    i0 = i1==0;
-    if (i0) goto l23;
-    i0=0u;
-    goto l25;
-l23:
-    i0 = i2==0u;
+    i2 = i2==0;
+    if (i2) goto l24;
+    i2=0u;
+    goto l26;
+l24:
+    i2 = i4==0u;
     
-l25:
-    if (i0) goto l27;
+l26:
+    if (i2) goto l28;
     return 2;
-    goto l59;
-l27:
+    goto l29;
+l28:
     return 3;
+l29:
+    i2=i3;
     goto l59;
   case 3:
-    i1 = i2==0u;
-    if (i1) goto l32;
+    i2 = i4==0u;
+    if (i2) goto l33;
     return 2;
-    goto l59;
-l32:
-    i1 = start;
+    goto l57;
+l33:
     i2 = i0-i1;
-    i3 = i2<10;
-    if (i3) goto l51;
+    i4 = i2<10;
+    if (i4) goto l51;
     i2 = i2==10;
-    if (i2) goto l37;
-    i0=0u;
+    if (i2) goto l38;
+    i2=0u;
     goto l53;
-l37:
-    i2 = positive;
-    if (i2) goto l40;
-    i0=0u;
+l38:
+    if (i3) goto l40;
+    i2=0u;
     goto l42;
 l40:
-    i0 = IntConv__FormatInt_LessOrEqual((void*)(OOC_INT32)IntConv__maxInt, 11, i1, i0);
+    i2 = IntConv__FormatInt_LessOrEqual((void*)(OOC_INT32)IntConv__maxInt, 11, i1, i0);
     
 l42:
-    if (i0) goto l48;
-    i0 = positive;
-    i0 = !i0;
-    if (i0) goto l46;
-    i0=0u;
+    if (i2) goto l48;
+    i2 = !i3;
+    if (i2) goto l46;
+    i2=0u;
     goto l53;
 l46:
-    i0 = index;
-    i1 = start;
-    i0 = IntConv__FormatInt_LessOrEqual((void*)(OOC_INT32)IntConv__minInt, 11, i1, i0);
+    i2 = IntConv__FormatInt_LessOrEqual((void*)(OOC_INT32)IntConv__minInt, 11, i1, i0);
     
     goto l53;
 l48:
-    i0=1u;
+    i2=1u;
     goto l53;
 l51:
-    i0=1u;
+    i2=1u;
 l53:
-    if (i0) goto l55;
+    if (i2) goto l55;
     return 1;
-    goto l59;
+    goto l57;
 l55:
     return 0;
+l57:
+    i2=i3;
     goto l59;
   default:
-    _failed_case(i3, 5860);
+    _failed_case(i5, 5860);
+    i2=i3;
     goto l59;
   }
 l59:
-  i0 = _class;
-  i1 = index;
-  prev = i0;
-  i1 = i1+1;
-  index = i1;
-  {register OOC_INT32 h0=i0;i0=i1;i1=h0;}
+  prev = i5;
+  i0 = i0+1;
+  index = i0;
+  i3=i2;i2=i5;
   goto l1_loop;
 l61:
   ;

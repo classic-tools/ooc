@@ -20,19 +20,19 @@ typedef struct Exception__Context {
 } Exception__Context;
 extern void Exception__Init(Exception__Exception e, Object__String msg);
 extern void NORETURN Exception__Raise(Exception__Exception e) NORETURN2;
-extern Exception__Exception Exception__Current();
-extern void Exception__Clear();
+extern Exception__Exception Exception__Current(void);
+extern void Exception__Clear(void);
 extern void Exception__PushContext(struct Exception__Context *context, OOC_PTR jmpbuf);
 extern void Exception__PopContext(OOC_INT32 n);
-extern void NORETURN Exception__ActivateContext() NORETURN2;
+extern void NORETURN Exception__ActivateContext(void) NORETURN2;
 extern Object__String Exception__ExceptionDesc_GetMessage(Exception__Exception e);
 #define _TBN_Exception__ExceptionDesc_GetMessage 0
 typedef Object__String (*_TBP_Exception__ExceptionDesc_GetMessage)(Exception__Exception e);
 extern void Exception__ExceptionDesc_WriteBacktrace(Exception__Exception e);
 #define _TBN_Exception__ExceptionDesc_WriteBacktrace 1
 typedef void (*_TBP_Exception__ExceptionDesc_WriteBacktrace)(Exception__Exception e);
-extern void OOC_Exception_init();
-extern void OOC_Exception_init0();
+extern void OOC_Exception_init(void);
+extern void OOC_Exception_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Exception__Exception;

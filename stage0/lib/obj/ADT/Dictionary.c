@@ -16,7 +16,7 @@ void ADT_Dictionary__Init(ADT_Dictionary__Dictionary dict) {
   ;
 }
 
-ADT_Dictionary__Dictionary ADT_Dictionary__New() {
+ADT_Dictionary__Dictionary ADT_Dictionary__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary__Dictionary.baseTypes[0]);

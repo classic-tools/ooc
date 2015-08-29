@@ -17,8 +17,8 @@ typedef OOC_CHAR8 OS_ProcessParameters__Path[];
 #define OS_ProcessParameters__cwdTooLong 2
 #define OS_ProcessParameters__accessDenied 3
 extern void OS_ProcessParameters__getcwd(OS_ProcessParameters__Path buffer, OOC_LEN buffer_0d, Msg__Msg *res);
-extern void OOC_OS_ProcessParameters_init();
-extern void OOC_OS_ProcessParameters_init0();
+extern void OOC_OS_ProcessParameters_init(void);
+extern void OOC_OS_ProcessParameters_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OS_ProcessParameters__Path;

@@ -48,7 +48,7 @@ Config_Value__StringPtr Config_Value__GetStringPtr(Config_Value__String str, OOC
   ;
 }
 
-Config_Value__PrototypeList Config_Value__NewPrototypeList() {
+Config_Value__PrototypeList Config_Value__NewPrototypeList(void) {
   register OOC_INT32 i0;
   Config_Value__PrototypeList tl;
 

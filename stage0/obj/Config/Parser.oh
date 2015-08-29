@@ -99,8 +99,8 @@ typedef OOC_CHAR8 (*_TBP_Config_Parser__NodeDesc_IsEmpty)(Config_Parser__Node no
 extern XML_UnicodeBuffer__CharArray Config_Parser__NodeDesc_GetCharDataContent(Config_Parser__Node node);
 #define _TBN_Config_Parser__NodeDesc_GetCharDataContent 0
 typedef XML_UnicodeBuffer__CharArray (*_TBP_Config_Parser__NodeDesc_GetCharDataContent)(Config_Parser__Node node);
-extern void OOC_Config_Parser_init();
-extern void OOC_Config_Parser_init0();
+extern void OOC_Config_Parser_init(void);
+extern void OOC_Config_Parser_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Parser__String;

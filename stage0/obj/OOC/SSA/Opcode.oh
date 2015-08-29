@@ -119,14 +119,14 @@ extern OOC_CHAR8 OOC_SSA_Opcode__ConvDiffersFromCast(OOC_INT8 from, OOC_INT8 to)
 extern void OOC_SSA_Opcode__GetSubclassName(OOC_INT8 subclass, OOC_CHAR8 name[], OOC_LEN name_0d);
 extern void OOC_SSA_Opcode__GetName(OOC_INT8 _class, OOC_INT8 subclass, OOC_CHAR8 name[], OOC_LEN name_0d);
 extern OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type);
-extern void OOC_OOC_SSA_Opcode_init();
-extern void OOC_OOC_SSA_Opcode_init0();
+extern void OOC_OOC_SSA_Opcode_init(void);
+extern void OOC_OOC_SSA_Opcode_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SSA_Opcode__33519;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__33605;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__34191;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__34294;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__33709;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__33795;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__34381;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__34484;
 #endif /* _MODULE_OOC_SSA_Opcode_ */
 
 /* --- */

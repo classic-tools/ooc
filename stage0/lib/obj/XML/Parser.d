@@ -87,7 +87,7 @@ static OOC_CHAR8 XML_Parser__IsPubidChar(OOC_CHAR16 ch);
 static OOC_CHAR8 XML_Parser__IsVersionNumChar(OOC_CHAR16 ch);
 static OOC_CHAR8 XML_Parser__IsEncNameChar(OOC_CHAR16 ch, OOC_CHAR8 first);
 static void XML_Parser__Init(XML_Parser__Parser p, OOC_CHAR8 _new, IO__ByteChannel reader, URI__URI baseURI, XML_UnicodeCodec__Factory codecFactory, XML_EntityResolver__Resolver entityResolver, XML_Builder__Builder builder);
-static void XML_Parser__SetErrorMessages();
+static void XML_Parser__SetErrorMessages(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

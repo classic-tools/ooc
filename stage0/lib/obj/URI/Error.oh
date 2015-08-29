@@ -34,8 +34,8 @@ typedef void (*_TBP_URI_Error__ContextDesc_SetString)(URI_Error__Context context
 extern URI_Error__Context URI_Error__NewContext(const Msg__String id__ref, OOC_LEN id_0d);
 extern void URI_Error__SetURIString(Msg__Msg msg, URI_String__String str, OOC_LEN str_0d);
 extern Msg__Msg URI_Error__New(URI_Error__Context context, OOC_INT32 code, OOC_INT16 pos);
-extern void OOC_URI_Error_init();
-extern void OOC_URI_Error_init0();
+extern void OOC_URI_Error_init(void);
+extern void OOC_URI_Error_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Error__Mapping;

@@ -296,27 +296,25 @@ l12:
   i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4370)));
   i1 = i1==37u;
   if (i1) goto l3;
-  i0=0u;
+  i1=0u;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4397)));
-  i0 = URI_CharClass__SkipEscaped_SkipHex(i0);
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4397)));
+  i1 = URI_CharClass__SkipEscaped_SkipHex(i1);
   
 l5:
-  if (i0) goto l7;
-  i0=0u;
+  if (i1) goto l7;
+  i1=0u;
   goto l9;
 l7:
-  i0 = *pos;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4420)));
-  i0 = URI_CharClass__SkipEscaped_SkipHex(i0);
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4420)));
+  i1 = URI_CharClass__SkipEscaped_SkipHex(i1);
   
 l9:
-  if (i0) goto l11;
+  if (i1) goto l11;
   return 0u;
   goto l12;
 l11:
-  i0 = *pos;
   *pos = (i0+3);
   return 1u;
 l12:
@@ -325,12 +323,12 @@ l12:
 }
 
 OOC_CHAR8 URI_CharClass__SkipPChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
-  register OOC_INT32 i0;
+  register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4630)));
-  i0 = URI_CharClass__IsMember(i0, ":@&=+$,", 8);
-  if (i0) goto l7;
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4630)));
+  i1 = URI_CharClass__IsMember(i1, ":@&=+$,", 8);
+  if (i1) goto l7;
   i0 = URI_CharClass__SkipUnreserved((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
   if (i0) goto l5;
   i0 = URI_CharClass__SkipEscaped((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -342,7 +340,6 @@ l6:
   return i0;
   goto l8;
 l7:
-  i0 = *pos;
   *pos = (i0+1);
   return 1u;
 l8:

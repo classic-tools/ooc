@@ -265,11 +265,11 @@ typedef void (*_TBP_OOC_Doc__BlockElementDesc_Store)(OOC_Doc__BlockElement e, AD
 extern void OOC_Doc__BlockElementDesc_Load(OOC_Doc__BlockElement e, ADT_Storable__Reader r);
 #define _TBN_OOC_Doc__BlockElementDesc_Load 4
 typedef void (*_TBP_OOC_Doc__BlockElementDesc_Load)(OOC_Doc__BlockElement e, ADT_Storable__Reader r);
-extern OOC_Doc__InlineList OOC_Doc__NewInlineList();
+extern OOC_Doc__InlineList OOC_Doc__NewInlineList(void);
 extern void OOC_Doc__InlineListDesc_Append(OOC_Doc__InlineList il, OOC_Doc__InlineElement inlineElement);
 #define _TBN_OOC_Doc__InlineListDesc_Append 0
 typedef void (*_TBP_OOC_Doc__InlineListDesc_Append)(OOC_Doc__InlineList il, OOC_Doc__InlineElement inlineElement);
-extern OOC_Doc__BlockList OOC_Doc__NewBlockList();
+extern OOC_Doc__BlockList OOC_Doc__NewBlockList(void);
 extern void OOC_Doc__BlockListDesc_Append(OOC_Doc__BlockList bl, OOC_Doc__BlockElement inlineElement);
 #define _TBN_OOC_Doc__BlockListDesc_Append 0
 typedef void (*_TBP_OOC_Doc__BlockListDesc_Append)(OOC_Doc__BlockList bl, OOC_Doc__BlockElement inlineElement);
@@ -509,8 +509,8 @@ typedef void (*_TBP_OOC_Doc__DocumentDesc_Normalize)(OOC_Doc__Document doc);
 extern void OOC_Doc__DocumentDesc_Merge(OOC_Doc__Document doc, OOC_Doc__Document source);
 #define _TBN_OOC_Doc__DocumentDesc_Merge 7
 typedef void (*_TBP_OOC_Doc__DocumentDesc_Merge)(OOC_Doc__Document doc, OOC_Doc__Document source);
-extern void OOC_OOC_Doc_init();
-extern void OOC_OOC_Doc_init0();
+extern void OOC_OOC_Doc_init(void);
+extern void OOC_OOC_Doc_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Doc__Position;

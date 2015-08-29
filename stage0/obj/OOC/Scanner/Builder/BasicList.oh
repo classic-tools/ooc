@@ -40,8 +40,8 @@ typedef void (*_TBP_OOC_Scanner_Builder_BasicList__BuilderDesc_Clear)(OOC_Scanne
 extern void OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol(OOC_Scanner_Builder_BasicList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
 #define _TBN_OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol 0
 typedef void (*_TBP_OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol)(OOC_Scanner_Builder_BasicList__Builder b, OOC_INT8 id, OOC_INT32 cstart, OOC_INT32 cend, OOC_INT32 line, OOC_INT32 column);
-extern void OOC_OOC_Scanner_Builder_BasicList_init();
-extern void OOC_OOC_Scanner_Builder_BasicList_init0();
+extern void OOC_OOC_Scanner_Builder_BasicList_init(void);
+extern void OOC_OOC_Scanner_Builder_BasicList_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Scanner_Builder_BasicList__Symbol;

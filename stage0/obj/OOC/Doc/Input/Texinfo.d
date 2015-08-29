@@ -108,7 +108,7 @@ static OOC_Scanner_InputBuffer__CharArray OOC_Doc_Input_Texinfo__emptyString;
 static OOC_Doc_Input_Texinfo__ErrorContext OOC_Doc_Input_Texinfo__texinfoContext;
 static OOC_Doc_Input_Texinfo__Token OOC_Doc_Input_Texinfo__Tokenize(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray str, OOC_Error__List errList);
 static void OOC_Doc_Input_Texinfo__WriteTokens(Channel__Channel ch, OOC_Doc_Input_Texinfo__Token t);
-static void OOC_Doc_Input_Texinfo__Init();
+static void OOC_Doc_Input_Texinfo__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

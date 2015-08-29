@@ -51,12 +51,12 @@ static OOC_CHAR8 oo2c__forceUpdateRepository;
 static OOC_CHAR8 oo2c__doInstall;
 static Config_Section_Options__Option oo2c__option;
 static OOC_Repository__Module oo2c__module;
-static void oo2c__NewConfig();
+static void oo2c__NewConfig(void);
 static OOC_Repository__Module oo2c__GetModule(Object__String moduleName);
 static OOC_CHAR8 oo2c__BuildPackage(OOC_Package__Package pkg, OOC_Repository__Repository rep, OOC_CHAR8 install);
 static void oo2c__UninstallPackage(OOC_Package__Package pkg);
 static OOC_CHAR8 oo2c__BuildPackageDoc(OOC_Package__Package pkg);
-static void oo2c__WriteHelp();
+static void oo2c__WriteHelp(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

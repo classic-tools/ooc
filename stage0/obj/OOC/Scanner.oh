@@ -27,8 +27,8 @@ extern void OOC_Scanner__ErrorContextDesc_GetTemplate(OOC_Scanner__ErrorContext 
 #define _TBN_OOC_Scanner__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_Scanner__ErrorContextDesc_GetTemplate)(OOC_Scanner__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 extern void OOC_Scanner__ScanInput(OOC_Scanner_Builder__Builder builder, OOC_Config_Pragmas__Section defaultPragmas, OOC_UINT32 scanOptions);
-extern void OOC_OOC_Scanner_init();
-extern void OOC_OOC_Scanner_init0();
+extern void OOC_OOC_Scanner_init(void);
+extern void OOC_OOC_Scanner_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Scanner__2939;

@@ -38,20 +38,18 @@ void OOC_SSA_XML__WriterDesc_WriteInstrChildren(OOC_SSA_XML__Writer w, OOC_SSA__
 }
 
 OOC_INT32 OOC_SSA_XML__WriterDesc_GetId(OOC_SSA_XML__Writer w, OOC_SSA__Result result) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)w;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2036))+76);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2036))+76);
-  i3 = (OOC_INT32)result;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2043)))), ADT_Dictionary_IntValue__DictionaryDesc_HasKey)),ADT_Dictionary_IntValue__DictionaryDesc_HasKey)((ADT_Dictionary_IntValue__Dictionary)i2, (Object__Object)i3);
+  i2 = (OOC_INT32)result;
+  i1 = ADT_Dictionary_IntValue__DictionaryDesc_HasKey((ADT_Dictionary_IntValue__Dictionary)i1, (Object__Object)i2);
   if (i1) goto l3;
   return (-1);
   goto l4;
 l3:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2085))+76);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2085))+76);
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2092)))), ADT_Dictionary_IntValue__DictionaryDesc_Get)),ADT_Dictionary_IntValue__DictionaryDesc_Get)((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i3);
+  i0 = ADT_Dictionary_IntValue__DictionaryDesc_Get((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i2);
   return (_abs(i0));
 l4:
   _failed_function(1983); return 0;
@@ -77,7 +75,7 @@ void OOC_SSA_XML__WriterDesc_AttrId(OOC_SSA_XML__Writer w, const OOC_CHAR16 name
   i2 = (OOC_INT32)result;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2413))+8);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2375))+72);
-  i3 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2398)))), OOC_SSA_XML__WriterDesc_GetId)),OOC_SSA_XML__WriterDesc_GetId)((OOC_SSA_XML__Writer)i0, (OOC_SSA__Result)i3);
+  i3 = OOC_SSA_XML__WriterDesc_GetId((OOC_SSA_XML__Writer)i0, (OOC_SSA__Result)i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2379)))), ADT_StringBuffer__StringBufferDesc_AppendInt)),ADT_StringBuffer__StringBufferDesc_AppendInt)((ADT_StringBuffer__StringBuffer)i4, (_abs(i3)));
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2448))+8);
   i1 = i2!=i1;
@@ -207,7 +205,7 @@ static OOC_CHAR8 OOC_SSA_XML__Omit(OOC_SSA__Instr instr) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)instr;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3941)))), OOC_SSA__InstrDesc_IsConst)),OOC_SSA__InstrDesc_IsConst)((OOC_SSA__Instr)i0);
+  i0 = OOC_SSA__InstrDesc_IsConst((OOC_SSA__Instr)i0);
   return i0;
   ;
 }
@@ -294,7 +292,7 @@ l3:
   OOC_SSA_XML__WriterDesc_WriteInstr_StartTagInstr((XML_Writer__Writer)i1, (OOC_SSA__Instr)i0);
   i0 = (OOC_INT32)w;
   i1 = (OOC_INT32)instr;
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5392)))), OOC_SSA_XML__WriterDesc_GetId)),OOC_SSA_XML__WriterDesc_GetId)((OOC_SSA_XML__Writer)i0, (OOC_SSA__Result)i1);
+  i2 = OOC_SSA_XML__WriterDesc_GetId((OOC_SSA_XML__Writer)i0, (OOC_SSA__Result)i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5374)))), XML_Writer__WriterDesc_AttrInt)),XML_Writer__WriterDesc_AttrInt)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){105,100,0}), 3, i2);
   i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5429)))), &_td_OOC_SSA__ConstDesc);
   if (i2) goto l9;
@@ -369,41 +367,39 @@ void OOC_SSA_XML__WriterDesc_WriteProcBody(OOC_SSA_XML__Writer w, OOC_SSA__ProcB
   auto void OOC_SSA_XML__WriterDesc_WriteProcBody_TraverseInstr(OOC_SSA__Instr instr);
     
     void OOC_SSA_XML__WriterDesc_WriteProcBody_AssignId(OOC_SSA__Instr instr) {
-      register OOC_INT32 i0,i1,i2,i3;
+      register OOC_INT32 i0,i1,i2;
       OOC_SSA__Opnd opnd;
 
       i0 = (OOC_INT32)w;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6399))+76);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6399))+76);
-      i2 = (OOC_INT32)instr;
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6406)))), ADT_Dictionary_IntValue__DictionaryDesc_HasKey)),ADT_Dictionary_IntValue__DictionaryDesc_HasKey)((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i2);
+      i1 = (OOC_INT32)instr;
+      i0 = ADT_Dictionary_IntValue__DictionaryDesc_HasKey((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i1);
       i0 = !i0;
       if (!i0) goto l22;
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6545))+24);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6545))+24);
       opnd = (OOC_SSA__Opnd)i0;
-      i1 = i0!=(OOC_INT32)0;
-      if (!i1) goto l10;
+      i2 = i0!=(OOC_INT32)0;
+      if (!i2) goto l10;
 l5_loop:
-      i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6611));
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6616))+8);
-      OOC_SSA_XML__WriterDesc_WriteProcBody_AssignId((OOC_SSA__Instr)i1);
+      i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6611));
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6616))+8);
+      OOC_SSA_XML__WriterDesc_WriteProcBody_AssignId((OOC_SSA__Instr)i2);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6648))+8);
       opnd = (OOC_SSA__Opnd)i0;
-      i1 = i0!=(OOC_INT32)0;
-      if (i1) goto l5_loop;
+      i2 = i0!=(OOC_INT32)0;
+      if (i2) goto l5_loop;
 l10:
-      i0 = OOC_SSA_XML__Omit((OOC_SSA__Instr)i2);
+      i0 = OOC_SSA_XML__Omit((OOC_SSA__Instr)i1);
       i0 = !i0;
       if (!i0) goto l13;
       i0 = (OOC_INT32)w;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6722))+76);
-      i3 = instrCount;
+      i2 = instrCount;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6722))+76);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6729)))), ADT_Dictionary_IntValue__DictionaryDesc_Set)),ADT_Dictionary_IntValue__DictionaryDesc_Set)((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i2, (-i3));
+      ADT_Dictionary_IntValue__DictionaryDesc_Set((ADT_Dictionary_IntValue__Dictionary)i0, (Object__Object)i1, (-i2));
       i0 = instrCount;
       instrCount = (i0+1);
 l13:
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6828))+24);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6828))+24);
       opnd = (OOC_SSA__Opnd)i0;
       i1 = i0!=(OOC_INT32)0;
       if (!i1) goto l22;
@@ -422,7 +418,7 @@ l22:
 
     
     void OOC_SSA_XML__WriterDesc_WriteProcBody_TraverseInstr(OOC_SSA__Instr instr) {
-      register OOC_INT32 i0,i1,i2,i3;
+      register OOC_INT32 i0,i1,i2;
       OOC_INT32 id;
       OOC_SSA__Result backwardFeed;
       OOC_SSA__Opnd opnd;
@@ -432,16 +428,14 @@ l22:
       i1 = !i1;
       if (!i1) goto l18;
       i1 = (OOC_INT32)w;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7169))+76);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7169))+76);
-      i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7176)))), ADT_Dictionary_IntValue__DictionaryDesc_Get)),ADT_Dictionary_IntValue__DictionaryDesc_Get)((ADT_Dictionary_IntValue__Dictionary)i1, (Object__Object)i0);
+      i1 = ADT_Dictionary_IntValue__DictionaryDesc_Get((ADT_Dictionary_IntValue__Dictionary)i1, (Object__Object)i0);
       id = i1;
       i2 = i1<0;
       if (!i2) goto l18;
       i2 = (OOC_INT32)w;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7270))+76);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7270))+76);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 7277)))), ADT_Dictionary_IntValue__DictionaryDesc_Set)),ADT_Dictionary_IntValue__DictionaryDesc_Set)((ADT_Dictionary_IntValue__Dictionary)i2, (Object__Object)i0, (-i1));
+      ADT_Dictionary_IntValue__DictionaryDesc_Set((ADT_Dictionary_IntValue__Dictionary)i2, (Object__Object)i0, (-i1));
       i1 = *(OOC_INT8*)((_check_pointer(i0, 7341))+36);
       i1 = i1==10;
       if (i1) goto l15;
@@ -459,7 +453,7 @@ l9_loop:
       if (i2) goto l9_loop;
 l14:
       i1 = (OOC_INT32)w;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8011)))), OOC_SSA_XML__WriterDesc_WriteInstr)),OOC_SSA_XML__WriterDesc_WriteInstr)((OOC_SSA_XML__Writer)i1, (OOC_SSA__Instr)i0);
+      OOC_SSA_XML__WriterDesc_WriteInstr((OOC_SSA_XML__Writer)i1, (OOC_SSA__Instr)i0);
       goto l18;
 l15:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7569))+24);
@@ -467,8 +461,8 @@ l15:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7584))+8);
       OOC_SSA_XML__WriterDesc_WriteProcBody_TraverseInstr((OOC_SSA__Instr)i1);
       i1 = (OOC_INT32)w;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 7607)))), OOC_SSA_XML__WriterDesc_WriteInstr)),OOC_SSA_XML__WriterDesc_WriteInstr)((OOC_SSA_XML__Writer)i1, (OOC_SSA__Instr)i0);
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7662)))), OOC_SSA__InstrDesc_GetBackwardFeed)),OOC_SSA__InstrDesc_GetBackwardFeed)((OOC_SSA__Instr)i0);
+      OOC_SSA_XML__WriterDesc_WriteInstr((OOC_SSA_XML__Writer)i1, (OOC_SSA__Instr)i0);
+      i0 = (OOC_INT32)OOC_SSA__InstrDesc_GetBackwardFeed((OOC_SSA__Instr)i0);
       backwardFeed = (OOC_SSA__Result)i0;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7722))+8);
       OOC_SSA_XML__WriterDesc_WriteProcBody_TraverseInstr((OOC_SSA__Instr)i0);
@@ -508,9 +502,8 @@ l18:
   if (!i1) goto l14;
 l5_loop:
   i1 = (OOC_INT32)w;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8707))+76);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8707))+76);
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 8714)))), ADT_Dictionary_IntValue__DictionaryDesc_HasKey)),ADT_Dictionary_IntValue__DictionaryDesc_HasKey)((ADT_Dictionary_IntValue__Dictionary)i1, (Object__Object)i0);
+  i1 = ADT_Dictionary_IntValue__DictionaryDesc_HasKey((ADT_Dictionary_IntValue__Dictionary)i1, (Object__Object)i0);
   i1 = !i1;
   if (!i1) goto l8;
   OOC_SSA_XML__WriterDesc_WriteProcBody_AssignId((OOC_SSA__Instr)i0);
@@ -596,9 +589,9 @@ l4:
       i2 = i1!=(OOC_INT32)0;
       if (!i2) goto l12;
 l7_loop:
-      i2 = (OOC_INT32)w;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10080))+12);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 10061)))), OOC_SSA_XML__WriterDesc_WriteInstr)),OOC_SSA_XML__WriterDesc_WriteInstr)((OOC_SSA_XML__Writer)i2, (OOC_SSA__Instr)i3);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10080))+12);
+      i3 = (OOC_INT32)w;
+      OOC_SSA_XML__WriterDesc_WriteInstr((OOC_SSA_XML__Writer)i3, (OOC_SSA__Instr)i2);
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 10112));
       proxy = (OOC_SSA_Schedule__InstrProxy)i1;
       i2 = i1!=(OOC_INT32)0;
@@ -623,7 +616,7 @@ l20:
 
     
     void OOC_SSA_XML__WriterDesc_WriteSchedule_AssignIds(OOC_SSA_Schedule__Block b) {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5;
+      register OOC_INT32 i0,i1,i2,i3,i4;
       OOC_SSA_Schedule__InstrProxy proxy;
       OOC_SSA_Schedule__Block nested;
 
@@ -638,11 +631,10 @@ l3_loop:
       i2 = !i2;
       if (!i2) goto l6;
       i2 = (OOC_INT32)w;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10551))+76);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10551))+76);
-      i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10570))+12);
-      i5 = instrCount;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 10558)))), ADT_Dictionary_IntValue__DictionaryDesc_Set)),ADT_Dictionary_IntValue__DictionaryDesc_Set)((ADT_Dictionary_IntValue__Dictionary)i2, (Object__Object)i4, i5);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10570))+12);
+      i4 = instrCount;
+      ADT_Dictionary_IntValue__DictionaryDesc_Set((ADT_Dictionary_IntValue__Dictionary)i2, (Object__Object)i3, i4);
       i2 = instrCount;
       instrCount = (i2+1);
 l6:

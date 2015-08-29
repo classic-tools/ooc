@@ -42,8 +42,8 @@
 #define Ascii__sp " "
 #define Ascii__xon "\021"
 #define Ascii__xoff "\023"
-extern void OOC_Ascii_init();
-extern void OOC_Ascii_init0();
+extern void OOC_Ascii_init(void);
+extern void OOC_Ascii_init0(void);
 
 /* run-time meta data */
 #endif /* _MODULE_Ascii_ */

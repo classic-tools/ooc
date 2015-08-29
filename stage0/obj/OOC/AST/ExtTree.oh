@@ -475,7 +475,7 @@ extern void OOC_AST_ExtTree__VisitorDesc_VisitLinkLibFlag(OOC_AST_ExtTree__Visit
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitLinkLibFlag 19
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitLinkLibFlag)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__LinkLibFlag linkLibFlag);
 extern void OOC_AST_ExtTree__Init(OOC_AST_ExtTree__Builder b);
-extern OOC_AST_ExtTree__Builder OOC_AST_ExtTree__New();
+extern OOC_AST_ExtTree__Builder OOC_AST_ExtTree__New(void);
 extern OOC_AST_ExtTree__NodeList OOC_AST_ExtTree__BuilderDesc_NewNodeList(OOC_AST_ExtTree__Builder b);
 #define _TBN_OOC_AST_ExtTree__BuilderDesc_NewNodeList 25
 typedef OOC_AST_ExtTree__NodeList (*_TBP_OOC_AST_ExtTree__BuilderDesc_NewNodeList)(OOC_AST_ExtTree__Builder b);
@@ -746,8 +746,8 @@ typedef OOC_AST__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_LinkLibFlag)(OOC_AST_E
 extern void OOC_AST_ExtTree__LinkLibFlagDesc_Accept(OOC_AST_ExtTree__LinkLibFlag linkLibFlag, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__LinkLibFlagDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__LinkLibFlagDesc_Accept)(OOC_AST_ExtTree__LinkLibFlag linkLibFlag, OOC_AST_ExtTree__Visitor v);
-extern void OOC_OOC_AST_ExtTree_init();
-extern void OOC_OOC_AST_ExtTree_init0();
+extern void OOC_OOC_AST_ExtTree_init(void);
+extern void OOC_OOC_AST_ExtTree_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_AST_ExtTree__NodeList;

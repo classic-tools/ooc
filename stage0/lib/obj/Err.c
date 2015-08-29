@@ -2,7 +2,7 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-OOC_CHAR8 Err__Done() {
+OOC_CHAR8 Err__Done(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Err__writer;
@@ -11,7 +11,7 @@ OOC_CHAR8 Err__Done() {
   ;
 }
 
-void Err__ClearError() {
+void Err__ClearError(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Err__writer;
@@ -37,7 +37,7 @@ l4:
   ;
 }
 
-void Err__Flush() {
+void Err__Flush(void) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)Err__writer;
@@ -217,7 +217,7 @@ void Err__Set(OOC_UINT32 s) {
   ;
 }
 
-void Err__Ln() {
+void Err__Ln(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Err__writer;

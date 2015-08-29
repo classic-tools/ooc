@@ -32,7 +32,7 @@ typedef struct ADT_Dictionary__DummyDesc {
   char __dummy;
 } ADT_Dictionary__DummyDesc;
 extern void ADT_Dictionary__Init(ADT_Dictionary__Dictionary dict);
-extern ADT_Dictionary__Dictionary ADT_Dictionary__New();
+extern ADT_Dictionary__Dictionary ADT_Dictionary__New(void);
 extern void ADT_Dictionary__DictionaryDesc_Destroy(ADT_Dictionary__Dictionary dict);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Destroy 3
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Destroy)(ADT_Dictionary__Dictionary dict);
@@ -78,8 +78,8 @@ typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Load)(ADT_Dictionary__Diction
 extern void ADT_Dictionary__DummyDesc_Destroy(ADT_Dictionary__Dummy dummy);
 #define _TBN_ADT_Dictionary__DummyDesc_Destroy 3
 typedef void (*_TBP_ADT_Dictionary__DummyDesc_Destroy)(ADT_Dictionary__Dummy dummy);
-extern void OOC_ADT_Dictionary_init();
-extern void OOC_ADT_Dictionary_init0();
+extern void OOC_ADT_Dictionary_init(void);
+extern void OOC_ADT_Dictionary_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_Dictionary__Entry;

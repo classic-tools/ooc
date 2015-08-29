@@ -1,4 +1,4 @@
-(* 	$Id: DeclWriter.Mod,v 1.62 2003/04/06 12:11:14 mva Exp $	 *)
+(* 	$Id: DeclWriter.Mod,v 1.63 2003/04/14 19:14:24 mva Exp $	 *)
 MODULE OOC:C:DeclWriter [OOC_EXTENSIONS];
 (*  Defines classes to handle C declarations, types, and include statements.
     Copyright (C) 2001-2003  Michael van Acken
@@ -970,17 +970,21 @@ PROCEDURE (fct: Function) WriteRight (w: Writer);
   VAR
     i: LONGINT;
   BEGIN
-    w. WriteChar("(");
-    FOR i := 0 TO fct. parameters. Size()-1 DO
-      IF (i # 0) THEN
-        w. WriteString (", ")
+    IF (fct.parameters.Size() = 0) THEN
+      w. WriteString("(void)");
+    ELSE
+      w. WriteChar("(");
+      FOR i := 0 TO fct. parameters. Size()-1 DO
+        IF (i # 0) THEN
+          w. WriteString (", ")
+        END;
+        w. WriteDeclaration (fct. parameters. array[i](Declaration))
       END;
-      w. WriteDeclaration (fct. parameters. array[i](Declaration))
+      IF fct. restParameters THEN
+        w. WriteString (", ...");
+      END;
+      w. WriteChar(")");
     END;
-    IF fct. restParameters THEN
-      w. WriteString (", ...");
-    END;
-    w. WriteChar(")");
     WriteRight (w, fct. resultType, priFunction);
     IF fct.noReturn THEN
       w.WriteString(" NORETURN2");

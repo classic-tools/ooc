@@ -129,7 +129,7 @@ void IO_BinaryRider__ReaderDesc_ReadLChar(IO_BinaryRider__Reader r, OOC_CHAR16 *
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3659)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)ch, 2);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)ch, 2);
   return;
   ;
 }
@@ -204,7 +204,7 @@ void IO_BinaryRider__ReaderDesc_ReadSInt(IO_BinaryRider__Reader r, OOC_INT8 *sin
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4853)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)sint, 1);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)sint, 1);
   return;
   ;
 }
@@ -213,7 +213,7 @@ void IO_BinaryRider__ReaderDesc_ReadInt(IO_BinaryRider__Reader r, OOC_INT16 *_in
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4974)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)_int, 2);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)_int, 2);
   return;
   ;
 }
@@ -222,7 +222,7 @@ void IO_BinaryRider__ReaderDesc_ReadLInt(IO_BinaryRider__Reader r, OOC_INT32 *li
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5113)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)lint, 4);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)lint, 4);
   return;
   ;
 }
@@ -299,7 +299,7 @@ void IO_BinaryRider__ReaderDesc_ReadReal(IO_BinaryRider__Reader r, OOC_REAL32 *r
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5889)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)real, 4);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)real, 4);
   return;
   ;
 }
@@ -308,7 +308,7 @@ void IO_BinaryRider__ReaderDesc_ReadLReal(IO_BinaryRider__Reader r, OOC_REAL64 *
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6033)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)lreal, 8);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)lreal, 8);
   return;
   ;
 }
@@ -317,7 +317,7 @@ void IO_BinaryRider__ReaderDesc_ReadSet(IO_BinaryRider__Reader r, OOC_UINT32 *s)
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)r;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6151)))), IO_BinaryRider__ReaderDesc_ReadBytesOrdered)),IO_BinaryRider__ReaderDesc_ReadBytesOrdered)((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)s, 4);
+  IO_BinaryRider__ReaderDesc_ReadBytesOrdered((IO_BinaryRider__Reader)i0, (void*)(OOC_INT32)s, 4);
   return;
   ;
 }
@@ -523,7 +523,7 @@ void IO_BinaryRider__WriterDesc_WriteLChar(IO_BinaryRider__Writer w, OOC_CHAR16 
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9168)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&ch, 2);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&ch, 2);
   return;
   ;
 }
@@ -533,8 +533,8 @@ void IO_BinaryRider__WriterDesc_WriteString(IO_BinaryRider__Writer w, const OOC_
 
   i0 = (OOC_INT32)w;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9383))+4);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9383))+4);
   i2 = Strings__Length((void*)(OOC_INT32)s, s_0d);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9383))+4);
   i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 9391)))), IO__ByteChannelDesc_Write)),IO__ByteChannelDesc_Write)((IO__ByteChannel)i0, (void*)(OOC_INT32)s, (-1), 0, (i2+1));
   return;
   ;
@@ -574,7 +574,7 @@ void IO_BinaryRider__WriterDesc_WriteInt(IO_BinaryRider__Writer w, OOC_INT16 _in
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9950)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&_int, 2);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&_int, 2);
   return;
   ;
 }
@@ -583,7 +583,7 @@ void IO_BinaryRider__WriterDesc_WriteLInt(IO_BinaryRider__Writer w, OOC_INT32 li
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10084)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&lint, 4);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&lint, 4);
   return;
   ;
 }
@@ -625,7 +625,7 @@ void IO_BinaryRider__WriterDesc_WriteReal(IO_BinaryRider__Writer w, OOC_REAL32 r
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10514)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&real, 4);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&real, 4);
   return;
   ;
 }
@@ -634,7 +634,7 @@ void IO_BinaryRider__WriterDesc_WriteLReal(IO_BinaryRider__Writer w, OOC_REAL64 
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10653)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&lreal, 8);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&lreal, 8);
   return;
   ;
 }
@@ -643,7 +643,7 @@ void IO_BinaryRider__WriterDesc_WriteSet(IO_BinaryRider__Writer w, OOC_UINT32 s)
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10764)))), IO_BinaryRider__WriterDesc_WriteOrdered)),IO_BinaryRider__WriterDesc_WriteOrdered)((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&s, 4);
+  IO_BinaryRider__WriterDesc_WriteOrdered((IO_BinaryRider__Writer)i0, (void*)(OOC_INT32)&s, 4);
   return;
   ;
 }
@@ -667,7 +667,7 @@ l7:
   i1 = (OOC_INT32)w;
   i2 = *(OOC_INT32*)(_check_pointer(i0, 11266));
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11254)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, ((-i2)-1));
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11298)))), Object__String32Desc_CharsUCS4)),Object__String32Desc_CharsUCS4)((Object__String32)i0);
+  i2 = (OOC_INT32)Object__String32Desc_CharsUCS4((Object__String32)i0);
   chars32 = (Object__CharsUCS4)i2;
   i = 0;
   i0 = *(OOC_INT32*)(_check_pointer(i0, 11335));
@@ -688,7 +688,7 @@ l17:
   i1 = (OOC_INT32)w;
   i2 = *(OOC_INT32*)(_check_pointer(i0, 11066));
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11055)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, (i2+1));
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11097)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
+  i2 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
   chars8 = (Object__CharsLatin1)i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11127))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11127))+4);
@@ -781,7 +781,7 @@ l4:
   ;
 }
 
-static void IO_BinaryRider__Init() {
+static void IO_BinaryRider__Init(void) {
   OOC_INT16 i;
 
   i = 1;

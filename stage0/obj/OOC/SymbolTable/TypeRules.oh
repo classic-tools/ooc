@@ -48,8 +48,8 @@ extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsNilCompatible(OOC_SymbolTable__Typ
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsReadOnly(OOC_SymbolTable__Module usingModule, OOC_SymbolTable__Declaration decl);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsReadOnlyType(OOC_SymbolTable__Module usingModule, OOC_SymbolTable__Type type);
 extern void OOC_SymbolTable_TypeRules__AllocateType(OOC_SymbolTable__Type type);
-extern void OOC_OOC_SymbolTable_TypeRules_init();
-extern void OOC_OOC_SymbolTable_TypeRules_init0();
+extern void OOC_OOC_SymbolTable_TypeRules_init(void);
+extern void OOC_OOC_SymbolTable_TypeRules_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_TypeRules__2917;

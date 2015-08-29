@@ -25,15 +25,15 @@ typedef struct SysClock__DateTime {
   OOC_INT16 fractions;
   OOC_INT16 zone;
 } SysClock__DateTime;
-extern OOC_CHAR8 SysClock__CanGetClock();
-extern OOC_CHAR8 SysClock__CanSetClock();
+extern OOC_CHAR8 SysClock__CanGetClock(void);
+extern OOC_CHAR8 SysClock__CanSetClock(void);
 extern OOC_CHAR8 SysClock__IsValidDateTime(const struct SysClock__DateTime *d__ref);
 extern void SysClock__GetClock(struct SysClock__DateTime *userData, RT0__Struct userData__tag);
 extern void SysClock__SetClock(const struct SysClock__DateTime *userData__ref);
 extern void SysClock__MakeLocalTime(struct SysClock__DateTime *c, RT0__Struct c__tag);
 extern OOC_INT32 SysClock__GetTimeOfDay(OOC_INT32 *sec, OOC_INT32 *usec);
-extern void OOC_SysClock_init();
-extern void OOC_SysClock_init0();
+extern void OOC_SysClock_init(void);
+extern void OOC_SysClock_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_SysClock__DateTime;

@@ -30,8 +30,8 @@ typedef void (*_TBP_URI_Authority_Unparsed__AuthorityDesc_WriteXML)(URI_Authorit
 extern void URI_Authority_Unparsed__AuthorityDesc_Append(URI_Authority_Unparsed__Authority auth, OOC_CHAR8 str[], OOC_LEN str_0d);
 #define _TBN_URI_Authority_Unparsed__AuthorityDesc_Append 0
 typedef void (*_TBP_URI_Authority_Unparsed__AuthorityDesc_Append)(URI_Authority_Unparsed__Authority auth, OOC_CHAR8 str[], OOC_LEN str_0d);
-extern void OOC_URI_Authority_Unparsed_init();
-extern void OOC_URI_Authority_Unparsed_init0();
+extern void OOC_URI_Authority_Unparsed_init(void);
+extern void OOC_URI_Authority_Unparsed_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Authority_Unparsed__Authority;

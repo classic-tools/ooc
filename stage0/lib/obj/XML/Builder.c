@@ -134,7 +134,7 @@ void XML_Builder__Init(XML_Builder__Builder b) {
   ;
 }
 
-XML_Builder__Builder XML_Builder__New() {
+XML_Builder__Builder XML_Builder__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_XML_Builder__Builder.baseTypes[0]);
@@ -192,7 +192,7 @@ void XML_Builder__InitAttributeList(XML_Builder__AttributeList attrList) {
   ;
 }
 
-XML_Builder__AttributeList XML_Builder__NewAttributeList() {
+XML_Builder__AttributeList XML_Builder__NewAttributeList(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_XML_Builder__AttributeList.baseTypes[0]);

@@ -15,8 +15,8 @@ typedef OOC_INT8 OOC_SSA_Result__Class;
 #define OOC_SSA_Result__exception 19
 #define OOC_SSA_Result__dgatePlaceholder 23
 extern void OOC_SSA_Result__GetName(OOC_INT8 _class, OOC_CHAR8 name[], OOC_LEN name_0d);
-extern void OOC_OOC_SSA_Result_init();
-extern void OOC_OOC_SSA_Result_init0();
+extern void OOC_OOC_SSA_Result_init(void);
+extern void OOC_OOC_SSA_Result_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_Result__3303;

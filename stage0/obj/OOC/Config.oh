@@ -22,9 +22,9 @@ extern Config_Section_Options__Option OOC_Config__xsltproc;
 extern Config_Section_Options__Option OOC_Config__AddOption(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value init);
 extern void OOC_Config__AddCmdLine(const OOC_CHAR8 options__ref[], OOC_LEN options_0d, const OOC_CHAR8 _template__ref[], OOC_LEN _template_0d);
 extern void OOC_Config__Read(Msg__MsgList errList);
-extern OOC_CHAR8 OOC_Config__HaveXsltProc();
-extern void OOC_OOC_Config_init();
-extern void OOC_OOC_Config_init0();
+extern OOC_CHAR8 OOC_Config__HaveXsltProc(void);
+extern void OOC_OOC_Config_init(void);
+extern void OOC_OOC_Config_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config__723;

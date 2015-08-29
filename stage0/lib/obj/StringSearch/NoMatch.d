@@ -4,7 +4,7 @@ StringSearch_NoMatch__Matcher StringSearch_NoMatch__matcher;
 static void StringSearch_NoMatch__InitMatcher(StringSearch_NoMatch__Matcher matcher, Object__String8 pattern, OOC_UINT32 flags, OOC_INT32 groups);
 static StringSearch_NoMatch__Matcher StringSearch_NoMatch__NewMatcher(Object__String8 pattern, OOC_UINT32 flags, OOC_INT32 groups);
 static void StringSearch_NoMatch__InitFactory(StringSearch_NoMatch__Factory f);
-static StringSearch_NoMatch__Factory StringSearch_NoMatch__NewFactory();
+static StringSearch_NoMatch__Factory StringSearch_NoMatch__NewFactory(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

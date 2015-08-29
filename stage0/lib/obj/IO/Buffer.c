@@ -64,7 +64,7 @@ void IO_Buffer__ChannelDesc_SetPos(IO_Buffer__Channel ch, OOC_INT32 pos) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)ch;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2185)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2201))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2201))+8);
   i2 = pos;
@@ -81,7 +81,7 @@ OOC_INT32 IO_Buffer__ChannelDesc_Read(IO_Buffer__Channel ch, OOC_CHAR8 buffer[],
   i0 = (OOC_INT32)ch;
   i1 = *(OOC_UINT8*)((_check_pointer(i0, 2421))+12);
   if (i1) goto l3;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3100)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   i = 0;
   
   goto l8;
@@ -140,7 +140,7 @@ l11:
   if (i3) goto l16;
   *(OOC_INT32*)((_check_pointer(i0, 3953))+20) = i2;
   i2 = start;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3993)))), IO_Buffer__ChannelDesc_Read)),IO_Buffer__ChannelDesc_Read)((IO_Buffer__Channel)i0, (void*)(OOC_INT32)buffer, (-1), i2, i1);
+  i0 = IO_Buffer__ChannelDesc_Read((IO_Buffer__Channel)i0, (void*)(OOC_INT32)buffer, (-1), i2, i1);
   i1 = i;
   return (i1+i0);
   goto l32;
@@ -183,18 +183,18 @@ OOC_INT32 IO_Buffer__ChannelDesc_Write(IO_Buffer__Channel ch, const OOC_CHAR8 bu
   i0 = (OOC_INT32)ch;
   i1 = *(OOC_UINT8*)((_check_pointer(i0, 4262))+12);
   if (!i1) goto l3;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4284)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   *(OOC_UINT8*)((_check_pointer(i0, 4302))+12) = 0u;
 l3:
   i1 = *(OOC_INT32*)((_check_pointer(i0, 4345))+20);
   i2 = length;
   i1 = (i1+i2)<=8192;
   if (i1) goto l10;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4590)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   i1 = i2>=4096;
   if (i1) goto l8;
   i1 = start;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4861)))), IO_Buffer__ChannelDesc_Write)),IO_Buffer__ChannelDesc_Write)((IO_Buffer__Channel)i0, (void*)(OOC_INT32)buffer, (-1), i1, i2);
+  i0 = IO_Buffer__ChannelDesc_Write((IO_Buffer__Channel)i0, (void*)(OOC_INT32)buffer, (-1), i1, i2);
   return i0;
   goto l11;
 l8:
@@ -240,7 +240,7 @@ void IO_Buffer__ChannelDesc_Close(IO_Buffer__Channel ch) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)ch;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5228)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5244))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5244))+8);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5249)))), IO__ChannelDesc_Close)),IO__ChannelDesc_Close)((IO__Channel)i0);
@@ -252,7 +252,7 @@ void IO_Buffer__ChannelDesc_CloseAndRegister(IO_Buffer__Channel ch) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)ch;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5348)))), IO_Buffer__ChannelDesc_Flush)),IO_Buffer__ChannelDesc_Flush)((IO_Buffer__Channel)i0);
+  IO_Buffer__ChannelDesc_Flush((IO_Buffer__Channel)i0);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5364))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5364))+8);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5369)))), IO__ChannelDesc_CloseAndRegister)),IO__ChannelDesc_CloseAndRegister)((IO__Channel)i0);

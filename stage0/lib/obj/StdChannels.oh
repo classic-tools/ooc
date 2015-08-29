@@ -58,8 +58,8 @@ typedef void (*_TBP_StdChannels__NullChannelDesc_Flush)(StdChannels__NullChannel
 extern void StdChannels__NullChannelDesc_Close(StdChannels__NullChannel ch);
 #define _TBN_StdChannels__NullChannelDesc_Close 1
 typedef void (*_TBP_StdChannels__NullChannelDesc_Close)(StdChannels__NullChannel ch);
-extern void OOC_StdChannels_init();
-extern void OOC_StdChannels_init0();
+extern void OOC_StdChannels_init(void);
+extern void OOC_StdChannels_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_StdChannels__NullChannel;

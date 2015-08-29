@@ -45,15 +45,15 @@ extern void Config_Value__ValueDesc_DefiningModule(Config_Value__Value v, Config
 #define _TBN_Config_Value__ValueDesc_DefiningModule 1
 typedef void (*_TBP_Config_Value__ValueDesc_DefiningModule)(Config_Value__Value v, Config_Value__String str, OOC_LEN str_0d);
 extern Config_Value__StringPtr Config_Value__GetStringPtr(Config_Value__String str, OOC_LEN str_0d);
-extern Config_Value__PrototypeList Config_Value__NewPrototypeList();
+extern Config_Value__PrototypeList Config_Value__NewPrototypeList(void);
 extern void Config_Value__PrototypeListDesc_RegisterPrototype(Config_Value__PrototypeList tl, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value prototype);
 #define _TBN_Config_Value__PrototypeListDesc_RegisterPrototype 1
 typedef void (*_TBP_Config_Value__PrototypeListDesc_RegisterPrototype)(Config_Value__PrototypeList tl, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value prototype);
 extern Config_Value__Value Config_Value__PrototypeListDesc_GetClone(Config_Value__PrototypeList tl, const OOC_CHAR8 prototypeName__ref[], OOC_LEN prototypeName_0d);
 #define _TBN_Config_Value__PrototypeListDesc_GetClone 0
 typedef Config_Value__Value (*_TBP_Config_Value__PrototypeListDesc_GetClone)(Config_Value__PrototypeList tl, const OOC_CHAR8 prototypeName__ref[], OOC_LEN prototypeName_0d);
-extern void OOC_Config_Value_init();
-extern void OOC_Config_Value_init0();
+extern void OOC_Config_Value_init(void);
+extern void OOC_Config_Value_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Value__String;

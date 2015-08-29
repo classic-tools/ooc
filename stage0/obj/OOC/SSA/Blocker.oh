@@ -148,8 +148,8 @@ typedef void (*_TBP_OOC_SSA_Blocker__DependenceDataDesc_SetRegion)(OOC_SSA_Block
 extern void OOC_SSA_Blocker__Write(IO__ByteChannel c, OOC_SSA__ProcBlock pb);
 extern void OOC_SSA_Blocker__WriteMarker(IO__ByteChannel c, OOC_SSA__ProcBlock pb, ADT_Dictionary__Dictionary marker);
 extern void OOC_SSA_Blocker__ToStderr(OOC_SSA__ProcBlock pb);
-extern void OOC_OOC_SSA_Blocker_init();
-extern void OOC_OOC_SSA_Blocker_init0();
+extern void OOC_OOC_SSA_Blocker_init(void);
+extern void OOC_OOC_SSA_Blocker_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_Blocker__Proxy;

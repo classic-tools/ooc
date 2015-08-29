@@ -22,7 +22,7 @@ static void XML_DTD__InitNamespace(XML_DTD__Namespace ns) {
   ;
 }
 
-XML_DTD__Namespace XML_DTD__NewNamespace() {
+XML_DTD__Namespace XML_DTD__NewNamespace(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_XML_DTD__Namespace.baseTypes[0]);
@@ -300,9 +300,7 @@ l11:
 l14:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18954))+8);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18962))+20);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18954))+8);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 18962))+20);
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 18972)))), XML_DTD__AttValueDesc_Length)),XML_DTD__AttValueDesc_Length)((XML_DTD__AttValue)i3);
+  i2 = XML_DTD__AttValueDesc_Length((XML_DTD__AttValue)i2);
   i1 = i1+i2;
   len = i1;
   
@@ -432,7 +430,7 @@ l20:
 
 
   i0 = (OOC_INT32)attValue;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21019)))), XML_DTD__AttValueDesc_Length)),XML_DTD__AttValueDesc_Length)((XML_DTD__AttValue)i0);
+  i1 = XML_DTD__AttValueDesc_Length((XML_DTD__AttValue)i0);
   len = i1;
   str = (XML_UnicodeBuffer__CharArray)((OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i1+2)));
   pos = 0;
@@ -475,42 +473,40 @@ l11:
 }
 
 XML_UnicodeBuffer__CharArray XML_DTD__AttValueDesc_Flatten(XML_DTD__AttValue attValue, XML_DTD__AttrDecl attrDecl) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1;
   OOC_CHAR8 didNormalization;
 
-  i0 = (OOC_INT32)attValue;
-  i1 = _check_pointer(i0, 21873);
-  i2 = (OOC_INT32)attrDecl;
-  i3 = i2!=(OOC_INT32)0;
-  if (i3) goto l3;
-  i2=0u;
+  i0 = (OOC_INT32)attrDecl;
+  i1 = i0!=(OOC_INT32)0;
+  if (i1) goto l3;
+  i0=0u;
   goto l4;
 l3:
-  i2 = *(OOC_INT8*)((_check_pointer(i2, 21952))+12);
-  i2 = i2!=9;
+  i0 = *(OOC_INT8*)((_check_pointer(i0, 21952))+12);
+  i0 = i0!=9;
   
 l4:
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG(i1)), XML_DTD__AttValueDesc_FlattenValue)),XML_DTD__AttValueDesc_FlattenValue)((XML_DTD__AttValue)i0, i2, (void*)(OOC_INT32)&didNormalization);
+  i1 = (OOC_INT32)attValue;
+  i0 = (OOC_INT32)XML_DTD__AttValueDesc_FlattenValue((XML_DTD__AttValue)i1, i0, (void*)(OOC_INT32)&didNormalization);
   return (XML_UnicodeBuffer__CharArray)i0;
   ;
 }
 
 XML_UnicodeBuffer__CharArray XML_DTD__AttValueDesc_FlattenNorm(XML_DTD__AttValue attValue, XML_DTD__AttrDecl attrDecl, OOC_CHAR8 *didNormalization) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1;
 
-  i0 = (OOC_INT32)attValue;
-  i1 = _check_pointer(i0, 22426);
-  i2 = (OOC_INT32)attrDecl;
-  i3 = i2!=(OOC_INT32)0;
-  if (i3) goto l3;
-  i2=0u;
+  i0 = (OOC_INT32)attrDecl;
+  i1 = i0!=(OOC_INT32)0;
+  if (i1) goto l3;
+  i0=0u;
   goto l4;
 l3:
-  i2 = *(OOC_INT8*)((_check_pointer(i2, 22505))+12);
-  i2 = i2!=9;
+  i0 = *(OOC_INT8*)((_check_pointer(i0, 22505))+12);
+  i0 = i0!=9;
   
 l4:
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG(i1)), XML_DTD__AttValueDesc_FlattenValue)),XML_DTD__AttValueDesc_FlattenValue)((XML_DTD__AttValue)i0, i2, (void*)(OOC_INT32)didNormalization);
+  i1 = (OOC_INT32)attValue;
+  i0 = (OOC_INT32)XML_DTD__AttValueDesc_FlattenValue((XML_DTD__AttValue)i1, i0, (void*)(OOC_INT32)didNormalization);
   return (XML_UnicodeBuffer__CharArray)i0;
   ;
 }
@@ -649,7 +645,7 @@ l4:
 }
 
 void XML_DTD__BuilderDesc_AttachAttributes(XML_DTD__Builder b) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5;
+  register OOC_INT32 i0,i1,i2,i3,i4;
   XML_DTD__Declaration ptr;
   XML_DTD__AttrDecl attrDecl;
   XML_DTD__Declaration decl;
@@ -669,17 +665,15 @@ l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 25306));
   ptr = (XML_DTD__Declaration)i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 25336))+12);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 25336))+12);
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 25369))+8);
-  i3 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 25354)))), XML_DTD__NamespaceDesc_Get)),XML_DTD__NamespaceDesc_Get)((XML_DTD__Namespace)i4, (XML_UnicodeBuffer__CharArray)i5);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 25369))+8);
+  i3 = (OOC_INT32)XML_DTD__NamespaceDesc_Get((XML_DTD__Namespace)i3, (XML_UnicodeBuffer__CharArray)i4);
   decl = (XML_DTD__Declaration)i3;
   i4 = i3==(OOC_INT32)0;
   if (i4) goto l21;
   i3 = _type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 25525)))), &_td_XML_DTD__ElementDeclDesc, 25525);
   elemDecl = (XML_DTD__ElementDecl)i3;
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 25564))+20);
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 25564))+20);
-  i4 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 25579)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i5, (XML_DTD__Declaration)i1);
+  i4 = XML_DTD__NamespaceDesc_Add((XML_DTD__Namespace)i4, (XML_DTD__Declaration)i1);
   dummy = i4;
   i4 = *(OOC_INT8*)((_check_pointer(i1, 25617))+12);
   i4 = i4==0;
@@ -1364,9 +1358,8 @@ void XML_DTD__Init(XML_DTD__Builder b) {
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 37480)))), XML_DTD__BuilderDesc_NewInternalEntity)),XML_DTD__BuilderDesc_NewInternalEntity)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i0, 0, (XML_UnicodeBuffer__CharArray)i1, 0u);
       entity = (XML_DTD__Entity)i0;
       i1 = (OOC_INT32)b;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 37611))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 37611))+4);
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 37624)))), XML_DTD__NamespaceDesc_Add)),XML_DTD__NamespaceDesc_Add)((XML_DTD__Namespace)i1, (XML_DTD__Declaration)i0);
+      i0 = XML_DTD__NamespaceDesc_Add((XML_DTD__Namespace)i1, (XML_DTD__Declaration)i0);
       return;
       ;
     }
@@ -1391,7 +1384,7 @@ void XML_DTD__Init(XML_DTD__Builder b) {
   ;
 }
 
-XML_DTD__Builder XML_DTD__New() {
+XML_DTD__Builder XML_DTD__New(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_XML_DTD__Builder.baseTypes[0]);

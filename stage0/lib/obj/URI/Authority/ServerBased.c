@@ -93,8 +93,8 @@ static Msg__Msg URI_Authority_ServerBased__ParseHost(URI_String__StringPtr str, 
   OOC_INT16 j;
   OOC_INT16 lastLabelStart;
   auto OOC_CHAR8 URI_Authority_ServerBased__ParseHost_IsIPv4Address(URI_String__StringPtr str);
-  auto OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipDigits();
-  auto OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipLabel();
+  auto OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipDigits(void);
+  auto OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipLabel(void);
     
     OOC_CHAR8 URI_Authority_ServerBased__ParseHost_IsIPv4Address(URI_String__StringPtr str) {
       register OOC_INT32 i0,i1,i2,i3;
@@ -140,49 +140,44 @@ l15:
     }
 
     
-    OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipDigits() {
+    OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipDigits(void) {
       register OOC_INT32 i0,i1,i2,i3,i4,i5;
       OOC_INT16 start;
       OOC_INT16 val;
 
       i0 = (OOC_INT32)str;
-      i0 = _check_pointer(i0, 3999);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      i2 = i;
-      i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 3999)));
-      i0 = URI_CharClass__IsDigit(i0);
-      if (i0) goto l3;
-      i0=0u;
-      goto l9;
-l3:
-      i0 = (OOC_INT32)str;
-      i1 = _check_pointer(i0, 4020);
+      i1 = _check_pointer(i0, 3999);
       i2 = OOC_ARRAY_LENGTH(i1, 0);
       i3 = i;
+      i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 3999)));
+      i1 = URI_CharClass__IsDigit(i1);
+      if (i1) goto l3;
+      i1=0u;
+      goto l9;
+l3:
+      i1 = _check_pointer(i0, 4020);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
       i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 4020)));
       i1 = i1!=48u;
       if (i1) goto l6;
-      i0 = _check_pointer(i0, 4057);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      i0 = *(OOC_UINT8*)(i0+(_check_index((i3+1), i1, OOC_UINT16, 4057)));
-      i0 = URI_CharClass__IsDigit(i0);
-      i0 = !i0;
+      i1 = _check_pointer(i0, 4057);
+      i2 = OOC_ARRAY_LENGTH(i1, 0);
+      i1 = *(OOC_UINT8*)(i1+(_check_index((i3+1), i2, OOC_UINT16, 4057)));
+      i1 = URI_CharClass__IsDigit(i1);
+      i1 = !i1;
       
       goto l9;
 l6:
-      i0=1u;
+      i1=1u;
 l9:
-      if (!i0) goto l24;
-      i0 = i;
-      start = i0;
+      if (!i1) goto l24;
+      start = i3;
       val = 0;
-      i1=0;
+      i2=i3;i1=0;
 l11_loop:
-      i2 = i;
-      i3 = (OOC_INT32)str;
       i4 = i1<1000;
       if (!i4) goto l15;
-      i4 = _check_pointer(i3, 4189);
+      i4 = _check_pointer(i0, 4189);
       i5 = OOC_ARRAY_LENGTH(i4, 0);
       i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 4189)));
       i1 = ((i1*10)+i4)-48;
@@ -191,72 +186,67 @@ l11_loop:
 l15:
       i2 = i2+1;
       i = i2;
-      i3 = _check_pointer(i3, 4273);
-      i4 = OOC_ARRAY_LENGTH(i3, 0);
-      i2 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT16, 4273)));
-      i2 = URI_CharClass__IsDigit(i2);
-      i2 = !i2;
-      if (!i2) goto l11_loop;
+      i4 = _check_pointer(i0, 4273);
+      i5 = OOC_ARRAY_LENGTH(i4, 0);
+      i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 4273)));
+      i4 = URI_CharClass__IsDigit(i4);
+      i4 = !i4;
+      if (!i4) goto l11_loop;
 l19:
-      i1 = i1>255;
-      if (i1) goto l22;
+      i0 = i1>255;
+      if (i0) goto l22;
       return 1u;
       goto l24;
 l22:
-      i = i0;
+      i = i3;
 l24:
       return 0u;
       ;
     }
 
     
-    OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipLabel() {
-      register OOC_INT32 i0,i1,i2;
+    OOC_CHAR8 URI_Authority_ServerBased__ParseHost_SkipLabel(void) {
+      register OOC_INT32 i0,i1,i2,i3;
 
       i0 = (OOC_INT32)str;
-      i0 = _check_pointer(i0, 4562);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      i2 = i;
-      i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 4562)));
-      i0 = URI_CharClass__IsAlpha(i0);
-      if (!i0) goto l16;
-l3_loop:
-      i0 = i;
-      i0 = i0+1;
-      i = i0;
-      i1 = (OOC_INT32)str;
-      i1 = _check_pointer(i1, 4645);
+      i1 = _check_pointer(i0, 4562);
       i2 = OOC_ARRAY_LENGTH(i1, 0);
-      i0 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT16, 4645)));
-      i0 = URI_CharClass__IsAlphaNum(i0);
-      i0 = !i0;
-      if (i0) goto l6;
-      i0=0u;
+      i3 = i;
+      i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 4562)));
+      i1 = URI_CharClass__IsAlpha(i1);
+      if (!i1) goto l16;
+      i1=i3;
+l3_loop:
+      i1 = i1+1;
+      i = i1;
+      i2 = _check_pointer(i0, 4645);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
+      i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 4645)));
+      i2 = URI_CharClass__IsAlphaNum(i2);
+      i2 = !i2;
+      if (i2) goto l6;
+      i2=0u;
       goto l8;
 l6:
-      i0 = (OOC_INT32)str;
-      i0 = _check_pointer(i0, 4656);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      i2 = i;
-      i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT16, 4656)));
-      i0 = i0!=45u;
+      i2 = _check_pointer(i0, 4656);
+      i3 = OOC_ARRAY_LENGTH(i2, 0);
+      i2 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT16, 4656)));
+      i2 = i2!=45u;
       
 l8:
-      if (!i0) goto l3_loop;
+      if (!i2) goto l3_loop;
 l11:
-      i0 = (OOC_INT32)str;
       i0 = _check_pointer(i0, 4705);
-      i1 = i;
       i2 = OOC_ARRAY_LENGTH(i0, 0);
-      i0 = *(OOC_UINT8*)(i0+(_check_index((i1-1), i2, OOC_UINT16, 4705)));
+      i1 = i1-1;
+      i0 = *(OOC_UINT8*)(i0+(_check_index(i1, i2, OOC_UINT16, 4705)));
       i0 = URI_CharClass__IsAlphaNum(i0);
       i0 = !i0;
       if (i0) goto l14;
       return 1u;
       goto l16;
 l14:
-      i0 = i;
-      i = (i0-1);
+      i = i1;
 l16:
       return 0u;
       ;
@@ -558,15 +548,14 @@ l77:
   port = 0;
   i4 = _check_pointer(i0, 7205);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
-  i2 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 7205)));
-  i2 = URI_CharClass__IsDigit(i2);
-  if (i2) goto l80;
+  i4 = *(OOC_UINT8*)(i4+(_check_index(i2, i5, OOC_UINT16, 7205)));
+  i4 = URI_CharClass__IsDigit(i4);
+  if (i4) goto l80;
   i2=0;
   goto l90;
 l80:
-  i2=0;
+  i4=i2;i2=0;
 l81_loop:
-  i4 = i;
   i5 = i2<1000000;
   if (!i5) goto l85;
   i5 = _check_pointer(i0, 7283);
@@ -580,9 +569,9 @@ l85:
   i = i4;
   i5 = _check_pointer(i0, 7205);
   i6 = OOC_ARRAY_LENGTH(i5, 0);
-  i4 = *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT16, 7205)));
-  i4 = URI_CharClass__IsDigit(i4);
-  if (i4) goto l81_loop;
+  i5 = *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT16, 7205)));
+  i5 = URI_CharClass__IsDigit(i5);
+  if (i5) goto l81_loop;
 l90:
   i4 = i2>65535;
   if (!i4) goto l95;

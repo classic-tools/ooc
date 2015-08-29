@@ -168,7 +168,7 @@ l3:
   i1 = _check_pointer(i1, 5650);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
   *(OOC_UINT8*)(i1+(_check_index(0, i2, OOC_UINT8, 5650))) = 0u;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5682)))), XML_InputBuffer__BufferDesc_NextBlock)),XML_InputBuffer__BufferDesc_NextBlock)((XML_InputBuffer__Buffer)i0);
+  i0 = XML_InputBuffer__BufferDesc_NextBlock((XML_InputBuffer__Buffer)i0);
   return;
   ;
 }

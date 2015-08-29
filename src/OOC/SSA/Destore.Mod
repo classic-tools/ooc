@@ -1,4 +1,4 @@
-(* 	$Id: Destore.Mod,v 1.67 2003/04/10 23:43:04 mva Exp $	 *)
+(* 	$Id: Destore.Mod,v 1.68 2003/04/14 19:23:16 mva Exp $	 *)
 MODULE OOC:SSA:Destore;
 (*  Converts reads from/writes to memory into local values.
     Copyright (C) 2001-2003  Michael van Acken
@@ -233,11 +233,26 @@ PROCEDURE AccessedByCall (s: State;
         RETURN FALSE;
       END;
     END NestedProc;
+
+  PROCEDURE NonlocalWrites(calledAdr: SSA.Result): BOOLEAN;
+    VAR
+      proc: Sym.ProcDecl;
+    BEGIN
+      proc := calledAdr.CalledProc();
+      IF (proc # NIL) THEN
+        RETURN proc.nonlocalWrites;
+      ELSE
+        RETURN TRUE;  (* be pessimistic *)
+      END;
+    END NonlocalWrites;
   
   BEGIN
-    RETURN
-        NestedProc (calledAdr, s. pb. procDecl) OR
-        ~LocalVarWithoutAdr (design);
+    IF (mode = write) & ~NonlocalWrites(calledAdr) THEN
+      RETURN FALSE;
+    ELSE
+      RETURN NestedProc (calledAdr, s. pb. procDecl) OR
+          ~LocalVarWithoutAdr (design);
+    END;
   END AccessedByCall;
 
 PROCEDURE (s: State) ClobberedBy* (readDesign: SSA.Opnd; instr: SSA.Instr): BOOLEAN;

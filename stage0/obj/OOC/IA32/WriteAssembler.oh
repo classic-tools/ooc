@@ -26,8 +26,8 @@ extern void OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody(volatile OOC_I
 typedef void (*_TBP_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody)(OOC_IA32_WriteAssembler__Translator t, OOC_IR__Procedure proc);
 extern void OOC_IA32_WriteAssembler__InitTranslator(OOC_IA32_WriteAssembler__Translator t, OOC_Repository__Module module, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
 extern OOC_IA32_WriteAssembler__Translator OOC_IA32_WriteAssembler__NewTranslator(OOC_Repository__Module module, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
-extern void OOC_OOC_IA32_WriteAssembler_init();
-extern void OOC_OOC_IA32_WriteAssembler_init0();
+extern void OOC_OOC_IA32_WriteAssembler_init(void);
+extern void OOC_OOC_IA32_WriteAssembler_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Translator;

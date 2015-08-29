@@ -12,7 +12,7 @@ typedef struct OOC_Doc_TextBuffer__BufferDesc {
   OOC_Scanner_InputBuffer__CharArray str;
   OOC_INT32 len;
 } OOC_Doc_TextBuffer__BufferDesc;
-extern OOC_Doc_TextBuffer__Buffer OOC_Doc_TextBuffer__New();
+extern OOC_Doc_TextBuffer__Buffer OOC_Doc_TextBuffer__New(void);
 extern void OOC_Doc_TextBuffer__BufferDesc_Clear(OOC_Doc_TextBuffer__Buffer b);
 #define _TBN_OOC_Doc_TextBuffer__BufferDesc_Clear 6
 typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_Clear)(OOC_Doc_TextBuffer__Buffer b);
@@ -37,8 +37,8 @@ typedef void (*_TBP_OOC_Doc_TextBuffer__BufferDesc_Capitalize)(OOC_Doc_TextBuffe
 extern void OOC_Doc_TextBuffer__FormatBlock(OOC_Doc_TextBuffer__Buffer dest, OOC_Doc_TextBuffer__Buffer source, OOC_INT32 indent, OOC_INT32 scrWidth, OOC_INT32 offsetFirst);
 extern void OOC_Doc_TextBuffer__FormatBlockHTML(OOC_Doc_TextBuffer__Buffer dest, OOC_Doc_TextBuffer__Buffer source, OOC_INT32 indent, OOC_INT32 scrWidth, OOC_INT32 offsetFirst);
 extern void OOC_Doc_TextBuffer__IndentBlock(OOC_Doc_TextBuffer__Buffer dest, OOC_Doc_TextBuffer__Buffer source, OOC_INT32 indent);
-extern void OOC_OOC_Doc_TextBuffer_init();
-extern void OOC_OOC_Doc_TextBuffer_init0();
+extern void OOC_OOC_Doc_TextBuffer_init(void);
+extern void OOC_OOC_Doc_TextBuffer_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Doc_TextBuffer__Buffer;

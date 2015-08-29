@@ -50,7 +50,7 @@ l11:
 
     
     void OOC_Make_WriteMainFileC__WriteFile_WriteModules(IO_TextRider__Writer w, const OOC_CHAR8 prefix__ref[], OOC_LEN prefix_0d, const OOC_CHAR8 suffix__ref[], OOC_LEN suffix_0d) {
-      register OOC_INT32 i0,i1,i2,i3;
+      register OOC_INT32 i0,i1,i2;
       OOC_ALLOCATE_VPAR(prefix,OOC_CHAR8 ,prefix_0d)
       OOC_ALLOCATE_VPAR(suffix,OOC_CHAR8 ,suffix_0d)
       OOC_INT32 i;
@@ -65,9 +65,7 @@ l11:
 l3_loop:
       i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i1, imports_0d, OOC_UINT32, 1904))*4);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1907))+12);
-      i3 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i1, imports_0d, OOC_UINT32, 1904))*4);
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 1907))+12);
-      i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1914)))), OOC_SymbolTable__ModuleDesc_NoObjectFile)),OOC_SymbolTable__ModuleDesc_NoObjectFile)((OOC_SymbolTable__Module)i3);
+      i2 = OOC_SymbolTable__ModuleDesc_NoObjectFile((OOC_SymbolTable__Module)i2);
       i2 = !i2;
       if (!i2) goto l6;
       i2 = (OOC_INT32)*(OOC_INT32*)((OOC_INT32)imports+(_check_index(i1, imports_0d, OOC_UINT32, 1980))*4);

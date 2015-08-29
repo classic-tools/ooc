@@ -113,7 +113,7 @@ void StdChannels__NullChannelDesc_Close(StdChannels__NullChannel ch) {
   ;
 }
 
-static void StdChannels__Flush() {
+static void StdChannels__Flush(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)StdChannels__stdout;

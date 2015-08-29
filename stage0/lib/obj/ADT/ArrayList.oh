@@ -77,8 +77,8 @@ typedef void (*_TBP_ADT_ArrayList__ArrayListDesc_Store)(ADT_ArrayList__ArrayList
 extern void ADT_ArrayList__ArrayListDesc_Load(ADT_ArrayList__ArrayList l, ADT_Storable__Reader r);
 #define _TBN_ADT_ArrayList__ArrayListDesc_Load 4
 typedef void (*_TBP_ADT_ArrayList__ArrayListDesc_Load)(ADT_ArrayList__ArrayList l, ADT_Storable__Reader r);
-extern void OOC_ADT_ArrayList_init();
-extern void OOC_ADT_ArrayList_init0();
+extern void OOC_ADT_ArrayList_init(void);
+extern void OOC_ADT_ArrayList_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_ArrayList__968;

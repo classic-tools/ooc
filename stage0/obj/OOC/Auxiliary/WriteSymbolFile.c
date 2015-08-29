@@ -23,7 +23,7 @@ void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OO
   stb = (OOC_SymbolTable_Builder__Builder)i2;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 618)))), OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)),OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)((OOC_SymbolTable_Builder__Builder)i2, (IO__ByteChannel)i0, (OOC_SymbolTable__Module)i1);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 682))+12);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 659)))), IO_Memory__ChannelDesc_Fingerprint)),IO_Memory__ChannelDesc_Fingerprint)((IO_Memory__Channel)i0, (void*)(OOC_INT32)&fp, 4, 0, i2);
+  IO_Memory__ChannelDesc_Fingerprint((IO_Memory__Channel)i0, (void*)(OOC_INT32)&fp, 4, 0, i2);
   i2 = (OOC_INT32)m;
   i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 704)))), OOC_Repository__ModuleDesc_GetOutputChannel)),OOC_Repository__ModuleDesc_GetOutputChannel)((OOC_Repository__Module)i2, 1, 1u);
   ch = (IO__ByteChannel)i2;
@@ -62,7 +62,7 @@ l3_loop:
   i6 = i5<i4;
   if (i6) goto l3_loop;
 l8:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1494)))), IO_Memory__ChannelDesc_SetPos)),IO_Memory__ChannelDesc_SetPos)((IO_Memory__Channel)i0, 0);
+  IO_Memory__ChannelDesc_SetPos((IO_Memory__Channel)i0, 0);
   i1 = *(OOC_INT32*)((_check_pointer(i0, 1533))+12);
   i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1518)))), IO__ByteChannelDesc_TransferTo)),IO__ByteChannelDesc_TransferTo)((IO__ByteChannel)i0, i1, (IO__ByteChannel)i2);
   d = i0;
