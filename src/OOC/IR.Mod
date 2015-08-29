@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.272 2003/10/07 18:34:55 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.274 2003/11/24 23:43:21 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -1516,6 +1516,8 @@ PROCEDURE (b: Builder) SetNameToType(type: Sym.Type);
       | type: Sym.TypeVar DO
         name := "TYPE_VAR";
       | type: Sym.PredefType DO
+        name := "unknown";
+      ELSE  (* for example, a module or the type representing types *)
         name := "unknown";
       END;
     END;
@@ -3805,14 +3807,16 @@ PROCEDURE (b: Builder) NewAssignment* (sym: Symbol;
                                        variable, value: Expression): Statement;
   VAR
     assignment: Assignment;
+    valueType: Sym.Type;
   BEGIN
     b. AssertVar (variable);
     MakeAssignmentCompatible (b, sym, value, variable. type);
-    IF TR.IsStringConst (value. type) THEN
+    valueType := value.type.Deparam();
+    IF TR.IsStringConst (valueType) THEN
       (* assigning a string constant: create CopyString opcode *)
       RETURN b. NewCopyString (sym, value, variable,
                                b. Fold (b. NewLen (sym, variable, 0)));
-    ELSIF (value. type IS Sym.Array) OR (value. type IS Sym.Record) THEN
+    ELSIF (valueType IS Sym.Array) OR (valueType IS Sym.Record) THEN
       (* assigning a structured value: create Copy opcode *)
       RETURN b. NewCopy (sym, value, variable);
     ELSE

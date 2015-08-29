@@ -1,4 +1,4 @@
-(* 	$Id: Repository.Mod,v 1.43 2003/07/14 12:10:50 mva Exp $	 *)
+(* 	$Id: Repository.Mod,v 1.44 2003/11/13 23:02:08 mva Exp $	 *)
 MODULE OOC:Repository [OOC_EXTENSIONS];
 (*  Abstraction of storage of source, intermediate, and target code.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -528,11 +528,13 @@ PROCEDURE ValidModuleName* (moduleName: ARRAY OF CHAR): BOOLEAN;
   BEGIN
     i := 0;
     WHILE (moduleName[i] # 0X) DO
-      IF (("A" <= CAP (moduleName[i])) & (CAP (moduleName[i]) <= "Z")) THEN
+      IF (("A" <= CAP (moduleName[i])) & (CAP (moduleName[i]) <= "Z") OR
+          (moduleName[i] = "_")) THEN
         REPEAT
           INC (i)
         UNTIL ~(("A" <= CAP (moduleName[i])) & (CAP (moduleName[i]) <= "Z") OR
-                ("0" <= moduleName[i]) & (moduleName[i] <= "9"));
+                ("0" <= moduleName[i]) & (moduleName[i] <= "9") OR
+                (moduleName[i] = "_"));
         IF (moduleName[i] = ":") THEN
           INC (i);
           IF (moduleName[i] = 0X) THEN   (* ":" at end of name *)
@@ -545,7 +547,7 @@ PROCEDURE ValidModuleName* (moduleName: ARRAY OF CHAR): BOOLEAN;
         RETURN FALSE
       END
     END;
-    RETURN TRUE
+    RETURN (i > 0);
   END ValidModuleName;
 
 PROCEDURE (rep: Repository) GetModuleByURI* (uri: URI.HierarchicalURI; force: BOOLEAN): Module;

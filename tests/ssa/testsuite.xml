@@ -17,10 +17,10 @@
   generic53 generic54 generic55 generic56 generic57 generic58">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; generic71">-->
+  select ="&SetupTestCasesWithOut; tbproc1 tbproc13">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; vtable1 vtable2 vtable4 vtable3 vtable5 generic1 generic41 generic45">-->
+  select ="&SetupTestCasesWithOut; generic72">-->
 
   &TestSetupWithOut;
     
@@ -70,6 +70,12 @@
     </test>
     <test id="assign14" type="reject" file="Assign14.Mod">
       Procedure assignment: number of arguments differ.
+    </test>
+    <test id="assign15" type="reject" file="Assign15.Mod">
+      Invalid assignment to module name.
+    </test>
+    <test id="assign16" type="reject" file="Assign16.Mod">
+      Invalid assignment to type name.
     </test>
     
     <test id="return1" type="reject" file="Return1.Mod">
@@ -923,6 +929,10 @@
       Super call to a different procedure, with the called procedure
       and the redefinition placed after the call.
     </test>
+    <test id="tbproc13" type="reject" file="TBProc13.Mod">
+      The record type to which a type-bound procedure is attached must
+      be from the current module.
+    </test>
 
     
     <test id="nestedproc1" type="run"
@@ -1612,6 +1622,11 @@
       Regression test for <code>oo2c</code>: Don't crash when
       stumbling over a type name for a botched parametric type.
     </test>
+    <test id="generic72" type="run" file="Generic72.Mod">
+      Regression test: Handle assignment of non-scalar type correctly,
+      even if the right hand side of the assignment is a parametric
+      record.
+    </test>
   </testcases>
 
   <testcases profile="Tests for Warnings" default-lang="OOC O2">
@@ -1864,6 +1879,8 @@
     <reject-info id="assign12" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
     <reject-info id="assign13" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
     <reject-info id="assign14" pos='p %:= P;' msg="Expression not compatible with variable type `PROCEDURE'"/>
+    <reject-info id="assign15" pos='%Out :=' msg="This must be a variable"/>
+    <reject-info id="assign16" pos='%Alp :=' msg="This must be a variable"/>
         
     <reject-info id="return1" pos="RETURN %123" msg="RETURN must not provide a result value"/>
     <reject-info id="return2" pos="%RETURN" msg="RETURN must provide a result value"/>
@@ -1935,6 +1952,8 @@
       msg="This variable has no dynamic type"/>
     
     <reject-info id="tbproc8" pos="p. %Proc" msg="Undeclared identifier"/>
+    <reject-info id="tbproc13" pos="%Proc()"
+                 msg="Receiver's base record is imported"/>
 
     <reject-info id="inc2" pos="INC(%x,1)"
       msg="Expression must be of integer type"/>

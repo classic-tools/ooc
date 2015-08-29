@@ -1,4 +1,4 @@
-(* 	$Id: ConstFold.Mod,v 1.78 2003/07/07 22:06:23 mva Exp $	 *)
+(* 	$Id: ConstFold.Mod,v 1.79 2003/11/15 23:19:00 mva Exp $	 *)
 MODULE OOC:IR:ConstFold;
 (*  Constant folding on IR expressions.
     Copyright (C) 2002, 2003  Stewart Greenhill, Michael van Acken
@@ -316,9 +316,18 @@ BEGIN
 END VisitCap;
 
 PROCEDURE (c: ConstFold) VisitEntier* (op: IR.Entier);
-BEGIN
-    (* FIXME! *)
-END VisitEntier;
+  VAR
+    value: Boxed.Object;
+    i: LONGINT;
+  BEGIN
+    IF c.ValidEval(op.operand, value) THEN
+      i := ENTIER(value(Boxed.LongReal).value);
+      c.result := c.builder.NewConst(op.sym, Predef.GetType(Predef.longint), 
+                                     BigInt.NewInt(i));
+    ELSE
+      c.result := NIL;
+    END;
+  END VisitEntier;
 
 PROCEDURE (c: ConstFold) VisitOdd* (op: IR.Odd);
 BEGIN
