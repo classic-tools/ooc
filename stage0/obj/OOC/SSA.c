@@ -481,7 +481,7 @@ void OOC_SSA__InstrDesc_SetSubclass(OOC_SSA__Instr instr, OOC_INT8 subclass) {
   ;
 }
 
-void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_BasicList__Symbol sym) {
+void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_SymList__Symbol sym) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)instr;

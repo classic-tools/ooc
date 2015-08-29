@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.257 2003/08/01 09:00:30 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.262 2003/08/26 14:05:23 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -24,7 +24,7 @@ IMPORT
 Log,
   Msg, Object, Object:Boxed, Object:BigInt, Strings,
   ADT:ArrayList, ADT:StringBuffer, Config,
-  Id := OOC:Scanner:Symbol, OOC:Scanner:BasicList, OOC:Error,
+  Id := OOC:Scanner:Symbol, OOC:Scanner:SymList, OOC:Error,
   OOC:Config:Pragmas, OOC:Config:StdPragmas,
   OOC:AST, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Namespace,
@@ -152,7 +152,7 @@ Log,
 
 TYPE
   Name* = AST.Name;
-  Symbol* = BasicList.Symbol;
+  Symbol* = SymList.Symbol;
   
 TYPE
   Node* = POINTER TO NodeDesc;
@@ -3424,12 +3424,12 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
     END HasDynamicType;
   
   BEGIN
-    refType := b. AssertType (referenceType);
+    refType := Sym.Expand(b.AssertType(referenceType));
     IF (refType = NIL) THEN
       RETURN b. errorExpr;
     ELSIF (refType IS Sym.TypeVar) THEN
       RETURN b.ErrExpr(notTypeInstance, referenceType.sym);
-    ELSIF ~TR.IsInducedExtensionOf(Sym.Expand(refType), expr.type, TRUE) THEN
+    ELSIF ~TR.IsExtensionOf(refType, expr.type) THEN
       RETURN b. ErrExpr (notExtensionOfLHS, referenceType. sym);
     ELSIF ~HasDynamicType(expr) THEN
       (* The test for TR.IsExtensionOf restricts the type of the variable to
@@ -3437,7 +3437,7 @@ PROCEDURE (b: Builder) NewTypeTest* (sym: Symbol; expr, referenceType: Expressio
          a dynamic type that can differ from its static one.  *)
       RETURN b. ErrExpr (noDynamicType, expr.sym);
     ELSE
-      IF TR.SameType(Sym.Expand(refType), expr.type) THEN
+      IF TR.SameType(refType, expr.type) THEN
         b.WarnSym(redundantTypeTest, referenceType.sym);
       END;
       
@@ -5328,7 +5328,7 @@ PROCEDURE InitBuilder* (b: Builder; module: Sym.Module; uses: Uses.Uses;
     b. module := module;
     b. pragmaHistory := pragmaHistory;
     b. errList := errList;
-    b. errorExpr := NewConst (BasicList.NewSymbol (NIL, -1),
+    b. errorExpr := NewConst (SymList.NewSymbol (NIL, -1),
                               Predef.GetType(Predef.void),
                               Boxed.false);
     b. typeType := NewTypeType (NIL, NIL);
@@ -5462,7 +5462,7 @@ PROCEDURE (b: Builder) NewIdentRef* (baseNS, ns: Sym.Namespace;
           ELSE
             ns := redirModule(Sym.Import).externalSymTab.ns;
             RETURN b.NewIdentRef(ns, ns, context,
-                                 BasicList.CloneSymbol(name, decl.ident.str^));
+                                 SymList.CloneSymbol(name, decl.ident.str^));
           END;
         ELSE
           Log.Type ("Unknown decl in NewIdentRef", decl);

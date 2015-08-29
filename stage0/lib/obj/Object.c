@@ -76,14 +76,14 @@ l9:
   i0 = (OOC_INT32)x;
   i0 = (OOC_INT32)RT0__TypeOf((void*)i0);
   _struct = (RT0__Struct)i0;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6913))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6913))+12);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6920));
   Object__ObjectDesc_ToString_Append((RT0__Name)i0);
   i0 = i;
   *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 280, OOC_UINT32, 6935))) = 46u;
   i = (i0+1);
   i0 = (OOC_INT32)_struct;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6973))+12);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6973))+16);
   Object__ObjectDesc_ToString_Append((RT0__Name)i0);
   i0 = i;
   *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, 280, OOC_UINT32, 6988))) = 32u;

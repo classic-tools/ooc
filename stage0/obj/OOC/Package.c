@@ -254,10 +254,10 @@ static OOC_Package__Package OOC_Package__NewPackage(void) {
   OOC_Repository__InitPkgInfo((OOC_Repository__PkgInfo)i0);
   *(OOC_INT32*)((_check_pointer(i0, 6611))+8) = (OOC_INT32)0;
   *(OOC_INT32*)((_check_pointer(i0, 6630))+12) = (OOC_INT32)0;
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_ArrayList__ArrayList.baseTypes[0]);
+  i1 = (OOC_INT32)RT0__NewObject(_td__qtd1.baseTypes[0]);
   ADT_ArrayList__ArrayListDesc_INIT((ADT_ArrayList__ArrayList)i1, 4);
   *(OOC_INT32*)((_check_pointer(i0, 6652))+16) = i1;
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_ArrayList__ArrayList.baseTypes[0]);
+  i1 = (OOC_INT32)RT0__NewObject(_td__qtd3.baseTypes[0]);
   ADT_ArrayList__ArrayListDesc_INIT((ADT_ArrayList__ArrayList)i1, 4);
   *(OOC_INT32*)((_check_pointer(i0, 6707))+20) = i1;
   *(OOC_INT32*)((_check_pointer(i0, 6768))+24) = (OOC_INT32)0;
@@ -272,7 +272,7 @@ static OOC_Package__Repository OOC_Package__NewRepository(void) {
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Package__Repository.baseTypes[0]);
   r = (OOC_Package__Repository)i0;
   OOC_Repository__InitPkgInfo((OOC_Repository__PkgInfo)i0);
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_ArrayList__ArrayList.baseTypes[0]);
+  i1 = (OOC_INT32)RT0__NewObject(_td__qtd5.baseTypes[0]);
   ADT_ArrayList__ArrayListDesc_INIT((ADT_ArrayList__ArrayList)i1, 4);
   *(OOC_INT32*)((_check_pointer(i0, 6931))+8) = i1;
   return (OOC_Package__Repository)i0;

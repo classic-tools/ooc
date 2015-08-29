@@ -1,4 +1,4 @@
-(* 	$Id: Scanner.Mod,v 1.9 2003/04/11 00:22:23 mva Exp $	 *)
+(* 	$Id: Scanner.Mod,v 1.10 2003/08/24 00:03:58 mva Exp $	 *)
 MODULE OOC:Scanner;
 (*  Convert a character sequence into a stream of Oberon-2 symbols.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:Scanner;
 
 IMPORT
   Ascii, IO, OOC:Error, OOC:Scanner:InputBuffer, OOC:Scanner:Symbol,
-  OOC:Scanner:Builder, OOC:Scanner:Pragma, OOC:Config:Pragmas;
+  OOC:Scanner:Pragma, OOC:Scanner:SymList, OOC:Config:Pragmas;
 
 
 CONST
@@ -120,7 +120,7 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
 
-PROCEDURE ScanInput* (builder: Builder.Builder;
+PROCEDURE ScanInput* (builder: SymList.Builder;
                       defaultPragmas: Pragmas.Section; scanOptions: SET)
 RAISES IO.Error;
 (**Reads sequence of characters from input buffer @samp{builder. inputBuffer}

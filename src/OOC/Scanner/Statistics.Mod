@@ -1,4 +1,4 @@
-(* 	$Id: Statistics.Mod,v 1.1 2003/04/16 10:32:35 mva Exp $	 *)
+(* 	$Id: Statistics.Mod,v 1.2 2003/08/24 00:03:57 mva Exp $	 *)
 MODULE OOC:Scanner:Statistics;
 (*  Displays statistics about the symbols of a module.
     Copyright (C) 2000  Michael van Acken
@@ -26,7 +26,7 @@ characters are used by these symbols.  *)
 
 IMPORT
   Channel, TextRider, Strings, OOC:Scanner:InputBuffer, OOC:Scanner:Symbol,
-  B := OOC:Scanner:Builder;
+  B := OOC:Scanner:SymList;
 
 CONST
   maxSymbols= 256;
@@ -45,7 +45,7 @@ PROCEDURE Init* (b: Builder; buffer: InputBuffer.Buffer; ch: Channel.Channel);
   VAR
     i: LONGINT;
   BEGIN
-    B.Init (b, buffer);
+    B.Init (b, buffer, TRUE);
     b. w := TextRider.ConnectWriter (ch);
     b. numOfSymbols := 0;
     b. numOfChars := 0;

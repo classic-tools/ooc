@@ -37,7 +37,6 @@ typedef void (*_TBP_Exception__ExceptionDesc_INIT)(Exception__Exception e, Objec
 extern void NORETURN Exception__Raise(Exception__Exception e) NORETURN2;
 extern Exception__Exception Exception__Current(void);
 extern void Exception__Clear(void);
-extern void Exception__ClearFixed(struct Exception__Context *context);
 extern void Exception__PushContext(struct Exception__Context *context, OOC_PTR jmpbuf);
 extern void Exception__PopContext(OOC_INT32 n);
 extern void NORETURN Exception__ActivateContext(void) NORETURN2;

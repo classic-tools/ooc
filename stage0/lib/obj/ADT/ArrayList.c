@@ -60,7 +60,7 @@ void ADT_ArrayList__ArrayListDesc_INIT(ADT_ArrayList__ArrayList l, OOC_INT32 ini
 ADT_ArrayList__ArrayList ADT_ArrayList__New(OOC_INT32 initialSize) {
   register OOC_INT32 i0,i1;
 
-  i0 = (OOC_INT32)RT0__NewObject(_td_ADT_ArrayList__ArrayList.baseTypes[0]);
+  i0 = (OOC_INT32)RT0__NewObject(_td__qtd1.baseTypes[0]);
   i1 = initialSize;
   ADT_ArrayList__ArrayListDesc_INIT((ADT_ArrayList__ArrayList)i0, i1);
   return (ADT_ArrayList__ArrayList)i0;
@@ -97,7 +97,7 @@ ADT_ArrayList__ArrayList ADT_ArrayList__ArrayListDesc_Copy(ADT_ArrayList__ArrayL
   ADT_ArrayList__ArrayList _new;
   OOC_INT32 i;
 
-  i0 = (OOC_INT32)RT0__NewObject(_td_ADT_ArrayList__ArrayList.baseTypes[0]);
+  i0 = (OOC_INT32)RT0__NewObject(_td__qtd3.baseTypes[0]);
   i1 = (OOC_INT32)l;
   i2 = *(OOC_INT32*)((_check_pointer(i1, 2839))+4);
   ADT_ArrayList__ArrayListDesc_INIT((ADT_ArrayList__ArrayList)i0, i2);

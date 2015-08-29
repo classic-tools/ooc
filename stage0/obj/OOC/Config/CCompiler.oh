@@ -16,6 +16,7 @@ extern Config_Section_Options__Option OOC_Config_CCompiler__uninstall;
 extern Config_Section_Options__Option OOC_Config_CCompiler__bindir;
 extern Config_Section_Options__Option OOC_Config_CCompiler__oocdir;
 extern OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool(void);
+extern OOC_CHAR8 OOC_Config_CCompiler__SkipCallCC(void);
 extern Object__String OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary);
 extern Object__String OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary);
 extern Object__String OOC_Config_CCompiler__InstallDirectoryCmd(Object__String path);

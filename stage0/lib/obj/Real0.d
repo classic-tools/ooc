@@ -26,13 +26,13 @@ static void Real0__WEState(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__Scan
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_Real0__3861 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__3926 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__4546 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__8322 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__9168 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__10611 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Real0__10722 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__3861 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__3926 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__4546 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__8322 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__9168 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__10611 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Real0__10722 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"Real0", (RT0__Struct[]) { NULL } };
 
 extern void OOC_Real0_init0() {

@@ -19,9 +19,9 @@ static void OOC_SSA_Algebraic__Init(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_SSA_Algebraic__Worklist = { (RT0__Struct[]){&_td_OOC_SSA_Algebraic__WorklistDesc}, NULL, &_mid, "Worklist", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_Algebraic__WorklistDesc = { (RT0__Struct[]){&_td_OOC_SSA_Algebraic__WorklistDesc}, (void*[]){}, &_mid, "WorklistDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_Algebraic__1233 = { (RT0__Struct[]){&_td_Object_BigInt__BigInt}, NULL, &_mid, NULL, 256, 64, RT0__strArray };
+RT0__StructDesc _td_OOC_SSA_Algebraic__Worklist = { (RT0__Struct[]){&_td_OOC_SSA_Algebraic__WorklistDesc}, NULL, NULL, &_mid, "Worklist", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_Algebraic__WorklistDesc = { (RT0__Struct[]){&_td_OOC_SSA_Algebraic__WorklistDesc}, (void*[]){}, NULL, &_mid, "WorklistDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_Algebraic__1233 = { (RT0__Struct[]){&_td_Object_BigInt__BigInt}, NULL, NULL, &_mid, NULL, 256, 64, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SSA:Algebraic", (RT0__Struct[]) { &_td_OOC_SSA_Algebraic__Worklist, &_td_OOC_SSA_Algebraic__WorklistDesc, NULL } };
 
 extern void OOC_OOC_SSA_Algebraic_init0() {

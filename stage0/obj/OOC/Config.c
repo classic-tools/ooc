@@ -31,7 +31,7 @@ static void OOC_Config__InitConfig(Object__String8 defaultConfigFile) {
   Config_Section_Options__Option configFile;
 
   i0 = (OOC_INT32)defaultConfigFile;
-  i1 = (OOC_INT32)Config_Simple__New((Object__String8)i0);
+  i1 = (OOC_INT32)Config_Simple__New((Object__String)i0);
   OOC_Config__config = (Config_Simple__Config)i1;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1485))+16);
   OOC_Config__cmdLine = (Config_Source_CmdLine__CmdLine)i2;
@@ -100,7 +100,7 @@ void OOC_OOC_Config_init(void) {
   _c3 = Object__NewLatin1Region("xsltproc", 9, 0, 8);
   _c4 = Object__NewLatin1Region("xsltproc", 9, 0, 8);
   _c5 = Object__NewLatin1Region("no", 3, 0, 2);
-  _c6 = Object__NewLatin1Region("/usr/home/ooc-devel/local-ooc2//lib/oo2c/oo2crc.xml", 52, 0, 51);
+  _c6 = Object__NewLatin1Region("/usr/home/ooc-devel/local-ooc2/lib/oo2c/oo2crc.xml", 51, 0, 50);
 
   OOC_Config__InitConfig((Object__String8)((OOC_INT32)_c6));
   RT0__poisonHeap = 85;

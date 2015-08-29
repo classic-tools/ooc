@@ -29,12 +29,13 @@ typedef struct OOC_SSA_WriteC__TranslatorDesc {
   OOC_C_DeclWriter__Writer wd;
   OOC_IR__ProcedureList procList;
   OOC_INT32 currentProc;
+  OOC_C_Naming__QualTypeData qtdData;
   StringSearch__Matcher inspectProc;
   StringSearch__Matcher inspectStage;
   OOC_CHAR8 writeStats;
-  OOC_CHAR8 __pad25;
-  OOC_CHAR8 __pad26;
-  OOC_CHAR8 __pad27;
+  OOC_CHAR8 __pad29;
+  OOC_CHAR8 __pad30;
+  OOC_CHAR8 __pad31;
   ADT_Dictionary__Dictionary nonLocalAccess;
   ADT_Dictionary_IntValue__Dictionary preloadedVars;
 } OOC_SSA_WriteC__TranslatorDesc;
@@ -131,13 +132,13 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__Visitor;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__VisitorDesc;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__6091;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__7131;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22445;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__23944;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__24147;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__25158;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__25451;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__39569;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__52287;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__22655;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24154;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24357;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__25368;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__25661;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__40115;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__52833;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

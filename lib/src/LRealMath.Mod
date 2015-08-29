@@ -1,4 +1,4 @@
-(* 	$Id: LRealMath.Mod,v 1.6 2003/04/16 16:45:55 mva Exp $	 *)
+(* 	$Id: LRealMath.Mod,v 1.7 2003/08/09 06:17:48 mva Exp $	 *)
 MODULE LRealMath [INTERFACE "C"
   <* IF HAVE_LIB_M THEN *> ; LINK LIB "m" END <* END *> ];
 (*  Math functions for LONGREAL.
@@ -30,7 +30,7 @@ PROCEDURE sqrt*(x: LONGREAL): LONGREAL;
 PROCEDURE exp*(x: LONGREAL): LONGREAL;
 (**Returns the exponential of x for x < Ln(MAX(REAL).  *)
 
-PROCEDURE ln*(x: LONGREAL): LONGREAL;
+PROCEDURE ["log"] ln*(x: LONGREAL): LONGREAL;
 (**Returns the natural logarithm of x for x > 0.  *)
 
 PROCEDURE sin* (x: LONGREAL): LONGREAL;

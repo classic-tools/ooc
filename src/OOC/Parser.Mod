@@ -1,4 +1,4 @@
-(* 	$Id: Parser.Mod,v 1.22 2003/07/15 19:42:52 mva Exp $	 *)
+(* 	$Id: Parser.Mod,v 1.26 2003/08/26 14:05:22 mva Exp $	 *)
 MODULE OOC:Parser;
 (*  Parses an Oberon-2 module and creates an abstract syntax tree.
     Copyright (C) 1999-2003  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:Parser;
 
 IMPORT
   Msg, Strings,
-  OOC:Error, OOC:Scanner:Symbol, OOC:Scanner:BasicList, OOC:AST,
+  OOC:Error, OOC:Scanner:Symbol, OOC:Scanner:SymList, OOC:AST,
   OOC:Doc, OOC:Doc:Input:Texinfo;
 
 
@@ -132,7 +132,7 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
   END GetTemplate;
 
 
-PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
+PROCEDURE Module* (sym: SymList.Symbol; ast: AST.Builder;
                    errList: Error.List; parseOptions: SET): AST.Node;
 (**This procedure implements a recursive descent parser for a slightly modified
    Oberon-2 syntax.  It takes a sequences of tokens in @oparam{sym} and creates
@@ -158,16 +158,19 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
    multi-part identifiers, and C style rest parameters.  See the list under
    @oconst{enableAll} for more details.  *)
   VAR
-    prevSym, nameSym: BasicList.Symbol;
+    prevSym, nameSym: SymList.Symbol;
     lastError: Error.Msg;
-    module, name, moduleFlags, scolon, import, body, period, eof: AST.Node;
+    body: AST.Body;
+    module: AST.Terminal;
+    moduleFlags: AST.Flags;
+    name, scolon, import, period, eof: AST.Node;
     headName: AST.Name;
     
     lastIdentDef: AST.Node;
     (* node with name of last declaration; if a doc comment is found, the
        comment is attached to this node *)
     
-  PROCEDURE Err (code: Error.Code; sym: BasicList.Symbol);
+  PROCEDURE Err (code: Error.Code; sym: SymList.Symbol);
   (* Creates an error message, using the starting position of the symbol 
      @oparam{sym} for the error position.  The newly created message is 
      appended to @oparam{errList}, and a reference to the message is
@@ -180,7 +183,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       errList. Append (lastError)
     END Err;
   
-  PROCEDURE ErrEndPos (code: Error.Code; sym: BasicList.Symbol);
+  PROCEDURE ErrEndPos (code: Error.Code; sym: SymList.Symbol);
   (* Creates an error message, using the @emph{ending} position of the symbol 
      @oparam{sym} for the error position.  The newly created message is 
      appended to @oparam{errList}, and a reference to the message is
@@ -220,7 +223,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       END
     END NextSym;
   
-  PROCEDURE CheckSym (symId: Symbol.Id): AST.Node;
+  PROCEDURE CheckSym (symId: Symbol.Id): AST.Terminal;
   (**Compares with current symbol @oparam{sym} with the required symbol (or
      symbol class) in @oparam{symId}.  If there is a mismatch, an error message
      is emitted and the function returns @code{NIL}.  Otherwise, it creates an
@@ -228,7 +231,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
      the current symbol forward by one step, and returns the newly created
      node.  *)
     VAR
-      node: AST.Node;
+      node: AST.Terminal;
     BEGIN
       IF (sym. id # symId) THEN
         IF Symbol.IsKeyword (symId) THEN
@@ -318,7 +321,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       RETURN ast. ModuleIdent (nl)
     END MultiPartIdent;
   
-  PROCEDURE Flags (context: SHORTINT): AST.Node;
+  PROCEDURE Flags (context: SHORTINT): AST.Flags;
   (* Reads a list of system flags.  *)
     VAR
       counter: LONGINT;
@@ -556,9 +559,10 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
      procedure and is passed upward in the recursive descent parser.  *)
      
   PROCEDURE IdentDef (level: LONGINT; noReadOnly, noMark: BOOLEAN;
-                      VAR name: AST.Name): AST.Node;
+                      VAR name: AST.Name): AST.IdentDef;
     VAR
-      ident, mark, identDef: AST.Node;
+      ident, mark: AST.Terminal;
+      identDef: AST.IdentDef;
     BEGIN
       (*S: IdentDef = ident ["*" | "-"].  *)
       name := sym. str;
@@ -587,7 +591,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       VAR
         alias, becomes, module: AST.Node;
         name: AST.Name;
-        ptr: BasicList.Symbol;
+        ptr: SymList.Symbol;
       BEGIN
         (*S: ImportDecl = [ident ":="] mp_ident.  *)
         IF (sym. next # NIL) & (sym. next. id = Symbol.becomes) THEN
@@ -851,7 +855,8 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
   
   PROCEDURE FormalPars (): AST.Node;
     VAR
-      flags, lParen, rParen, colon, result, raises, oldLastIdentDef: AST.Node;
+      flags: AST.Flags;
+      lParen, rParen, colon, result, raises, oldLastIdentDef: AST.Node;
       fpSections, raisesList: AST.NodeList;
     
     PROCEDURE FPSection (): AST.Node;
@@ -949,7 +954,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
                               colon, result, raises, raisesList);
     END FormalPars;
   
-  PROCEDURE TypePars(): AST.Node;
+  PROCEDURE TypePars(): AST.TypePars;
     VAR
       lParen, rParen, oldLastIdentDef: AST.Node;
       tpSections: AST.NodeList;
@@ -1004,7 +1009,8 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     
     PROCEDURE ArrayType (): AST.Node;
       VAR
-        array, flags, of, type: AST.Node;
+        array, of, type: AST.Node;
+        flags: AST.Flags;
         exprList: AST.NodeList;
       BEGIN
         (*S: ArrayType = "ARRAY" Flags [Expr {"," Expr}] "OF" Type.  *)
@@ -1028,7 +1034,8 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     
     PROCEDURE RecordType (): AST.Node;
       VAR
-        record, flags, lParen, qualident, rParen, end: AST.Node;
+        flags: AST.Flags;
+        record, lParen, qualident, rParen, end: AST.Node;
         fieldLists: AST.NodeList;
       
       PROCEDURE FieldList (): AST.Node;
@@ -1087,7 +1094,8 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
     
     PROCEDURE PointerType (): AST.Node;
       VAR
-        pointer, flags, to, type: AST.Node;
+        flags: AST.Flags;
+        pointer, to, type: AST.Node;
       BEGIN
         (*S: PointerType =  "POINTER" Flags "TO" Type.  *)
         pointer := CheckSym (Symbol.pointer);
@@ -1137,12 +1145,12 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
       RETURN type
     END Type;
 
-  PROCEDURE Body (level: LONGINT; headName: AST.Name): AST.Node;
+  PROCEDURE Body (level: LONGINT; headName: AST.Name): AST.Body;
   (* level=0: module; level>0: nested in this many procedures *)
     VAR
       begin, end, name: AST.Node;
       declSeq, statmSeq: AST.NodeList;
-      ptr: BasicList.Symbol;
+      ptr: SymList.Symbol;
       tailName: AST.Name;
     
     PROCEDURE DeclSeq(): AST.NodeList;
@@ -1151,7 +1159,8 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         
       PROCEDURE ConstDecl(): AST.Node;
         VAR
-          identDef, flags, equal, expr, scolon: AST.Node;
+          flags: AST.Flags;
+          identDef, equal, expr, scolon: AST.Node;
           dummy: AST.Name;
         BEGIN  (* pre: (sym. id = Symbol.ident) *)
           (*S: ConstDecl = IdentDef Flags "=" Expr ";".  *)
@@ -1165,7 +1174,9 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
 
       PROCEDURE TypeDecl (): AST.Node;
         VAR
-          identDef, flags, typePars, equal, type, scolon: AST.Node;
+          flags: AST.Flags;
+          typePars: AST.TypePars;
+          identDef, equal, type, scolon: AST.Node;
           dummy: AST.Name;
         BEGIN  (* pre: (sym. id = Symbol.ident) *)
           (*S: TypeDecl = IdentDef Flags [TypePars] "=" Type ";".  *)
@@ -1210,20 +1221,23 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
 
       PROCEDURE ProcDecl (): AST.Node;
         VAR
-          proc, arrow, receiver, flags, identDef, formalPars, semicolon1,
-          body, semicolon2: AST.Node;
+          flags: AST.Flags;
+          body: AST.Body;
+          proc, arrow, receiver, identDef, formalPars, semicolon1,
+              semicolon2: AST.Node;
           procName: AST.Name;
         
         PROCEDURE Receiver (): AST.Node;
           VAR
-            lParen, var, ident, colon, type, rParen,
-                lParenAlias, rParenAlias: AST.Node;
+            ident: AST.IdentDef;
+            lParenAlias, rParenAlias: AST.Terminal;
+            lParen, var, colon, type, rParen: AST.Node;
             aliasList: AST.NodeList;
             dummy: AST.Name;
 
-          PROCEDURE AliasList(VAR lParen: AST.Node;
+          PROCEDURE AliasList(VAR lParen: AST.Terminal;
                               VAR aliasList: AST.NodeList;
-                              VAR rParen: AST.Node);
+                              VAR rParen: AST.Terminal);
             BEGIN  (* pre: sym.id=lParen *)
               lParen := CheckSym (Symbol.lParen);
               aliasList := ast.NewNodeList();
@@ -1652,7 +1666,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
         RETURN list
       END StatementSeq;
     
-    PROCEDURE CheckName (sym: BasicList.Symbol; head, tail: AST.Name);
+    PROCEDURE CheckName (sym: SymList.Symbol; head, tail: AST.Name);
       BEGIN
         IF (errList. msgCount = 0) & (head^ # tail^) THEN
           Err (nameMismatch, sym);

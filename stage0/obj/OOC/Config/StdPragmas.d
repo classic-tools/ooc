@@ -1,3 +1,30 @@
+static void* _c0;
+static void* _c1;
+static void* _c2;
+static void* _c3;
+static void* _c4;
+static void* _c5;
+static void* _c6;
+static void* _c7;
+static void* _c8;
+static void* _c9;
+static void* _c10;
+static void* _c11;
+static void* _c12;
+static void* _c13;
+static void* _c14;
+static void* _c15;
+static void* _c16;
+static void* _c17;
+static void* _c18;
+static void* _c19;
+static void* _c20;
+static void* _c21;
+static void* _c22;
+static void* _c23;
+static void* _c24;
+static void* _c25;
+static void* _c26;
 #include <OOC/Config/StdPragmas.oh>
 #include <Config.oh>
 #include <OOC/Config/Autoconf.oh>
@@ -50,31 +77,4 @@ extern void OOC_OOC_Config_StdPragmas_init0() {
   OOC_OOC_Config_StdPragmas_init();
 }
 
-static void* _c0;
-static void* _c1;
-static void* _c2;
-static void* _c3;
-static void* _c4;
-static void* _c5;
-static void* _c6;
-static void* _c7;
-static void* _c8;
-static void* _c9;
-static void* _c10;
-static void* _c11;
-static void* _c12;
-static void* _c13;
-static void* _c14;
-static void* _c15;
-static void* _c16;
-static void* _c17;
-static void* _c18;
-static void* _c19;
-static void* _c20;
-static void* _c21;
-static void* _c22;
-static void* _c23;
-static void* _c24;
-static void* _c25;
-static void* _c26;
 /* --- */

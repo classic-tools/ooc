@@ -111,13 +111,13 @@ void Err__ShortInt(OOC_INT8 sint, OOC_INT32 n) {
   ;
 }
 
-void Err__Int(OOC_INT16 _int, OOC_INT32 n) {
+void Err__Int(OOC_INT32 _int, OOC_INT32 n) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)Err__writer;
   i1 = _int;
   i2 = n;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2727)))), TextRider__WriterDesc_WriteInt)),TextRider__WriterDesc_WriteInt)((TextRider__Writer)i0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2727)))), TextRider__WriterDesc_WriteLInt)),TextRider__WriterDesc_WriteLInt)((TextRider__Writer)i0, i1, i2);
   return;
   ;
 }
@@ -128,7 +128,7 @@ void Err__Hex(OOC_INT32 lint, OOC_INT32 n) {
   i0 = (OOC_INT32)Err__writer;
   i1 = lint;
   i2 = n;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2821)))), TextRider__WriterDesc_WriteHex)),TextRider__WriterDesc_WriteHex)((TextRider__Writer)i0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2822)))), TextRider__WriterDesc_WriteHex)),TextRider__WriterDesc_WriteHex)((TextRider__Writer)i0, i1, i2);
   return;
   ;
 }
@@ -141,7 +141,7 @@ void Err__LongReal(OOC_REAL64 lreal, OOC_INT32 n, OOC_INT32 k) {
   d0 = lreal;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3045)))), TextRider__WriterDesc_WriteLReal)),TextRider__WriterDesc_WriteLReal)((TextRider__Writer)i0, d0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3046)))), TextRider__WriterDesc_WriteLReal)),TextRider__WriterDesc_WriteLReal)((TextRider__Writer)i0, d0, i1, i2);
   return;
   ;
 }
@@ -154,7 +154,7 @@ void Err__Real(OOC_REAL32 real, OOC_INT32 n, OOC_INT32 k) {
   f0 = real;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3180)))), TextRider__WriterDesc_WriteReal)),TextRider__WriterDesc_WriteReal)((TextRider__Writer)i0, f0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3181)))), TextRider__WriterDesc_WriteReal)),TextRider__WriterDesc_WriteReal)((TextRider__Writer)i0, f0, i1, i2);
   return;
   ;
 }
@@ -165,7 +165,7 @@ void Err__LongRealFix(OOC_REAL64 lreal, OOC_INT32 n, OOC_INT32 k) {
   i0 = (OOC_INT32)Err__writer;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3576)))), TextRider__WriterDesc_WriteLRealFix)),TextRider__WriterDesc_WriteLRealFix)((TextRider__Writer)i0, (void*)(OOC_INT32)&lreal, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3577)))), TextRider__WriterDesc_WriteLRealFix)),TextRider__WriterDesc_WriteLRealFix)((TextRider__Writer)i0, (void*)(OOC_INT32)&lreal, i1, i2);
   return;
   ;
 }
@@ -178,7 +178,7 @@ void Err__RealFix(OOC_REAL32 real, OOC_INT32 n, OOC_INT32 k) {
   f0 = real;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3723)))), TextRider__WriterDesc_WriteRealFix)),TextRider__WriterDesc_WriteRealFix)((TextRider__Writer)i0, f0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3724)))), TextRider__WriterDesc_WriteRealFix)),TextRider__WriterDesc_WriteRealFix)((TextRider__Writer)i0, f0, i1, i2);
   return;
   ;
 }
@@ -189,7 +189,7 @@ void Err__LongRealEng(OOC_REAL64 lreal, OOC_INT32 n, OOC_INT32 k) {
   i0 = (OOC_INT32)Err__writer;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3986)))), TextRider__WriterDesc_WriteLRealEng)),TextRider__WriterDesc_WriteLRealEng)((TextRider__Writer)i0, (void*)(OOC_INT32)&lreal, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3987)))), TextRider__WriterDesc_WriteLRealEng)),TextRider__WriterDesc_WriteLRealEng)((TextRider__Writer)i0, (void*)(OOC_INT32)&lreal, i1, i2);
   return;
   ;
 }
@@ -202,7 +202,7 @@ void Err__RealEng(OOC_REAL32 real, OOC_INT32 n, OOC_INT32 k) {
   f0 = real;
   i1 = n;
   i2 = k;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4133)))), TextRider__WriterDesc_WriteRealEng)),TextRider__WriterDesc_WriteRealEng)((TextRider__Writer)i0, f0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4134)))), TextRider__WriterDesc_WriteRealEng)),TextRider__WriterDesc_WriteRealEng)((TextRider__Writer)i0, f0, i1, i2);
   return;
   ;
 }
@@ -212,7 +212,7 @@ void Err__Set(OOC_UINT32 s) {
 
   i0 = (OOC_INT32)Err__writer;
   i1 = s;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4222)))), TextRider__WriterDesc_WriteSet)),TextRider__WriterDesc_WriteSet)((TextRider__Writer)i0, i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4223)))), TextRider__WriterDesc_WriteSet)),TextRider__WriterDesc_WriteSet)((TextRider__Writer)i0, i1);
   return;
   ;
 }
@@ -221,7 +221,7 @@ void Err__Ln(void) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)Err__writer;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4282)))), TextRider__WriterDesc_WriteLn)),TextRider__WriterDesc_WriteLn)((TextRider__Writer)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4283)))), TextRider__WriterDesc_WriteLn)),TextRider__WriterDesc_WriteLn)((TextRider__Writer)i0);
   return;
   ;
 }

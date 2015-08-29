@@ -1,4 +1,4 @@
-(* 	$Id: WriteC.Mod,v 1.169 2003/07/15 18:49:04 mva Exp $	 *)
+(* 	$Id: WriteC.Mod,v 1.171 2003/08/13 08:34:28 mva Exp $	 *)
 MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to plain C.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -729,12 +729,19 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
     VAR
       name: STRING;
       opnd: SSA.Opnd;
+      type: Sym.Type;
     BEGIN
-      w. WriteString ("_type_guard(");
+      opnd := typeGuard. GetOpndClass (Opnd.type);
+      type := opnd. arg(SSA.TypeRef). type;
+      
+      IF (type IS Sym.TypeClosure) THEN  (* slower but more powerful *)
+        w. WriteString ("_type_guard_q(");
+      ELSE
+        w. WriteString ("_type_guard(");
+      END;
       RefList (typeGuard. opndList. nextOpnd, Opnd.arg);
       w. WriteString (", &");
-      opnd := typeGuard. GetOpndClass (Opnd.type);
-      name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
+      name := Naming.NameOfTypeDescriptor (type, w.translator.qtdData);
       w. WriteObject (name);
       w. WriteString (", ");
       w. WriteLInt (typeGuard. pos, 0);
@@ -855,7 +862,8 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       CastFromPtr (instr);
       w. WriteString ("RT0__NewObject(");
       opnd := instr. GetOpndClass (Opnd.type);
-      name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
+      name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type,
+                                           w.translator.qtdData);
       w. WriteObject (name);
       w. WriteString (".baseTypes[0]");
 
@@ -920,7 +928,8 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
         w. WriteObject (name);
       ELSIF (instr. opndList. arg IS SSA.TypeRef) THEN
         w. WriteChar ("&");
-        name := Naming.NameOfTypeDescriptor (instr. opndList. arg(SSA.TypeRef). type);
+        name := Naming.NameOfTypeDescriptor(instr.opndList.arg(SSA.TypeRef).type,
+                                            w.translator.qtdData);
         w. WriteObject (name);
       ELSE
         w. WriteString ("OOC_TYPE_TAG(");
@@ -933,12 +942,19 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
     VAR
       name: STRING;
       opnd: SSA.Opnd;
+      type: Sym.Type;
     BEGIN
-      w. WriteString ("OOC_TYPE_TEST(");
+      opnd := instr. opndList. nextOpnd;
+      type := opnd. arg(SSA.TypeRef). type;
+
+      IF (type IS Sym.TypeClosure) THEN  (* slower but more powerful *)
+        w.WriteString("RT0__TypeTest((OOC_PTR)");
+      ELSE
+        w.WriteString("OOC_TYPE_TEST(");
+      END;
       w. Ref (instr. opndList);
       w. WriteString (", &");
-      opnd := instr. opndList. nextOpnd;
-      name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
+      name := Naming.NameOfTypeDescriptor (type, w.translator.qtdData);
       w. WriteObject (name);
       w. WriteString (")");
     END TypeTest;
@@ -1125,10 +1141,10 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w.textWriter.WriteLInt(id, 0);
 
       wd := w.translator.wd;
-      wd.Newline;
       wd.WriteString("static void* "+prefixPreloadVar);
       wd.textWriter.WriteLInt(id, 0);
       wd.WriteString(";");
+      wd.Newline;
     END PreloadedVar;
   
   BEGIN

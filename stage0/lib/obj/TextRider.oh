@@ -269,13 +269,13 @@ extern RT0__StructDesc _td_TextRider__33072;
 extern RT0__StructDesc _td_TextRider__38078;
 extern RT0__StructDesc _td_TextRider__38942;
 extern RT0__StructDesc _td_TextRider__39784;
-extern RT0__StructDesc _td_TextRider__41937;
-extern RT0__StructDesc _td_TextRider__43415;
-extern RT0__StructDesc _td_TextRider__43788;
-extern RT0__StructDesc _td_TextRider__44231;
-extern RT0__StructDesc _td_TextRider__44616;
-extern RT0__StructDesc _td_TextRider__45064;
-extern RT0__StructDesc _td_TextRider__45447;
+extern RT0__StructDesc _td_TextRider__41984;
+extern RT0__StructDesc _td_TextRider__43462;
+extern RT0__StructDesc _td_TextRider__43835;
+extern RT0__StructDesc _td_TextRider__44278;
+extern RT0__StructDesc _td_TextRider__44663;
+extern RT0__StructDesc _td_TextRider__45111;
+extern RT0__StructDesc _td_TextRider__45494;
 #endif /* _MODULE_TextRider_ */
 
 /* --- */

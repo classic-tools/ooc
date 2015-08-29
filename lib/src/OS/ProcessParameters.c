@@ -1,4 +1,4 @@
-/* 	$Id: ProcessParameters.c,v 1.9 2003/05/18 18:38:48 mva Exp $	 */
+/* 	$Id: ProcessParameters.c,v 1.10 2003/08/22 09:04:34 mva Exp $	 */
 #ifdef WIN32
 #include <io.h>
 #include <direct.h>
@@ -24,6 +24,17 @@ Object__String OS_ProcessParameters__GetCwd() {
     IO_StdChannels__IOError(NULL);
   }
 }
+
+Object__String OS_ProcessParameters__GetEnv(Object__String name) {
+  char *ptr = getenv(OS_Path__Encode(name));
+  if (ptr) {
+    return OS_Path__Decode(ptr, strlen(ptr)+1);
+  } else {
+    return NULL;
+    return 0;
+  }
+}
+
 
 void OOC_OS_ProcessParameters_init(void) {
 }

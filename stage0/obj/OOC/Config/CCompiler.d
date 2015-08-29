@@ -1,34 +1,3 @@
-#include <OOC/Config/CCompiler.oh>
-#include <Object.oh>
-#include <ADT/StringBuffer.oh>
-#include <URI/Scheme/File.oh>
-#include <Config.oh>
-#include <OOC/Config.oh>
-#include <OOC/Repository.oh>
-static Config_Section_Options__Option OOC_Config_CCompiler__cc;
-static Config_Section_Options__Option OOC_Config_CCompiler__cppflags;
-static Config_Section_Options__Option OOC_Config_CCompiler__cflags;
-static Config_Section_Options__Option OOC_Config_CCompiler__ldflags;
-Config_Section_Options__Option OOC_Config_CCompiler__libs;
-static Config_Section_Options__Option OOC_Config_CCompiler__libtool;
-Config_Section_Options__Option OOC_Config_CCompiler__libdir;
-Config_Section_Options__Option OOC_Config_CCompiler__install;
-static Config_Section_Options__Option OOC_Config_CCompiler__installProgram;
-Config_Section_Options__Option OOC_Config_CCompiler__installData;
-Config_Section_Options__Option OOC_Config_CCompiler__uninstall;
-Config_Section_Options__Option OOC_Config_CCompiler__bindir;
-Config_Section_Options__Option OOC_Config_CCompiler__oocdir;
-static ADT_StringBuffer__StringBuffer OOC_Config_CCompiler__SetCommand(Object__String mode);
-
-/* run-time meta data */
-static RT0__ModuleDesc _mid;
-static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:CCompiler", (RT0__Struct[]) { NULL } };
-
-extern void OOC_OOC_Config_CCompiler_init0() {
-  RT0__RegisterModule(&_mid);
-  OOC_OOC_Config_CCompiler_init();
-}
-
 static void* _c0;
 static void* _c1;
 static void* _c2;
@@ -79,4 +48,35 @@ static void* _c46;
 static void* _c47;
 static void* _c48;
 static void* _c49;
+#include <OOC/Config/CCompiler.oh>
+#include <Object.oh>
+#include <ADT/StringBuffer.oh>
+#include <URI/Scheme/File.oh>
+#include <Config.oh>
+#include <OOC/Config.oh>
+#include <OOC/Repository.oh>
+static Config_Section_Options__Option OOC_Config_CCompiler__cc;
+static Config_Section_Options__Option OOC_Config_CCompiler__cppflags;
+static Config_Section_Options__Option OOC_Config_CCompiler__cflags;
+static Config_Section_Options__Option OOC_Config_CCompiler__ldflags;
+Config_Section_Options__Option OOC_Config_CCompiler__libs;
+static Config_Section_Options__Option OOC_Config_CCompiler__libtool;
+Config_Section_Options__Option OOC_Config_CCompiler__libdir;
+Config_Section_Options__Option OOC_Config_CCompiler__install;
+static Config_Section_Options__Option OOC_Config_CCompiler__installProgram;
+Config_Section_Options__Option OOC_Config_CCompiler__installData;
+Config_Section_Options__Option OOC_Config_CCompiler__uninstall;
+Config_Section_Options__Option OOC_Config_CCompiler__bindir;
+Config_Section_Options__Option OOC_Config_CCompiler__oocdir;
+static ADT_StringBuffer__StringBuffer OOC_Config_CCompiler__SetCommand(Object__String mode);
+
+/* run-time meta data */
+static RT0__ModuleDesc _mid;
+static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:CCompiler", (RT0__Struct[]) { NULL } };
+
+extern void OOC_OOC_Config_CCompiler_init0() {
+  RT0__RegisterModule(&_mid);
+  OOC_OOC_Config_CCompiler_init();
+}
+
 /* --- */

@@ -1026,10 +1026,10 @@ l28:
 
   i0 = (OOC_INT32)module;
   OOC_SymbolTable_Builder__BuilderDesc_Finalize_CollectFormalPars((OOC_SymbolTable__Item)i0);
-  i0 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary__Dictionary.baseTypes[0]);
+  i0 = (OOC_INT32)RT0__NewObject(_td__qtd1.baseTypes[0]);
   ADT_Dictionary__DictionaryDesc_INIT((ADT_Dictionary__Dictionary)i0);
   getPointerDecl = (ADT_Dictionary__Dictionary)i0;
-  i0 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary__Dictionary.baseTypes[0]);
+  i0 = (OOC_INT32)RT0__NewObject(_td__qtd3.baseTypes[0]);
   ADT_Dictionary__DictionaryDesc_INIT((ADT_Dictionary__Dictionary)i0);
   hasTypeBoundProc = (ADT_Dictionary__Dictionary)i0;
   i0 = (OOC_INT32)module;
@@ -1063,7 +1063,7 @@ void OOC_SymbolTable_Builder__WriterDesc_INIT(OOC_SymbolTable_Builder__Writer w,
   i1 = (OOC_INT32)ch;
   i2 = (OOC_INT32)chDoc;
   OOC_SymbolTable__WriterDesc_INIT((OOC_SymbolTable__Writer)i0, (IO__ByteChannel)i1, (IO__ByteChannel)i2);
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary__Dictionary.baseTypes[0]);
+  i1 = (OOC_INT32)RT0__NewObject(_td__qtd5.baseTypes[0]);
   ADT_Dictionary__DictionaryDesc_INIT((ADT_Dictionary__Dictionary)i1);
   *(OOC_INT32*)((_check_pointer(i0, 22448))+284) = i1;
   return;

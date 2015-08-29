@@ -19,6 +19,11 @@ typedef struct ADT_Dictionary__Entry {
   Object__Object value;
 } ADT_Dictionary__Entry;
 typedef struct ADT_Dictionary__Entry *ADT_Dictionary__Table;
+typedef struct ADT_Dictionary__Item {
+  Object__Object key;
+  Object__Object value;
+} ADT_Dictionary__Item;
+typedef struct ADT_Dictionary__Item *ADT_Dictionary__ItemArrayPtr;
 typedef struct ADT_Dictionary__DictionaryDesc *ADT_Dictionary__Dictionary;
 typedef struct ADT_Dictionary__DictionaryDesc {
   OOC_INT32 fill;
@@ -39,25 +44,25 @@ extern void ADT_Dictionary__DictionaryDesc_Destroy(ADT_Dictionary__Dictionary di
 #define _TBN_ADT_Dictionary__DictionaryDesc_Destroy 8
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Destroy)(ADT_Dictionary__Dictionary dict);
 extern OOC_INT32 ADT_Dictionary__DictionaryDesc_Lookup(ADT_Dictionary__Dictionary dict, Object__Object key, OOC_INT32 hash);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Lookup 14
+#define _TBN_ADT_Dictionary__DictionaryDesc_Lookup 15
 typedef OOC_INT32 (*_TBP_ADT_Dictionary__DictionaryDesc_Lookup)(ADT_Dictionary__Dictionary dict, Object__Object key, OOC_INT32 hash);
 extern void ADT_Dictionary__DictionaryDesc_Insert(ADT_Dictionary__Dictionary dict, Object__Object key, OOC_INT32 hash, Object__Object value);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Insert 12
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Insert)(ADT_Dictionary__Dictionary dict, Object__Object key, OOC_INT32 hash, Object__Object value);
 extern void ADT_Dictionary__DictionaryDesc_Resize(ADT_Dictionary__Dictionary dict, OOC_INT32 minUsed);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Resize 15
+#define _TBN_ADT_Dictionary__DictionaryDesc_Resize 16
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Resize)(ADT_Dictionary__Dictionary dict, OOC_INT32 minUsed);
 extern OOC_CHAR8 ADT_Dictionary__DictionaryDesc_HasKey(ADT_Dictionary__Dictionary dict, Object__Object key);
 #define _TBN_ADT_Dictionary__DictionaryDesc_HasKey 10
 typedef OOC_CHAR8 (*_TBP_ADT_Dictionary__DictionaryDesc_HasKey)(ADT_Dictionary__Dictionary dict, Object__Object key);
 extern OOC_INT32 ADT_Dictionary__DictionaryDesc_Size(ADT_Dictionary__Dictionary dict);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Size 17
+#define _TBN_ADT_Dictionary__DictionaryDesc_Size 18
 typedef OOC_INT32 (*_TBP_ADT_Dictionary__DictionaryDesc_Size)(ADT_Dictionary__Dictionary dict);
 extern Object__Object ADT_Dictionary__DictionaryDesc_Get(ADT_Dictionary__Dictionary dict, Object__Object key);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Get 9
 typedef Object__Object (*_TBP_ADT_Dictionary__DictionaryDesc_Get)(ADT_Dictionary__Dictionary dict, Object__Object key);
 extern void ADT_Dictionary__DictionaryDesc_Set(ADT_Dictionary__Dictionary dict, Object__Object key, Object__Object value);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Set 16
+#define _TBN_ADT_Dictionary__DictionaryDesc_Set 17
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Set)(ADT_Dictionary__Dictionary dict, Object__Object key, Object__Object value);
 extern ADT_Dictionary__Dictionary ADT_Dictionary__DictionaryDesc_Copy(ADT_Dictionary__Dictionary dict);
 #define _TBN_ADT_Dictionary__DictionaryDesc_Copy 6
@@ -69,11 +74,14 @@ extern void ADT_Dictionary__DictionaryDesc_Clear(ADT_Dictionary__Dictionary dict
 #define _TBN_ADT_Dictionary__DictionaryDesc_Clear 5
 typedef void (*_TBP_ADT_Dictionary__DictionaryDesc_Clear)(ADT_Dictionary__Dictionary dict);
 extern Object__ObjectArrayPtr ADT_Dictionary__DictionaryDesc_Keys(ADT_Dictionary__Dictionary dict);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Keys 13
+#define _TBN_ADT_Dictionary__DictionaryDesc_Keys 14
 typedef Object__ObjectArrayPtr (*_TBP_ADT_Dictionary__DictionaryDesc_Keys)(ADT_Dictionary__Dictionary dict);
 extern Object__ObjectArrayPtr ADT_Dictionary__DictionaryDesc_Values(ADT_Dictionary__Dictionary dict);
-#define _TBN_ADT_Dictionary__DictionaryDesc_Values 18
+#define _TBN_ADT_Dictionary__DictionaryDesc_Values 19
 typedef Object__ObjectArrayPtr (*_TBP_ADT_Dictionary__DictionaryDesc_Values)(ADT_Dictionary__Dictionary dict);
+extern ADT_Dictionary__ItemArrayPtr ADT_Dictionary__DictionaryDesc_Items(ADT_Dictionary__Dictionary dict);
+#define _TBN_ADT_Dictionary__DictionaryDesc_Items 13
+typedef ADT_Dictionary__ItemArrayPtr (*_TBP_ADT_Dictionary__DictionaryDesc_Items)(ADT_Dictionary__Dictionary dict);
 extern OOC_CHAR8 NORETURN ADT_Dictionary__DictionaryDesc_Equals(ADT_Dictionary__Dictionary dict, Object__Object obj) NORETURN2;
 #define _TBN_ADT_Dictionary__DictionaryDesc_Equals 0
 typedef OOC_CHAR8 NORETURN (*_TBP_ADT_Dictionary__DictionaryDesc_Equals)(ADT_Dictionary__Dictionary dict, Object__Object obj) NORETURN2;
@@ -96,11 +104,14 @@ extern void OOC_ADT_Dictionary_init0(void);
 extern RT0__StructDesc _td_ADT_Dictionary__Entry;
 extern RT0__StructDesc _td_ADT_Dictionary__2652;
 extern RT0__StructDesc _td_ADT_Dictionary__Table;
+extern RT0__StructDesc _td_ADT_Dictionary__Item;
+extern RT0__StructDesc _td_ADT_Dictionary__2791;
+extern RT0__StructDesc _td_ADT_Dictionary__ItemArrayPtr;
 extern RT0__StructDesc _td_ADT_Dictionary__Dictionary;
 extern RT0__StructDesc _td_ADT_Dictionary__DictionaryDesc;
 extern RT0__StructDesc _td_ADT_Dictionary__Dummy;
 extern RT0__StructDesc _td_ADT_Dictionary__DummyDesc;
-extern RT0__StructDesc _td_ADT_Dictionary__4178;
+extern RT0__StructDesc _td_ADT_Dictionary__4316;
 #endif /* _MODULE_ADT_Dictionary_ */
 
 /* --- */

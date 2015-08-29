@@ -33,8 +33,14 @@
 /* Define to 1 if you have the `mingwex' library (-lmingwex). */
 #undef HAVE_LIBMINGWEX
 
+/* Define to 1 if you have the `posix4' library (-lposix4). */
+#undef HAVE_LIBPOSIX4
+
 /* compiler was configured with --enable-threads=pthreads */
 #undef HAVE_LIBPTHREAD
+
+/* Define to 1 if you have the `rt' library (-lrt). */
+#undef HAVE_LIBRT
 
 /* Define to 1 if you have the `wsock32' library (-lwsock32). */
 #undef HAVE_LIBWSOCK32

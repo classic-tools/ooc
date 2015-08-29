@@ -214,7 +214,7 @@ l20:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6482))+20);
       i3 = _check_pointer(i3, 6491);
       i4 = OOC_ARRAY_LENGTH(i3, 0);
-      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6513))+12);
+      i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6513))+16);
       *(OOC_INT32*)((i3+((_check_index(i2, i4, OOC_UINT32, 6491))*12))+8) = i5;
       goto l32;
 l23:
@@ -625,9 +625,9 @@ l52:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10572)))), IO_BinaryRider__WriterDesc_WriteNum)),IO_BinaryRider__WriterDesc_WriteNum)((IO_BinaryRider__Writer)i1, i2);
   i0 = (OOC_INT32)RT0__TypeOf((void*)i0);
   type = (RT0__Struct)i0;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10732))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10732))+12);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 10740));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10752))+12);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10752))+16);
   i0 = ADT_Object_Storage__WriterDesc_WriteObject_LookupType((ADT_Object_Storage__Writer)i1, (RT0__Name)i2, (RT0__Name)i0);
   tref = i0;
   i1 = (OOC_INT32)w;
@@ -635,11 +635,11 @@ l52:
   i0 = i0>0;
   if (!i0) goto l7;
   i0 = (OOC_INT32)type;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10836))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10836))+12);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 10844));
   _copy_8((const void*)(_check_pointer(i2, 10850)),(void*)((_check_pointer(i1, 10854))+24),256);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10880)))), IO_BinaryRider__WriterDesc_WriteString)),IO_BinaryRider__WriterDesc_WriteString)((IO_BinaryRider__Writer)i1, (void*)((_check_pointer(i1, 10896))+24), 256);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10931))+12);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10931))+16);
   _copy_8((const void*)(_check_pointer(i0, 10937)),(void*)((_check_pointer(i1, 10941))+24),256);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 10967)))), IO_BinaryRider__WriterDesc_WriteString)),IO_BinaryRider__WriterDesc_WriteString)((IO_BinaryRider__Writer)i1, (void*)((_check_pointer(i1, 10983))+24), 256);
 l7:

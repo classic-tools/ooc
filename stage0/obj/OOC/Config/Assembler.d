@@ -1,3 +1,5 @@
+static void* _c0;
+static void* _c1;
 #include <OOC/Config/Assembler.oh>
 #include <ADT/StringBuffer.oh>
 #include <URI/Scheme/File.oh>
@@ -11,6 +13,4 @@ extern void OOC_OOC_Config_Assembler_init0() {
   OOC_OOC_Config_Assembler_init();
 }
 
-static void* _c0;
-static void* _c1;
 /* --- */

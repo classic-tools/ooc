@@ -6,7 +6,7 @@
 #include <IO.oh>
 #include <OOC/Error.oh>
 #include <OOC/Scanner/Symbol.oh>
-#include <OOC/Scanner/Builder.oh>
+#include <OOC/Scanner/SymList.oh>
 #include <OOC/Config/Pragmas.oh>
 #include <RT0.oh>
 #include <Object.oh>
@@ -26,20 +26,20 @@ typedef struct OOC_Scanner__ErrorContextDesc {
 extern void OOC_Scanner__ErrorContextDesc_GetTemplate(OOC_Scanner__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_OOC_Scanner__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_Scanner__ErrorContextDesc_GetTemplate)(OOC_Scanner__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-extern void OOC_Scanner__ScanInput(OOC_Scanner_Builder__Builder builder, OOC_Config_Pragmas__Section defaultPragmas, OOC_UINT32 scanOptions);
+extern void OOC_Scanner__ScanInput(OOC_Scanner_SymList__Builder builder, OOC_Config_Pragmas__Section defaultPragmas, OOC_UINT32 scanOptions);
 extern void OOC_OOC_Scanner_init(void);
 extern void OOC_OOC_Scanner_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Scanner__2939;
-extern RT0__StructDesc _td_OOC_Scanner__2922;
-extern RT0__StructDesc _td_OOC_Scanner__3045;
-extern RT0__StructDesc _td_OOC_Scanner__3028;
+extern RT0__StructDesc _td_OOC_Scanner__2940;
+extern RT0__StructDesc _td_OOC_Scanner__2923;
+extern RT0__StructDesc _td_OOC_Scanner__3046;
+extern RT0__StructDesc _td_OOC_Scanner__3029;
 extern RT0__StructDesc _td_OOC_Scanner__ErrorContext;
 extern RT0__StructDesc _td_OOC_Scanner__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Scanner__3717;
-extern RT0__StructDesc _td_OOC_Scanner__7822;
-extern RT0__StructDesc _td_OOC_Scanner__22012;
+extern RT0__StructDesc _td_OOC_Scanner__3718;
+extern RT0__StructDesc _td_OOC_Scanner__7823;
+extern RT0__StructDesc _td_OOC_Scanner__22013;
 #endif /* _MODULE_OOC_Scanner_ */
 
 /* --- */

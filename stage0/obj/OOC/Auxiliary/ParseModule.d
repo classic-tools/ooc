@@ -3,11 +3,10 @@
 #include <OOC/Config.oh>
 #include <OOC/Scanner/InputBuffer.oh>
 #include <OOC/Scanner.oh>
-#include <OOC/Scanner/BasicList.oh>
+#include <OOC/Scanner/SymList.oh>
 #include <OOC/Parser.oh>
-#include <OOC/AST/ExtTree.oh>
 #include <OOC/SymbolTable/Builder.oh>
-#include <OOC/AST/ExtTree/CreateSymTab.oh>
+#include <OOC/AST/CreateSymTab.oh>
 #include <OOC/SymbolTable/CreateNamespace.oh>
 #include <OOC/Auxiliary/WriteSymbolFile.oh>
 

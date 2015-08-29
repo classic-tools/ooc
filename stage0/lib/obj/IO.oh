@@ -212,9 +212,9 @@ extern RT0__StructDesc _td_IO__ProtocolError;
 extern RT0__StructDesc _td_IO__ProtocolErrorDesc;
 extern RT0__StructDesc _td_IO__ErrorResponse;
 extern RT0__StructDesc _td_IO__ErrorResponseDesc;
-extern RT0__StructDesc _td_IO__15225;
-extern RT0__StructDesc _td_IO__16553;
-extern RT0__StructDesc _td_IO__17905;
+extern RT0__StructDesc _td_IO__15226;
+extern RT0__StructDesc _td_IO__16554;
+extern RT0__StructDesc _td_IO__17906;
 #endif /* _MODULE_IO_ */
 
 /* --- */

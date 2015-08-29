@@ -1,3 +1,9 @@
+static void* _c0;
+static void* _c1;
+static void* _c2;
+static void* _c3;
+static void* _c4;
+static void* _c5;
 #include <OOC/Repository/FileSystem.oh>
 #include <Msg.oh>
 #include <Files.oh>
@@ -15,13 +21,13 @@ static OOC_Repository_FileSystem__Module OOC_Repository_FileSystem__NewModule(OO
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Repository_FileSystem__Repository = { (RT0__Struct[]){&_td_OOC_Repository_FileSystem__RepositoryDesc}, NULL, &_mid, "Repository", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Repository_FileSystem__RepositoryDesc = { (RT0__Struct[]){&_td_OOC_Repository__RepositoryDesc,&_td_OOC_Repository_FileSystem__RepositoryDesc}, (void*[]){(void*)OOC_Repository_FileSystem__RepositoryDesc_DumpContent,(void*)OOC_Repository__RepositoryDesc_GetDefaultSubdir,(void*)OOC_Repository__RepositoryDesc_GetDefaultSuffix,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetModule,(void*)OOC_Repository__RepositoryDesc_GetModuleByURI,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetResource,(void*)OOC_Repository__RepositoryDesc_SetPackageInfo}, &_mid, "RepositoryDesc", 16, 1, RT0__strRecord };
-RT0__StructDesc _td_OOC_Repository_FileSystem__Module = { (RT0__Struct[]){&_td_OOC_Repository_FileSystem__ModuleDesc}, NULL, &_mid, "Module", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Repository_FileSystem__ModuleDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_Repository__ModuleDesc,&_td_OOC_Repository_FileSystem__ModuleDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString,(void*)OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir,(void*)OOC_Repository_FileSystem__ModuleDesc_FileExists,(void*)OOC_Repository__ModuleDesc_GetImportedModule,(void*)OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer,(void*)OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel,(void*)OOC_Repository_FileSystem__ModuleDesc_GetTimeStamp,(void*)OOC_Repository_FileSystem__ModuleDesc_GetURI,(void*)OOC_Repository__ModuleDesc_MatchesURI,(void*)OOC_Repository__ModuleDesc_ReadSymbolFile,(void*)OOC_Repository__ModuleDesc_SetFingerprint,(void*)OOC_Repository__ModuleDesc_SetInterfaceData}, &_mid, "ModuleDesc", 36, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Repository_FileSystem__2660 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository_FileSystem__2961 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository_FileSystem__4661 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository_FileSystem__Repository = { (RT0__Struct[]){&_td_OOC_Repository_FileSystem__RepositoryDesc}, NULL, NULL, &_mid, "Repository", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Repository_FileSystem__RepositoryDesc = { (RT0__Struct[]){&_td_OOC_Repository__RepositoryDesc,&_td_OOC_Repository_FileSystem__RepositoryDesc}, (void*[]){(void*)OOC_Repository_FileSystem__RepositoryDesc_DumpContent,(void*)OOC_Repository__RepositoryDesc_GetDefaultSubdir,(void*)OOC_Repository__RepositoryDesc_GetDefaultSuffix,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetModule,(void*)OOC_Repository__RepositoryDesc_GetModuleByURI,(void*)OOC_Repository_FileSystem__RepositoryDesc_GetResource,(void*)OOC_Repository__RepositoryDesc_SetPackageInfo}, NULL, &_mid, "RepositoryDesc", 16, 1, RT0__strRecord };
+RT0__StructDesc _td_OOC_Repository_FileSystem__Module = { (RT0__Struct[]){&_td_OOC_Repository_FileSystem__ModuleDesc}, NULL, NULL, &_mid, "Module", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Repository_FileSystem__ModuleDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_Repository__ModuleDesc,&_td_OOC_Repository_FileSystem__ModuleDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString,(void*)OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir,(void*)OOC_Repository_FileSystem__ModuleDesc_FileExists,(void*)OOC_Repository__ModuleDesc_GetImportedModule,(void*)OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer,(void*)OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel,(void*)OOC_Repository_FileSystem__ModuleDesc_GetTimeStamp,(void*)OOC_Repository_FileSystem__ModuleDesc_GetURI,(void*)OOC_Repository__ModuleDesc_MatchesURI,(void*)OOC_Repository__ModuleDesc_ReadSymbolFile,(void*)OOC_Repository__ModuleDesc_SetFingerprint,(void*)OOC_Repository__ModuleDesc_SetInterfaceData}, NULL, &_mid, "ModuleDesc", 36, 2, RT0__strRecord };
+RT0__StructDesc _td_OOC_Repository_FileSystem__2660 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository_FileSystem__2961 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository_FileSystem__4661 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Repository:FileSystem", (RT0__Struct[]) { &_td_OOC_Repository_FileSystem__Repository, &_td_OOC_Repository_FileSystem__RepositoryDesc, &_td_OOC_Repository_FileSystem__Module, &_td_OOC_Repository_FileSystem__ModuleDesc, NULL } };
 
 extern void OOC_OOC_Repository_FileSystem_init0() {
@@ -29,10 +35,4 @@ extern void OOC_OOC_Repository_FileSystem_init0() {
   OOC_OOC_Repository_FileSystem_init();
 }
 
-static void* _c0;
-static void* _c1;
-static void* _c2;
-static void* _c3;
-static void* _c4;
-static void* _c5;
 /* --- */

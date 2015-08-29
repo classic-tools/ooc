@@ -15,6 +15,7 @@ typedef struct OOC_C_IRtoC__TranslatorDesc {
   OOC_C_DeclWriter__Writer wd;
   OOC_IR__ProcedureList procList;
   OOC_INT32 currentProc;
+  OOC_C_Naming__QualTypeData qtdData;
 } OOC_C_IRtoC__TranslatorDesc;
 extern void OOC_C_IRtoC__WriteStatmSeq(OOC_C_DeclWriter__Writer w, OOC_IR__StatementSeq statmSeq);
 extern void OOC_C_IRtoC__InitTranslator(OOC_C_IRtoC__Translator t);

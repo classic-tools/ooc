@@ -25,11 +25,11 @@ static OOC_CHAR8 OOC_Doc_ResolveRef__ParseRef(OOC_Doc__OberonRef ref, OOC_Error_
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContext = { (RT0__Struct[]){&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, (void*[]){(void*)OOC_Doc_ResolveRef__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__1656 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__4596 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__4812 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContext = { (RT0__Struct[]){&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, NULL, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, (void*[]){(void*)OOC_Doc_ResolveRef__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, NULL, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__1656 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__4596 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__4812 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Doc:ResolveRef", (RT0__Struct[]) { &_td_OOC_Doc_ResolveRef__ErrorContext, &_td_OOC_Doc_ResolveRef__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Doc_ResolveRef_init0() {

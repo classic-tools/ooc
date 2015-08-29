@@ -3,7 +3,6 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Object.oh>
 #include <Msg.oh>
 #include <IO.oh>
 #include <Config.oh>
@@ -18,7 +17,7 @@
 #include <Exception.oh>
 typedef struct Config_Simple__ConfigDesc *Config_Simple__Config;
 typedef struct Config_Simple__ConfigDesc {
-  Object__String8 cfgFile;
+  Object__String cfgFile;
   Config_Source_Environment__VariableTemplate cfgFileEnvVar;
   Config_Source_CmdLine__OptionTemplate cfgFileCmdLineOption;
   Config_Source_Environment__Environment envVars;
@@ -29,8 +28,8 @@ typedef struct Config_Simple__ConfigDesc {
   Config_Section__SectionList sectionList;
   Config_Parser__Resolver resolver;
 } Config_Simple__ConfigDesc;
-extern void Config_Simple__Init(Config_Simple__Config config, Object__String8 defaultConfigFile);
-extern Config_Simple__Config Config_Simple__New(Object__String8 defaultConfigFile);
+extern void Config_Simple__Init(Config_Simple__Config config, Object__String defaultConfigFile);
+extern Config_Simple__Config Config_Simple__New(Object__String defaultConfigFile);
 extern void Config_Simple__ConfigDesc_ConfigFileEnvVar(Config_Simple__Config config, Config_Source_Environment__VariableTemplate envTemplate);
 #define _TBN_Config_Simple__ConfigDesc_ConfigFileEnvVar 1
 typedef void (*_TBP_Config_Simple__ConfigDesc_ConfigFileEnvVar)(Config_Simple__Config config, Config_Source_Environment__VariableTemplate envTemplate);

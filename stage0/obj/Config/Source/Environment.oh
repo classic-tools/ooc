@@ -52,8 +52,7 @@ extern RT0__StructDesc _td_Config_Source_Environment__Command;
 extern RT0__StructDesc _td_Config_Source_Environment__CommandDesc;
 extern RT0__StructDesc _td_Config_Source_Environment__Environment;
 extern RT0__StructDesc _td_Config_Source_Environment__EnvironmentDesc;
-extern RT0__StructDesc _td_Config_Source_Environment__2790;
-extern RT0__StructDesc _td_Config_Source_Environment__3676;
+extern RT0__StructDesc _td_Config_Source_Environment__3605;
 #endif /* _MODULE_Config_Source_Environment_ */
 
 /* --- */

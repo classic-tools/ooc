@@ -11,10 +11,10 @@ static void IntConv__SState(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__Sca
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_IntConv__1617 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 11, 11, RT0__strArray };
-RT0__StructDesc _td_IntConv__5030 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IntConv__5284 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IntConv__6744 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IntConv__1617 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 11, 11, RT0__strArray };
+RT0__StructDesc _td_IntConv__5030 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IntConv__5284 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IntConv__6744 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"IntConv", (RT0__Struct[]) { NULL } };
 
 extern void OOC_IntConv_init0() {

@@ -9,6 +9,7 @@
 #include <OOC/IR.oh>
 #include <OOC/SymbolTable/Uses.oh>
 #include <OOC/C/DeclWriter.oh>
+#include <OOC/C/Naming.oh>
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
@@ -18,6 +19,7 @@ typedef struct OOC_Make_TranslateToC__TranslatorDesc {
   OOC_C_DeclWriter__Writer wd;
   OOC_IR__ProcedureList procList;
   OOC_INT32 currentProc;
+  OOC_C_Naming__QualTypeData qtdData;
 } OOC_Make_TranslateToC__TranslatorDesc;
 extern void OOC_Make_TranslateToC__InitTranslator(OOC_Make_TranslateToC__Translator t);
 extern void OOC_Make_TranslateToC__TranslatorDesc_SetWriter(OOC_Make_TranslateToC__Translator t, OOC_C_DeclWriter__Writer w);
@@ -45,9 +47,9 @@ extern void OOC_OOC_Make_TranslateToC_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4390;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4467;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4516;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4451;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4528;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4577;
 #endif /* _MODULE_OOC_Make_TranslateToC_ */
 
 /* --- */

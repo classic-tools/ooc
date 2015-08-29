@@ -12,10 +12,10 @@ static URI__URI OOC_SymbolTable_InterfaceXML__GetSystemId(OOC_Config_Repositorie
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2183 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2279 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2972 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6707 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2183 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2279 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2972 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6707 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SymbolTable:InterfaceXML", (RT0__Struct[]) { NULL } };
 
 extern void OOC_OOC_SymbolTable_InterfaceXML_init0() {

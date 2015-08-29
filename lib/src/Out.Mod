@@ -1,4 +1,4 @@
-(*	$Id: Out.Mod,v 1.6 2002/12/30 09:29:23 mva Exp $	*)
+(*	$Id: Out.Mod,v 1.7 2003/08/03 16:39:37 mva Exp $	*)
 MODULE Out [OOC_EXTENSIONS];
 
 (*
@@ -92,9 +92,9 @@ PROCEDURE ShortInt* (sint: SHORTINT; n: LONGINT);
     writer. WriteSInt (sint, n)
   END ShortInt;
 
-PROCEDURE Int* (int: INTEGER; n: LONGINT);
+PROCEDURE Int* (int: LONGINT; n: LONGINT);
   BEGIN
-    writer. WriteInt (int, n)
+    writer. WriteLInt (int, n)
   END Int;
 
 PROCEDURE Hex* (lint: LONGINT; n: LONGINT);

@@ -1,3 +1,7 @@
+static void* _c0;
+static void* _c1;
+static void* _c2;
+static void* _c3;
 #include <URI.oh>
 #include <CharClass.oh>
 typedef struct URI__ListDesc *URI__List;
@@ -9,22 +13,22 @@ static URI__List URI__schemeList;
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_URI__URI = { (RT0__Struct[]){&_td_URI__URIDesc}, NULL, &_mid, "URI", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__URIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__URIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__URIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML}, &_mid, "URIDesc", 4, 1, RT0__strRecord };
-RT0__StructDesc _td_URI__Authority = { (RT0__Struct[]){&_td_URI__AuthorityDesc}, NULL, &_mid, "Authority", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__AuthorityDesc = { (RT0__Struct[]){&_td_URI__AuthorityDesc}, (void*[]){(void*)URI__AuthorityDesc_Append,(void*)URI__AuthorityDesc_Clone,(void*)URI__AuthorityDesc_Copy,(void*)URI__AuthorityDesc_ParseAuthority,(void*)URI__AuthorityDesc_WriteXML}, &_mid, "AuthorityDesc", 0, 0, RT0__strRecord };
-RT0__StructDesc _td_URI__Query = { (RT0__Struct[]){&_td_URI__QueryDesc}, NULL, &_mid, "Query", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__QueryDesc = { (RT0__Struct[]){&_td_URI__QueryDesc}, (void*[]){(void*)URI__QueryDesc_Append,(void*)URI__QueryDesc_Clone,(void*)URI__QueryDesc_Copy,(void*)URI__QueryDesc_ParseQuery,(void*)URI__QueryDesc_WriteXML}, &_mid, "QueryDesc", 0, 0, RT0__strRecord };
-RT0__StructDesc _td_URI__Fragment = { (RT0__Struct[]){&_td_URI__FragmentDesc}, NULL, &_mid, "Fragment", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__FragmentDesc = { (RT0__Struct[]){&_td_URI__FragmentDesc}, (void*[]){(void*)URI__FragmentDesc_Append,(void*)URI__FragmentDesc_Clone,(void*)URI__FragmentDesc_Copy,(void*)URI__FragmentDesc_ParseFragment,(void*)URI__FragmentDesc_WriteXML}, &_mid, "FragmentDesc", 0, 0, RT0__strRecord };
-RT0__StructDesc _td_URI__HierarchicalURI = { (RT0__Struct[]){&_td_URI__HierarchicalURIDesc}, NULL, &_mid, "HierarchicalURI", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__HierarchicalURIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc,&_td_URI__HierarchicalURIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__HierarchicalURIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__HierarchicalURIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML,(void*)URI__HierarchicalURIDesc_AppendPath,(void*)URI__HierarchicalURIDesc_AuthorityMandatory,(void*)URI__HierarchicalURIDesc_ClearPath,(void*)URI__HierarchicalURIDesc_NewAuthority,(void*)URI__HierarchicalURIDesc_NewQuery,(void*)URI__HierarchicalURIDesc_ParsePath,(void*)URI__HierarchicalURIDesc_ResolveRelative,(void*)URI__HierarchicalURIDesc_SetAuthority,(void*)URI__HierarchicalURIDesc_SetQuery}, &_mid, "HierarchicalURIDesc", 12, 2, RT0__strRecord };
-RT0__StructDesc _td_URI__OpaqueURI = { (RT0__Struct[]){&_td_URI__OpaqueURIDesc}, NULL, &_mid, "OpaqueURI", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__OpaqueURIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc,&_td_URI__OpaqueURIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__URIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__URIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML,(void*)URI__OpaqueURIDesc_ParseOpaquePart}, &_mid, "OpaqueURIDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_URI__Reference = { (RT0__Struct[]){&_td_URI__ReferenceDesc}, NULL, &_mid, "Reference", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__ReferenceDesc = { (RT0__Struct[]){&_td_URI__ReferenceDesc}, (void*[]){(void*)URI__ReferenceDesc_ToString,(void*)URI__ReferenceDesc_WriteXML}, &_mid, "ReferenceDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_URI__List = { (RT0__Struct[]){&_td_URI__ListDesc}, NULL, &_mid, "List", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_URI__ListDesc = { (RT0__Struct[]){&_td_URI__ListDesc}, (void*[]){}, &_mid, "ListDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_URI__URI = { (RT0__Struct[]){&_td_URI__URIDesc}, NULL, NULL, &_mid, "URI", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__URIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__URIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__URIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML}, NULL, &_mid, "URIDesc", 4, 1, RT0__strRecord };
+RT0__StructDesc _td_URI__Authority = { (RT0__Struct[]){&_td_URI__AuthorityDesc}, NULL, NULL, &_mid, "Authority", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__AuthorityDesc = { (RT0__Struct[]){&_td_URI__AuthorityDesc}, (void*[]){(void*)URI__AuthorityDesc_Append,(void*)URI__AuthorityDesc_Clone,(void*)URI__AuthorityDesc_Copy,(void*)URI__AuthorityDesc_ParseAuthority,(void*)URI__AuthorityDesc_WriteXML}, NULL, &_mid, "AuthorityDesc", 0, 0, RT0__strRecord };
+RT0__StructDesc _td_URI__Query = { (RT0__Struct[]){&_td_URI__QueryDesc}, NULL, NULL, &_mid, "Query", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__QueryDesc = { (RT0__Struct[]){&_td_URI__QueryDesc}, (void*[]){(void*)URI__QueryDesc_Append,(void*)URI__QueryDesc_Clone,(void*)URI__QueryDesc_Copy,(void*)URI__QueryDesc_ParseQuery,(void*)URI__QueryDesc_WriteXML}, NULL, &_mid, "QueryDesc", 0, 0, RT0__strRecord };
+RT0__StructDesc _td_URI__Fragment = { (RT0__Struct[]){&_td_URI__FragmentDesc}, NULL, NULL, &_mid, "Fragment", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__FragmentDesc = { (RT0__Struct[]){&_td_URI__FragmentDesc}, (void*[]){(void*)URI__FragmentDesc_Append,(void*)URI__FragmentDesc_Clone,(void*)URI__FragmentDesc_Copy,(void*)URI__FragmentDesc_ParseFragment,(void*)URI__FragmentDesc_WriteXML}, NULL, &_mid, "FragmentDesc", 0, 0, RT0__strRecord };
+RT0__StructDesc _td_URI__HierarchicalURI = { (RT0__Struct[]){&_td_URI__HierarchicalURIDesc}, NULL, NULL, &_mid, "HierarchicalURI", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__HierarchicalURIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc,&_td_URI__HierarchicalURIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__HierarchicalURIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__HierarchicalURIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML,(void*)URI__HierarchicalURIDesc_AppendPath,(void*)URI__HierarchicalURIDesc_AuthorityMandatory,(void*)URI__HierarchicalURIDesc_ClearPath,(void*)URI__HierarchicalURIDesc_NewAuthority,(void*)URI__HierarchicalURIDesc_NewQuery,(void*)URI__HierarchicalURIDesc_ParsePath,(void*)URI__HierarchicalURIDesc_ResolveRelative,(void*)URI__HierarchicalURIDesc_SetAuthority,(void*)URI__HierarchicalURIDesc_SetQuery}, NULL, &_mid, "HierarchicalURIDesc", 12, 2, RT0__strRecord };
+RT0__StructDesc _td_URI__OpaqueURI = { (RT0__Struct[]){&_td_URI__OpaqueURIDesc}, NULL, NULL, &_mid, "OpaqueURI", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__OpaqueURIDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_URI__URIDesc,&_td_URI__OpaqueURIDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)URI__URIDesc_ToString,(void*)URI__URIDesc_AppendScheme,(void*)URI__URIDesc_Clone,(void*)URI__URIDesc_Copy,(void*)URI__URIDesc_GetChannel,(void*)URI__URIDesc_MakeRelative,(void*)URI__URIDesc_SetSchemeId,(void*)URI__URIDesc_WriteXML,(void*)URI__OpaqueURIDesc_ParseOpaquePart}, NULL, &_mid, "OpaqueURIDesc", 4, 2, RT0__strRecord };
+RT0__StructDesc _td_URI__Reference = { (RT0__Struct[]){&_td_URI__ReferenceDesc}, NULL, NULL, &_mid, "Reference", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__ReferenceDesc = { (RT0__Struct[]){&_td_URI__ReferenceDesc}, (void*[]){(void*)URI__ReferenceDesc_ToString,(void*)URI__ReferenceDesc_WriteXML}, NULL, &_mid, "ReferenceDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_URI__List = { (RT0__Struct[]){&_td_URI__ListDesc}, NULL, NULL, &_mid, "List", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_URI__ListDesc = { (RT0__Struct[]){&_td_URI__ListDesc}, (void*[]){}, NULL, &_mid, "ListDesc", 8, 0, RT0__strRecord };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"URI", (RT0__Struct[]) { &_td_URI__URI, &_td_URI__URIDesc, &_td_URI__Authority, &_td_URI__AuthorityDesc, &_td_URI__Query, &_td_URI__QueryDesc, &_td_URI__Fragment, &_td_URI__FragmentDesc, &_td_URI__HierarchicalURI, &_td_URI__HierarchicalURIDesc, &_td_URI__OpaqueURI, &_td_URI__OpaqueURIDesc, &_td_URI__Reference, &_td_URI__ReferenceDesc, &_td_URI__List, &_td_URI__ListDesc, NULL } };
 
 extern void OOC_URI_init0() {
@@ -32,8 +36,4 @@ extern void OOC_URI_init0() {
   OOC_URI_init();
 }
 
-static void* _c0;
-static void* _c1;
-static void* _c2;
-static void* _c3;
 /* --- */

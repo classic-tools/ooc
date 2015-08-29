@@ -5,10 +5,10 @@ IMPORT
   OOC:Config, OOC:Config:Pragmas, OOC:Repository,
   
   OOC:Error, OOC:Scanner:InputBuffer, 
-  OOC:Scanner, OOC:Scanner:BasicList,
-  OOC:Parser, OOC:AST, OOC:AST:ExtTree,
+  OOC:Scanner, OOC:Scanner:SymList,
+  OOC:Parser, OOC:AST,
   Sym := OOC:SymbolTable, OOC:SymbolTable:Builder, OOC:SymbolTable:Uses,
-  OOC:AST:ExtTree:CreateSymTab, OOC:SymbolTable:CreateNamespace,
+  OOC:AST:CreateSymTab, OOC:SymbolTable:CreateNamespace,
   OOC:Auxiliary:WriteSymbolFile;
   
 
@@ -41,8 +41,8 @@ RAISES IO.Error;
    *)
   VAR
     inputBuffer: InputBuffer.Buffer;
-    scannerBuilder: BasicList.Builder;
-    astBuilder: ExtTree.Builder;
+    scannerBuilder: SymList.Builder;
+    astBuilder: AST.Builder;
     stb: Builder.Builder;
     uri: URI.URI;
     scannerFlags, parserFlags: SET;
@@ -56,7 +56,7 @@ RAISES IO.Error;
       errList := Error.NewList(uri.ToString());
     ELSE
       errList := inputBuffer. errList;
-      scannerBuilder := BasicList.New (inputBuffer, TRUE);
+      scannerBuilder := SymList.New (inputBuffer, TRUE);
       scannerFlags := Scanner.enableAll;
       IF abortAfterImport THEN
         INCL(scannerFlags, Scanner.abortAtDeclarations);
@@ -67,7 +67,7 @@ RAISES IO.Error;
       
       ast := NIL;
       IF errList.NoErrors() THEN
-        astBuilder := ExtTree.New();
+        astBuilder := AST.New();
         IF checkModuleName THEN
           astBuilder. SetModuleName (m. name^)
         END;

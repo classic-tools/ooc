@@ -1,4 +1,4 @@
-(* 	$Id: Builder.Mod,v 1.53 2003/07/07 07:42:24 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.55 2003/08/26 14:05:21 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
     Copyright (C) 2000-2003  Michael van Acken

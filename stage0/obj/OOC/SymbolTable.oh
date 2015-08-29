@@ -13,7 +13,7 @@
 #include <IO.oh>
 #include <URI.oh>
 #include <OOC/Scanner/InputBuffer.oh>
-#include <OOC/Scanner/Builder.oh>
+#include <OOC/Scanner/SymList.oh>
 #include <OOC/Doc.oh>
 #include <OOC/AST.oh>
 #include <RT0.oh>
@@ -1104,11 +1104,11 @@ extern RT0__StructDesc _td_OOC_SymbolTable__TypeNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Pointer;
 extern RT0__StructDesc _td_OOC_SymbolTable__PointerDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionName;
-extern RT0__StructDesc _td_OOC_SymbolTable__22618;
+extern RT0__StructDesc _td_OOC_SymbolTable__22610;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDecl;
-extern RT0__StructDesc _td_OOC_SymbolTable__23236;
+extern RT0__StructDesc _td_OOC_SymbolTable__23228;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDeclArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalPars;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalParsDesc;
@@ -1119,7 +1119,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__RecordDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeVarDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__QualType;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeRef;
-extern RT0__StructDesc _td_OOC_SymbolTable__32443;
+extern RT0__StructDesc _td_OOC_SymbolTable__32435;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeRefArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__QualTypeDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeClosure;
@@ -1135,13 +1135,13 @@ extern RT0__StructDesc _td_OOC_SymbolTable__FieldDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Redirect;
 extern RT0__StructDesc _td_OOC_SymbolTable__RedirectDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__43025;
-extern RT0__StructDesc _td_OOC_SymbolTable__43014;
+extern RT0__StructDesc _td_OOC_SymbolTable__43010;
+extern RT0__StructDesc _td_OOC_SymbolTable__42999;
 extern RT0__StructDesc _td_OOC_SymbolTable__Writer;
 extern RT0__StructDesc _td_OOC_SymbolTable__WriterDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Reader;
 extern RT0__StructDesc _td_OOC_SymbolTable__ReaderDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__61693;
+extern RT0__StructDesc _td_OOC_SymbolTable__61678;
 #endif /* _MODULE_OOC_SymbolTable_ */
 
 /* --- */

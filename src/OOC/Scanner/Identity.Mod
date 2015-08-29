@@ -1,4 +1,4 @@
-(* 	$Id: Identity.Mod,v 1.1 2003/04/16 10:32:35 mva Exp $	 *)
+(* 	$Id: Identity.Mod,v 1.2 2003/08/24 00:03:57 mva Exp $	 *)
 MODULE OOC:Scanner:Identity;
 (*  Passes string representation of scanned symbols to output channel.
     Copyright (C) 2000  Michael van Acken
@@ -29,7 +29,7 @@ the builder.  *)
 
 IMPORT
   Channel, OOC:Scanner:Symbol, OOC:Scanner:InputBuffer, 
-  B := OOC:Scanner:Builder;
+  B := OOC:Scanner:SymList;
 
 TYPE
   Builder* = POINTER TO BuilderDesc;
@@ -41,7 +41,7 @@ TYPE
 
 PROCEDURE Init* (b: Builder; buffer: InputBuffer.Buffer; ch: Channel.Channel);
   BEGIN
-    B.Init (b, buffer);
+    B.Init (b, buffer, TRUE);
     b. writer := ch. NewWriter ()
   END Init;
 

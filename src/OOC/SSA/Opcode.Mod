@@ -1,4 +1,4 @@
-(* 	$Id: Opcode.Mod,v 1.101 2003/07/15 18:49:04 mva Exp $	 *)
+(* 	$Id: Opcode.Mod,v 1.102 2003/09/02 19:49:36 mva Exp $	 *)
 MODULE OOC:SSA:Opcode;
 (*  This modules defines opcodes for SSA instructions.
     Copyright (C) 2001-2003  Michael van Acken
@@ -52,7 +52,7 @@ CONST
   address* = 3;
   (**Denotes the address of a declared object, for example of a variable or a
      procedures.  Instance of @otype{*OOC:SSA.Address}.  Takes no SSA operands.
-     The object can be found in @ofield{*OOC:SSA.Address.decl}.  This
+     The object can be found in @ofield{*OOC:SSA.AddressDesc.decl}.  This
      instruction produces a value of type address.  *)
   
   enter* = 4;

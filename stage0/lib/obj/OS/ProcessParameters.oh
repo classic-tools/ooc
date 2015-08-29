@@ -11,6 +11,7 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern Object__String OS_ProcessParameters__GetCwd(void);
+extern Object__String OS_ProcessParameters__GetEnv(Object__String name);
 extern void OOC_OS_ProcessParameters_init(void);
 extern void OOC_OS_ProcessParameters_init0(void);
 

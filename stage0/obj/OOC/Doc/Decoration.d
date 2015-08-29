@@ -12,14 +12,14 @@ typedef struct OOC_Doc_Decoration__DotLineIndentDesc {
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Doc_Decoration__Decoration = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc}, NULL, &_mid, "Decoration", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Doc_Decoration__DecorationDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc}, (void*[]){(void*)OOC_Doc_Decoration__DecorationDesc_Decorate}, &_mid, "DecorationDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Decoration__PlainIndent = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__PlainIndentDesc}, NULL, &_mid, "PlainIndent", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Doc_Decoration__PlainIndentDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc,&_td_OOC_Doc_Decoration__PlainIndentDesc}, (void*[]){(void*)OOC_Doc_Decoration__PlainIndentDesc_Decorate}, &_mid, "PlainIndentDesc", 12, 1, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Decoration__DotLineIndent = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DotLineIndentDesc}, NULL, &_mid, "DotLineIndent", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Doc_Decoration__DotLineIndentDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc,&_td_OOC_Doc_Decoration__PlainIndentDesc,&_td_OOC_Doc_Decoration__DotLineIndentDesc}, (void*[]){(void*)OOC_Doc_Decoration__PlainIndentDesc_Decorate}, &_mid, "DotLineIndentDesc", 12, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_Decoration__1941 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Doc_Decoration__7691 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 4, 4, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_Decoration__Decoration = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc}, NULL, NULL, &_mid, "Decoration", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Doc_Decoration__DecorationDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc}, (void*[]){(void*)OOC_Doc_Decoration__DecorationDesc_Decorate}, NULL, &_mid, "DecorationDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_Doc_Decoration__PlainIndent = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__PlainIndentDesc}, NULL, NULL, &_mid, "PlainIndent", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Doc_Decoration__PlainIndentDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc,&_td_OOC_Doc_Decoration__PlainIndentDesc}, (void*[]){(void*)OOC_Doc_Decoration__PlainIndentDesc_Decorate}, NULL, &_mid, "PlainIndentDesc", 12, 1, RT0__strRecord };
+RT0__StructDesc _td_OOC_Doc_Decoration__DotLineIndent = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DotLineIndentDesc}, NULL, NULL, &_mid, "DotLineIndent", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Doc_Decoration__DotLineIndentDesc = { (RT0__Struct[]){&_td_OOC_Doc_Decoration__DecorationDesc,&_td_OOC_Doc_Decoration__PlainIndentDesc,&_td_OOC_Doc_Decoration__DotLineIndentDesc}, (void*[]){(void*)OOC_Doc_Decoration__PlainIndentDesc_Decorate}, NULL, &_mid, "DotLineIndentDesc", 12, 2, RT0__strRecord };
+RT0__StructDesc _td_OOC_Doc_Decoration__1937 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Doc_Decoration__7687 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 4, 4, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Doc:Decoration", (RT0__Struct[]) { &_td_OOC_Doc_Decoration__Decoration, &_td_OOC_Doc_Decoration__DecorationDesc, &_td_OOC_Doc_Decoration__PlainIndent, &_td_OOC_Doc_Decoration__PlainIndentDesc, &_td_OOC_Doc_Decoration__DotLineIndent, &_td_OOC_Doc_Decoration__DotLineIndentDesc, NULL } };
 
 extern void OOC_OOC_Doc_Decoration_init0() {

@@ -1,3 +1,10 @@
+static void* _c0;
+static void* _c1;
+static void* _c2;
+static void* _c3;
+static void* _c4;
+static void* _c5;
+static void* _c6;
 #include <OOC/Config.oh>
 #include <RT0.oh>
 #include <Config/Source/CmdLine.oh>
@@ -18,7 +25,7 @@ static void OOC_Config__InitConfig(Object__String8 defaultConfigFile);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Config__990 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config__990 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config", (RT0__Struct[]) { NULL } };
 
 extern void OOC_OOC_Config_init0() {
@@ -26,11 +33,4 @@ extern void OOC_OOC_Config_init0() {
   OOC_OOC_Config_init();
 }
 
-static void* _c0;
-static void* _c1;
-static void* _c2;
-static void* _c3;
-static void* _c4;
-static void* _c5;
-static void* _c6;
 /* --- */

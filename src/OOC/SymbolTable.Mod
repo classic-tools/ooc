@@ -1,4 +1,4 @@
-(* 	$Id: SymbolTable.Mod,v 1.109 2003/08/01 08:59:10 mva Exp $	 *)
+(* 	$Id: SymbolTable.Mod,v 1.114 2003/08/26 14:05:22 mva Exp $	 *)
 MODULE OOC:SymbolTable [OOC_EXTENSIONS];
 (*  Defines structure and entries of the symbol table.
     Copyright (C) 2000-2003  Michael van Acken
@@ -24,7 +24,7 @@ IMPORT
   Object, Object:Boxed, Exception, Strings, ADT:Dictionary:AddressKey,
   ADT:Dictionary, ADT:Storable, ADT:ArrayList, ADT:Object:Storage, IO,
   URI, ParserURI := URI:Parser, URI:Scheme:File,
-  OOC:Scanner:InputBuffer, SB := OOC:Scanner:Builder, OOC:Doc, OOC:AST;
+  OOC:Scanner:InputBuffer, SB := OOC:Scanner:SymList, OOC:Doc, OOC:AST;
 
 TYPE
   NameString* = InputBuffer.CharArray;
@@ -440,7 +440,7 @@ TYPE
        field is not part of the fingerprinted area of the symbol file.  *)
     moduleAST-: AST.Node;
     (**Refers to the abstract syntax tree of the module, for example an
-       instance of @otype{*OOC:AST:ExtTree.Module}.  *)
+       instance of @otype{*OOC:AST.Module}.  *)
     bodyDecl-: ProcDecl;
     (**This pseudo declaration is used to turn the statement sequence in the
        module body into a fully fledged procedure declaration.  It's name
@@ -687,7 +687,7 @@ TYPE
        definition, then this field is not @code{NIL}.  In this case, it
        points to the name of the class, typically the name of the pointer
        type that has this record as its base type.  This field is filled
-       in by @oproc{*OOC:SymbolTable:Builder.Finalize}.
+       in by @oproc{*OOC:SymbolTable:SymList.Finalize}.
        
        A record is classified as a @samp{class} if it is the base type of a
        pointer type declaration, or if it is an extension of another record,
@@ -763,7 +763,7 @@ TYPE
     (TypeDesc)
     baseType-: Type;
     params: TypeVarArray;
-    arguments: TypeRefArray;
+    arguments-: TypeRefArray;
   END;
 
 VAR
@@ -825,7 +825,7 @@ TYPE
        the procedure on the link level.  Otherwise, it is @code{NIL}.  *)
     procAST-: AST.Node;
     (**Refers to the abstract syntax tree of the procedure, for example an
-       instance of @otype{*OOC:AST:ExtTree.ProcDecl}.  For the pseudo procedure
+       instance of @otype{*OOC:AST.ProcDecl}.  For the pseudo procedure
        representing the module body, this field is @code{NIL}.  In this case,
        the field @ofield{parent} is also @code{NIL}.  *)
     hasTryStatm*: BOOLEAN;

@@ -1,4 +1,4 @@
-(*	$Id: RegexpDFA.Mod,v 1.4 2002/12/20 17:48:07 mva Exp $	*)
+(*	$Id: RegexpDFA.Mod,v 1.5 2003/08/02 07:27:19 mva Exp $	*)
 MODULE StringSearch:RegexpDFA [OOC_EXTENSIONS];
 (*  DFA based regular expression matcher.
     Copyright (C) 2001  Michael van Acken
@@ -347,6 +347,7 @@ PROCEDURE BuildDFA (regexp: Regexp.Group): Node;
     IF (regexp = NIL) THEN
       RETURN NIL
     ELSE
+      dummy := NIL;
       BuildGroup (regexp, initialState, dummy, NIL);
       Minimize (initialState);
       RETURN initialState
@@ -546,6 +547,7 @@ PROCEDURE Match (matcher: Matcher;
   BEGIN
     first := NIL;
     last := NIL;
+    deScanState := NIL;
     Put (scanState);
     deScanState := last;
     UnmarkNode (matcher. initialState);

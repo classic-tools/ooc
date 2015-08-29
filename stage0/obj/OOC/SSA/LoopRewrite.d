@@ -152,27 +152,27 @@ static void OOC_SSA_LoopRewrite__InstallEquivCE(OOC_SSA__ProcBlock pb, OOC_SSA__
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__Worklist = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__WorklistDesc}, NULL, &_mid, "Worklist", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__WorklistDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__WorklistDesc}, (void*[]){}, &_mid, "WorklistDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__Sum = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__SumDesc}, NULL, &_mid, "Sum", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__2107 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__Sum}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__Factors = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__2107}, NULL, &_mid, "Factors", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__Product = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__ProductDesc}, NULL, &_mid, "Product", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__ProductDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__ProductDesc}, (void*[]){}, &_mid, "ProductDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__PList = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__PListDesc}, NULL, &_mid, "PList", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__PListDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__PListDesc}, (void*[]){}, &_mid, "PListDesc", 8, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__2914 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__Product}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__2903 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__2914}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__CycleElement = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__CycleElementDesc}, NULL, &_mid, "CycleElement", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__SumDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, &_mid, "SumDesc", 48, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__InductionCycle = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__InductionCycleDesc}, NULL, &_mid, "InductionCycle", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__CycleElementDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc,&_td_OOC_SSA_LoopRewrite__CycleElementDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, &_mid, "CycleElementDesc", 84, 3, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__5545 = { (RT0__Struct[]){&RT0__longint}, NULL, &_mid, NULL, 20, 5, RT0__strArray };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__RewrittenCycle = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__RewrittenCycleDesc}, NULL, &_mid, "RewrittenCycle", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__RewrittenCycleDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__RewrittenCycleDesc}, (void*[]){}, &_mid, "RewrittenCycleDesc", 20, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__5879 = { (RT0__Struct[]){&_td_OOC_SSA__Result}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__5868 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__5879}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_LoopRewrite__InductionCycleDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc,&_td_OOC_SSA_LoopRewrite__CycleElementDesc,&_td_OOC_SSA_LoopRewrite__InductionCycleDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, &_mid, "InductionCycleDesc", 92, 4, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__Worklist = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__WorklistDesc}, NULL, NULL, &_mid, "Worklist", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__WorklistDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__WorklistDesc}, (void*[]){}, NULL, &_mid, "WorklistDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__Sum = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__SumDesc}, NULL, NULL, &_mid, "Sum", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__2107 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__Sum}, NULL, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__Factors = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__2107}, NULL, NULL, &_mid, "Factors", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__Product = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__ProductDesc}, NULL, NULL, &_mid, "Product", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__ProductDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__ProductDesc}, (void*[]){}, NULL, &_mid, "ProductDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__PList = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__PListDesc}, NULL, NULL, &_mid, "PList", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__PListDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__PListDesc}, (void*[]){}, NULL, &_mid, "PListDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__2914 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__Product}, NULL, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__2903 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__2914}, NULL, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__CycleElement = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__CycleElementDesc}, NULL, NULL, &_mid, "CycleElement", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__SumDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, NULL, &_mid, "SumDesc", 48, 2, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__InductionCycle = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__InductionCycleDesc}, NULL, NULL, &_mid, "InductionCycle", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__CycleElementDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc,&_td_OOC_SSA_LoopRewrite__CycleElementDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, NULL, &_mid, "CycleElementDesc", 84, 3, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__5545 = { (RT0__Struct[]){&RT0__longint}, NULL, NULL, &_mid, NULL, 20, 5, RT0__strArray };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__RewrittenCycle = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__RewrittenCycleDesc}, NULL, NULL, &_mid, "RewrittenCycle", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__RewrittenCycleDesc = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__RewrittenCycleDesc}, (void*[]){}, NULL, &_mid, "RewrittenCycleDesc", 20, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__5879 = { (RT0__Struct[]){&_td_OOC_SSA__Result}, NULL, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__5868 = { (RT0__Struct[]){&_td_OOC_SSA_LoopRewrite__5879}, NULL, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_SSA_LoopRewrite__InductionCycleDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_LoopRewrite__SumDesc,&_td_OOC_SSA_LoopRewrite__CycleElementDesc,&_td_OOC_SSA_LoopRewrite__InductionCycleDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, NULL, &_mid, "InductionCycleDesc", 92, 4, RT0__strRecord };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SSA:LoopRewrite", (RT0__Struct[]) { &_td_OOC_SSA_LoopRewrite__Worklist, &_td_OOC_SSA_LoopRewrite__WorklistDesc, &_td_OOC_SSA_LoopRewrite__Sum, &_td_OOC_SSA_LoopRewrite__Factors, &_td_OOC_SSA_LoopRewrite__Product, &_td_OOC_SSA_LoopRewrite__ProductDesc, &_td_OOC_SSA_LoopRewrite__PList, &_td_OOC_SSA_LoopRewrite__PListDesc, &_td_OOC_SSA_LoopRewrite__CycleElement, &_td_OOC_SSA_LoopRewrite__SumDesc, &_td_OOC_SSA_LoopRewrite__InductionCycle, &_td_OOC_SSA_LoopRewrite__CycleElementDesc, &_td_OOC_SSA_LoopRewrite__RewrittenCycle, &_td_OOC_SSA_LoopRewrite__RewrittenCycleDesc, &_td_OOC_SSA_LoopRewrite__InductionCycleDesc, NULL } };
 
 extern void OOC_OOC_SSA_LoopRewrite_init0() {

@@ -1,4 +1,4 @@
-(* 	$Id: CCompiler.Mod,v 1.32 2003/05/19 22:56:49 mva Exp $	 *)
+(* 	$Id: CCompiler.Mod,v 1.33 2003/08/02 07:25:56 mva Exp $	 *)
 MODULE OOC:Config:CCompiler;
 (*  Generates command lines for the C compiler and linker.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -33,6 +33,13 @@ PROCEDURE HaveLibtool*(): BOOLEAN;
   BEGIN
     RETURN ~libtool.value(CfgData.StringVar).string.Equals("no");
   END HaveLibtool;
+
+PROCEDURE SkipCallCC*(): BOOLEAN;
+(**Return @code{TRUE} if this ``make'' run should skip all calls to the
+   external C compiler.  *)
+  BEGIN
+    RETURN (cc.value(CfgData.StringVar).string.length = 0);
+  END SkipCallCC;
 
 PROCEDURE SetCommand(mode: STRING): StringBuffer.StringBuffer;
   VAR

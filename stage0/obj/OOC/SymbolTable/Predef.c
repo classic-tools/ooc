@@ -340,7 +340,7 @@ OOC_CHAR8 OOC_SymbolTable_Predef__IsStaticMethod(const OOC_CHAR8 name__ref[], OO
 static void OOC_SymbolTable_Predef__Init(void) {
   register OOC_INT32 i0,i1;
 
-  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__43014.baseTypes[0], 18));
+  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__42999.baseTypes[0], 18));
   i0=0;
 l1_loop:
   *(OOC_INT32*)((OOC_INT32)OOC_SymbolTable_Predef__minConst+(_check_index(i0, 18, OOC_UINT32, 15135))*4) = (OOC_INT32)0;

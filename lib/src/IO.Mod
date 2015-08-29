@@ -1,4 +1,4 @@
-(*	$Id: IO.Mod,v 1.12 2003/06/04 22:36:16 mva Exp $	*)
+(*	$Id: IO.Mod,v 1.13 2003/08/03 12:18:44 mva Exp $	*)
 MODULE IO;
 (*  Defines common behaviour of I/O channel and selector.
     Copyright (C) 2003  Michael van Acken
@@ -181,7 +181,7 @@ TYPE
     (ErrorDesc) 
   END;
   ProtocolError* = POINTER TO ProtocolErrorDesc;
-  ProtocolErrorDesc = RECORD
+  ProtocolErrorDesc* = RECORD
   (**Raised if malformed data is received from the remote side of a
      conversation.  This is @emph{not} used for responses that indicate failure
      to process a request.  An example for a protocol error is an NNTP response

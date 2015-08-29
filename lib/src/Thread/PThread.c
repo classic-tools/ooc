@@ -21,7 +21,7 @@ void Thread_PThread__ErrorDesc_INIT(Thread_PThread__Error e, Object__String msg,
   e->errorCode = errorCode;
 }
 
-static void check_error(int errorCode, int fatal) {
+void Thread_PThread__CheckError(OOC_INT32 errorCode, OOC_BOOLEAN fatal) {
   if (errorCode) {
     Exception__Exception e;
     char buffer[64];
@@ -38,6 +38,8 @@ static void check_error(int errorCode, int fatal) {
       str = "Deadlock (EDEADLK)";
     case EBUSY:
       str = "Resource in use (EBUSY)";
+    case ENOSYS:
+      str = "Not supported (ENOSYS)";
     default:
       sprintf(buffer, "Unknown error code (%i)", errorCode);
       str = buffer;
@@ -90,13 +92,13 @@ void Thread_PThread__ThreadDesc_Start(Thread_PThread__Thread t) {
   pthread_sigmask(SIG_BLOCK, &newmask, &oldmask);
   rc = pthread_create((pthread_t*)&t->thread, NULL, start, t);
   pthread_sigmask(SIG_SETMASK, &oldmask, NULL);
-  check_error(rc, OOC_FALSE);
+  Thread_PThread__CheckError(rc, OOC_FALSE);
 }
 
 void Thread_PThread__ThreadDesc_Join(Thread_PThread__Thread t) {
   void *exit_code;
   
-  check_error(pthread_join((pthread_t)t->thread, &exit_code), OOC_FALSE);
+  Thread_PThread__CheckError(pthread_join((pthread_t)t->thread, &exit_code), OOC_FALSE);
 }
 
 #define THIS_THREAD ((Thread_PThread__Thread)pthread_getspecific(threadobj_key))
@@ -112,15 +114,25 @@ void Thread_PThread__MutexDesc_INIT(Thread_PThread__Mutex m) {
 }
 
 void Thread_PThread__MutexDesc_Lock(Thread_PThread__Mutex m) {
-  check_error(pthread_mutex_lock((pthread_mutex_t*)m->mutex), OOC_TRUE);
+  Thread_PThread__CheckError(pthread_mutex_lock((pthread_mutex_t*)m->mutex), OOC_TRUE);
+}
+
+OOC_BOOLEAN Thread_PThread__MutexDesc_TryLock(Thread_PThread__Mutex m) {
+  int res;
+
+  res = pthread_mutex_trylock((pthread_mutex_t*)m->mutex);
+  if (res && (res != EBUSY)) {
+    Thread_PThread__CheckError(res, OOC_TRUE);
+  }
+  return (res == 0);
 }
 
 void Thread_PThread__MutexDesc_Unlock(Thread_PThread__Mutex m) {
-  check_error(pthread_mutex_unlock((pthread_mutex_t*)m->mutex), OOC_TRUE);
+  Thread_PThread__CheckError(pthread_mutex_unlock((pthread_mutex_t*)m->mutex), OOC_TRUE);
 }
 
 void Thread_PThread__MutexDesc_Destroy(Thread_PThread__Mutex m) {
-  check_error(pthread_mutex_destroy((pthread_mutex_t*)m->mutex), OOC_TRUE);
+  Thread_PThread__CheckError(pthread_mutex_destroy((pthread_mutex_t*)m->mutex), OOC_TRUE);
   m->mutex = NULL;
 }
 
@@ -171,7 +183,7 @@ OOC_BOOLEAN Thread_PThread__ConditionDesc_TimedWait(Thread_PThread__Condition c,
 }
 
 void Thread_PThread__ConditionDesc_Destroy(Thread_PThread__Condition c) {
-  check_error(pthread_cond_destroy((pthread_cond_t*)c->cond), OOC_TRUE);
+  Thread_PThread__CheckError(pthread_cond_destroy((pthread_cond_t*)c->cond), OOC_TRUE);
   c->cond = NULL;
 }
 

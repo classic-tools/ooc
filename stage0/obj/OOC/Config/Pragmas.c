@@ -18,7 +18,7 @@ OOC_Config_Pragmas__Section OOC_Config_Pragmas__New(void) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Config_Pragmas__Section.baseTypes[0]);
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_Dictionary__Dictionary.baseTypes[0]);
+  i1 = (OOC_INT32)RT0__NewObject(_td__qtd1.baseTypes[0]);
   ADT_Dictionary__DictionaryDesc_INIT((ADT_Dictionary__Dictionary)i1);
   i2 = (OOC_INT32)Config__NewBooleanVar(0u);
   Config__SetPrototype((ADT_Dictionary__Dictionary)i1, (Object__String)((OOC_INT32)_c0), (Config__Variable)i2);

@@ -1,4 +1,4 @@
-/*	$Id: HashCode.c,v 1.1 2003/05/30 16:06:40 mva Exp $	*/
+/*	$Id: HashCode.c,v 1.2 2003/08/14 21:19:43 mva Exp $	*/
 /*  Hash functions for basic types.
     Copyright (C) 2003  Michael van Acken
 
@@ -53,7 +53,7 @@ HashCode__Hash HashCode__Set(OOC_UINT32 x) {
 
 HashCode__Hash HashCode__Ptr(void* x) {
   if (SIZE_OF_HASH(x)) {
-    return AS_HASH(x);
+    return AS_HASH(x);  /* this causes a warning on 64 bit systems */
   } else {
     union {
       void* ptr;

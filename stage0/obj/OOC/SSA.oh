@@ -222,9 +222,9 @@ typedef void (*_TBP_OOC_SSA__ResultDesc_LogId)(OOC_SSA__Result result, const OOC
 extern void OOC_SSA__InstrDesc_SetSubclass(OOC_SSA__Instr instr, OOC_INT8 subclass);
 #define _TBN_OOC_SSA__InstrDesc_SetSubclass 38
 typedef void (*_TBP_OOC_SSA__InstrDesc_SetSubclass)(OOC_SSA__Instr instr, OOC_INT8 subclass);
-extern void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_BasicList__Symbol sym);
+extern void OOC_SSA__InstrDesc_SetPos(OOC_SSA__Instr instr, OOC_Scanner_SymList__Symbol sym);
 #define _TBN_OOC_SSA__InstrDesc_SetPos 37
-typedef void (*_TBP_OOC_SSA__InstrDesc_SetPos)(OOC_SSA__Instr instr, OOC_Scanner_BasicList__Symbol sym);
+typedef void (*_TBP_OOC_SSA__InstrDesc_SetPos)(OOC_SSA__Instr instr, OOC_Scanner_SymList__Symbol sym);
 extern void OOC_SSA__InstrDesc_AddOpnd(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);
 #define _TBN_OOC_SSA__InstrDesc_AddOpnd 9
 typedef void (*_TBP_OOC_SSA__InstrDesc_AddOpnd)(OOC_SSA__Instr instr, OOC_SSA__Result arg, OOC_INT8 _class);

@@ -1,4 +1,4 @@
-(*	$Id: Dictionary.Mod,v 1.14 2003/07/06 11:31:41 mva Exp $	*)
+(*	$Id: Dictionary.Mod,v 1.15 2003/08/03 12:18:29 mva Exp $	*)
 MODULE ADT:Dictionary;
 (*  A dictionary implementation using objects' HashCode() as keys.
     Copyright (C) 2000, 2001, 2003  Michael van Acken
@@ -67,6 +67,11 @@ TYPE
     value: V;
   END;
   Table(K: Key; V: Value) = POINTER TO ARRAY OF Entry(K, V);
+  Item*(K: Key; V: Value) = RECORD
+    key*: K;
+    value*: V;
+  END;
+  ItemArrayPtr*(K: Key; V: Value) = POINTER TO ARRAY OF Item(K, V);
 
 TYPE
   Dictionary*(K: Key; V: Value) = POINTER TO DictionaryDesc(K, V);
@@ -435,6 +440,26 @@ PROCEDURE (dict: Dictionary(K, V)) Values* (): Object.ObjectArrayPtr(V);
     ASSERT (j = dict. used);
     RETURN list
   END Values;
+
+PROCEDURE (dict: Dictionary(K, V)) Items*(): ItemArrayPtr(K, V);
+(**Returns the list of items of the dictionary @oparam{dict}.  The items are
+   listed in no particular order.  *)
+  VAR
+    list: ItemArrayPtr(K, V);
+    i, j: LONGINT;
+  BEGIN
+    NEW (list, dict.used);
+    j := 0;
+    FOR i := 0 TO dict.size-1 DO
+      IF IsSet (dict.table[i].key) THEN
+        list[j].key := dict.table[i].key;
+        list[j].value := dict.table[i].value;
+        INC(j);
+      END;
+    END;
+    ASSERT(j = dict.used);
+    RETURN list;
+  END Items;
 
 
 PROCEDURE (dict: Dictionary(K, V)) Equals* (obj: Object.Object): BOOLEAN;

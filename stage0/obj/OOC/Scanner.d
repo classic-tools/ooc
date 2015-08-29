@@ -18,15 +18,15 @@ static void OOC_Scanner__InitKeywords(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Scanner__2939 = { (RT0__Struct[]){&_td_OOC_Scanner_InputBuffer__CharArray}, NULL, &_mid, NULL, 8, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Scanner__2922 = { (RT0__Struct[]){&_td_OOC_Scanner__2939}, NULL, &_mid, NULL, 2048, 256, RT0__strArray };
-RT0__StructDesc _td_OOC_Scanner__3045 = { (RT0__Struct[]){&RT0__shortint}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Scanner__3028 = { (RT0__Struct[]){&_td_OOC_Scanner__3045}, NULL, &_mid, NULL, 512, 256, RT0__strArray };
-RT0__StructDesc _td_OOC_Scanner__ErrorContext = { (RT0__Struct[]){&_td_OOC_Scanner__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Scanner__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Scanner__ErrorContextDesc}, (void*[]){(void*)OOC_Scanner__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Scanner__3717 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Scanner__7822 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Scanner__22012 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Scanner__2940 = { (RT0__Struct[]){&_td_OOC_Scanner_InputBuffer__CharArray}, NULL, NULL, &_mid, NULL, 8, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Scanner__2923 = { (RT0__Struct[]){&_td_OOC_Scanner__2940}, NULL, NULL, &_mid, NULL, 2048, 256, RT0__strArray };
+RT0__StructDesc _td_OOC_Scanner__3046 = { (RT0__Struct[]){&RT0__shortint}, NULL, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Scanner__3029 = { (RT0__Struct[]){&_td_OOC_Scanner__3046}, NULL, NULL, &_mid, NULL, 512, 256, RT0__strArray };
+RT0__StructDesc _td_OOC_Scanner__ErrorContext = { (RT0__Struct[]){&_td_OOC_Scanner__ErrorContextDesc}, NULL, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Scanner__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Scanner__ErrorContextDesc}, (void*[]){(void*)OOC_Scanner__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, NULL, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
+RT0__StructDesc _td_OOC_Scanner__3718 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Scanner__7823 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Scanner__22013 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Scanner", (RT0__Struct[]) { &_td_OOC_Scanner__ErrorContext, &_td_OOC_Scanner__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Scanner_init0() {

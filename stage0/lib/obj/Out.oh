@@ -20,7 +20,7 @@ extern void Out__Object(Object__Object obj);
 extern void Out__Bool(OOC_CHAR8 _bool);
 extern void Out__LongInt(OOC_INT32 lint, OOC_INT32 n);
 extern void Out__ShortInt(OOC_INT8 sint, OOC_INT32 n);
-extern void Out__Int(OOC_INT16 _int, OOC_INT32 n);
+extern void Out__Int(OOC_INT32 _int, OOC_INT32 n);
 extern void Out__Hex(OOC_INT32 lint, OOC_INT32 n);
 extern void Out__LongReal(OOC_REAL64 lreal, OOC_INT32 n, OOC_INT32 k);
 extern void Out__Real(OOC_REAL32 real, OOC_INT32 n, OOC_INT32 k);

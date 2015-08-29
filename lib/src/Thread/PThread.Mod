@@ -1,4 +1,4 @@
-(* 	$Id: PThread.Mod,v 1.2 2003/07/21 19:23:29 mva Exp $	 *)
+(* 	$Id: PThread.Mod,v 1.6 2003/08/14 21:19:43 mva Exp $	 *)
 MODULE Thread:PThread [FOREIGN "C"; LINK LIB "pthread"; FILE "PThread.c" END];
 (*  Interface for ths POSIX threads library.
     Copyright (C) 2003  Michael van Acken
@@ -48,6 +48,8 @@ TYPE
        we must make sure a reference to the current exception is always life
        in an area it @emph{can} see.  *)
     thread: SYSTEM.PTR;
+    (* FIXME... under Linux and Solaris pthread_t is actually an integer type
+       (long or unsigned), which triggers a warning under 64 bit Solaris *)
   END;
 
 TYPE
@@ -64,7 +66,8 @@ TYPE
 
 
 PROCEDURE (e: Error) INIT*(msg: STRING; errno: LONGINT);
-
+PROCEDURE CheckError*(errorCode: LONGINT; fatal: BOOLEAN) RAISES Error;
+  
 (* ------------------------------------------------------------------------ *)
   
 PROCEDURE (t: Thread) INIT*();
@@ -93,6 +96,12 @@ PROCEDURE (m: Mutex) Unlock*();
 
 PROCEDURE (m: Mutex) Destroy*();
 
+PROCEDURE (m: Mutex) TryLock*(): BOOLEAN;
+(**Behaves identically to @oproc{Mutex.Lock}, except that it does not block
+   the calling thread if the mutex is already locked by another thread (or by
+   the calling thread in the case of a "fast" mutex).  Instead, this method
+   returns immediatly with @code{FALSE}.  *)
+  
 (* ------------------------------------------------------------------------ *)
 
 PROCEDURE (c: Condition) INIT*();

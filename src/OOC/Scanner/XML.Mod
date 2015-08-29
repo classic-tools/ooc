@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.1 2003/04/16 10:32:35 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.2 2003/08/24 00:03:57 mva Exp $	 *)
 MODULE OOC:Scanner:XML;
 (*  Creates XML document from a scanned symbol sequence.
     Copyright (C) 2000  Michael van Acken
@@ -55,7 +55,7 @@ produces this XML document
 
 IMPORT
   Channel, TextRider,
-  OOC:Scanner:Symbol, OOC:Scanner:InputBuffer, B := OOC:Scanner:Builder;
+  OOC:Scanner:Symbol, OOC:Scanner:InputBuffer, B := OOC:Scanner:SymList;
 
 TYPE
   Builder* = POINTER TO BuilderDesc;
@@ -67,7 +67,7 @@ TYPE
 
 PROCEDURE Init* (b: Builder; buffer: InputBuffer.Buffer; ch: Channel.Channel);
   BEGIN
-    B.Init (b, buffer);
+    B.Init (b, buffer, TRUE);
     b. w := TextRider.ConnectWriter (ch);
   END Init;
 

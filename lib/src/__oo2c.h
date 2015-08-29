@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.h,v 1.44 2003/06/28 10:39:26 mva Exp $        */
+/*      $Id: __oo2c.h,v 1.45 2003/08/13 08:34:28 mva Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001-2003  Michael van Acken
 
@@ -61,6 +61,11 @@
      adr; })
 #define _type_guard(adr,tag,guard,pos)                          \
   ({ if (!OOC_TYPE_TEST(tag,guard)) {                           \
+       RT0__ErrorFailedTypeGuard(&_mid,pos,(RT0__Struct)tag);   \
+     }                                                          \
+     adr; })
+#define _type_guard_q(adr,tag,guard,pos)                        \
+  ({ if (!RT0__TypeTest((RT0__Struct)tag,(RT0__Struct)guard)) { \
        RT0__ErrorFailedTypeGuard(&_mid,pos,(RT0__Struct)tag);   \
      }                                                          \
      adr; })
