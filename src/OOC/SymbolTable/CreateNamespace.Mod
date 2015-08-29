@@ -1,7 +1,7 @@
-(* 	$Id: CreateNamespace.Mod,v 1.70 2003/11/15 23:21:59 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.74 2004/01/20 06:59:57 sgreenhill Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
-    Copyright (C) 2000-2003  Michael van Acken
+    Copyright (C) 2000-2004  Michael van Acken
 
     This file is part of OOC.
 
@@ -879,7 +879,10 @@ RAISES IO.Error;
           IF item. isParameter THEN
             IF ~(type IS Sym.TypeName) & ~TR.IsValidParameterType (type) THEN
               ErrType (invalidParameterType, item. srcCodeType)
-            END
+            END;
+            IF ~item.isVarParam THEN
+              CheckInstance(item.type, item.srcCodeType);
+            END;
           ELSE
             CheckOpenArray (item. type, item. srcCodeType);
             CheckInstance(item.type, item.srcCodeType);
@@ -1130,9 +1133,10 @@ RAISES IO.Error;
             baseRecord := type(Sym.Record);
             CheckRecord (baseRecord);
             record. tbProcCount := baseRecord. tbProcCount;
-            IF record. isVtable # baseRecord. isVtable THEN
+            IF record. isVtable & ~baseRecord. isVtable THEN
               ErrType(inconsistentVtable, record);
-            END
+            END;
+            record. isVtable := baseRecord. isVtable;
           END;
           record.ns(Namespace.Extended).CheckRestrictions (record, uses,
                                                            errList);
@@ -1301,6 +1305,8 @@ RAISES IO.Error;
                 SetFlag(item.isUncheckedException, TRUE);
               | Sym.flagVtable:
                 SetFlag(item.isVtable, TRUE);
+              | Sym.flagAtomic:
+                SetFlag(item.isAtomic, TRUE);
               | Sym.flagUnion:
                 SetFlag(item.isUnion, TRUE);
               | Sym.flagAlign1:
@@ -1328,6 +1334,8 @@ RAISES IO.Error;
                 END;
               | Sym.flagReadOnly:
                 SetFlag(item.readOnlyExport, TRUE);
+              | Sym.flagAtomic:
+                SetFlag(item.isAtomic, TRUE);
               ELSE
                 InvalidFlag(flag, invalidModifierFlag);
               END;
@@ -1400,7 +1408,7 @@ RAISES IO.Error;
           
         | item: Sym.VarDecl DO
           IF item.isParameter THEN
-            type := item.type;
+            type := item.type.Deparam();
             ResolveFlagsDirect(item, type);
             IF (type IS Sym.Record) & ~type(Sym.Record).hasDescriptor OR
                (type IS Sym.Array) & ~type(Sym.Array).hasLengthInfo THEN

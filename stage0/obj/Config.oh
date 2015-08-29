@@ -35,43 +35,43 @@ typedef ADT_Dictionary__Dictionary Config__PrototypeMap;
 #define Config__empty "Value is empty"
 extern void Config__InitConfig(Config__Config config);
 extern void Config__VariableDesc_StringToValue(Config__Variable v, Object__String str);
-#define _TBN_Config__VariableDesc_StringToValue 3
+#define _TBN_Config__VariableDesc_StringToValue 4
 typedef void (*_TBP_Config__VariableDesc_StringToValue)(Config__Variable v, Object__String str);
 extern Object__String Config__VariableDesc_ToString(Config__Variable v);
-#define _TBN_Config__VariableDesc_ToString 0
+#define _TBN_Config__VariableDesc_ToString 1
 typedef Object__String (*_TBP_Config__VariableDesc_ToString)(Config__Variable v);
 extern Config__Variable Config__VariableDesc_Clone(Config__Variable v);
-#define _TBN_Config__VariableDesc_Clone 4
+#define _TBN_Config__VariableDesc_Clone 5
 typedef Config__Variable (*_TBP_Config__VariableDesc_Clone)(Config__Variable v);
 extern Config__BooleanVar Config__NewBooleanVar(OOC_CHAR8 boolean);
 extern void Config__BooleanVarDesc_StringToValue(Config__BooleanVar v, Object__String str);
-#define _TBN_Config__BooleanVarDesc_StringToValue 3
+#define _TBN_Config__BooleanVarDesc_StringToValue 4
 typedef void (*_TBP_Config__BooleanVarDesc_StringToValue)(Config__BooleanVar v, Object__String str);
 extern Object__String Config__BooleanVarDesc_ToString(Config__BooleanVar v);
-#define _TBN_Config__BooleanVarDesc_ToString 0
+#define _TBN_Config__BooleanVarDesc_ToString 1
 typedef Object__String (*_TBP_Config__BooleanVarDesc_ToString)(Config__BooleanVar v);
 extern Config__BooleanVar Config__BooleanVarDesc_Clone(Config__BooleanVar v);
-#define _TBN_Config__BooleanVarDesc_Clone 4
+#define _TBN_Config__BooleanVarDesc_Clone 5
 typedef Config__BooleanVar (*_TBP_Config__BooleanVarDesc_Clone)(Config__BooleanVar v);
 extern Config__IntegerVar Config__NewIntegerVar(OOC_INT32 _int);
 extern void Config__IntegerVarDesc_StringToValue(Config__IntegerVar v, Object__String str);
-#define _TBN_Config__IntegerVarDesc_StringToValue 3
+#define _TBN_Config__IntegerVarDesc_StringToValue 4
 typedef void (*_TBP_Config__IntegerVarDesc_StringToValue)(Config__IntegerVar v, Object__String str);
 extern Object__String Config__IntegerVarDesc_ToString(Config__IntegerVar v);
-#define _TBN_Config__IntegerVarDesc_ToString 0
+#define _TBN_Config__IntegerVarDesc_ToString 1
 typedef Object__String (*_TBP_Config__IntegerVarDesc_ToString)(Config__IntegerVar v);
 extern Config__IntegerVar Config__IntegerVarDesc_Clone(Config__IntegerVar v);
-#define _TBN_Config__IntegerVarDesc_Clone 4
+#define _TBN_Config__IntegerVarDesc_Clone 5
 typedef Config__IntegerVar (*_TBP_Config__IntegerVarDesc_Clone)(Config__IntegerVar v);
 extern Config__StringVar Config__NewStringVar(Object__String8 str);
 extern void Config__StringVarDesc_StringToValue(Config__StringVar v, Object__String str);
-#define _TBN_Config__StringVarDesc_StringToValue 3
+#define _TBN_Config__StringVarDesc_StringToValue 4
 typedef void (*_TBP_Config__StringVarDesc_StringToValue)(Config__StringVar v, Object__String str);
 extern Object__String Config__StringVarDesc_ToString(Config__StringVar v);
-#define _TBN_Config__StringVarDesc_ToString 0
+#define _TBN_Config__StringVarDesc_ToString 1
 typedef Object__String (*_TBP_Config__StringVarDesc_ToString)(Config__StringVar v);
 extern Config__StringVar Config__StringVarDesc_Clone(Config__StringVar v);
-#define _TBN_Config__StringVarDesc_Clone 4
+#define _TBN_Config__StringVarDesc_Clone 5
 typedef Config__StringVar (*_TBP_Config__StringVarDesc_Clone)(Config__StringVar v);
 extern void Config__SetPrototype(ADT_Dictionary__Dictionary map, Object__String name, Config__Variable prototype);
 extern Config__Variable Config__GetClone(ADT_Dictionary__Dictionary map, Object__String prototypeName);

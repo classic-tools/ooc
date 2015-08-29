@@ -20,7 +20,7 @@ typedef struct OOC_C_Naming__QualTypeDataDesc {
 } OOC_C_Naming__QualTypeDataDesc;
 #define OOC_C_Naming__suffixPassPerRef "__ref"
 extern void OOC_C_Naming__QualTypeDescrDesc_INIT(OOC_C_Naming__QualTypeDescr qtd, OOC_INT32 id, OOC_SymbolTable__TypeClosure type);
-#define _TBN_OOC_C_Naming__QualTypeDescrDesc_INIT 3
+#define _TBN_OOC_C_Naming__QualTypeDescrDesc_INIT 4
 typedef void (*_TBP_OOC_C_Naming__QualTypeDescrDesc_INIT)(OOC_C_Naming__QualTypeDescr qtd, OOC_INT32 id, OOC_SymbolTable__TypeClosure type);
 extern void OOC_C_Naming__QualTypeDataDesc_INIT(OOC_C_Naming__QualTypeData qtdData);
 #define _TBN_OOC_C_Naming__QualTypeDataDesc_INIT 0

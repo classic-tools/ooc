@@ -11,7 +11,7 @@ static void XML_DTD__InitNamespaceDeclaration(XML_DTD__NamespaceDeclaration name
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_XML_DTD__StringVar = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, "StringVar", 2, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__StringVar = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, "StringVar", 2, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
 RT0__StructDesc _td_XML_DTD__Namespace = { (RT0__Struct[]){&_td_XML_DTD__NamespaceDesc}, NULL, NULL, &_mid, "Namespace", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_XML_DTD__Declaration = { (RT0__Struct[]){&_td_XML_DTD__DeclarationDesc}, NULL, NULL, &_mid, "Declaration", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_XML_DTD__Builder = { (RT0__Struct[]){&_td_XML_DTD__BuilderDesc}, NULL, NULL, &_mid, "Builder", 4, -1, 0, RT0__strPointer };
@@ -49,17 +49,17 @@ RT0__StructDesc _td_XML_DTD__SeqCPDesc = { (RT0__Struct[]){&_td_XML_DTD__CPDesc,
 RT0__StructDesc _td_XML_DTD__NameCP = { (RT0__Struct[]){&_td_XML_DTD__NameCPDesc}, NULL, NULL, &_mid, "NameCP", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_XML_DTD__NameCPDesc = { (RT0__Struct[]){&_td_XML_DTD__CPDesc,&_td_XML_DTD__NameCPDesc}, (void*[]){(void*)XML_DTD__CPDesc_SetNext,(void*)XML_DTD__CPDesc_SetMode}, NULL, &_mid, "NameCPDesc", 12, 1, 0, RT0__strRecord };
 RT0__StructDesc _td_XML_DTD__RegexpInfo = { (RT0__Struct[]){&_td_XML_DTD__RegexpInfoDesc}, NULL, NULL, &_mid, "RegexpInfo", 4, -1, 0, RT0__strPointer };
-RT0__StructDesc _td_XML_DTD__RegexpInfoDesc = { (RT0__Struct[]){&_td_XML_DTD__RegexpInfoDesc}, (void*[]){}, NULL, &_mid, "RegexpInfoDesc", 0, 0, 0, RT0__strRecord };
+RT0__StructDesc _td_XML_DTD__RegexpInfoDesc = { (RT0__Struct[]){&_td_XML_DTD__RegexpInfoDesc}, (void*[]){}, NULL, &_mid, "RegexpInfoDesc", 0, 0, (1<<RT0__flagAtomic), RT0__strRecord };
 RT0__StructDesc _td_XML_DTD__ElementDecl = { (RT0__Struct[]){&_td_XML_DTD__ElementDeclDesc}, NULL, NULL, &_mid, "ElementDecl", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_XML_DTD__ElementDeclDesc = { (RT0__Struct[]){&_td_XML_DTD__DeclarationDesc,&_td_XML_DTD__ElementDeclDesc}, (void*[]){(void*)XML_DTD__ElementDeclDesc_SetRegexp,(void*)XML_DTD__ElementDeclDesc_SetMultipleDecl,(void*)XML_DTD__ElementDeclDesc_IsEmpty,(void*)XML_DTD__ElementDeclDesc_IsElementContent}, NULL, &_mid, "ElementDeclDesc", 32, 1, 0, RT0__strRecord };
 RT0__StructDesc _td_XML_DTD__NamespaceDeclaration = { (RT0__Struct[]){&_td_XML_DTD__NamespaceDeclarationDesc}, NULL, NULL, &_mid, "NamespaceDeclaration", 4, -1, 0, RT0__strPointer };
-RT0__StructDesc _td_XML_DTD__14383 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__14383 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
 RT0__StructDesc _td_XML_DTD__StringURI = { (RT0__Struct[]){&_td_XML_DTD__14383}, NULL, NULL, &_mid, "StringURI", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_XML_DTD__NamespaceDeclarationDesc = { (RT0__Struct[]){&_td_XML_DTD__NamespaceDeclarationDesc}, (void*[]){}, NULL, &_mid, "NamespaceDeclarationDesc", 8, 0, 0, RT0__strRecord };
-RT0__StructDesc _td_XML_DTD__36176 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_XML_DTD__36454 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_XML_DTD__36608 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
-RT0__StructDesc _td_XML_DTD__37086 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__36176 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__36454 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__36608 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 1, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
+RT0__StructDesc _td_XML_DTD__37086 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 2, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"XML:DTD", (RT0__Struct[]) { &_td_XML_DTD__StringVar, &_td_XML_DTD__Namespace, &_td_XML_DTD__Declaration, &_td_XML_DTD__Builder, &_td_XML_DTD__BuilderDesc, &_td_XML_DTD__DeclarationDesc, &_td_XML_DTD__NamespaceDesc, &_td_XML_DTD__Fragment, &_td_XML_DTD__FragmentDesc, &_td_XML_DTD__Characters, &_td_XML_DTD__CharactersDesc, &_td_XML_DTD__EntityRef, &_td_XML_DTD__Entity, &_td_XML_DTD__EntityRefDesc, &_td_XML_DTD__AttValue, &_td_XML_DTD__AttValueDesc, &_td_XML_DTD__NameNode, &_td_XML_DTD__NameNodeDesc, &_td_XML_DTD__Enumeration, &_td_XML_DTD__EnumerationDesc, &_td_XML_DTD__AttrDecl, &_td_XML_DTD__AttrDeclDesc, &_td_XML_DTD__EntityDesc, &_td_XML_DTD__InternalEntity, &_td_XML_DTD__InternalEntityDesc, &_td_XML_DTD__ExternalEntity, &_td_XML_DTD__ExternalEntityDesc, &_td_XML_DTD__Notation, &_td_XML_DTD__NotationDesc, &_td_XML_DTD__CP, &_td_XML_DTD__CPDesc, &_td_XML_DTD__ChoiceCP, &_td_XML_DTD__ChoiceCPDesc, &_td_XML_DTD__SeqCP, &_td_XML_DTD__SeqCPDesc, &_td_XML_DTD__NameCP, &_td_XML_DTD__NameCPDesc, &_td_XML_DTD__RegexpInfo, &_td_XML_DTD__RegexpInfoDesc, &_td_XML_DTD__ElementDecl, &_td_XML_DTD__ElementDeclDesc, &_td_XML_DTD__NamespaceDeclaration, &_td_XML_DTD__StringURI, &_td_XML_DTD__NamespaceDeclarationDesc, NULL } };
 
 extern void OOC_XML_DTD_init0() {

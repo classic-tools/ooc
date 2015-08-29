@@ -23,7 +23,7 @@ RT0__StructDesc _td_StdChannels__NullChannelDesc = { (RT0__Struct[]){&_td_Channe
 RT0__StructDesc _td_StdChannels__WriterDesc = { (RT0__Struct[]){&_td_Channel__WriterDesc,&_td_StdChannels__WriterDesc}, (void*[]){(void*)StdChannels__WriterDesc_Pos,(void*)StdChannels__WriterDesc_SetPos,(void*)StdChannels__WriterDesc_WriteByte,(void*)StdChannels__WriterDesc_WriteBytes,(void*)Channel__WriterDesc_ClearError}, NULL, &_mid, "WriterDesc", 16, 1, 0, RT0__strRecord };
 RT0__StructDesc _td_StdChannels__ErrorContext = { (RT0__Struct[]){&_td_StdChannels__ErrorContextDesc}, NULL, NULL, &_mid, "ErrorContext", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_StdChannels__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_Channel__ErrorContextDesc,&_td_StdChannels__ErrorContextDesc}, (void*[]){(void*)Channel__ErrorContextDesc_GetTemplate}, NULL, &_mid, "ErrorContextDesc", 4, 2, 0, RT0__strRecord };
-RT0__StructDesc _td_StdChannels__2863 = { (RT0__Struct[]){&RT0__byte}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_StdChannels__2863 = { (RT0__Struct[]){&RT0__byte}, NULL, NULL, &_mid, NULL, 1, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"StdChannels", (RT0__Struct[]) { &_td_StdChannels__NullChannel, &_td_StdChannels__Writer, &_td_StdChannels__NullChannelDesc, &_td_StdChannels__WriterDesc, &_td_StdChannels__ErrorContext, &_td_StdChannels__ErrorContextDesc, NULL } };
 
 extern void OOC_StdChannels_init0() {

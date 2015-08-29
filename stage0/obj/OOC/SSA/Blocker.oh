@@ -109,16 +109,16 @@ typedef struct OOC_SSA_Blocker__DependenceDataDesc {
   ADT_Dictionary__Dictionary proxyMap;
 } OOC_SSA_Blocker__DependenceDataDesc;
 extern void OOC_SSA_Blocker__RegionDesc_Append(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Append 3
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Append 4
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Append)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__RegionDesc_Insert(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Insert 4
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Insert 5
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Insert)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__RegionDesc_Remove(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Remove 5
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Remove 6
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Remove)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__LoopDesc_AppendLoop(OOC_SSA_Blocker__Loop loop, OOC_SSA_Blocker__Loop nestedLoop);
-#define _TBN_OOC_SSA_Blocker__LoopDesc_AppendLoop 6
+#define _TBN_OOC_SSA_Blocker__LoopDesc_AppendLoop 7
 typedef void (*_TBP_OOC_SSA_Blocker__LoopDesc_AppendLoop)(OOC_SSA_Blocker__Loop loop, OOC_SSA_Blocker__Loop nestedLoop);
 extern void OOC_SSA_Blocker__RemoveAntiDeps(OOC_SSA__ProcBlock pb);
 extern void OOC_SSA_Blocker__RemoveRegionDeps(OOC_SSA__ProcBlock pb);

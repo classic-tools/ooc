@@ -26,7 +26,7 @@ typedef struct OOC_SSA_CSE__PartitionDesc {
   OOC_SSA_CSE__Partition nextOrigin;
 } OOC_SSA_CSE__PartitionDesc;
 extern void OOC_SSA_CSE__PartitionDesc_Add(OOC_SSA_CSE__Partition p, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_CSE__PartitionDesc_Add 3
+#define _TBN_OOC_SSA_CSE__PartitionDesc_Add 4
 typedef void (*_TBP_OOC_SSA_CSE__PartitionDesc_Add)(OOC_SSA_CSE__Partition p, OOC_SSA__Instr instr);
 extern void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_CSE_init(void);

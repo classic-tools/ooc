@@ -1233,7 +1233,7 @@ void OOC_OOC_SymbolTable_Builder_init(void) {
   register OOC_INT32 i0,i1,i2,i3,i4;
 
   OOC_SymbolTable_Builder__doAutoImport = 0;
-  _copy_8((const void*)"OOC8",(void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber,5);
+  _copy_8((const void*)"OOC9",(void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber,5);
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable_Builder__3208.baseTypes[0], 3);
   OOC_SymbolTable_Builder__autoImport = (void*)i0;
   i1 = _check_pointer(i0, 25140);

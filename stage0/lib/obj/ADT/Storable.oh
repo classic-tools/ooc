@@ -37,10 +37,10 @@ typedef struct ADT_Storable__TypeErrorDesc {
 } ADT_Storable__TypeErrorDesc;
 extern void NORETURN ADT_Storable__RaiseTypeError(Object__String msg) NORETURN2;
 extern void ADT_Storable__ObjectDesc_Store(ADT_Storable__Object obj, ADT_Storable__Writer w);
-#define _TBN_ADT_Storable__ObjectDesc_Store 3
+#define _TBN_ADT_Storable__ObjectDesc_Store 4
 typedef void (*_TBP_ADT_Storable__ObjectDesc_Store)(ADT_Storable__Object obj, ADT_Storable__Writer w);
 extern void ADT_Storable__ObjectDesc_Load(ADT_Storable__Object obj, ADT_Storable__Reader r);
-#define _TBN_ADT_Storable__ObjectDesc_Load 4
+#define _TBN_ADT_Storable__ObjectDesc_Load 5
 typedef void (*_TBP_ADT_Storable__ObjectDesc_Load)(ADT_Storable__Object obj, ADT_Storable__Reader r);
 extern void ADT_Storable__InitWriter(ADT_Storable__Writer w, IO__ByteChannel ch);
 extern void ADT_Storable__InitReader(ADT_Storable__Reader r, IO__ByteChannel ch);

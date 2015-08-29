@@ -15,7 +15,7 @@ RT0__StructDesc _td_ProgramArgs__Reader = { (RT0__Struct[]){&_td_ProgramArgs__Re
 RT0__StructDesc _td_ProgramArgs__ReaderDesc = { (RT0__Struct[]){&_td_Channel__ReaderDesc,&_td_ProgramArgs__ReaderDesc}, (void*[]){(void*)ProgramArgs__ReaderDesc_Pos,(void*)ProgramArgs__ReaderDesc_Available,(void*)ProgramArgs__ReaderDesc_SetPos,(void*)ProgramArgs__ReaderDesc_ReadByte,(void*)ProgramArgs__ReaderDesc_ReadBytes,(void*)Channel__ReaderDesc_ClearError}, NULL, &_mid, "ReaderDesc", 24, 1, 0, RT0__strRecord };
 RT0__StructDesc _td_ProgramArgs__ErrorContext = { (RT0__Struct[]){&_td_ProgramArgs__ErrorContextDesc}, NULL, NULL, &_mid, "ErrorContext", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_ProgramArgs__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_Channel__ErrorContextDesc,&_td_ProgramArgs__ErrorContextDesc}, (void*[]){(void*)Channel__ErrorContextDesc_GetTemplate}, NULL, &_mid, "ErrorContextDesc", 4, 2, 0, RT0__strRecord };
-RT0__StructDesc _td_ProgramArgs__5299 = { (RT0__Struct[]){&RT0__byte}, NULL, NULL, &_mid, NULL, 1, 1, 0, RT0__strOpenArray };
+RT0__StructDesc _td_ProgramArgs__5299 = { (RT0__Struct[]){&RT0__byte}, NULL, NULL, &_mid, NULL, 1, 1, (1<<RT0__flagAtomic), RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"ProgramArgs", (RT0__Struct[]) { &_td_ProgramArgs__Channel, &_td_ProgramArgs__ChannelDesc, &_td_ProgramArgs__Reader, &_td_ProgramArgs__ReaderDesc, &_td_ProgramArgs__ErrorContext, &_td_ProgramArgs__ErrorContextDesc, NULL } };
 
 extern void OOC_ProgramArgs_init0() {

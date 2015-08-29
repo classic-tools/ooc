@@ -82,10 +82,19 @@ static void _negative_length(OOC_LEN len) {
   exit(EXIT_CODE);
 }
 
+#ifdef USE_BOEHM_GC
+void HandleFinalize(GC_PTR ptr, GC_PTR client_data) {
+  int prefix = ROUND_SIZE(sizeof(RT0__Struct));
+  RT0__Object obj = (RT0__Object) (ptr + prefix);
+
+  DYN_TBCALL(RT0,ObjectDesc,Finalize,(RT0__Object)obj,(obj));
+}
+#endif
 
 OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
   void *var, *ptr;
   OOC_INT8 form = td->form;
+  int flags = td->flags;
   
   if (form == RT0__strQualType) { /* get to base type of qualified type */
     form = td->typeArgs[0]->form;
@@ -95,7 +104,6 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     int allocate;
     int prefix;
     int size = td->size;
-    int flags = td->flags;
 
     if (size == 0) size++;
     prefix = ROUND_SIZE(sizeof(RT0__Struct));
@@ -116,10 +124,20 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     if (flags & (1<<RT0__flagVTable)) {
       ((void **) var)[0] = td->tbProcs;
     }
+#ifdef USE_BOEHM_GC
+    if (flags & (1<<RT0__flagFinalize)) { 
+      GC_register_finalizer(ptr, 
+        HandleFinalize, 0, (GC_finalization_proc *) 0, (GC_PTR *) 0);
+    }
+#endif
   } else if (form == RT0__strArray) { /* fixed size array */
     int size = td->size;
     if (size == 0) size++;
-    var = GC_MALLOC(size);
+    if (flags & (1<<RT0__flagAtomic)) { 
+      var = GC_MALLOC_ATOMIC(size);
+    } else {
+      var = GC_MALLOC(size);
+    }
     if (var == NULL) {
       _out_of_memory(size);
     } else if (RT0__poisonHeap >= 0) {
@@ -127,6 +145,7 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     }
     
   } else {			/* dynamic array */
+    int allocate;
     va_list ap;
     int i;
     size_t size, prefix;
@@ -150,11 +169,16 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
        of any basic type */
     prefix = ROUND_SIZE(td->len*sizeof(OOC_LEN));
     
-    ptr = GC_MALLOC(prefix+size);
+    allocate = prefix + size;
+    if (flags & (1<<RT0__flagAtomic)) { 
+      ptr = GC_MALLOC_ATOMIC(allocate);
+    } else {
+      ptr = GC_MALLOC(allocate);
+    }
     if (ptr == NULL) {
-      _out_of_memory(prefix+size);
+      _out_of_memory(allocate);
     } else if (RT0__poisonHeap >= 0) {
-      memset(ptr, RT0__poisonHeap, prefix+size);
+      memset(ptr, RT0__poisonHeap, allocate);
     }
     var = (char*)ptr+prefix;
     
@@ -217,6 +241,19 @@ void RT0__CollectGarbage() {
 #endif
 }
 
+void RT0__RegisterDisappearingLink(OOC_PTR * ptr) {
+#ifdef USE_BOEHM_GC
+/* CHECKME: What if ptr is not in a heap object? */
+  GC_general_register_disappearing_link(ptr, GC_base(*ptr));
+#endif
+}
+
+void RT0__UnregisterDisappearingLink(OOC_PTR * ptr) {
+#ifdef USE_BOEHM_GC
+/* CHECKME: What if ptr is not in a heap object? */
+  GC_unregister_disappearing_link(ptr);
+#endif
+}
 
 void RT0__ErrorIndexOutOfRange (RT0__Module mid, OOC_CHARPOS pos,
 				OOC_LEN index, OOC_LEN length) {
@@ -338,6 +375,9 @@ RT0__Struct RT0__ThisType(RT0__Module mid, const OOC_CHAR8 name__ref[], OOC_LEN 
   return NULL;
 }
 
+void RT0__ObjectDesc_Finalize(RT0__Object o) {
+  (void)fprintf(stderr, "RT0.ObjectDesc.Finalize(%p)\n", o);
+}
 
 void OOC_RT0_init() {
 #ifdef USE_BOEHM_GC

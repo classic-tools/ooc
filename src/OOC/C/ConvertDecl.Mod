@@ -1,7 +1,7 @@
-(* 	$Id: ConvertDecl.Mod,v 1.66 2003/10/06 18:26:34 mva Exp $	 *)
+(* 	$Id: ConvertDecl.Mod,v 1.67 2004/01/14 23:50:39 mva Exp $	 *)
 MODULE OOC:C:ConvertDecl;
 (*  Translate Oberon-2 declarations to their C counterparts.
-    Copyright (C) 2001-2003  Michael van Acken
+    Copyright (C) 2001-2004  Michael van Acken
 
     This file is part of OOC.
 
@@ -68,6 +68,7 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
       VAR
         length: DeclWriter.Declaration;
       BEGIN
+        type := type.Deparam();
         IF (type IS Sym.Array) & type(Sym.Array). isOpenArray THEN
           length := w. NewDeclaration (Naming.NameOfLengthParam (param, dim),
                                        DeclWriter.tqNone,
@@ -83,6 +84,7 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
       VAR
         tag: DeclWriter.Declaration;
       BEGIN
+        type := type.Deparam();
         IF param. isVarParam & (param. type IS Sym.Record) THEN
           tag := w. NewDeclaration (Naming.NameOfTypeTagParam (param),
                                     DeclWriter.tqNone,

@@ -122,7 +122,7 @@ extern void OOC_OOC_SSA_WriteC_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_WriteC__RegisterSwap;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__1861;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__1847;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__SwapArray;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__Translator;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__TranslatorDesc;
@@ -130,15 +130,15 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__Writer;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__WriterDesc;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__Visitor;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__VisitorDesc;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__6098;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__7138;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22662;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__24260;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__24463;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__25474;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__25767;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__40679;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__53397;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__6084;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__7124;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__22686;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24284;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__24487;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__25498;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__25791;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__40703;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__53421;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

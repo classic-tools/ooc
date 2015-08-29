@@ -287,10 +287,10 @@ extern OOC_C_DeclWriter__Declaration OOC_C_DeclWriter__WriterDesc_NewDeclaration
 #define _TBN_OOC_C_DeclWriter__WriterDesc_NewDeclaration 22
 typedef OOC_C_DeclWriter__Declaration (*_TBP_OOC_C_DeclWriter__WriterDesc_NewDeclaration)(OOC_C_DeclWriter__Writer w, Object__String name, OOC_INT8 typeQualifier, OOC_INT8 storageClass, OOC_C_DeclWriter__Type type);
 extern void OOC_C_DeclWriter__DeclarationDesc_SetTypeQualifier(OOC_C_DeclWriter__Declaration d, OOC_INT8 typeQualifier);
-#define _TBN_OOC_C_DeclWriter__DeclarationDesc_SetTypeQualifier 3
+#define _TBN_OOC_C_DeclWriter__DeclarationDesc_SetTypeQualifier 4
 typedef void (*_TBP_OOC_C_DeclWriter__DeclarationDesc_SetTypeQualifier)(OOC_C_DeclWriter__Declaration d, OOC_INT8 typeQualifier);
 extern void OOC_C_DeclWriter__DeclarationDesc_Write(OOC_C_DeclWriter__Declaration d, OOC_C_DeclWriter__Writer w);
-#define _TBN_OOC_C_DeclWriter__DeclarationDesc_Write 4
+#define _TBN_OOC_C_DeclWriter__DeclarationDesc_Write 5
 typedef void (*_TBP_OOC_C_DeclWriter__DeclarationDesc_Write)(OOC_C_DeclWriter__Declaration d, OOC_C_DeclWriter__Writer w);
 extern OOC_C_DeclWriter__IncludeModule OOC_C_DeclWriter__WriterDesc_NewIncludeModule(OOC_C_DeclWriter__Writer w, OOC_Repository__Module module);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_NewIncludeModule 23
@@ -299,13 +299,13 @@ extern void OOC_C_DeclWriter__WriterDesc_WriteModuleInclude(OOC_C_DeclWriter__Wr
 #define _TBN_OOC_C_DeclWriter__WriterDesc_WriteModuleInclude 24
 typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_WriteModuleInclude)(OOC_C_DeclWriter__Writer w, OOC_Repository__Module m, OOC_INT8 fileId);
 extern void OOC_C_DeclWriter__IncludeModuleDesc_Write(OOC_C_DeclWriter__IncludeModule d, OOC_C_DeclWriter__Writer w);
-#define _TBN_OOC_C_DeclWriter__IncludeModuleDesc_Write 4
+#define _TBN_OOC_C_DeclWriter__IncludeModuleDesc_Write 5
 typedef void (*_TBP_OOC_C_DeclWriter__IncludeModuleDesc_Write)(OOC_C_DeclWriter__IncludeModule d, OOC_C_DeclWriter__Writer w);
 extern OOC_C_DeclWriter__Define OOC_C_DeclWriter__WriterDesc_NewDefine(OOC_C_DeclWriter__Writer w, Object__String name, Object_Boxed__Object _const, OOC_SymbolTable__Type oocType);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_NewDefine 25
 typedef OOC_C_DeclWriter__Define (*_TBP_OOC_C_DeclWriter__WriterDesc_NewDefine)(OOC_C_DeclWriter__Writer w, Object__String name, Object_Boxed__Object _const, OOC_SymbolTable__Type oocType);
 extern void OOC_C_DeclWriter__DefineDesc_Write(OOC_C_DeclWriter__Define d, OOC_C_DeclWriter__Writer w);
-#define _TBN_OOC_C_DeclWriter__DefineDesc_Write 4
+#define _TBN_OOC_C_DeclWriter__DefineDesc_Write 5
 typedef void (*_TBP_OOC_C_DeclWriter__DefineDesc_Write)(OOC_C_DeclWriter__Define d, OOC_C_DeclWriter__Writer w);
 extern void OOC_C_DeclWriter__WriterDesc_WriteTypeCast(OOC_C_DeclWriter__Writer w, OOC_C_DeclWriter__Type t);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_WriteTypeCast 26

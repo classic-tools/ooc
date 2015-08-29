@@ -5,22 +5,7 @@
 <testsuite-ext profile="Test Suite for Translation Patterns">
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; generic1 generic2 generic3 generic4
-  generic5 generic6 generic7 generic8 generic9 generic10 generic11
-  generic12 generic13 generic14 generic15 generic16 generic17
-  generic18 generic19 generic20 generic21 generic22 generic23
-  generic24 generic25 generic26 generic27 generic28 generic29
-  generic30 generic31 generic32 generic33 generic34 generic35
-  generic36 generic37 generic38 generic39 generic40 generic41
-  generic42 generic43 generic44 generic45 generic46 generic47
-  generic48 generic48 generic49 generic50 generic52
-  generic53 generic54 generic55 generic56 generic57 generic58">-->
-
-<!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; assign17">-->
-
-<!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; generic72">-->
+  select ="&SetupTestCasesWithOut; generic73 generic74">-->
 
   &TestSetupWithOut;
     
@@ -1355,6 +1340,19 @@
       Trying to call the function variant of <code>NEW</code> with an
       <code>ABSTRACT</code> record base type.
     </test>
+    <test id="abstract11" type="reject" file="Abstract11.Mod">
+      Trying to define a formal value parameter whose type is an
+      <code>ABSTRACT</code> record.
+    </test>
+    <test id="abstract12" type="accept" file="Abstract12.Mod">
+      Defining a formal <code>VAR</code> parameter whose type is an
+      <code>ABSTRACT</code> record.
+    </test>
+
+    <test id="atomic1" type = "run" file="Atomic1.Mod" output="Atomic1.Ref">
+      Test the classification of atomic types, including records with
+      the NO_TRACED_POINTERS flag.
+    </test>
   </testcases>
   
   <testcases profile="OOC2 Development: Generics Extension"
@@ -1630,6 +1628,18 @@
       Regression test: Handle assignment of non-scalar type correctly,
       even if the right hand side of the assignment is a parametric
       record.
+    </test>
+    <test id="generic73" type="run" file="Generic73.Mod">
+      Regression test: Parametric value parameters of array type are
+      passed just like their non-parametric counterparts.  For
+      <code>oo2c</code> this means that the array is passed by
+      reference, the length is passed as an implicit second parameter,
+      and the callee allocates space on the stack for a local copy of
+      the array.
+    </test>
+    <test id="generic74" type="run" file="Generic74.Mod">
+      Regression test: Like <code>generic73</code>, but for a record
+      parameter.
     </test>
   </testcases>
 
@@ -2252,6 +2262,8 @@
         msg="Inherited procedure `Proc' is still abstract"/>
     <reject-info id="abstract10" pos="NEW(%P)"
         msg="Cannot create instance of abstract type"/>
+    <reject-info id="abstract11" pos="(r: %R)"
+        msg="Cannot create instance of abstract type"/>
 
     <reject-info id="generic5" pos="A: %Array"
         msg="Invalid type bound"/>
@@ -2330,7 +2342,7 @@
     <reject-info id="callconv4" pos="%:="
         msg="Expression not compatible with variable type `CallConv1.Proc'"/>
 
-    <reject-info id="vtable2" pos="BDesc = %RECORD (ADesc)"
+    <reject-info id="vtable2" pos="BDesc = %RECORD [VTABLE]"
         msg="VTABLE flag is inconsistent with base type"/>
 
     <warning-info id="undef1" pos="x := %y;"

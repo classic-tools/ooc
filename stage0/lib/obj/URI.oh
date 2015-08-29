@@ -50,32 +50,32 @@ typedef struct URI__ReferenceDesc {
 typedef OOC_INT8 URI__ChannelMode;
 extern void URI__InitURI(URI__URI uri, Object__String schemeId);
 extern URI__URI URI__URIDesc_Clone(URI__URI uri);
-#define _TBN_URI__URIDesc_Clone 3
+#define _TBN_URI__URIDesc_Clone 4
 typedef URI__URI (*_TBP_URI__URIDesc_Clone)(URI__URI uri);
 extern void URI__URIDesc_Copy(URI__URI uri, URI__URI dest);
-#define _TBN_URI__URIDesc_Copy 4
+#define _TBN_URI__URIDesc_Copy 5
 typedef void (*_TBP_URI__URIDesc_Copy)(URI__URI uri, URI__URI dest);
 extern void URI__URIDesc_SetSchemeId(URI__URI uri, Object__String schemeId);
-#define _TBN_URI__URIDesc_SetSchemeId 5
+#define _TBN_URI__URIDesc_SetSchemeId 6
 typedef void (*_TBP_URI__URIDesc_SetSchemeId)(URI__URI uri, Object__String schemeId);
 extern void URI__URIDesc_WriteXML(URI__URI uri, TextRider__Writer w);
-#define _TBN_URI__URIDesc_WriteXML 6
+#define _TBN_URI__URIDesc_WriteXML 7
 typedef void (*_TBP_URI__URIDesc_WriteXML)(URI__URI uri, TextRider__Writer w);
 extern Object__String8 URI__URIDesc_ToString(URI__URI uri);
-#define _TBN_URI__URIDesc_ToString 0
+#define _TBN_URI__URIDesc_ToString 1
 typedef Object__String8 (*_TBP_URI__URIDesc_ToString)(URI__URI uri);
 extern void URI__URIDesc_AppendScheme(URI__URI uri, ADT_StringBuffer__StringBuffer sb);
-#define _TBN_URI__URIDesc_AppendScheme 7
+#define _TBN_URI__URIDesc_AppendScheme 8
 typedef void (*_TBP_URI__URIDesc_AppendScheme)(URI__URI uri, ADT_StringBuffer__StringBuffer sb);
 extern URI__URI URI__URIDesc_MakeRelative(URI__URI uri, URI__HierarchicalURI baseURI);
-#define _TBN_URI__URIDesc_MakeRelative 8
+#define _TBN_URI__URIDesc_MakeRelative 9
 typedef URI__URI (*_TBP_URI__URIDesc_MakeRelative)(URI__URI uri, URI__HierarchicalURI baseURI);
 extern IO__ByteChannel URI__URIDesc_GetChannel(URI__URI uri, OOC_INT8 mode);
-#define _TBN_URI__URIDesc_GetChannel 9
+#define _TBN_URI__URIDesc_GetChannel 10
 typedef IO__ByteChannel (*_TBP_URI__URIDesc_GetChannel)(URI__URI uri, OOC_INT8 mode);
 extern void URI__InitOpaqueURI(URI__OpaqueURI uri, Object__String schemeId);
 extern void URI__OpaqueURIDesc_ParseOpaquePart(URI__OpaqueURI uri, Object__CharsLatin1 str, OOC_INT16 offset);
-#define _TBN_URI__OpaqueURIDesc_ParseOpaquePart 10
+#define _TBN_URI__OpaqueURIDesc_ParseOpaquePart 11
 typedef void (*_TBP_URI__OpaqueURIDesc_ParseOpaquePart)(URI__OpaqueURI uri, Object__CharsLatin1 str, OOC_INT16 offset);
 extern void URI__InitAuthority(URI__Authority auth);
 extern URI__Authority URI__AuthorityDesc_Clone(URI__Authority auth);
@@ -111,37 +111,37 @@ extern void URI__QueryDesc_Append(URI__Query query, ADT_StringBuffer__StringBuff
 typedef void (*_TBP_URI__QueryDesc_Append)(URI__Query query, ADT_StringBuffer__StringBuffer sb);
 extern void URI__InitHierarchicalURI(URI__HierarchicalURI uri, Object__String schemeId, URI__Authority authority, URI__Query query);
 extern OOC_CHAR8 URI__HierarchicalURIDesc_AuthorityMandatory(URI__HierarchicalURI uri);
-#define _TBN_URI__HierarchicalURIDesc_AuthorityMandatory 10
+#define _TBN_URI__HierarchicalURIDesc_AuthorityMandatory 11
 typedef OOC_CHAR8 (*_TBP_URI__HierarchicalURIDesc_AuthorityMandatory)(URI__HierarchicalURI uri);
 extern void URI__HierarchicalURIDesc_Copy(URI__HierarchicalURI uri, URI__URI dest);
-#define _TBN_URI__HierarchicalURIDesc_Copy 4
+#define _TBN_URI__HierarchicalURIDesc_Copy 5
 typedef void (*_TBP_URI__HierarchicalURIDesc_Copy)(URI__HierarchicalURI uri, URI__URI dest);
 extern URI__Authority URI__HierarchicalURIDesc_NewAuthority(URI__HierarchicalURI uri);
-#define _TBN_URI__HierarchicalURIDesc_NewAuthority 11
+#define _TBN_URI__HierarchicalURIDesc_NewAuthority 12
 typedef URI__Authority (*_TBP_URI__HierarchicalURIDesc_NewAuthority)(URI__HierarchicalURI uri);
 extern void URI__HierarchicalURIDesc_SetAuthority(URI__HierarchicalURI uri, URI__Authority auth);
-#define _TBN_URI__HierarchicalURIDesc_SetAuthority 12
+#define _TBN_URI__HierarchicalURIDesc_SetAuthority 13
 typedef void (*_TBP_URI__HierarchicalURIDesc_SetAuthority)(URI__HierarchicalURI uri, URI__Authority auth);
 extern URI__Query URI__HierarchicalURIDesc_NewQuery(URI__HierarchicalURI uri);
-#define _TBN_URI__HierarchicalURIDesc_NewQuery 13
+#define _TBN_URI__HierarchicalURIDesc_NewQuery 14
 typedef URI__Query (*_TBP_URI__HierarchicalURIDesc_NewQuery)(URI__HierarchicalURI uri);
 extern void URI__HierarchicalURIDesc_SetQuery(URI__HierarchicalURI uri, URI__Query query);
-#define _TBN_URI__HierarchicalURIDesc_SetQuery 14
+#define _TBN_URI__HierarchicalURIDesc_SetQuery 15
 typedef void (*_TBP_URI__HierarchicalURIDesc_SetQuery)(URI__HierarchicalURI uri, URI__Query query);
 extern void URI__HierarchicalURIDesc_ResolveRelative(URI__HierarchicalURI uri, URI__HierarchicalURI baseURI);
-#define _TBN_URI__HierarchicalURIDesc_ResolveRelative 15
+#define _TBN_URI__HierarchicalURIDesc_ResolveRelative 16
 typedef void (*_TBP_URI__HierarchicalURIDesc_ResolveRelative)(URI__HierarchicalURI uri, URI__HierarchicalURI baseURI);
 extern void URI__HierarchicalURIDesc_ClearPath(URI__HierarchicalURI uri);
-#define _TBN_URI__HierarchicalURIDesc_ClearPath 16
+#define _TBN_URI__HierarchicalURIDesc_ClearPath 17
 typedef void (*_TBP_URI__HierarchicalURIDesc_ClearPath)(URI__HierarchicalURI uri);
 extern void URI__HierarchicalURIDesc_ParsePath(URI__HierarchicalURI uri, Object__CharsLatin1 str, OOC_CHAR8 absolute, OOC_INT16 offset);
-#define _TBN_URI__HierarchicalURIDesc_ParsePath 17
+#define _TBN_URI__HierarchicalURIDesc_ParsePath 18
 typedef void (*_TBP_URI__HierarchicalURIDesc_ParsePath)(URI__HierarchicalURI uri, Object__CharsLatin1 str, OOC_CHAR8 absolute, OOC_INT16 offset);
 extern URI__URI URI__HierarchicalURIDesc_MakeRelative(URI__HierarchicalURI uri, URI__HierarchicalURI baseURI);
-#define _TBN_URI__HierarchicalURIDesc_MakeRelative 8
+#define _TBN_URI__HierarchicalURIDesc_MakeRelative 9
 typedef URI__URI (*_TBP_URI__HierarchicalURIDesc_MakeRelative)(URI__HierarchicalURI uri, URI__HierarchicalURI baseURI);
 extern void URI__HierarchicalURIDesc_AppendPath(URI__HierarchicalURI uri, ADT_StringBuffer__StringBuffer sb);
-#define _TBN_URI__HierarchicalURIDesc_AppendPath 18
+#define _TBN_URI__HierarchicalURIDesc_AppendPath 19
 typedef void (*_TBP_URI__HierarchicalURIDesc_AppendPath)(URI__HierarchicalURI uri, ADT_StringBuffer__StringBuffer sb);
 extern void URI__InitFragment(URI__Fragment frag);
 extern URI__Fragment URI__FragmentDesc_Clone(URI__Fragment frag);

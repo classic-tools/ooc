@@ -58,25 +58,25 @@ extern void OOC_IR_CheckUses__VisitorCallsDesc_VisitCall(OOC_IR_CheckUses__Visit
 #define _TBN_OOC_IR_CheckUses__VisitorCallsDesc_VisitCall 40
 typedef void (*_TBP_OOC_IR_CheckUses__VisitorCallsDesc_VisitCall)(OOC_IR_CheckUses__VisitorCalls v, OOC_IR__Call call);
 extern OOC_IR_CheckUses__Def OOC_IR_CheckUses__DefDesc_Copy(OOC_IR_CheckUses__Def def);
-#define _TBN_OOC_IR_CheckUses__DefDesc_Copy 3
+#define _TBN_OOC_IR_CheckUses__DefDesc_Copy 4
 typedef OOC_IR_CheckUses__Def (*_TBP_OOC_IR_CheckUses__DefDesc_Copy)(OOC_IR_CheckUses__Def def);
 extern OOC_INT32 OOC_IR_CheckUses__DefDesc_GetClass(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var);
-#define _TBN_OOC_IR_CheckUses__DefDesc_GetClass 4
+#define _TBN_OOC_IR_CheckUses__DefDesc_GetClass 5
 typedef OOC_INT32 (*_TBP_OOC_IR_CheckUses__DefDesc_GetClass)(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var);
 extern void OOC_IR_CheckUses__DefDesc_SetClass(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var, OOC_INT32 _class);
-#define _TBN_OOC_IR_CheckUses__DefDesc_SetClass 5
+#define _TBN_OOC_IR_CheckUses__DefDesc_SetClass 6
 typedef void (*_TBP_OOC_IR_CheckUses__DefDesc_SetClass)(OOC_IR_CheckUses__Def def, OOC_SymbolTable__Item var, OOC_INT32 _class);
 extern void OOC_IR_CheckUses__DefDesc_Merge(OOC_IR_CheckUses__Def def, OOC_IR_CheckUses__Def def2);
-#define _TBN_OOC_IR_CheckUses__DefDesc_Merge 6
+#define _TBN_OOC_IR_CheckUses__DefDesc_Merge 7
 typedef void (*_TBP_OOC_IR_CheckUses__DefDesc_Merge)(OOC_IR_CheckUses__Def def, OOC_IR_CheckUses__Def def2);
 extern void OOC_IR_CheckUses__DefDesc_Unreachable(OOC_IR_CheckUses__Def def);
-#define _TBN_OOC_IR_CheckUses__DefDesc_Unreachable 7
+#define _TBN_OOC_IR_CheckUses__DefDesc_Unreachable 8
 typedef void (*_TBP_OOC_IR_CheckUses__DefDesc_Unreachable)(OOC_IR_CheckUses__Def def);
 extern void OOC_IR_CheckUses__ProcDataDesc_SetReadFlag(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__VarDecl varDecl, OOC_INT32 flag);
-#define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetReadFlag 3
+#define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetReadFlag 4
 typedef void (*_TBP_OOC_IR_CheckUses__ProcDataDesc_SetReadFlag)(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__VarDecl varDecl, OOC_INT32 flag);
 extern void OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__Item item, OOC_INT32 flag);
-#define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag 4
+#define _TBN_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag 5
 typedef void (*_TBP_OOC_IR_CheckUses__ProcDataDesc_SetWriteFlag)(OOC_IR_CheckUses__ProcData pd, OOC_SymbolTable__Item item, OOC_INT32 flag);
 extern void OOC_IR_CheckUses__VisitorDesc_VisitVar(OOC_IR_CheckUses__Visitor v, OOC_IR__Var var);
 #define _TBN_OOC_IR_CheckUses__VisitorDesc_VisitVar 36

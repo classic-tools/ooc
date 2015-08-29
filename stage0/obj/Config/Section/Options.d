@@ -27,8 +27,8 @@ RT0__StructDesc _td_Config_Section_Options__SectionDesc = { (RT0__Struct[]){&_td
 RT0__StructDesc _td_Config_Section_Options__OptionDesc = { (RT0__Struct[]){&_td_Config_Section_Options__OptionDesc}, (void*[]){(void*)Config_Section_Options__OptionDesc_Set}, NULL, &_mid, "OptionDesc", 12, 0, 0, RT0__strRecord };
 RT0__StructDesc _td_Config_Section_Options__ErrorContext = { (RT0__Struct[]){&_td_Config_Section_Options__ErrorContextDesc}, NULL, NULL, &_mid, "ErrorContext", 4, -1, 0, RT0__strPointer };
 RT0__StructDesc _td_Config_Section_Options__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_XML_Error__ContextDesc,&_td_Config_Section__ErrorContextDesc,&_td_Config_Section_Options__ErrorContextDesc}, (void*[]){(void*)Config_Section_Options__ErrorContextDesc_GetTemplate,(void*)XML_Error__ContextDesc_WriteTemplate,(void*)XML_Error__ContextDesc_SetString}, NULL, &_mid, "ErrorContextDesc", 8, 3, 0, RT0__strRecord };
-RT0__StructDesc _td_Config_Section_Options__992 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 256, 128, 0, RT0__strArray };
-RT0__StructDesc _td_Config_Section_Options__8494 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 2048, 2048, 0, RT0__strArray };
+RT0__StructDesc _td_Config_Section_Options__992 = { (RT0__Struct[]){&RT0__longchar}, NULL, NULL, &_mid, NULL, 256, 128, (1<<RT0__flagAtomic), RT0__strArray };
+RT0__StructDesc _td_Config_Section_Options__8494 = { (RT0__Struct[]){&RT0__char}, NULL, NULL, &_mid, NULL, 2048, 2048, (1<<RT0__flagAtomic), RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"Config:Section:Options", (RT0__Struct[]) { &_td_Config_Section_Options__Section, &_td_Config_Section_Options__Option, &_td_Config_Section_Options__SectionDesc, &_td_Config_Section_Options__OptionDesc, &_td_Config_Section_Options__ErrorContext, &_td_Config_Section_Options__ErrorContextDesc, NULL } };
 
 extern void OOC_Config_Section_Options_init0() {
