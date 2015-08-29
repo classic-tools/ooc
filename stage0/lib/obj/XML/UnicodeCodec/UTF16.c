@@ -1,5 +1,6 @@
 #include <XML/UnicodeCodec/UTF16.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void XML_UnicodeCodec_UTF16__InitBE(XML_UnicodeCodec_UTF16__Codec codec, OOC_INT8 bom) {
   register OOC_INT32 i0,i1;

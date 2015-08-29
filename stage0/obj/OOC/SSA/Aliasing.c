@@ -1,5 +1,6 @@
 #include <OOC/SSA/Aliasing.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_INT8 OOC_SSA_Aliasing__DesignatorAlias(OOC_SSA__Opnd instr, OOC_SSA__Opnd reference) {
   register OOC_INT32 i0,i1,i2;

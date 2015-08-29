@@ -1,5 +1,6 @@
 #include <URI/Scheme/Hierarchical.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Scheme_Hierarchical__InitParameter(URI_Scheme_Hierarchical__Parameter param, URI_String__StringPtr string) {
   register OOC_INT32 i0,i1;

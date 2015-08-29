@@ -1,5 +1,6 @@
 #include <OOC/SSA/ConstProp.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static OOC_SSA__Const OOC_SSA_ConstProp__ComputeConst(OOC_SSA__ProcBlock pb, OOC_SSA__Instr instr) {
   register OOC_INT32 i0,i1,i2,i3;
@@ -17,7 +18,7 @@ static OOC_SSA__Const OOC_SSA_ConstProp__ComputeConst(OOC_SSA__ProcBlock pb, OOC
   goto l5;
 l3:
   i1 = *(OOC_INT8*)((_check_pointer(i0, 1523))+36);
-  i1 = i1!=73;
+  i1 = i1!=80;
   
 l5:
   if (i1) goto l7;
@@ -594,7 +595,7 @@ l3_loop:
   i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9868)))), &_td_OOC_SSA__ConstDesc);
   if (i1) goto l6;
   i1 = *(OOC_INT8*)((_check_pointer(i0, 9891))+36);
-  i1 = i1==74;
+  i1 = i1==81;
   
   goto l8;
 l6:

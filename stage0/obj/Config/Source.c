@@ -1,5 +1,6 @@
 #include <Config/Source.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Config_Source__Init(Config_Source__Source src) {
 

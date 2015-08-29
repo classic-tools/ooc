@@ -3,7 +3,6 @@
 #include <Channel.oh>
 #include <Msg.oh>
 #include <StdChannels.oh>
-#include <Object.oh>
 #include <ADT/Dictionary.oh>
 #include <OOC/Config/Pragmas.oh>
 #include <OOC/Auxiliary/ParseModule.oh>

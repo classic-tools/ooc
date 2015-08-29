@@ -1,5 +1,6 @@
 #include <Config/Simple.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Config_Simple__Init(Config_Simple__Config config, const OOC_CHAR8 defaultConfigFile__ref[], OOC_LEN defaultConfigFile_0d) {
   register OOC_INT32 i0,i1,i2,i3;

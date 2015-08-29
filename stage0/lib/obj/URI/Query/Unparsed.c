@@ -1,5 +1,6 @@
 #include <URI/Query/Unparsed.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Query_Unparsed__Init(URI_Query_Unparsed__Query query, URI_String__StringPtr unparsed) {
   register OOC_INT32 i0,i1;

@@ -1,5 +1,6 @@
 #include <OOC/SSA/DeadCodeElimination.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void OOC_SSA_DeadCodeElimination__MarkLive(OOC_SSA__Instr instr) {
   register OOC_INT32 i0,i1;

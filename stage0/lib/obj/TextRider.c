@@ -1,5 +1,6 @@
 #include <TextRider.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static Msg__Msg TextRider__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;
@@ -2399,57 +2400,60 @@ l10:
   ;
 }
 
-void TextRider__WriterDesc_WriteStr(TextRider__Writer w, Object__String s) {
+void TextRider__WriterDesc_WriteObject(TextRider__Writer w, Object__Object obj) {
   register OOC_INT32 i0,i1,i2,i3,i4;
+  Object__String s;
   Object__CharsLatin1 chars;
 
-  i0 = (OOC_INT32)s;
+  i0 = (OOC_INT32)obj;
   i1 = i0==(OOC_INT32)0;
   if (i1) goto l21;
   i1 = (OOC_INT32)w;
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 40292));
+  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 40262));
   i2 = i2==(OOC_INT32)0;
   if (!i2) goto l22;
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40323)))), &_td_Object__String8Desc);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40295)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
+  s = (Object__String)i0;
+  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40320)))), &_td_Object__String8Desc);
   if (i2) goto l11;
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40609)))), &_td_Object__String32Desc);
+  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40606)))), &_td_Object__String32Desc);
   if (i2) goto l9;
-  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40606)))), 40606);
+  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40603)))), 40603);
   goto l22;
 l9:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 40639)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i1, "[TextRider.WriteStr: String32 not implemented]", 47);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 40636)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i1, "[TextRider.WriteObject: String32 not implemented]", 50);
   goto l22;
 l11:
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40361)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40358)))), Object__String8Desc_CharsLatin1)),Object__String8Desc_CharsLatin1)((Object__String8)i0);
   chars = (Object__CharsLatin1)i2;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40386))+8);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 40424));
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40386))+8);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 40398)))), Channel__WriterDesc_WriteBytes)),Channel__WriterDesc_WriteBytes)((Channel__Writer)i4, (void*)(_check_pointer(i2, 40417)), -1, 0, i0);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40453))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40465))+4);
-  *(OOC_INT32*)(_check_pointer(i1, 40443)) = i0;
-  i0 = *(OOC_UINT32*)((_check_pointer(i1, 40500))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40383))+8);
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 40421));
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40383))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 40395)))), Channel__WriterDesc_WriteBytes)),Channel__WriterDesc_WriteBytes)((Channel__Writer)i4, (void*)(_check_pointer(i2, 40414)), -1, 0, i0);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40450))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40462))+4);
+  *(OOC_INT32*)(_check_pointer(i1, 40440)) = i0;
+  i0 = *(OOC_UINT32*)((_check_pointer(i1, 40497))+4);
   i0 = _in(0,i0);
   if (i0) goto l14;
   i0=OOC_FALSE;
   goto l16;
 l14:
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 40510));
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 40507));
   i0 = i0==(OOC_INT32)0;
   
 l16:
   if (!i0) goto l22;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40540))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40540))+12);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40546)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i2);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40576))+12);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 40582));
-  *(OOC_INT32*)(_check_pointer(i1, 40566)) = i0;
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40537))+12);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40537))+12);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40543)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i2);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 40573))+12);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 40579));
+  *(OOC_INT32*)(_check_pointer(i1, 40563)) = i0;
   goto l22;
 l21:
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40257)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "<NIL>", 6);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40227)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "<NIL>", 6);
 l22:
   return;
   ;
@@ -2461,11 +2465,11 @@ void TextRider__WriterDesc_WriteBool(TextRider__Writer w, OOC_CHAR8 _bool) {
   i0 = _bool;
   if (i0) goto l3;
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40847)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "FALSE", 6);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40850)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "FALSE", 6);
   goto l4;
 l3:
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40814)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "TRUE", 5);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 40817)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "TRUE", 5);
 l4:
   return;
   ;
@@ -2475,30 +2479,30 @@ void TextRider__WriterDesc_WriteChar(TextRider__Writer w, OOC_CHAR8 ch) {
   register OOC_INT32 i0,i1,i2,i3;
 
   i0 = (OOC_INT32)w;
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 40960));
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 40963));
   i1 = i1==(OOC_INT32)0;
   if (!i1) goto l10;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40986))+8);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40986))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40989))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 40989))+8);
   i3 = ch;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 40997)))), Channel__WriterDesc_WriteByte)),Channel__WriterDesc_WriteByte)((Channel__Writer)i2, i3);
-  i1 = *(OOC_UINT32*)((_check_pointer(i0, 41039))+4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41000)))), Channel__WriterDesc_WriteByte)),Channel__WriterDesc_WriteByte)((Channel__Writer)i2, i3);
+  i1 = *(OOC_UINT32*)((_check_pointer(i0, 41042))+4);
   i1 = _in(0,i1);
   if (i1) goto l5;
   i1=OOC_FALSE;
   goto l7;
 l5:
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 41049));
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 41052));
   i1 = i1==(OOC_INT32)0;
   
 l7:
   if (!i1) goto l10;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41077))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41077))+12);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41083)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i2);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41111))+12);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 41117));
-  *(OOC_INT32*)(_check_pointer(i0, 41101)) = i1;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41080))+12);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41080))+12);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 41086)))), Channel__ChannelDesc_Flush)),Channel__ChannelDesc_Flush)((Channel__Channel)i2);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 41114))+12);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 41120));
+  *(OOC_INT32*)(_check_pointer(i0, 41104)) = i1;
 l10:
   return;
   ;
@@ -2512,7 +2516,7 @@ static void TextRider__WritePad(TextRider__Writer w, OOC_INT32 n) {
   if (!i0) goto l8;
   i0 = (OOC_INT32)w;
 l3_loop:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 41256)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)' ');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 41259)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)' ');
   i1 = n;
   i1 = i1-1;
   n = i1;
@@ -2533,7 +2537,7 @@ void TextRider__WriterDesc_WriteLInt(TextRider__Writer w, OOC_INT32 lint, OOC_IN
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 41834)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 16);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 41837)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 16);
   return;
   ;
 }
@@ -2544,7 +2548,7 @@ void TextRider__WriterDesc_WriteSInt(TextRider__Writer w, OOC_INT8 sint, OOC_INT
   i0 = (OOC_INT32)w;
   i1 = sint;
   i2 = n;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 41948)))), TextRider__WriterDesc_WriteLInt)),TextRider__WriterDesc_WriteLInt)((TextRider__Writer)i0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 41951)))), TextRider__WriterDesc_WriteLInt)),TextRider__WriterDesc_WriteLInt)((TextRider__Writer)i0, i1, i2);
   return;
   ;
 }
@@ -2555,7 +2559,7 @@ void TextRider__WriterDesc_WriteInt(TextRider__Writer w, OOC_INT16 _int, OOC_INT
   i0 = (OOC_INT32)w;
   i1 = _int;
   i2 = n;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42059)))), TextRider__WriterDesc_WriteLInt)),TextRider__WriterDesc_WriteLInt)((TextRider__Writer)i0, i1, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42062)))), TextRider__WriterDesc_WriteLInt)),TextRider__WriterDesc_WriteLInt)((TextRider__Writer)i0, i1, i2);
   return;
   ;
 }
@@ -2576,10 +2580,10 @@ void TextRider__WriterDesc_WriteHex(TextRider__Writer w, OOC_INT32 lint, OOC_INT
       i1 = (OOC_INT32)w;
 l3_loop:
       if (i0) goto l6;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 42506)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, (OOC_CHAR8)'0');
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 42509)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, (OOC_CHAR8)'0');
       goto l7;
 l6:
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 42484)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, (OOC_CHAR8)'F');
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 42487)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i1, (OOC_CHAR8)'F');
 l7:
       i2 = digits;
       i2 = i2-1;
@@ -2600,10 +2604,10 @@ l15_loop:
       dig = i3;
       i4 = i3<=9;
       if (i4) goto l18;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42755)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (55+i3));
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42758)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (55+i3));
       goto l19;
 l18:
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42708)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (48+i3));
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 42711)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (48+i3));
 l19:
       i2 = i2>0;
       if (i2) goto l15_loop;
@@ -2637,7 +2641,7 @@ void TextRider__WriterDesc_WriteLReal(TextRider__Writer w, OOC_REAL64 lreal, OOC
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 43325)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 43328)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2654,7 +2658,7 @@ void TextRider__WriterDesc_WriteReal(TextRider__Writer w, OOC_REAL32 real, OOC_I
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 43696)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 43699)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2671,7 +2675,7 @@ void TextRider__WriterDesc_WriteLRealFix(TextRider__Writer w, OOC_REAL64 *lreal,
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44145)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44148)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2688,7 +2692,7 @@ void TextRider__WriterDesc_WriteRealFix(TextRider__Writer w, OOC_REAL32 real, OO
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44528)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44531)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2705,7 +2709,7 @@ void TextRider__WriterDesc_WriteLRealEng(TextRider__Writer w, OOC_REAL64 *lreal,
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44976)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 44979)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2722,7 +2726,7 @@ void TextRider__WriterDesc_WriteRealEng(TextRider__Writer w, OOC_REAL32 real, OO
   i1 = n;
   i2 = (OOC_INT32)w;
   TextRider__WritePad((TextRider__Writer)i2, (i1-i0));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 45357)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 45360)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i2, (void*)(OOC_INT32)val, 128);
   return;
   ;
 }
@@ -2734,7 +2738,7 @@ void TextRider__WriterDesc_WriteSet(TextRider__Writer w, OOC_UINT32 s) {
   OOC_INT8 lo;
 
   i0 = (OOC_INT32)w;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45550)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)'{');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45553)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)'{');
   bit = 0;
   addComma = OOC_FALSE;
   i1 = s;
@@ -2777,14 +2781,14 @@ l22:
   i3=OOC_TRUE;
   goto l25;
 l24:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45822)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, ", ", 3);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45825)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, ", ", 3);
   
 l25:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45875)))), TextRider__WriterDesc_WriteInt)),TextRider__WriterDesc_WriteInt)((TextRider__Writer)i0, i2, 0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45878)))), TextRider__WriterDesc_WriteInt)),TextRider__WriterDesc_WriteInt)((TextRider__Writer)i0, i2, 0);
   i2 = i2<i4;
   if (!i2) goto l28;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45927)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "..", 3);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45948)))), TextRider__WriterDesc_WriteInt)),TextRider__WriterDesc_WriteInt)((TextRider__Writer)i0, i4, 0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45930)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "..", 3);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 45951)))), TextRider__WriterDesc_WriteInt)),TextRider__WriterDesc_WriteInt)((TextRider__Writer)i0, i4, 0);
 l28:
   i2=i3;i3=i4;
 l29:
@@ -2795,7 +2799,7 @@ l29:
   {register OOC_INT32 h0=i2;i2=i3;i3=h0;}
   goto l1_loop;
 l33:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 46018)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)'}');
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 46021)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, (OOC_CHAR8)'}');
   return;
   ;
 }
@@ -2805,15 +2809,15 @@ void TextRider__WriterDesc_WriteLn(TextRider__Writer w) {
   OOC_INT16 i;
 
   i0 = (OOC_INT32)w;
-  i1 = *(OOC_INT16*)((_check_pointer(i0, 46158))+18);
+  i1 = *(OOC_INT16*)((_check_pointer(i0, 46161))+18);
   i1 = i1-1;
   i2 = 0<=i1;
   i = 0;
   if (!i2) goto l8;
   i2=0;
 l3_loop:
-  i3 = *(OOC_UINT8*)(((_check_pointer(i0, 46193))+16)+(_check_index(i2, 2, OOC_UINT16, 46197)));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 46179)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, i3);
+  i3 = *(OOC_UINT8*)(((_check_pointer(i0, 46196))+16)+(_check_index(i2, 2, OOC_UINT16, 46200)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 46182)))), TextRider__WriterDesc_WriteChar)),TextRider__WriterDesc_WriteChar)((TextRider__Writer)i0, i3);
   i2 = i2+1;
   i3 = i2<=i1;
   i = i2;
@@ -2827,15 +2831,15 @@ void TextRider__InitReader(TextRider__Reader r, Channel__Channel ch) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)r;
-  *(OOC_INT32*)(_check_pointer(i0, 46397)) = (OOC_INT32)0;
-  *(OOC_UINT32*)((_check_pointer(i0, 46417))+4) = 0;
+  *(OOC_INT32*)(_check_pointer(i0, 46400)) = (OOC_INT32)0;
+  *(OOC_UINT32*)((_check_pointer(i0, 46420))+4) = 0;
   i1 = (OOC_INT32)ch;
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 46467)))), Channel__ChannelDesc_NewReader)),Channel__ChannelDesc_NewReader)((Channel__Channel)i1);
-  *(OOC_INT32*)((_check_pointer(i0, 46449))+8) = i2;
-  *(OOC_INT32*)((_check_pointer(i0, 46486))+12) = i1;
-  *(OOC_INT16*)((_check_pointer(i0, 46505))+18) = -1;
-  *(OOC_UINT8*)((_check_pointer(i0, 46526))+20) = OOC_FALSE;
-  *(OOC_INT16*)((_check_pointer(i0, 46555))+32) = (OOC_INT32)0;
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 46470)))), Channel__ChannelDesc_NewReader)),Channel__ChannelDesc_NewReader)((Channel__Channel)i1);
+  *(OOC_INT32*)((_check_pointer(i0, 46452))+8) = i2;
+  *(OOC_INT32*)((_check_pointer(i0, 46489))+12) = i1;
+  *(OOC_INT16*)((_check_pointer(i0, 46508))+18) = -1;
+  *(OOC_UINT8*)((_check_pointer(i0, 46529))+20) = OOC_FALSE;
+  *(OOC_INT16*)((_check_pointer(i0, 46558))+32) = (OOC_INT32)0;
   return;
   ;
 }
@@ -2848,7 +2852,7 @@ TextRider__Reader TextRider__ConnectReader(Channel__Channel ch) {
   r = (TextRider__Reader)i0;
   i1 = (OOC_INT32)ch;
   TextRider__InitReader((TextRider__Reader)i0, (Channel__Channel)i1);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 46716))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 46719))+8);
   i1 = i1==(OOC_INT32)0;
   if (i1) goto l3;
   return (TextRider__Reader)i0;
@@ -2856,7 +2860,7 @@ TextRider__Reader TextRider__ConnectReader(Channel__Channel ch) {
 l3:
   return (TextRider__Reader)(OOC_INT32)0;
 l4:
-  _failed_function(46597); return 0;
+  _failed_function(46600); return 0;
   ;
 }
 
@@ -2865,23 +2869,23 @@ void TextRider__InitWriter(TextRider__Writer w, Channel__Channel ch) {
   OOC_INT16 i;
 
   i0 = (OOC_INT32)w;
-  *(OOC_INT32*)(_check_pointer(i0, 47006)) = (OOC_INT32)0;
-  *(OOC_UINT32*)((_check_pointer(i0, 47026))+4) = 0;
+  *(OOC_INT32*)(_check_pointer(i0, 47009)) = (OOC_INT32)0;
+  *(OOC_UINT32*)((_check_pointer(i0, 47029))+4) = 0;
   i1 = (OOC_INT32)ch;
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 47076)))), Channel__ChannelDesc_NewWriter)),Channel__ChannelDesc_NewWriter)((Channel__Channel)i1);
-  *(OOC_INT32*)((_check_pointer(i0, 47058))+8) = i2;
-  *(OOC_INT32*)((_check_pointer(i0, 47095))+12) = i1;
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 47079)))), Channel__ChannelDesc_NewWriter)),Channel__ChannelDesc_NewWriter)((Channel__Channel)i1);
+  *(OOC_INT32*)((_check_pointer(i0, 47061))+8) = i2;
+  *(OOC_INT32*)((_check_pointer(i0, 47098))+12) = i1;
   i1 = Strings__Length((void*)(OOC_INT32)CharClass__systemEol, 3);
-  *(OOC_INT16*)((_check_pointer(i0, 47114))+18) = i1;
-  i1 = *(OOC_INT16*)((_check_pointer(i0, 47183))+18);
+  *(OOC_INT16*)((_check_pointer(i0, 47117))+18) = i1;
+  i1 = *(OOC_INT16*)((_check_pointer(i0, 47186))+18);
   i1 = i1-1;
   i2 = (OOC_INT32)0<=i1;
   i = (OOC_INT32)0;
   if (!i2) goto l8;
   i2=(OOC_INT32)0;
 l3_loop:
-  i3 = *(OOC_UINT8*)((OOC_INT32)CharClass__systemEol+(_check_index(i2, 3, OOC_UINT16, 47235)));
-  *(OOC_UINT8*)(((_check_pointer(i0, 47204))+16)+(_check_index(i2, 2, OOC_UINT16, 47209))) = i3;
+  i3 = *(OOC_UINT8*)((OOC_INT32)CharClass__systemEol+(_check_index(i2, 3, OOC_UINT16, 47238)));
+  *(OOC_UINT8*)(((_check_pointer(i0, 47207))+16)+(_check_index(i2, 2, OOC_UINT16, 47212))) = i3;
   i2 = i2+1;
   i3 = i2<=i1;
   i = i2;
@@ -2899,7 +2903,7 @@ TextRider__Writer TextRider__ConnectWriter(Channel__Channel ch) {
   w = (TextRider__Writer)i0;
   i1 = (OOC_INT32)ch;
   TextRider__InitWriter((TextRider__Writer)i0, (Channel__Channel)i1);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 47395))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 47398))+8);
   i1 = i1==(OOC_INT32)0;
   if (i1) goto l3;
   return (TextRider__Writer)i0;
@@ -2907,7 +2911,7 @@ TextRider__Writer TextRider__ConnectWriter(Channel__Channel ch) {
 l3:
   return (TextRider__Writer)(OOC_INT32)0;
 l4:
-  _failed_function(47276); return 0;
+  _failed_function(47279); return 0;
   ;
 }
 
@@ -2915,14 +2919,14 @@ void TextRider__InitScanner(TextRider__Scanner s, Channel__Channel ch) {
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)s;
-  *(OOC_INT32*)(_check_pointer(i0, 47664)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 47667)) = (OOC_INT32)0;
   i1 = (OOC_INT32)ch;
   i2 = (OOC_INT32)TextRider__ConnectReader((Channel__Channel)i1);
-  *(OOC_INT32*)((_check_pointer(i0, 47684))+4) = i2;
-  *(OOC_UINT32*)((_check_pointer(i0, 47712))+12) = 30;
-  *(OOC_INT16*)((_check_pointer(i0, 47742))+16) = -1;
-  *(OOC_INT32*)((_check_pointer(i0, 47765))+24) = 0;
-  *(OOC_INT32*)((_check_pointer(i0, 47781))+8) = i1;
+  *(OOC_INT32*)((_check_pointer(i0, 47687))+4) = i2;
+  *(OOC_UINT32*)((_check_pointer(i0, 47715))+12) = 30;
+  *(OOC_INT16*)((_check_pointer(i0, 47745))+16) = -1;
+  *(OOC_INT32*)((_check_pointer(i0, 47768))+24) = 0;
+  *(OOC_INT32*)((_check_pointer(i0, 47784))+8) = i1;
   return;
   ;
 }
@@ -2935,7 +2939,7 @@ TextRider__Scanner TextRider__ConnectScanner(Channel__Channel ch) {
   s = (TextRider__Scanner)i0;
   i1 = (OOC_INT32)ch;
   TextRider__InitScanner((TextRider__Scanner)i0, (Channel__Channel)i1);
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 47948))+4);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 47951))+4);
   i1 = i1==(OOC_INT32)0;
   if (i1) goto l3;
   return (TextRider__Scanner)i0;
@@ -2943,7 +2947,7 @@ TextRider__Scanner TextRider__ConnectScanner(Channel__Channel ch) {
 l3:
   return (TextRider__Scanner)(OOC_INT32)0;
 l4:
-  _failed_function(47825); return 0;
+  _failed_function(47828); return 0;
   ;
 }
 

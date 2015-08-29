@@ -1,4 +1,4 @@
-(* 	$Id: Writer.Mod,v 1.7 2002/12/20 10:19:33 mva Exp $	 *)
+(* 	$Id: Writer.Mod,v 1.8 2002/12/30 09:29:21 mva Exp $	 *)
 MODULE OOC:IA32:Writer [OOC_EXTENSIONS];
 (*  Write assembler file.
     Copyright (C) 2002  Michael van Acken
@@ -65,14 +65,14 @@ PROCEDURE (w: Writer) Write* (str: ARRAY OF CHAR);
     w. textWriter. WriteString (str);
   END Write;
 
-PROCEDURE (w: Writer) WriteStr* (str: STRING);
+PROCEDURE (w: Writer) WriteObject* (str: STRING);
   BEGIN
-    w. textWriter. WriteStr (str);
-  END WriteStr;
+    w. textWriter. WriteObject (str);
+  END WriteObject;
 
 PROCEDURE (w: Writer) Label* (label: STRING);
   BEGIN
-    w. textWriter. WriteStr (label);
+    w. textWriter. WriteObject (label);
     w. textWriter. WriteChar (":");
     w. textWriter. WriteLn;
   END Label;

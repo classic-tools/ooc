@@ -413,6 +413,7 @@ typedef struct OOC_IR__ExitDesc {
   OOC_Scanner_Builder_BasicList__Symbol sym;
   OOC_SymbolTable__Type type;
   OOC_IR__LoopStatm loop;
+  OOC_INT32 popExceptionContext;
 } OOC_IR__ExitDesc;
 typedef struct OOC_IR__ForStatmDesc *OOC_IR__ForStatm;
 typedef struct OOC_IR__ForStatmDesc {
@@ -463,6 +464,12 @@ typedef struct OOC_IR__MoveBlockDesc {
   OOC_IR__Expression dest;
   OOC_IR__Expression size;
 } OOC_IR__MoveBlockDesc;
+typedef struct OOC_IR__RaiseDesc *OOC_IR__Raise;
+typedef struct OOC_IR__RaiseDesc {
+  OOC_Scanner_Builder_BasicList__Symbol sym;
+  OOC_SymbolTable__Type type;
+  OOC_IR__Expression exception;
+} OOC_IR__RaiseDesc;
 typedef struct OOC_IR__RepeatStatmDesc *OOC_IR__RepeatStatm;
 typedef struct OOC_IR__RepeatStatmDesc {
   OOC_Scanner_Builder_BasicList__Symbol sym;
@@ -475,7 +482,25 @@ typedef struct OOC_IR__ReturnDesc {
   OOC_Scanner_Builder_BasicList__Symbol sym;
   OOC_SymbolTable__Type type;
   OOC_IR__Expression result;
+  OOC_INT32 popExceptionContext;
 } OOC_IR__ReturnDesc;
+typedef struct OOC_IR__CatchClauseDesc *OOC_IR__CatchClause;
+typedef OOC_IR__CatchClause *OOC_IR__CatchList;
+typedef struct OOC_IR__CatchClauseDesc {
+  OOC_Scanner_Builder_BasicList__Symbol sym;
+  OOC_SymbolTable__Type type;
+  OOC_SymbolTable__Type exceptionType;
+  OOC_IR__StatementSeq statmSeq;
+  OOC_CHAR8 triggered;
+} OOC_IR__CatchClauseDesc;
+typedef struct OOC_IR__TryStatmDesc *OOC_IR__TryStatm;
+typedef struct OOC_IR__TryStatmDesc {
+  OOC_Scanner_Builder_BasicList__Symbol sym;
+  OOC_SymbolTable__Type type;
+  OOC_IR__StatementSeq statmSeq;
+  OOC_IR__CatchList catchList;
+  OOC_IR__TryStatm enclosingTry;
+} OOC_IR__TryStatmDesc;
 typedef struct OOC_IR__WhileStatmDesc *OOC_IR__WhileStatm;
 typedef struct OOC_IR__WhileStatmDesc {
   OOC_Scanner_Builder_BasicList__Symbol sym;
@@ -572,16 +597,16 @@ extern void OOC_IR__NodeDesc_Accept(OOC_IR__Node node, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__NodeDesc_Accept 3
 typedef void (*_TBP_OOC_IR__NodeDesc_Accept)(OOC_IR__Node node, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__ConstFoldDesc_TryConstFold(OOC_IR__ConstFold c, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__ConstFoldDesc_TryConstFold 55
+#define _TBN_OOC_IR__ConstFoldDesc_TryConstFold 58
 typedef OOC_IR__Expression (*_TBP_OOC_IR__ConstFoldDesc_TryConstFold)(OOC_IR__ConstFold c, OOC_IR__Expression expr);
 extern void OOC_IR__BuilderDesc_ErrSym(OOC_IR__Builder b, OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
 #define _TBN_OOC_IR__BuilderDesc_ErrSym 14
 typedef void (*_TBP_OOC_IR__BuilderDesc_ErrSym)(OOC_IR__Builder b, OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern void OOC_IR__BuilderDesc_WarnSym(OOC_IR__Builder b, OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_WarnSym 85
+#define _TBN_OOC_IR__BuilderDesc_WarnSym 88
 typedef void (*_TBP_OOC_IR__BuilderDesc_WarnSym)(OOC_IR__Builder b, OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern void OOC_IR__BuilderDesc_WarnName(OOC_IR__Builder b, OOC_INT32 code, OOC_SymbolTable__Name name);
-#define _TBN_OOC_IR__BuilderDesc_WarnName 84
+#define _TBN_OOC_IR__BuilderDesc_WarnName 87
 typedef void (*_TBP_OOC_IR__BuilderDesc_WarnName)(OOC_IR__Builder b, OOC_INT32 code, OOC_SymbolTable__Name name);
 extern OOC_IR__Const OOC_IR__BuilderDesc_ErrExpr(OOC_IR__Builder b, OOC_INT32 code, OOC_Scanner_Builder_BasicList__Symbol sym);
 #define _TBN_OOC_IR__BuilderDesc_ErrExpr 13
@@ -603,7 +628,7 @@ extern void OOC_IR__BuilderDesc_CheckFunctionOp(OOC_IR__Builder b, OOC_IR__Expre
 typedef void (*_TBP_OOC_IR__BuilderDesc_CheckFunctionOp)(OOC_IR__Builder b, OOC_IR__Expression expr, OOC_Scanner_Builder_BasicList__Symbol op);
 extern void OOC_IR__InitExpression(OOC_IR__Expression expr, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type);
 extern void OOC_IR__VisitorDesc_VisitConst(OOC_IR__Visitor v, OOC_IR__Const _const);
-#define _TBN_OOC_IR__VisitorDesc_VisitConst 15
+#define _TBN_OOC_IR__VisitorDesc_VisitConst 16
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitConst)(OOC_IR__Visitor v, OOC_IR__Const _const);
 extern void OOC_IR__ConstDesc_Accept(OOC_IR__Const _const, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ConstDesc_Accept 3
@@ -612,16 +637,16 @@ extern Object__String OOC_IR__ConstDesc_ToString(OOC_IR__Const _const);
 #define _TBN_OOC_IR__ConstDesc_ToString 2
 typedef Object__String (*_TBP_OOC_IR__ConstDesc_ToString)(OOC_IR__Const _const);
 extern OOC_IR__Const OOC_IR__BuilderDesc_NewConst(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, Object_Boxed__Object value);
-#define _TBN_OOC_IR__BuilderDesc_NewConst 34
+#define _TBN_OOC_IR__BuilderDesc_NewConst 35
 typedef OOC_IR__Const (*_TBP_OOC_IR__BuilderDesc_NewConst)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, Object_Boxed__Object value);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewStringConst(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewStringConst 72
+#define _TBN_OOC_IR__BuilderDesc_NewStringConst 74
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewStringConst)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewIntConst10(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewIntConst10 45
+#define _TBN_OOC_IR__BuilderDesc_NewIntConst10 46
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewIntConst10)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewIntConst16(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewIntConst16 46
+#define _TBN_OOC_IR__BuilderDesc_NewIntConst16 47
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewIntConst16)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Const OOC_IR__BuilderDesc_AssertConst(OOC_IR__Builder b, OOC_IR__Expression expr);
 #define _TBN_OOC_IR__BuilderDesc_AssertConst 2
@@ -645,22 +670,22 @@ extern OOC_IR__Expression OOC_IR__BuilderDesc_AssertSet(OOC_IR__Builder b, OOC_I
 #define _TBN_OOC_IR__BuilderDesc_AssertSet 7
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_AssertSet)(OOC_IR__Builder b, OOC_IR__Expression expr);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewRealConst(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT16 type);
-#define _TBN_OOC_IR__BuilderDesc_NewRealConst 61
+#define _TBN_OOC_IR__BuilderDesc_NewRealConst 63
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewRealConst)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT16 type);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewCharConst16(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewCharConst16 31
+#define _TBN_OOC_IR__BuilderDesc_NewCharConst16 32
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewCharConst16)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewNil(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewNil 55
+#define _TBN_OOC_IR__BuilderDesc_NewNil 56
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewNil)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewSize(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression type);
-#define _TBN_OOC_IR__BuilderDesc_NewSize 71
+#define _TBN_OOC_IR__BuilderDesc_NewSize 73
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewSize)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression type);
 extern OOC_IR__Const OOC_IR__BuilderDesc_GetOne(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type);
 #define _TBN_OOC_IR__BuilderDesc_GetOne 17
 typedef OOC_IR__Const (*_TBP_OOC_IR__BuilderDesc_GetOne)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_ValidSetElement(OOC_IR__Builder b, OOC_IR__Expression expr, OOC_SymbolTable__Type set);
-#define _TBN_OOC_IR__BuilderDesc_ValidSetElement 83
+#define _TBN_OOC_IR__BuilderDesc_ValidSetElement 86
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_ValidSetElement)(OOC_IR__Builder b, OOC_IR__Expression expr, OOC_SymbolTable__Type set);
 extern void OOC_IR__InitOperator(OOC_IR__Operator op, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewAbs(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression operand);
@@ -718,154 +743,154 @@ extern void OOC_IR__CapDesc_Accept(OOC_IR__Cap cap, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CapDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CapDesc_Accept)(OOC_IR__Cap cap, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewChangeElement(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT8 variant, OOC_IR__Expression set, OOC_IR__Expression element);
-#define _TBN_OOC_IR__BuilderDesc_NewChangeElement 30
+#define _TBN_OOC_IR__BuilderDesc_NewChangeElement 31
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewChangeElement)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT8 variant, OOC_IR__Expression set, OOC_IR__Expression element);
 extern void OOC_IR__VisitorDesc_VisitChangeElement(OOC_IR__Visitor v, OOC_IR__ChangeElement ch);
-#define _TBN_OOC_IR__VisitorDesc_VisitChangeElement 12
+#define _TBN_OOC_IR__VisitorDesc_VisitChangeElement 13
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitChangeElement)(OOC_IR__Visitor v, OOC_IR__ChangeElement ch);
 extern void OOC_IR__ChangeElementDesc_Accept(OOC_IR__ChangeElement ch, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ChangeElementDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ChangeElementDesc_Accept)(OOC_IR__ChangeElement ch, OOC_IR__Visitor v);
 extern OOC_IR__Compare OOC_IR__BuilderDesc_NewCompare(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression left, OOC_IR__Expression right);
-#define _TBN_OOC_IR__BuilderDesc_NewCompare 32
+#define _TBN_OOC_IR__BuilderDesc_NewCompare 33
 typedef OOC_IR__Compare (*_TBP_OOC_IR__BuilderDesc_NewCompare)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression left, OOC_IR__Expression right);
 extern void OOC_IR__VisitorDesc_VisitCompare(OOC_IR__Visitor v, OOC_IR__Compare op);
-#define _TBN_OOC_IR__VisitorDesc_VisitCompare 13
+#define _TBN_OOC_IR__VisitorDesc_VisitCompare 14
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitCompare)(OOC_IR__Visitor v, OOC_IR__Compare op);
 extern void OOC_IR__CompareDesc_Accept(OOC_IR__Compare op, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CompareDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CompareDesc_Accept)(OOC_IR__Compare op, OOC_IR__Visitor v);
 extern OOC_IR__Concat OOC_IR__BuilderDesc_NewConcat(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__ExpressionList strings);
-#define _TBN_OOC_IR__BuilderDesc_NewConcat 33
+#define _TBN_OOC_IR__BuilderDesc_NewConcat 34
 typedef OOC_IR__Concat (*_TBP_OOC_IR__BuilderDesc_NewConcat)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__ExpressionList strings);
 extern void OOC_IR__VisitorDesc_VisitConcat(OOC_IR__Visitor v, OOC_IR__Concat op);
-#define _TBN_OOC_IR__VisitorDesc_VisitConcat 14
+#define _TBN_OOC_IR__VisitorDesc_VisitConcat 15
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitConcat)(OOC_IR__Visitor v, OOC_IR__Concat op);
 extern void OOC_IR__ConcatDesc_Accept(OOC_IR__Concat op, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ConcatDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ConcatDesc_Accept)(OOC_IR__Concat op, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewDeref(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design);
-#define _TBN_OOC_IR__BuilderDesc_NewDeref 38
+#define _TBN_OOC_IR__BuilderDesc_NewDeref 39
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewDeref)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design);
 extern void OOC_IR__VisitorDesc_VisitDeref(OOC_IR__Visitor v, OOC_IR__Deref index);
-#define _TBN_OOC_IR__VisitorDesc_VisitDeref 19
+#define _TBN_OOC_IR__VisitorDesc_VisitDeref 20
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitDeref)(OOC_IR__Visitor v, OOC_IR__Deref index);
 extern void OOC_IR__DerefDesc_Accept(OOC_IR__Deref index, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__DerefDesc_Accept 3
 typedef void (*_TBP_OOC_IR__DerefDesc_Accept)(OOC_IR__Deref index, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewEntier(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewEntier 39
+#define _TBN_OOC_IR__BuilderDesc_NewEntier 40
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewEntier)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitEntier(OOC_IR__Visitor v, OOC_IR__Entier entier);
-#define _TBN_OOC_IR__VisitorDesc_VisitEntier 20
+#define _TBN_OOC_IR__VisitorDesc_VisitEntier 21
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitEntier)(OOC_IR__Visitor v, OOC_IR__Entier entier);
 extern void OOC_IR__EntierDesc_Accept(OOC_IR__Entier entier, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__EntierDesc_Accept 3
 typedef void (*_TBP_OOC_IR__EntierDesc_Accept)(OOC_IR__Entier entier, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewIndex(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression array, OOC_IR__Expression index);
-#define _TBN_OOC_IR__BuilderDesc_NewIndex 44
+#define _TBN_OOC_IR__BuilderDesc_NewIndex 45
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewIndex)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression array, OOC_IR__Expression index);
 extern void OOC_IR__VisitorDesc_VisitIndex(OOC_IR__Visitor v, OOC_IR__Index index);
-#define _TBN_OOC_IR__VisitorDesc_VisitIndex 24
+#define _TBN_OOC_IR__VisitorDesc_VisitIndex 25
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitIndex)(OOC_IR__Visitor v, OOC_IR__Index index);
 extern void OOC_IR__IndexDesc_Accept(OOC_IR__Index index, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__IndexDesc_Accept 3
 typedef void (*_TBP_OOC_IR__IndexDesc_Accept)(OOC_IR__Index index, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewLen(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression array, OOC_INT32 dim);
-#define _TBN_OOC_IR__BuilderDesc_NewLen 47
+#define _TBN_OOC_IR__BuilderDesc_NewLen 48
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewLen)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression array, OOC_INT32 dim);
 extern void OOC_IR__VisitorDesc_VisitLen(OOC_IR__Visitor v, OOC_IR__Len len);
-#define _TBN_OOC_IR__VisitorDesc_VisitLen 25
+#define _TBN_OOC_IR__VisitorDesc_VisitLen 26
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitLen)(OOC_IR__Visitor v, OOC_IR__Len len);
 extern void OOC_IR__LenDesc_Accept(OOC_IR__Len len, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__LenDesc_Accept 3
 typedef void (*_TBP_OOC_IR__LenDesc_Accept)(OOC_IR__Len len, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewNegate(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewNegate 52
+#define _TBN_OOC_IR__BuilderDesc_NewNegate 53
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewNegate)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitNegate(OOC_IR__Visitor v, OOC_IR__Negate neg);
-#define _TBN_OOC_IR__VisitorDesc_VisitNegate 30
+#define _TBN_OOC_IR__VisitorDesc_VisitNegate 31
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitNegate)(OOC_IR__Visitor v, OOC_IR__Negate neg);
 extern void OOC_IR__NegateDesc_Accept(OOC_IR__Negate neg, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__NegateDesc_Accept 3
 typedef void (*_TBP_OOC_IR__NegateDesc_Accept)(OOC_IR__Negate neg, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewNewBlock(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, OOC_IR__Expression size);
-#define _TBN_OOC_IR__BuilderDesc_NewNewBlock 53
+#define _TBN_OOC_IR__BuilderDesc_NewNewBlock 54
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewNewBlock)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, OOC_IR__Expression size);
 extern void OOC_IR__VisitorDesc_VisitNewBlock(OOC_IR__Visitor v, OOC_IR__NewBlock _new);
-#define _TBN_OOC_IR__VisitorDesc_VisitNewBlock 31
+#define _TBN_OOC_IR__VisitorDesc_VisitNewBlock 32
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitNewBlock)(OOC_IR__Visitor v, OOC_IR__NewBlock _new);
 extern void OOC_IR__NewBlockDesc_Accept(OOC_IR__NewBlock _new, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__NewBlockDesc_Accept 3
 typedef void (*_TBP_OOC_IR__NewBlockDesc_Accept)(OOC_IR__NewBlock _new, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewNewObject(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, OOC_IR__ExpressionList args);
-#define _TBN_OOC_IR__BuilderDesc_NewNewObject 54
+#define _TBN_OOC_IR__BuilderDesc_NewNewObject 55
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewNewObject)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__Type type, OOC_IR__ExpressionList args);
 extern void OOC_IR__VisitorDesc_VisitNewObject(OOC_IR__Visitor v, OOC_IR__NewObject _new);
-#define _TBN_OOC_IR__VisitorDesc_VisitNewObject 32
+#define _TBN_OOC_IR__VisitorDesc_VisitNewObject 33
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitNewObject)(OOC_IR__Visitor v, OOC_IR__NewObject _new);
 extern void OOC_IR__NewObjectDesc_Accept(OOC_IR__NewObject _new, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__NewObjectDesc_Accept 3
 typedef void (*_TBP_OOC_IR__NewObjectDesc_Accept)(OOC_IR__NewObject _new, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewNot(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewNot 56
+#define _TBN_OOC_IR__BuilderDesc_NewNot 57
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewNot)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitNot(OOC_IR__Visitor v, OOC_IR__Not neg);
-#define _TBN_OOC_IR__VisitorDesc_VisitNot 33
+#define _TBN_OOC_IR__VisitorDesc_VisitNot 34
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitNot)(OOC_IR__Visitor v, OOC_IR__Not neg);
 extern void OOC_IR__NotDesc_Accept(OOC_IR__Not neg, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__NotDesc_Accept 3
 typedef void (*_TBP_OOC_IR__NotDesc_Accept)(OOC_IR__Not neg, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewOdd(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewOdd 57
+#define _TBN_OOC_IR__BuilderDesc_NewOdd 58
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewOdd)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitOdd(OOC_IR__Visitor v, OOC_IR__Odd odd);
-#define _TBN_OOC_IR__VisitorDesc_VisitOdd 34
+#define _TBN_OOC_IR__VisitorDesc_VisitOdd 35
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitOdd)(OOC_IR__Visitor v, OOC_IR__Odd odd);
 extern void OOC_IR__OddDesc_Accept(OOC_IR__Odd odd, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__OddDesc_Accept 3
 typedef void (*_TBP_OOC_IR__OddDesc_Accept)(OOC_IR__Odd odd, OOC_IR__Visitor v);
 extern OOC_IR__SelectField OOC_IR__BuilderDesc_NewSelectField(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression record, OOC_SymbolTable__FieldDecl field, OOC_Scanner_Builder_BasicList__Symbol fieldSym);
-#define _TBN_OOC_IR__BuilderDesc_NewSelectField 65
+#define _TBN_OOC_IR__BuilderDesc_NewSelectField 67
 typedef OOC_IR__SelectField (*_TBP_OOC_IR__BuilderDesc_NewSelectField)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression record, OOC_SymbolTable__FieldDecl field, OOC_Scanner_Builder_BasicList__Symbol fieldSym);
 extern void OOC_IR__VisitorDesc_VisitSelectField(OOC_IR__Visitor v, OOC_IR__SelectField sf);
-#define _TBN_OOC_IR__VisitorDesc_VisitSelectField 40
+#define _TBN_OOC_IR__VisitorDesc_VisitSelectField 42
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitSelectField)(OOC_IR__Visitor v, OOC_IR__SelectField sf);
 extern void OOC_IR__SelectFieldDesc_Accept(OOC_IR__SelectField sf, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__SelectFieldDesc_Accept 3
 typedef void (*_TBP_OOC_IR__SelectFieldDesc_Accept)(OOC_IR__SelectField sf, OOC_IR__Visitor v);
 extern OOC_IR__SelectProc OOC_IR__BuilderDesc_NewSelectProc(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression receiver, OOC_SymbolTable__Record recordType, OOC_SymbolTable__ProcDecl tbProc, OOC_Scanner_Builder_BasicList__Symbol tbProcSym, OOC_CHAR8 isStaticCall);
-#define _TBN_OOC_IR__BuilderDesc_NewSelectProc 66
+#define _TBN_OOC_IR__BuilderDesc_NewSelectProc 68
 typedef OOC_IR__SelectProc (*_TBP_OOC_IR__BuilderDesc_NewSelectProc)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression receiver, OOC_SymbolTable__Record recordType, OOC_SymbolTable__ProcDecl tbProc, OOC_Scanner_Builder_BasicList__Symbol tbProcSym, OOC_CHAR8 isStaticCall);
 extern void OOC_IR__VisitorDesc_VisitSelectProc(OOC_IR__Visitor v, OOC_IR__SelectProc sp);
-#define _TBN_OOC_IR__VisitorDesc_VisitSelectProc 41
+#define _TBN_OOC_IR__VisitorDesc_VisitSelectProc 43
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitSelectProc)(OOC_IR__Visitor v, OOC_IR__SelectProc sp);
 extern void OOC_IR__SelectProcDesc_Accept(OOC_IR__SelectProc sp, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__SelectProcDesc_Accept 3
 typedef void (*_TBP_OOC_IR__SelectProcDesc_Accept)(OOC_IR__SelectProc sp, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewSetMember(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression element, OOC_IR__Expression set);
-#define _TBN_OOC_IR__BuilderDesc_NewSetMember 67
+#define _TBN_OOC_IR__BuilderDesc_NewSetMember 69
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewSetMember)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression element, OOC_IR__Expression set);
 extern void OOC_IR__VisitorDesc_VisitSetMember(OOC_IR__Visitor v, OOC_IR__SetMember op);
-#define _TBN_OOC_IR__VisitorDesc_VisitSetMember 42
+#define _TBN_OOC_IR__VisitorDesc_VisitSetMember 44
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitSetMember)(OOC_IR__Visitor v, OOC_IR__SetMember op);
 extern void OOC_IR__SetMemberDesc_Accept(OOC_IR__SetMember op, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__SetMemberDesc_Accept 3
 typedef void (*_TBP_OOC_IR__SetMemberDesc_Accept)(OOC_IR__SetMember op, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewSetOp(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT8 variant, OOC_IR__Expression left, OOC_IR__Expression right);
-#define _TBN_OOC_IR__BuilderDesc_NewSetOp 68
+#define _TBN_OOC_IR__BuilderDesc_NewSetOp 70
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewSetOp)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_INT8 variant, OOC_IR__Expression left, OOC_IR__Expression right);
 extern void OOC_IR__VisitorDesc_VisitSetOp(OOC_IR__Visitor v, OOC_IR__SetOp op);
-#define _TBN_OOC_IR__VisitorDesc_VisitSetOp 43
+#define _TBN_OOC_IR__VisitorDesc_VisitSetOp 45
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitSetOp)(OOC_IR__Visitor v, OOC_IR__SetOp op);
 extern void OOC_IR__SetOpDesc_Accept(OOC_IR__SetOp op, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__SetOpDesc_Accept 3
 typedef void (*_TBP_OOC_IR__SetOpDesc_Accept)(OOC_IR__SetOp op, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewSetRange(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression from, OOC_IR__Expression to, OOC_CHAR8 isSet);
-#define _TBN_OOC_IR__BuilderDesc_NewSetRange 69
+#define _TBN_OOC_IR__BuilderDesc_NewSetRange 71
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewSetRange)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression from, OOC_IR__Expression to, OOC_CHAR8 isSet);
 extern void OOC_IR__VisitorDesc_VisitSetRange(OOC_IR__Visitor v, OOC_IR__SetRange range);
-#define _TBN_OOC_IR__VisitorDesc_VisitSetRange 44
+#define _TBN_OOC_IR__VisitorDesc_VisitSetRange 46
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitSetRange)(OOC_IR__Visitor v, OOC_IR__SetRange range);
 extern void OOC_IR__SetRangeDesc_Accept(OOC_IR__SetRange range, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__SetRangeDesc_Accept 3
@@ -877,103 +902,103 @@ extern OOC_CHAR8 OOC_IR__SetRangeDesc_IntersectsWith(OOC_IR__SetRange range, OOC
 #define _TBN_OOC_IR__SetRangeDesc_IntersectsWith 4
 typedef OOC_CHAR8 (*_TBP_OOC_IR__SetRangeDesc_IntersectsWith)(OOC_IR__SetRange range, OOC_IR__SetRange range2);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewShift(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression value, OOC_IR__Expression by, OOC_CHAR8 rotate);
-#define _TBN_OOC_IR__BuilderDesc_NewShift 70
+#define _TBN_OOC_IR__BuilderDesc_NewShift 72
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewShift)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression value, OOC_IR__Expression by, OOC_CHAR8 rotate);
 extern void OOC_IR__VisitorDesc_VisitShift(OOC_IR__Visitor v, OOC_IR__Shift shift);
-#define _TBN_OOC_IR__VisitorDesc_VisitShift 45
+#define _TBN_OOC_IR__VisitorDesc_VisitShift 47
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitShift)(OOC_IR__Visitor v, OOC_IR__Shift shift);
 extern void OOC_IR__ShiftDesc_Accept(OOC_IR__Shift shift, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ShiftDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ShiftDesc_Accept)(OOC_IR__Shift shift, OOC_IR__Visitor v);
 extern OOC_IR__TypeCast OOC_IR__BuilderDesc_NewTypeCast(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression typeExpr, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeCast 73
+#define _TBN_OOC_IR__BuilderDesc_NewTypeCast 76
 typedef OOC_IR__TypeCast (*_TBP_OOC_IR__BuilderDesc_NewTypeCast)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression typeExpr, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitTypeCast(OOC_IR__Visitor v, OOC_IR__TypeCast cast);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeCast 46
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeCast 49
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeCast)(OOC_IR__Visitor v, OOC_IR__TypeCast cast);
 extern void OOC_IR__TypeCastDesc_Accept(OOC_IR__TypeCast cast, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeCastDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeCastDesc_Accept)(OOC_IR__TypeCast cast, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewTypeConv(OOC_IR__Builder b, OOC_SymbolTable__Type type, OOC_IR__Expression expr);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeConv 74
+#define _TBN_OOC_IR__BuilderDesc_NewTypeConv 77
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewTypeConv)(OOC_IR__Builder b, OOC_SymbolTable__Type type, OOC_IR__Expression expr);
 extern void OOC_IR__VisitorDesc_VisitTypeConv(OOC_IR__Visitor v, OOC_IR__TypeConv conv);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeConv 47
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeConv 50
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeConv)(OOC_IR__Visitor v, OOC_IR__TypeConv conv);
 extern void OOC_IR__TypeConvDesc_Accept(OOC_IR__TypeConv conv, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeConvDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeConvDesc_Accept)(OOC_IR__TypeConv conv, OOC_IR__Visitor v);
 extern OOC_CHAR8 OOC_IR__BuilderDesc_Widen(OOC_IR__Builder b, OOC_IR__Expression *expr, OOC_SymbolTable__Type type);
-#define _TBN_OOC_IR__BuilderDesc_Widen 86
+#define _TBN_OOC_IR__BuilderDesc_Widen 89
 typedef OOC_CHAR8 (*_TBP_OOC_IR__BuilderDesc_Widen)(OOC_IR__Builder b, OOC_IR__Expression *expr, OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_IR__BuilderDesc_WidenForAssign(OOC_IR__Builder b, OOC_IR__Expression *expr, OOC_SymbolTable__Type type);
-#define _TBN_OOC_IR__BuilderDesc_WidenForAssign 87
+#define _TBN_OOC_IR__BuilderDesc_WidenForAssign 90
 typedef OOC_CHAR8 (*_TBP_OOC_IR__BuilderDesc_WidenForAssign)(OOC_IR__Builder b, OOC_IR__Expression *expr, OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_IR__BuilderDesc_WidenToCommon(OOC_IR__Builder b, OOC_IR__Expression *left, OOC_IR__Expression *right);
-#define _TBN_OOC_IR__BuilderDesc_WidenToCommon 88
+#define _TBN_OOC_IR__BuilderDesc_WidenToCommon 91
 typedef OOC_CHAR8 (*_TBP_OOC_IR__BuilderDesc_WidenToCommon)(OOC_IR__Builder b, OOC_IR__Expression *left, OOC_IR__Expression *right);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewTypeTag(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeTag 77
+#define _TBN_OOC_IR__BuilderDesc_NewTypeTag 80
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewTypeTag)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design);
 extern void OOC_IR__VisitorDesc_VisitTypeTag(OOC_IR__Visitor v, OOC_IR__TypeTag tag);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeTag 50
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeTag 53
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeTag)(OOC_IR__Visitor v, OOC_IR__TypeTag tag);
 extern void OOC_IR__TypeTagDesc_Accept(OOC_IR__TypeTag tag, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeTagDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeTagDesc_Accept)(OOC_IR__TypeTag tag, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewTypeTest(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr, OOC_IR__Expression referenceType);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeTest 78
+#define _TBN_OOC_IR__BuilderDesc_NewTypeTest 81
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewTypeTest)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression expr, OOC_IR__Expression referenceType);
 extern void OOC_IR__VisitorDesc_VisitTypeTest(OOC_IR__Visitor v, OOC_IR__TypeTest test);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeTest 51
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeTest 54
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeTest)(OOC_IR__Visitor v, OOC_IR__TypeTest test);
 extern void OOC_IR__TypeTestDesc_Accept(OOC_IR__TypeTest test, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeTestDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeTestDesc_Accept)(OOC_IR__TypeTest test, OOC_IR__Visitor v);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewTypeGuard(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design, OOC_IR__TypeRef ref);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeGuard 75
+#define _TBN_OOC_IR__BuilderDesc_NewTypeGuard 78
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewTypeGuard)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression design, OOC_IR__TypeRef ref);
 extern void OOC_IR__VisitorDesc_VisitTypeGuard(OOC_IR__Visitor v, OOC_IR__TypeGuard test);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeGuard 48
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeGuard 51
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeGuard)(OOC_IR__Visitor v, OOC_IR__TypeGuard test);
 extern void OOC_IR__TypeGuardDesc_Accept(OOC_IR__TypeGuard test, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeGuardDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeGuardDesc_Accept)(OOC_IR__TypeGuard test, OOC_IR__Visitor v);
 extern OOC_IR__ModuleRef OOC_IR__BuilderDesc_NewModuleRef(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__Module decl);
-#define _TBN_OOC_IR__BuilderDesc_NewModuleRef 50
+#define _TBN_OOC_IR__BuilderDesc_NewModuleRef 51
 typedef OOC_IR__ModuleRef (*_TBP_OOC_IR__BuilderDesc_NewModuleRef)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__Module decl);
 extern void OOC_IR__VisitorDesc_VisitModuleRef(OOC_IR__Visitor v, OOC_IR__ModuleRef modRef);
-#define _TBN_OOC_IR__VisitorDesc_VisitModuleRef 28
+#define _TBN_OOC_IR__VisitorDesc_VisitModuleRef 29
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitModuleRef)(OOC_IR__Visitor v, OOC_IR__ModuleRef modRef);
 extern void OOC_IR__ModuleRefDesc_Accept(OOC_IR__ModuleRef modRef, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ModuleRefDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ModuleRefDesc_Accept)(OOC_IR__ModuleRef modRef, OOC_IR__Visitor v);
 extern void OOC_IR__VisitorDesc_VisitPredefProc(OOC_IR__Visitor v, OOC_IR__PredefProc pproc);
-#define _TBN_OOC_IR__VisitorDesc_VisitPredefProc 35
+#define _TBN_OOC_IR__VisitorDesc_VisitPredefProc 36
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitPredefProc)(OOC_IR__Visitor v, OOC_IR__PredefProc pproc);
 extern void OOC_IR__PredefProcDesc_Accept(OOC_IR__PredefProc pproc, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__PredefProcDesc_Accept 3
 typedef void (*_TBP_OOC_IR__PredefProcDesc_Accept)(OOC_IR__PredefProc pproc, OOC_IR__Visitor v);
 extern void OOC_IR__VisitorDesc_VisitProcedureRef(OOC_IR__Visitor v, OOC_IR__ProcedureRef procRef);
-#define _TBN_OOC_IR__VisitorDesc_VisitProcedureRef 37
+#define _TBN_OOC_IR__VisitorDesc_VisitProcedureRef 38
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitProcedureRef)(OOC_IR__Visitor v, OOC_IR__ProcedureRef procRef);
 extern void OOC_IR__ProcedureRefDesc_Accept(OOC_IR__ProcedureRef procRef, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ProcedureRefDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ProcedureRefDesc_Accept)(OOC_IR__ProcedureRef procRef, OOC_IR__Visitor v);
 extern OOC_IR__TypeRef OOC_IR__BuilderDesc_NewTypeRef(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__TypeDecl decl);
-#define _TBN_OOC_IR__BuilderDesc_NewTypeRef 76
+#define _TBN_OOC_IR__BuilderDesc_NewTypeRef 79
 typedef OOC_IR__TypeRef (*_TBP_OOC_IR__BuilderDesc_NewTypeRef)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__TypeDecl decl);
 extern void OOC_IR__VisitorDesc_VisitTypeRef(OOC_IR__Visitor v, OOC_IR__TypeRef typeRef);
-#define _TBN_OOC_IR__VisitorDesc_VisitTypeRef 49
+#define _TBN_OOC_IR__VisitorDesc_VisitTypeRef 52
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTypeRef)(OOC_IR__Visitor v, OOC_IR__TypeRef typeRef);
 extern void OOC_IR__TypeRefDesc_Accept(OOC_IR__TypeRef typeRef, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__TypeRefDesc_Accept 3
 typedef void (*_TBP_OOC_IR__TypeRefDesc_Accept)(OOC_IR__TypeRef typeRef, OOC_IR__Visitor v);
 extern OOC_IR__Var OOC_IR__BuilderDesc_NewVar(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__VarDecl decl);
-#define _TBN_OOC_IR__BuilderDesc_NewVar 79
+#define _TBN_OOC_IR__BuilderDesc_NewVar 82
 typedef OOC_IR__Var (*_TBP_OOC_IR__BuilderDesc_NewVar)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol name, OOC_SymbolTable__VarDecl decl);
 extern void OOC_IR__VisitorDesc_VisitVar(OOC_IR__Visitor v, OOC_IR__Var var);
-#define _TBN_OOC_IR__VisitorDesc_VisitVar 52
+#define _TBN_OOC_IR__VisitorDesc_VisitVar 55
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitVar)(OOC_IR__Visitor v, OOC_IR__Var var);
 extern void OOC_IR__VarDesc_Accept(OOC_IR__Var var, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__VarDesc_Accept 3
@@ -1017,56 +1042,56 @@ extern void OOC_IR__CallDesc_Accept(OOC_IR__Call call, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CallDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CallDesc_Accept)(OOC_IR__Call call, OOC_IR__Visitor v);
 extern OOC_IR__Copy OOC_IR__BuilderDesc_NewCopy(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest);
-#define _TBN_OOC_IR__BuilderDesc_NewCopy 35
+#define _TBN_OOC_IR__BuilderDesc_NewCopy 36
 typedef OOC_IR__Copy (*_TBP_OOC_IR__BuilderDesc_NewCopy)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest);
 extern void OOC_IR__VisitorDesc_VisitCopy(OOC_IR__Visitor v, OOC_IR__Copy cp);
-#define _TBN_OOC_IR__VisitorDesc_VisitCopy 16
+#define _TBN_OOC_IR__VisitorDesc_VisitCopy 17
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitCopy)(OOC_IR__Visitor v, OOC_IR__Copy cp);
 extern void OOC_IR__CopyDesc_Accept(OOC_IR__Copy cp, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CopyDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CopyDesc_Accept)(OOC_IR__Copy cp, OOC_IR__Visitor v);
 extern OOC_IR__CopyParameter OOC_IR__BuilderDesc_NewCopyParameter(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Var param);
-#define _TBN_OOC_IR__BuilderDesc_NewCopyParameter 36
+#define _TBN_OOC_IR__BuilderDesc_NewCopyParameter 37
 typedef OOC_IR__CopyParameter (*_TBP_OOC_IR__BuilderDesc_NewCopyParameter)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Var param);
 extern void OOC_IR__VisitorDesc_VisitCopyParameter(OOC_IR__Visitor v, OOC_IR__CopyParameter cp);
-#define _TBN_OOC_IR__VisitorDesc_VisitCopyParameter 17
+#define _TBN_OOC_IR__VisitorDesc_VisitCopyParameter 18
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitCopyParameter)(OOC_IR__Visitor v, OOC_IR__CopyParameter cp);
 extern void OOC_IR__CopyParameterDesc_Accept(OOC_IR__CopyParameter cp, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CopyParameterDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CopyParameterDesc_Accept)(OOC_IR__CopyParameter cp, OOC_IR__Visitor v);
 extern OOC_IR__CopyString OOC_IR__BuilderDesc_NewCopyString(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest, OOC_IR__Expression maxLength);
-#define _TBN_OOC_IR__BuilderDesc_NewCopyString 37
+#define _TBN_OOC_IR__BuilderDesc_NewCopyString 38
 typedef OOC_IR__CopyString (*_TBP_OOC_IR__BuilderDesc_NewCopyString)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest, OOC_IR__Expression maxLength);
 extern void OOC_IR__VisitorDesc_VisitCopyString(OOC_IR__Visitor v, OOC_IR__CopyString cp);
-#define _TBN_OOC_IR__VisitorDesc_VisitCopyString 18
+#define _TBN_OOC_IR__VisitorDesc_VisitCopyString 19
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitCopyString)(OOC_IR__Visitor v, OOC_IR__CopyString cp);
 extern void OOC_IR__CopyStringDesc_Accept(OOC_IR__CopyString cp, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__CopyStringDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CopyStringDesc_Accept)(OOC_IR__CopyString cp, OOC_IR__Visitor v);
 extern void OOC_IR__InitExit(OOC_IR__Exit exit, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern OOC_IR__Exit OOC_IR__BuilderDesc_NewExit(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
-#define _TBN_OOC_IR__BuilderDesc_NewExit 40
+#define _TBN_OOC_IR__BuilderDesc_NewExit 41
 typedef OOC_IR__Exit (*_TBP_OOC_IR__BuilderDesc_NewExit)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym);
 extern void OOC_IR__VisitorDesc_VisitExit(OOC_IR__Visitor v, OOC_IR__Exit exit);
-#define _TBN_OOC_IR__VisitorDesc_VisitExit 21
+#define _TBN_OOC_IR__VisitorDesc_VisitExit 22
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitExit)(OOC_IR__Visitor v, OOC_IR__Exit exit);
 extern void OOC_IR__ExitDesc_Accept(OOC_IR__Exit exit, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ExitDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ExitDesc_Accept)(OOC_IR__Exit exit, OOC_IR__Visitor v);
 extern OOC_IR__ForStatm OOC_IR__BuilderDesc_NewForStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression var, OOC_IR__Expression start, OOC_IR__Expression end, OOC_IR__Expression step, OOC_IR__StatementSeq body);
-#define _TBN_OOC_IR__BuilderDesc_NewForStatm 41
+#define _TBN_OOC_IR__BuilderDesc_NewForStatm 42
 typedef OOC_IR__ForStatm (*_TBP_OOC_IR__BuilderDesc_NewForStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression var, OOC_IR__Expression start, OOC_IR__Expression end, OOC_IR__Expression step, OOC_IR__StatementSeq body);
 extern void OOC_IR__VisitorDesc_VisitForStatm(OOC_IR__Visitor v, OOC_IR__ForStatm forStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitForStatm 22
+#define _TBN_OOC_IR__VisitorDesc_VisitForStatm 23
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitForStatm)(OOC_IR__Visitor v, OOC_IR__ForStatm forStatm);
 extern void OOC_IR__ForStatmDesc_Accept(OOC_IR__ForStatm forStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ForStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ForStatmDesc_Accept)(OOC_IR__ForStatm forStatm, OOC_IR__Visitor v);
 extern OOC_IR__IfStatm OOC_IR__BuilderDesc_NewIfStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq pathTrue, OOC_IR__StatementSeq pathFalse);
-#define _TBN_OOC_IR__BuilderDesc_NewIfStatm 43
+#define _TBN_OOC_IR__BuilderDesc_NewIfStatm 44
 typedef OOC_IR__IfStatm (*_TBP_OOC_IR__BuilderDesc_NewIfStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq pathTrue, OOC_IR__StatementSeq pathFalse);
 extern void OOC_IR__VisitorDesc_VisitIfStatm(OOC_IR__Visitor v, OOC_IR__IfStatm ifStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitIfStatm 23
+#define _TBN_OOC_IR__VisitorDesc_VisitIfStatm 24
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitIfStatm)(OOC_IR__Visitor v, OOC_IR__IfStatm ifStatm);
 extern void OOC_IR__IfStatmDesc_Accept(OOC_IR__IfStatm ifStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__IfStatmDesc_Accept 3
@@ -1093,78 +1118,105 @@ extern void OOC_IR__CaseStatmDesc_Accept(OOC_IR__CaseStatm caseStatm, OOC_IR__Vi
 #define _TBN_OOC_IR__CaseStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__CaseStatmDesc_Accept)(OOC_IR__CaseStatm caseStatm, OOC_IR__Visitor v);
 extern OOC_IR__LoopStatm OOC_IR__BuilderDesc_NewLoopStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq body);
-#define _TBN_OOC_IR__BuilderDesc_NewLoopStatm 48
+#define _TBN_OOC_IR__BuilderDesc_NewLoopStatm 49
 typedef OOC_IR__LoopStatm (*_TBP_OOC_IR__BuilderDesc_NewLoopStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq body);
 extern void OOC_IR__VisitorDesc_VisitLoopStatm(OOC_IR__Visitor v, OOC_IR__LoopStatm loopStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitLoopStatm 26
+#define _TBN_OOC_IR__VisitorDesc_VisitLoopStatm 27
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitLoopStatm)(OOC_IR__Visitor v, OOC_IR__LoopStatm loopStatm);
 extern void OOC_IR__LoopStatmDesc_Accept(OOC_IR__LoopStatm loopStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__LoopStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__LoopStatmDesc_Accept)(OOC_IR__LoopStatm loopStatm, OOC_IR__Visitor v);
 extern OOC_IR__MoveBlock OOC_IR__BuilderDesc_NewMoveBlock(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest, OOC_IR__Expression size);
-#define _TBN_OOC_IR__BuilderDesc_NewMoveBlock 51
+#define _TBN_OOC_IR__BuilderDesc_NewMoveBlock 52
 typedef OOC_IR__MoveBlock (*_TBP_OOC_IR__BuilderDesc_NewMoveBlock)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression source, OOC_IR__Expression dest, OOC_IR__Expression size);
 extern void OOC_IR__VisitorDesc_VisitMoveBlock(OOC_IR__Visitor v, OOC_IR__MoveBlock move);
-#define _TBN_OOC_IR__VisitorDesc_VisitMoveBlock 29
+#define _TBN_OOC_IR__VisitorDesc_VisitMoveBlock 30
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitMoveBlock)(OOC_IR__Visitor v, OOC_IR__MoveBlock move);
 extern void OOC_IR__MoveBlockDesc_Accept(OOC_IR__MoveBlock move, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__MoveBlockDesc_Accept 3
 typedef void (*_TBP_OOC_IR__MoveBlockDesc_Accept)(OOC_IR__MoveBlock move, OOC_IR__Visitor v);
+extern OOC_IR__Raise OOC_IR__BuilderDesc_NewRaise(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression exception);
+#define _TBN_OOC_IR__BuilderDesc_NewRaise 62
+typedef OOC_IR__Raise (*_TBP_OOC_IR__BuilderDesc_NewRaise)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression exception);
+extern void OOC_IR__VisitorDesc_VisitRaise(OOC_IR__Visitor v, OOC_IR__Raise raise);
+#define _TBN_OOC_IR__VisitorDesc_VisitRaise 39
+typedef void (*_TBP_OOC_IR__VisitorDesc_VisitRaise)(OOC_IR__Visitor v, OOC_IR__Raise raise);
+extern void OOC_IR__RaiseDesc_Accept(OOC_IR__Raise raise, OOC_IR__Visitor v);
+#define _TBN_OOC_IR__RaiseDesc_Accept 3
+typedef void (*_TBP_OOC_IR__RaiseDesc_Accept)(OOC_IR__Raise raise, OOC_IR__Visitor v);
 extern OOC_IR__RepeatStatm OOC_IR__BuilderDesc_NewRepeatStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq body, OOC_IR__Expression exitCondition);
-#define _TBN_OOC_IR__BuilderDesc_NewRepeatStatm 62
+#define _TBN_OOC_IR__BuilderDesc_NewRepeatStatm 64
 typedef OOC_IR__RepeatStatm (*_TBP_OOC_IR__BuilderDesc_NewRepeatStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq body, OOC_IR__Expression exitCondition);
 extern void OOC_IR__VisitorDesc_VisitRepeatStatm(OOC_IR__Visitor v, OOC_IR__RepeatStatm repeatStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitRepeatStatm 38
+#define _TBN_OOC_IR__VisitorDesc_VisitRepeatStatm 40
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitRepeatStatm)(OOC_IR__Visitor v, OOC_IR__RepeatStatm repeatStatm);
 extern void OOC_IR__RepeatStatmDesc_Accept(OOC_IR__RepeatStatm repeatStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__RepeatStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__RepeatStatmDesc_Accept)(OOC_IR__RepeatStatm repeatStatm, OOC_IR__Visitor v);
 extern OOC_IR__Return OOC_IR__BuilderDesc_NewReturn(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression result);
-#define _TBN_OOC_IR__BuilderDesc_NewReturn 63
+#define _TBN_OOC_IR__BuilderDesc_NewReturn 65
 typedef OOC_IR__Return (*_TBP_OOC_IR__BuilderDesc_NewReturn)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression result);
 extern void OOC_IR__VisitorDesc_VisitReturn(OOC_IR__Visitor v, OOC_IR__Return _return);
-#define _TBN_OOC_IR__VisitorDesc_VisitReturn 39
+#define _TBN_OOC_IR__VisitorDesc_VisitReturn 41
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitReturn)(OOC_IR__Visitor v, OOC_IR__Return _return);
 extern void OOC_IR__ReturnDesc_Accept(OOC_IR__Return _return, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ReturnDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ReturnDesc_Accept)(OOC_IR__Return _return, OOC_IR__Visitor v);
+extern OOC_IR__CatchClause OOC_IR__BuilderDesc_NewCatchClause(OOC_IR__Builder b, OOC_IR__Expression guardType, OOC_IR__StatementSeq statmSeq);
+#define _TBN_OOC_IR__BuilderDesc_NewCatchClause 30
+typedef OOC_IR__CatchClause (*_TBP_OOC_IR__BuilderDesc_NewCatchClause)(OOC_IR__Builder b, OOC_IR__Expression guardType, OOC_IR__StatementSeq statmSeq);
+extern void OOC_IR__VisitorDesc_VisitCatchClause(OOC_IR__Visitor v, OOC_IR__CatchClause _catch);
+#define _TBN_OOC_IR__VisitorDesc_VisitCatchClause 12
+typedef void (*_TBP_OOC_IR__VisitorDesc_VisitCatchClause)(OOC_IR__Visitor v, OOC_IR__CatchClause _catch);
+extern void OOC_IR__CatchClauseDesc_Accept(OOC_IR__CatchClause _catch, OOC_IR__Visitor v);
+#define _TBN_OOC_IR__CatchClauseDesc_Accept 3
+typedef void (*_TBP_OOC_IR__CatchClauseDesc_Accept)(OOC_IR__CatchClause _catch, OOC_IR__Visitor v);
+extern OOC_IR__TryStatm OOC_IR__BuilderDesc_NewTryStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq statmSeq, OOC_IR__CatchList catchList);
+#define _TBN_OOC_IR__BuilderDesc_NewTryStatm 75
+typedef OOC_IR__TryStatm (*_TBP_OOC_IR__BuilderDesc_NewTryStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__StatementSeq statmSeq, OOC_IR__CatchList catchList);
+extern void OOC_IR__VisitorDesc_VisitTryStatm(OOC_IR__Visitor v, OOC_IR__TryStatm tryStatm);
+#define _TBN_OOC_IR__VisitorDesc_VisitTryStatm 48
+typedef void (*_TBP_OOC_IR__VisitorDesc_VisitTryStatm)(OOC_IR__Visitor v, OOC_IR__TryStatm tryStatm);
+extern void OOC_IR__TryStatmDesc_Accept(OOC_IR__TryStatm tryStatm, OOC_IR__Visitor v);
+#define _TBN_OOC_IR__TryStatmDesc_Accept 3
+typedef void (*_TBP_OOC_IR__TryStatmDesc_Accept)(OOC_IR__TryStatm tryStatm, OOC_IR__Visitor v);
 extern OOC_IR__WhileStatm OOC_IR__BuilderDesc_NewWhileStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq body);
-#define _TBN_OOC_IR__BuilderDesc_NewWhileStatm 80
+#define _TBN_OOC_IR__BuilderDesc_NewWhileStatm 83
 typedef OOC_IR__WhileStatm (*_TBP_OOC_IR__BuilderDesc_NewWhileStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq body);
 extern void OOC_IR__VisitorDesc_VisitWhileStatm(OOC_IR__Visitor v, OOC_IR__WhileStatm whileStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitWhileStatm 53
+#define _TBN_OOC_IR__VisitorDesc_VisitWhileStatm 56
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitWhileStatm)(OOC_IR__Visitor v, OOC_IR__WhileStatm whileStatm);
 extern void OOC_IR__WhileStatmDesc_Accept(OOC_IR__WhileStatm whileStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__WhileStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__WhileStatmDesc_Accept)(OOC_IR__WhileStatm whileStatm, OOC_IR__Visitor v);
 extern OOC_IR__WithStatm OOC_IR__BuilderDesc_NewWithStatm(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq pathTrue, OOC_IR__StatementSeq pathFalse);
-#define _TBN_OOC_IR__BuilderDesc_NewWithStatm 81
+#define _TBN_OOC_IR__BuilderDesc_NewWithStatm 84
 typedef OOC_IR__WithStatm (*_TBP_OOC_IR__BuilderDesc_NewWithStatm)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression guard, OOC_IR__StatementSeq pathTrue, OOC_IR__StatementSeq pathFalse);
 extern void OOC_IR__VisitorDesc_VisitWithStatm(OOC_IR__Visitor v, OOC_IR__WithStatm withStatm);
-#define _TBN_OOC_IR__VisitorDesc_VisitWithStatm 54
+#define _TBN_OOC_IR__VisitorDesc_VisitWithStatm 57
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitWithStatm)(OOC_IR__Visitor v, OOC_IR__WithStatm withStatm);
 extern void OOC_IR__WithStatmDesc_Accept(OOC_IR__WithStatm withStatm, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__WithStatmDesc_Accept 3
 typedef void (*_TBP_OOC_IR__WithStatmDesc_Accept)(OOC_IR__WithStatm withStatm, OOC_IR__Visitor v);
-extern void OOC_IR__BuilderDesc_CheckExit(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq, OOC_IR__LoopStatm currentLoop);
+extern void OOC_IR__BuilderDesc_CheckExit(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq);
 #define _TBN_OOC_IR__BuilderDesc_CheckExit 10
-typedef void (*_TBP_OOC_IR__BuilderDesc_CheckExit)(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq, OOC_IR__LoopStatm currentLoop);
+typedef void (*_TBP_OOC_IR__BuilderDesc_CheckExit)(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq);
 extern void OOC_IR__InitProcedure(OOC_IR__Procedure p, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 checkFunctionResult);
 extern OOC_IR__Procedure OOC_IR__BuilderDesc_NewProcedure(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 hasBegin);
-#define _TBN_OOC_IR__BuilderDesc_NewProcedure 59
+#define _TBN_OOC_IR__BuilderDesc_NewProcedure 60
 typedef OOC_IR__Procedure (*_TBP_OOC_IR__BuilderDesc_NewProcedure)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 hasBegin);
 extern void OOC_IR__VisitorDesc_VisitProcedure(OOC_IR__Visitor v, OOC_IR__Procedure procedure);
-#define _TBN_OOC_IR__VisitorDesc_VisitProcedure 36
+#define _TBN_OOC_IR__VisitorDesc_VisitProcedure 37
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitProcedure)(OOC_IR__Visitor v, OOC_IR__Procedure procedure);
 extern void OOC_IR__ProcedureDesc_Accept(OOC_IR__Procedure p, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ProcedureDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ProcedureDesc_Accept)(OOC_IR__Procedure p, OOC_IR__Visitor v);
 extern void OOC_IR__InitModule(OOC_IR__Module m, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_IR__ProcedureList procList, OOC_IR__Procedure moduleBody);
 extern OOC_IR__Module OOC_IR__BuilderDesc_NewModule(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq);
-#define _TBN_OOC_IR__BuilderDesc_NewModule 49
+#define _TBN_OOC_IR__BuilderDesc_NewModule 50
 typedef OOC_IR__Module (*_TBP_OOC_IR__BuilderDesc_NewModule)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq);
 extern void OOC_IR__VisitorDesc_VisitModule(OOC_IR__Visitor v, OOC_IR__Module module);
-#define _TBN_OOC_IR__VisitorDesc_VisitModule 27
+#define _TBN_OOC_IR__VisitorDesc_VisitModule 28
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitModule)(OOC_IR__Visitor v, OOC_IR__Module module);
 extern void OOC_IR__ModuleDesc_Accept(OOC_IR__Module m, OOC_IR__Visitor v);
 #define _TBN_OOC_IR__ModuleDesc_Accept 3
@@ -1177,22 +1229,22 @@ extern void OOC_IR__InitConstFold(OOC_IR__ConstFold c, OOC_IR__Builder b);
 extern void OOC_IR__InitBuilder(OOC_IR__Builder b, OOC_SymbolTable__Module module, OOC_Config_Pragmas__History pragmaHistory, OOC_Error__List errList, OOC_IR__ConstFold fold);
 extern OOC_IR__Builder OOC_IR__NewBuilder(OOC_SymbolTable__Module module, OOC_Config_Pragmas__History pragmaHistory, OOC_Error__List errList, OOC_IR__ConstFold constFold);
 extern void OOC_IR__BuilderDesc_StartTypeGuard(OOC_IR__Builder b, OOC_IR__TypeTest typeTest, OOC_SymbolTable__Namespace *namespace);
-#define _TBN_OOC_IR__BuilderDesc_StartTypeGuard 82
+#define _TBN_OOC_IR__BuilderDesc_StartTypeGuard 85
 typedef void (*_TBP_OOC_IR__BuilderDesc_StartTypeGuard)(OOC_IR__Builder b, OOC_IR__TypeTest typeTest, OOC_SymbolTable__Namespace *namespace);
 extern void OOC_IR__BuilderDesc_EndTypeGuard(OOC_IR__Builder b, OOC_SymbolTable__Namespace *namespace);
 #define _TBN_OOC_IR__BuilderDesc_EndTypeGuard 12
 typedef void (*_TBP_OOC_IR__BuilderDesc_EndTypeGuard)(OOC_IR__Builder b, OOC_SymbolTable__Namespace *namespace);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewIdentRef(OOC_IR__Builder b, OOC_SymbolTable__Namespace baseNS, OOC_SymbolTable__Namespace ns, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
-#define _TBN_OOC_IR__BuilderDesc_NewIdentRef 42
+#define _TBN_OOC_IR__BuilderDesc_NewIdentRef 43
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewIdentRef)(OOC_IR__Builder b, OOC_SymbolTable__Namespace baseNS, OOC_SymbolTable__Namespace ns, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewQualident(OOC_IR__Builder b, OOC_SymbolTable__Namespace baseNS, OOC_IR__ModuleRef modref, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
-#define _TBN_OOC_IR__BuilderDesc_NewQualident 60
+#define _TBN_OOC_IR__BuilderDesc_NewQualident 61
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewQualident)(OOC_IR__Builder b, OOC_SymbolTable__Namespace baseNS, OOC_IR__ModuleRef modref, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewSelect(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression var, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
-#define _TBN_OOC_IR__BuilderDesc_NewSelect 64
+#define _TBN_OOC_IR__BuilderDesc_NewSelect 66
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewSelect)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression var, OOC_SymbolTable__Item context, OOC_Scanner_Builder_BasicList__Symbol name);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewOperator(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression left, OOC_IR__Expression right);
-#define _TBN_OOC_IR__BuilderDesc_NewOperator 58
+#define _TBN_OOC_IR__BuilderDesc_NewOperator 59
 typedef OOC_IR__Expression (*_TBP_OOC_IR__BuilderDesc_NewOperator)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_IR__Expression left, OOC_IR__Expression right);
 extern OOC_IR__Expression OOC_IR__BuilderDesc_NewCall(OOC_IR__Builder b, OOC_IR__Expression design, OOC_IR__ExpressionList arguments, OOC_CHAR8 isFunctionCall, OOC_Scanner_Builder_BasicList__Symbol endOfArgsSym);
 #define _TBN_OOC_IR__BuilderDesc_NewCall 26
@@ -1206,7 +1258,7 @@ extern RT0__StructDesc _td_OOC_IR__NodeDesc;
 extern RT0__StructDesc _td_OOC_IR__GuardedVar;
 extern RT0__StructDesc _td_OOC_IR__GuardedVarDesc;
 extern RT0__StructDesc _td_OOC_IR__Expression;
-extern RT0__StructDesc _td_OOC_IR__9047;
+extern RT0__StructDesc _td_OOC_IR__9052;
 extern RT0__StructDesc _td_OOC_IR__ExpressionList;
 extern RT0__StructDesc _td_OOC_IR__ExpressionDesc;
 extern RT0__StructDesc _td_OOC_IR__Const;
@@ -1285,7 +1337,7 @@ extern RT0__StructDesc _td_OOC_IR__Var;
 extern RT0__StructDesc _td_OOC_IR__VarDesc;
 extern RT0__StructDesc _td_OOC_IR__Statement;
 extern RT0__StructDesc _td_OOC_IR__LoopStatm;
-extern RT0__StructDesc _td_OOC_IR__23604;
+extern RT0__StructDesc _td_OOC_IR__23609;
 extern RT0__StructDesc _td_OOC_IR__StatementSeq;
 extern RT0__StructDesc _td_OOC_IR__StatementDesc;
 extern RT0__StructDesc _td_OOC_IR__Assert;
@@ -1309,26 +1361,34 @@ extern RT0__StructDesc _td_OOC_IR__ForStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__IfStatm;
 extern RT0__StructDesc _td_OOC_IR__IfStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Case;
-extern RT0__StructDesc _td_OOC_IR__28228;
+extern RT0__StructDesc _td_OOC_IR__28268;
 extern RT0__StructDesc _td_OOC_IR__CaseLabels;
 extern RT0__StructDesc _td_OOC_IR__CaseDesc;
 extern RT0__StructDesc _td_OOC_IR__CaseStatm;
-extern RT0__StructDesc _td_OOC_IR__28554;
+extern RT0__StructDesc _td_OOC_IR__28594;
 extern RT0__StructDesc _td_OOC_IR__CaseList;
 extern RT0__StructDesc _td_OOC_IR__CaseStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__LoopStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__MoveBlock;
 extern RT0__StructDesc _td_OOC_IR__MoveBlockDesc;
+extern RT0__StructDesc _td_OOC_IR__Raise;
+extern RT0__StructDesc _td_OOC_IR__RaiseDesc;
 extern RT0__StructDesc _td_OOC_IR__RepeatStatm;
 extern RT0__StructDesc _td_OOC_IR__RepeatStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Return;
 extern RT0__StructDesc _td_OOC_IR__ReturnDesc;
+extern RT0__StructDesc _td_OOC_IR__CatchClause;
+extern RT0__StructDesc _td_OOC_IR__30063;
+extern RT0__StructDesc _td_OOC_IR__CatchList;
+extern RT0__StructDesc _td_OOC_IR__CatchClauseDesc;
+extern RT0__StructDesc _td_OOC_IR__TryStatm;
+extern RT0__StructDesc _td_OOC_IR__TryStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__WhileStatm;
 extern RT0__StructDesc _td_OOC_IR__WhileStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__WithStatm;
 extern RT0__StructDesc _td_OOC_IR__WithStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Procedure;
-extern RT0__StructDesc _td_OOC_IR__30818;
+extern RT0__StructDesc _td_OOC_IR__31603;
 extern RT0__StructDesc _td_OOC_IR__ProcedureList;
 extern RT0__StructDesc _td_OOC_IR__ProcedureDesc;
 extern RT0__StructDesc _td_OOC_IR__Module;
@@ -1345,10 +1405,10 @@ extern RT0__StructDesc _td_OOC_IR__VisitorDesc;
 extern RT0__StructDesc _td_OOC_IR__ConstFoldDesc;
 extern RT0__StructDesc _td_OOC_IR__ErrorContext;
 extern RT0__StructDesc _td_OOC_IR__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_IR__36788;
-extern RT0__StructDesc _td_OOC_IR__37028;
-extern RT0__StructDesc _td_OOC_IR__54108;
-extern RT0__StructDesc _td_OOC_IR__54473;
+extern RT0__StructDesc _td_OOC_IR__37704;
+extern RT0__StructDesc _td_OOC_IR__37912;
+extern RT0__StructDesc _td_OOC_IR__55454;
+extern RT0__StructDesc _td_OOC_IR__55819;
 #endif /* _MODULE_OOC_IR_ */
 
 /* --- */

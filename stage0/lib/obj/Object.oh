@@ -127,22 +127,22 @@ extern RT0__StructDesc _td_Object__String;
 extern RT0__StructDesc _td_Object__StringArray;
 extern RT0__StructDesc _td_Object__StringArrayPtr;
 extern RT0__StructDesc _td_Object__StringDesc;
-extern RT0__StructDesc _td_Object__1804;
+extern RT0__StructDesc _td_Object__3355;
 extern RT0__StructDesc _td_Object__CharsLatin1;
-extern RT0__StructDesc _td_Object__2078;
+extern RT0__StructDesc _td_Object__3551;
 extern RT0__StructDesc _td_Object__CharsUCS4;
 extern RT0__StructDesc _td_Object__String8;
 extern RT0__StructDesc _td_Object__String8Desc;
 extern RT0__StructDesc _td_Object__String32;
 extern RT0__StructDesc _td_Object__String32Desc;
-extern RT0__StructDesc _td_Object__3124;
-extern RT0__StructDesc _td_Object__3590;
-extern RT0__StructDesc _td_Object__8811;
-extern RT0__StructDesc _td_Object__9184;
-extern RT0__StructDesc _td_Object__9850;
-extern RT0__StructDesc _td_Object__10397;
-extern RT0__StructDesc _td_Object__11449;
-extern RT0__StructDesc _td_Object__12162;
+extern RT0__StructDesc _td_Object__4699;
+extern RT0__StructDesc _td_Object__5165;
+extern RT0__StructDesc _td_Object__10386;
+extern RT0__StructDesc _td_Object__10759;
+extern RT0__StructDesc _td_Object__11425;
+extern RT0__StructDesc _td_Object__11972;
+extern RT0__StructDesc _td_Object__13024;
+extern RT0__StructDesc _td_Object__13737;
 #endif /* _MODULE_Object_ */
 
 /* --- */

@@ -1,5 +1,6 @@
 #include <OOC/Config/Assembler.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
   register OOC_INT32 i0;

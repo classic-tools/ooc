@@ -1,5 +1,6 @@
 #include <Strings.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_INT16 Strings__Length(const OOC_CHAR8 stringVal__ref[], OOC_LEN stringVal_0d) {
   register OOC_INT32 i0,i1;

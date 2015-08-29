@@ -1,5 +1,6 @@
 #include <Config/Value.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Config_Value__ErrorContextDesc_WriteTemplate(Config_Value__ErrorContext ec, Msg__Msg msg, Msg__LString text, OOC_LEN text_0d, Msg__LString templ, OOC_LEN templ_0d) {
 

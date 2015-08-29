@@ -1,5 +1,6 @@
 #include <OOC/Doc/TextBuffer.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_Doc_TextBuffer__Buffer OOC_Doc_TextBuffer__New() {
   register OOC_INT32 i0,i1,i2;

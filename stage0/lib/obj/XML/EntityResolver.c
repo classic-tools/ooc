@@ -1,5 +1,6 @@
 #include <XML/EntityResolver.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 XML_DTD__StringURI XML_EntityResolver__NormalizeURI(XML_UnicodeBuffer__CharArray uri) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;

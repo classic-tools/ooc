@@ -13,6 +13,7 @@ extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsScalarType(OOC_SymbolTable__Type t
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsCharType(OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsStringConst(OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsObject(OOC_SymbolTable__Type type);
+extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsException(OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsSTRING(OOC_SymbolTable__Type type);
 extern OOC_SymbolTable__PredefType OOC_SymbolTable_TypeRules__BaseCharType(OOC_SymbolTable__Type type);
 extern OOC_SymbolTable__Type OOC_SymbolTable_TypeRules__StringBase(OOC_SymbolTable__Type type);
@@ -35,7 +36,7 @@ extern OOC_CHAR8 OOC_SymbolTable_TypeRules__VariableInstance(OOC_SymbolTable__Ty
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__SameType(OOC_SymbolTable__Type a, OOC_SymbolTable__Type b);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__EqualTypes(OOC_SymbolTable__Type a, OOC_SymbolTable__Type b);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsExtensionOf(OOC_SymbolTable__Type type, OOC_SymbolTable__Type base);
-extern OOC_CHAR8 OOC_SymbolTable_TypeRules__FormalParamsMatch(OOC_SymbolTable__FormalPars baseFPars, OOC_SymbolTable__FormalPars procFPars, OOC_CHAR8 allowExtendedResult);
+extern OOC_CHAR8 OOC_SymbolTable_TypeRules__FormalParamsMatch(OOC_SymbolTable__FormalPars baseFPars, OOC_SymbolTable__FormalPars procFPars, OOC_CHAR8 allowSpecialization);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsValidRedefinition(OOC_SymbolTable__FormalPars baseFPars, OOC_SymbolTable__FormalPars procFPars);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsValidForwardDecl(OOC_SymbolTable__FormalPars forward, OOC_SymbolTable__FormalPars proc);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsArrayType(OOC_SymbolTable__Type type);
@@ -50,6 +51,7 @@ extern void OOC_OOC_SymbolTable_TypeRules_init();
 extern void OOC_OOC_SymbolTable_TypeRules_init0();
 
 /* run-time meta data */
+extern RT0__StructDesc _td_OOC_SymbolTable_TypeRules__2942;
 #endif /* _MODULE_OOC_SymbolTable_TypeRules_ */
 
 /* --- */

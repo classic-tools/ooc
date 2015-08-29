@@ -81,10 +81,17 @@ typedef OOC_INT8 OOC_SSA_Opcode__Subclass;
 #define OOC_SSA_Opcode__failedCase 69
 #define OOC_SSA_Opcode__failedWith 70
 #define OOC_SSA_Opcode__failedTypeAssert 71
-#define OOC_SSA_Opcode__selectException 72
-#define OOC_SSA_Opcode__preloadedVar 73
-#define OOC_SSA_Opcode__labels 74
-#define OOC_SSA_Opcode__dgate 75
+#define OOC_SSA_Opcode__tryStart 72
+#define OOC_SSA_Opcode__tryEnd 73
+#define OOC_SSA_Opcode__raiseException 74
+#define OOC_SSA_Opcode__currentException 75
+#define OOC_SSA_Opcode__clearException 76
+#define OOC_SSA_Opcode__pushExceptionContext 77
+#define OOC_SSA_Opcode__popExceptionContext 78
+#define OOC_SSA_Opcode__activateContext 79
+#define OOC_SSA_Opcode__preloadedVar 80
+#define OOC_SSA_Opcode__labels 81
+#define OOC_SSA_Opcode__dgate 82
 #define OOC_SSA_Opcode__scNone 0
 #define OOC_SSA_Opcode__scSigned8 1
 #define OOC_SSA_Opcode__scSigned16 2
@@ -109,10 +116,10 @@ extern void OOC_OOC_SSA_Opcode_init();
 extern void OOC_OOC_SSA_Opcode_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SSA_Opcode__28722;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__28808;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__29394;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__29497;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__30752;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__30838;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__31424;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__31527;
 #endif /* _MODULE_OOC_SSA_Opcode_ */
 
 /* --- */

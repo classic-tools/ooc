@@ -1,5 +1,6 @@
 #include <URI/Authority/Unparsed.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Authority_Unparsed__Init(URI_Authority_Unparsed__Authority auth, URI_String__StringPtr unparsed) {
   register OOC_INT32 i0,i1;

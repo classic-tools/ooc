@@ -1,5 +1,6 @@
 #include <OS/Path.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OS_Path__dirname(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 dirname[], OOC_LEN dirname_0d) {
   register OOC_INT32 i0,i1,i2,i3;

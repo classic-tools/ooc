@@ -1,5 +1,6 @@
 #include <OOC/Scanner/InputBuffer.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_CHAR8 OOC_Scanner_InputBuffer__BufferDesc_NextBlock(OOC_Scanner_InputBuffer__Buffer b) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;

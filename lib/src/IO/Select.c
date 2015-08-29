@@ -1,4 +1,4 @@
-/*	$Id: Select.c,v 1.4 2002/12/08 22:30:02 mva Exp $	*/
+/*	$Id: Select.c,v 1.5 2002/12/28 13:21:27 mva Exp $	*/
 /*  Wrapper around the select() function.
     Copyright (C) 2000  Michael van Acken
 
@@ -27,9 +27,9 @@
    string.h */
 #include <string.h>
 #endif
-#include "__oo2c.h"
-#include "__config.h"
-#include "IO/Select.d"
+#include <__oo2c.h>
+#include <__config.h>
+#include <IO/Select.d>
 
 int IO_Select__FD_SETSIZE = FD_SETSIZE;
 

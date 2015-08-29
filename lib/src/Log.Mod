@@ -1,4 +1,4 @@
-(*	$Id: Log.Mod,v 1.6 2002/12/17 19:33:50 mva Exp $	*)
+(*	$Id: Log.Mod,v 1.8 2002/12/30 09:29:23 mva Exp $	*)
 MODULE Log [OOC_EXTENSIONS];
 (*  Simple logging facility to stderr.
     Copyright (C) 1998-2000 Michael van Acken
@@ -19,7 +19,7 @@ MODULE Log [OOC_EXTENSIONS];
 *)
    
 IMPORT
-  S := SYSTEM, RT0, StdChannels, TextRider, Object;
+  S := SYSTEM, RT0, StdChannels, TextRider, Obj := Object;
 
 VAR
   writer-: TextRider.Writer;
@@ -99,13 +99,13 @@ PROCEDURE LString* (msg[NO_COPY]: ARRAY OF CHAR; s[NO_COPY]: ARRAY OF LONGCHAR);
     writer. WriteLn
   END LString;
 
-PROCEDURE Str* (msg[NO_COPY]: ARRAY OF CHAR; s: Object.String);
+PROCEDURE Object* (msg[NO_COPY]: ARRAY OF CHAR; obj: Obj.Object);
   BEGIN
     writer. WriteString (msg);
     writer. WriteString (": ");
-    writer. WriteStr (s);
+    writer. WriteObject (obj);
     writer. WriteLn
-  END Str;
+  END Object;
 
 PROCEDURE Bool* (msg[NO_COPY]: ARRAY OF CHAR; bool: BOOLEAN);
   BEGIN

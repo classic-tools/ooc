@@ -1,4 +1,4 @@
-(* 	$Id: WriteAssembler.Mod,v 1.14 2002/12/20 10:19:33 mva Exp $	 *)
+(* 	$Id: WriteAssembler.Mod,v 1.15 2002/12/30 09:29:21 mva Exp $	 *)
 MODULE OOC:IA32:WriteAssembler [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to IA32 assembler.
     Copyright (C) 2002  Michael van Acken
@@ -299,8 +299,8 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     INC (t. lfeCount);
     
     w. Instr (".align 4");
-    w. Write (".globl "); w. WriteStr (name); w. Newline;
-    w. Write (Ascii.ht+".type "); w. WriteStr (name);
+    w. Write (".globl "); w. WriteObject (name); w. Newline;
+    w. Write (Ascii.ht+".type "); w. WriteObject (name);
     w. Write (",@function"); w. Newline;
     w. Label (name);
     w. Instr ("pushl %ebp");
@@ -313,8 +313,8 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     w. Instr ("leave");
     w. Instr ("ret");
     w. Label (Object.NewLatin1(lfe));
-    w. Write (Ascii.ht+".size "); w. WriteStr (name); w. Write (",");
-    w. Write (lfe); w. Write ("-"); w. WriteStr (name); w. Newline;
+    w. Write (Ascii.ht+".size "); w. WriteObject (name); w. Write (",");
+    w. Write (lfe); w. Write ("-"); w. WriteObject (name); w. Newline;
   END WriteProcBody;
 
 

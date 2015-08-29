@@ -1,5 +1,6 @@
 #include <Object/BigInt.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static Object_BigInt__BigInt Object_BigInt__NewInstance(OOC_INT32 size) {
   register OOC_INT32 i0,i1;

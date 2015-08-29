@@ -16,7 +16,7 @@ extern void Log__Flush();
 extern void Log__Char(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_CHAR8 ch);
 extern void Log__String(const OOC_CHAR8 msg[], OOC_LEN msg_0d, const OOC_CHAR8 s[], OOC_LEN s_0d);
 extern void Log__LString(const OOC_CHAR8 msg[], OOC_LEN msg_0d, const OOC_CHAR16 s[], OOC_LEN s_0d);
-extern void Log__Str(const OOC_CHAR8 msg[], OOC_LEN msg_0d, Object__String s);
+extern void Log__Object(const OOC_CHAR8 msg[], OOC_LEN msg_0d, Object__Object obj);
 extern void Log__Bool(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_CHAR8 _bool);
 extern void Log__LongInt(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_INT32 lint);
 extern void Log__ShortInt(const OOC_CHAR8 msg[], OOC_LEN msg_0d, OOC_INT8 sint);
@@ -36,27 +36,27 @@ extern void OOC_Log_init();
 extern void OOC_Log_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_Log__1992;
-extern RT0__StructDesc _td_Log__2185;
-extern RT0__StructDesc _td_Log__2212;
-extern RT0__StructDesc _td_Log__2397;
-extern RT0__StructDesc _td_Log__2424;
-extern RT0__StructDesc _td_Log__3234;
-extern RT0__StructDesc _td_Log__3428;
-extern RT0__StructDesc _td_Log__3629;
-extern RT0__StructDesc _td_Log__3835;
-extern RT0__StructDesc _td_Log__4038;
-extern RT0__StructDesc _td_Log__4232;
-extern RT0__StructDesc _td_Log__4431;
-extern RT0__StructDesc _td_Log__4807;
-extern RT0__StructDesc _td_Log__5019;
-extern RT0__StructDesc _td_Log__5428;
-extern RT0__StructDesc _td_Log__5611;
-extern RT0__StructDesc _td_Log__5782;
-extern RT0__StructDesc _td_Log__5970;
-extern RT0__StructDesc _td_Log__5992;
-extern RT0__StructDesc _td_Log__6089;
-extern RT0__StructDesc _td_Log__6333;
+extern RT0__StructDesc _td_Log__1999;
+extern RT0__StructDesc _td_Log__2192;
+extern RT0__StructDesc _td_Log__2219;
+extern RT0__StructDesc _td_Log__2404;
+extern RT0__StructDesc _td_Log__2431;
+extern RT0__StructDesc _td_Log__3244;
+extern RT0__StructDesc _td_Log__3445;
+extern RT0__StructDesc _td_Log__3646;
+extern RT0__StructDesc _td_Log__3852;
+extern RT0__StructDesc _td_Log__4055;
+extern RT0__StructDesc _td_Log__4249;
+extern RT0__StructDesc _td_Log__4448;
+extern RT0__StructDesc _td_Log__4824;
+extern RT0__StructDesc _td_Log__5036;
+extern RT0__StructDesc _td_Log__5445;
+extern RT0__StructDesc _td_Log__5628;
+extern RT0__StructDesc _td_Log__5799;
+extern RT0__StructDesc _td_Log__5987;
+extern RT0__StructDesc _td_Log__6009;
+extern RT0__StructDesc _td_Log__6106;
+extern RT0__StructDesc _td_Log__6350;
 #endif /* _MODULE_Log_ */
 
 /* --- */

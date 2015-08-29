@@ -1,5 +1,6 @@
 #include <XML/UnicodeCodec/Latin1.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void XML_UnicodeCodec_Latin1__Init(XML_UnicodeCodec_Latin1__Codec codec, OOC_INT8 bom) {
   register OOC_INT32 i0,i1;

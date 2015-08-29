@@ -1,4 +1,4 @@
-(* 	$Id: Predef.Mod,v 1.51 2002/12/19 05:09:02 mva Exp $	 *)
+(* 	$Id: Predef.Mod,v 1.52 2002/12/29 14:36:26 mva Exp $	 *)
 MODULE OOC:SymbolTable:Predef;
 (*  Defines symbol table of pseudo module with predefined entities.
     Copyright (C) 2000, 2001, 2002  Michael van Acken
@@ -120,13 +120,14 @@ CONST
   min* = 20;                             (* MIN *)
   new* = 21;                             (* NEW *)
   copy* = 22;                            (* COPY *)
-
-  adr* = 23;                             (* SYSTEM.ADR *)
-  lsh* = 24;                             (* SYSTEM.LSH *)
-  move* = 25;                            (* SYSTEM.MOVE *)
-  systemNew* = 26;                       (* SYSTEM.NEW *)
-  rot* = 27;                             (* SYSTEM.ROT *)
-  val* = 28;                             (* SYSTEM.VAL *)
+  raise* = 23;                           (* RAISE *)
+  
+  adr* = 24;                             (* SYSTEM.ADR *)
+  lsh* = 25;                             (* SYSTEM.LSH *)
+  move* = 26;                            (* SYSTEM.MOVE *)
+  systemNew* = 27;                       (* SYSTEM.NEW *)
+  rot* = 28;                             (* SYSTEM.ROT *)
+  val* = 29;                             (* SYSTEM.VAL *)
 
 CONST
   minExitCode* = 0;
@@ -288,6 +289,7 @@ PROCEDURE CreatePredef* (stb: Builder.Builder): Sym.Module;
     PredefProc (stb, module, min, "MIN", 1, 1);
     PredefProc (stb, module, new, "NEW", 1, Sym.unlimitedArgs);
     PredefProc (stb, module, copy, "COPY", 2, 2);
+    PredefProc (stb, module, raise, "RAISE", 1, 1);
     
     stb. Finalize (module);
     RETURN module

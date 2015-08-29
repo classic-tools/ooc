@@ -1,4 +1,4 @@
-/*	$Id: Socket.c,v 1.4 2002/12/08 22:30:02 mva Exp $	*/
+/*	$Id: Socket.c,v 1.5 2002/12/28 13:21:27 mva Exp $	*/
 /*  Interface to socket facilities.
     Copyright (C) 2000  Michael van Acken
 
@@ -31,9 +31,9 @@
 typedef unsigned short uint16_t;
 #endif
 
-#include "__oo2c.h"
-#include "__config.h"
-#include "IO/Socket.d"
+#include <__oo2c.h>
+#include <__config.h>
+#include <IO/Socket.d>
 
 int IO_Socket__AF_INET = AF_INET;
 int IO_Socket__AF_UNIX = AF_UNIX;

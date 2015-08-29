@@ -1,5 +1,6 @@
 #include <OOC/Config/CCompiler.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool() {
   register OOC_INT32 i0;

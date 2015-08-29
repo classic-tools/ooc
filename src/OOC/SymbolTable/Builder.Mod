@@ -1,4 +1,4 @@
-(* 	$Id: Builder.Mod,v 1.28 2002/12/19 00:05:15 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.30 2002/12/29 16:17:29 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
     Copyright (C) 2000-2002  Michael van Acken
@@ -296,6 +296,16 @@ PROCEDURE (b: Builder) NewPointer* (parent: Sym.Item;
     RETURN ptr
   END NewPointer;
 
+PROCEDURE (b: Builder) NewExceptionName*(parent: Sym.Item;
+                                         type: Sym.Type): Sym.ExceptionName;
+  VAR
+    eName: Sym.ExceptionName;
+  BEGIN
+    NEW(eName);
+    Sym.InitExceptionName(eName, parent, type);
+    RETURN eName;
+  END NewExceptionName;
+
 PROCEDURE (b: Builder) NewFormalPars* (parent: Sym.Item;
                                        position: Sym.Position;
                                        resultType: Sym.Type): Sym.FormalPars;
@@ -329,6 +339,7 @@ PROCEDURE (b: Builder) NewModule* (name: Sym.Name; docString: Doc.Document;
                                 NIL, FALSE, FALSE, NIL);
     bodyDecl. formalPars := b. NewFormalPars(bodyDecl, name, NIL);
     NEW (bodyDecl. formalPars. params, 0);
+    NEW (bodyDecl. formalPars. raises, 0);
     
     NEW (mod);
     Sym.InitModule (mod, name, docString, class, callConv, moduleAST,
@@ -607,7 +618,7 @@ PROCEDURE N (str: ARRAY OF CHAR): Name;
 
 BEGIN
   doAutoImport := noAutoImport;
-  magicNumber := "OOC3";
+  magicNumber := "OOC4";
   
   NEW(autoImport, 2);
   NEW(autoImport[0]);

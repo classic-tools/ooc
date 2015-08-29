@@ -1,5 +1,6 @@
 #include <OOC/IR/ConstFold.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void OOC_IR_ConstFold__InitConstFold(OOC_IR_ConstFold__ConstFold c) {
   register OOC_INT32 i0;
@@ -1469,7 +1470,25 @@ void OOC_IR_ConstFold__ConstFoldDesc_VisitMoveBlock(OOC_IR_ConstFold__ConstFold 
   ;
 }
 
+void OOC_IR_ConstFold__ConstFoldDesc_VisitRaise(OOC_IR_ConstFold__ConstFold c, OOC_IR__Raise raise) {
+
+  return;
+  ;
+}
+
 void OOC_IR_ConstFold__ConstFoldDesc_VisitRepeatStatm(OOC_IR_ConstFold__ConstFold c, OOC_IR__RepeatStatm repeatStatm) {
+
+  return;
+  ;
+}
+
+void OOC_IR_ConstFold__ConstFoldDesc_VisitCatchClause(OOC_IR_ConstFold__ConstFold c, OOC_IR__CatchClause _catch) {
+
+  return;
+  ;
+}
+
+void OOC_IR_ConstFold__ConstFoldDesc_VisitTryStatm(OOC_IR_ConstFold__ConstFold c, OOC_IR__TryStatm tryStatm) {
 
   return;
   ;

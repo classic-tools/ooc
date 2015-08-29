@@ -1,5 +1,6 @@
 #include <ADT/Dictionary.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void ADT_Dictionary__Init(ADT_Dictionary__Dictionary dict) {
   register OOC_INT32 i0;

@@ -1,4 +1,4 @@
-/*	$Id: PFD.c,v 1.4 2002/12/19 06:36:46 mva Exp $	*/
+/*	$Id: PFD.c,v 1.5 2002/12/28 13:21:27 mva Exp $	*/
 /*  Generalized access to POSIX-style file descriptors.
     Copyright (C) 1997-2000  Michael van Acken
 
@@ -28,9 +28,9 @@
 #include <sys/ioctl.h>
 
 
-#include "__oo2c.h"
-#include "__config.h"
-#include "IO/PFD.d"
+#include <__oo2c.h>
+#include <__config.h>
+#include <IO/PFD.d>
 
 #if TIME_WITH_SYS_TIME
 # include <sys/time.h>

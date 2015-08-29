@@ -1,5 +1,6 @@
 #include <OOC/Error.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Error__InitContext(OOC_Error__Context c, const Msg__String id__ref, OOC_LEN id_0d) {
   register OOC_INT32 i0;

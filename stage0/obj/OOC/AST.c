@@ -1,5 +1,6 @@
 #include <OOC/AST.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_AST__InitNodeList(OOC_AST__NodeList nl) {
   register OOC_INT32 i0;
@@ -148,7 +149,7 @@ OOC_AST__Node OOC_AST__BuilderDesc_FPSection(OOC_AST__Builder b, OOC_AST__Node v
   ;
 }
 
-OOC_AST__Node OOC_AST__BuilderDesc_FormalPars(OOC_AST__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result) {
+OOC_AST__Node OOC_AST__BuilderDesc_FormalPars(OOC_AST__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result, OOC_AST__Node raises, OOC_AST__NodeList raisesList) {
 
   _failed_function(13177); return 0;
   ;
@@ -156,199 +157,205 @@ OOC_AST__Node OOC_AST__BuilderDesc_FormalPars(OOC_AST__Builder b, OOC_AST__Node 
 
 OOC_AST__Node OOC_AST__BuilderDesc_ProcType(OOC_AST__Builder b, OOC_AST__Node procedure, OOC_AST__Node formalPars) {
 
-  _failed_function(14762); return 0;
+  _failed_function(15466); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ImportDecl(OOC_AST__Builder b, OOC_AST__Node alias, OOC_AST__Node becomes, OOC_AST__Node module, OOC_Scanner_InputBuffer__CharArray moduleName) {
 
-  _failed_function(15169); return 0;
+  _failed_function(15873); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ConstDecl(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node equal, OOC_AST__Node expr, OOC_AST__Node semicolon) {
 
-  _failed_function(15985); return 0;
+  _failed_function(16689); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_TypeDecl(OOC_AST__Builder b, OOC_AST__Node identDef, OOC_AST__Node equal, OOC_AST__Node type, OOC_AST__Node semicolon) {
 
-  _failed_function(16557); return 0;
+  _failed_function(17261); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_VarDecl(OOC_AST__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node semicolon) {
 
-  _failed_function(17062); return 0;
+  _failed_function(17766); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Receiver(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node var, OOC_AST__Node ident, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node rParen) {
 
-  _failed_function(17889); return 0;
+  _failed_function(18593); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ProcDecl(OOC_AST__Builder b, OOC_AST__Node proc, OOC_AST__Node arrow, OOC_AST__Node receiver, OOC_AST__Node flags, OOC_AST__Node identDef, OOC_AST__Node formalPars, OOC_AST__Node semicolon1, OOC_AST__Node body, OOC_AST__Node semicolon2) {
 
-  _failed_function(18621); return 0;
+  _failed_function(19325); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ImportList(OOC_AST__Builder b, OOC_AST__Node import, OOC_AST__NodeList imports, OOC_AST__Node semicolon) {
 
-  _failed_function(20043); return 0;
+  _failed_function(20747); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Body(OOC_AST__Builder b, OOC_AST__NodeList declSeq, OOC_AST__Node begin, OOC_AST__NodeList statmSeq, OOC_AST__Node end, OOC_AST__Node name) {
 
-  _failed_function(20733); return 0;
+  _failed_function(21437); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Module(OOC_AST__Builder b, OOC_AST__Node module, OOC_AST__Node name, OOC_AST__Node flags, OOC_AST__Node semicolon, OOC_AST__Node importList, OOC_AST__Node body, OOC_AST__Node period, OOC_Scanner_InputBuffer__CharArray moduleName) {
 
-  _failed_function(22324); return 0;
+  _failed_function(23028); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Operator(OOC_AST__Builder b, OOC_AST__Node left, OOC_AST__Node op, OOC_AST__Node right) {
 
-  _failed_function(23429); return 0;
+  _failed_function(24133); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Factor(OOC_AST__Builder b, OOC_AST__Node lParen, OOC_AST__Node expr, OOC_AST__Node rParen) {
 
-  _failed_function(24126); return 0;
+  _failed_function(24830); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Set(OOC_AST__Builder b, OOC_AST__Node type, OOC_AST__Node lBrace, OOC_AST__NodeList elementList, OOC_AST__Node rBrace) {
 
-  _failed_function(24635); return 0;
+  _failed_function(25339); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ArrayIndex(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lBrak, OOC_AST__NodeList indices, OOC_AST__Node rBrak) {
 
-  _failed_function(25488); return 0;
+  _failed_function(26192); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_FunctionCall(OOC_AST__Builder b, OOC_AST__Node design, OOC_AST__Node lParen, OOC_AST__NodeList arguments, OOC_AST__Node rParen) {
 
-  _failed_function(26141); return 0;
+  _failed_function(26845); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Assignment(OOC_AST__Builder b, OOC_AST__Node assignment) {
 
-  _failed_function(27147); return 0;
+  _failed_function(27851); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ProcedureCall(OOC_AST__Builder b, OOC_AST__Node call) {
 
-  _failed_function(27544); return 0;
+  _failed_function(28248); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_IfStatm(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end) {
 
-  _failed_function(28025); return 0;
+  _failed_function(28729); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_CaseStatm(OOC_AST__Builder b, OOC_AST__Node _case, OOC_AST__Node expr, OOC_AST__Node of, OOC_AST__NodeList caseList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end) {
 
-  _failed_function(29152); return 0;
+  _failed_function(29856); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_WhileStatm(OOC_AST__Builder b, OOC_AST__Node _while, OOC_AST__Node guard, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end) {
 
-  _failed_function(30796); return 0;
+  _failed_function(31500); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_RepeatStatm(OOC_AST__Builder b, OOC_AST__Node repeat, OOC_AST__NodeList statmSeq, OOC_AST__Node until, OOC_AST__Node expr) {
 
-  _failed_function(31218); return 0;
+  _failed_function(31922); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ForStatm(OOC_AST__Builder b, OOC_AST__Node _for, OOC_AST__Node ident, OOC_AST__Node becomes, OOC_AST__Node startValue, OOC_AST__Node to, OOC_AST__Node endValue, OOC_AST__Node by, OOC_AST__Node step, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end) {
 
-  _failed_function(31604); return 0;
+  _failed_function(32308); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LoopStatm(OOC_AST__Builder b, OOC_AST__Node loop, OOC_AST__NodeList statmSeq, OOC_AST__Node end) {
 
-  _failed_function(32482); return 0;
+  _failed_function(33186); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_WithStatm(OOC_AST__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end) {
 
-  _failed_function(32801); return 0;
+  _failed_function(33505); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ExitStatm(OOC_AST__Builder b, OOC_AST__Node exit) {
 
-  _failed_function(33975); return 0;
+  _failed_function(34679); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ReturnStatm(OOC_AST__Builder b, OOC_AST__Node _return, OOC_AST__Node expr) {
 
-  _failed_function(34163); return 0;
+  _failed_function(34867); return 0;
+  ;
+}
+
+OOC_AST__Node OOC_AST__BuilderDesc_TryStatm(OOC_AST__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end) {
+
+  _failed_function(35202); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_Flags(OOC_AST__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak) {
 
-  _failed_function(34499); return 0;
+  _failed_function(36139); return 0;
   ;
 }
 
 OOC_CHAR8 OOC_AST__BuilderDesc_ProcWithoutBody(OOC_AST__Builder b, OOC_AST__Node moduleFlags, OOC_AST__Node procFlags) {
 
-  _failed_function(34667); return 0;
+  _failed_function(36307); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ProcIdFlag(OOC_AST__Builder b, OOC_AST__Node procId, OOC_AST__Node equal, OOC_AST__Node number) {
 
-  _failed_function(35113); return 0;
+  _failed_function(36753); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_ModuleFlags(OOC_AST__Builder b, OOC_AST__Node external, OOC_AST__Node callConv, OOC_AST__NodeList moduleFlags, OOC_AST__Node semicolon, OOC_AST__Node link, OOC_AST__NodeList linkSections, OOC_AST__Node end) {
 
-  _failed_function(35215); return 0;
+  _failed_function(36855); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkFileFlag(OOC_AST__Builder b, OOC_AST__Node file, OOC_AST__Node fileName, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt) {
 
-  _failed_function(35454); return 0;
+  _failed_function(37094); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkObjFlag(OOC_AST__Builder b, OOC_AST__Node obj, OOC_AST__Node fileName) {
 
-  _failed_function(35593); return 0;
+  _failed_function(37233); return 0;
   ;
 }
 
 OOC_AST__Node OOC_AST__BuilderDesc_LinkLibFlag(OOC_AST__Builder b, OOC_AST__Node lib, OOC_AST__Node libName, OOC_AST__Node lParen, OOC_AST__NodeList dependences, OOC_AST__Node rParen, OOC_AST__Node addOption, OOC_AST__Node prefixOpt, OOC_AST__Node comma, OOC_AST__Node suffixOpt) {
 
-  _failed_function(35689); return 0;
+  _failed_function(37329); return 0;
   ;
 }
 

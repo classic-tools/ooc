@@ -1,5 +1,6 @@
 #include <Config/Source/Environment.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void Config_Source_Environment__Init(Config_Source_Environment__Environment env) {
   register OOC_INT32 i0;

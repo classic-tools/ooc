@@ -1,5 +1,6 @@
 #include <OOC/Config/Repositories/FileSystem.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Config_Repositories_FileSystem__ErrorContextDesc_GetTemplate(OOC_Config_Repositories_FileSystem__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1;

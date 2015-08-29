@@ -1,5 +1,6 @@
 #include <OOC/SSA.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_SSA__InitNode(OOC_SSA__Node n) {
 
@@ -2202,7 +2203,7 @@ l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 45942))+28);
   nextInstr = (OOC_SSA__Instr)i2;
   i3 = *(OOC_INT8*)((_check_pointer(i1, 45969))+36);
-  i3 = i3!=73;
+  i3 = i3!=80;
   if (!i3) goto l22;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 46105))+24);
   opnd = (OOC_SSA__Opnd)i3;

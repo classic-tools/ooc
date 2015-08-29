@@ -1,5 +1,6 @@
 #include <URI/Error.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Error__ContextDesc_GetTemplate(URI_Error__Context context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0,i1,i2,i3;

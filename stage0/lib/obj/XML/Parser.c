@@ -1,5 +1,6 @@
 #include <XML/Parser.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static OOC_CHAR8 XML_Parser__IsCharUCS4(OOC_INT32 ch) {
   register OOC_INT32 i0,i1;

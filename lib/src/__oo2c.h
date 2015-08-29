@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.h,v 1.39 2002/12/19 03:18:23 mva Exp $        */
+/*      $Id: __oo2c.h,v 1.41 2002/12/23 17:40:14 mva Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001, 2002  Michael van Acken
 
@@ -160,7 +160,7 @@ extern OOC_INT32 _cmp32(const OOC_CHAR32* l, const OOC_CHAR32* r);
 
 /* SYSTEM.VAL */
 #define _type_cast(_destType, _sourceType, _x) \
-  ({ _sourceType y = (_sourceType)_x; *(_destType*)&y; })
+  ({ union {_sourceType s; _destType d;} _v; _v.s=_x; _v.d; })
 #define _type_cast_fast(_destType, _sourceType, _x) \
   (_destType)(_sourceType)_x
 

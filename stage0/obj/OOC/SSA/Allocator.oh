@@ -45,7 +45,7 @@ extern RT0__StructDesc _td_OOC_SSA_Allocator__3162;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__3151;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__3206;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__3195;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__17535;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__17570;
 #endif /* _MODULE_OOC_SSA_Allocator_ */
 
 /* --- */

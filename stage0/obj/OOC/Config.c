@@ -1,5 +1,6 @@
 #include <OOC/Config.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 Config_Section_Options__Option OOC_Config__AddOption(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, Config_Value__Value init) {
   register OOC_INT32 i0,i1;
@@ -97,7 +98,7 @@ OOC_CHAR8 OOC_Config__HaveXsltProc() {
 
 void OOC_OOC_Config_init(void) {
 
-  OOC_Config__InitConfig("/tmp/test/lib/oo2c/oo2crc.xml", 30);
+  OOC_Config__InitConfig("/usr/home/ooc-devel/local-ooc2/lib/oo2c/oo2crc.xml", 51);
   RT0__poisonHeap = 85;
   return;
   ;

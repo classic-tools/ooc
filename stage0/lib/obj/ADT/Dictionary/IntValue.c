@@ -1,5 +1,6 @@
 #include <ADT/Dictionary/IntValue.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void ADT_Dictionary_IntValue__Init(ADT_Dictionary_IntValue__Dictionary dict) {
   register OOC_INT32 i0;

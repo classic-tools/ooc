@@ -1,5 +1,6 @@
 #include <Time.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Time__InitTimeStamp(struct Time__TimeStamp *t, RT0__Struct t__tag, OOC_INT32 days, OOC_INT32 msecs) {
   register OOC_INT32 i0,i1;

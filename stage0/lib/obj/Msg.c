@@ -1,5 +1,6 @@
 #include <Msg.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Msg__InitContext(Msg__Context context, const Msg__String id__ref, OOC_LEN id_0d) {
   register OOC_INT32 i0,i1;

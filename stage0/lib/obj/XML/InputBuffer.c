@@ -1,5 +1,6 @@
 #include <XML/InputBuffer.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_CHAR8 XML_InputBuffer__BufferDesc_NextBlock(XML_InputBuffer__Buffer b) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5;

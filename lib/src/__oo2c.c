@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.c,v 1.12 2002/12/19 03:18:23 mva Exp $        */
+/*      $Id: __oo2c.c,v 1.13 2002/12/28 13:21:27 mva Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001, 2002  Michael van Acken
 
@@ -19,7 +19,7 @@
 
 /* This file is #included into RT0.c, and therefore compiled into RT0.o */
 
-#include "__oo2c.h"
+#include <__oo2c.h>
 
 /* --- string compare */
 OOC_INT32 _cmp8(const OOC_CHAR8* l, const OOC_CHAR8* r) {

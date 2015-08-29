@@ -1,4 +1,4 @@
-(* 	$Id: WriteC.Mod,v 1.146 2002/12/21 09:21:49 mva Exp $	 *)
+(* 	$Id: WriteC.Mod,v 1.148 2002/12/30 09:29:21 mva Exp $	 *)
 MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to plain C.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -60,7 +60,7 @@ TYPE
   WriterDesc = RECORD
     (DeclWriter.WriterDesc)
     translator: Translator;
-    registerMap: Dictionary.Dictionary;
+    registerMap, jmpbufMap: Dictionary.Dictionary;
     procBlock: SSA.ProcBlock;
 
     swapArray: SwapArray;                (* used by WriteCollect *)
@@ -137,7 +137,7 @@ PROCEDURE SubclassToBasicType (res: SSA.Result): DeclWriter.BasicTypeId;
 PROCEDURE NewWriter (translator: Translator;
                      cWriter: DeclWriter.Writer;
                      procBlock: SSA.ProcBlock;
-                     registerMap: Dictionary.Dictionary): Writer;
+                     registerMap, jmpbufMap: Dictionary.Dictionary): Writer;
   VAR
     w: Writer;
   BEGIN
@@ -145,6 +145,7 @@ PROCEDURE NewWriter (translator: Translator;
     cWriter. CopyTo (w);
     w. procBlock := procBlock;
     w. registerMap := registerMap;
+    w. jmpbufMap := jmpbufMap;
     NEW (w. swapArray, 8);
     w. lengthSwapArray := 0;
     w. swapHelperVars := 0;
@@ -231,9 +232,9 @@ PROCEDURE (w: Writer) IntroduceHelperVar (i: LONGINT);
     w. WriteString ("{register ");
     w. WriteString (w. basicType[Allocator.RegisterType (w. swapArray[i]. ctype)]. repr);
     w. WriteString (" ");
-    w. WriteStr (h);
+    w. WriteObject (h);
     w. WriteChar ("=");
-    w. WriteStr (w. swapArray[i]. dest);
+    w. WriteObject (w. swapArray[i]. dest);
     w. WriteChar (";");
   END IntroduceHelperVar;
 
@@ -245,10 +246,12 @@ PROCEDURE (w: Writer) FixupHelperVars;
     END;
   END FixupHelperVars;
 
-PROCEDURE Fixup (pb: SSA.ProcBlock);
+PROCEDURE Fixup (pb: SSA.ProcBlock; VAR jmpbufMap: Dictionary.Dictionary);
   VAR
     instr: SSA.Instr;
+    num: ARRAY 16 OF CHAR;
   BEGIN
+    jmpbufMap := NIL;
     instr := pb. instrList;
     WHILE (instr # NIL) DO
       CASE instr. opcode OF
@@ -261,6 +264,13 @@ PROCEDURE Fixup (pb: SSA.ProcBlock);
           instr. opndList. ReplaceArg
               (pb. GetDeclRef (instr. opndList. arg(SSA.Address). decl));
         END;
+
+      | Opcode.tryStart:
+        IF (jmpbufMap = NIL) THEN
+          jmpbufMap := Dictionary.New();
+        END;
+        IntStr.IntToStr(jmpbufMap.Size(), num);
+        jmpbufMap.Set(instr, Object.NewLatin1(num));
       ELSE (* nothing to do *)
       END;
       instr := instr. nextInstr
@@ -304,7 +314,7 @@ PROCEDURE WriteTypeAndLength (w: Writer; instr: SSA.Instr;
 
 
 PROCEDURE WriteLocalDecl (t: Translator; w: Writer;
-                          pb: SSA.ProcBlock);
+                          pb: SSA.ProcBlock; volatile: BOOLEAN);
 (**Writes local declarations of the procedure, most of all local variables.  *)
   VAR
     declMap: Dictionary.Dictionary;
@@ -357,10 +367,13 @@ PROCEDURE WriteLocalDecl (t: Translator; w: Writer;
             name := Naming.NameOfDeclaration(decl);
             w. Newline;
             w. WriteString ("OOC_ALLOCATE_VPAR(");
-            w. WriteStr (name);
+            w. WriteObject (name);
             WriteTypeAndLength(w, instr, decl, FALSE);
           ELSIF ~decl. isParameter THEN
             cDecl := ConvertDecl.GetDecl (w, decl);
+            IF volatile THEN
+              cDecl.SetTypeQualifier(DeclWriter.tqVolatile);
+            END;
             w. Newline;
             w. WriteDeclaration (cDecl);
             w. WriteChar (";");
@@ -425,7 +438,7 @@ PROCEDURE (w: Writer) LengthExprParam (instr: SSA.Instr);
     design := instr. GetArgClass (Opnd.readDesign);
     name := Naming.NameOfLengthParam
         (design(SSA.DeclRef). decl(Sym.VarDecl), instr. opndList. GetIntConst());
-    w. WriteStr (name);
+    w. WriteObject (name);
   END LengthExprParam;
 
 PROCEDURE ^ WriteExpr (w: Writer; instr: SSA.Instr);
@@ -450,7 +463,7 @@ PROCEDURE (w: Writer) Ref (opnd: SSA.Opnd);
            happens to be an array *)
         w. WriteString ("*")
       END;
-      w. WriteStr (name)
+      w. WriteObject (name)
 
     | arg: SSA.Const DO
       (* write constant values directly, without going through an
@@ -481,7 +494,7 @@ PROCEDURE (w: Writer) Ref (opnd: SSA.Opnd);
            a pass by reference parameter *)
         w. WriteChar ("&");
       END;
-      w. WriteStr (name);
+      w. WriteObject (name);
       
     ELSE
       instr := opnd. arg. instr;
@@ -492,11 +505,17 @@ PROCEDURE (w: Writer) Ref (opnd: SSA.Opnd);
           WriteExpr (w, opnd. arg. instr);
           w. WriteChar (")");
         ELSE
-          w. WriteStr (obj(STRING));
+          w. WriteObject (obj);
         END;
 
       ELSIF (instr. opcode = Opcode.getLengthParam) THEN
         w. LengthExprParam (instr);
+        
+      ELSIF (instr.opcode = Opcode.tryStart) THEN
+        w.WriteString("setjmp(_target");
+        obj := w.jmpbufMap.Get(instr);
+        w.WriteObject(obj);
+        w.WriteString(")");
         
       ELSE
         (* provoke an C error if this value is used: *)
@@ -600,7 +619,7 @@ PROCEDURE CastToPtr (w: Writer; var: SSA.Result; type: Sym.Type;
       ELSE
         name := Naming.NameOfType (type);
         w. WriteString ("(");
-        w. WriteStr (name);
+        w. WriteObject (name);
         w. WriteString (")");
       END;
     END;
@@ -680,7 +699,7 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w. WriteString (", &");
       opnd := typeGuard. GetOpndClass (Opnd.type);
       name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
-      w. WriteStr (name);
+      w. WriteObject (name);
       w. WriteString (", ");
       w. WriteLInt (typeGuard. pos, 0);
       w. WriteString (")")
@@ -714,7 +733,7 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
         w. Ref (call. opndList);
         w. WriteChar (",");
         name := Naming.NameOfDeclaration (decl);
-        w. WriteStr (name);
+        w. WriteObject (name);
         w. WriteChar (")");
       ELSIF ~(call. opndList. arg IS SSA.DeclRef) THEN
         (* calling through variable: cast address to function type *)
@@ -773,7 +792,7 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w. WriteString ("RT0__NewObject(");
       opnd := instr. GetOpndClass (Opnd.type);
       name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
-      w. WriteStr (name);
+      w. WriteObject (name);
       w. WriteString (".baseTypes[0]");
 
       opnd := opnd. nextOpnd;
@@ -834,11 +853,11 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       CastFromPtr (instr);
       IF (instr. opndList. arg IS SSA.DeclRef) THEN
         name := Naming.NameOfTypeTagParam (instr. opndList. arg(SSA.DeclRef). decl(Sym.VarDecl));
-        w. WriteStr (name);
+        w. WriteObject (name);
       ELSIF (instr. opndList. arg IS SSA.TypeRef) THEN
         w. WriteChar ("&");
         name := Naming.NameOfTypeDescriptor (instr. opndList. arg(SSA.TypeRef). type);
-        w. WriteStr (name);
+        w. WriteObject (name);
       ELSE
         w. WriteString ("OOC_TYPE_TAG(");
         w. Ref (instr. opndList);
@@ -856,7 +875,7 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w. WriteString (", &");
       opnd := instr. opndList. nextOpnd;
       name := Naming.NameOfTypeDescriptor (opnd. arg(SSA.TypeRef). type);
-      w. WriteStr (name);
+      w. WriteObject (name);
       w. WriteString (")");
     END TypeTest;
 
@@ -869,7 +888,7 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       w. Ref (instr. opndList);
       w. WriteString (", ");
       name := Naming.NameOfDeclaration (instr. opndList. nextOpnd. arg(SSA.DeclRef). decl);
-      w. WriteStr (name);
+      w. WriteObject (name);
       w. WriteString (")");
     END TBProcAddress;
   
@@ -883,9 +902,9 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       
       w. Newline;
       w. WriteString ("OOC_INITIALIZE_VPAR(");
-      w. WriteStr (name);
+      w. WriteObject (name);
       w. WriteString (Naming.suffixPassPerRef+",");
-      w. WriteStr (name);
+      w. WriteObject (name);
       WriteTypeAndLength(w, instr, varDecl, TRUE);
     END CopyParameter;
   
@@ -1218,6 +1237,9 @@ PROCEDURE WriteExpr (w: Writer; instr: SSA.Instr);
       END;
       Call (instr);
 
+    | Opcode.currentException:
+      w.WriteString("Exception__Current()");
+      
     | Opcode.preloadedVar:
       PreloadedVar(instr);
     END;
@@ -1230,6 +1252,7 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
     target: Object.Object;
     str: ARRAY 32 OF CHAR;
     opnd: SSA.Opnd;
+    obj: Object.Object;
     
   PROCEDURE WriteCollect (collect, targetInstr: SSA.Instr);
     VAR
@@ -1270,9 +1293,9 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
         IF (i = w. lengthSwapArray) THEN
           w. IntroduceHelperVar (0)
         ELSE                             (* can write out assignment *)
-          w. WriteStr (w. swapArray[i]. dest);
+          w. WriteObject (w. swapArray[i]. dest);
           w. WriteString ("=");
-          w. WriteStr (w. swapArray[i]. source);
+          w. WriteObject (w. swapArray[i]. source);
           w. WriteChar (";");
           w. RemoveSwapData (i)
         END;
@@ -1286,7 +1309,7 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
         IF (opnd. class # Opnd.store) THEN
           targetVar := w. registerMap. Get (res);
           IF ~w. registerMap. HasKey (opnd. arg) THEN
-            w. WriteStr (targetVar(STRING));
+            w. WriteObject (targetVar);
             w. WriteString ("=");
             w. Ref (opnd);
             w. WriteChar (";");
@@ -1339,7 +1362,7 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
           (*w. WriteString ("/* ");
              w. textWriter. WriteHex (SYSTEM.VAL(LONGINT,instr),8);
              w. WriteString ("*/ ");*)
-          w. WriteStr (target(STRING));
+          w. WriteObject (target);
           w. WriteString (" = ");
         END;
       END;
@@ -1409,6 +1432,40 @@ PROCEDURE (w: Writer) WriteInstrList (b: Schedule.Block);
             END;
           END;
           
+        | Opcode.tryStart:
+          w.Newline;
+          w.WriteString("{");
+          w.Indent(1);
+        | Opcode.tryEnd:
+          w.WriteString(";");
+          w.Indent(-1);
+          w.Newline;
+          w.WriteString("}");
+        | Opcode.raiseException:
+          w.Newline;
+          w.WriteString("Exception__Raise((void*)");
+          w.Ref(instr.NthOpnd(1));
+          w.WriteString(");");
+        | Opcode.pushExceptionContext:
+          w.Newline;
+          w.WriteString("Exception__PushContext(&_context");
+          obj := w.jmpbufMap.Get(instr.opndList.arg.instr);
+          w.WriteObject(obj);
+          w.WriteString(", &_target");
+          w.WriteObject(obj);
+          w.WriteString(");");
+        | Opcode.popExceptionContext:
+          w.Newline;
+          w.WriteString("Exception__PopContext(");
+          w.WriteConst(instr.opndList.nextOpnd.arg(SSA.Const).value,
+                       Predef.GetType(Predef.longint));
+          w.WriteString(");");
+        | Opcode.clearException:
+          w.Newline;
+          w.WriteString("Exception__Clear();");
+        | Opcode.activateContext:
+          w.Newline;
+          w.WriteString("Exception__ActivateContext();");
         ELSE
           WriteExpr (w, instr);
           IF ~instr. IsConst() THEN  (* FIXME... omit ; for some getLength *)
@@ -1581,12 +1638,35 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     enter, instr: SSA.Instr;
     s: SSA.Result;
     domRoot: Schedule.Block;
-    registerMap: Dictionary.Dictionary;
+    registerMap, jmpbufMap: Dictionary.Dictionary;
     w: Writer;
     writeProc: BOOLEAN;
     destore: Destore.State;
     oldSize: LONGINT;
 
+  PROCEDURE WriteJmpBufDecl(jmpbufMap: Dictionary.Dictionary);
+    VAR
+      i: LONGINT;
+    BEGIN
+      IF (jmpbufMap # NIL) THEN
+        w.Newline;
+        w.WriteString("jmp_buf ");
+        FOR i := 0 TO jmpbufMap.Size()-1 DO
+          IF (i # 0) THEN w.WriteString(", ") END;
+          w.WriteString("_target"); w.WriteLInt(i, 0);
+        END;
+        w.WriteString(";");
+
+        w.Newline;
+        w.WriteString("Exception__Context ");
+        FOR i := 0 TO jmpbufMap.Size()-1 DO
+          IF (i # 0) THEN w.WriteString(", ") END;
+          w.WriteString("_context"); w.WriteLInt(i, 0);
+        END;
+        w.WriteString(";");
+      END;
+    END WriteJmpBufDecl;
+  
   PROCEDURE Write (pre, post: ARRAY OF CHAR);
     BEGIN
       IF writeProc &
@@ -1744,11 +1824,12 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
       END;
     END;
     
-    Fixup (pb);
+    Fixup (pb, jmpbufMap);
     t. w. Indent (1);
     registerMap := Allocator.AssignRegisters (pb, domRoot, t. w);
-    w := NewWriter (t, t. w, pb, registerMap);
-    WriteLocalDecl (t, w, pb);
+    w := NewWriter (t, t. w, pb, registerMap, jmpbufMap);
+    WriteLocalDecl (t, w, pb, jmpbufMap # NIL);
+    WriteJmpBufDecl(jmpbufMap);
     IF proc.decl.IsModuleBody() THEN
       (* pick up any preloaded-var instructions in the module body, so that
          we can write them out at the beginning of the init function *)

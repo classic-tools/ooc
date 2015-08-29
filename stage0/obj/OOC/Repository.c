@@ -1,5 +1,6 @@
 #include <OOC/Repository.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Repository__Init(OOC_Repository__Repository rep, OOC_Repository__Repository baseRep, URI__HierarchicalURI baseURI) {
   register OOC_INT32 i0,i1,i2;

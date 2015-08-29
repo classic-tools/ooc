@@ -49,6 +49,7 @@ typedef struct OOC_SymbolTable__FlagDesc {
 #define OOC_SymbolTable__flagNilCompat 6
 #define OOC_SymbolTable__flagUnion 7
 #define OOC_SymbolTable__flagReadOnly 8
+#define OOC_SymbolTable__flagNoReturn 9
 #define OOC_SymbolTable__nameNotExported 0
 #define OOC_SymbolTable__nameExported 1
 #define OOC_SymbolTable__nameExportedRO 2
@@ -234,6 +235,16 @@ typedef struct OOC_SymbolTable__PointerDesc {
   OOC_CHAR8 doCArrayAssignment;
   OOC_CHAR8 isStatic;
 } OOC_SymbolTable__PointerDesc;
+typedef struct OOC_SymbolTable__ExceptionNameDesc *OOC_SymbolTable__ExceptionName;
+typedef OOC_SymbolTable__ExceptionName *OOC_SymbolTable__ExceptionNameArray;
+typedef struct OOC_SymbolTable__ExceptionNameDesc {
+  OOC_SymbolTable__Item nextNested;
+  OOC_SymbolTable__Item parent;
+  OOC_SymbolTable__Item nestedItems;
+  OOC_SymbolTable__Flag flagList;
+  OOC_SymbolTable__Type type;
+  OOC_SymbolTable__Type srcCodeType;
+} OOC_SymbolTable__ExceptionNameDesc;
 typedef struct OOC_SymbolTable__VarDeclDesc *OOC_SymbolTable__VarDecl;
 typedef OOC_SymbolTable__VarDecl *OOC_SymbolTable__VarDeclArray;
 typedef struct OOC_SymbolTable__FormalParsDesc *OOC_SymbolTable__FormalPars;
@@ -253,6 +264,10 @@ typedef struct OOC_SymbolTable__FormalParsDesc {
   OOC_SymbolTable__Type srcCodeResultType;
   OOC_SymbolTable__VarDeclArray params;
   OOC_CHAR8 anyRestParameters;
+  OOC_CHAR8 noReturn;
+  OOC_CHAR8 __pad50;
+  OOC_CHAR8 __pad51;
+  OOC_SymbolTable__ExceptionNameArray raises;
 } OOC_SymbolTable__FormalParsDesc;
 typedef struct OOC_SymbolTable__ArrayDesc *OOC_SymbolTable__Array;
 typedef struct OOC_SymbolTable__ArrayDesc {
@@ -320,6 +335,7 @@ typedef struct OOC_SymbolTable__ProcDeclDesc {
   OOC_SymbolTable__FormalPars formalPars;
   Object__String linkName;
   OOC_AST__Node procAST;
+  OOC_CHAR8 hasTryStatm;
 } OOC_SymbolTable__ProcDeclDesc;
 #define OOC_SymbolTable__unlimitedArgs 32767
 typedef struct OOC_SymbolTable__PredefProcDesc *OOC_SymbolTable__PredefProc;
@@ -583,6 +599,13 @@ typedef void (*_TBP_OOC_SymbolTable__ConstDeclDesc_Store)(OOC_SymbolTable__Const
 extern void OOC_SymbolTable__ConstDeclDesc_Load(OOC_SymbolTable__ConstDecl constDecl, ADT_Storable__Reader r);
 #define _TBN_OOC_SymbolTable__ConstDeclDesc_Load 4
 typedef void (*_TBP_OOC_SymbolTable__ConstDeclDesc_Load)(OOC_SymbolTable__ConstDecl constDecl, ADT_Storable__Reader r);
+extern void OOC_SymbolTable__InitExceptionName(OOC_SymbolTable__ExceptionName exceptionName, OOC_SymbolTable__Item parent, OOC_SymbolTable__Type type);
+extern void OOC_SymbolTable__ExceptionNameDesc_Store(OOC_SymbolTable__ExceptionName exceptionName, ADT_Storable__Writer w);
+#define _TBN_OOC_SymbolTable__ExceptionNameDesc_Store 5
+typedef void (*_TBP_OOC_SymbolTable__ExceptionNameDesc_Store)(OOC_SymbolTable__ExceptionName exceptionName, ADT_Storable__Writer w);
+extern void OOC_SymbolTable__ExceptionNameDesc_Load(OOC_SymbolTable__ExceptionName exceptionName, ADT_Storable__Reader r);
+#define _TBN_OOC_SymbolTable__ExceptionNameDesc_Load 4
+typedef void (*_TBP_OOC_SymbolTable__ExceptionNameDesc_Load)(OOC_SymbolTable__ExceptionName exceptionName, ADT_Storable__Reader r);
 extern void OOC_SymbolTable__VarDeclDesc_SetType(OOC_SymbolTable__VarDecl varDecl, OOC_SymbolTable__Type type);
 #define _TBN_OOC_SymbolTable__VarDeclDesc_SetType 13
 typedef void (*_TBP_OOC_SymbolTable__VarDeclDesc_SetType)(OOC_SymbolTable__VarDecl varDecl, OOC_SymbolTable__Type type);
@@ -751,7 +774,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__Item;
 extern RT0__StructDesc _td_OOC_SymbolTable__ItemDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Declaration;
 extern RT0__StructDesc _td_OOC_SymbolTable__DeclarationDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__8310;
+extern RT0__StructDesc _td_OOC_SymbolTable__8331;
 extern RT0__StructDesc _td_OOC_SymbolTable__DeclarationArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__Type;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDecl;
@@ -767,7 +790,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__LinkLibDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Module;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRef;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRefDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__14461;
+extern RT0__StructDesc _td_OOC_SymbolTable__14482;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRefArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__ProcDecl;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleDesc;
@@ -779,8 +802,12 @@ extern RT0__StructDesc _td_OOC_SymbolTable__TypeName;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Pointer;
 extern RT0__StructDesc _td_OOC_SymbolTable__PointerDesc;
+extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionName;
+extern RT0__StructDesc _td_OOC_SymbolTable__20131;
+extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameArray;
+extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDecl;
-extern RT0__StructDesc _td_OOC_SymbolTable__20092;
+extern RT0__StructDesc _td_OOC_SymbolTable__20749;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDeclArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalPars;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalParsDesc;
@@ -799,10 +826,10 @@ extern RT0__StructDesc _td_OOC_SymbolTable__FieldDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Redirect;
 extern RT0__StructDesc _td_OOC_SymbolTable__RedirectDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__32938;
-extern RT0__StructDesc _td_OOC_SymbolTable__32927;
-extern RT0__StructDesc _td_OOC_SymbolTable__46457;
-extern RT0__StructDesc _td_OOC_SymbolTable__47038;
+extern RT0__StructDesc _td_OOC_SymbolTable__34307;
+extern RT0__StructDesc _td_OOC_SymbolTable__34296;
+extern RT0__StructDesc _td_OOC_SymbolTable__47893;
+extern RT0__StructDesc _td_OOC_SymbolTable__48474;
 #endif /* _MODULE_OOC_SymbolTable_ */
 
 /* --- */

@@ -1,4 +1,4 @@
-(* 	$Id: Blocker.Mod,v 1.40 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: Blocker.Mod,v 1.41 2002/12/30 09:29:21 mva Exp $	 *)
 MODULE OOC:SSA:Blocker;
 (*  Imposes a block structure on a flat list of SSA instructions.
     Copyright (C) 2002  Michael van Acken
@@ -507,7 +507,7 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
       IF marker. HasKey (res) THEN
         obj := marker. Get (res);
         w. WriteChar ("[");
-        w. WriteStr (obj(STRING));
+        w. WriteObject (obj);
         w. WriteChar ("]");
       END;
       
@@ -518,7 +518,7 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
             w. WriteString ("NIL");
           ELSE
             value := instr. value. ToString();
-            w. WriteStr (value);
+            w. WriteObject (value);
           END;
         | instr: SSA.DeclRef DO
           w. WriteString (instr. decl. name. str^);

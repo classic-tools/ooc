@@ -1,5 +1,6 @@
 #include <OOC/Auxiliary/WriteSymbolFile.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OOC_SymbolTable__Module symTab, OOC_Error__List errList) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;

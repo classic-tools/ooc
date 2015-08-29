@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.5 2002/11/11 21:44:16 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.6 2002/12/29 14:33:40 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:XML;
 (*  Writes an abstract syntax tree into an XML document.
     Copyright (C) 2000, 2001, 2002  Michael van Acken
@@ -355,6 +355,14 @@ PROCEDURE Write* (cw: Channel.Writer; m: ExtTree.Module);
           w. StartTag ("return_statm", FALSE);
           Node (n. return);
           Node (n. expr);
+          w. EndTag
+        
+        | n: ExtTree.TryStatm DO
+          w. StartTag ("try_statm", FALSE);
+          Node(n.try);
+          Node(n.statmSeq);
+          Node(n.catchList);
+          Node(n.end);
           w. EndTag
         
         

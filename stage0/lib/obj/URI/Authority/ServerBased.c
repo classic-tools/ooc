@@ -1,5 +1,6 @@
 #include <URI/Authority/ServerBased.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Authority_ServerBased__Init(URI_Authority_ServerBased__Authority auth, URI_String__StringPtr userinfo, URI_String__StringPtr host, OOC_INT32 port, OOC_INT32 defaultPort) {
   register OOC_INT32 i0,i1,i2;

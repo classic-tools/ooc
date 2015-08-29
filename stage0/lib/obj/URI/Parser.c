@@ -1,5 +1,6 @@
 #include <URI/Parser.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 URI__URI URI_Parser__NewURI(const URI_String__String str__ref, OOC_LEN str_0d, URI__HierarchicalURI baseURI, Msg__Msg *res) {
   register OOC_INT32 i0,i1,i2,i3,i4;

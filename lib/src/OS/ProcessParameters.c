@@ -1,13 +1,13 @@
-/* 	$Id: ProcessParameters.c,v 1.5 2002/12/08 22:30:01 mva Exp $	 */
+/* 	$Id: ProcessParameters.c,v 1.6 2002/12/28 13:21:26 mva Exp $	 */
 #include <unistd.h>
 #include <errno.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 
-#include "__oo2c.h"
-#include "__config.h"
-#include "OS/ProcessParameters.d"
+#include <__oo2c.h>
+#include <__config.h>
+#include <OS/ProcessParameters.d>
 
 
 void OS_ProcessParameters__ErrorContextDesc_GetTemplate(OS_ProcessParameters__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {

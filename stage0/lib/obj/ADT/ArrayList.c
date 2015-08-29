@@ -1,5 +1,6 @@
 #include <ADT/ArrayList.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static ADT_ArrayList__Array ADT_ArrayList__CreateArray(OOC_INT32 size, ADT_ArrayList__ArrayList old) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;

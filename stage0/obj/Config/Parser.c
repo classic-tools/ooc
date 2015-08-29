@@ -1,5 +1,6 @@
 #include <Config/Parser.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void Config_Parser__InitBuilder(Config_Parser__Builder b) {
   register OOC_INT32 i0;

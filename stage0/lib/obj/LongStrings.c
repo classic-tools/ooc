@@ -1,5 +1,6 @@
 #include <LongStrings.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_INT16 LongStrings__Length(const OOC_CHAR16 stringVal__ref[], OOC_LEN stringVal_0d) {
   register OOC_INT32 i0,i1;

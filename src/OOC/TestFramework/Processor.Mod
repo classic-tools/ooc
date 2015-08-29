@@ -1,4 +1,4 @@
-(* 	$Id: Processor.Mod,v 1.19 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: Processor.Mod,v 1.20 2002/12/30 09:29:20 mva Exp $	 *)
 MODULE OOC:TestFramework:Processor;
 (*  Processes test cases using an OOC compiler.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -359,7 +359,7 @@ PROCEDURE (proc: Processor) Process* (test: Testcases.Test;
       IF (res = NIL) THEN
         w := TextRider.ConnectWriter (f);
         w. WriteString ("MODULE x");
-        w. WriteStr (name);
+        w. WriteObject (name);
         w. WriteString (";");
         w. WriteLn;
         IF name.Equals(Object.NewLatin1(outModule)) THEN
@@ -369,18 +369,18 @@ PROCEDURE (proc: Processor) Process* (test: Testcases.Test;
           w. WriteString ("IMPORT ");
           w. WriteString (outModule);
           w. WriteString (", ");
-          w. WriteStr (name);
+          w. WriteObject (name);
         END;
         w. WriteString (";");
         w. WriteLn;
         w. WriteString ("BEGIN ");
         w. WriteString (outModule);
         w. WriteString (".Open; ");
-        w. WriteStr (name);
+        w. WriteObject (name);
         w. WriteString (".Test;");
         w. WriteLn;
         w. WriteString ("END x");
-        w. WriteStr (name);
+        w. WriteObject (name);
         w. WriteString (".");
         w. WriteLn;
         

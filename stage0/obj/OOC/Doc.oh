@@ -70,21 +70,22 @@ typedef struct OOC_Doc__TextDesc {
 #define OOC_Doc__markAsIs 0
 #define OOC_Doc__markCite 1
 #define OOC_Doc__markCode 2
-#define OOC_Doc__markDfn 3
-#define OOC_Doc__markEmph 4
-#define OOC_Doc__markFile 5
-#define OOC_Doc__markKbd 6
-#define OOC_Doc__markSamp 7
-#define OOC_Doc__markStrong 8
-#define OOC_Doc__markVar 9
-#define OOC_Doc__markUrl 10
-#define OOC_Doc__markOberonModule 11
-#define OOC_Doc__markOberonConst 12
-#define OOC_Doc__markOberonField 13
-#define OOC_Doc__markOberonParam 14
-#define OOC_Doc__markOberonProc 15
-#define OOC_Doc__markOberonType 16
-#define OOC_Doc__markOberonVar 17
+#define OOC_Doc__markCommand 3
+#define OOC_Doc__markDfn 4
+#define OOC_Doc__markEmph 5
+#define OOC_Doc__markFile 6
+#define OOC_Doc__markKbd 7
+#define OOC_Doc__markSamp 8
+#define OOC_Doc__markStrong 9
+#define OOC_Doc__markVar 10
+#define OOC_Doc__markUrl 11
+#define OOC_Doc__markOberonModule 12
+#define OOC_Doc__markOberonConst 13
+#define OOC_Doc__markOberonField 14
+#define OOC_Doc__markOberonParam 15
+#define OOC_Doc__markOberonProc 16
+#define OOC_Doc__markOberonType 17
+#define OOC_Doc__markOberonVar 18
 typedef struct OOC_Doc__MarkedInlineDesc *OOC_Doc__MarkedInline;
 typedef struct OOC_Doc__MarkedInlineDesc {
   struct OOC_Doc__Position pos;
@@ -180,6 +181,25 @@ typedef struct OOC_Doc__ItemizeDesc {
   OOC_Doc__Item text;
   OOC_Doc__BlockElement itemList;
 } OOC_Doc__ItemizeDesc;
+#define OOC_Doc__enumNumber 0
+#define OOC_Doc__enumLowercase 1
+#define OOC_Doc__enumUppercase 2
+typedef struct OOC_Doc__EnumerateDesc *OOC_Doc__Enumerate;
+typedef struct OOC_Doc__EnumerateDesc {
+  struct OOC_Doc__Position pos;
+  OOC_Doc__BlockElement nextBlock;
+  OOC_CHAR8 padAfter;
+  OOC_CHAR8 __pad17;
+  OOC_CHAR8 __pad18;
+  OOC_CHAR8 __pad19;
+  OOC_INT8 mode;
+  OOC_CHAR8 __pad21;
+  OOC_CHAR8 __pad22;
+  OOC_CHAR8 __pad23;
+  OOC_INT32 start;
+  OOC_Doc__Item text;
+  OOC_Doc__BlockElement itemList;
+} OOC_Doc__EnumerateDesc;
 typedef struct OOC_Doc__FirstColumnDesc *OOC_Doc__FirstColumn;
 typedef struct OOC_Doc__FirstColumnDesc {
   struct OOC_Doc__Position pos;
@@ -419,6 +439,19 @@ typedef void (*_TBP_OOC_Doc__ItemizeDesc_Store)(OOC_Doc__Itemize i, ADT_Storable
 extern void OOC_Doc__ItemizeDesc_Load(OOC_Doc__Itemize i, ADT_Storable__Reader r);
 #define _TBN_OOC_Doc__ItemizeDesc_Load 4
 typedef void (*_TBP_OOC_Doc__ItemizeDesc_Load)(OOC_Doc__Itemize i, ADT_Storable__Reader r);
+extern OOC_Doc__Enumerate OOC_Doc__NewEnumerate(OOC_CHAR8 padAfter, OOC_INT8 mode, OOC_INT32 start, OOC_Doc__Item text, OOC_Doc__BlockElement itemList);
+extern void OOC_Doc__EnumerateDesc_NodeName(OOC_Doc__Enumerate e, OOC_CHAR8 name[], OOC_LEN name_0d);
+#define _TBN_OOC_Doc__EnumerateDesc_NodeName 6
+typedef void (*_TBP_OOC_Doc__EnumerateDesc_NodeName)(OOC_Doc__Enumerate e, OOC_CHAR8 name[], OOC_LEN name_0d);
+extern void OOC_Doc__EnumerateDesc_Normalize(OOC_Doc__Enumerate e);
+#define _TBN_OOC_Doc__EnumerateDesc_Normalize 7
+typedef void (*_TBP_OOC_Doc__EnumerateDesc_Normalize)(OOC_Doc__Enumerate e);
+extern void OOC_Doc__EnumerateDesc_Store(OOC_Doc__Enumerate e, ADT_Storable__Writer w);
+#define _TBN_OOC_Doc__EnumerateDesc_Store 5
+typedef void (*_TBP_OOC_Doc__EnumerateDesc_Store)(OOC_Doc__Enumerate e, ADT_Storable__Writer w);
+extern void OOC_Doc__EnumerateDesc_Load(OOC_Doc__Enumerate e, ADT_Storable__Reader r);
+#define _TBN_OOC_Doc__EnumerateDesc_Load 4
+typedef void (*_TBP_OOC_Doc__EnumerateDesc_Load)(OOC_Doc__Enumerate e, ADT_Storable__Reader r);
 extern OOC_Doc__FirstColumn OOC_Doc__NewFirstColumn(OOC_CHAR8 padAfter, OOC_Doc__InlineElement inlineText);
 extern void OOC_Doc__FirstColumnDesc_NodeName(OOC_Doc__FirstColumn fc, OOC_CHAR8 name[], OOC_LEN name_0d);
 #define _TBN_OOC_Doc__FirstColumnDesc_NodeName 6
@@ -515,30 +548,33 @@ extern RT0__StructDesc _td_OOC_Doc__Item;
 extern RT0__StructDesc _td_OOC_Doc__ItemDesc;
 extern RT0__StructDesc _td_OOC_Doc__Itemize;
 extern RT0__StructDesc _td_OOC_Doc__ItemizeDesc;
+extern RT0__StructDesc _td_OOC_Doc__Enumerate;
+extern RT0__StructDesc _td_OOC_Doc__EnumerateDesc;
 extern RT0__StructDesc _td_OOC_Doc__FirstColumn;
 extern RT0__StructDesc _td_OOC_Doc__FirstColumnDesc;
 extern RT0__StructDesc _td_OOC_Doc__TableRow;
 extern RT0__StructDesc _td_OOC_Doc__TableRowDesc;
 extern RT0__StructDesc _td_OOC_Doc__Table;
 extern RT0__StructDesc _td_OOC_Doc__TableDesc;
-extern RT0__StructDesc _td_OOC_Doc__6637;
-extern RT0__StructDesc _td_OOC_Doc__12263;
-extern RT0__StructDesc _td_OOC_Doc__13005;
-extern RT0__StructDesc _td_OOC_Doc__13214;
-extern RT0__StructDesc _td_OOC_Doc__13411;
-extern RT0__StructDesc _td_OOC_Doc__16343;
-extern RT0__StructDesc _td_OOC_Doc__19635;
-extern RT0__StructDesc _td_OOC_Doc__20860;
-extern RT0__StructDesc _td_OOC_Doc__22327;
-extern RT0__StructDesc _td_OOC_Doc__23411;
-extern RT0__StructDesc _td_OOC_Doc__24346;
-extern RT0__StructDesc _td_OOC_Doc__25334;
-extern RT0__StructDesc _td_OOC_Doc__26307;
-extern RT0__StructDesc _td_OOC_Doc__27513;
-extern RT0__StructDesc _td_OOC_Doc__28987;
-extern RT0__StructDesc _td_OOC_Doc__30202;
-extern RT0__StructDesc _td_OOC_Doc__31407;
-extern RT0__StructDesc _td_OOC_Doc__32278;
+extern RT0__StructDesc _td_OOC_Doc__6920;
+extern RT0__StructDesc _td_OOC_Doc__12546;
+extern RT0__StructDesc _td_OOC_Doc__13288;
+extern RT0__StructDesc _td_OOC_Doc__13497;
+extern RT0__StructDesc _td_OOC_Doc__13694;
+extern RT0__StructDesc _td_OOC_Doc__16626;
+extern RT0__StructDesc _td_OOC_Doc__19960;
+extern RT0__StructDesc _td_OOC_Doc__21185;
+extern RT0__StructDesc _td_OOC_Doc__22652;
+extern RT0__StructDesc _td_OOC_Doc__23736;
+extern RT0__StructDesc _td_OOC_Doc__24671;
+extern RT0__StructDesc _td_OOC_Doc__25659;
+extern RT0__StructDesc _td_OOC_Doc__26632;
+extern RT0__StructDesc _td_OOC_Doc__27838;
+extern RT0__StructDesc _td_OOC_Doc__29523;
+extern RT0__StructDesc _td_OOC_Doc__30893;
+extern RT0__StructDesc _td_OOC_Doc__32108;
+extern RT0__StructDesc _td_OOC_Doc__33313;
+extern RT0__StructDesc _td_OOC_Doc__34184;
 #endif /* _MODULE_OOC_Doc_ */
 
 /* --- */

@@ -22,24 +22,25 @@ extern void OOC_OOC_Doc_Input_Texinfo_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__Command;
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__CommandDesc;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3206;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3273;
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__Token;
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__TokenDesc;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3568;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3602;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3635;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__3669;
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__ErrorContext;
 extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__4233;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__5550;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__7079;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__11811;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__15475;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17623;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17766;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__23845;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__25331;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__28163;
-extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__31703;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__4325;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__5715;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__7244;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__11976;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__15640;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17831;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__17974;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__24053;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__25539;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__27328;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__30665;
+extern RT0__StructDesc _td_OOC_Doc_Input_Texinfo__34275;
 #endif /* _MODULE_OOC_Doc_Input_Texinfo_ */
 
 /* --- */

@@ -58,7 +58,7 @@ RT0__StructDesc _td_OOC_SSA_Allocator__3162 = { (RT0__Struct[]){&_td_OOC_SSA__In
 RT0__StructDesc _td_OOC_SSA_Allocator__3151 = { (RT0__Struct[]){&_td_OOC_SSA_Allocator__3162}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_SSA_Allocator__3206 = { (RT0__Struct[]){&_td_ADT_Dictionary__Dictionary}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_SSA_Allocator__3195 = { (RT0__Struct[]){&_td_OOC_SSA_Allocator__3206}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_SSA_Allocator__17535 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
+RT0__StructDesc _td_OOC_SSA_Allocator__17570 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SSA:Allocator", (RT0__Struct[]) { &_td_OOC_SSA_Allocator__BlockList, &_td_OOC_SSA_Allocator__NameArray, &_td_OOC_SSA_Allocator__RegisterFile, &_td_OOC_SSA_Allocator__RegisterFiles, &_td_OOC_SSA_Allocator__RegisterFileDesc, &_td_OOC_SSA_Allocator__LiveData, &_td_OOC_SSA_Allocator__LiveDataDesc, &_td_OOC_SSA_Allocator__BlockInfo, &_td_OOC_SSA_Allocator__BlockInfoDesc, NULL } };
 
 extern void OOC_OOC_SSA_Allocator_init0() {

@@ -1,5 +1,6 @@
 #include <URI/Scheme/File.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Scheme_File__Init(URI_Scheme_File__URI file, URI_String__StringPtr schemeId, URI__Authority authority, URI__Query query) {
   register OOC_INT32 i0,i1,i2,i3;

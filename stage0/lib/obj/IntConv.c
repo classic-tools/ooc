@@ -1,5 +1,6 @@
 #include <IntConv.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void IntConv__WState(OOC_CHAR8 inputCh, OOC_INT8 *chClass, ConvTypes__ScanState *nextState) {
   register OOC_INT32 i0;

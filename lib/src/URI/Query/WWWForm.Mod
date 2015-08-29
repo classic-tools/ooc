@@ -1,4 +1,4 @@
-(* 	$Id: WWWForm.Mod,v 1.5 2002/12/17 19:33:40 mva Exp $	 *)
+(* 	$Id: WWWForm.Mod,v 1.6 2002/12/30 09:29:23 mva Exp $	 *)
 MODULE URI:Query:WWWForm;
 (*  Implements class for WWW form query components of GET/POST requests.
     Copyright (C) 2000  Michael van Acken
@@ -190,9 +190,9 @@ PROCEDURE (query: Query) WriteXML* (w: TextRider.Writer);
     w. WriteString (CC.eol+"<query-www-form>");
     FOR i := 0 TO query. names. size-1 DO
       w. WriteString (CC.eol+"  <entry name='");
-      w. WriteStr (query. names. array[i](Object.String8));
+      w. WriteObject (query. names. array[i]);
       w. WriteString ("'>");
-      w. WriteStr (query. values. array[i](Object.String8));
+      w. WriteObject (query. values. array[i]);
       w. WriteString ("</entry>");
     END;
     w. WriteString ("</query-www-form>");

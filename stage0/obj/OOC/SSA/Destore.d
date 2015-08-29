@@ -28,6 +28,7 @@ RT0__StructDesc _td_OOC_SSA_Destore__CacheEntry = { (RT0__Struct[]){&_td_OOC_SSA
 RT0__StructDesc _td_OOC_SSA_Destore__CacheEntryDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_SSA__NodeDesc,&_td_OOC_SSA_Destore__CacheEntryDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, &_mid, "CacheEntryDesc", 12, 2, RT0__strRecord };
 RT0__StructDesc _td_OOC_SSA_Destore__Worklist = { (RT0__Struct[]){&_td_OOC_SSA_Destore__WorklistDesc}, NULL, &_mid, "Worklist", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_SSA_Destore__WorklistDesc = { (RT0__Struct[]){&_td_OOC_SSA_Destore__WorklistDesc}, (void*[]){}, &_mid, "WorklistDesc", 8, 0, RT0__strRecord };
+RT0__StructDesc _td_OOC_SSA_Destore__8424 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SSA:Destore", (RT0__Struct[]) { &_td_OOC_SSA_Destore__State, &_td_OOC_SSA_Destore__StateDesc, &_td_OOC_SSA_Destore__CacheEntry, &_td_OOC_SSA_Destore__CacheEntryDesc, &_td_OOC_SSA_Destore__Worklist, &_td_OOC_SSA_Destore__WorklistDesc, NULL } };
 
 extern void OOC_OOC_SSA_Destore_init0() {

@@ -1,5 +1,6 @@
 #include <ADT/Object/Storage.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static Msg__Msg ADT_Object_Storage__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;

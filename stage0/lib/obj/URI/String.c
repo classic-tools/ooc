@@ -1,5 +1,6 @@
 #include <URI/String.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 URI_String__StringPtr URI_String__Extract(const URI_String__String str__ref, OOC_LEN str_0d, OOC_INT16 start, OOC_INT16 end) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;

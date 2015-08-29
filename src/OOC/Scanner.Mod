@@ -1,4 +1,4 @@
-(* 	$Id: Scanner.Mod,v 1.5 2002/10/20 11:56:57 mva Exp $	 *)
+(* 	$Id: Scanner.Mod,v 1.6 2002/12/29 14:30:37 mva Exp $	 *)
 MODULE OOC:Scanner;
 (*  Convert a character sequence into a stream of Oberon-2 symbols.
     Copyright (C) 2000, 2001, 2002  Michael van Acken
@@ -60,7 +60,7 @@ CONST
   (**Enables all available add-on symbols.  *)
   
 CONST
-  sizeKWTable = 128;                     
+  sizeKWTable = 256;
   (* size of keyword hash table *)
 
 VAR
@@ -712,7 +712,10 @@ PROCEDURE InitKeywords;
     KW ("UNTIL", Symbol.until);
     KW ("VAR", Symbol.var);
     KW ("WHILE", Symbol.while); 
-    KW ("WITH", Symbol.with)
+    KW ("WITH", Symbol.with);
+    KW ("TRY", Symbol.try);
+    KW ("CATCH", Symbol.catch);
+    KW ("RAISES", Symbol.raises);
   END InitKeywords;
 
 BEGIN

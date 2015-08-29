@@ -1,5 +1,6 @@
 #include <IntStr.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void IntStr__StrToInt(const OOC_CHAR8 str__ref[], OOC_LEN str_0d, OOC_INT32 *_int, OOC_INT8 *res) {
   register OOC_INT32 i0,i1;

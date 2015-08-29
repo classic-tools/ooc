@@ -15,15 +15,15 @@ extern void OOC_OOC_SymbolTable_InterfaceDescr_init();
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2516;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2667;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6293;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6408;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6847;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7063;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__9871;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__14057;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__15132;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2517;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2668;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6294;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6409;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6848;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7064;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__10178;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__14364;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__15439;
 #endif /* _MODULE_OOC_SymbolTable_InterfaceDescr_ */
 
 /* --- */

@@ -1,5 +1,6 @@
 #include <OOC/SSA/Schedule.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_SSA_Schedule__InitInfo(OOC_SSA_Schedule__Info info) {
 

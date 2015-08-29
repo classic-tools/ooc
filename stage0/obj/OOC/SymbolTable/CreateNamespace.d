@@ -31,6 +31,7 @@
 #define OOC_SymbolTable_CreateNamespace__abstractProcNotExported 23
 #define OOC_SymbolTable_CreateNamespace__procedureStillAbstract 24
 #define OOC_SymbolTable_CreateNamespace__atMostOneLinkFile 25
+#define OOC_SymbolTable_CreateNamespace__notException 26
 static OOC_SymbolTable_CreateNamespace__ErrorContext OOC_SymbolTable_CreateNamespace__createNamespaceContext;
 static OOC_SymbolTable__Module OOC_SymbolTable_CreateNamespace__predefModule;
 OOC_SymbolTable__Module OOC_SymbolTable_CreateNamespace__systemModule;
@@ -39,7 +40,7 @@ OOC_SymbolTable__Module OOC_SymbolTable_CreateNamespace__systemModule;
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContext = { (RT0__Struct[]){&_td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc}, (void*[]){(void*)OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2258 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2279 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:SymbolTable:CreateNamespace", (RT0__Struct[]) { &_td_OOC_SymbolTable_CreateNamespace__ErrorContext, &_td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_SymbolTable_CreateNamespace_init0() {

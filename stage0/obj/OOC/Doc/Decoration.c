@@ -1,5 +1,6 @@
 #include <OOC/Doc/Decoration.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_Scanner_InputBuffer__CharArray OOC_Doc_Decoration__Remove(OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Doc_Decoration__Decoration *deco) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;

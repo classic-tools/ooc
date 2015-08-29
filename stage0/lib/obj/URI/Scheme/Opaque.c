@@ -1,5 +1,6 @@
 #include <URI/Scheme/Opaque.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void URI_Scheme_Opaque__Init(URI_Scheme_Opaque__Generic uri, URI_String__StringPtr schemeId, URI_String__StringPtr opaque) {
   register OOC_INT32 i0,i1;

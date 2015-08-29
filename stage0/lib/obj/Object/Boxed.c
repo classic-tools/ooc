@@ -1,5 +1,6 @@
 #include <Object/Boxed.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 Object__String Object_Boxed__ObjectDesc_ToString(Object_Boxed__Object v) {
 

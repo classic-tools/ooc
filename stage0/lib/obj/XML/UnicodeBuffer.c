@@ -1,5 +1,6 @@
 #include <XML/UnicodeBuffer.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static OOC_INT32 XML_UnicodeBuffer__AutodetectEnc(XML_UnicodeBuffer__Input input, OOC_CHAR8 enc[], OOC_LEN enc_0d) {
   register OOC_INT32 i0,i1,i2;

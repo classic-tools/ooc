@@ -1,5 +1,6 @@
 #include <Config/Source/CmdLine.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void Config_Source_CmdLine__ErrorContextDesc_GetTemplate(Config_Source_CmdLine__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d) {
   register OOC_INT32 i0;

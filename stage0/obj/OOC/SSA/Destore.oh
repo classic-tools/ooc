@@ -30,6 +30,7 @@ extern RT0__StructDesc _td_OOC_SSA_Destore__CacheEntry;
 extern RT0__StructDesc _td_OOC_SSA_Destore__CacheEntryDesc;
 extern RT0__StructDesc _td_OOC_SSA_Destore__Worklist;
 extern RT0__StructDesc _td_OOC_SSA_Destore__WorklistDesc;
+extern RT0__StructDesc _td_OOC_SSA_Destore__8424;
 #endif /* _MODULE_OOC_SSA_Destore_ */
 
 /* --- */

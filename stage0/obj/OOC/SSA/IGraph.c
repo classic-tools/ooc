@@ -1,5 +1,6 @@
 #include <OOC/SSA/IGraph.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_SSA_IGraph__GraphDesc_Clear(OOC_SSA_IGraph__Graph g) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;

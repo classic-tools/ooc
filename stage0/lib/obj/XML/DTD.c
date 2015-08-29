@@ -1,5 +1,6 @@
 #include <XML/DTD.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void XML_DTD__InitDeclaration(XML_DTD__Declaration decl, XML_UnicodeBuffer__CharArray name) {
   register OOC_INT32 i0,i1;

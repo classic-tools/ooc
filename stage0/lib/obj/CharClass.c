@@ -1,5 +1,6 @@
 #include <CharClass.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_CHAR8 CharClass__IsNumeric(OOC_CHAR8 ch) {
   register OOC_INT32 i0,i1;

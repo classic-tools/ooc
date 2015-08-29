@@ -1,5 +1,6 @@
 #include <OOC/Scanner/Builder/BasicList.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Scanner_Builder_BasicList__Init(OOC_Scanner_Builder_BasicList__Builder b, OOC_Scanner_InputBuffer__Buffer buffer, OOC_CHAR8 includeDocComments) {
   register OOC_INT32 i0,i1;
@@ -91,16 +92,16 @@ void OOC_Scanner_Builder_BasicList__BuilderDesc_AddSymbol(OOC_Scanner_Builder_Ba
   OOC_INT32 len;
 
   i0 = id;
-  i1 = i0<74;
+  i1 = i0<77;
   if (i1) goto l3;
-  i1 = i0>77;
+  i1 = i0>80;
   
   goto l5;
 l3:
   i1=OOC_TRUE;
 l5:
   if (i1) goto l11;
-  i1 = i0==75;
+  i1 = i0==78;
   if (i1) goto l9;
   i1=OOC_FALSE;
   goto l13;

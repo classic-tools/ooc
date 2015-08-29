@@ -29,15 +29,15 @@ extern void OOC_OOC_Scanner_init();
 extern void OOC_OOC_Scanner_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Scanner__2950;
-extern RT0__StructDesc _td_OOC_Scanner__2933;
-extern RT0__StructDesc _td_OOC_Scanner__3056;
-extern RT0__StructDesc _td_OOC_Scanner__3039;
+extern RT0__StructDesc _td_OOC_Scanner__2929;
+extern RT0__StructDesc _td_OOC_Scanner__2912;
+extern RT0__StructDesc _td_OOC_Scanner__3035;
+extern RT0__StructDesc _td_OOC_Scanner__3018;
 extern RT0__StructDesc _td_OOC_Scanner__ErrorContext;
 extern RT0__StructDesc _td_OOC_Scanner__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Scanner__3728;
-extern RT0__StructDesc _td_OOC_Scanner__7769;
-extern RT0__StructDesc _td_OOC_Scanner__21959;
+extern RT0__StructDesc _td_OOC_Scanner__3707;
+extern RT0__StructDesc _td_OOC_Scanner__7748;
+extern RT0__StructDesc _td_OOC_Scanner__21938;
 #endif /* _MODULE_OOC_Scanner_ */
 
 /* --- */

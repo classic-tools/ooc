@@ -44,6 +44,7 @@ typedef struct OOC_SSA_WriteC__WriterDesc {
   OOC_C_DeclWriter__BasicType basicType[17];
   OOC_SSA_WriteC__Translator translator;
   ADT_Dictionary__Dictionary registerMap;
+  ADT_Dictionary__Dictionary jmpbufMap;
   OOC_SSA__ProcBlock procBlock;
   OOC_SSA_WriteC__SwapArray swapArray;
   OOC_INT32 lengthSwapArray;
@@ -55,10 +56,10 @@ typedef struct OOC_SSA_WriteC__VisitorDesc {
   ADT_Dictionary__Dictionary nonLocalAccess;
 } OOC_SSA_WriteC__VisitorDesc;
 extern void OOC_SSA_WriteC__VisitorDesc_VisitProcedure(OOC_SSA_WriteC__Visitor v, OOC_IR__Procedure procedure);
-#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitProcedure 36
+#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitProcedure 37
 typedef void (*_TBP_OOC_SSA_WriteC__VisitorDesc_VisitProcedure)(OOC_SSA_WriteC__Visitor v, OOC_IR__Procedure procedure);
 extern void OOC_SSA_WriteC__VisitorDesc_VisitVar(OOC_SSA_WriteC__Visitor v, OOC_IR__Var var);
-#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitVar 52
+#define _TBN_OOC_SSA_WriteC__VisitorDesc_VisitVar 55
 typedef void (*_TBP_OOC_SSA_WriteC__VisitorDesc_VisitVar)(OOC_SSA_WriteC__Visitor v, OOC_IR__Var var);
 extern void OOC_SSA_WriteC__WriterDesc_ClearSwapData(OOC_SSA_WriteC__Writer w);
 #define _TBN_OOC_SSA_WriteC__WriterDesc_ClearSwapData 26
@@ -123,13 +124,14 @@ extern RT0__StructDesc _td_OOC_SSA_WriteC__Writer;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__WriterDesc;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__Visitor;
 extern RT0__StructDesc _td_OOC_SSA_WriteC__VisitorDesc;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__6546;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__20744;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22240;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22444;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__22737;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__36754;
-extern RT0__StructDesc _td_OOC_SSA_WriteC__47440;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__6599;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__7633;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__21439;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__22938;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23142;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__23435;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__37556;
+extern RT0__StructDesc _td_OOC_SSA_WriteC__50142;
 #endif /* _MODULE_OOC_SSA_WriteC_ */
 
 /* --- */

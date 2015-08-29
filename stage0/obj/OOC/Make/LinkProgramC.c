@@ -1,5 +1,6 @@
 #include <OOC/Make/LinkProgramC.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static Object__StringArrayPtr OOC_Make_LinkProgramC__GetExternalLibs(const OOC_Repository__Module moduleList__ref[], OOC_LEN moduleList_0d, Object__String thisLibrary) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;

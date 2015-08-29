@@ -1,5 +1,6 @@
 #include <StringSearch.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void StringSearch__InitMatchObject(StringSearch__MatchObject m, OOC_INT32 pos, OOC_INT32 endpos, StringSearch__Matcher matcher, Object__String8 string) {
   register OOC_INT32 i0,i1;

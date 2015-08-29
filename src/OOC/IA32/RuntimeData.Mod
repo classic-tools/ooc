@@ -1,4 +1,4 @@
-(* 	$Id: RuntimeData.Mod,v 1.6 2002/12/20 10:19:33 mva Exp $	 *)
+(* 	$Id: RuntimeData.Mod,v 1.7 2002/12/28 10:22:30 mva Exp $	 *)
 MODULE OOC:IA32:RuntimeData;
 (*  Writes assembler code for run-time data like type descriptors.
     Copyright (C) 2002  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:IA32:RuntimeData;
 
 
 IMPORT
-  Object, Sym := OOC:SymbolTable, OOC:IA32:Writer;
+  Sym := OOC:SymbolTable, OOC:IA32:Writer;
 
 PROCEDURE Write* (w: Writer.Writer; symTab: Sym.Module);
   PROCEDURE ModuleDescr (module: Sym.Module);

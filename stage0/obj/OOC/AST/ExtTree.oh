@@ -87,6 +87,8 @@ typedef struct OOC_AST_ExtTree__FormalParsDesc {
   OOC_AST__Node rParen;
   OOC_AST__Node colon;
   OOC_AST__Node result;
+  OOC_AST__Node raises;
+  OOC_AST__NodeList raisesList;
 } OOC_AST_ExtTree__FormalParsDesc;
 typedef struct OOC_AST_ExtTree__ProcTypeDesc *OOC_AST_ExtTree__ProcType;
 typedef struct OOC_AST_ExtTree__ProcTypeDesc {
@@ -276,6 +278,13 @@ typedef struct OOC_AST_ExtTree__ReturnStatmDesc {
   OOC_AST_ExtTree__Terminal _return;
   OOC_AST__Node expr;
 } OOC_AST_ExtTree__ReturnStatmDesc;
+typedef struct OOC_AST_ExtTree__TryStatmDesc *OOC_AST_ExtTree__TryStatm;
+typedef struct OOC_AST_ExtTree__TryStatmDesc {
+  OOC_AST_ExtTree__Terminal _try;
+  OOC_AST_ExtTree__NodeList statmSeq;
+  OOC_AST_ExtTree__NodeList catchList;
+  OOC_AST_ExtTree__Terminal end;
+} OOC_AST_ExtTree__TryStatmDesc;
 typedef struct OOC_AST_ExtTree__FlagsDesc {
   OOC_INT8 context;
   OOC_CHAR8 __pad1;
@@ -375,10 +384,10 @@ extern void OOC_AST_ExtTree__VisitorDesc_VisitConstDecl(OOC_AST_ExtTree__Visitor
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitConstDecl 5
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitConstDecl)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__ConstDecl constDecl);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitTypeDecl(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__TypeDecl typeDecl);
-#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitTypeDecl 38
+#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitTypeDecl 39
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitTypeDecl)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__TypeDecl typeDecl);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitVarDecl(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__VarDecl varDecl);
-#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitVarDecl 39
+#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitVarDecl 40
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitVarDecl)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__VarDecl varDecl);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitReceiver(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__Receiver receiver);
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitReceiver 32
@@ -423,7 +432,7 @@ extern void OOC_AST_ExtTree__VisitorDesc_VisitCaseStatm(OOC_AST_ExtTree__Visitor
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitCaseStatm 4
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitCaseStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__CaseStatm caseStatm);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitWhileStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__WhileStatm whileStatm);
-#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitWhileStatm 40
+#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitWhileStatm 41
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitWhileStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__WhileStatm whileStatm);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitRepeatStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__RepeatStatm repeatStatm);
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitRepeatStatm 34
@@ -435,7 +444,7 @@ extern void OOC_AST_ExtTree__VisitorDesc_VisitLoopStatm(OOC_AST_ExtTree__Visitor
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitLoopStatm 21
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitLoopStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__LoopStatm loopStatm);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitWithStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__WithStatm withStatm);
-#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitWithStatm 41
+#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitWithStatm 42
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitWithStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__WithStatm withStatm);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitExitStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__ExitStatm exitStatm);
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitExitStatm 6
@@ -443,6 +452,9 @@ typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitExitStatm)(OOC_AST_ExtTree
 extern void OOC_AST_ExtTree__VisitorDesc_VisitReturnStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__ReturnStatm returnStatm);
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitReturnStatm 35
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitReturnStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__ReturnStatm returnStatm);
+extern void OOC_AST_ExtTree__VisitorDesc_VisitTryStatm(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__TryStatm tryStatm);
+#define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitTryStatm 38
+typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitTryStatm)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__TryStatm tryStatm);
 extern void OOC_AST_ExtTree__VisitorDesc_VisitFlags(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__Flags flags);
 #define _TBN_OOC_AST_ExtTree__VisitorDesc_VisitFlags 10
 typedef void (*_TBP_OOC_AST_ExtTree__VisitorDesc_VisitFlags)(OOC_AST_ExtTree__Visitor v, OOC_AST_ExtTree__Flags flags);
@@ -526,9 +538,9 @@ typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_FPSection)(OOC
 extern void OOC_AST_ExtTree__FPSectionDesc_Accept(OOC_AST_ExtTree__FPSection fpSection, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__FPSectionDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__FPSectionDesc_Accept)(OOC_AST_ExtTree__FPSection fpSection, OOC_AST_ExtTree__Visitor v);
-extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_FormalPars(OOC_AST_ExtTree__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result);
+extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_FormalPars(OOC_AST_ExtTree__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result, OOC_AST__Node raises, OOC_AST__NodeList raisesList);
 #define _TBN_OOC_AST_ExtTree__BuilderDesc_FormalPars 12
-typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_FormalPars)(OOC_AST_ExtTree__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result);
+typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_FormalPars)(OOC_AST_ExtTree__Builder b, OOC_AST__Node flags, OOC_AST__Node lParen, OOC_AST__NodeList fpSections, OOC_AST__Node rParen, OOC_AST__Node colon, OOC_AST__Node result, OOC_AST__Node raises, OOC_AST__NodeList raisesList);
 extern void OOC_AST_ExtTree__FormalParsDesc_Accept(OOC_AST_ExtTree__FormalPars formalPars, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__FormalParsDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__FormalParsDesc_Accept)(OOC_AST_ExtTree__FormalPars formalPars, OOC_AST_ExtTree__Visitor v);
@@ -551,13 +563,13 @@ extern void OOC_AST_ExtTree__ConstDeclDesc_Accept(OOC_AST_ExtTree__ConstDecl con
 #define _TBN_OOC_AST_ExtTree__ConstDeclDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__ConstDeclDesc_Accept)(OOC_AST_ExtTree__ConstDecl constDecl, OOC_AST_ExtTree__Visitor v);
 extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_TypeDecl(OOC_AST_ExtTree__Builder b, OOC_AST__Node identDef, OOC_AST__Node equal, OOC_AST__Node type, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST_ExtTree__BuilderDesc_TypeDecl 40
+#define _TBN_OOC_AST_ExtTree__BuilderDesc_TypeDecl 41
 typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_TypeDecl)(OOC_AST_ExtTree__Builder b, OOC_AST__Node identDef, OOC_AST__Node equal, OOC_AST__Node type, OOC_AST__Node semicolon);
 extern void OOC_AST_ExtTree__TypeDeclDesc_Accept(OOC_AST_ExtTree__TypeDecl typeDecl, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__TypeDeclDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__TypeDeclDesc_Accept)(OOC_AST_ExtTree__TypeDecl typeDecl, OOC_AST_ExtTree__Visitor v);
 extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_VarDecl(OOC_AST_ExtTree__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node semicolon);
-#define _TBN_OOC_AST_ExtTree__BuilderDesc_VarDecl 41
+#define _TBN_OOC_AST_ExtTree__BuilderDesc_VarDecl 42
 typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_VarDecl)(OOC_AST_ExtTree__Builder b, OOC_AST__NodeList identList, OOC_AST__Node colon, OOC_AST__Node type, OOC_AST__Node semicolon);
 extern void OOC_AST_ExtTree__VarDeclDesc_Accept(OOC_AST_ExtTree__VarDecl varDecl, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__VarDeclDesc_Accept 1
@@ -647,7 +659,7 @@ extern void OOC_AST_ExtTree__CaseStatmDesc_Accept(OOC_AST_ExtTree__CaseStatm cas
 #define _TBN_OOC_AST_ExtTree__CaseStatmDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__CaseStatmDesc_Accept)(OOC_AST_ExtTree__CaseStatm caseStatm, OOC_AST_ExtTree__Visitor v);
 extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_WhileStatm(OOC_AST_ExtTree__Builder b, OOC_AST__Node _while, OOC_AST__Node guard, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST_ExtTree__BuilderDesc_WhileStatm 42
+#define _TBN_OOC_AST_ExtTree__BuilderDesc_WhileStatm 43
 typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_WhileStatm)(OOC_AST_ExtTree__Builder b, OOC_AST__Node _while, OOC_AST__Node guard, OOC_AST__Node _do, OOC_AST__NodeList statmSeq, OOC_AST__Node end);
 extern void OOC_AST_ExtTree__WhileStatmDesc_Accept(OOC_AST_ExtTree__WhileStatm whileStatm, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__WhileStatmDesc_Accept 1
@@ -671,7 +683,7 @@ extern void OOC_AST_ExtTree__LoopStatmDesc_Accept(OOC_AST_ExtTree__LoopStatm loo
 #define _TBN_OOC_AST_ExtTree__LoopStatmDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__LoopStatmDesc_Accept)(OOC_AST_ExtTree__LoopStatm loopStatm, OOC_AST_ExtTree__Visitor v);
 extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_WithStatm(OOC_AST_ExtTree__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
-#define _TBN_OOC_AST_ExtTree__BuilderDesc_WithStatm 43
+#define _TBN_OOC_AST_ExtTree__BuilderDesc_WithStatm 44
 typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_WithStatm)(OOC_AST_ExtTree__Builder b, OOC_AST__NodeList guardList, OOC_AST__Node _else, OOC_AST__NodeList elseStatmSeq, OOC_AST__Node end);
 extern void OOC_AST_ExtTree__WithStatmDesc_Accept(OOC_AST_ExtTree__WithStatm withStatm, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__WithStatmDesc_Accept 1
@@ -688,6 +700,12 @@ typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_ReturnStatm)(O
 extern void OOC_AST_ExtTree__ReturnStatmDesc_Accept(OOC_AST_ExtTree__ReturnStatm returnStatm, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__ReturnStatmDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__ReturnStatmDesc_Accept)(OOC_AST_ExtTree__ReturnStatm returnStatm, OOC_AST_ExtTree__Visitor v);
+extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_TryStatm(OOC_AST_ExtTree__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end);
+#define _TBN_OOC_AST_ExtTree__BuilderDesc_TryStatm 40
+typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_TryStatm)(OOC_AST_ExtTree__Builder b, OOC_AST__Node _try, OOC_AST__NodeList statmSeq, OOC_AST__NodeList catchList, OOC_AST__Node end);
+extern void OOC_AST_ExtTree__TryStatmDesc_Accept(OOC_AST_ExtTree__TryStatm tryStatm, OOC_AST_ExtTree__Visitor v);
+#define _TBN_OOC_AST_ExtTree__TryStatmDesc_Accept 1
+typedef void (*_TBP_OOC_AST_ExtTree__TryStatmDesc_Accept)(OOC_AST_ExtTree__TryStatm tryStatm, OOC_AST_ExtTree__Visitor v);
 extern OOC_AST__Node OOC_AST_ExtTree__BuilderDesc_Flags(OOC_AST_ExtTree__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak);
 #define _TBN_OOC_AST_ExtTree__BuilderDesc_Flags 10
 typedef OOC_AST__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_Flags)(OOC_AST_ExtTree__Builder b, OOC_INT8 context, OOC_AST__Node lBrak, OOC_AST__NodeList flagList, OOC_AST__Node rBrak);
@@ -810,6 +828,8 @@ extern RT0__StructDesc _td_OOC_AST_ExtTree__ExitStatm;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__ExitStatmDesc;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__ReturnStatm;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__ReturnStatmDesc;
+extern RT0__StructDesc _td_OOC_AST_ExtTree__TryStatm;
+extern RT0__StructDesc _td_OOC_AST_ExtTree__TryStatmDesc;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__FlagsDesc;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__ProcIdFlag;
 extern RT0__StructDesc _td_OOC_AST_ExtTree__ProcIdFlagDesc;

@@ -1,7 +1,7 @@
-(* 	$Id: CreateNamespace.Mod,v 1.22 2002/12/20 05:11:46 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.25 2003/01/01 14:00:49 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -53,6 +53,7 @@ CONST
   abstractProcNotExported = 23;
   procedureStillAbstract = 24;
   atMostOneLinkFile = 25;
+  notException = 26;
   
 TYPE
   ErrorContext = POINTER TO ErrorContextDesc;
@@ -120,6 +121,8 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
       t := "Inherited procedure `${name}' is still abstract"
     | atMostOneLinkFile:
       t := "Module must provide at most one LINK FILE directive"
+    | notException:
+      t := "Type is not an extension of `Exception.Exception'"
     END;
     context. BaseTemplate (msg, t, templ)
   END GetTemplate;
@@ -426,6 +429,7 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
      type of a record are checked.  *)
     VAR
       ptr: Sym.Item;
+      i: LONGINT;
       
     PROCEDURE GetTypeByName (typeName: Sym.Type; contextOfUse: Sym.Item; 
                       extendedSearch: BOOLEAN; errList: Error.List): Sym.Type;
@@ -511,7 +515,13 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
           IF (item. resultType # NIL) THEN
             item. resultType := GetTypeByName (item. resultType,
                                                contextOfUse, FALSE, errList)
-          END
+          END;
+          IF (item.raises # NIL) THEN
+            FOR i := 0 TO LEN(item.raises^)-1 DO
+              item.raises[i].type := GetTypeByName
+                  (item.raises[i].type, contextOfUse, FALSE, errList);
+            END;
+          END;
           
         | item: Sym.Array DO
           item. elementType := GetTypeByName (item. elementType,
@@ -547,6 +557,7 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
       ptr: Sym.Item;
       type: Sym.Type;
       record: Sym.Record;
+      i: LONGINT;
     
     PROCEDURE CheckOpenArray (type, srcCodeType: Sym.Type);
       BEGIN
@@ -610,7 +621,14 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
           IF (type # NIL) & ~(type IS Sym.TypeName) &
              ~TR.IsValidResultType (type) THEN
             ErrType (invalidResultType, item. srcCodeResultType)
-          END
+          END;
+          IF (item.raises # NIL) THEN
+            FOR i := 0 TO LEN(item.raises^)-1 DO
+              IF errList.NoErrors() & ~TR.IsException(item.raises[i].type) THEN
+                ErrType(notException, item.raises[i].srcCodeType);
+              END;
+            END;
+          END;
           
         | item: Sym.Array DO
           type := item. elementType;
@@ -739,8 +757,11 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
           END;
           record.ns(Namespace.Extended).CheckRestrictions (record, errList);
 
-          IF ~record.isAbstract THEN
-            (* check that no abstract procedure remain *)
+          IF errList.NoErrors() & ~record.isAbstract THEN
+            (* Check that no abstract procedure remain.  Only do this if the
+               call to CheckRestrictions did not report any errors, or we might
+               report a missing procedure although only the formal parameters
+               were invalid.  *)
             FOR i := 0 TO record.tbProcCount-1 DO
               proc := record.ns(Namespace.Extended).GetTBProcByIndex (i);
               IF proc.isAbstract THEN
@@ -861,6 +882,14 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
               CASE flag.id OF
               | Sym.flagCString:
                 SetFlag(item.doCArrayAssignment, TRUE);
+              ELSE
+                InvalidFlag(flag, invalidModifierFlag);
+              END;
+
+            | item: Sym.FormalPars DO
+              CASE flag.id OF
+              | Sym.flagNoReturn:
+                SetFlag(item.noReturn, TRUE);
               ELSE
                 InvalidFlag(flag, invalidModifierFlag);
               END;
@@ -1006,7 +1035,7 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
     (* eighth pass: resolve forward declarations of procedures *)
     IF errList.NoErrors() THEN
       (* if there are type names that could not be resolved, then this
-         function cannot operator properly; only run it if we are clean *)
+         function cannot operate properly; only run it if we are clean *)
       ResolveForwardDecl (root, errList);
     END;
 
@@ -1018,7 +1047,7 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
        records and assign indexes to type-bound procedures *)
     IF errList.NoErrors() THEN
       (* if there are type names that could not be resolved, then this
-         function cannot operator properly; only run it if we are clean *)
+         function cannot operate properly; only run it if we are clean *)
       CheckExtendedRecords (root, errList);
     END;
     

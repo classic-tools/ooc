@@ -1,4 +1,4 @@
-(* 	$Id: TranslateToIA32.Mod,v 1.6 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: TranslateToIA32.Mod,v 1.7 2002/12/28 10:23:49 mva Exp $	 *)
 MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Ascii, Channel, Msg, StdChannels, Object, ADT:Dictionary, 
+  Ascii, Channel, Msg, StdChannels, ADT:Dictionary, 
   OOC:Config:Pragmas, OOC:Auxiliary:ParseModule,
   OOC:Auxiliary:WriteSymbolFile, OOC:Error, Rep := OOC:Repository, OOC:AST,
   OOC:AST:ExtTree, OOC:AST:ExtTree:CreateIR, ASTtoXML := OOC:AST:ExtTree:XML, 

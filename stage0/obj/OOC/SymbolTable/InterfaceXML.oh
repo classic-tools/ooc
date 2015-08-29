@@ -14,10 +14,10 @@ extern void OOC_OOC_SymbolTable_InterfaceXML_init();
 extern void OOC_OOC_SymbolTable_InterfaceXML_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2160;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2256;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2949;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6457;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2166;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2262;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2955;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6690;
 #endif /* _MODULE_OOC_SymbolTable_InterfaceXML_ */
 
 /* --- */

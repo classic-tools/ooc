@@ -1,5 +1,6 @@
 #include <ADT/StringBuffer.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void ADT_StringBuffer__Init(ADT_StringBuffer__StringBuffer b, OOC_INT32 initialCapacity) {
   register OOC_INT32 i0,i1;

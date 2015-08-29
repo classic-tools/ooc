@@ -1,4 +1,4 @@
-/*	$Id: Termination.c,v 1.2 2002/12/08 22:30:03 mva Exp $	*/
+/*	$Id: Termination.c,v 1.3 2002/12/28 13:21:27 mva Exp $	*/
 /*  Provides procedures for program finalization.
     Copyright (C) 1997, 1999, 2000, 2002  Michael van Acken
 
@@ -21,8 +21,8 @@
 #include <signal.h>
 #include <sys/types.h>
 
-#include "Termination.d"
-#include "__config.h"
+#include <Termination.d>
+#include <__config.h>
 
 #if HAVE_UNISTD_H
 #include <unistd.h>

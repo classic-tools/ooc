@@ -1,7 +1,7 @@
-(* 	$Id: DeclWriter.Mod,v 1.52 2002/12/23 04:59:58 mva Exp $	 *)
+(* 	$Id: DeclWriter.Mod,v 1.55 2003/01/01 14:00:50 mva Exp $	 *)
 MODULE OOC:C:DeclWriter [OOC_EXTENSIONS];
 (*  Defines classes to handle C declarations, types, and include statements.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -151,6 +151,7 @@ TYPE
     resultType: Type;
     parameters: ArrayList.ArrayList;
     restParameters: BOOLEAN;
+    noReturn: BOOLEAN;
   END;
 
 TYPE
@@ -340,10 +341,10 @@ PROCEDURE (w: Writer) WriteString* (str[NO_COPY]: ARRAY OF CHAR);
     w. textWriter. WriteString (str)
   END WriteString;
 
-PROCEDURE (w: Writer) WriteStr* (str: STRING);
+PROCEDURE (w: Writer) WriteObject* (obj: Object.Object);
   BEGIN
-    w.textWriter.WriteStr(str);
-  END WriteStr;
+    w.textWriter.WriteObject(obj);
+  END WriteObject;
 
 PROCEDURE (w: Writer) WriteChar* (ch: CHAR);
   BEGIN
@@ -514,7 +515,7 @@ PROCEDURE (w: Writer) WriteConst* (value: Boxed.Object; type: Sym.Type);
         END;
         
       | value: Boxed.LongReal DO
-        w. WriteStr(value.ToString());
+        w. WriteObject(value.ToString());
         IF TR.IsPredefType(type, Predef.real) THEN
           w. WriteString("f");
         END;
@@ -528,7 +529,7 @@ PROCEDURE (w: Writer) WriteConst* (value: Boxed.Object; type: Sym.Type);
           w. WriteLInt (MAX (LONGINT), 0);
           w. WriteString ("-1)");
         ELSE
-          w. WriteStr(value.ToString());
+          w. WriteObject(value.ToString());
         END;
         
       | value: Boxed.Set DO
@@ -740,6 +741,7 @@ PROCEDURE InitFunction (fct: Function; resultType: Type; restParameters: BOOLEAN
     fct. resultType := resultType;
     fct. parameters := ArrayList.New (4);
     fct. restParameters := restParameters;
+    fct. noReturn := FALSE;
   END InitFunction;
 
 PROCEDURE (w: Writer) NewFunction* (resultType: Type; restParameters: BOOLEAN): Function;
@@ -751,10 +753,28 @@ PROCEDURE (w: Writer) NewFunction* (resultType: Type; restParameters: BOOLEAN): 
     RETURN fct
   END NewFunction;
 
+PROCEDURE (fct: Function) SetNoReturn* (noReturn: BOOLEAN);
+  BEGIN
+    fct.noReturn := noReturn;
+  END SetNoReturn;
+
 PROCEDURE (fct: Function) AddParameter* (param: Declaration);
   BEGIN
     fct. parameters. Append (param)
   END AddParameter;
+
+PROCEDURE (fct: Function) MakeParametersVolatile*();
+  VAR
+    i: LONGINT;
+    param: Declaration;
+  BEGIN
+    FOR i := 0 TO fct.parameters.size-1 DO
+      param := fct.parameters.array[i](Declaration);
+      IF (param.typeQualifier = tqNone) THEN
+        param.typeQualifier := tqVolatile;
+      END;
+    END;
+  END MakeParametersVolatile;
 
 
 PROCEDURE (fct: Function) Priority (): SHORTINT;
@@ -765,6 +785,9 @@ PROCEDURE (fct: Function) Priority (): SHORTINT;
 PROCEDURE (fct: Function) WriteLeft (w: Writer);
   BEGIN
     WriteLeft (w, fct. resultType, priFunction);
+    IF fct.noReturn THEN
+      w.WriteString("NORETURN ");
+    END;
   END WriteLeft;
 
 PROCEDURE (fct: Function) WriteRight (w: Writer);
@@ -782,7 +805,10 @@ PROCEDURE (fct: Function) WriteRight (w: Writer);
       w. WriteString (", ...");
     END;
     w. WriteChar(")");
-    WriteRight (w, fct. resultType, priFunction)
+    WriteRight (w, fct. resultType, priFunction);
+    IF fct.noReturn THEN
+      w.WriteString(" NORETURN2");
+    END;
   END WriteRight;
 
 (* -------- *)
@@ -834,7 +860,7 @@ PROCEDURE (struct: Struct) WriteLeft (w: Writer);
     END;
     IF (struct. name # NIL) THEN
       w. WriteString (" ");
-      w. WriteStr (struct. name);
+      w. WriteObject (struct. name);
     END;
     w. WriteString (" {");
     w. Indent (1);
@@ -887,7 +913,7 @@ PROCEDURE (typeRef: TypeRef) WriteLeft (w: Writer);
     | refStruct : w. WriteString ("struct ");
     | refUnion  : w. WriteString ("union ");
     END;
-    w. WriteStr (typeRef. name);
+    w. WriteObject (typeRef. name);
     w. WriteChar (" ");
   END WriteLeft;
 
@@ -927,6 +953,11 @@ PROCEDURE (w: Writer) NewDeclaration* (name: STRING; typeQualifier: TypeQualifie
     RETURN d
   END NewDeclaration;
 
+PROCEDURE (d: Declaration) SetTypeQualifier*(typeQualifier: TypeQualifier);
+  BEGIN
+    d.typeQualifier := typeQualifier;
+  END SetTypeQualifier;
+
 PROCEDURE (d: Declaration) Write (w: Writer);
   PROCEDURE WriteTypeQualifier (w: Writer; typeQualifier: TypeQualifier);
     BEGIN
@@ -949,7 +980,7 @@ PROCEDURE (d: Declaration) Write (w: Writer);
     END;
     WriteTypeQualifier (w, d. typeQualifier);
     WriteLeft (w, d. type, priDeclaration);
-    w. WriteStr (d. name);
+    w. WriteObject (d. name);
     WriteRight (w, d. type, priDeclaration)
   END Write;
 
@@ -1015,7 +1046,7 @@ PROCEDURE (w: Writer) NewDefine* (name: STRING;
 PROCEDURE (d: Define) Write (w: Writer);
   BEGIN
     w. WriteString ("#define ");
-    w. WriteStr (d. name);
+    w. WriteObject (d. name);
     w. WriteString (" ");
     IF (d. const = NIL) THEN
       w. WriteString (" 0");             (* NULL *)

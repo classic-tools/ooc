@@ -1,5 +1,6 @@
 #include <Config/Value/String.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 Config_Value_String__Value Config_Value_String__New(const Config_Value__String str__ref, OOC_LEN str_0d) {
   register OOC_INT32 i0,i1;

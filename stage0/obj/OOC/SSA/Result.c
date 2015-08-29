@@ -1,5 +1,6 @@
 #include <OOC/SSA/Result.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_SSA_Result__GetName(OOC_INT8 _class, OOC_CHAR8 name[], OOC_LEN name_0d) {
   register OOC_INT32 i0;

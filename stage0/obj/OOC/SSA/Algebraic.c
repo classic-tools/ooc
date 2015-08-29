@@ -1,5 +1,6 @@
 #include <OOC/SSA/Algebraic.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static OOC_INT32 OOC_SSA_Algebraic__IsPowerOf2(Object_BigInt__BigInt value) {
   register OOC_INT32 i0,i1,i2,i3;

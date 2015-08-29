@@ -1,7 +1,7 @@
-(* 	$Id: CreateSymTab.Mod,v 1.25 2002/12/20 10:19:34 mva Exp $	 *)
+(* 	$Id: CreateSymTab.Mod,v 1.27 2003/01/01 14:00:51 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateSymTab;
 (*  Creates symbol table from abstract syntax tree of module `ExtTree'.
-    Copyright (C) 2000, 2001, 2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -416,6 +416,7 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
   VAR
     proc: Sym.ProcDecl;
     type: Sym.Type;
+    fpar: ExtTree.FormalPars;
     formalPars: Sym.FormalPars;
     endPos: Sym.ModulePos;
     i: LONGINT;
@@ -464,17 +465,32 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
     IF (procDecl. receiver # NIL) THEN
       AcceptParent (v, procDecl. receiver, formalPars)
     END;
-    IF (procDecl. formalPars # NIL) & 
-       (procDecl. formalPars(ExtTree.FormalPars). fpSections # NIL) THEN
-      FOR i := 0 TO procDecl. formalPars(ExtTree.FormalPars). fpSections. len-1 BY 2 DO
-        nodePtr := procDecl. formalPars(ExtTree.FormalPars). fpSections. n[i];
-        WITH nodePtr: ExtTree.Terminal DO (* rest parameter *)
-          ASSERT (nodePtr. sym. str^ = "...");
-          formalPars. EnableRestParameters()
-        ELSE
-          AcceptParent (v, nodePtr, formalPars)
+    IF (procDecl. formalPars # NIL) THEN
+      fpar := procDecl. formalPars(ExtTree.FormalPars);
+      AddFlags(formalPars, fpar.flags);
+      IF (fpar. fpSections # NIL) THEN
+        FOR i := 0 TO fpar. fpSections. len-1 BY 2 DO
+          nodePtr := fpar. fpSections. n[i];
+          WITH nodePtr: ExtTree.Terminal DO (* rest parameter *)
+            ASSERT (nodePtr. sym. str^ = "...");
+            formalPars. EnableRestParameters()
+          ELSE
+            AcceptParent (v, nodePtr, formalPars)
+          END
         END
-      END
+      END;
+
+      IF (fpar.raisesList # NIL) THEN
+        NEW(formalPars.raises, (fpar.raisesList.len+1) DIV 2);
+        FOR i := 0 TO fpar. raisesList. len-1 BY 2 DO
+          nodePtr := fpar. raisesList. n[i];
+          type := GetType(v, nodePtr);
+          formalPars.raises[i DIV 2] :=
+              v.stb.NewExceptionName(formalPars, type);
+        END
+      ELSE
+        NEW(formalPars.raises, 0);
+      END;
     END;
     IF (procDecl. flags # NIL) THEN
       ParseFlags (proc, procDecl. flags. flagList(ExtTree.NodeList));
@@ -579,9 +595,12 @@ PROCEDURE (v: Visitor) VisitArrayType* (arrayType: ExtTree.ArrayType);
 
 PROCEDURE (v: Visitor) VisitProcType* (procType: ExtTree.ProcType);
   VAR
+    fpar: ExtTree.FormalPars;
     formalPars: Sym.FormalPars;
     baseType: Sym.Type;
     i: LONGINT;
+    nodePtr: AST.Node;
+    type: Sym.Type;
   BEGIN
     IF (procType. formalPars # NIL) &
        (procType. formalPars(ExtTree.FormalPars). result # NIL) THEN
@@ -595,12 +614,25 @@ PROCEDURE (v: Visitor) VisitProcType* (procType: ExtTree.ProcType);
     IF (procType.formalPars # NIL) THEN
       AddFlags(formalPars, procType.formalPars(ExtTree.FormalPars).flags);
     END;
-    IF (procType. formalPars # NIL) &
-       (procType. formalPars(ExtTree.FormalPars). fpSections # NIL) THEN
-      FOR i := 0 TO procType. formalPars(ExtTree.FormalPars). fpSections. len-1 BY 2 DO
-        AcceptParent (v, procType. formalPars(ExtTree.FormalPars). 
-                           fpSections. n[i], formalPars)
-      END
+    IF (procType. formalPars # NIL) THEN
+      fpar := procType. formalPars(ExtTree.FormalPars);
+      IF (fpar. fpSections # NIL) THEN
+        FOR i := 0 TO fpar. fpSections. len-1 BY 2 DO
+          AcceptParent (v, fpar. fpSections. n[i], formalPars)
+        END;
+      END;
+      
+      IF (fpar.raisesList # NIL) THEN
+        NEW(formalPars.raises, (fpar.raisesList.len+1) DIV 2);
+        FOR i := 0 TO fpar. raisesList. len-1 BY 2 DO
+          nodePtr := fpar. raisesList. n[i];
+          type := GetType(v, nodePtr);
+          formalPars.raises[i DIV 2] :=
+              v.stb.NewExceptionName(formalPars, type);
+        END
+      ELSE
+        NEW(formalPars.raises, 0);
+      END;
     END;
     v. type := formalPars
   END VisitProcType;

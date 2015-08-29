@@ -1,4 +1,4 @@
-/*	$Id: SysClock.c,v 1.2 2002/12/08 22:30:03 mva Exp $	*/
+/*	$Id: SysClock.c,v 1.3 2002/12/28 13:21:27 mva Exp $	*/
 /*  SysClock - facilities for accessing a system clock that records the 
                date and time of day.
     Copyright (C) 1996-2000, 2002  Michael Griebling, Michael van Acken
@@ -19,8 +19,8 @@
 */
 #include <errno.h>
 
-#include "SysClock.d"
-#include "__config.h"
+#include <SysClock.d>
+#include <__config.h>
 
 #if TIME_WITH_SYS_TIME
 # include <sys/time.h>

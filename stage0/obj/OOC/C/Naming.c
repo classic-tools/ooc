@@ -1,5 +1,6 @@
 #include <OOC/C/Naming.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 Object__String OOC_C_Naming__NameOfDeclaration(OOC_SymbolTable__Declaration decl) {
   register OOC_INT32 i0,i1,i2;

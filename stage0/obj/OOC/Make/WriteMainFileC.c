@@ -1,5 +1,6 @@
 #include <OOC/Make/WriteMainFileC.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_Make_WriteMainFileC__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Msg__Msg *res) {
   register OOC_INT32 i0,i1;

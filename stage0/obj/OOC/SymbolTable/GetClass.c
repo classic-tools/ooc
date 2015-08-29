@@ -1,5 +1,6 @@
 #include <OOC/SymbolTable/GetClass.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 OOC_SymbolTable__Name OOC_SymbolTable_GetClass__GetClass(OOC_SymbolTable__Item item) {
   register OOC_INT32 i0,i1;

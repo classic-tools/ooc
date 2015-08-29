@@ -1,5 +1,6 @@
 #include <IO/Memory.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static Msg__Msg IO_Memory__GetError(OOC_INT32 code) {
   register OOC_INT32 i0,i1;

@@ -1,5 +1,6 @@
 #include <OOC/Config/Pragmas.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void OOC_Config_Pragmas__Init(OOC_Config_Pragmas__Section s, const Config_Parser__String id__ref, OOC_LEN id_0d, Config_Value__PrototypeList prototypeList) {
   register OOC_INT32 i0,i1;

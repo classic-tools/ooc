@@ -1,5 +1,6 @@
 #include <OOC/SSA/XML.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 void OOC_SSA_XML__InitWriter(OOC_SSA_XML__Writer w, Channel__Writer cw) {
   register OOC_INT32 i0,i1,i2;

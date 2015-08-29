@@ -1,4 +1,4 @@
-(* 	$Id: RunTests.Mod,v 1.14 2002/12/22 16:41:18 mva Exp $	 *)
+(* 	$Id: RunTests.Mod,v 1.15 2002/12/30 09:29:23 mva Exp $	 *)
 MODULE RunTests;
 (*  Applies a test schedule to an OOC compiler and produces an XML report.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -166,7 +166,7 @@ PROCEDURE RunTests (testSetup: TestSetup.TestSetup;
     result, class: SHORTINT;
     timeStr, str: ARRAY 128 OF CHAR;
     path: ARRAY 1024 OF CHAR;
-    time: SysClock.DateTime;
+    (*time: SysClock.DateTime;*)
     elem: Element.Element;
     processorInfo: Testcases.ProcessorInfo;
     i: INTEGER;

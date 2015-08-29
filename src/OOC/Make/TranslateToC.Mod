@@ -1,4 +1,4 @@
-(* 	$Id: TranslateToC.Mod,v 1.12 2002/12/22 16:11:06 mva Exp $	 *)
+(* 	$Id: TranslateToC.Mod,v 1.13 2002/12/29 14:49:30 mva Exp $	 *)
 MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -192,6 +192,8 @@ PROCEDURE WriteCodeFile (w, wd: DeclWriter.Writer; m: Repository.Module;
        the .h and .d files can be used without pulling in all the 
        declarations of the run-time header file *)
     w. WriteString ('#include <__oo2c.h>');
+    w. WriteLn;
+    w. WriteString ('#include <setjmp.h>');
     w. WriteLn;
     translator. SetDataWriter (wd);
     translator. SetProcedureList (moduleIR. procList);

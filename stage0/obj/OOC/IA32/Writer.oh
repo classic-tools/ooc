@@ -24,9 +24,9 @@ typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Newline)(OOC_IA32_Writer__Writer
 extern void OOC_IA32_Writer__WriterDesc_Write(OOC_IA32_Writer__Writer w, const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
 #define _TBN_OOC_IA32_Writer__WriterDesc_Write 11
 typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Write)(OOC_IA32_Writer__Writer w, const OOC_CHAR8 str__ref[], OOC_LEN str_0d);
-extern void OOC_IA32_Writer__WriterDesc_WriteStr(OOC_IA32_Writer__Writer w, Object__String str);
-#define _TBN_OOC_IA32_Writer__WriterDesc_WriteStr 12
-typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_WriteStr)(OOC_IA32_Writer__Writer w, Object__String str);
+extern void OOC_IA32_Writer__WriterDesc_WriteObject(OOC_IA32_Writer__Writer w, Object__String str);
+#define _TBN_OOC_IA32_Writer__WriterDesc_WriteObject 12
+typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_WriteObject)(OOC_IA32_Writer__Writer w, Object__String str);
 extern void OOC_IA32_Writer__WriterDesc_Label(OOC_IA32_Writer__Writer w, Object__String label);
 #define _TBN_OOC_IA32_Writer__WriterDesc_Label 4
 typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Label)(OOC_IA32_Writer__Writer w, Object__String label);
@@ -67,12 +67,12 @@ extern void OOC_OOC_IA32_Writer_init0();
 extern RT0__StructDesc _td_OOC_IA32_Writer__Writer;
 extern RT0__StructDesc _td_OOC_IA32_Writer__WriterDesc;
 extern RT0__StructDesc _td_OOC_IA32_Writer__1960;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2353;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2502;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2688;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2878;
-extern RT0__StructDesc _td_OOC_IA32_Writer__3240;
-extern RT0__StructDesc _td_OOC_IA32_Writer__3856;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2365;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2514;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2700;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2890;
+extern RT0__StructDesc _td_OOC_IA32_Writer__3252;
+extern RT0__StructDesc _td_OOC_IA32_Writer__3868;
 #endif /* _MODULE_OOC_IA32_Writer_ */
 
 /* --- */

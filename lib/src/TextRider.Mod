@@ -1,4 +1,4 @@
-(*	$Id: TextRider.Mod,v 1.6 2002/12/17 19:33:49 mva Exp $	*)
+(*	$Id: TextRider.Mod,v 1.8 2002/12/30 09:29:23 mva Exp $	*)
 MODULE TextRider [OOC_EXTENSIONS];
 
 (*
@@ -1339,13 +1339,15 @@ PROCEDURE (w: Writer) WriteString*(s[NO_COPY]: ARRAY OF CHAR);
     END
   END WriteString;
 
-PROCEDURE (w: Writer) WriteStr*(s: Object.String);
+PROCEDURE (w: Writer) WriteObject*(obj: Object.Object);
   VAR
     chars: Object.CharsLatin1;
-  BEGIN  (* FIXME... add codec to writer, and use it for output *)
-    IF (s = NIL) THEN
+    s: Object.String;
+  BEGIN
+    IF (obj = NIL) THEN
       w.WriteString("<NIL>");
     ELSIF (w. res = done) THEN
+      s := obj.ToString();
       WITH s: Object.String8 DO
         chars := s.CharsLatin1();
         w. byteWriter. WriteBytes (chars^, 0, s.length);
@@ -1355,10 +1357,10 @@ PROCEDURE (w: Writer) WriteStr*(s: Object.String);
           w. res := w. base. res
         END
       | s: Object.String32 DO
-        w.WriteString("[TextRider.WriteStr: String32 not implemented]");
+        w.WriteString("[TextRider.WriteObject: String32 not implemented]");
       END;
     END
-  END WriteStr;
+  END WriteObject;
 
 PROCEDURE (w: Writer) WriteBool*(bool: BOOLEAN);
   BEGIN

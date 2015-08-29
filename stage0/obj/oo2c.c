@@ -1,5 +1,6 @@
 #include <oo2c.d>
 #include <__oo2c.h>
+#include <setjmp.h>
 
 static void oo2c__NewConfig() {
   register OOC_INT32 i0;
@@ -1544,7 +1545,7 @@ l103:
   goto l108;
 l105:
   Out__String("oo2c/gcc ", 10);
-  Out__String("2.0.2", 6);
+  Out__String("2.0.3", 6);
   Out__Ln();
   _halt((OOC_INT32)0);
   goto l108;
