@@ -1,4 +1,4 @@
-(* 	$Id: Scanner.Mod,v 1.7 2003/01/30 23:38:28 mva Exp $	 *)
+(* 	$Id: Scanner.Mod,v 1.9 2003/04/11 00:22:23 mva Exp $	 *)
 MODULE OOC:Scanner;
 (*  Convert a character sequence into a stream of Oberon-2 symbols.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken

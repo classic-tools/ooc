@@ -23,6 +23,7 @@ typedef struct OOC_Scanner_Pragma__ConditionStackDesc {
   OOC_CHAR8 skippedCond;
   OOC_CHAR8 foundTrue;
   OOC_CHAR8 elsePresent;
+  OOC_CHAR8 withStatm;
 } OOC_Scanner_Pragma__ConditionStackDesc;
 typedef struct OOC_Scanner_Pragma__State {
   OOC_Scanner_InputBuffer__Buffer buffer;
@@ -57,7 +58,7 @@ extern RT0__StructDesc _td_OOC_Scanner_Pragma__ConditionStackDesc;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__State;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContext;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Scanner_Pragma__3166;
+extern RT0__StructDesc _td_OOC_Scanner_Pragma__3793;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ParsePragma_Value;
 #endif /* _MODULE_OOC_Scanner_Pragma_ */
 

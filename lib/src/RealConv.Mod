@@ -1,4 +1,4 @@
-(* 	$Id: RealConv.Mod,v 1.5 2002/11/16 10:23:04 mva Exp $	 *)
+(* 	$Id: RealConv.Mod,v 1.7 2003/04/06 12:11:15 mva Exp $	 *)
 MODULE RealConv;
 (*  String to REAL conversion functions.
     Copyright (C) 2002  Michael van Acken
@@ -74,7 +74,9 @@ PROCEDURE ValueReal*(str: ARRAY OF CHAR): REAL;
       INC (i);
     END;
     IF libc.sscanf(SYSTEM.ADR(str[i]), "%f", SYSTEM.ADR(value)) = 1 THEN
+      <*PUSH; Warnings:=FALSE*>
       RETURN value                       (* syntax is ok *)
+      <*POP*>
     ELSE
       RETURN 0;                          (* error *)
     END;
@@ -82,17 +84,23 @@ PROCEDURE ValueReal*(str: ARRAY OF CHAR): REAL;
 
 PROCEDURE LengthFloatReal*(real: REAL; sigFigs: INTEGER): INTEGER;
   BEGIN
-    ASSERT (FALSE); RETURN -1;  (* FIXME... *)
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END LengthFloatReal;
  
 PROCEDURE LengthEngReal*(real: REAL; sigFigs: INTEGER): INTEGER;
   BEGIN
-    ASSERT (FALSE); RETURN -1;  (* FIXME... *)
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END LengthEngReal;
  
 PROCEDURE LengthFixedReal*(real: REAL; place: INTEGER): INTEGER;
   BEGIN
-    ASSERT (FALSE); RETURN -1;  (* FIXME... *)
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END LengthFixedReal;
 
 END RealConv.

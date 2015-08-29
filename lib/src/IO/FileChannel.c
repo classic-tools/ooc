@@ -9,6 +9,11 @@
 #include <limits.h>
 #include <string.h>
 
+#ifdef __MINGW32__
+#include <windows.h>
+typedef int ssize_t;
+#endif
+
 /* if the system imposes no limit on the length of a file name, choose an 
    arbitrary large value instead */
 #ifndef PATH_MAX
@@ -103,6 +108,9 @@ IO_FileChannel__Channel IO_FileChannel__OpenUnbuffered(Object__String8 file,
     flags |= O_APPEND;
   }
 
+#ifdef O_BINARY
+	flags |= O_BINARY;
+#endif
   if (mode & tmp_mask) {
     char tname[PATH_MAX+16];
     int count = 0;
@@ -214,7 +222,14 @@ void IO_FileChannel__ChannelDesc_CloseAndRegister(IO_FileChannel__Channel ch) {
     if (ch->tmpIndex >= 0) {
       char* fname = (char*)OOC_METHOD(ch->origName,Object__String8Desc_CharsLatin1)(ch->origName);
       char* tname = (char*)OOC_METHOD(ch->tmpName,Object__String8Desc_CharsLatin1)(ch->tmpName);
+#ifdef __MINGW32__
+        if (MoveFileEx(tname, fname, MOVEFILE_REPLACE_EXISTING) == 0)
+          res = GetLastError();
+        else
+          res = 0;
+#else
       res = rename(tname, fname);
+#endif
       remove_tmp_file(ch);
     }
   }

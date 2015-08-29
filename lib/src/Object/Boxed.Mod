@@ -1,4 +1,4 @@
-(*	$Id: Boxed.Mod,v 1.8 2003/02/04 20:55:30 mva Exp $	*)
+(*	$Id: Boxed.Mod,v 1.11 2003/04/11 07:31:36 mva Exp $	*)
 MODULE Object:Boxed;
 (*  Implements object representations for predefined types.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -117,8 +117,9 @@ PROCEDURE (v: Boolean) Equals*(y: Obj.Object): BOOLEAN;
   
 PROCEDURE (v: Boolean) Cmp*(y: Obj.Object): LONGINT;
   BEGIN
+<*PUSH; Assertions:=TRUE*>
     ASSERT (FALSE);
-    RETURN -1;
+<*POP*>
   END Cmp;
   
 PROCEDURE (v: Boolean) HashCode*(): Obj.Hash;
@@ -323,8 +324,9 @@ END Equals;
 
 PROCEDURE (v: Set) Cmp*(y: Obj.Object): LONGINT;
   BEGIN
+<*PUSH; Assertions:=TRUE*>
     ASSERT (FALSE);
-    RETURN -1;
+<*POP*>
   END Cmp;
   
 PROCEDURE (v: Set) HashCode*(): Obj.Hash;

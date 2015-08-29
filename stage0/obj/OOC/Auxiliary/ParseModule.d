@@ -1,5 +1,4 @@
 #include <OOC/Auxiliary/ParseModule.oh>
-#include <Msg.oh>
 #include <URI.oh>
 #include <OOC/Config.oh>
 #include <OOC/Scanner/InputBuffer.oh>

@@ -1,7 +1,7 @@
-(* 	$Id: ExtTree.Mod,v 1.31 2002/12/29 14:33:42 mva Exp $	 *)
+(* 	$Id: ExtTree.Mod,v 1.32 2003/04/05 18:51:01 mva Exp $	 *)
 MODULE OOC:AST:ExtTree [OOC_EXTENSIONS];
 (*  Creates extended abstract syntax tree from the parser output.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -228,7 +228,7 @@ TYPE
     declSeq-: NodeList;
     begin-: AST.Node;
     statmSeq-: NodeList;  (* may be NIL *)
-    end-: AST.Node;
+    end-: Terminal;
     name-: AST.Node;
   END;
   
@@ -1099,7 +1099,7 @@ PROCEDURE (b: Builder) Body* (declSeq: AST.NodeList;
     ELSE
       body. statmSeq := statmSeq(NodeList)
     END;
-    body. end := end;
+    body. end := end(Terminal);
     body. name := name;
     RETURN body
   END Body;

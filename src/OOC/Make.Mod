@@ -1,4 +1,4 @@
-(* 	$Id: Make.Mod,v 1.39 2003/02/08 12:46:51 mva Exp $	 *)
+(* 	$Id: Make.Mod,v 1.40 2003/04/06 12:11:14 mva Exp $	 *)
 MODULE OOC:Make;
 (*  Builds object files, libraries, binaries, and the like.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -622,7 +622,9 @@ PROCEDURE (r: Rules) UpdateSymbolTableXML*(module: Rep.Module): BOOLEAN
 RAISES IO.Error;
 (* Must be redefined by application when used.  *)
   BEGIN
-    ASSERT(FALSE); RETURN FALSE;
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END UpdateSymbolTableXML;
 
 PROCEDURE (r: Rules) UpdateInterfaceDescr (module: Rep.Module): BOOLEAN

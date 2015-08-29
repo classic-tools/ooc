@@ -1,4 +1,4 @@
-(*      $Id: Parser.Mod,v 1.6 2003/02/01 17:29:34 mva Exp $   *)
+(*      $Id: Parser.Mod,v 1.8 2003/04/11 00:22:24 mva Exp $   *)
 MODULE XML:Parser;
 (*  Implements the XML parser.
     Copyright (C) 2000, 2001, 2003  Michael van Acken

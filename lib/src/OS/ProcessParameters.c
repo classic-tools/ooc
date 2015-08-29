@@ -1,5 +1,10 @@
-/* 	$Id: ProcessParameters.c,v 1.6 2002/12/28 13:21:26 mva Exp $	 */
+/* 	$Id: ProcessParameters.c,v 1.7 2003/04/04 08:02:56 sgreenhill Exp $	 */
+#ifdef WIN32
+#include <io.h>
+#include <direct.h>
+#else
 #include <unistd.h>
+#endif
 #include <errno.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -77,6 +82,17 @@ void OS_ProcessParameters__getcwd(OS_ProcessParameters__Path buffer, OOC_LEN buf
   }
 }
 
+#ifdef WIN32
+
+void OS_ProcessParameters__getdcwd(OOC_INT32 drive, OS_ProcessParameters__Path buffer, OOC_LEN buffer_0d, Msg__Msg *res) {
+  if (_getdcwd(drive, (char*)buffer, buffer_0d)) {
+    *res = OS_ProcessParameters__done;
+  } else {
+    *res = get_error();
+  }
+}
+
+#endif
 
 void OOC_OS_ProcessParameters_init(void) {
   OS_ProcessParameters__errorContext =

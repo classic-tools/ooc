@@ -1,4 +1,4 @@
-(* 	$Id: ProcessManagement.Mod,v 1.1 2002/07/16 11:29:05 mva Exp $	 *)
+(* 	$Id: ProcessManagement.Mod,v 1.2 2003/03/14 08:37:49 sgreenhill Exp $	 *)
 MODULE OS:ProcessManagement [FOREIGN "C"; LINK FILE "ProcessManagement.c" END];
 (*  Creation and management of processes.
     Copyright (C) 2000  Michael van Acken
@@ -34,5 +34,14 @@ PROCEDURE system* (command[NIL_COMPAT]: ARRAY OF CHAR): C.int;
    specified for @samp{wait()}.  Note that POSIX does not specify the meaning
    of the return value of the C @samp{system()} function, so the return value
    of this Oberon-2 function is system-dependent.  *)
+
+PROCEDURE ExitStatus* (status : C.int) : C.int;
+(**Returns the exit status for the command executed by @samp{system()}. If the
+   process terminated abnormally (eg. due to a signal), the value -1 is
+   returned. *)
+
+PROCEDURE TermSignal* (status : C.int) : C.int;
+(**Returns the termination signal for the command executed by @samp{system()}.
+   If the process terminated normally, the value -1 is returned. *)
 
 END OS:ProcessManagement.

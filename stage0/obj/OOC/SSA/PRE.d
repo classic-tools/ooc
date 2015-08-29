@@ -1,5 +1,4 @@
 #include <OOC/SSA/PRE.oh>
-#include <Log.oh>
 #include <Object.oh>
 #include <ADT/ArrayList.oh>
 #include <ADT/Dictionary.oh>

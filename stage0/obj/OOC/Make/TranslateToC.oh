@@ -44,9 +44,9 @@ extern void OOC_OOC_Make_TranslateToC_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4368;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4445;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4494;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4386;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4463;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4512;
 #endif /* _MODULE_OOC_Make_TranslateToC_ */
 
 /* --- */

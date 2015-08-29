@@ -1,4 +1,4 @@
-(* 	$Id: RunTests.Mod,v 1.17 2003/02/02 17:58:39 mva Exp $	 *)
+(* 	$Id: RunTests.Mod,v 1.18 2003/04/02 22:08:31 mva Exp $	 *)
 MODULE RunTests;
 (*  Applies a test schedule to an OOC compiler and produces an XML report.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -283,6 +283,8 @@ RAISES IO.Error;
             str := "program ran, but output does not match reference"
           | Processor.processCompareFailed:
             str := "program ran, but failed to compare output with reference"
+          | Processor.processWarningMismatch:
+            str := "accepted by compiler, but warnings do not match"
           END;
           reportWriter. AttrStringLatin1 ("result", str);
           CASE class OF

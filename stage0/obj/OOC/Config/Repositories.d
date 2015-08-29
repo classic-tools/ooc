@@ -14,19 +14,19 @@ static void OOC_Config_Repositories__Init(OOC_Config_Repositories__Section s, co
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Config_Repositories__Section = { (RT0__Struct[]){&_td_OOC_Config_Repositories__SectionDesc}, NULL, &_mid, "Section", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Config_Repositories__1214 = { (RT0__Struct[]){&_td_OOC_Repository__Module}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_Repositories__ModuleList = { (RT0__Struct[]){&_td_OOC_Config_Repositories__1214}, NULL, &_mid, "ModuleList", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Config_Repositories__1213 = { (RT0__Struct[]){&_td_OOC_Repository__Module}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_Repositories__ModuleList = { (RT0__Struct[]){&_td_OOC_Config_Repositories__1213}, NULL, &_mid, "ModuleList", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Config_Repositories__SectionDesc = { (RT0__Struct[]){&_td_Config_Section__SectionDesc,&_td_OOC_Config_Repositories__SectionDesc}, (void*[]){(void*)OOC_Config_Repositories__SectionDesc_DumpContent,(void*)OOC_Config_Repositories__SectionDesc_ProcessElements,(void*)OOC_Config_Repositories__SectionDesc_GetIncludePaths,(void*)OOC_Config_Repositories__SectionDesc_GetModule,(void*)OOC_Config_Repositories__SectionDesc_GetResource}, &_mid, "SectionDesc", 16, 1, RT0__strRecord };
 RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntry = { (RT0__Struct[]){&_td_OOC_Config_Repositories__RepositoryEntryDesc}, NULL, &_mid, "RepositoryEntry", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntryDesc = { (RT0__Struct[]){&_td_OOC_Config_Repositories__RepositoryEntryDesc}, (void*[]){(void*)OOC_Config_Repositories__RepositoryEntryDesc_ProcessElement}, &_mid, "RepositoryEntryDesc", 68, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Config_Repositories__1521 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 64, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_Repositories__1520 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 64, 32, RT0__strArray };
 RT0__StructDesc _td_OOC_Config_Repositories__ErrorContext = { (RT0__Struct[]){&_td_OOC_Config_Repositories__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Config_Repositories__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_XML_Error__ContextDesc,&_td_Config_Section__ErrorContextDesc,&_td_OOC_Config_Repositories__ErrorContextDesc}, (void*[]){(void*)OOC_Config_Repositories__ErrorContextDesc_GetTemplate,(void*)XML_Error__ContextDesc_SetString,(void*)XML_Error__ContextDesc_WriteTemplate}, &_mid, "ErrorContextDesc", 8, 3, RT0__strRecord };
-RT0__StructDesc _td_OOC_Config_Repositories__1937 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_Repositories__2674 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_Repositories__4494 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2048, 2048, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_Repositories__5101 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_Repositories__8873 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_Repositories__1936 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_Repositories__2673 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_Repositories__4493 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2048, 2048, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_Repositories__5100 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_Repositories__8872 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:Repositories", (RT0__Struct[]) { &_td_OOC_Config_Repositories__Section, &_td_OOC_Config_Repositories__ModuleList, &_td_OOC_Config_Repositories__SectionDesc, &_td_OOC_Config_Repositories__RepositoryEntry, &_td_OOC_Config_Repositories__RepositoryEntryDesc, &_td_OOC_Config_Repositories__ErrorContext, &_td_OOC_Config_Repositories__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Config_Repositories_init0() {

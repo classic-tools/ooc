@@ -48,8 +48,21 @@ URI_Scheme_File__URI URI_Scheme_File__URIDesc_Clone(URI_Scheme_File__URI file) {
   i0 = (OOC_INT32)RT0__NewObject(_td_URI_Scheme_File__URI.baseTypes[0]);
   copy = (URI_Scheme_File__URI)i0;
   i1 = (OOC_INT32)file;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2103)))), URI_Scheme_Hierarchical__GenericDesc_Copy)),URI_Scheme_Hierarchical__GenericDesc_Copy)((URI_Scheme_Hierarchical__Generic)i1, (URI__URI)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2110)))), URI_Scheme_Hierarchical__GenericDesc_Copy)),URI_Scheme_Hierarchical__GenericDesc_Copy)((URI_Scheme_Hierarchical__Generic)i1, (URI__URI)i0);
   return (URI_Scheme_File__URI)i0;
+  ;
+}
+
+static void URI_Scheme_File__NormalisePath(OOC_CHAR8 path[], OOC_LEN path_0d, Msg__Msg *res) {
+
+  *res = (Msg__Msg)(OOC_INT32)0;
+  return;
+  ;
+}
+
+static void URI_Scheme_File__DenormalisePath(OOC_CHAR8 path[], OOC_LEN path_0d) {
+
+  return;
   ;
 }
 
@@ -59,15 +72,15 @@ void URI_Scheme_File__URIDesc_GetPath(URI_Scheme_File__URI file, OOC_CHAR8 fileP
 
   _copy_8((const void*)"",(void*)(OOC_INT32)filePath,filePath_0d);
   i0 = (OOC_INT32)file;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2435))+12);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5278))+12);
   segm = (URI_Scheme_Hierarchical__Segment)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l15;
 l3_loop:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2494))+12);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5337))+12);
   i2 = i1!=i2;
   if (i2) goto l6;
-  i2 = *(OOC_UINT8*)((_check_pointer(i0, 2513))+16);
+  i2 = *(OOC_UINT8*)((_check_pointer(i0, 5356))+16);
   
   goto l8;
 l6:
@@ -76,15 +89,16 @@ l8:
   if (!i2) goto l10;
   Strings__Append("/", 2, (void*)(OOC_INT32)filePath, filePath_0d);
 l10:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2609))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2609))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2617)), 0);
-  Strings__Append((void*)(_check_pointer(i2, 2617)), i3, (void*)(OOC_INT32)filePath, filePath_0d);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2649));
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5452))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5452))+4);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 5460)), 0);
+  Strings__Append((void*)(_check_pointer(i2, 5460)), i3, (void*)(OOC_INT32)filePath, filePath_0d);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 5492));
   segm = (URI_Scheme_Hierarchical__Segment)i1;
   i2 = i1!=(OOC_INT32)0;
   if (i2) goto l3_loop;
 l15:
+  URI_Scheme_File__DenormalisePath((void*)(OOC_INT32)filePath, filePath_0d);
   return;
   ;
 }
@@ -95,7 +109,7 @@ IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, O
   Object__String8 s;
 
   i0 = (OOC_INT32)file;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2853)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)filePath, 2048);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5728)))), URI_Scheme_File__URIDesc_GetPath)),URI_Scheme_File__URIDesc_GetPath)((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)filePath, 2048);
   i0 = (OOC_INT32)Object__NewLatin1((void*)(OOC_INT32)filePath, 2048);
   s = (Object__String8)i0;
   i1 = mode;
@@ -113,11 +127,11 @@ IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, O
     return (IO__ByteChannel)i0;
     goto l6;
   default:
-    _failed_case(i1, 2916);
+    _failed_case(i1, 5791);
     goto l6;
   }
 l6:
-  _failed_function(2702); return 0;
+  _failed_function(5577); return 0;
   ;
 }
 
@@ -140,20 +154,25 @@ URI_Scheme_File__URI URI_Scheme_File__GetCwd() {
   OS_ProcessParameters__getcwd((void*)(OOC_INT32)path, 4096, (void*)(OOC_INT32)&res);
   i0 = (OOC_INT32)res;
   i0 = i0==(OOC_INT32)0;
-  if (!i0) goto l6;
+  if (!i0) goto l3;
+  URI_Scheme_File__NormalisePath((void*)(OOC_INT32)path, 4096, (void*)(OOC_INT32)&res);
+l3:
+  i0 = (OOC_INT32)res;
+  i0 = i0==(OOC_INT32)0;
+  if (!i0) goto l9;
   _copy_8((const void*)"file:",(void*)(OOC_INT32)uriString,4096);
   URI_String__AppendEscaped((void*)(OOC_INT32)path, 4096, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
   i0 = Strings__Length((void*)(OOC_INT32)uriString, 4096);
-  i0 = *(OOC_UINT8*)((OOC_INT32)uriString+(_check_index((i0-1), 4096, OOC_UINT16, 3997)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)uriString+(_check_index((i0-1), 4096, OOC_UINT16, 6937)));
   i0 = i0!=47u;
-  if (!i0) goto l5;
+  if (!i0) goto l8;
   Strings__Append("/", 2, (void*)(OOC_INT32)uriString, 4096);
-l5:
+l8:
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(OOC_INT32)uriString, 4096, (URI__HierarchicalURI)(OOC_INT32)0, (void*)(OOC_INT32)&res);
   uri = (URI__URI)i0;
-  _assert((i0!=(OOC_INT32)0), 127, 4147);
-  return (URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4184)))), &_td_URI_Scheme_File__URIDesc, 4184));
-l6:
+  _assert((i0!=(OOC_INT32)0), 127, 7087);
+  return (URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7124)))), &_td_URI_Scheme_File__URIDesc, 7124));
+l9:
   return (URI_Scheme_File__URI)(OOC_INT32)0;
   ;
 }
@@ -161,36 +180,44 @@ l6:
 URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], OOC_LEN filePath_0d) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(filePath,OOC_CHAR8 ,filePath_0d)
+  OOC_CHAR8 normPath[4096];
+  Msg__Msg res;
   OOC_CHAR8 uriString[4096];
   URI__URI uri;
-  Msg__Msg res;
 
   OOC_INITIALIZE_VPAR(filePath__ref,filePath,OOC_CHAR8 ,filePath_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)filePath+(_check_index(0, filePath_0d, OOC_UINT8, 4502)));
+  _copy_8((const void*)(OOC_INT32)filePath,(void*)(OOC_INT32)normPath,4096);
+  URI_Scheme_File__NormalisePath((void*)(OOC_INT32)normPath, 4096, (void*)(OOC_INT32)&res);
+  i0 = (OOC_INT32)res;
+  i0 = i0!=(OOC_INT32)0;
+  if (!i0) goto l3;
+  return (URI_Scheme_File__URI)(OOC_INT32)0;
+l3:
+  i0 = *(OOC_UINT8*)((OOC_INT32)normPath+(_check_index(0, 4096, OOC_UINT8, 7554)));
   i0 = i0==47u;
-  if (i0) goto l3;
+  if (i0) goto l6;
   _copy_8((const void*)"",(void*)(OOC_INT32)uriString,4096);
-  URI_String__AppendEscaped((void*)(OOC_INT32)filePath, filePath_0d, "@&=+$,/", 8, (void*)(OOC_INT32)uriString, 4096);
+  URI_String__AppendEscaped((void*)(OOC_INT32)normPath, 4096, "@&=+$,/", 8, (void*)(OOC_INT32)uriString, 4096);
   i0 = (OOC_INT32)URI_Scheme_File__GetCwd();
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(OOC_INT32)uriString, 4096, (URI__HierarchicalURI)i0, (void*)(OOC_INT32)&res);
   uri = (URI__URI)i0;
   
-  goto l4;
-l3:
+  goto l7;
+l6:
   _copy_8((const void*)"file:",(void*)(OOC_INT32)uriString,4096);
-  URI_String__AppendEscaped((void*)(OOC_INT32)filePath, filePath_0d, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
+  URI_String__AppendEscaped((void*)(OOC_INT32)normPath, 4096, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(OOC_INT32)uriString, 4096, (URI__HierarchicalURI)(OOC_INT32)0, (void*)(OOC_INT32)&res);
   uri = (URI__URI)i0;
   
-l4:
-  i1 = i0==(OOC_INT32)0;
-  if (i1) goto l7;
-  return (URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4918)))), &_td_URI_Scheme_File__URIDesc, 4918));
-  goto l8;
 l7:
+  i1 = i0==(OOC_INT32)0;
+  if (i1) goto l10;
+  return (URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7970)))), &_td_URI_Scheme_File__URIDesc, 7970));
+  goto l11;
+l10:
   return (URI_Scheme_File__URI)(OOC_INT32)0;
-l8:
-  _failed_function(4238); return 0;
+l11:
+  _failed_function(7178); return 0;
   ;
 }
 

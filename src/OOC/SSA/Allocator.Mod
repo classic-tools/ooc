@@ -1,4 +1,4 @@
-(* 	$Id: Allocator.Mod,v 1.35 2003/02/24 04:33:53 mva Exp $	 *)
+(* 	$Id: Allocator.Mod,v 1.36 2003/04/05 18:55:58 mva Exp $	 *)
 MODULE OOC:SSA:Allocator;
 (*  A register allocator for the C back-end.
     Copyright (C) 2001-2003  Michael van Acken
@@ -614,10 +614,12 @@ PROCEDURE AssignRegisterFile (rf: RegisterFile;
              entries that are not live at the backward jump; the values that
              are live have been merged into the loop's back-edge collect *)
           loopTarget := loopBlock. targetUseList;
-          WHILE ~loopTarget. isLoopBackedge DO
+          WHILE (loopTarget # NIL) & ~loopTarget. isLoopBackedge DO
             loopTarget := loopTarget. nextTargetUse;
           END;
-          TraverseBlocks (rf, loopTarget. src, rf. iGraph. NewVector());
+          IF (loopTarget # NIL) THEN
+            TraverseBlocks (rf, loopTarget. src, rf. iGraph. NewVector());
+          END;
         END;
       END Propagate;
 

@@ -56,9 +56,9 @@ RT0__StructDesc _td_OOC_C_DeclWriter__9135 = { (RT0__Struct[]){&RT0__char}, NULL
 RT0__StructDesc _td_OOC_C_DeclWriter__9508 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_C_DeclWriter__11591 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_OOC_C_DeclWriter__12492 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__25814 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__25971 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_DeclWriter__30395 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__25838 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__25995 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_DeclWriter__30419 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:C:DeclWriter", (RT0__Struct[]) { &_td_OOC_C_DeclWriter__Type, &_td_OOC_C_DeclWriter__TypeDesc, &_td_OOC_C_DeclWriter__BasicType, &_td_OOC_C_DeclWriter__BasicTypeDesc, &_td_OOC_C_DeclWriter__Pointer, &_td_OOC_C_DeclWriter__PointerDesc, &_td_OOC_C_DeclWriter__Array, &_td_OOC_C_DeclWriter__ArrayDesc, &_td_OOC_C_DeclWriter__Function, &_td_OOC_C_DeclWriter__FunctionDesc, &_td_OOC_C_DeclWriter__Struct, &_td_OOC_C_DeclWriter__StructDesc, &_td_OOC_C_DeclWriter__TypeRef, &_td_OOC_C_DeclWriter__TypeRefDesc, &_td_OOC_C_DeclWriter__Declaration, &_td_OOC_C_DeclWriter__DeclarationDesc, &_td_OOC_C_DeclWriter__IncludeModule, &_td_OOC_C_DeclWriter__IncludeModuleDesc, &_td_OOC_C_DeclWriter__Define, &_td_OOC_C_DeclWriter__DefineDesc, &_td_OOC_C_DeclWriter__Writer, &_td_OOC_C_DeclWriter__WriterDesc, NULL } };
 
 extern void OOC_OOC_C_DeclWriter_init0() {

@@ -62,19 +62,19 @@ extern void OOC_OOC_Config_Repositories_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_Repositories__Section;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1214;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1213;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ModuleList;
 extern RT0__StructDesc _td_OOC_Config_Repositories__SectionDesc;
 extern RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntry;
 extern RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntryDesc;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1521;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1520;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ErrorContext;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1937;
-extern RT0__StructDesc _td_OOC_Config_Repositories__2674;
-extern RT0__StructDesc _td_OOC_Config_Repositories__4494;
-extern RT0__StructDesc _td_OOC_Config_Repositories__5101;
-extern RT0__StructDesc _td_OOC_Config_Repositories__8873;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1936;
+extern RT0__StructDesc _td_OOC_Config_Repositories__2673;
+extern RT0__StructDesc _td_OOC_Config_Repositories__4493;
+extern RT0__StructDesc _td_OOC_Config_Repositories__5100;
+extern RT0__StructDesc _td_OOC_Config_Repositories__8872;
 #endif /* _MODULE_OOC_Config_Repositories_ */
 
 /* --- */

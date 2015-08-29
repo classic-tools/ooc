@@ -1,4 +1,4 @@
-(* 	$Id: FileSystem.Mod,v 1.2 2001/08/30 09:01:23 mva Exp $	 *)
+(* 	$Id: FileSystem.Mod,v 1.4 2003/04/11 00:22:22 mva Exp $	 *)
 MODULE OOC:Config:Repositories:FileSystem;
 (*  Implements "file-system" element of XML repository configuration.
     Copyright (C) 2001  Michael van Acken

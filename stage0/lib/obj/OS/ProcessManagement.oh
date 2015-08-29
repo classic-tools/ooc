@@ -8,11 +8,13 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern OOC_INT32 OS_ProcessManagement__system(const OOC_CHAR8 command__ref[], OOC_LEN command_0d);
+extern OOC_INT32 OS_ProcessManagement__ExitStatus(OOC_INT32 status);
+extern OOC_INT32 OS_ProcessManagement__TermSignal(OOC_INT32 status);
 extern void OOC_OS_ProcessManagement_init();
 extern void OOC_OS_ProcessManagement_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OS_ProcessManagement__1282;
+extern RT0__StructDesc _td_OS_ProcessManagement__1289;
 #endif /* _MODULE_OS_ProcessManagement_ */
 
 /* --- */

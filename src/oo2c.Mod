@@ -1,4 +1,4 @@
-(* 	$Id: oo2c.Mod,v 1.46 2003/02/08 12:46:51 mva Exp $	 *)
+(* 	$Id: oo2c.Mod,v 1.47 2003/04/02 22:09:22 mva Exp $	 *)
 MODULE oo2c;
 (*  Main module for the Oberon-2 to C translator.
     Copyright (C) 2002,2003  Michael van Acken
@@ -537,7 +537,8 @@ PROCEDURE WriteHelp();
     Out.String("  --config <file>"); Out.Ln;
     Out.String("  --repository <directory>, -r <directory>"); Out.Ln;
     Out.String("  --no-rtc"); Out.Ln;
-    Out.String("  --error-style <string>"); Out.Ln;
+    Out.String("  --error-style (file:line:column|char-pos|attributes)");
+    Out.Ln;
   END WriteHelp;
 
 BEGIN  <*Warnings:=FALSE*>

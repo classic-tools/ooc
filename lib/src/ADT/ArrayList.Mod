@@ -1,4 +1,4 @@
-(*	$Id: ArrayList.Mod,v 1.7 2003/02/04 20:55:37 mva Exp $	*)
+(*	$Id: ArrayList.Mod,v 1.8 2003/04/06 12:11:15 mva Exp $	*)
 MODULE ADT:ArrayList;
 (*  Implements a resizable list of objects.
     Copyright (C) 2000, 2003  Michael van Acken
@@ -299,12 +299,16 @@ PROCEDURE (l: ArrayList) IsEmpty* (): BOOLEAN;
 
 PROCEDURE (l: ArrayList) Equals* (obj: Object.Object): BOOLEAN;
   BEGIN
-    <*PUSH; Assertions:=TRUE*>ASSERT(FALSE)<*POP*>
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END Equals;
 
 PROCEDURE (l: ArrayList) HashCode* (): LONGINT;
   BEGIN
-    <*PUSH; Assertions:=TRUE*>ASSERT(FALSE)<*POP*>
+<*PUSH; Assertions:=TRUE*>
+    ASSERT (FALSE);
+<*POP*>
   END HashCode;
 
 PROCEDURE (l: ArrayList) Store* (w: Storable.Writer) RAISES IO.Error;

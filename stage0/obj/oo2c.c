@@ -1224,7 +1224,7 @@ static void oo2c__WriteHelp() {
   Out__Ln();
   Out__String("  --no-rtc", 11);
   Out__Ln();
-  Out__String("  --error-style <string>", 25);
+  Out__String("  --error-style (file:line:column|char-pos|attributes)", 55);
   Out__Ln();
   return;
   ;
@@ -1251,19 +1251,19 @@ void OOC_oo2c_init(void) {
   i0 = (OOC_INT32)OOC_Make__NewRules();
   oo2c__makeRules = (OOC_Make__Rules)i0;
   i1 = (OOC_INT32)oo2c__useStderr;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18246))+8);
-  i1 = *(OOC_UINT8*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18261)))), &_td_Config_Value_Boolean__ValueDesc, 18261)), 18267));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 18280))+8);
+  i1 = *(OOC_UINT8*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18295)))), &_td_Config_Value_Boolean__ValueDesc, 18295)), 18301));
   if (!i1) goto l3;
   i1 = (OOC_INT32)StdChannels__stderr;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18294)))), OOC_Make__RulesDesc_SetErrOut)),OOC_Make__RulesDesc_SetErrOut)((OOC_Make__Rules)i0, (Channel__Channel)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18328)))), OOC_Make__RulesDesc_SetErrOut)),OOC_Make__RulesDesc_SetErrOut)((OOC_Make__Rules)i0, (Channel__Channel)i1);
 l3:
   i0 = (OOC_INT32)oo2c__writeStats;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18364))+8);
-  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18379)))), &_td_Config_Value_Boolean__ValueDesc, 18379)), 18385));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18398))+8);
+  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18413)))), &_td_Config_Value_Boolean__ValueDesc, 18413)), 18419));
   OOC_Make__writeStats = i0;
   i0 = (OOC_INT32)oo2c__command;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18416))+8);
-  i0 = *(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18431)))), &_td_Config_Value_Integer__ValueDesc, 18431)), 18437));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18450))+8);
+  i0 = *(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18465)))), &_td_Config_Value_Integer__ValueDesc, 18465)), 18471));
   switch (i0) {
   case 0:
     oo2c__mode = 11;
@@ -1291,20 +1291,20 @@ l3:
     oo2c__mode = (-6);
     goto l14;
   default:
-    _failed_case(i0, 18404);
+    _failed_case(i0, 18438);
     goto l14;
   }
 l14:
   i0 = (OOC_INT32)oo2c__errorStyle;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18779))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18798)))), &_td_Config_Value_String__ValueDesc, 18798)), 18804));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18813))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18832)))), &_td_Config_Value_String__ValueDesc, 18832)), 18838));
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 18811)),(const void*)"file:line:column"))==0;
+  _cmp8((const void*)(_check_pointer(i1, 18845)),(const void*)"file:line:column"))==0;
   if (i1) goto l20;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18905))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18924)))), &_td_Config_Value_String__ValueDesc, 18924)), 18930));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18939))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 18958)))), &_td_Config_Value_String__ValueDesc, 18958)), 18964));
   i0 = (
-  _cmp8((const void*)(_check_pointer(i0, 18937)),(const void*)"char-pos"))==0;
+  _cmp8((const void*)(_check_pointer(i0, 18971)),(const void*)"char-pos"))==0;
   if (!i0) goto l21;
   OOC_Error__style = 1;
   goto l21;
@@ -1312,27 +1312,27 @@ l20:
   OOC_Error__style = 0;
 l21:
   i0 = (OOC_INT32)oo2c__cfgErrList;
-  i1 = *(OOC_INT32*)(_check_pointer(i0, 19023));
+  i1 = *(OOC_INT32*)(_check_pointer(i0, 19057));
   i1 = i1!=0;
   if (!i1) goto l24;
   i1 = (OOC_INT32)StdChannels__stdout;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19058)))), OOC_Error__ListDesc_Write)),OOC_Error__ListDesc_Write)((OOC_Error__List)i0, (Channel__Channel)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19092)))), OOC_Error__ListDesc_Write)),OOC_Error__ListDesc_Write)((OOC_Error__List)i0, (Channel__Channel)i1);
 l24:
   i0 = (OOC_INT32)oo2c__cfgErrList;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19111)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i0);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19145)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i0);
   i0 = !i0;
   if (i0) goto l115;
   i0 = (OOC_INT32)oo2c__showVersion;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19160))+8);
-  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19175)))), &_td_Config_Value_Boolean__ValueDesc, 19175)), 19181));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19194))+8);
+  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19209)))), &_td_Config_Value_Boolean__ValueDesc, 19209)), 19215));
   if (i0) goto l113;
   i0 = (OOC_INT32)oo2c__showHelp;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19316))+8);
-  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19331)))), &_td_Config_Value_Boolean__ValueDesc, 19331)), 19337));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19350))+8);
+  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19365)))), &_td_Config_Value_Boolean__ValueDesc, 19365)), 19371));
   if (i0) goto l111;
   i0 = (OOC_INT32)OOC_Config__arguments;
   i1 = oo2c__mode;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19419)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i0);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19453)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i0);
   i0 = (i1==(-4))!=(i0==0);
   if (i0) goto l109;
   oo2c__ok = 1u;
@@ -1354,7 +1354,7 @@ l37:
   goto l42;
 l40:
   i0 = (OOC_INT32)OOC_Config__arguments;
-  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19825)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i0);
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19859)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i0);
   i0 = 0!=i0;
   
 l42:
@@ -1362,29 +1362,29 @@ l42:
 l44_loop:
   i0 = (OOC_INT32)OOC_Config__arguments;
   i1 = oo2c__i;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19874)))), Config_Section_Arguments__SectionDesc_Get)),Config_Section_Arguments__SectionDesc_Get)((Config_Section_Arguments__Section)i0, i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19908)))), Config_Section_Arguments__SectionDesc_Get)),Config_Section_Arguments__SectionDesc_Get)((Config_Section_Arguments__Section)i0, i1);
   oo2c__arg = (Config_Value__StringPtr)i0;
   i1 = oo2c__mode;
   switch (i1) {
   case (-1):
   case (-2):
     oo2c__doInstall = (i1==(-2));
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20033)), 0);
-    i0 = (OOC_INT32)OOC_Package__GetPackage((void*)(_check_pointer(i0, 20033)), i1, (void*)(OOC_INT32)&oo2c__rep);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20067)), 0);
+    i0 = (OOC_INT32)OOC_Package__GetPackage((void*)(_check_pointer(i0, 20067)), i1, (void*)(OOC_INT32)&oo2c__rep);
     oo2c__pkg = (OOC_Package__Package)i0;
     i0 = i0==0;
     if (i0) goto l59;
     i0 = oo2c__doInstall;
     if (!i0) goto l58;
     i0 = (OOC_INT32)OOC_Config_CCompiler__oocdir;
-    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20307))+8);
-    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20326)))), &_td_Config_Value_String__ValueDesc, 20326)), 20332));
-    i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20307))+8);
-    i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20326)))), &_td_Config_Value_String__ValueDesc, 20326)), 20332));
+    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20341))+8);
+    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20360)))), &_td_Config_Value_String__ValueDesc, 20360)), 20366));
+    i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20341))+8);
+    i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20360)))), &_td_Config_Value_String__ValueDesc, 20360)), 20366));
     i2 = (OOC_INT32)oo2c__arg;
-    i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20345)), 0);
-    i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20339)), 0);
-    i0 = (OOC_INT32)OOC_Package__GetPkgInfo((void*)(_check_pointer(i1, 20339)), i0, (void*)(_check_pointer(i2, 20345)), i3, (void*)(OOC_INT32)&oo2c__errList);
+    i3 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20379)), 0);
+    i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20373)), 0);
+    i0 = (OOC_INT32)OOC_Package__GetPkgInfo((void*)(_check_pointer(i1, 20373)), i0, (void*)(_check_pointer(i2, 20379)), i3, (void*)(OOC_INT32)&oo2c__errList);
     oo2c__pkgInfo = (OOC_Package__Package)i0;
     i1 = i0!=0;
     if (i1) goto l53;
@@ -1392,7 +1392,7 @@ l44_loop:
     goto l55;
 l53:
     i1 = (OOC_INT32)oo2c__errList;
-    i1 = *(OOC_INT32*)(_check_pointer(i1, 20401));
+    i1 = *(OOC_INT32*)(_check_pointer(i1, 20435));
     i1 = i1==0;
     
 l55:
@@ -1410,27 +1410,27 @@ l58:
 l59:
     Err__String("Error: Cannot locate package ", 30);
     i0 = (OOC_INT32)oo2c__arg;
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20157)), 0);
-    Err__String((void*)(_check_pointer(i0, 20157)), i1);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20191)), 0);
+    Err__String((void*)(_check_pointer(i0, 20191)), i1);
     Err__Ln();
     _halt(1);
     goto l83;
   case (-3):
     i1 = (OOC_INT32)OOC_Config_CCompiler__oocdir;
-    i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20707))+8);
-    i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 20726)))), &_td_Config_Value_String__ValueDesc, 20726)), 20732));
-    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20707))+8);
-    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20726)))), &_td_Config_Value_String__ValueDesc, 20726)), 20732));
-    i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20745)), 0);
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 20739)), 0);
-    i0 = (OOC_INT32)OOC_Package__GetPkgInfo((void*)(_check_pointer(i2, 20739)), i1, (void*)(_check_pointer(i0, 20745)), i3, (void*)(OOC_INT32)&oo2c__errList);
+    i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20741))+8);
+    i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 20760)))), &_td_Config_Value_String__ValueDesc, 20760)), 20766));
+    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 20741))+8);
+    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 20760)))), &_td_Config_Value_String__ValueDesc, 20760)), 20766));
+    i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20779)), 0);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 20773)), 0);
+    i0 = (OOC_INT32)OOC_Package__GetPkgInfo((void*)(_check_pointer(i2, 20773)), i1, (void*)(_check_pointer(i0, 20779)), i3, (void*)(OOC_INT32)&oo2c__errList);
     oo2c__pkg = (OOC_Package__Package)i0;
     i0 = (OOC_INT32)oo2c__errList;
-    i1 = *(OOC_INT32*)(_check_pointer(i0, 20779));
+    i1 = *(OOC_INT32*)(_check_pointer(i0, 20813));
     i1 = i1!=0;
     if (!i1) goto l64;
     i1 = (OOC_INT32)StdChannels__stdout;
-    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20818)))), OOC_Error__ListDesc_Write)),OOC_Error__ListDesc_Write)((OOC_Error__List)i0, (Channel__Channel)i1);
+    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 20852)))), OOC_Error__ListDesc_Write)),OOC_Error__ListDesc_Write)((OOC_Error__List)i0, (Channel__Channel)i1);
 l64:
     i0 = (OOC_INT32)oo2c__pkg;
     i1 = i0==0;
@@ -1441,24 +1441,24 @@ l64:
 l67:
     Err__String("Error: Cannot locate package ", 30);
     i0 = (OOC_INT32)oo2c__arg;
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20976)), 0);
-    Err__String((void*)(_check_pointer(i0, 20976)), i1);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21010)), 0);
+    Err__String((void*)(_check_pointer(i0, 21010)), i1);
     Err__Ln();
     _halt(1);
     goto l83;
   case (-5):
     i1 = (OOC_INT32)OOC_Config__options;
-    i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21194)), 0);
-    i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21186)))), Config_Section_Options__SectionDesc_Get)),Config_Section_Options__SectionDesc_Get)((Config_Section_Options__Section)i1, (void*)(_check_pointer(i0, 21194)), i2);
+    i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21228)), 0);
+    i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21220)))), Config_Section_Options__SectionDesc_Get)),Config_Section_Options__SectionDesc_Get)((Config_Section_Options__Section)i1, (void*)(_check_pointer(i0, 21228)), i2);
     oo2c__option = (Config_Section_Options__Option)i0;
     i1 = i0==0;
     if (i1) goto l72;
-    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21309))+8);
-    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21328)))), &_td_Config_Value_String__ValueDesc, 21328)), 21334));
-    i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21309))+8);
-    i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21328)))), &_td_Config_Value_String__ValueDesc, 21328)), 21334));
-    i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21341)), 0);
-    Out__String((void*)(_check_pointer(i1, 21341)), i0);
+    i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21343))+8);
+    i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21362)))), &_td_Config_Value_String__ValueDesc, 21362)), 21368));
+    i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 21343))+8);
+    i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21362)))), &_td_Config_Value_String__ValueDesc, 21362)), 21368));
+    i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21375)), 0);
+    Out__String((void*)(_check_pointer(i1, 21375)), i0);
     goto l73;
 l72:
     Out__String("(none)", 7);
@@ -1466,8 +1466,8 @@ l73:
     Out__Ln();
     goto l83;
   case (-6):
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21455)), 0);
-    i0 = (OOC_INT32)OOC_Package__GetPackage((void*)(_check_pointer(i0, 21455)), i1, (void*)(OOC_INT32)&oo2c__rep);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21489)), 0);
+    i0 = (OOC_INT32)OOC_Package__GetPackage((void*)(_check_pointer(i0, 21489)), i1, (void*)(OOC_INT32)&oo2c__rep);
     oo2c__pkg = (OOC_Package__Package)i0;
     i1 = i0==0;
     if (i1) goto l77;
@@ -1477,29 +1477,29 @@ l73:
 l77:
     Err__String("Error: Cannot locate package ", 30);
     i0 = (OOC_INT32)oo2c__arg;
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21579)), 0);
-    Err__String((void*)(_check_pointer(i0, 21579)), i1);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21613)), 0);
+    Err__String((void*)(_check_pointer(i0, 21613)), i1);
     Err__Ln();
     _halt(1);
     goto l83;
   default:
-    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21768)), 0);
-    i0 = (OOC_INT32)Object__NewLatin1((void*)(_check_pointer(i0, 21768)), i1);
+    i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 21802)), 0);
+    i0 = (OOC_INT32)Object__NewLatin1((void*)(_check_pointer(i0, 21802)), i1);
     i0 = (OOC_INT32)oo2c__GetModule((Object__String)i0);
     oo2c__module = (OOC_Repository__Module)i0;
     i1 = oo2c__mode;
     i1 = i1==11;
     if (!i1) goto l82;
     i1 = (OOC_INT32)oo2c__makeRules;
-    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21838)))), OOC_Make__RulesDesc_SetAllImportsModule)),OOC_Make__RulesDesc_SetAllImportsModule)((OOC_Make__Rules)i1, (OOC_Repository__Module)i0);
+    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 21872)))), OOC_Make__RulesDesc_SetAllImportsModule)),OOC_Make__RulesDesc_SetAllImportsModule)((OOC_Make__Rules)i1, (OOC_Repository__Module)i0);
 l82:
     i0 = (OOC_INT32)oo2c__makeRules;
     i1 = (OOC_INT32)oo2c__module;
     i2 = oo2c__mode;
-    i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21908)))), OOC_Make__RulesDesc_Update)),OOC_Make__RulesDesc_Update)((OOC_Make__Rules)i0, (OOC_Repository__Module)i1, i2);
+    i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21942)))), OOC_Make__RulesDesc_Update)),OOC_Make__RulesDesc_Update)((OOC_Make__Rules)i0, (OOC_Repository__Module)i1, i2);
     oo2c__ok = i0;
     i0 = (OOC_INT32)oo2c__makeRules;
-    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21950)))), OOC_Make__RulesDesc_SetAllImportsModule)),OOC_Make__RulesDesc_SetAllImportsModule)((OOC_Make__Rules)i0, (OOC_Repository__Module)0);
+    OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 21984)))), OOC_Make__RulesDesc_SetAllImportsModule)),OOC_Make__RulesDesc_SetAllImportsModule)((OOC_Make__Rules)i0, (OOC_Repository__Module)0);
     goto l83;
   }
 l83:
@@ -1512,7 +1512,7 @@ l83:
   goto l88;
 l86:
   i1 = (OOC_INT32)OOC_Config__arguments;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 19825)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i1);
+  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 19859)))), Config_Section_Arguments__SectionDesc_ArgNumber)),Config_Section_Arguments__SectionDesc_ArgNumber)((Config_Section_Arguments__Section)i1);
   i0 = i0!=i1;
   
 l88:
@@ -1528,22 +1528,22 @@ l95:
 l97:
   if (!i0) goto l101;
   i0 = (OOC_INT32)OOC_Config_CCompiler__oocdir;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22114))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22133)))), &_td_Config_Value_String__ValueDesc, 22133)), 22139));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22114))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 22133)))), &_td_Config_Value_String__ValueDesc, 22133)), 22139));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 22146)), 0);
-  i0 = OOC_Package__UpdateRepository((void*)(_check_pointer(i1, 22146)), i0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22148))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22167)))), &_td_Config_Value_String__ValueDesc, 22167)), 22173));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22148))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 22167)))), &_td_Config_Value_String__ValueDesc, 22167)), 22173));
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 22180)), 0);
+  i0 = OOC_Package__UpdateRepository((void*)(_check_pointer(i1, 22180)), i0);
   oo2c__ok = i0;
   goto l101;
 l100:
   i0 = (OOC_INT32)OOC_Config_CCompiler__oocdir;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19586))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 19605)))), &_td_Config_Value_String__ValueDesc, 19605)), 19611));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19586))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19605)))), &_td_Config_Value_String__ValueDesc, 19605)), 19611));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 19618)), 0);
-  i0 = OOC_Package__UpdateRepository((void*)(_check_pointer(i1, 19618)), i0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19620))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 19639)))), &_td_Config_Value_String__ValueDesc, 19639)), 19645));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19620))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 19639)))), &_td_Config_Value_String__ValueDesc, 19639)), 19645));
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 19652)), 0);
+  i0 = OOC_Package__UpdateRepository((void*)(_check_pointer(i1, 19652)), i0);
   oo2c__ok = i0;
 l101:
   i0 = oo2c__ok;
@@ -1564,7 +1564,7 @@ l111:
   goto l116;
 l113:
   Out__String("oo2c/gcc ", 10);
-  Out__String("2.0.6", 6);
+  Out__String("2.0.7", 6);
   Out__Ln();
   _halt(0);
   goto l116;

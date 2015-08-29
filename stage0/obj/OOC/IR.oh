@@ -525,6 +525,10 @@ typedef struct OOC_IR__ProcedureDesc {
   OOC_SymbolTable__ProcDecl decl;
   OOC_IR__StatementSeq statmSeq;
   OOC_CHAR8 checkFunctionResult;
+  OOC_CHAR8 __pad13;
+  OOC_CHAR8 __pad14;
+  OOC_CHAR8 __pad15;
+  OOC_Scanner_Builder_BasicList__Symbol endOfProc;
 } OOC_IR__ProcedureDesc;
 typedef struct OOC_IR__ModuleDesc *OOC_IR__Module;
 typedef struct OOC_IR__ModuleDesc {
@@ -1202,10 +1206,10 @@ typedef void (*_TBP_OOC_IR__WithStatmDesc_Accept)(OOC_IR__WithStatm withStatm, O
 extern void OOC_IR__BuilderDesc_CheckExit(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq);
 #define _TBN_OOC_IR__BuilderDesc_CheckExit 10
 typedef void (*_TBP_OOC_IR__BuilderDesc_CheckExit)(OOC_IR__Builder b, OOC_SymbolTable__ProcDecl procDecl, OOC_IR__StatementSeq statmSeq);
-extern void OOC_IR__InitProcedure(OOC_IR__Procedure p, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 checkFunctionResult);
-extern OOC_IR__Procedure OOC_IR__BuilderDesc_NewProcedure(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 hasBegin);
+extern void OOC_IR__InitProcedure(OOC_IR__Procedure p, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_Scanner_Builder_BasicList__Symbol endOfProc, OOC_CHAR8 checkFunctionResult);
+extern OOC_IR__Procedure OOC_IR__BuilderDesc_NewProcedure(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_Scanner_Builder_BasicList__Symbol endOfProc, OOC_CHAR8 hasBegin);
 #define _TBN_OOC_IR__BuilderDesc_NewProcedure 60
-typedef OOC_IR__Procedure (*_TBP_OOC_IR__BuilderDesc_NewProcedure)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_CHAR8 hasBegin);
+typedef OOC_IR__Procedure (*_TBP_OOC_IR__BuilderDesc_NewProcedure)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_SymbolTable__ProcDecl decl, OOC_IR__StatementSeq statmSeq, OOC_Scanner_Builder_BasicList__Symbol endOfProc, OOC_CHAR8 hasBegin);
 extern void OOC_IR__VisitorDesc_VisitProcedure(OOC_IR__Visitor v, OOC_IR__Procedure procedure);
 #define _TBN_OOC_IR__VisitorDesc_VisitProcedure 37
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitProcedure)(OOC_IR__Visitor v, OOC_IR__Procedure procedure);
@@ -1213,9 +1217,9 @@ extern void OOC_IR__ProcedureDesc_Accept(OOC_IR__Procedure p, OOC_IR__Visitor v)
 #define _TBN_OOC_IR__ProcedureDesc_Accept 3
 typedef void (*_TBP_OOC_IR__ProcedureDesc_Accept)(OOC_IR__Procedure p, OOC_IR__Visitor v);
 extern void OOC_IR__InitModule(OOC_IR__Module m, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_IR__ProcedureList procList, OOC_IR__Procedure moduleBody);
-extern OOC_IR__Module OOC_IR__BuilderDesc_NewModule(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq);
+extern OOC_IR__Module OOC_IR__BuilderDesc_NewModule(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq, OOC_Scanner_Builder_BasicList__Symbol endOfModule);
 #define _TBN_OOC_IR__BuilderDesc_NewModule 50
-typedef OOC_IR__Module (*_TBP_OOC_IR__BuilderDesc_NewModule)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq);
+typedef OOC_IR__Module (*_TBP_OOC_IR__BuilderDesc_NewModule)(OOC_IR__Builder b, OOC_Scanner_Builder_BasicList__Symbol sym, OOC_Scanner_InputBuffer__CharArray name, OOC_SymbolTable__Module decl, OOC_IR__ProcedureList procList, OOC_IR__StatementSeq statmSeq, OOC_Scanner_Builder_BasicList__Symbol endOfModule);
 extern void OOC_IR__VisitorDesc_VisitModule(OOC_IR__Visitor v, OOC_IR__Module module);
 #define _TBN_OOC_IR__VisitorDesc_VisitModule 28
 typedef void (*_TBP_OOC_IR__VisitorDesc_VisitModule)(OOC_IR__Visitor v, OOC_IR__Module module);
@@ -1259,7 +1263,7 @@ extern RT0__StructDesc _td_OOC_IR__NodeDesc;
 extern RT0__StructDesc _td_OOC_IR__GuardedVar;
 extern RT0__StructDesc _td_OOC_IR__GuardedVarDesc;
 extern RT0__StructDesc _td_OOC_IR__Expression;
-extern RT0__StructDesc _td_OOC_IR__9051;
+extern RT0__StructDesc _td_OOC_IR__9109;
 extern RT0__StructDesc _td_OOC_IR__ExpressionList;
 extern RT0__StructDesc _td_OOC_IR__ExpressionDesc;
 extern RT0__StructDesc _td_OOC_IR__Const;
@@ -1338,7 +1342,7 @@ extern RT0__StructDesc _td_OOC_IR__Var;
 extern RT0__StructDesc _td_OOC_IR__VarDesc;
 extern RT0__StructDesc _td_OOC_IR__Statement;
 extern RT0__StructDesc _td_OOC_IR__LoopStatm;
-extern RT0__StructDesc _td_OOC_IR__23959;
+extern RT0__StructDesc _td_OOC_IR__24017;
 extern RT0__StructDesc _td_OOC_IR__StatementSeq;
 extern RT0__StructDesc _td_OOC_IR__StatementDesc;
 extern RT0__StructDesc _td_OOC_IR__Assert;
@@ -1362,11 +1366,11 @@ extern RT0__StructDesc _td_OOC_IR__ForStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__IfStatm;
 extern RT0__StructDesc _td_OOC_IR__IfStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Case;
-extern RT0__StructDesc _td_OOC_IR__28618;
+extern RT0__StructDesc _td_OOC_IR__28676;
 extern RT0__StructDesc _td_OOC_IR__CaseLabels;
 extern RT0__StructDesc _td_OOC_IR__CaseDesc;
 extern RT0__StructDesc _td_OOC_IR__CaseStatm;
-extern RT0__StructDesc _td_OOC_IR__28944;
+extern RT0__StructDesc _td_OOC_IR__29002;
 extern RT0__StructDesc _td_OOC_IR__CaseList;
 extern RT0__StructDesc _td_OOC_IR__CaseStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__LoopStatmDesc;
@@ -1379,7 +1383,7 @@ extern RT0__StructDesc _td_OOC_IR__RepeatStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Return;
 extern RT0__StructDesc _td_OOC_IR__ReturnDesc;
 extern RT0__StructDesc _td_OOC_IR__CatchClause;
-extern RT0__StructDesc _td_OOC_IR__30413;
+extern RT0__StructDesc _td_OOC_IR__30471;
 extern RT0__StructDesc _td_OOC_IR__CatchList;
 extern RT0__StructDesc _td_OOC_IR__CatchClauseDesc;
 extern RT0__StructDesc _td_OOC_IR__TryStatm;
@@ -1389,7 +1393,7 @@ extern RT0__StructDesc _td_OOC_IR__WhileStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__WithStatm;
 extern RT0__StructDesc _td_OOC_IR__WithStatmDesc;
 extern RT0__StructDesc _td_OOC_IR__Procedure;
-extern RT0__StructDesc _td_OOC_IR__31953;
+extern RT0__StructDesc _td_OOC_IR__32011;
 extern RT0__StructDesc _td_OOC_IR__ProcedureList;
 extern RT0__StructDesc _td_OOC_IR__ProcedureDesc;
 extern RT0__StructDesc _td_OOC_IR__Module;
@@ -1406,10 +1410,10 @@ extern RT0__StructDesc _td_OOC_IR__VisitorDesc;
 extern RT0__StructDesc _td_OOC_IR__ConstFoldDesc;
 extern RT0__StructDesc _td_OOC_IR__ErrorContext;
 extern RT0__StructDesc _td_OOC_IR__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_IR__38054;
-extern RT0__StructDesc _td_OOC_IR__38262;
-extern RT0__StructDesc _td_OOC_IR__55942;
-extern RT0__StructDesc _td_OOC_IR__56307;
+extern RT0__StructDesc _td_OOC_IR__38206;
+extern RT0__StructDesc _td_OOC_IR__38414;
+extern RT0__StructDesc _td_OOC_IR__56094;
+extern RT0__StructDesc _td_OOC_IR__56459;
 #endif /* _MODULE_OOC_IR_ */
 
 /* --- */

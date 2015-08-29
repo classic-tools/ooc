@@ -1,4 +1,4 @@
-(* 	$Id: Destore.Mod,v 1.66 2003/03/09 22:01:01 mva Exp $	 *)
+(* 	$Id: Destore.Mod,v 1.67 2003/04/10 23:43:04 mva Exp $	 *)
 MODULE OOC:SSA:Destore;
 (*  Converts reads from/writes to memory into local values.
     Copyright (C) 2001-2003  Michael van Acken
@@ -357,6 +357,7 @@ PROCEDURE (s: State) Transform*;
             ptr := ptr. next
           END;
         END;
+        value := NIL;  (* prevent warning *)
         RETURN FALSE;
       END InCache;
     

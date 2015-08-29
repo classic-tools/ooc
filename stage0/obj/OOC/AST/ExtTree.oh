@@ -138,7 +138,7 @@ typedef struct OOC_AST_ExtTree__BodyDesc {
   OOC_AST_ExtTree__NodeList declSeq;
   OOC_AST__Node begin;
   OOC_AST_ExtTree__NodeList statmSeq;
-  OOC_AST__Node end;
+  OOC_AST_ExtTree__Terminal end;
   OOC_AST__Node name;
 } OOC_AST_ExtTree__BodyDesc;
 typedef struct OOC_AST_ExtTree__ProcDeclDesc *OOC_AST_ExtTree__ProcDecl;

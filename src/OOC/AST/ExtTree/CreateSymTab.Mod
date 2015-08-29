@@ -1,4 +1,4 @@
-(* 	$Id: CreateSymTab.Mod,v 1.27 2003/01/01 14:00:51 mva Exp $	 *)
+(* 	$Id: CreateSymTab.Mod,v 1.28 2003/04/05 18:45:34 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateSymTab;
 (*  Creates symbol table from abstract syntax tree of module `ExtTree'.
     Copyright (C) 2000-2003  Michael van Acken
@@ -90,9 +90,8 @@ PROCEDURE ExportMark (id: AST.Node): Sym.ExportMark;
         RETURN Sym.nameNotExported
       ELSIF (id. mark. sym. str^ = "*") THEN
         RETURN Sym.nameExported
-      ELSIF (id. mark. sym. str^ = "-") THEN
+      ELSE (* (id. mark. sym. str^ = "-") *)
         RETURN Sym.nameExportedRO
-      ELSE
       END
     END
   END ExportMark;

@@ -1,5 +1,7 @@
-(*	$Id: Select.Mod,v 1.4 2003/02/05 21:32:01 mva Exp $	*)
-MODULE IO:Select [FOREIGN "C"; LINK FILE "Select.c" END];
+(*	$Id: Select.Mod,v 1.5 2003/04/04 07:59:30 sgreenhill Exp $	*)
+MODULE IO:Select [FOREIGN "C"; LINK FILE "Select.c" 
+  <* IF TARGET_OS="Win32" THEN *> ; LIB "wsock32" <* END *>
+END];
 (*  Selector implementation based on the select() function.
     Copyright (C) 2003  Michael van Acken
 

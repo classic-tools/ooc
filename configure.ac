@@ -1,6 +1,6 @@
 dnl Autoconf requirements
 AC_PREREQ(2.53)
-AC_INIT(OOC,2.0.6,mia@de.uu.net)
+AC_INIT(OOC,2.0.7,mia@de.uu.net)
 AC_CONFIG_SRCDIR(src/OOC/Parser.Mod)
 AC_CONFIG_HEADER(lib/src/__config.h)
 
@@ -9,6 +9,11 @@ AC_SUBST(OOC_DEV_ROOT,[`cd "$srcdir" && pwd`])
 AC_SUBST(COMPILER_VERSION,[$PACKAGE_VERSION])
 AC_SUBST(COMPILER_MAJOR,[`echo $COMPILER_VERSION|sed -e 's:\..*$::'`])
 AC_SUBST(COMPILER_MINOR,[`echo $COMPILER_VERSION|sed -e 's:^[[^.]]*\.::' -e 's:\..*$::'`])
+AC_SUBST(TARGET_OS)
+AC_EGREP_CPP(yes,
+[#ifdef WIN32
+  yes
+#endif], TARGET_OS="Win32", TARGET_OS="Unix")
 AC_SUBST(OFLAGS)
 
 dnl checks for programs
@@ -61,8 +66,10 @@ dnl checks for library functions
 AC_TYPE_SIGNAL
 dnl   ANSI functions:
 AC_CHECK_FUNCS(atexit raise)
+dnl   POSIX functions:
+AC_CHECK_FUNCS(ftruncate)
 dnl   BSD functions:
-AC_CHECK_FUNCS(gettimeofday settimeofday)
+AC_CHECK_FUNCS(gettimeofday settimeofday mkstemp)
 dnl   GNU extensions:
 AC_CHECK_FUNCS(backtrace_symbols readdir_r)
 dnl   math functions:

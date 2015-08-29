@@ -1,4 +1,4 @@
-(*	$Id: PosixFileDescr.Mod,v 1.3 2002/12/19 06:36:46 mva Exp $	*)
+(*	$Id: PosixFileDescr.Mod,v 1.4 2003/03/16 16:28:59 mva Exp $	*)
 MODULE PosixFileDescr [FOREIGN "C"; LINK FILE "PosixFileDescr.c" END];
 (*  Generalized access to POSIX-style file descriptors.
     Copyright (C) 1997-1999  Michael van Acken
@@ -187,6 +187,8 @@ PROCEDURE Truncate* (w: Writer; newLength: LONGINT);
    are read as zeros.  The writer's position is not modified.  Note: On systems
    that do not support shortening files directly it is implemented as a partial
    file copy.  This procedure should always be called through
-   @oproc{*Files.Writer.Truncate}.  *)
+   @oproc{*Files.Writer.Truncate}.
+
+   Availability: Unix.  *)
 
 END PosixFileDescr.

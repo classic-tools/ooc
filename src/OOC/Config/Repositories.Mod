@@ -1,7 +1,7 @@
-(* 	$Id: Repositories.Mod,v 1.18 2002/12/17 19:33:33 mva Exp $	 *)
+(* 	$Id: Repositories.Mod,v 1.20 2003/04/11 00:22:22 mva Exp $	 *)
 MODULE OOC:Config:Repositories [OOC_EXTENSIONS];
 (*  Management of a hierarchy of configured repositories.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001-2003  Michael van Acken
 
     This file is part of OOC.
 

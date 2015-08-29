@@ -1,4 +1,4 @@
-(* 	$Id: PRE.Mod,v 1.4 2003/03/10 22:50:50 mva Exp $	 *)
+(* 	$Id: PRE.Mod,v 1.5 2003/04/02 22:09:41 mva Exp $	 *)
 MODULE OOC:SSA:PRE;
 (*  Partial redundancy elimination.
     Copyright (C) 2003  Michael van Acken
@@ -27,7 +27,6 @@ MODULE OOC:SSA:PRE;
    instruction.  Partial redundancies in nested "select"s are not found.  *)
 
 IMPORT
-  Log,
   Object, ADT:ArrayList, ADT:Dictionary, OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd,
   OOC:SSA:Result, OOC:SSA:Blocker, OOC:SSA:CSE;
 
