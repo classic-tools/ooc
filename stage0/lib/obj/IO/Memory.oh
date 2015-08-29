@@ -3,162 +3,49 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
-#include <Msg.oh>
-#include <Time.oh>
+#include <IO.oh>
 #include <RT0.oh>
 #include <Object.oh>
-#define IO_Memory__noLength -1
-#define IO_Memory__noPosition -2
-#define IO_Memory__done  0
-#define IO_Memory__channelClosed 6
-#define IO_Memory__noModTime 12
-#define IO_Memory__noReadAccess 9
-#define IO_Memory__noWriteAccess 9
-#define IO_Memory__outOfRange 4
-#define IO_Memory__readAfterEnd 5
-#define IO_Memory__accessDenied 14
-#define IO_Memory__noSuchFile 15
-#define IO_Memory__read 0
-#define IO_Memory__write 1
-typedef struct IO_Memory__FileDesc *IO_Memory__File;
+#include <Exception.oh>
 typedef OOC_CHAR8 *IO_Memory__Data;
-typedef OOC_CHAR8 *IO_Memory__Name;
-typedef struct IO_Memory__FileDesc {
-  IO_Memory__File next;
-  IO_Memory__Name name;
-  OOC_INT32 length;
-  OOC_INT32 dataLength;
-  OOC_INT32 openCount;
-  IO_Memory__Data data;
-} IO_Memory__FileDesc;
 typedef struct IO_Memory__ChannelDesc *IO_Memory__Channel;
 typedef struct IO_Memory__ChannelDesc {
-  Msg__Msg res;
-  OOC_CHAR8 readable;
-  OOC_CHAR8 writable;
-  OOC_CHAR8 open;
-  OOC_CHAR8 __pad7;
-  IO_Memory__File file;
+  OOC_UINT32 readyOps;
+  IO__SelectionKeyList keys;
+  OOC_INT32 pos;
+  OOC_INT32 length;
+  IO_Memory__Data data;
 } IO_Memory__ChannelDesc;
-typedef struct IO_Memory__ReaderDesc *IO_Memory__Reader;
-typedef struct IO_Memory__ReaderDesc {
-  Channel__Channel base;
-  Msg__Msg res;
-  OOC_INT32 bytesRead;
-  OOC_CHAR8 positionable;
-  OOC_CHAR8 __pad13;
-  OOC_CHAR8 __pad14;
-  OOC_CHAR8 __pad15;
-  OOC_INT32 pos;
-} IO_Memory__ReaderDesc;
-typedef struct IO_Memory__WriterDesc *IO_Memory__Writer;
-typedef struct IO_Memory__WriterDesc {
-  Channel__Channel base;
-  Msg__Msg res;
-  OOC_INT32 bytesWritten;
-  OOC_CHAR8 positionable;
-  OOC_CHAR8 __pad13;
-  OOC_CHAR8 __pad14;
-  OOC_CHAR8 __pad15;
-  OOC_INT32 pos;
-} IO_Memory__WriterDesc;
-typedef struct IO_Memory__ErrorContextDesc *IO_Memory__ErrorContext;
-typedef struct IO_Memory__ErrorContextDesc {
-  Msg__StringPtr id;
-} IO_Memory__ErrorContextDesc;
-extern void IO_Memory__ErrorContextDesc_GetTemplate(IO_Memory__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-#define _TBN_IO_Memory__ErrorContextDesc_GetTemplate 0
-typedef void (*_TBP_IO_Memory__ErrorContextDesc_GetTemplate)(IO_Memory__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-extern OOC_INT32 IO_Memory__ReaderDesc_Pos(IO_Memory__Reader r);
-#define _TBN_IO_Memory__ReaderDesc_Pos 2
-typedef OOC_INT32 (*_TBP_IO_Memory__ReaderDesc_Pos)(IO_Memory__Reader r);
-extern OOC_INT32 IO_Memory__ReaderDesc_Available(IO_Memory__Reader r);
-#define _TBN_IO_Memory__ReaderDesc_Available 0
-typedef OOC_INT32 (*_TBP_IO_Memory__ReaderDesc_Available)(IO_Memory__Reader r);
-extern void IO_Memory__ReaderDesc_SetPos(IO_Memory__Reader r, OOC_INT32 newPos);
-#define _TBN_IO_Memory__ReaderDesc_SetPos 5
-typedef void (*_TBP_IO_Memory__ReaderDesc_SetPos)(IO_Memory__Reader r, OOC_INT32 newPos);
-extern void IO_Memory__ReaderDesc_ReadByte(IO_Memory__Reader r, OOC_CHAR8 *x);
-#define _TBN_IO_Memory__ReaderDesc_ReadByte 3
-typedef void (*_TBP_IO_Memory__ReaderDesc_ReadByte)(IO_Memory__Reader r, OOC_CHAR8 *x);
-extern void IO_Memory__ReaderDesc_ReadBytes(IO_Memory__Reader r, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
-#define _TBN_IO_Memory__ReaderDesc_ReadBytes 4
-typedef void (*_TBP_IO_Memory__ReaderDesc_ReadBytes)(IO_Memory__Reader r, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
-extern OOC_INT32 IO_Memory__WriterDesc_Pos(IO_Memory__Writer w);
-#define _TBN_IO_Memory__WriterDesc_Pos 1
-typedef OOC_INT32 (*_TBP_IO_Memory__WriterDesc_Pos)(IO_Memory__Writer w);
-extern void IO_Memory__WriterDesc_SetPos(IO_Memory__Writer w, OOC_INT32 newPos);
-#define _TBN_IO_Memory__WriterDesc_SetPos 2
-typedef void (*_TBP_IO_Memory__WriterDesc_SetPos)(IO_Memory__Writer w, OOC_INT32 newPos);
-extern void IO_Memory__WriterDesc_Truncate(IO_Memory__Writer w, OOC_INT32 newLength);
-#define _TBN_IO_Memory__WriterDesc_Truncate 5
-typedef void (*_TBP_IO_Memory__WriterDesc_Truncate)(IO_Memory__Writer w, OOC_INT32 newLength);
-extern void IO_Memory__WriterDesc_WriteByte(IO_Memory__Writer w, OOC_CHAR8 x);
-#define _TBN_IO_Memory__WriterDesc_WriteByte 3
-typedef void (*_TBP_IO_Memory__WriterDesc_WriteByte)(IO_Memory__Writer w, OOC_CHAR8 x);
-extern void IO_Memory__WriterDesc_WriteBytes(IO_Memory__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
-#define _TBN_IO_Memory__WriterDesc_WriteBytes 4
-typedef void (*_TBP_IO_Memory__WriterDesc_WriteBytes)(IO_Memory__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
-extern IO_Memory__Reader IO_Memory__ChannelDesc_NewReader(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_NewReader 5
-typedef IO_Memory__Reader (*_TBP_IO_Memory__ChannelDesc_NewReader)(IO_Memory__Channel ch);
-extern IO_Memory__Writer IO_Memory__ChannelDesc_NewWriter(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_NewWriter 6
-typedef IO_Memory__Writer (*_TBP_IO_Memory__ChannelDesc_NewWriter)(IO_Memory__Channel ch);
-extern OOC_INT32 IO_Memory__ChannelDesc_Length(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_Length 4
-typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Length)(IO_Memory__Channel ch);
+extern IO_Memory__Channel IO_Memory__Open();
+extern void IO_Memory__ChannelDesc_SetBlocking(IO_Memory__Channel ch, OOC_CHAR8 block);
+#define _TBN_IO_Memory__ChannelDesc_SetBlocking 5
+typedef void (*_TBP_IO_Memory__ChannelDesc_SetBlocking)(IO_Memory__Channel ch, OOC_CHAR8 block);
+extern OOC_INT32 IO_Memory__ChannelDesc_FileDescriptor(IO_Memory__Channel ch);
+#define _TBN_IO_Memory__ChannelDesc_FileDescriptor 2
+typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_FileDescriptor)(IO_Memory__Channel ch);
+extern void IO_Memory__ChannelDesc_SetPos(IO_Memory__Channel ch, OOC_INT32 pos);
+#define _TBN_IO_Memory__ChannelDesc_SetPos 6
+typedef void (*_TBP_IO_Memory__ChannelDesc_SetPos)(IO_Memory__Channel ch, OOC_INT32 pos);
+extern OOC_INT32 IO_Memory__ChannelDesc_Read(IO_Memory__Channel ch, OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
+#define _TBN_IO_Memory__ChannelDesc_Read 8
+typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Read)(IO_Memory__Channel ch, OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
+extern OOC_INT32 IO_Memory__ChannelDesc_Write(IO_Memory__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
+#define _TBN_IO_Memory__ChannelDesc_Write 10
+typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Write)(IO_Memory__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
 extern void IO_Memory__ChannelDesc_Fingerprint(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
-#define _TBN_IO_Memory__ChannelDesc_Fingerprint 8
+#define _TBN_IO_Memory__ChannelDesc_Fingerprint 11
 typedef void (*_TBP_IO_Memory__ChannelDesc_Fingerprint)(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
-extern void IO_Memory__ChannelDesc_Flush(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_Flush 2
-typedef void (*_TBP_IO_Memory__ChannelDesc_Flush)(IO_Memory__Channel ch);
-extern void IO_Memory__ChannelDesc_GetModTime(IO_Memory__Channel ch, struct Time__TimeStamp *mtime, RT0__Struct mtime__tag);
-#define _TBN_IO_Memory__ChannelDesc_GetModTime 3
-typedef void (*_TBP_IO_Memory__ChannelDesc_GetModTime)(IO_Memory__Channel ch, struct Time__TimeStamp *mtime, RT0__Struct mtime__tag);
-extern void IO_Memory__ChannelDesc_Register(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_Register 9
-typedef void (*_TBP_IO_Memory__ChannelDesc_Register)(IO_Memory__Channel ch);
-extern void IO_Memory__ChannelDesc_Close(IO_Memory__Channel ch);
-#define _TBN_IO_Memory__ChannelDesc_Close 1
-typedef void (*_TBP_IO_Memory__ChannelDesc_Close)(IO_Memory__Channel ch);
-extern void IO_Memory__ChannelDesc_CopyToWriter(IO_Memory__Channel ch, Channel__Writer writer);
-#define _TBN_IO_Memory__ChannelDesc_CopyToWriter 7
-typedef void (*_TBP_IO_Memory__ChannelDesc_CopyToWriter)(IO_Memory__Channel ch, Channel__Writer writer);
-extern OOC_CHAR8 IO_Memory__Exists(const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
-extern IO_Memory__Channel IO_Memory__New(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, OOC_UINT32 flags, Msg__Msg *res);
-extern IO_Memory__Channel IO_Memory__Old(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, OOC_UINT32 flags, Msg__Msg *res);
-extern IO_Memory__Channel IO_Memory__Tmp(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, OOC_UINT32 flags, Msg__Msg *res);
 extern void OOC_IO_Memory_init();
 extern void OOC_IO_Memory_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_IO_Memory__File;
-extern RT0__StructDesc _td_IO_Memory__1923;
+extern RT0__StructDesc _td_IO_Memory__927;
 extern RT0__StructDesc _td_IO_Memory__Data;
-extern RT0__StructDesc _td_IO_Memory__1958;
-extern RT0__StructDesc _td_IO_Memory__Name;
-extern RT0__StructDesc _td_IO_Memory__FileDesc;
 extern RT0__StructDesc _td_IO_Memory__Channel;
 extern RT0__StructDesc _td_IO_Memory__ChannelDesc;
-extern RT0__StructDesc _td_IO_Memory__Reader;
-extern RT0__StructDesc _td_IO_Memory__ReaderDesc;
-extern RT0__StructDesc _td_IO_Memory__Writer;
-extern RT0__StructDesc _td_IO_Memory__WriterDesc;
-extern RT0__StructDesc _td_IO_Memory__ErrorContext;
-extern RT0__StructDesc _td_IO_Memory__ErrorContextDesc;
-extern RT0__StructDesc _td_IO_Memory__3621;
-extern RT0__StructDesc _td_IO_Memory__3945;
-extern RT0__StructDesc _td_IO_Memory__4725;
-extern RT0__StructDesc _td_IO_Memory__7143;
-extern RT0__StructDesc _td_IO_Memory__9596;
-extern RT0__StructDesc _td_IO_Memory__11476;
-extern RT0__StructDesc _td_IO_Memory__13672;
-extern RT0__StructDesc _td_IO_Memory__14100;
-extern RT0__StructDesc _td_IO_Memory__14867;
-extern RT0__StructDesc _td_IO_Memory__15492;
+extern RT0__StructDesc _td_IO_Memory__1761;
+extern RT0__StructDesc _td_IO_Memory__2504;
+extern RT0__StructDesc _td_IO_Memory__3185;
 #endif /* _MODULE_IO_Memory_ */
 
 /* --- */

@@ -1,7 +1,7 @@
-(* 	$Id: Builder.Mod,v 1.30 2002/12/29 16:17:29 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.33 2003/02/04 20:55:25 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Out, Strings, Channel, Object:Boxed, ADT:Storable, ADT:Object:Storage,
+  Out, Strings, Object:Boxed, ADT:Storable, ADT:Object:Storage, IO,
   OOC:Doc, OOC:AST, Sym := OOC:SymbolTable;
 
 
@@ -544,7 +544,9 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
     END;
   END Finalize;
 
-PROCEDURE (b: Builder) WriteSymbolTable* (ch: Channel.Channel; symTab: Sym.Module; VAR res: Channel.Result);
+PROCEDURE (b: Builder) WriteSymbolTable* (ch: IO.ByteChannel;
+                                          symTab: Sym.Module)
+RAISES IO.Error;
   VAR
     writer: Storage.Writer;
   BEGIN
@@ -553,14 +555,10 @@ PROCEDURE (b: Builder) WriteSymbolTable* (ch: Channel.Channel; symTab: Sym.Modul
        written by OOC:Auxiliary:WriteSymbolFile.WriteSymbolFile *)
     writer := Storage.ConnectWriter (ch);
     writer. WriteObject (symTab);
-    res := writer. res;
-    IF (res = Channel.done) THEN
-      res := ch. res
-    END
   END WriteSymbolTable;
 
-PROCEDURE (b: Builder) ReadSymbolTable* (ch: Channel.Channel;
-                                         VAR res: Channel.Result): Sym.Module;
+PROCEDURE (b: Builder) ReadSymbolTable* (ch: IO.ByteChannel): Sym.Module
+RAISES IO.Error;
   VAR
     obj: Storable.Object;
     reader: Storage.Reader;
@@ -594,7 +592,6 @@ PROCEDURE (b: Builder) ReadSymbolTable* (ch: Channel.Channel;
     END;
     
     reader. ReadObject (obj);
-    res := reader. res;
     IF (obj = NIL) THEN
       RETURN NIL
     ELSE
@@ -620,16 +617,25 @@ BEGIN
   doAutoImport := noAutoImport;
   magicNumber := "OOC4";
   
-  NEW(autoImport, 2);
+  NEW(autoImport, 3);
   NEW(autoImport[0]);
   autoImport[0].module := N("RT0");
   NEW (autoImport[0].exclude, 2);
   autoImport[0].exclude[0] := autoImport[0].module;
   autoImport[0].exclude[1] := N("Out0");
+  
   NEW(autoImport[1]);
   autoImport[1].module := N(stringModule);
   NEW (autoImport[1].exclude, 3);
   autoImport[1].exclude[0] := autoImport[0].module;
   autoImport[1].exclude[1] := autoImport[1].module;
   autoImport[1].exclude[2] := N("Out0");
+  
+  NEW(autoImport[2]);
+  autoImport[2].module := N("Exception");
+  NEW (autoImport[2].exclude, 4);
+  autoImport[2].exclude[0] := autoImport[0].module;
+  autoImport[2].exclude[1] := autoImport[1].module;
+  autoImport[2].exclude[2] := autoImport[2].module;
+  autoImport[2].exclude[3] := N("Out0");
 END OOC:SymbolTable:Builder.

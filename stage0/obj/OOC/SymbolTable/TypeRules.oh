@@ -7,6 +7,7 @@
 #include <OOC/SymbolTable/Predef.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsNamedType(OOC_SymbolTable__Type type);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsPredefType(OOC_SymbolTable__Type type, OOC_INT16 id);
 extern OOC_CHAR8 OOC_SymbolTable_TypeRules__IsScalarType(OOC_SymbolTable__Type type);

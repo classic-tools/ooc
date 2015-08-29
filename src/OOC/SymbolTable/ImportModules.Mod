@@ -1,7 +1,7 @@
-(* 	$Id: ImportModules.Mod,v 1.8 2002/12/14 23:56:56 mva Exp $	 *)
+(* 	$Id: ImportModules.Mod,v 1.10 2003/01/31 13:34:15 mva Exp $	 *)
 MODULE OOC:SymbolTable:ImportModules;
 (*  Retrieve exported symbol data for imported modules.
-    Copyright (C) 2000, 2001, 2002  Michael van Acken
+    Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:SymbolTable:ImportModules;
 *)
 
 IMPORT
-  Msg, OOC:Config, OOC:Error, Sym := OOC:SymbolTable, OOC:Repository;
+  Msg, IO, OOC:Config, OOC:Error, Sym := OOC:SymbolTable, OOC:Repository;
 
 
 CONST
@@ -54,7 +54,8 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error
 
 PROCEDURE ImportModules* (systemModule: Sym.Module;
                           symTab: Sym.Module;
-                          errList: Error.List);
+                          errList: Error.List)
+RAISES IO.Error;
   VAR
     ptr: Sym.Item;
     lastError: Error.Msg;
@@ -69,10 +70,10 @@ PROCEDURE ImportModules* (systemModule: Sym.Module;
       errList. Append (lastError)
     END Err;
   
-  PROCEDURE ReadSymbolFile (import: Sym.Import);
+  PROCEDURE ReadSymbolFile (import: Sym.Import)
+  RAISES IO.Error;
     VAR
       m: Repository.Module;
-      res: Msg.Msg;
     BEGIN
       IF import. IsInternalImport() THEN
         import. SetExternalSymTab (systemModule)
@@ -85,21 +86,16 @@ PROCEDURE ImportModules* (systemModule: Sym.Module;
             (* we already read the symbol file, and it has not been
                invalidated at this time: take old data *)
             symTab := m.ifData;
-            res := NIL;
           ELSE
-            symTab := m.ReadSymbolFile (res);
+            symTab := m.ReadSymbolFile();
           END;
-          IF (res # NIL) THEN
-            Err (readErrorSymbolFile, import. moduleName);
-            lastError. SetMsgAttrib ("reason", res)
-          ELSE
-            (* when we reach this point, then the imported modules have
-               been processed one way or other, and we must make sure that
-               we only see exactly this processed data further on *)
-            m.SetInterfaceData(symTab, Repository.completeInterface, TRUE);
-            m.SetFingerprint(symTab.fingerprint);
-            import. SetExternalSymTab (symTab)
-          END
+          
+          (* when we reach this point, then the imported modules have
+             been processed one way or other, and we must make sure that
+             we only see exactly this processed data further on *)
+          m.SetInterfaceData(symTab, Repository.completeInterface, TRUE);
+          m.SetFingerprint(symTab.fingerprint);
+          import. SetExternalSymTab (symTab);
         END
       END
     END ReadSymbolFile;

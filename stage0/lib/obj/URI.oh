@@ -4,12 +4,13 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Msg.oh>
-#include <Channel.oh>
 #include <TextRider.oh>
+#include <IO.oh>
 #include <URI/String.oh>
 #include <URI/Error.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef URI_String__String URI__String;
 typedef URI_String__StringPtr URI__StringPtr;
 typedef OOC_INT16 URI__Offset;
@@ -83,9 +84,9 @@ typedef void (*_TBP_URI__URIDesc_AppendScheme)(URI__URI uri, OOC_CHAR8 str[], OO
 extern URI__URI URI__URIDesc_MakeRelative(URI__URI uri, URI__HierarchicalURI baseURI);
 #define _TBN_URI__URIDesc_MakeRelative 5
 typedef URI__URI (*_TBP_URI__URIDesc_MakeRelative)(URI__URI uri, URI__HierarchicalURI baseURI);
-extern Channel__Channel URI__URIDesc_GetChannel(URI__URI uri, OOC_INT8 mode, Msg__Msg *res);
+extern IO__ByteChannel URI__URIDesc_GetChannel(URI__URI uri, OOC_INT8 mode);
 #define _TBN_URI__URIDesc_GetChannel 3
-typedef Channel__Channel (*_TBP_URI__URIDesc_GetChannel)(URI__URI uri, OOC_INT8 mode, Msg__Msg *res);
+typedef IO__ByteChannel (*_TBP_URI__URIDesc_GetChannel)(URI__URI uri, OOC_INT8 mode);
 extern void URI__InitOpaqueURI(URI__OpaqueURI uri, URI_String__StringPtr schemeId);
 extern Msg__Msg URI__OpaqueURIDesc_ParseOpaquePart(URI__OpaqueURI uri, URI_String__StringPtr str, OOC_INT16 offset);
 #define _TBN_URI__OpaqueURIDesc_ParseOpaquePart 8
@@ -206,17 +207,16 @@ extern RT0__StructDesc _td_URI__List;
 extern RT0__StructDesc _td_URI__ListDesc;
 extern RT0__StructDesc _td_URI__ErrorContext;
 extern RT0__StructDesc _td_URI__ErrorContextDesc;
-extern RT0__StructDesc _td_URI__5947;
-extern RT0__StructDesc _td_URI__7396;
-extern RT0__StructDesc _td_URI__7756;
-extern RT0__StructDesc _td_URI__10071;
-extern RT0__StructDesc _td_URI__12421;
-extern RT0__StructDesc _td_URI__13874;
-extern RT0__StructDesc _td_URI__17258;
-extern RT0__StructDesc _td_URI__18443;
-extern RT0__StructDesc _td_URI__19920;
-extern RT0__StructDesc _td_URI__20814;
-extern RT0__StructDesc _td_URI__23251;
+extern RT0__StructDesc _td_URI__5948;
+extern RT0__StructDesc _td_URI__7397;
+extern RT0__StructDesc _td_URI__7757;
+extern RT0__StructDesc _td_URI__12163;
+extern RT0__StructDesc _td_URI__13616;
+extern RT0__StructDesc _td_URI__17000;
+extern RT0__StructDesc _td_URI__18185;
+extern RT0__StructDesc _td_URI__19662;
+extern RT0__StructDesc _td_URI__20556;
+extern RT0__StructDesc _td_URI__22993;
 #endif /* _MODULE_URI_ */
 
 /* --- */

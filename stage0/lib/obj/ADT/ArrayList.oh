@@ -5,8 +5,10 @@
 #include <RT0.oh>
 #include <ADT/Storable.oh>
 #include <Object.oh>
+#include <IO.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Object__Object *ADT_ArrayList__Array;
 typedef struct ADT_ArrayList__ArrayListDesc *ADT_ArrayList__ArrayList;
 typedef struct ADT_ArrayList__ArrayListDesc {
@@ -79,7 +81,7 @@ extern void OOC_ADT_ArrayList_init();
 extern void OOC_ADT_ArrayList_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_ADT_ArrayList__958;
+extern RT0__StructDesc _td_ADT_ArrayList__968;
 extern RT0__StructDesc _td_ADT_ArrayList__Array;
 extern RT0__StructDesc _td_ADT_ArrayList__ArrayList;
 extern RT0__StructDesc _td_ADT_ArrayList__ArrayListDesc;

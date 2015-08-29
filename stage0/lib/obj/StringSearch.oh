@@ -6,6 +6,7 @@
 #include <Object.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_UINT32 StringSearch__Flags;
 #define StringSearch__ignoreCase 0
 #define StringSearch__copyString 1

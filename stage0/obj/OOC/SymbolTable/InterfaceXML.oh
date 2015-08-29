@@ -3,21 +3,22 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <URI.oh>
 #include <OOC/Config/Repositories.oh>
 #include <OOC/SymbolTable.oh>
 #include <RT0.oh>
 #include <Object.oh>
-extern void OOC_SymbolTable_InterfaceXML__Write(Channel__Writer cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories);
+#include <Exception.oh>
+extern void OOC_SymbolTable_InterfaceXML__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories);
 extern void OOC_OOC_SymbolTable_InterfaceXML_init();
 extern void OOC_OOC_SymbolTable_InterfaceXML_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2166;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2262;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2955;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6690;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2183;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2279;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__2972;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceXML__6707;
 #endif /* _MODULE_OOC_SymbolTable_InterfaceXML_ */
 
 /* --- */

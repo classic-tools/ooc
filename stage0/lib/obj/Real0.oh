@@ -6,6 +6,7 @@
 #include <ConvTypes.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 Real0__ConvResults;
 typedef OOC_INT8 Real0__ScanClass;
 typedef ConvTypes__ScanState Real0__ScanState;

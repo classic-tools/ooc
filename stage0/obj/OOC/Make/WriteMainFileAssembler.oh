@@ -3,22 +3,23 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <OOC/Error.oh>
+#include <IO.oh>
 #include <OOC/Repository.oh>
 #include <RT0.oh>
 #include <Object.oh>
-extern void OOC_Make_WriteMainFileAssembler__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Msg__Msg *res);
+#include <Exception.oh>
+extern void OOC_Make_WriteMainFileAssembler__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d);
 extern void OOC_OOC_Make_WriteMainFileAssembler_init();
 extern void OOC_OOC_Make_WriteMainFileAssembler_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1099;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1318;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1426;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1461;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1861;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__2135;
-extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__2253;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1085;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1278;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1386;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1421;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__1821;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__2095;
+extern RT0__StructDesc _td_OOC_Make_WriteMainFileAssembler__2213;
 #endif /* _MODULE_OOC_Make_WriteMainFileAssembler_ */
 
 /* --- */

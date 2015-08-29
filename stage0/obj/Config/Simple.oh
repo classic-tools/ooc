@@ -4,6 +4,7 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <Config.oh>
 #include <Config/Parser.oh>
 #include <Config/Source/Environment.oh>
@@ -14,6 +15,7 @@
 #include <Config/Section/Arguments.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Config_Simple__ConfigDesc *Config_Simple__Config;
 typedef struct Config_Simple__ConfigDesc {
   Config_Value__StringPtr cfgFile;
@@ -44,8 +46,8 @@ extern void OOC_Config_Simple_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Simple__Config;
 extern RT0__StructDesc _td_Config_Simple__ConfigDesc;
-extern RT0__StructDesc _td_Config_Simple__992;
-extern RT0__StructDesc _td_Config_Simple__2003;
+extern RT0__StructDesc _td_Config_Simple__961;
+extern RT0__StructDesc _td_Config_Simple__1972;
 #endif /* _MODULE_Config_Simple_ */
 
 /* --- */

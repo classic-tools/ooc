@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.h,v 1.42 2003/01/04 09:05:25 mva Exp $        */
+/*      $Id: __oo2c.h,v 1.43 2003/01/08 11:44:56 mva Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001-2003  Michael van Acken
 
@@ -36,6 +36,14 @@
 #define NORETURN2
 #endif
 
+
+/* Use lrint() for round() in RealMath and LRealMath if it is available, 
+   otherwise use our own definitions in __oo2c.c.  The prototype for lrint()
+   is in __libc.h.  */
+#ifdef HAVE_LRINT
+#define ooc_round_real32(_x) (OOC_INT32)lrint(_x)
+#define ooc_round_real64(_x) (OOC_INT32)lrint(_x)
+#endif
 
 
 #define _check_index(index,length,utype,pos)              \

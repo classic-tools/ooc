@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Config__ConfigDesc *Config__Config;
 typedef struct Config__ConfigDesc {
   char __dummy;

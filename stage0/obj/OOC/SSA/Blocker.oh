@@ -10,6 +10,7 @@
 #include <OOC/SSA/Opnd.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_SSA_Blocker__ProxyDesc *OOC_SSA_Blocker__Proxy;
 typedef struct OOC_SSA_Blocker__RegionDesc *OOC_SSA_Blocker__Region;
 typedef struct OOC_SSA_Blocker__SelectDesc *OOC_SSA_Blocker__Select;

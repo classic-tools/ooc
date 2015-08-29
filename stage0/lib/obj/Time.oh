@@ -6,6 +6,7 @@
 #include <SysClock.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define Time__msecPerSec 1000
 #define Time__msecPerMin 60000
 #define Time__msecPerHour 3600000

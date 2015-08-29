@@ -4,6 +4,7 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <Config/Value.oh>
 #include <Config/Section/Options.oh>
 #include <Config/Section/Arguments.oh>
@@ -11,6 +12,7 @@
 #include <OOC/Config/Repositories.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern Config_Section_Options__Section OOC_Config__options;
 extern Config_Section_Arguments__Section OOC_Config__arguments;
 extern OOC_Config_Pragmas__Section OOC_Config__pragmas;
@@ -25,9 +27,9 @@ extern void OOC_OOC_Config_init();
 extern void OOC_OOC_Config_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Config__719;
-extern RT0__StructDesc _td_OOC_Config__1029;
-extern RT0__StructDesc _td_OOC_Config__1394;
+extern RT0__StructDesc _td_OOC_Config__723;
+extern RT0__StructDesc _td_OOC_Config__1033;
+extern RT0__StructDesc _td_OOC_Config__1398;
 #endif /* _MODULE_OOC_Config_ */
 
 /* --- */

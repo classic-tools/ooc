@@ -3,27 +3,28 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
 #include <ADT/Dictionary.oh>
+#include <IO.oh>
 #include <URI.oh>
 #include <OOC/Config/Repositories.oh>
 #include <OOC/SymbolTable.oh>
 #include <RT0.oh>
 #include <Object.oh>
-extern void OOC_SymbolTable_InterfaceDescr__Write(Channel__Writer cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary extensionDict);
+#include <Exception.oh>
+extern void OOC_SymbolTable_InterfaceDescr__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary extensionDict);
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init();
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2517;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2668;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6294;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6409;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6848;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7064;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__10178;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__14364;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__15439;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2532;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2683;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6309;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6424;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6863;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7079;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__10193;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__14379;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__15454;
 #endif /* _MODULE_OOC_SymbolTable_InterfaceDescr_ */
 
 /* --- */

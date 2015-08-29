@@ -3,15 +3,15 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Msg.oh>
-#include <Channel.oh>
 #include <TextRider.oh>
 #include <Time.oh>
+#include <IO.oh>
 #include <URI.oh>
 #include <OOC/Scanner/InputBuffer.oh>
 #include <OOC/Repository.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Repository_FileSystem__RepositoryDesc *OOC_Repository_FileSystem__Repository;
 typedef struct OOC_Repository_FileSystem__RepositoryDesc {
   OOC_Repository__Repository baseRep;
@@ -60,15 +60,15 @@ typedef void (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetTimeStamp)(OOC_Repo
 extern OOC_CHAR8 OOC_Repository_FileSystem__ModuleDesc_FileExists(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_FileExists 4
 typedef OOC_CHAR8 (*_TBP_OOC_Repository_FileSystem__ModuleDesc_FileExists)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId);
-extern OOC_Scanner_InputBuffer__Buffer OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer(OOC_Repository_FileSystem__Module m, Msg__Msg *res);
+extern OOC_Scanner_InputBuffer__Buffer OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer(OOC_Repository_FileSystem__Module m);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer 6
-typedef OOC_Scanner_InputBuffer__Buffer (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer)(OOC_Repository_FileSystem__Module m, Msg__Msg *res);
-extern void OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, Msg__Msg *res);
+typedef OOC_Scanner_InputBuffer__Buffer (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetInputBuffer)(OOC_Repository_FileSystem__Module m);
+extern void OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir 3
-typedef void (*_TBP_OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, Msg__Msg *res);
-extern Channel__Channel OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp, Msg__Msg *res);
+typedef void (*_TBP_OOC_Repository_FileSystem__ModuleDesc_CreateOutputDir)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId);
+extern IO__ByteChannel OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel 7
-typedef Channel__Channel (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp, Msg__Msg *res);
+typedef IO__ByteChannel (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetOutputChannel)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 makeTmp);
 extern void OOC_OOC_Repository_FileSystem_init();
 extern void OOC_OOC_Repository_FileSystem_init0();
 
@@ -77,10 +77,10 @@ extern RT0__StructDesc _td_OOC_Repository_FileSystem__Repository;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__RepositoryDesc;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__Module;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__ModuleDesc;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__2661;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__2910;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__4676;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__5986;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__2662;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__2911;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__4677;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__5987;
 #endif /* _MODULE_OOC_Repository_FileSystem_ */
 
 /* --- */

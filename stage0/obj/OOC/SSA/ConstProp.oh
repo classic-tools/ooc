@@ -6,6 +6,7 @@
 #include <OOC/SSA.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern void OOC_SSA_ConstProp__Transform(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_ConstProp_init();
 extern void OOC_OOC_SSA_ConstProp_init0();

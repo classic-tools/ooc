@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 OOC_Scanner_Symbol__Id;
 #define OOC_Scanner_Symbol__times 1
 #define OOC_Scanner_Symbol__slash 2

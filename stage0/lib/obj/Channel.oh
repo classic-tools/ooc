@@ -7,6 +7,7 @@
 #include <Msg.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Msg__Msg Channel__Result;
 #define Channel__noLength -1
 #define Channel__noPosition -2

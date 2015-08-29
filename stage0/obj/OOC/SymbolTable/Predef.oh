@@ -9,6 +9,7 @@
 #include <OOC/SymbolTable/Builder.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define OOC_SymbolTable_Predef__boolean 0
 #define OOC_SymbolTable_Predef__char 1
 #define OOC_SymbolTable_Predef__longchar 2

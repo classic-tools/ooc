@@ -1,6 +1,5 @@
 #include <OOC/Make/TranslateToC.oh>
-#include <Channel.oh>
-#include <StdChannels.oh>
+#include <IO/StdChannels.oh>
 #include <ADT/Dictionary.oh>
 #include <OOC/Config.oh>
 #include <OOC/Config/Pragmas.oh>
@@ -25,9 +24,9 @@ static void OOC_Make_TranslateToC__WriteCodeFile(OOC_C_DeclWriter__Writer w, OOC
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Make_TranslateToC__Translator = { (RT0__Struct[]){&_td_OOC_Make_TranslateToC__TranslatorDesc}, NULL, &_mid, "Translator", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc = { (RT0__Struct[]){&_td_OOC_Make_TranslateToC__TranslatorDesc}, (void*[]){(void*)OOC_Make_TranslateToC__TranslatorDesc_SetDataWriter,(void*)OOC_Make_TranslateToC__TranslatorDesc_SetProcedureList,(void*)OOC_Make_TranslateToC__TranslatorDesc_SetWriter,(void*)OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures,(void*)OOC_Make_TranslateToC__TranslatorDesc_WriteProcBody,(void*)OOC_Make_TranslateToC__TranslatorDesc_WriteProcedure}, &_mid, "TranslatorDesc", 16, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Make_TranslateToC__4364 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Make_TranslateToC__4441 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Make_TranslateToC__4490 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Make_TranslateToC__4368 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Make_TranslateToC__4445 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Make_TranslateToC__4494 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Make:TranslateToC", (RT0__Struct[]) { &_td_OOC_Make_TranslateToC__Translator, &_td_OOC_Make_TranslateToC__TranslatorDesc, NULL } };
 
 extern void OOC_OOC_Make_TranslateToC_init0() {

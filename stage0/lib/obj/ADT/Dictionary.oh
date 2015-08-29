@@ -5,8 +5,10 @@
 #include <RT0.oh>
 #include <ADT/Storable.oh>
 #include <Object.oh>
+#include <IO.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT32 ADT_Dictionary__Hash;
 typedef OOC_INT32 ADT_Dictionary__Index;
 typedef Object__Object ADT_Dictionary__Key;
@@ -81,13 +83,13 @@ extern void OOC_ADT_Dictionary_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_Dictionary__Entry;
-extern RT0__StructDesc _td_ADT_Dictionary__2611;
+extern RT0__StructDesc _td_ADT_Dictionary__2621;
 extern RT0__StructDesc _td_ADT_Dictionary__Table;
 extern RT0__StructDesc _td_ADT_Dictionary__Dictionary;
 extern RT0__StructDesc _td_ADT_Dictionary__DictionaryDesc;
 extern RT0__StructDesc _td_ADT_Dictionary__Dummy;
 extern RT0__StructDesc _td_ADT_Dictionary__DummyDesc;
-extern RT0__StructDesc _td_ADT_Dictionary__4083;
+extern RT0__StructDesc _td_ADT_Dictionary__4093;
 #endif /* _MODULE_ADT_Dictionary_ */
 
 /* --- */

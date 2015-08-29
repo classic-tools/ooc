@@ -1,7 +1,7 @@
-(* 	$Id: RealMath.Mod,v 1.3 2002/11/29 23:17:19 mva Exp $	 *)
+(* 	$Id: RealMath.Mod,v 1.7 2003/02/05 21:55:14 mva Exp $	 *)
 MODULE RealMath [INTERFACE "C"; LINK LIB "m" END];
 (*  Math functions for REAL.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002,2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -24,8 +24,8 @@ MODULE RealMath [INTERFACE "C"; LINK LIB "m" END];
    with some C level type cast trickery, which prevent them from being
    used in a procedure variable, but should work fine otherwise.  *)
 
-IMPORT
-  LRealMath;
+IMPORT  <*Warnings:=FALSE*>
+  LRealMath;  (* unused but mandatory *)
 
 CONST
   pi*   = 3.1415926535897932384626433832795028841972E0;
@@ -61,7 +61,7 @@ PROCEDURE ["(float)pow"] power*(base, exponent: REAL): REAL;
 (**Returns the value of the number base raised to the power exponent 
      for base > 0.  *)
 
-PROCEDURE ["(float)lrint"] round*(x: REAL): LONGINT;
+PROCEDURE ["ooc_round_real32"] round*(x: REAL): LONGINT;
 (**Returns the value of x rounded to the nearest integer.  *)
 
 PROCEDURE ["(float)sincos"] sincos* (x: REAL; VAR sin, cos: REAL);

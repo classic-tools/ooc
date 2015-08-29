@@ -16,15 +16,15 @@ RT0__StructDesc _td_OOC_Repository__Import = { (RT0__Struct[]){&_td_OOC_Reposito
 RT0__StructDesc _td_OOC_Repository__ImportDesc = { (RT0__Struct[]){&_td_OOC_Repository__ImportDesc}, (void*[]){}, &_mid, "ImportDesc", 8, 0, RT0__strRecord };
 RT0__StructDesc _td_OOC_Repository__ModuleRef = { (RT0__Struct[]){&_td_OOC_Repository__ModuleRef}, (void*[]){}, &_mid, "ModuleRef", 16, 0, RT0__strRecord };
 RT0__StructDesc _td_OOC_Repository__ModuleDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_Repository__ModuleDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString,(void*)OOC_Repository__ModuleDesc_CreateOutputDir,(void*)OOC_Repository__ModuleDesc_FileExists,(void*)OOC_Repository__ModuleDesc_GetImportedModule,(void*)OOC_Repository__ModuleDesc_GetInputBuffer,(void*)OOC_Repository__ModuleDesc_GetOutputChannel,(void*)OOC_Repository__ModuleDesc_GetTimeStamp,(void*)OOC_Repository__ModuleDesc_GetURI,(void*)OOC_Repository__ModuleDesc_MatchesURI,(void*)OOC_Repository__ModuleDesc_ReadSymbolFile,(void*)OOC_Repository__ModuleDesc_SetFingerprint,(void*)OOC_Repository__ModuleDesc_SetInterfaceData}, &_mid, "ModuleDesc", 36, 1, RT0__strRecord };
-RT0__StructDesc _td_OOC_Repository__3266 = { (RT0__Struct[]){&_td_OOC_Repository__ModuleRef}, NULL, &_mid, NULL, 16, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__3255 = { (RT0__Struct[]){&_td_OOC_Repository__3266}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Repository__11585 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__12470 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__15022 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__15483 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__17526 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__18330 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Repository__19422 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__3267 = { (RT0__Struct[]){&_td_OOC_Repository__ModuleRef}, NULL, &_mid, NULL, 16, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__3256 = { (RT0__Struct[]){&_td_OOC_Repository__3267}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Repository__11586 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__12471 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__15023 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__15484 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__17574 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__18378 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Repository__19470 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Repository", (RT0__Struct[]) { &_td_OOC_Repository__URIBuffer, &_td_OOC_Repository__PkgInfo, &_td_OOC_Repository__PkgInfoDesc, &_td_OOC_Repository__Repository, &_td_OOC_Repository__RepositoryDesc, &_td_OOC_Repository__Module, &_td_OOC_Repository__Import, &_td_OOC_Repository__ImportDesc, &_td_OOC_Repository__ModuleRef, &_td_OOC_Repository__ModuleDesc, NULL } };
 
 extern void OOC_OOC_Repository_init0() {

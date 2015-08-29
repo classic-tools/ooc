@@ -7,14 +7,11 @@
   <test id="libio_Select" type="run" file="LibIoSelect.Mod">
     Imports module <code>IO:Select</code>.
   </test>
-  <test id="libio_PFD" type="run" file="LibIoPFD.Mod">
-    Imports module <code>IO:PFD</code>.
+  <test id="libio_StdChannels" type="run" file="LibIoStdChannels.Mod">
+    Imports module <code>IO:StdChannels</code>.
   </test>
   <test id="libio_Socket" type="run" file="LibIoSocket.Mod">
     Imports module <code>IO:Socket</code>.
-  </test>
-  <test id="libio_Port" type="run" file="LibIoPort.Mod">
-    Imports modules <code>IO:Port:*</code>.
   </test>
   <test id="libio_Net" type="run" file="LibNet.Mod">
     Imports modules <code>Net:*</code>.

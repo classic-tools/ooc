@@ -23,13 +23,13 @@ OOC_CHAR8 URI_CharClass__SkipAlpha(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *p
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2099)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2206)));
   i1 = (OOC_CHAR8)'A'<=(_cap(i1));
   if (i1) goto l3;
   i1=OOC_FALSE;
   goto l5;
 l3:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2118)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2225)));
   i1 = (_cap(i1))<=(OOC_CHAR8)'Z';
   
 l5:
@@ -40,7 +40,7 @@ l7:
   *pos = (i0+1);
   return OOC_TRUE;
 l8:
-  _failed_function(2004); return 0;
+  _failed_function(2111); return 0;
   ;
 }
 
@@ -64,13 +64,13 @@ OOC_CHAR8 URI_CharClass__SkipDigit(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *p
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2428)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2535)));
   i1 = (OOC_CHAR8)'0'<=i1;
   if (i1) goto l3;
   i1=OOC_FALSE;
   goto l5;
 l3:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2441)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2548)));
   i1 = i1<=(OOC_CHAR8)'9';
   
 l5:
@@ -81,7 +81,7 @@ l7:
   *pos = (i0+1);
   return OOC_TRUE;
 l8:
-  _failed_function(2338); return 0;
+  _failed_function(2445); return 0;
   ;
 }
 
@@ -121,13 +121,13 @@ OOC_CHAR8 URI_CharClass__IsMember(OOC_CHAR8 ch, const OOC_CHAR8 set__ref[], OOC_
   OOC_ALLOCATE_VPAR(set,OOC_CHAR8 ,set_0d)
 
   OOC_INITIALIZE_VPAR(set__ref,set,OOC_CHAR8 ,set_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 2938)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 3045)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (i0) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 2954)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index((OOC_INT32)0, set_0d, OOC_UINT16, 3061)));
   i1 = ch;
   i0 = i0!=i1;
   
@@ -140,13 +140,13 @@ l7:
   i1=(OOC_INT32)0;
 l8_loop:
   i1 = i1+1;
-  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 2938)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3045)));
   i2 = i2!=(OOC_CHAR8)'\000';
   if (i2) goto l11;
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 2954)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3061)));
   i2 = i2!=i0;
   
 l13:
@@ -154,7 +154,7 @@ l13:
 l16:
   i0=i1;
 l17:
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i0, set_0d, OOC_UINT16, 3005)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i0, set_0d, OOC_UINT16, 3112)));
   return (i0!=(OOC_CHAR8)'\000');
   ;
 }
@@ -172,7 +172,7 @@ OOC_CHAR8 URI_CharClass__SkipReserved(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3242)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3349)));
   i1 = URI_CharClass__IsMember(i1, ";/?:@&=+$,[]", 13);
   if (i1) goto l3;
   return OOC_FALSE;
@@ -181,7 +181,7 @@ l3:
   *pos = (i0+1);
   return OOC_TRUE;
 l4:
-  _failed_function(3147); return 0;
+  _failed_function(3254); return 0;
   ;
 }
 
@@ -206,7 +206,7 @@ OOC_CHAR8 URI_CharClass__IsMark(OOC_CHAR8 ch) {
     goto l4;
   }
 l4:
-  _failed_function(3366); return 0;
+  _failed_function(3473); return 0;
   ;
 }
 
@@ -214,7 +214,7 @@ OOC_CHAR8 URI_CharClass__SkipMark(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *po
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3637)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3744)));
   i1 = URI_CharClass__IsMark(i1);
   if (i1) goto l3;
   return OOC_FALSE;
@@ -223,7 +223,7 @@ l3:
   *pos = (i0+1);
   return OOC_TRUE;
 l4:
-  _failed_function(3548); return 0;
+  _failed_function(3655); return 0;
   ;
 }
 
@@ -293,13 +293,13 @@ l12:
 
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4263)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4370)));
   i1 = i1==(OOC_CHAR8)'%';
   if (i1) goto l3;
   i0=OOC_FALSE;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4290)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4397)));
   i0 = URI_CharClass__SkipEscaped_SkipHex(i0);
   
 l5:
@@ -308,7 +308,7 @@ l5:
   goto l9;
 l7:
   i0 = *pos;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4313)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4420)));
   i0 = URI_CharClass__SkipEscaped_SkipHex(i0);
   
 l9:
@@ -320,7 +320,7 @@ l11:
   *pos = (i0+3);
   return OOC_TRUE;
 l12:
-  _failed_function(4031); return 0;
+  _failed_function(4138); return 0;
   ;
 }
 
@@ -328,7 +328,7 @@ OOC_CHAR8 URI_CharClass__SkipPChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *p
   register OOC_INT32 i0;
 
   i0 = *pos;
-  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4523)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4630)));
   i0 = URI_CharClass__IsMember(i0, ":@&=+$,", 8);
   if (i0) goto l7;
   i0 = URI_CharClass__SkipUnreserved((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -346,7 +346,7 @@ l7:
   *pos = (i0+1);
   return OOC_TRUE;
 l8:
-  _failed_function(4431); return 0;
+  _failed_function(4538); return 0;
   ;
 }
 
@@ -378,7 +378,7 @@ OOC_CHAR8 URI_CharClass__SkipMember(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *
 
   OOC_INITIALIZE_VPAR(set__ref,set,OOC_CHAR8 ,set_0d)
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5043)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5150)));
   i1 = URI_CharClass__IsMember(i1, (void*)(OOC_INT32)set, set_0d);
   if (i1) goto l3;
   return OOC_FALSE;
@@ -387,7 +387,7 @@ l3:
   *pos = (i0+1);
   return OOC_TRUE;
 l4:
-  _failed_function(4907); return 0;
+  _failed_function(5014); return 0;
   ;
 }
 

@@ -17,11 +17,10 @@ IMPORT
   QueryUnparsed := URI:Query:Unparsed,
   URI:Scheme:CurrentDoc,
   URI:Scheme:File,
-  URI:Scheme:HTTP,
+  (*URI:Scheme:HTTP, defunct *)
   URI:Scheme:Hierarchical,
   URI:Scheme:MailTo,
   URI:Scheme:Opaque,
-  URI:Scheme:Memory,
   URI,
   XML:Builder:Canonical,
   XML:Builder:ParserProtocol,
@@ -45,11 +44,6 @@ IMPORT
   
   BasicElement := XML:Basic:Element,
   BasicParser := XML:Basic:Parser,
-  BasicDataType := XML:Basic:DataType,
-  
-  ChannelMemory := IO:Memory,
-  IO:PFD,
-  IO:Socket,
-  IO:Select;
+  BasicDataType := XML:Basic:DataType;
   
 END libxml.

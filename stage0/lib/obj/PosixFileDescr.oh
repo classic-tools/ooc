@@ -11,6 +11,7 @@
 #include <LongStrings.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Msg__Msg PosixFileDescr__Result;
 #define PosixFileDescr__noLength -1
 #define PosixFileDescr__noPosition -2

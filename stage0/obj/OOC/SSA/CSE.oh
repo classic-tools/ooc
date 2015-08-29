@@ -6,6 +6,7 @@
 #include <OOC/SSA.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_SSA__Result *OOC_SSA_CSE__ResultList;
 typedef struct OOC_SSA_CSE__PartitionDesc *OOC_SSA_CSE__Partition;
 typedef OOC_SSA_CSE__Partition *OOC_SSA_CSE__ChildrenList;

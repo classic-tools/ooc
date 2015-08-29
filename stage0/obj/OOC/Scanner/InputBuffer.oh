@@ -3,17 +3,18 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <OOC/Error.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR8 OOC_Scanner_InputBuffer__Char;
 typedef OOC_CHAR8 *OOC_Scanner_InputBuffer__CharArray;
 typedef OOC_INT32 OOC_Scanner_InputBuffer__CharPos;
 #define OOC_Scanner_InputBuffer__markerEOB "\000"
 typedef struct OOC_Scanner_InputBuffer__BufferDesc *OOC_Scanner_InputBuffer__Buffer;
 typedef struct OOC_Scanner_InputBuffer__BufferDesc {
-  Channel__Reader r;
+  IO__ByteChannel r;
   OOC_Scanner_InputBuffer__CharArray chars;
   OOC_INT32 offsetFromPos0;
   OOC_INT32 endOfBuffer;
@@ -30,12 +31,12 @@ typedef OOC_CHAR8 (*_TBP_OOC_Scanner_InputBuffer__BufferDesc_EndOfBuffer)(OOC_Sc
 extern void OOC_Scanner_InputBuffer__BufferDesc_Close(OOC_Scanner_InputBuffer__Buffer b);
 #define _TBN_OOC_Scanner_InputBuffer__BufferDesc_Close 0
 typedef void (*_TBP_OOC_Scanner_InputBuffer__BufferDesc_Close)(OOC_Scanner_InputBuffer__Buffer b);
-extern OOC_Scanner_InputBuffer__Buffer OOC_Scanner_InputBuffer__New(Channel__Channel ch, OOC_Error__List errList);
+extern OOC_Scanner_InputBuffer__Buffer OOC_Scanner_InputBuffer__New(IO__ByteChannel ch, OOC_Error__List errList);
 extern void OOC_OOC_Scanner_InputBuffer_init();
 extern void OOC_OOC_Scanner_InputBuffer_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Scanner_InputBuffer__1295;
+extern RT0__StructDesc _td_OOC_Scanner_InputBuffer__1296;
 extern RT0__StructDesc _td_OOC_Scanner_InputBuffer__CharArray;
 extern RT0__StructDesc _td_OOC_Scanner_InputBuffer__Buffer;
 extern RT0__StructDesc _td_OOC_Scanner_InputBuffer__BufferDesc;

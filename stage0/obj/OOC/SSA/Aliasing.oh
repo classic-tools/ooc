@@ -6,6 +6,7 @@
 #include <OOC/SSA.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 OOC_SSA_Aliasing__Id;
 #define OOC_SSA_Aliasing__noAliasing 0
 #define OOC_SSA_Aliasing__completelyCovered 1

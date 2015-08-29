@@ -6,6 +6,7 @@
 #include <ConvTypes.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 LRealConv__ConvResults;
 #define LRealConv__strAllRight 0
 #define LRealConv__strOutOfRange 1

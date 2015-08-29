@@ -3,6 +3,7 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
+#include <IO.oh>
 #include <OOC/Config/Pragmas.oh>
 #include <OOC/Repository.oh>
 #include <OOC/Error.oh>
@@ -10,6 +11,7 @@
 #include <OOC/SymbolTable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern void OOC_Auxiliary_ParseModule__ParseModule(OOC_Repository__Module m, OOC_CHAR8 checkModuleName, OOC_CHAR8 createNamespace, OOC_CHAR8 writeSymbolFile, OOC_CHAR8 abortAfterImport, Object__String libraryName, OOC_AST__Node *ast, OOC_SymbolTable__Module *symTab, OOC_Config_Pragmas__History *pragmaHistory, OOC_Error__List *errList);
 extern void OOC_OOC_Auxiliary_ParseModule_init();
 extern void OOC_OOC_Auxiliary_ParseModule_init0();

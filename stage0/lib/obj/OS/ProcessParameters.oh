@@ -9,6 +9,7 @@
 #include <C.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Msg__Msg OS_ProcessParameters__Result;
 typedef OOC_CHAR8 OS_ProcessParameters__Path[];
 #define OS_ProcessParameters__done  0

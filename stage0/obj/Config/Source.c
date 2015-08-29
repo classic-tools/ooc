@@ -8,7 +8,7 @@ void Config_Source__Init(Config_Source__Source src) {
   ;
 }
 
-void Config_Source__SourceDesc_Write(Config_Source__Source source, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res) {
+void Config_Source__SourceDesc_Write(Config_Source__Source source, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d) {
   OOC_ALLOCATE_VPAR(rootTag,OOC_CHAR16 ,rootTag_0d)
 
   OOC_INITIALIZE_VPAR(rootTag__ref,rootTag,OOC_CHAR16 ,(rootTag_0d*2))

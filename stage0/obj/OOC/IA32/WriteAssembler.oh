@@ -9,6 +9,7 @@
 #include <OOC/Make/TranslateToIA32.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc *OOC_IA32_WriteAssembler__Translator;
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc {
   OOC_IA32_Writer__Writer w;
@@ -20,7 +21,7 @@ typedef struct OOC_IA32_WriteAssembler__TranslatorDesc {
   StringSearch__Matcher inspectStage;
   OOC_INT32 lfeCount;
 } OOC_IA32_WriteAssembler__TranslatorDesc;
-extern void OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody(OOC_IA32_WriteAssembler__Translator t, OOC_IR__Procedure proc);
+extern void OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody(volatile OOC_IA32_WriteAssembler__Translator t, volatile OOC_IR__Procedure proc);
 #define _TBN_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody 3
 typedef void (*_TBP_OOC_IA32_WriteAssembler__TranslatorDesc_WriteProcBody)(OOC_IA32_WriteAssembler__Translator t, OOC_IR__Procedure proc);
 extern void OOC_IA32_WriteAssembler__InitTranslator(OOC_IA32_WriteAssembler__Translator t, OOC_Repository__Module module, StringSearch__Matcher inspectProc, StringSearch__Matcher inspectStage);
@@ -32,9 +33,9 @@ extern void OOC_OOC_IA32_WriteAssembler_init0();
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Translator;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__TranslatorDesc;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Buffer;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2278;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6683;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6877;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2290;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6695;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6889;
 #endif /* _MODULE_OOC_IA32_WriteAssembler_ */
 
 /* --- */

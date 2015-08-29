@@ -3,11 +3,12 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <XML/Writer.oh>
 #include <OOC/IR.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_IR_XML__VisitorDesc *OOC_IR_XML__Visitor;
 typedef struct OOC_IR_XML__VisitorDesc {
   XML_Writer__Writer w;
@@ -186,15 +187,15 @@ typedef void (*_TBP_OOC_IR_XML__VisitorDesc_VisitProcedure)(OOC_IR_XML__Visitor 
 extern void OOC_IR_XML__VisitorDesc_VisitModule(OOC_IR_XML__Visitor v, OOC_IR__Module module);
 #define _TBN_OOC_IR_XML__VisitorDesc_VisitModule 28
 typedef void (*_TBP_OOC_IR_XML__VisitorDesc_VisitModule)(OOC_IR_XML__Visitor v, OOC_IR__Module module);
-extern void OOC_IR_XML__Write(Channel__Writer cw, OOC_IR__Module module);
+extern void OOC_IR_XML__Write(IO__ByteChannel cw, OOC_IR__Module module);
 extern void OOC_OOC_IR_XML_init();
 extern void OOC_OOC_IR_XML_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IR_XML__Visitor;
 extern RT0__StructDesc _td_OOC_IR_XML__VisitorDesc;
-extern RT0__StructDesc _td_OOC_IR_XML__3487;
-extern RT0__StructDesc _td_OOC_IR_XML__7214;
+extern RT0__StructDesc _td_OOC_IR_XML__3488;
+extern RT0__StructDesc _td_OOC_IR_XML__7215;
 #endif /* _MODULE_OOC_IR_XML_ */
 
 /* --- */

@@ -1,7 +1,7 @@
-(* 	$Id: XML.Mod,v 1.21 2002/12/20 10:19:32 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.23 2003/02/02 17:58:38 mva Exp $	 *)
 MODULE OOC:SSA:XML;
 (*  Produces a canonical representation of SSA code in XML.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -22,7 +22,7 @@ MODULE OOC:SSA:XML;
 
 
 IMPORT
-  Channel, Object, Dictionary := ADT:Dictionary:IntValue, 
+  Object, IO, Dictionary := ADT:Dictionary:IntValue, 
   ADT:StringBuffer, WriterXML := XML:Writer, XML:UnicodeCodec:Latin1,
   OOC:SSA:Opcode, OOC:SSA:Result, OOC:SSA:Opnd, OOC:SSA, OOC:SSA:Schedule;
 
@@ -38,13 +38,13 @@ TYPE
        the instruction has not been scheduled for writing yet *)
   END;
   
-PROCEDURE InitWriter* (w: Writer; cw: Channel.Writer);
+PROCEDURE InitWriter* (w: Writer; cw: IO.ByteChannel);
   BEGIN
     WriterXML.Init (w, cw, Latin1.factory, TRUE, 2);
     w. sb := StringBuffer.New("");
   END InitWriter;
 
-PROCEDURE NewWriter* (cw: Channel.Writer): Writer;
+PROCEDURE NewWriter* (cw: IO.ByteChannel): Writer;
   VAR
     w: Writer;
   BEGIN
@@ -218,7 +218,8 @@ PROCEDURE (w: Writer) WriteInstr (instr: SSA.Instr);
   END WriteInstr;
 
 PROCEDURE (w: Writer) WriteProcBody* (pb: SSA.ProcBlock;
-                                      includeDeadCode: BOOLEAN);
+                                      includeDeadCode: BOOLEAN)
+RAISES IO.Error;
   VAR
     instr: SSA.Instr;
     instrCount: LONGINT;
@@ -310,8 +311,9 @@ PROCEDURE (w: Writer) WriteProcBody* (pb: SSA.ProcBlock;
     w. EndOfText
   END WriteProcBody;
 
-PROCEDURE Write* (cw: Channel.Writer; pb: SSA.ProcBlock;
-                  includeDeadCode: BOOLEAN);
+PROCEDURE Write* (cw: IO.ByteChannel; pb: SSA.ProcBlock;
+                  includeDeadCode: BOOLEAN)
+RAISES IO.Error;
 (**Note: If @oparam{includeDeadCode} is set and the block contains instructions
    that are dead, then the output depends on the order of instructions in the
    blocks instruction list.  Consequently, it is no longer canonical and may
@@ -323,7 +325,8 @@ PROCEDURE Write* (cw: Channel.Writer; pb: SSA.ProcBlock;
     w. WriteProcBody (pb, includeDeadCode);
   END Write;
 
-PROCEDURE (w: Writer) WriteSchedule* (domRoot: Schedule.Block);
+PROCEDURE (w: Writer) WriteSchedule* (domRoot: Schedule.Block)
+RAISES IO.Error;
   VAR
     instrCount: LONGINT;
     
@@ -387,7 +390,8 @@ PROCEDURE (w: Writer) WriteSchedule* (domRoot: Schedule.Block);
     w. EndOfText
   END WriteSchedule;
 
-PROCEDURE WriteSchedule* (cw: Channel.Writer; domRoot: Schedule.Block);
+PROCEDURE WriteSchedule* (cw: IO.ByteChannel; domRoot: Schedule.Block)
+RAISES IO.Error;
   VAR
     w: Writer;
   BEGIN

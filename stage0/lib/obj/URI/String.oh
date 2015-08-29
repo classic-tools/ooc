@@ -6,6 +6,7 @@
 #include <URI/CharClass.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR8 URI_String__String[];
 typedef OOC_CHAR8 *URI_String__StringPtr;
 typedef OOC_INT16 URI_String__Offset;

@@ -7,6 +7,7 @@
 #include <OOC/Scanner/Builder/BasicList.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_Doc_Decoration__String;
 #define OOC_Doc_Decoration__removedSpace "\002"
 #define OOC_Doc_Decoration__removedTab "\003"

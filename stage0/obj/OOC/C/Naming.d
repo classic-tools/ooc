@@ -15,9 +15,9 @@ static void OOC_C_Naming__Init();
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_C_Naming__Buffer = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, "Buffer", 2048, 2048, RT0__strArray };
 RT0__StructDesc _td_OOC_C_Naming__1017 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_C_Naming__4242 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
-RT0__StructDesc _td_OOC_C_Naming__4921 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_OOC_C_Naming__6572 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_C_Naming__4360 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
+RT0__StructDesc _td_OOC_C_Naming__5039 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_OOC_C_Naming__6690 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:C:Naming", (RT0__Struct[]) { &_td_OOC_C_Naming__Buffer, NULL } };
 
 extern void OOC_OOC_C_Naming_init0() {

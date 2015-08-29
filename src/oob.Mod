@@ -1,3 +1,4 @@
+(* 	$Id: oob.Mod,v 1.12 2003/02/01 17:29:34 mva Exp $	 *)
 MODULE oob;
 (*  Symbol file browser.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -20,7 +21,7 @@ MODULE oob;
 *)
 
 IMPORT
-  Ascii, Err, Msg, Out, StdChannels, Strings, 
+  Ascii, Err, Out, StdChannels, Strings, IO,
   Config:Section:Options, Config:Section:Arguments, Config:Value:Boolean,
   OOC:Config, E := OOC:Error, Rep := OOC:Repository, Sym := OOC:SymbolTable,
   OOC:Logger, OOC:Doc, OOC:Doc:Output:Text, OOC:SymbolTable:ImportModules,
@@ -31,7 +32,7 @@ IMPORT
 
 VAR
   cfgErrList, errList: E.List;
-  help: Options.Option;
+  help, extendRecords: Options.Option;
   arg: Arguments.Argument;
   symTab: Sym.Module;
   
@@ -54,21 +55,10 @@ PROCEDURE GetModule (moduleName: ARRAY OF CHAR): Rep.Module;
     RETURN m;
   END GetModule;
 
-PROCEDURE GetSymTab(module: Rep.Module): Sym.Module;
-  VAR
-    msg: ARRAY 1024 OF CHAR;
-    symTab: Sym.Module;
-    res: Msg.Msg;
+PROCEDURE GetSymTab(module: Rep.Module): Sym.Module
+RAISES IO.Error;
   BEGIN
-    symTab := module.ReadSymbolFile(res);
-    IF (res # NIL) THEN
-      res.GetText(msg);
-      Err.String("Error: ");
-      Err.String(msg);
-      Err.Ln;
-      HALT(1);
-    END;
-    RETURN symTab;
+    RETURN module.ReadSymbolFile();
   END GetSymTab;
 
 PROCEDURE WriteSymTab(symTab: Sym.Module);
@@ -185,7 +175,8 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
       VAR
         item: Sym.Item;
       BEGIN
-        IF (record.baseType # NIL) THEN
+        IF extendRecords.value(Boolean.Value).boolean &
+           (record.baseType # NIL) THEN
           RecFields(record.baseType(Sym.Record));
         END;
         
@@ -260,6 +251,7 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
           END;
           Type(type.raises[i].type, type.raises[i].srcCodeType);
         END;
+        
       | type: Sym.Array DO
         IF type.isOpenArray THEN
           Out.String("ARRAY OF ");
@@ -282,12 +274,18 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
 
         RecFields(type);
 
-        FOR i := 0 TO type.tbProcCount-1 DO
+        i := 0;
+        IF ~extendRecords.value(Boolean.Value).boolean &
+           (type.baseType # NIL) THEN
+          i := type.baseType(Sym.Record).tbProcCount;
+        END;
+        WHILE (i # type.tbProcCount) DO
           procDecl := type.ns(Namespace.Extended).GetTBProcByIndex(i);
           Newline;
           ProcDecl(procDecl);
           Out.String(";");
           WriteDoc(procDecl);
+          INC(i);
         END;
         
         DEC(indent);
@@ -428,6 +426,7 @@ PROCEDURE WriteHelp;
     Out.String ("--config <file>           Use <file> as primary configuration file."); Out.Ln;
     Out.String ("--repository <directory>  Add repository."); Out.Ln;
     Out.String ("-r <directory>            Add repository."); Out.Ln;
+    Out.String ("--extended, -x            Include inherited members in records."); Out.Ln;
     Out.String ("--help, -h                Write this text and exit."); Out.Ln;
   END WriteHelp;
 
@@ -439,6 +438,10 @@ PROCEDURE NewConfig;
     help := Config.AddOption("help", Boolean.New(FALSE));
     Config.AddCmdLine("-h,--help",
                       "<options><set name='help'>TRUE</set></options>");
+
+    extendRecords := Config.AddOption("extendRecords", Boolean.New(FALSE));
+    Config.AddCmdLine("-x,--extended",
+                      "<options><set name='extendRecords'>TRUE</set></options>");
   END NewConfig;
 
 BEGIN

@@ -3,13 +3,13 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Files.oh>
+#include <IO.oh>
 #include <URI.oh>
-#include <URI/Error.oh>
 #include <URI/Scheme/Hierarchical.oh>
 #include <URI/Authority/ServerBased.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct URI_Scheme_File__URIDesc *URI_Scheme_File__URI;
 typedef struct URI_Scheme_File__URIDesc {
   URI_String__StringPtr schemeId;
@@ -32,9 +32,9 @@ typedef URI_Scheme_File__URI (*_TBP_URI_Scheme_File__URIDesc_Clone)(URI_Scheme_F
 extern void URI_Scheme_File__URIDesc_GetPath(URI_Scheme_File__URI file, OOC_CHAR8 filePath[], OOC_LEN filePath_0d);
 #define _TBN_URI_Scheme_File__URIDesc_GetPath 19
 typedef void (*_TBP_URI_Scheme_File__URIDesc_GetPath)(URI_Scheme_File__URI file, OOC_CHAR8 filePath[], OOC_LEN filePath_0d);
-extern Files__File URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, OOC_INT8 mode, Msg__Msg *res);
+extern IO__ByteChannel URI_Scheme_File__URIDesc_GetChannel(URI_Scheme_File__URI file, OOC_INT8 mode);
 #define _TBN_URI_Scheme_File__URIDesc_GetChannel 3
-typedef Files__File (*_TBP_URI_Scheme_File__URIDesc_GetChannel)(URI_Scheme_File__URI file, OOC_INT8 mode, Msg__Msg *res);
+typedef IO__ByteChannel (*_TBP_URI_Scheme_File__URIDesc_GetChannel)(URI_Scheme_File__URI file, OOC_INT8 mode);
 extern URI_Scheme_File__URI URI_Scheme_File__NewPrototype();
 extern URI_Scheme_File__URI URI_Scheme_File__GetCwd();
 extern URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], OOC_LEN filePath_0d);
@@ -44,11 +44,11 @@ extern void OOC_URI_Scheme_File_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_URI_Scheme_File__URI;
 extern RT0__StructDesc _td_URI_Scheme_File__URIDesc;
-extern RT0__StructDesc _td_URI_Scheme_File__2179;
-extern RT0__StructDesc _td_URI_Scheme_File__2777;
-extern RT0__StructDesc _td_URI_Scheme_File__3484;
-extern RT0__StructDesc _td_URI_Scheme_File__3981;
-extern RT0__StructDesc _td_URI_Scheme_File__4163;
+extern RT0__StructDesc _td_URI_Scheme_File__2194;
+extern RT0__StructDesc _td_URI_Scheme_File__2792;
+extern RT0__StructDesc _td_URI_Scheme_File__3759;
+extern RT0__StructDesc _td_URI_Scheme_File__4256;
+extern RT0__StructDesc _td_URI_Scheme_File__4438;
 #endif /* _MODULE_URI_Scheme_File_ */
 
 /* --- */

@@ -1,7 +1,7 @@
-(* 	$Id: InterfaceDescr.Mod,v 1.11 2002/12/30 06:34:06 mva Exp $	 *)
+(* 	$Id: InterfaceDescr.Mod,v 1.13 2003/02/02 17:58:38 mva Exp $	 *)
 MODULE OOC:SymbolTable:InterfaceDescr;
 (*  Writes a description of a module's interface as XML.
-    Copyright (C) 2000, 2001, 2002  Michael van Acken
+    Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,8 +21,7 @@ MODULE OOC:SymbolTable:InterfaceDescr;
 *)
 
 IMPORT
-  Channel, Strings, Object,
-  ADT:Dictionary, ADT:ArrayList,
+  Strings, Object, ADT:Dictionary, ADT:ArrayList, IO,
   URI, XML:Writer, XML:UnicodeCodec:Latin1,
   OOC:Repository,  OOC:Config:Repositories,
   Sym := OOC:SymbolTable, OOC:SymbolTable:GetClass, 
@@ -47,9 +46,10 @@ PROCEDURE GetSystemId (repositories: Repositories.Section): URI.URI;
     END
   END GetSystemId;
 
-PROCEDURE Write* (cw: Channel.Writer; baseURI: URI.HierarchicalURI;
+PROCEDURE Write* (cw: IO.ByteChannel; baseURI: URI.HierarchicalURI;
                   module: Sym.Module; repositories: Repositories.Section;
-                  extensionDict: Dictionary.Dictionary);
+                  extensionDict: Dictionary.Dictionary)
+RAISES IO.Error;
 (**Writes the exported parts of the symbol table with root @oparam{module} as
    XML to the output writer @oparam{cw}.  Includes descriptions for
    declarations, cross-references, information about class and base classes,

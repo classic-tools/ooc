@@ -3,13 +3,14 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <Config/Value.oh>
 #include <Config/Source.oh>
 #include <Config/Parser.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Config_Source_Environment__VariableTemplateDesc *Config_Source_Environment__VariableTemplate;
 typedef struct Config_Source_Environment__VariableTemplateDesc {
   Config_Source_Environment__VariableTemplate next;
@@ -38,9 +39,9 @@ typedef Config_Source_Environment__VariableTemplate (*_TBP_Config_Source_Environ
 extern Msg__Msg Config_Source_Environment__EnvironmentDesc_Parse(Config_Source_Environment__Environment env);
 #define _TBN_Config_Source_Environment__EnvironmentDesc_Parse 2
 typedef Msg__Msg (*_TBP_Config_Source_Environment__EnvironmentDesc_Parse)(Config_Source_Environment__Environment env);
-extern void Config_Source_Environment__EnvironmentDesc_Write(Config_Source_Environment__Environment env, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+extern void Config_Source_Environment__EnvironmentDesc_Write(Config_Source_Environment__Environment env, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 #define _TBN_Config_Source_Environment__EnvironmentDesc_Write 0
-typedef void (*_TBP_Config_Source_Environment__EnvironmentDesc_Write)(Config_Source_Environment__Environment env, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+typedef void (*_TBP_Config_Source_Environment__EnvironmentDesc_Write)(Config_Source_Environment__Environment env, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 extern void OOC_Config_Source_Environment_init();
 extern void OOC_Config_Source_Environment_init0();
 
@@ -51,10 +52,10 @@ extern RT0__StructDesc _td_Config_Source_Environment__Command;
 extern RT0__StructDesc _td_Config_Source_Environment__CommandDesc;
 extern RT0__StructDesc _td_Config_Source_Environment__Environment;
 extern RT0__StructDesc _td_Config_Source_Environment__EnvironmentDesc;
-extern RT0__StructDesc _td_Config_Source_Environment__2060;
-extern RT0__StructDesc _td_Config_Source_Environment__2855;
-extern RT0__StructDesc _td_Config_Source_Environment__3738;
-extern RT0__StructDesc _td_Config_Source_Environment__3818;
+extern RT0__StructDesc _td_Config_Source_Environment__2068;
+extern RT0__StructDesc _td_Config_Source_Environment__2863;
+extern RT0__StructDesc _td_Config_Source_Environment__3687;
+extern RT0__StructDesc _td_Config_Source_Environment__3764;
 #endif /* _MODULE_Config_Source_Environment_ */
 
 /* --- */

@@ -6,6 +6,7 @@
 #include <URI.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern void OOC_OOC_Config_Assembler_init();
 extern void OOC_OOC_Config_Assembler_init0();

@@ -5,12 +5,12 @@
 #include <RT0.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern void OOC_oo2c_init();
 extern void OOC_oo2c_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_oo2c__4205;
-extern RT0__StructDesc _td_oo2c__4297;
+extern RT0__StructDesc _td_oo2c__5148;
 #endif /* _MODULE_oo2c_ */
 
 /* --- */

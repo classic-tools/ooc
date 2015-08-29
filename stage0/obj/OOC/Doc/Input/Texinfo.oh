@@ -8,6 +8,7 @@
 #include <OOC/Doc.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Doc_Input_Texinfo__ErrorContextDesc *OOC_Doc_Input_Texinfo__ErrorContext;
 typedef struct OOC_Doc_Input_Texinfo__ErrorContextDesc {
   Msg__StringPtr id;

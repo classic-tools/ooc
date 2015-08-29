@@ -12,6 +12,7 @@
 #include <Msg.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Msg__Msg Files__Result;
 #define Files__noLength -1
 #define Files__noPosition -2

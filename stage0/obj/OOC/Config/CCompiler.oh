@@ -7,6 +7,7 @@
 #include <Config/Section/Options.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern Config_Section_Options__Option OOC_Config_CCompiler__libs;
 extern Config_Section_Options__Option OOC_Config_CCompiler__libdir;
 extern Config_Section_Options__Option OOC_Config_CCompiler__install;

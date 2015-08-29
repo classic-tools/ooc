@@ -1,7 +1,7 @@
-(*      $Id: Writer.Mod,v 1.4 2002/12/20 03:18:00 mva Exp $   *)
+(*      $Id: Writer.Mod,v 1.6 2003/02/02 17:58:39 mva Exp $   *)
 MODULE XML:Writer [OOC_EXTENSIONS];
 (*  Support for generating XML documents.
-    Copyright (C) 2000-2002  Michael van Acken
+    Copyright (C) 2000-2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -35,7 +35,7 @@ MODULE XML:Writer [OOC_EXTENSIONS];
    @end itemize  *)
 
 IMPORT
-  Ascii, Channel, Strings, LongStrings, IntStr, RealStr, Object, URI,
+  Ascii, Strings, LongStrings, IntStr, RealStr, Object, IO, URI,
   Codec := XML:UnicodeCodec, XML:UnicodeBuffer;
 
 
@@ -70,7 +70,7 @@ TYPE
 
 
 PROCEDURE Init* (w: Writer; 
-                 writer: Channel.Writer; codecFactory: Codec.Factory;
+                 writer: IO.ByteChannel; codecFactory: Codec.Factory;
                  writeBOM: BOOLEAN; indentLevel: LONGINT);
   BEGIN
     UnicodeBuffer.InitOutput (w, TRUE, writer, codecFactory, writeBOM);
@@ -89,7 +89,7 @@ PROCEDURE Init* (w: Writer;
     w. openEmptyTag := FALSE;
   END Init;
 
-PROCEDURE New* (writer: Channel.Writer; codecFactory: Codec.Factory;
+PROCEDURE New* (writer: IO.ByteChannel; codecFactory: Codec.Factory;
                 writeBOM: BOOLEAN; indentLevel: LONGINT): Writer;
   VAR
     w: Writer;
@@ -428,7 +428,11 @@ PROCEDURE (w: Writer) AttrURI* (name[NO_COPY]: ARRAY OF Char; uri: URI.URI;
 PROCEDURE (w: Writer) EndTag*;
   BEGIN
     IF (w. lenElementStack <= 0) THEN
-      w. Flush; ASSERT (FALSE)
+      TRY
+        w. Flush;
+      CATCH IO.Error:
+      END;
+      ASSERT (FALSE)
     END;
     
     IF w. doIndent THEN
@@ -463,7 +467,7 @@ PROCEDURE (w: Writer) EndTag*;
     END
   END EndTag;
 
-PROCEDURE (w: Writer) EndOfText*;
+PROCEDURE (w: Writer) EndOfText*() RAISES IO.Error;
 (**Adds final newline to text and flushes all buffers.  *)
   BEGIN
     IF w. openStartTag THEN w. CloseStartTag END;

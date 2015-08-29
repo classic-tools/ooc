@@ -1,7 +1,7 @@
-(* 	$Id: TranslateToC.Mod,v 1.13 2002/12/29 14:49:30 mva Exp $	 *)
+(* 	$Id: TranslateToC.Mod,v 1.16 2003/02/05 21:31:55 mva Exp $	 *)
 MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Channel, StdChannels, ADT:Dictionary, 
+  IO, IO:StdChannels, ADT:Dictionary, 
   OOC:Config, OOC:Config:Pragmas, OOC:Auxiliary:ParseModule,
   OOC:Auxiliary:WriteSymbolFile, OOC:Error, OOC:Repository, OOC:AST,
   OOC:AST:ExtTree, OOC:AST:ExtTree:CreateIR, ASTtoXML := OOC:AST:ExtTree:XML, 
@@ -215,7 +215,8 @@ PROCEDURE WriteCodeFile (w, wd: DeclWriter.Writer; m: Repository.Module;
 
 PROCEDURE Run*(m: Repository.Module; libraryName: STRING;
                writeAST: BOOLEAN; writeIR: BOOLEAN;
-               translator: Translator): Error.List;
+               translator: Translator): Error.List
+RAISES IO.Error;
 (**Compiles a module, creating the symbol file and all relevant C files.  *)
   VAR
     ast: AST.Node;
@@ -226,42 +227,35 @@ PROCEDURE Run*(m: Repository.Module; libraryName: STRING;
     pragmaHistory: Pragmas.History;
     wh, wd, wc: DeclWriter.Writer;
 
-  PROCEDURE WriteFile (fileId: Repository.FileId): DeclWriter.Writer;
+  PROCEDURE WriteFile (fileId: Repository.FileId): DeclWriter.Writer
+  RAISES IO.Error;
     VAR
-      res: Error.Msg;
       w: DeclWriter.Writer;
-      ch: Channel.Channel;
+      ch: IO.ByteChannel;
     BEGIN
-      ch := m. GetOutputChannel (fileId, TRUE, res);
-      IF (res = Channel.done) THEN
-        w := DeclWriter.NewWriter (ch, m. GetURI (fileId, FALSE));
-        CASE fileId OF
-        | Repository.modHeaderFileC:
-          WriteHeaderFile (w, m, symTab, exports);
-        | Repository.modDeclFileC:
-          WriteDeclFile (w, m, symTab, exports);
-        | Repository.modCodeFileC:
-          WriteCodeFile (w, wd, m, module, translator);
-        END;
-        RETURN w
-      ELSE
-        errList. Append (res);
-        RETURN NIL
+      ch := m. GetOutputChannel (fileId, TRUE);
+      w := DeclWriter.NewWriter (ch, m. GetURI (fileId, FALSE));
+      CASE fileId OF
+      | Repository.modHeaderFileC:
+        WriteHeaderFile (w, m, symTab, exports);
+      | Repository.modDeclFileC:
+        WriteDeclFile (w, m, symTab, exports);
+      | Repository.modCodeFileC:
+        WriteCodeFile (w, wd, m, module, translator);
       END;
+      RETURN w
     END WriteFile;
 
-  PROCEDURE CloseFile (w: DeclWriter.Writer);
-    VAR
-      res: Error.Msg;
+  PROCEDURE CloseFile (w: DeclWriter.Writer) RAISES IO.Error;
     BEGIN
       IF (w # NIL) THEN
         w. WriteLn;
         w. WriteString ("/* --- */");
         w. WriteLn;
-        w. Close (res);
-        IF (res # NIL) THEN
-          errList. Append (res)
-        END
+        IF (w.textWriter.error # NIL) THEN
+          RAISE(w.textWriter.error);
+        END;
+        w. Close ();
       END;
     END CloseFile;
   
@@ -274,14 +268,14 @@ PROCEDURE Run*(m: Repository.Module; libraryName: STRING;
     
     IF errList.NoErrors() THEN
       IF writeAST THEN
-        ASTtoXML.Write (StdChannels.stdout.NewWriter(), ast(ExtTree.Module));
+        ASTtoXML.Write (StdChannels.stdout, ast(ExtTree.Module));
       END;
       module := CreateIR.CreateIR (ast(ExtTree.Module), symTab, 
                                    IR.NewBuilder (symTab, pragmaHistory,
                                                   errList, 
                                                   ConstFold.NewConstFold()));
       IF writeIR THEN
-        IRtoXML.Write (StdChannels.stdout. NewWriter(), module);
+        IRtoXML.Write (StdChannels.stdout, module);
       END;
       
       exports := Exports.GetExports (symTab, TRUE);

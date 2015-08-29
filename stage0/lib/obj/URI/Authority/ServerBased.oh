@@ -9,6 +9,7 @@
 #include <URI/Error.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT32 URI_Authority_ServerBased__Port;
 typedef struct URI_Authority_ServerBased__AuthorityDesc *URI_Authority_ServerBased__Authority;
 typedef struct URI_Authority_ServerBased__AuthorityDesc {

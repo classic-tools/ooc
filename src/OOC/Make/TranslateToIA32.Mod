@@ -1,7 +1,7 @@
-(* 	$Id: TranslateToIA32.Mod,v 1.7 2002/12/28 10:23:49 mva Exp $	 *)
+(* 	$Id: TranslateToIA32.Mod,v 1.10 2003/02/05 21:31:55 mva Exp $	 *)
 MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:Make:TranslateToIA32 [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Ascii, Channel, Msg, StdChannels, ADT:Dictionary, 
+  Ascii, IO, IO:StdChannels, ADT:Dictionary, 
   OOC:Config:Pragmas, OOC:Auxiliary:ParseModule,
   OOC:Auxiliary:WriteSymbolFile, OOC:Error, Rep := OOC:Repository, OOC:AST,
   OOC:AST:ExtTree, OOC:AST:ExtTree:CreateIR, ASTtoXML := OOC:AST:ExtTree:XML, 
@@ -137,7 +137,8 @@ PROCEDURE WriteCodeFile (w: Writer.Writer; m: Rep.Module; symTab: Sym.Module;
 
 PROCEDURE Run*(m: Rep.Module; libraryName: STRING;
                writeAST, writeIR: BOOLEAN;
-               translator: Translator): Error.List;
+               translator: Translator): Error.List
+RAISES IO.Error;
 (**Compiles a module, creating the symbol file and the assembler file.  *)
   VAR
     ast: AST.Node;
@@ -147,18 +148,12 @@ PROCEDURE Run*(m: Rep.Module; libraryName: STRING;
     moduleIR: IR.Module;
     pragmaHistory: Pragmas.History;
     w: Writer.Writer;
-    res: Msg.Msg;
 
-  PROCEDURE CloseFile (w: Writer.Writer);
-    VAR
-      res: Error.Msg;
+  PROCEDURE CloseFile (w: Writer.Writer) RAISES IO.Error;
     BEGIN
       IF (w # NIL) THEN
         w. Newline;
-        w. Close (res);
-        IF (res # NIL) THEN
-          errList. Append (res)
-        END
+        w. Close ();
       END;
     END CloseFile;
   
@@ -171,14 +166,14 @@ PROCEDURE Run*(m: Rep.Module; libraryName: STRING;
     
     IF errList.NoErrors() THEN
       IF writeAST THEN
-        ASTtoXML.Write (StdChannels.stdout.NewWriter(), ast(ExtTree.Module));
+        ASTtoXML.Write (StdChannels.stdout, ast(ExtTree.Module));
       END;
       moduleIR := CreateIR.CreateIR (ast(ExtTree.Module), symTab, 
                                      IR.NewBuilder (symTab, pragmaHistory,
                                                     errList,
                                                     ConstFold.NewConstFold()));
       IF writeIR THEN
-        IRtoXML.Write (StdChannels.stdout. NewWriter(), moduleIR);
+        IRtoXML.Write (StdChannels.stdout, moduleIR);
       END;
       
       exports := Exports.GetExports (symTab, TRUE);
@@ -187,12 +182,8 @@ PROCEDURE Run*(m: Rep.Module; libraryName: STRING;
         (* only attempt to produce output if program compiled without errors *)
 
         w := Writer.NewWriter
-            (m. GetOutputChannel (Rep.modAssemblerFile, TRUE, res));
-        IF (res = Channel.done) THEN
-          WriteCodeFile (w, m, symTab, moduleIR, translator);
-        ELSE
-          errList. Append (res);
-        END;
+            (m. GetOutputChannel (Rep.modAssemblerFile, TRUE));
+        WriteCodeFile (w, m, symTab, moduleIR, translator);
         WriteSymbolFile.WriteSymbolFile (m, symTab, errList);
 
         (* close all output file after adding a tidbit of text to it;

@@ -5,11 +5,13 @@
 #include <RT0.oh>
 #include <Msg.oh>
 #include <Channel.oh>
+#include <IO.oh>
 #include <Config/Value.oh>
 #include <Config/Source.oh>
 #include <Config/Parser.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Config_Source_CmdLine__OptionTemplateDesc *Config_Source_CmdLine__OptionTemplate;
 typedef Config_Value__StringPtr *Config_Source_CmdLine__NameArray;
 typedef struct Config_Source_CmdLine__OptionTemplateDesc {
@@ -62,32 +64,32 @@ typedef void (*_TBP_Config_Source_CmdLine__CmdLineDesc_OptionsStartWithDash)(Con
 extern Msg__Msg Config_Source_CmdLine__CmdLineDesc_Parse(Config_Source_CmdLine__CmdLine cmdLine, Channel__Channel ch);
 #define _TBN_Config_Source_CmdLine__CmdLineDesc_Parse 5
 typedef Msg__Msg (*_TBP_Config_Source_CmdLine__CmdLineDesc_Parse)(Config_Source_CmdLine__CmdLine cmdLine, Channel__Channel ch);
-extern void Config_Source_CmdLine__CmdLineDesc_Write(Config_Source_CmdLine__CmdLine cmdLine, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+extern void Config_Source_CmdLine__CmdLineDesc_Write(Config_Source_CmdLine__CmdLine cmdLine, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 #define _TBN_Config_Source_CmdLine__CmdLineDesc_Write 0
-typedef void (*_TBP_Config_Source_CmdLine__CmdLineDesc_Write)(Config_Source_CmdLine__CmdLine cmdLine, Channel__Channel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d, Msg__Msg *res);
+typedef void (*_TBP_Config_Source_CmdLine__CmdLineDesc_Write)(Config_Source_CmdLine__CmdLine cmdLine, IO__ByteChannel ch, const Config_Parser__String rootTag__ref, OOC_LEN rootTag_0d);
 extern void OOC_Config_Source_CmdLine_init();
 extern void OOC_Config_Source_CmdLine_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Config_Source_CmdLine__OptionTemplate;
-extern RT0__StructDesc _td_Config_Source_CmdLine__1152;
+extern RT0__StructDesc _td_Config_Source_CmdLine__1184;
 extern RT0__StructDesc _td_Config_Source_CmdLine__NameArray;
 extern RT0__StructDesc _td_Config_Source_CmdLine__OptionTemplateDesc;
 extern RT0__StructDesc _td_Config_Source_CmdLine__Command;
-extern RT0__StructDesc _td_Config_Source_CmdLine__1382;
+extern RT0__StructDesc _td_Config_Source_CmdLine__1414;
 extern RT0__StructDesc _td_Config_Source_CmdLine__ArgList;
 extern RT0__StructDesc _td_Config_Source_CmdLine__CommandDesc;
 extern RT0__StructDesc _td_Config_Source_CmdLine__CmdLine;
 extern RT0__StructDesc _td_Config_Source_CmdLine__CmdLineDesc;
 extern RT0__StructDesc _td_Config_Source_CmdLine__ErrorContext;
 extern RT0__StructDesc _td_Config_Source_CmdLine__ErrorContextDesc;
-extern RT0__StructDesc _td_Config_Source_CmdLine__4172;
-extern RT0__StructDesc _td_Config_Source_CmdLine__6587;
-extern RT0__StructDesc _td_Config_Source_CmdLine__13337;
-extern RT0__StructDesc _td_Config_Source_CmdLine__13496;
-extern RT0__StructDesc _td_Config_Source_CmdLine__13545;
-extern RT0__StructDesc _td_Config_Source_CmdLine__19662;
-extern RT0__StructDesc _td_Config_Source_CmdLine__19742;
+extern RT0__StructDesc _td_Config_Source_CmdLine__4204;
+extern RT0__StructDesc _td_Config_Source_CmdLine__6619;
+extern RT0__StructDesc _td_Config_Source_CmdLine__13369;
+extern RT0__StructDesc _td_Config_Source_CmdLine__13528;
+extern RT0__StructDesc _td_Config_Source_CmdLine__13577;
+extern RT0__StructDesc _td_Config_Source_CmdLine__19647;
+extern RT0__StructDesc _td_Config_Source_CmdLine__19724;
 #endif /* _MODULE_Config_Source_CmdLine_ */
 
 /* --- */

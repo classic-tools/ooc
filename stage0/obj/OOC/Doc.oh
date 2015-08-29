@@ -5,10 +5,12 @@
 #include <RT0.oh>
 #include <ADT/Storable.oh>
 #include <ADT/ArrayList.oh>
+#include <IO.oh>
 #include <OOC/Doc/Decoration.oh>
 #include <OOC/Scanner/InputBuffer.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Doc__Position {
   OOC_INT32 _char;
   OOC_INT32 line;
@@ -556,25 +558,25 @@ extern RT0__StructDesc _td_OOC_Doc__TableRow;
 extern RT0__StructDesc _td_OOC_Doc__TableRowDesc;
 extern RT0__StructDesc _td_OOC_Doc__Table;
 extern RT0__StructDesc _td_OOC_Doc__TableDesc;
-extern RT0__StructDesc _td_OOC_Doc__6920;
-extern RT0__StructDesc _td_OOC_Doc__12546;
-extern RT0__StructDesc _td_OOC_Doc__13288;
-extern RT0__StructDesc _td_OOC_Doc__13497;
-extern RT0__StructDesc _td_OOC_Doc__13694;
-extern RT0__StructDesc _td_OOC_Doc__16626;
-extern RT0__StructDesc _td_OOC_Doc__19960;
-extern RT0__StructDesc _td_OOC_Doc__21185;
-extern RT0__StructDesc _td_OOC_Doc__22652;
-extern RT0__StructDesc _td_OOC_Doc__23736;
-extern RT0__StructDesc _td_OOC_Doc__24671;
-extern RT0__StructDesc _td_OOC_Doc__25659;
-extern RT0__StructDesc _td_OOC_Doc__26632;
-extern RT0__StructDesc _td_OOC_Doc__27838;
-extern RT0__StructDesc _td_OOC_Doc__29523;
-extern RT0__StructDesc _td_OOC_Doc__30893;
-extern RT0__StructDesc _td_OOC_Doc__32108;
-extern RT0__StructDesc _td_OOC_Doc__33313;
-extern RT0__StructDesc _td_OOC_Doc__34184;
+extern RT0__StructDesc _td_OOC_Doc__6930;
+extern RT0__StructDesc _td_OOC_Doc__12652;
+extern RT0__StructDesc _td_OOC_Doc__13426;
+extern RT0__StructDesc _td_OOC_Doc__13635;
+extern RT0__StructDesc _td_OOC_Doc__13832;
+extern RT0__StructDesc _td_OOC_Doc__16796;
+extern RT0__StructDesc _td_OOC_Doc__20194;
+extern RT0__StructDesc _td_OOC_Doc__21451;
+extern RT0__StructDesc _td_OOC_Doc__22950;
+extern RT0__StructDesc _td_OOC_Doc__24066;
+extern RT0__StructDesc _td_OOC_Doc__25033;
+extern RT0__StructDesc _td_OOC_Doc__26053;
+extern RT0__StructDesc _td_OOC_Doc__27058;
+extern RT0__StructDesc _td_OOC_Doc__28296;
+extern RT0__StructDesc _td_OOC_Doc__30013;
+extern RT0__StructDesc _td_OOC_Doc__31415;
+extern RT0__StructDesc _td_OOC_Doc__32662;
+extern RT0__StructDesc _td_OOC_Doc__33899;
+extern RT0__StructDesc _td_OOC_Doc__34802;
 #endif /* _MODULE_OOC_Doc_ */
 
 /* --- */

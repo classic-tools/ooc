@@ -5,9 +5,11 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Object/Boxed.oh>
+#include <IO.oh>
 #include <ADT/Storable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT16 Object_BigInt__Digit;
 typedef struct Object_BigInt__BigIntDesc *Object_BigInt__BigInt;
 typedef OOC_INT16 *Object_BigInt__DigitArray;
@@ -95,16 +97,16 @@ extern void OOC_Object_BigInt_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_Object_BigInt__BigInt;
-extern RT0__StructDesc _td_Object_BigInt__1476;
+extern RT0__StructDesc _td_Object_BigInt__1485;
 extern RT0__StructDesc _td_Object_BigInt__DigitArray;
 extern RT0__StructDesc _td_Object_BigInt__BigIntDesc;
-extern RT0__StructDesc _td_Object_BigInt__2147;
-extern RT0__StructDesc _td_Object_BigInt__11310;
-extern RT0__StructDesc _td_Object_BigInt__11361;
-extern RT0__StructDesc _td_Object_BigInt__16879;
-extern RT0__StructDesc _td_Object_BigInt__16868;
-extern RT0__StructDesc _td_Object_BigInt__19751;
-extern RT0__StructDesc _td_Object_BigInt__20902;
+extern RT0__StructDesc _td_Object_BigInt__2156;
+extern RT0__StructDesc _td_Object_BigInt__11319;
+extern RT0__StructDesc _td_Object_BigInt__11370;
+extern RT0__StructDesc _td_Object_BigInt__16888;
+extern RT0__StructDesc _td_Object_BigInt__16877;
+extern RT0__StructDesc _td_Object_BigInt__19760;
+extern RT0__StructDesc _td_Object_BigInt__20911;
 #endif /* _MODULE_Object_BigInt_ */
 
 /* --- */

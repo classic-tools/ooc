@@ -4,9 +4,11 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Object.oh>
+#include <IO.oh>
 #include <ADT/Storable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT32 ADT_Dictionary_IntValue__Hash;
 typedef OOC_INT32 ADT_Dictionary_IntValue__Index;
 typedef Object__Object ADT_Dictionary_IntValue__Key;
@@ -65,13 +67,13 @@ extern void OOC_ADT_Dictionary_IntValue_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Entry;
-extern RT0__StructDesc _td_ADT_Dictionary_IntValue__2513;
+extern RT0__StructDesc _td_ADT_Dictionary_IntValue__2523;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Table;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Dictionary;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__DictionaryDesc;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__Dummy;
 extern RT0__StructDesc _td_ADT_Dictionary_IntValue__DummyDesc;
-extern RT0__StructDesc _td_ADT_Dictionary_IntValue__3813;
+extern RT0__StructDesc _td_ADT_Dictionary_IntValue__3823;
 #endif /* _MODULE_ADT_Dictionary_IntValue_ */
 
 /* --- */

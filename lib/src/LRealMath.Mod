@@ -1,7 +1,7 @@
-(* 	$Id: LRealMath.Mod,v 1.3 2002/11/29 23:17:19 mva Exp $	 *)
+(* 	$Id: LRealMath.Mod,v 1.4 2003/01/08 11:44:57 mva Exp $	 *)
 MODULE LRealMath [INTERFACE "C"; LINK LIB "m" END];
 (*  Math functions for LONGREAL.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002,2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -52,7 +52,7 @@ PROCEDURE ["pow"] power*(base, exponent: LONGREAL): LONGREAL;
 (**Returns the value of the number base raised to the power exponent 
      for base > 0.  *)
 
-PROCEDURE ["lrint"] round*(x: LONGREAL): LONGINT;
+PROCEDURE ["ooc_round_real64"] round*(x: LONGREAL): LONGINT;
 (**Returns the value of x rounded to the nearest integer.  *)
 
 PROCEDURE sincos* (x: LONGREAL; VAR sin, cos: LONGREAL);

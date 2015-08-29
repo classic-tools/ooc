@@ -3,12 +3,14 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
+#include <IO.oh>
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
 #include <OOC/IR.oh>
 #include <OOC/C/DeclWriter.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Make_TranslateToC__TranslatorDesc *OOC_Make_TranslateToC__Translator;
 typedef struct OOC_Make_TranslateToC__TranslatorDesc {
   OOC_C_DeclWriter__Writer w;
@@ -42,9 +44,9 @@ extern void OOC_OOC_Make_TranslateToC_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4364;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4441;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4490;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4368;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4445;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4494;
 #endif /* _MODULE_OOC_Make_TranslateToC_ */
 
 /* --- */

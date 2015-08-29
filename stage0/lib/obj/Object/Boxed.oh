@@ -4,9 +4,11 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Object.oh>
+#include <IO.oh>
 #include <ADT/Storable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Object_Boxed__ObjectDesc *Object_Boxed__Object;
 typedef struct Object_Boxed__ObjectDesc {
   char __dummy;
@@ -144,7 +146,7 @@ extern void OOC_Object_Boxed_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_Object_Boxed__Object;
 extern RT0__StructDesc _td_Object_Boxed__ObjectDesc;
-extern RT0__StructDesc _td_Object_Boxed__1706;
+extern RT0__StructDesc _td_Object_Boxed__1716;
 extern RT0__StructDesc _td_Object_Boxed__Boolean;
 extern RT0__StructDesc _td_Object_Boxed__BooleanDesc;
 extern RT0__StructDesc _td_Object_Boxed__LongReal;
@@ -153,16 +155,16 @@ extern RT0__StructDesc _td_Object_Boxed__Set;
 extern RT0__StructDesc _td_Object_Boxed__SetDesc;
 extern RT0__StructDesc _td_Object_Boxed__String;
 extern RT0__StructDesc _td_Object_Boxed__StringDesc;
-extern RT0__StructDesc _td_Object_Boxed__2816;
-extern RT0__StructDesc _td_Object_Boxed__4167;
-extern RT0__StructDesc _td_Object_Boxed__4461;
-extern RT0__StructDesc _td_Object_Boxed__5903;
-extern RT0__StructDesc _td_Object_Boxed__6233;
-extern RT0__StructDesc _td_Object_Boxed__7984;
-extern RT0__StructDesc _td_Object_Boxed__8059;
-extern RT0__StructDesc _td_Object_Boxed__8831;
-extern RT0__StructDesc _td_Object_Boxed__9888;
-extern RT0__StructDesc _td_Object_Boxed__10434;
+extern RT0__StructDesc _td_Object_Boxed__2826;
+extern RT0__StructDesc _td_Object_Boxed__4209;
+extern RT0__StructDesc _td_Object_Boxed__4503;
+extern RT0__StructDesc _td_Object_Boxed__5977;
+extern RT0__StructDesc _td_Object_Boxed__6307;
+extern RT0__StructDesc _td_Object_Boxed__8058;
+extern RT0__StructDesc _td_Object_Boxed__8133;
+extern RT0__StructDesc _td_Object_Boxed__8905;
+extern RT0__StructDesc _td_Object_Boxed__9994;
+extern RT0__StructDesc _td_Object_Boxed__10572;
 #endif /* _MODULE_Object_Boxed_ */
 
 /* --- */

@@ -8,6 +8,7 @@
 #include <XML/DTD.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct XML_EntityResolver__ResolverDesc *XML_EntityResolver__Resolver;
 typedef struct XML_EntityResolver__ResolverDesc {
   char __dummy;

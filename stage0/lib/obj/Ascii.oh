@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define Ascii__nul "\000"
 #define Ascii__soh "\001"
 #define Ascii__stx "\002"

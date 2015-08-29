@@ -1,7 +1,7 @@
-(*      $Id: Canonical.Mod,v 1.1 2002/07/17 17:36:33 mva Exp $   *)
+(*      $Id: Canonical.Mod,v 1.3 2003/02/02 17:58:39 mva Exp $   *)
 MODULE XML:Builder:Canonical [OOC_EXTENSIONS];
 (*  Translates XML document to canonical XML.
-    Copyright (C) 2000, 2001  Michael van Acken
+    Copyright (C) 2000, 2001, 2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -20,7 +20,7 @@ MODULE XML:Builder:Canonical [OOC_EXTENSIONS];
 
 
 IMPORT
-  LongStrings, Channel, URI, Ascii,
+  LongStrings, IO, URI, Ascii,
   Codec := XML:UnicodeCodec, XML:DTD, B := XML:Builder, XML:UnicodeBuffer;
 
 CONST
@@ -160,9 +160,12 @@ PROCEDURE WriteDTD (b: Builder; root: DTD.String);
 PROCEDURE (b: Builder) StartDocument* (documentEntity: DTD.ExternalEntity);
   END StartDocument;
 
-PROCEDURE (b: Builder) EndDocument*;
+PROCEDURE (b: Builder) EndDocument*();
   BEGIN
-    b. out. Flush
+    TRY
+      b. out. Flush;
+    CATCH IO.Error:
+    END;
   END EndDocument;
 
 PROCEDURE (b: Builder) StartElement* (namespaceDecl: DTD.NamespaceDeclaration;
@@ -272,7 +275,7 @@ PROCEDURE (b: Builder) Characters* (VAR chars: DTD.StringVar;
   END Characters;
 
 
-PROCEDURE New* (outputChannel: Channel.Channel;
+PROCEDURE New* (outputChannel: IO.ByteChannel;
                 codecFactory: Codec.Factory;
                 format: SHORTINT): Builder;
 (**Creates a new writer.  The output is directory to @oparam{outputChannel},
@@ -283,7 +286,7 @@ PROCEDURE New* (outputChannel: Channel.Channel;
   BEGIN
     NEW (b);
     B.Init (b);
-    b. out := UnicodeBuffer.NewOutput (outputChannel. NewWriter(),
+    b. out := UnicodeBuffer.NewOutput (outputChannel,
                                        codecFactory, TRUE);
     b. format := format;
     

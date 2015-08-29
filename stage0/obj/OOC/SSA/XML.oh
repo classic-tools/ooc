@@ -3,7 +3,7 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <ADT/Dictionary/IntValue.oh>
 #include <ADT/StringBuffer.oh>
 #include <XML/Writer.oh>
@@ -11,11 +11,13 @@
 #include <OOC/SSA/Schedule.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_SSA_XML__WriterDesc *OOC_SSA_XML__Writer;
 typedef struct OOC_SSA_XML__WriterDesc {
   XML_UnicodeCodec__Factory codecFactory;
   XML_UnicodeCodec__Codec codec;
-  Channel__Writer writer;
+  IO__ByteChannel writer;
+  IO__Error error;
   OOC_CHAR8 *byteBuffer;
   OOC_INT32 byteStart;
   OOC_INT32 byteEnd;
@@ -24,24 +26,24 @@ typedef struct OOC_SSA_XML__WriterDesc {
   OOC_INT32 indentLevel;
   OOC_INT32 indent;
   OOC_CHAR8 newLine[3];
-  OOC_CHAR8 __pad43;
+  OOC_CHAR8 __pad47;
   OOC_INT32 lenNewLine;
   OOC_CHAR8 emptyElementHTML;
-  OOC_CHAR8 __pad49;
-  OOC_CHAR8 __pad50;
-  OOC_CHAR8 __pad51;
+  OOC_CHAR8 __pad53;
+  OOC_CHAR8 __pad54;
+  OOC_CHAR8 __pad55;
   URI__HierarchicalURI baseURI;
   XML_Writer__Elements elementStack;
   OOC_INT32 lenElementStack;
   OOC_CHAR8 doIndent;
   OOC_CHAR8 openStartTag;
   OOC_CHAR8 openEmptyTag;
-  OOC_CHAR8 __pad67;
+  OOC_CHAR8 __pad71;
   ADT_StringBuffer__StringBuffer sb;
   ADT_Dictionary_IntValue__Dictionary idMap;
 } OOC_SSA_XML__WriterDesc;
-extern void OOC_SSA_XML__InitWriter(OOC_SSA_XML__Writer w, Channel__Writer cw);
-extern OOC_SSA_XML__Writer OOC_SSA_XML__NewWriter(Channel__Writer cw);
+extern void OOC_SSA_XML__InitWriter(OOC_SSA_XML__Writer w, IO__ByteChannel cw);
+extern OOC_SSA_XML__Writer OOC_SSA_XML__NewWriter(IO__ByteChannel cw);
 extern void OOC_SSA_XML__WriterDesc_WriteInstrAttr(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
 #define _TBN_OOC_SSA_XML__WriterDesc_WriteInstrAttr 33
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteInstrAttr)(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
@@ -63,22 +65,22 @@ typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteInstr)(OOC_SSA_XML__Writer w, O
 extern void OOC_SSA_XML__WriterDesc_WriteProcBody(OOC_SSA_XML__Writer w, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
 #define _TBN_OOC_SSA_XML__WriterDesc_WriteProcBody 35
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteProcBody)(OOC_SSA_XML__Writer w, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
-extern void OOC_SSA_XML__Write(Channel__Writer cw, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
+extern void OOC_SSA_XML__Write(IO__ByteChannel cw, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
 extern void OOC_SSA_XML__WriterDesc_WriteSchedule(OOC_SSA_XML__Writer w, OOC_SSA_Schedule__Block domRoot);
 #define _TBN_OOC_SSA_XML__WriterDesc_WriteSchedule 36
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteSchedule)(OOC_SSA_XML__Writer w, OOC_SSA_Schedule__Block domRoot);
-extern void OOC_SSA_XML__WriteSchedule(Channel__Writer cw, OOC_SSA_Schedule__Block domRoot);
+extern void OOC_SSA_XML__WriteSchedule(IO__ByteChannel cw, OOC_SSA_Schedule__Block domRoot);
 extern void OOC_OOC_SSA_XML_init();
 extern void OOC_OOC_SSA_XML_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SSA_XML__Writer;
 extern RT0__StructDesc _td_OOC_SSA_XML__WriterDesc;
-extern RT0__StructDesc _td_OOC_SSA_XML__2176;
-extern RT0__StructDesc _td_OOC_SSA_XML__2231;
-extern RT0__StructDesc _td_OOC_SSA_XML__4028;
-extern RT0__StructDesc _td_OOC_SSA_XML__4242;
-extern RT0__StructDesc _td_OOC_SSA_XML__4705;
+extern RT0__StructDesc _td_OOC_SSA_XML__2177;
+extern RT0__StructDesc _td_OOC_SSA_XML__2232;
+extern RT0__StructDesc _td_OOC_SSA_XML__4029;
+extern RT0__StructDesc _td_OOC_SSA_XML__4243;
+extern RT0__StructDesc _td_OOC_SSA_XML__4706;
 #endif /* _MODULE_OOC_SSA_XML_ */
 
 /* --- */

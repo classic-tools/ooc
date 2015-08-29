@@ -8,6 +8,7 @@
 #include <Object.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern TextRider__Writer Out__writer;
 extern OOC_CHAR8 Out__Done();
 extern void Out__ClearError();

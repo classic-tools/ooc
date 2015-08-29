@@ -1,8 +1,6 @@
 #include <OOC/Make/TranslateToIA32.oh>
 #include <Ascii.oh>
-#include <Channel.oh>
-#include <Msg.oh>
-#include <StdChannels.oh>
+#include <IO/StdChannels.oh>
 #include <ADT/Dictionary.oh>
 #include <OOC/Config/Pragmas.oh>
 #include <OOC/Auxiliary/ParseModule.oh>

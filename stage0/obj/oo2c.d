@@ -1,5 +1,4 @@
 #include <oo2c.oh>
-#include <Msg.oh>
 #include <StdChannels.oh>
 #include <Strings.oh>
 #include <Out.oh>
@@ -8,6 +7,7 @@
 #include <URI.oh>
 #include <URI/Scheme/File.oh>
 #include <ADT/StringBuffer.oh>
+#include <IO.oh>
 #include <OS/ProcessManagement.oh>
 #include <Config/Section/Arguments.oh>
 #include <Config/Section/Options.oh>
@@ -58,8 +58,7 @@ static void oo2c__WriteHelp();
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_oo2c__4205 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 256, 256, RT0__strArray };
-RT0__StructDesc _td_oo2c__4297 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_oo2c__5148 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"oo2c", (RT0__Struct[]) { NULL } };
 
 extern void OOC_oo2c_init0() {

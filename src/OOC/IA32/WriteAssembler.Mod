@@ -1,7 +1,7 @@
-(* 	$Id: WriteAssembler.Mod,v 1.15 2002/12/30 09:29:21 mva Exp $	 *)
+(* 	$Id: WriteAssembler.Mod,v 1.18 2003/02/05 21:31:55 mva Exp $	 *)
 MODULE OOC:IA32:WriteAssembler [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to IA32 assembler.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -29,7 +29,7 @@ MODULE OOC:IA32:WriteAssembler [OOC_EXTENSIONS];
    into the OOC build framework.  *)
 
 IMPORT
-  Ascii, IntStr, Log, Out, StdChannels, Strings, StringSearch, 
+  Ascii, IntStr, Log, Out, Strings, StringSearch, IO, IO:StdChannels,
   Object, Object:Boxed, Object:BigInt, 
   Rep := OOC:Repository, OOC:IR, Sym := OOC:SymbolTable,OOC:SymbolTable:Predef,
   OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Schedule, 
@@ -252,7 +252,10 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
         Out.String (":");
         Out.Ln;
         Out.Flush;
-        XML.Write (StdChannels.stdout. NewWriter(), pb, TRUE);
+        TRY
+          XML.Write (StdChannels.stdout, pb, TRUE);
+        CATCH IO.Error:
+        END;
         Out.Flush;
       END;
     END Write;
@@ -282,7 +285,10 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     IF writeProc THEN
       IF (t. inspectStage. MatchChars ("schedule", 0, -1) # NIL) THEN
         (* write schedule SSA code to stdout *)
-        XML.WriteSchedule (StdChannels.stdout. NewWriter(), domRoot);
+        TRY
+          XML.WriteSchedule (StdChannels.stdout, domRoot);
+        CATCH IO.Error:
+        END;
         Out.Flush
       END;
     END;

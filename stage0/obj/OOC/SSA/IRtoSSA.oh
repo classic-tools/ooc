@@ -7,6 +7,7 @@
 #include <OOC/SSA.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern OOC_SSA__Result OOC_SSA_IRtoSSA__StatmSeq(OOC_SSA__ProcBlock pb, OOC_SSA__Result s, OOC_IR__StatementSeq statmSeq);
 extern void OOC_SSA_IRtoSSA__DiscardGets(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_IRtoSSA_init();

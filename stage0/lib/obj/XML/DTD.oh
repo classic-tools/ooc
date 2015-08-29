@@ -8,6 +8,7 @@
 #include <XML/UnicodeBuffer.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR16 XML_DTD__Char;
 typedef XML_UnicodeBuffer__CharArray XML_DTD__String;
 typedef OOC_CHAR16 XML_DTD__StringVar[];

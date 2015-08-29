@@ -3,6 +3,7 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
+#include <IO.oh>
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
 #include <OOC/IR.oh>
@@ -10,6 +11,7 @@
 #include <OOC/IA32/Writer.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Make_TranslateToIA32__TranslatorDesc *OOC_Make_TranslateToIA32__Translator;
 typedef struct OOC_Make_TranslateToIA32__TranslatorDesc {
   OOC_IA32_Writer__Writer w;

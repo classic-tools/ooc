@@ -7,6 +7,7 @@
 #include <OOC/SSA.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_SSA_Schedule__BlockDesc *OOC_SSA_Schedule__Block;
 typedef struct OOC_SSA_Schedule__InstrProxyDesc *OOC_SSA_Schedule__InstrProxy;
 typedef struct OOC_SSA_Schedule__BranchBlockDesc *OOC_SSA_Schedule__BranchBlock;

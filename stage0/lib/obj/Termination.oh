@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef void (*Termination__Proc)();
 extern void Termination__RegisterProc(Termination__Proc proc);
 extern void Termination__UnregisterProc(Termination__Proc proc);

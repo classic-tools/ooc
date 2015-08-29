@@ -7,6 +7,7 @@
 #include <Object/Boxed.oh>
 #include <ADT/Storable.oh>
 #include <ADT/Dictionary.oh>
+#include <IO.oh>
 #include <URI.oh>
 #include <OOC/Scanner/InputBuffer.oh>
 #include <OOC/Scanner/Builder.oh>
@@ -14,6 +15,7 @@
 #include <OOC/AST.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_SymbolTable__NameString;
 typedef OOC_INT32 OOC_SymbolTable__ModulePos;
 typedef OOC_INT32 OOC_SymbolTable__ModuleLine;
@@ -774,7 +776,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__Item;
 extern RT0__StructDesc _td_OOC_SymbolTable__ItemDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Declaration;
 extern RT0__StructDesc _td_OOC_SymbolTable__DeclarationDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__8331;
+extern RT0__StructDesc _td_OOC_SymbolTable__8336;
 extern RT0__StructDesc _td_OOC_SymbolTable__DeclarationArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__Type;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDecl;
@@ -790,7 +792,7 @@ extern RT0__StructDesc _td_OOC_SymbolTable__LinkLibDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Module;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRef;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRefDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__14482;
+extern RT0__StructDesc _td_OOC_SymbolTable__14487;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleRefArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__ProcDecl;
 extern RT0__StructDesc _td_OOC_SymbolTable__ModuleDesc;
@@ -803,11 +805,11 @@ extern RT0__StructDesc _td_OOC_SymbolTable__TypeNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Pointer;
 extern RT0__StructDesc _td_OOC_SymbolTable__PointerDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionName;
-extern RT0__StructDesc _td_OOC_SymbolTable__20131;
+extern RT0__StructDesc _td_OOC_SymbolTable__20136;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__ExceptionNameDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDecl;
-extern RT0__StructDesc _td_OOC_SymbolTable__20749;
+extern RT0__StructDesc _td_OOC_SymbolTable__20754;
 extern RT0__StructDesc _td_OOC_SymbolTable__VarDeclArray;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalPars;
 extern RT0__StructDesc _td_OOC_SymbolTable__FormalParsDesc;
@@ -826,10 +828,10 @@ extern RT0__StructDesc _td_OOC_SymbolTable__FieldDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__TypeDeclDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable__Redirect;
 extern RT0__StructDesc _td_OOC_SymbolTable__RedirectDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable__34307;
-extern RT0__StructDesc _td_OOC_SymbolTable__34296;
-extern RT0__StructDesc _td_OOC_SymbolTable__47893;
-extern RT0__StructDesc _td_OOC_SymbolTable__48474;
+extern RT0__StructDesc _td_OOC_SymbolTable__34312;
+extern RT0__StructDesc _td_OOC_SymbolTable__34301;
+extern RT0__StructDesc _td_OOC_SymbolTable__48153;
+extern RT0__StructDesc _td_OOC_SymbolTable__48784;
 #endif /* _MODULE_OOC_SymbolTable_ */
 
 /* --- */

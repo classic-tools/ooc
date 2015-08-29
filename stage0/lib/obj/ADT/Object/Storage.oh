@@ -4,12 +4,12 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <RT0.oh>
-#include <Channel.oh>
+#include <IO.oh>
 #include <ADT/Storable.oh>
 #include <ADT/Dictionary/AddressKey/IntValue.oh>
 #include <RT0.oh>
 #include <Object.oh>
-#define ADT_Object_Storage__done  0
+#include <Exception.oh>
 typedef struct {
   RT0__Name module;
   RT0__Name type;
@@ -24,13 +24,11 @@ typedef struct {
 typedef OOC_CHAR8 ADT_Object_Storage__CharBuffer[256];
 typedef struct ADT_Object_Storage__ReaderDesc *ADT_Object_Storage__Reader;
 typedef struct ADT_Object_Storage__ReaderDesc {
-  Msg__Msg res;
   OOC_INT8 byteOrder;
-  OOC_CHAR8 __pad5;
-  OOC_CHAR8 __pad6;
-  OOC_CHAR8 __pad7;
-  Channel__Reader byteReader;
-  Channel__Channel base;
+  OOC_CHAR8 __pad1;
+  OOC_CHAR8 __pad2;
+  OOC_CHAR8 __pad3;
+  IO__ByteChannel channel;
   OOC_INT32 objCounter;
   ADT_Object_Storage__ObjectArray objTab;
   OOC_INT32 typeCounter;
@@ -39,55 +37,48 @@ typedef struct ADT_Object_Storage__ReaderDesc {
 } ADT_Object_Storage__ReaderDesc;
 typedef struct ADT_Object_Storage__WriterDesc *ADT_Object_Storage__Writer;
 typedef struct ADT_Object_Storage__WriterDesc {
-  Msg__Msg res;
   OOC_INT8 byteOrder;
-  OOC_CHAR8 __pad5;
-  OOC_CHAR8 __pad6;
-  OOC_CHAR8 __pad7;
-  Channel__Writer byteWriter;
-  Channel__Channel base;
+  OOC_CHAR8 __pad1;
+  OOC_CHAR8 __pad2;
+  OOC_CHAR8 __pad3;
+  IO__ByteChannel channel;
   OOC_INT32 objCounter;
   ADT_Object_Storage__TypeRefMap typeRefMap;
   OOC_INT32 typeRefSize;
   ADT_Dictionary_AddressKey_IntValue__Dictionary objHash;
   ADT_Object_Storage__CharBuffer charBuffer;
 } ADT_Object_Storage__WriterDesc;
-typedef struct ADT_Object_Storage__ErrorContextDesc {
-  Msg__StringPtr id;
-} ADT_Object_Storage__ErrorContextDesc;
-extern ADT_Object_Storage__Reader ADT_Object_Storage__ConnectReader(Channel__Channel ch);
-extern ADT_Object_Storage__Writer ADT_Object_Storage__ConnectWriter(Channel__Channel ch);
+extern ADT_Object_Storage__Reader ADT_Object_Storage__ConnectReader(IO__ByteChannel ch);
+extern ADT_Object_Storage__Writer ADT_Object_Storage__ConnectWriter(IO__ByteChannel ch);
 extern void ADT_Object_Storage__ReaderDesc_ReadObject(ADT_Object_Storage__Reader r, ADT_Storable__Object *obj);
-#define _TBN_ADT_Object_Storage__ReaderDesc_ReadObject 22
+#define _TBN_ADT_Object_Storage__ReaderDesc_ReadObject 18
 typedef void (*_TBP_ADT_Object_Storage__ReaderDesc_ReadObject)(ADT_Object_Storage__Reader r, ADT_Storable__Object *obj);
 extern void ADT_Object_Storage__ReaderDesc_Disconnect(ADT_Object_Storage__Reader r);
-#define _TBN_ADT_Object_Storage__ReaderDesc_Disconnect 21
+#define _TBN_ADT_Object_Storage__ReaderDesc_Disconnect 17
 typedef void (*_TBP_ADT_Object_Storage__ReaderDesc_Disconnect)(ADT_Object_Storage__Reader r);
 extern void ADT_Object_Storage__WriterDesc_WriteObject(ADT_Object_Storage__Writer w, ADT_Storable__Object obj);
-#define _TBN_ADT_Object_Storage__WriterDesc_WriteObject 20
+#define _TBN_ADT_Object_Storage__WriterDesc_WriteObject 18
 typedef void (*_TBP_ADT_Object_Storage__WriterDesc_WriteObject)(ADT_Object_Storage__Writer w, ADT_Storable__Object obj);
 extern void ADT_Object_Storage__WriterDesc_Disconnect(ADT_Object_Storage__Writer w);
-#define _TBN_ADT_Object_Storage__WriterDesc_Disconnect 19
+#define _TBN_ADT_Object_Storage__WriterDesc_Disconnect 17
 typedef void (*_TBP_ADT_Object_Storage__WriterDesc_Disconnect)(ADT_Object_Storage__Writer w);
 extern void OOC_ADT_Object_Storage_init();
 extern void OOC_ADT_Object_Storage_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_ADT_Object_Storage__2122;
-extern RT0__StructDesc _td_ADT_Object_Storage__2113;
+extern RT0__StructDesc _td_ADT_Object_Storage__2070;
+extern RT0__StructDesc _td_ADT_Object_Storage__2061;
 extern RT0__StructDesc _td_ADT_Object_Storage__TypeRefMap;
-extern RT0__StructDesc _td_ADT_Object_Storage__2223;
+extern RT0__StructDesc _td_ADT_Object_Storage__2171;
 extern RT0__StructDesc _td_ADT_Object_Storage__ObjectArray;
-extern RT0__StructDesc _td_ADT_Object_Storage__2283;
-extern RT0__StructDesc _td_ADT_Object_Storage__2274;
+extern RT0__StructDesc _td_ADT_Object_Storage__2231;
+extern RT0__StructDesc _td_ADT_Object_Storage__2222;
 extern RT0__StructDesc _td_ADT_Object_Storage__TypeArray;
 extern RT0__StructDesc _td_ADT_Object_Storage__CharBuffer;
 extern RT0__StructDesc _td_ADT_Object_Storage__Reader;
 extern RT0__StructDesc _td_ADT_Object_Storage__ReaderDesc;
 extern RT0__StructDesc _td_ADT_Object_Storage__Writer;
 extern RT0__StructDesc _td_ADT_Object_Storage__WriterDesc;
-extern RT0__StructDesc _td_ADT_Object_Storage__ErrorContext;
-extern RT0__StructDesc _td_ADT_Object_Storage__ErrorContextDesc;
 #endif /* _MODULE_ADT_Object_Storage_ */
 
 /* --- */

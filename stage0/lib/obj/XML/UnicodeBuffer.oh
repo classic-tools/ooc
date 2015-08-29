@@ -3,12 +3,13 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <XML/InputBuffer.oh>
 #include <XML/UnicodeCodec.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR16 XML_UnicodeBuffer__Char;
 typedef OOC_CHAR16 *XML_UnicodeBuffer__CharArray;
 typedef OOC_INT32 XML_UnicodeBuffer__CharPos;
@@ -39,7 +40,8 @@ typedef struct XML_UnicodeBuffer__OutputDesc *XML_UnicodeBuffer__Output;
 typedef struct XML_UnicodeBuffer__OutputDesc {
   XML_UnicodeCodec__Factory codecFactory;
   XML_UnicodeCodec__Codec codec;
-  Channel__Writer writer;
+  IO__ByteChannel writer;
+  IO__Error error;
   OOC_CHAR8 *byteBuffer;
   OOC_INT32 byteStart;
   OOC_INT32 byteEnd;
@@ -55,8 +57,8 @@ typedef void (*_TBP_XML_UnicodeBuffer__InputDesc_Close)(XML_UnicodeBuffer__Input
 extern void XML_UnicodeBuffer__InputDesc_SetCodec(XML_UnicodeBuffer__Input in, XML_UnicodeCodec__Factory cf, OOC_CHAR8 autoDetect);
 #define _TBN_XML_UnicodeBuffer__InputDesc_SetCodec 2
 typedef void (*_TBP_XML_UnicodeBuffer__InputDesc_SetCodec)(XML_UnicodeBuffer__Input in, XML_UnicodeCodec__Factory cf, OOC_CHAR8 autoDetect);
-extern void XML_UnicodeBuffer__InitInput(XML_UnicodeBuffer__Input input, OOC_CHAR8 _new, Channel__Reader reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
-extern XML_UnicodeBuffer__Input XML_UnicodeBuffer__NewInput(Channel__Reader reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
+extern void XML_UnicodeBuffer__InitInput(XML_UnicodeBuffer__Input input, OOC_CHAR8 _new, IO__ByteChannel reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
+extern XML_UnicodeBuffer__Input XML_UnicodeBuffer__NewInput(IO__ByteChannel reader, XML_UnicodeCodec__Factory codecFactory, Msg__MsgList errList);
 extern void XML_UnicodeBuffer__OutputDesc_Write16I(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
 #define _TBN_XML_UnicodeBuffer__OutputDesc_Write16I 2
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write16I)(XML_UnicodeBuffer__Output out, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end);
@@ -72,29 +74,29 @@ typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Write8)(XML_UnicodeBuffer__Out
 extern void XML_UnicodeBuffer__OutputDesc_Flush(XML_UnicodeBuffer__Output out);
 #define _TBN_XML_UnicodeBuffer__OutputDesc_Flush 0
 typedef void (*_TBP_XML_UnicodeBuffer__OutputDesc_Flush)(XML_UnicodeBuffer__Output out);
-extern void XML_UnicodeBuffer__InitOutput(XML_UnicodeBuffer__Output out, OOC_CHAR8 _new, Channel__Writer writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);
-extern XML_UnicodeBuffer__Output XML_UnicodeBuffer__NewOutput(Channel__Writer writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);
+extern void XML_UnicodeBuffer__InitOutput(XML_UnicodeBuffer__Output out, OOC_CHAR8 _new, IO__ByteChannel writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);
+extern XML_UnicodeBuffer__Output XML_UnicodeBuffer__NewOutput(IO__ByteChannel writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 createBOM);
 extern void OOC_XML_UnicodeBuffer_init();
 extern void OOC_XML_UnicodeBuffer_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_XML_UnicodeBuffer__262;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__268;
 extern RT0__StructDesc _td_XML_UnicodeBuffer__CharArray;
 extern RT0__StructDesc _td_XML_UnicodeBuffer__Input;
 extern RT0__StructDesc _td_XML_UnicodeBuffer__InputDesc;
 extern RT0__StructDesc _td_XML_UnicodeBuffer__Output;
 extern RT0__StructDesc _td_XML_UnicodeBuffer__OutputDesc;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__3628;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__3617;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__3727;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__3716;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__3852;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__4822;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__11645;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__14989;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__15809;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__16624;
-extern RT0__StructDesc _td_XML_UnicodeBuffer__16764;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__3530;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__3519;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__3629;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__3618;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__3754;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__4724;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__11613;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__15126;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__15946;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__16761;
+extern RT0__StructDesc _td_XML_UnicodeBuffer__16901;
 #endif /* _MODULE_XML_UnicodeBuffer_ */
 
 /* --- */

@@ -3,9 +3,8 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
-#include <Msg.oh>
-#include <TextRider.oh>
+#include <IO.oh>
+#include <IO/TextRider.oh>
 #include <Object.oh>
 #include <Object/Boxed.oh>
 #include <ADT/ArrayList.oh>
@@ -14,6 +13,7 @@
 #include <OOC/SymbolTable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 OOC_C_DeclWriter__TypeQualifier;
 #define OOC_C_DeclWriter__tqNone 0
 #define OOC_C_DeclWriter__tqConst 1
@@ -125,15 +125,15 @@ typedef struct OOC_C_DeclWriter__DefineDesc {
 } OOC_C_DeclWriter__DefineDesc;
 typedef struct OOC_C_DeclWriter__WriterDesc *OOC_C_DeclWriter__Writer;
 typedef struct OOC_C_DeclWriter__WriterDesc {
-  Channel__Channel ch;
+  IO__ByteChannel ch;
   URI__HierarchicalURI baseURI;
-  TextRider__Writer textWriter;
+  IO_TextRider__Writer textWriter;
   ADT_ArrayList__ArrayList includes;
   ADT_ArrayList__ArrayList declarations;
   OOC_INT32 indentation;
   OOC_C_DeclWriter__BasicType basicType[17];
 } OOC_C_DeclWriter__WriterDesc;
-extern OOC_C_DeclWriter__Writer OOC_C_DeclWriter__NewWriter(Channel__Channel ch, URI__HierarchicalURI baseURI);
+extern OOC_C_DeclWriter__Writer OOC_C_DeclWriter__NewWriter(IO__ByteChannel ch, URI__HierarchicalURI baseURI);
 extern void OOC_C_DeclWriter__WriterDesc_CopyTo(OOC_C_DeclWriter__Writer w, OOC_C_DeclWriter__Writer dest);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_CopyTo 2
 typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_CopyTo)(OOC_C_DeclWriter__Writer w, OOC_C_DeclWriter__Writer dest);
@@ -161,9 +161,9 @@ typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_Newline)(OOC_C_DeclWriter__Writ
 extern void OOC_C_DeclWriter__WriterDesc_WriteInclude(OOC_C_DeclWriter__Writer w, const OOC_CHAR8 includePath__ref[], OOC_LEN includePath_0d);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_WriteInclude 17
 typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_WriteInclude)(OOC_C_DeclWriter__Writer w, const OOC_CHAR8 includePath__ref[], OOC_LEN includePath_0d);
-extern void OOC_C_DeclWriter__WriterDesc_Close(OOC_C_DeclWriter__Writer w, Msg__Msg *res);
+extern void OOC_C_DeclWriter__WriterDesc_Close(OOC_C_DeclWriter__Writer w);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_Close 1
-typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_Close)(OOC_C_DeclWriter__Writer w, Msg__Msg *res);
+typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_Close)(OOC_C_DeclWriter__Writer w);
 extern void OOC_C_DeclWriter__WriterDesc_WriteConst(OOC_C_DeclWriter__Writer w, Object_Boxed__Object value, OOC_SymbolTable__Type type);
 #define _TBN_OOC_C_DeclWriter__WriterDesc_WriteConst 14
 typedef void (*_TBP_OOC_C_DeclWriter__WriterDesc_WriteConst)(OOC_C_DeclWriter__Writer w, Object_Boxed__Object value, OOC_SymbolTable__Type type);
@@ -307,7 +307,7 @@ extern RT0__StructDesc _td_OOC_C_DeclWriter__Type;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__TypeDesc;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__BasicType;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__BasicTypeDesc;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__4953;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__4922;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__Pointer;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__PointerDesc;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__Array;
@@ -326,16 +326,14 @@ extern RT0__StructDesc _td_OOC_C_DeclWriter__Define;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__DefineDesc;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__Writer;
 extern RT0__StructDesc _td_OOC_C_DeclWriter__WriterDesc;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__8834;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__9167;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__9541;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__11625;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__12522;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__20211;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__20368;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__24792;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__30738;
-extern RT0__StructDesc _td_OOC_C_DeclWriter__30776;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__8802;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__9135;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__9508;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__11591;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__12492;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__19760;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__19917;
+extern RT0__StructDesc _td_OOC_C_DeclWriter__24341;
 #endif /* _MODULE_OOC_C_DeclWriter_ */
 
 /* --- */

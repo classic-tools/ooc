@@ -10,6 +10,7 @@
 #include <OOC/C/DeclWriter.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef ADT_Dictionary__Dictionary OOC_SSA_Allocator__State;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc *OOC_SSA_Allocator__BlockInfo;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc {

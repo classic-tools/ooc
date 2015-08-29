@@ -6,6 +6,7 @@
 #include <XML/UnicodeCodec.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct XML_UnicodeCodec_UTF16__CodecDesc *XML_UnicodeCodec_UTF16__Codec;
 typedef struct XML_UnicodeCodec_UTF16__CodecDesc {
   OOC_INT32 invalidChars;

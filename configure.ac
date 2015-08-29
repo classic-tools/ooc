@@ -1,6 +1,6 @@
 dnl Autoconf requirements
 AC_PREREQ(2.53)
-AC_INIT(OOC,2.0.4,mia@de.uu.net)
+AC_INIT(OOC,2.0.5,mia@de.uu.net)
 AC_CONFIG_SRCDIR(src/OOC/Parser.Mod)
 AC_CONFIG_HEADER(lib/src/__config.h)
 
@@ -9,6 +9,7 @@ AC_SUBST(OOC_DEV_ROOT,[`cd "$srcdir" && pwd`])
 AC_SUBST(COMPILER_VERSION,[$PACKAGE_VERSION])
 AC_SUBST(COMPILER_MAJOR,[`echo $COMPILER_VERSION|sed -e 's:\..*$::'`])
 AC_SUBST(COMPILER_MINOR,[`echo $COMPILER_VERSION|sed -e 's:^[[^.]]*\.::' -e 's:\..*$::'`])
+AC_SUBST(OFLAGS)
 
 dnl checks for programs
 AC_PROG_INSTALL
@@ -28,6 +29,7 @@ else
 fi
 
 dnl checks for libraries
+AC_CHECK_LIB(m,sin)
 AC_CHECK_LIB(gc,GC_malloc)
 AC_CHECK_LIB(xnet,socket)
 if test $ac_cv_lib_xnet_socket = yes; then
@@ -39,7 +41,7 @@ AC_SUBST(have_libxnet)
 
 dnl checks for header files
 AC_HEADER_STDC
-AC_CHECK_HEADERS(sys/time.h unistd.h io.h pwd.h utime.h gc/gc.h)
+AC_CHECK_HEADERS(sys/time.h unistd.h io.h pwd.h utime.h stdint.h gc/gc.h)
 AC_HEADER_TIME
 
 dnl checks for types
@@ -63,6 +65,8 @@ dnl   BSD functions:
 AC_CHECK_FUNCS(gettimeofday settimeofday)
 dnl   GNU extensions:
 AC_CHECK_FUNCS(backtrace_symbols readdir_r)
+dnl   math functions:
+AC_CHECK_FUNCS(lrint)
 
 dnl checks for system services
 

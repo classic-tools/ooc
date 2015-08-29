@@ -14,6 +14,7 @@
 #include <OOC/Repository.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Config_Repositories__SectionDesc *OOC_Config_Repositories__Section;
 typedef OOC_Repository__Module *OOC_Config_Repositories__ModuleList;
 typedef struct OOC_Config_Repositories__SectionDesc {

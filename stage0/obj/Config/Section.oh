@@ -10,6 +10,7 @@
 #include <Config/Parser.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct Config_Section__SectionDesc *Config_Section__Section;
 typedef struct Config_Section__SectionDesc {
   XML_UnicodeBuffer__CharArray name;

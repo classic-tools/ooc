@@ -8,6 +8,7 @@
 #include <OOC/AST.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define OOC_Parser__enableFlags 0
 #define OOC_Parser__enableMultiPartIdent 1
 #define OOC_Parser__enableRestParam 2

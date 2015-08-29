@@ -1,9 +1,6 @@
 #include <OOC/Auxiliary/WriteSymbolFile.oh>
-#include <BinaryRider.oh>
-#include <Channel.oh>
-#include <Files.oh>
-#include <Msg.oh>
 #include <Strings.oh>
+#include <IO/BinaryRider.oh>
 #include <IO/Memory.oh>
 #include <OOC/SymbolTable/Builder.oh>
 #include <OOC/SymbolTable/Exports.oh>

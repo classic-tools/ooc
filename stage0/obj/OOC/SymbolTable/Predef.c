@@ -314,7 +314,7 @@ l12:
 static void OOC_SymbolTable_Predef__Init() {
   register OOC_INT32 i0,i1,i2;
 
-  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__34296.baseTypes[0], 18));
+  OOC_SymbolTable__predefIdToType = (void*)((OOC_INT32)RT0__NewObject(_td_OOC_SymbolTable__34301.baseTypes[0], 18));
   i0=0;
 l1_loop:
   *(OOC_INT32*)((OOC_INT32)OOC_SymbolTable_Predef__minConst+(_check_index(i0, 18, OOC_UINT32, 14375))*4) = (OOC_INT32)0;

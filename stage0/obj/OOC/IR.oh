@@ -14,6 +14,7 @@
 #include <OOC/SymbolTable/Predef.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_IR__Name;
 typedef OOC_Scanner_Builder_BasicList__Symbol OOC_IR__Symbol;
 typedef struct OOC_IR__NodeDesc *OOC_IR__Node;

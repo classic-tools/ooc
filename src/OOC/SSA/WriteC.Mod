@@ -1,7 +1,7 @@
-(* 	$Id: WriteC.Mod,v 1.148 2002/12/30 09:29:21 mva Exp $	 *)
+(* 	$Id: WriteC.Mod,v 1.151 2003/02/05 21:31:54 mva Exp $	 *)
 MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 (*  Translates a set of scheduled SSA instructions to plain C.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,7 +21,7 @@ MODULE OOC:SSA:WriteC [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  IntStr, Out, StdChannels, Strings, StringSearch,
+  IntStr, Out, Strings, StringSearch, IO, IO:StdChannels,
   Object, Object:Boxed, ADT:Dictionary, ADT:ArrayList,
   Sym := OOC:SymbolTable,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Predef,
@@ -1681,7 +1681,10 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
         Out.String (":");
         Out.Ln;
         Out.Flush;
-        XML.Write (StdChannels.stdout. NewWriter(), pb, TRUE);
+        TRY
+          XML.Write (StdChannels.stdout, pb, TRUE);
+        CATCH IO.Error:
+        END;
         Out.Flush;
       END;
     END Write;
@@ -1819,7 +1822,10 @@ PROCEDURE (t: Translator) WriteProcBody* (proc: IR.Procedure);
     IF writeProc THEN
       IF (t. inspectStage. MatchChars ("schedule", 0, -1) # NIL) THEN
         (* write schedule SSA code to stdout *)
-        XML.WriteSchedule (StdChannels.stdout. NewWriter(), domRoot);
+        TRY
+          XML.WriteSchedule (StdChannels.stdout, domRoot);
+        CATCH IO.Error:
+        END;
         Out.Flush
       END;
     END;

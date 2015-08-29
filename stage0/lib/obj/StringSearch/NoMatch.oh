@@ -7,6 +7,7 @@
 #include <StringSearch.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct StringSearch_NoMatch__FactoryDesc *StringSearch_NoMatch__Factory;
 typedef struct StringSearch_NoMatch__FactoryDesc {
   char __dummy;

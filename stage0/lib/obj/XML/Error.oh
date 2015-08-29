@@ -8,6 +8,7 @@
 #include <URI.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Msg__Msg XML_Error__Msg;
 typedef OOC_INT32 XML_Error__Code;
 typedef OOC_CHAR8 XML_Error__Char;

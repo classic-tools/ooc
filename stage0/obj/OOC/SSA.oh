@@ -14,6 +14,7 @@
 #include <OOC/SSA/Opnd.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_SSA__NodeDesc *OOC_SSA__Node;
 typedef struct OOC_SSA__OpndDesc *OOC_SSA__Opnd;
 typedef struct OOC_SSA__ResultDesc *OOC_SSA__Result;

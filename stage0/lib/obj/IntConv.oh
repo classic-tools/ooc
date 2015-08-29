@@ -6,6 +6,7 @@
 #include <ConvTypes.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_INT8 IntConv__ConvResults;
 #define IntConv__strAllRight 0
 #define IntConv__strOutOfRange 1

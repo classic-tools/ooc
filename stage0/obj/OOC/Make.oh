@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <Channel.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <Object.oh>
 #include <ADT/Dictionary.oh>
 #include <StringSearch.oh>
@@ -13,6 +14,7 @@
 #include <OOC/SymbolTable/CreateNamespace.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR8 OOC_Make__ShellCommand[4096];
 typedef struct OOC_Make__ModuleInfoDesc *OOC_Make__ModuleInfo;
 typedef struct OOC_Make__ModuleInfoDesc {
@@ -150,17 +152,17 @@ extern void OOC_OOC_Make_init0();
 extern RT0__StructDesc _td_OOC_Make__ShellCommand;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfo;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfoDesc;
-extern RT0__StructDesc _td_OOC_Make__1874;
-extern RT0__StructDesc _td_OOC_Make__1926;
-extern RT0__StructDesc _td_OOC_Make__2053;
+extern RT0__StructDesc _td_OOC_Make__1877;
+extern RT0__StructDesc _td_OOC_Make__1929;
+extern RT0__StructDesc _td_OOC_Make__2056;
 extern RT0__StructDesc _td_OOC_Make__ModuleList;
 extern RT0__StructDesc _td_OOC_Make__Rules;
 extern RT0__StructDesc _td_OOC_Make__RulesDesc;
-extern RT0__StructDesc _td_OOC_Make__3539;
-extern RT0__StructDesc _td_OOC_Make__3514;
+extern RT0__StructDesc _td_OOC_Make__3542;
+extern RT0__StructDesc _td_OOC_Make__3517;
 extern RT0__StructDesc _td_OOC_Make__ErrorContext;
 extern RT0__StructDesc _td_OOC_Make__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Make__4525;
+extern RT0__StructDesc _td_OOC_Make__4528;
 #endif /* _MODULE_OOC_Make_ */
 
 /* --- */

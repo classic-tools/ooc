@@ -3,17 +3,18 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_CHAR8 XML_InputBuffer__Char;
 typedef OOC_CHAR8 *XML_InputBuffer__CharArray;
 typedef OOC_INT32 XML_InputBuffer__CharPos;
 #define XML_InputBuffer__markerEOB "\000"
 typedef struct XML_InputBuffer__BufferDesc *XML_InputBuffer__Buffer;
 typedef struct XML_InputBuffer__BufferDesc {
-  Channel__Reader r;
+  IO__ByteChannel r;
   XML_InputBuffer__CharArray chars;
   OOC_INT32 offsetFromPos0;
   OOC_INT32 endOfBuffer;
@@ -30,12 +31,12 @@ typedef OOC_CHAR8 (*_TBP_XML_InputBuffer__BufferDesc_EndOfBuffer)(XML_InputBuffe
 extern void XML_InputBuffer__BufferDesc_Close(XML_InputBuffer__Buffer b);
 #define _TBN_XML_InputBuffer__BufferDesc_Close 0
 typedef void (*_TBP_XML_InputBuffer__BufferDesc_Close)(XML_InputBuffer__Buffer b);
-extern XML_InputBuffer__Buffer XML_InputBuffer__New(Channel__Reader reader, Msg__MsgList errList);
+extern XML_InputBuffer__Buffer XML_InputBuffer__New(IO__ByteChannel reader, Msg__MsgList errList);
 extern void OOC_XML_InputBuffer_init();
 extern void OOC_XML_InputBuffer_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_XML_InputBuffer__316;
+extern RT0__StructDesc _td_XML_InputBuffer__317;
 extern RT0__StructDesc _td_XML_InputBuffer__CharArray;
 extern RT0__StructDesc _td_XML_InputBuffer__Buffer;
 extern RT0__StructDesc _td_XML_InputBuffer__BufferDesc;

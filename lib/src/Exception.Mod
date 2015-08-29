@@ -1,4 +1,4 @@
-(* 	$Id: Exception.Mod,v 1.4 2003/01/05 18:23:48 mva Exp $	 *)
+(* 	$Id: Exception.Mod,v 1.6 2003/02/02 01:35:10 mva Exp $	 *)
 MODULE Exception [FOREIGN "C"; LINK FILE "Exception.c" END];
 (*  Implements the run-time part of the exceptions mechanism.
     Copyright (C) 2002,2003  Michael van Acken
@@ -27,11 +27,11 @@ IMPORT
 
    @example
    TRY
-     S
+   S
    CATCH T1:
-     C1
+   C1
    CATCH T2:
-     C2
+   C2
    END;
    @end example
 
@@ -54,11 +54,11 @@ IMPORT
    Exception.PopContext;
    temp := Exception.Current();
    WITH temp: T1 DO
-     C1;
+   C1;
    | temp: T2 DO
-     C2;
+   C2;
    ELSE
-     Exception.ActivateContext;
+   Exception.ActivateContext;
    END;
    Exception.Clear;
    @end example
@@ -84,7 +84,15 @@ IMPORT
 
    Within the module body no exceptions can be passed up, because there is no
    caller.  As a consequence, any exception that is not caught explicity is
-   written to @var{stderr} and aborts the program.  *)
+   written to @var{stderr} and aborts the program.
+
+   @emph{Note}: A @code{TRY} block is mapped to C's @samp{setjmp()} function by
+   @code{oo2c}.  The amount of data stored by this function depends on the
+   target architecture and may differ by a factor of ten or more.  For example,
+   on a @samp{ix86} processor, only 72 bytes are stored, while on a @samp{PPC}
+   this is 768 bytes.  As a consequence, the work done within a @code{TRY}
+   should be large enough to amortize the costs of the @code{TRY} for all
+   possible targets.  *)
 
 (*
    Each @code{TRY} block pushes an exception handler on a stack managed as a
@@ -105,7 +113,7 @@ TYPE
      top few entries of the procedure call stack.  *)
     msg: STRING;
     backtrace: ARRAY maxBacktraceSize OF SYSTEM.PTR;
-    backtraceSize: LONGINT;
+    backtraceSize: LONGINT;  (* -1 if backtrace() hasn't been called yet *)
   END;
   ContextPtr = POINTER TO Context;
   Context* = RECORD [NO_DESCRIPTOR]
@@ -116,22 +124,23 @@ TYPE
   END;
   
 PROCEDURE Init*(e: Exception; msg: STRING);
-(**Initialize exception @oparam{e} and set @oparam{msg} as its message.  On
-   systems that support it, this also stores the first few entries of the call
-   stack.  @oparam{msg} may be @code{NIL}, but in this case
+(**Initialize exception @oparam{e} and set @oparam{msg} as its message.
+   @oparam{msg} may be @code{NIL}, but in this case
    @oproc{Exception.GetMessage} must be redefined to provide a non-@code{NIL}
    message.
-   
-   @precond
-   @oparam{e} is not @code{NIL}.
-   @end precond *)
-PROCEDURE Raise* [NO_RETURN](e: Exception) RAISES Exception;
-(**Raise exception @oparam{e}.  This procedure is the implementation of the
-   predefined procedure @code{RAISE}.
 
    @precond
    @oparam{e} is not @code{NIL}.
-   @end precond *)
+   @end precond  *)
+PROCEDURE Raise* [NO_RETURN](e: Exception) RAISES Exception;
+(**Raise exception @oparam{e}.  On systems that support it, the first time this
+   procedure is called with a given exception it stores the first few entries
+   of the call stack.  This procedure is the implementation of the predefined
+   procedure @code{RAISE}.
+
+   @precond
+   @oparam{e} is not @code{NIL}.
+   @end precond  *)
 PROCEDURE Current*(): Exception;
 (**Pointer to the currently active exception.  This is @code{NIL}
    if no exeception has been raised, or when a @code{CATCH} clause has been

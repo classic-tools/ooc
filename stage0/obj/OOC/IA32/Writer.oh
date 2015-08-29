@@ -3,21 +3,21 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Channel.oh>
-#include <Msg.oh>
-#include <TextRider.oh>
+#include <IO.oh>
+#include <IO/TextRider.oh>
 #include <Object/Boxed.oh>
 #include <ADT/Dictionary.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_IA32_Writer__WriterDesc *OOC_IA32_Writer__Writer;
 typedef struct OOC_IA32_Writer__WriterDesc {
-  Channel__Channel ch;
-  TextRider__Writer textWriter;
+  IO__ByteChannel ch;
+  IO_TextRider__Writer textWriter;
   ADT_Dictionary__Dictionary stringData;
   OOC_INT32 stringDataCount;
 } OOC_IA32_Writer__WriterDesc;
-extern OOC_IA32_Writer__Writer OOC_IA32_Writer__NewWriter(Channel__Channel ch);
+extern OOC_IA32_Writer__Writer OOC_IA32_Writer__NewWriter(IO__ByteChannel ch);
 extern void OOC_IA32_Writer__WriterDesc_Newline(OOC_IA32_Writer__Writer w);
 #define _TBN_OOC_IA32_Writer__WriterDesc_Newline 5
 typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Newline)(OOC_IA32_Writer__Writer w);
@@ -57,22 +57,22 @@ typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_PopBytes)(OOC_IA32_Writer__Write
 extern void OOC_IA32_Writer__WriterDesc_WriteStringData(OOC_IA32_Writer__Writer w);
 #define _TBN_OOC_IA32_Writer__WriterDesc_WriteStringData 13
 typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_WriteStringData)(OOC_IA32_Writer__Writer w);
-extern void OOC_IA32_Writer__WriterDesc_Close(OOC_IA32_Writer__Writer w, Msg__Msg *res);
+extern void OOC_IA32_Writer__WriterDesc_Close(OOC_IA32_Writer__Writer w);
 #define _TBN_OOC_IA32_Writer__WriterDesc_Close 0
-typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Close)(OOC_IA32_Writer__Writer w, Msg__Msg *res);
+typedef void (*_TBP_OOC_IA32_Writer__WriterDesc_Close)(OOC_IA32_Writer__Writer w);
 extern void OOC_OOC_IA32_Writer_init();
 extern void OOC_OOC_IA32_Writer_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_IA32_Writer__Writer;
 extern RT0__StructDesc _td_OOC_IA32_Writer__WriterDesc;
-extern RT0__StructDesc _td_OOC_IA32_Writer__1960;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2365;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2514;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2700;
-extern RT0__StructDesc _td_OOC_IA32_Writer__2890;
-extern RT0__StructDesc _td_OOC_IA32_Writer__3252;
-extern RT0__StructDesc _td_OOC_IA32_Writer__3868;
+extern RT0__StructDesc _td_OOC_IA32_Writer__1951;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2356;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2505;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2691;
+extern RT0__StructDesc _td_OOC_IA32_Writer__2881;
+extern RT0__StructDesc _td_OOC_IA32_Writer__3243;
+extern RT0__StructDesc _td_OOC_IA32_Writer__3859;
 #endif /* _MODULE_OOC_IA32_Writer_ */
 
 /* --- */

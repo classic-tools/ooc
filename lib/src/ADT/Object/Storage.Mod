@@ -1,7 +1,7 @@
-(*	$Id: Storage.Mod,v 1.9 2002/12/19 04:40:17 mva Exp $	*)
+(*	$Id: Storage.Mod,v 1.12 2003/02/04 20:55:32 mva Exp $	*)
 MODULE ADT:Object:Storage;
 (*  Implements a framework for persistent objects.
-    Copyright (C) 2000, 2001  Michael van Acken
+    Copyright (C) 2000, 2001, 2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -43,11 +43,8 @@ MODULE ADT:Object:Storage;
    embedded objects, but it does contain @code{NIL} pointers.  *)
 
 IMPORT
-  SYSTEM, RT0, Strings, Channel, BinaryRider, Msg, 
+  SYSTEM, RT0, Strings, IO,
   ADT:Storable, Dictionary := ADT:Dictionary:AddressKey:IntValue;
-
-CONST
-  done* = BinaryRider.done;
 
 TYPE
   TypeRefMap = POINTER TO ARRAY OF RECORD
@@ -94,26 +91,7 @@ TYPE
 CONST
   pointerGap = 4;
 
-
-TYPE
-  ErrorContext = POINTER TO ErrorContextDesc;
-  ErrorContextDesc* = RECORD
-     (* this record is exported, so that extensions of Channel can access the
-        error descriptions by extending `ErrorContextDesc' *)
-    (Storable.ErrorContextDesc)
-  END;
-
-VAR
-  errorContext: ErrorContext;
-
-
-PROCEDURE GetError (code: Msg.Code): Msg.Msg;
-  BEGIN
-    RETURN Msg.New (errorContext, code)
-  END GetError;
-
-
-PROCEDURE InitReader (r: Reader; ch: Channel.Channel);
+PROCEDURE InitReader (r: Reader; ch: IO.ByteChannel);
   BEGIN
     Storable.InitReader (r, ch);
     NEW (r. objTab, 128-pointerGap);
@@ -126,7 +104,7 @@ PROCEDURE InitReader (r: Reader; ch: Channel.Channel);
     r. typeCounter := 1;
   END InitReader;
 
-PROCEDURE InitWriter (w: Writer; ch: Channel.Channel);
+PROCEDURE InitWriter (w: Writer; ch: IO.ByteChannel);
   BEGIN
     Storable.InitWriter (w, ch);
     w. objCounter := 0;
@@ -136,28 +114,28 @@ PROCEDURE InitWriter (w: Writer; ch: Channel.Channel);
   END InitWriter;
 
 
-PROCEDURE ConnectReader* (ch: Channel.Channel): Reader;
+PROCEDURE ConnectReader* (ch: IO.ByteChannel): Reader;
 (**Creates a new reader instance operating on channel @oparam{ch}.  *)
   VAR
     r: Reader;
   BEGIN
     NEW (r);
     InitReader (r, ch);
-    IF (r. base = NIL) THEN  (* initialization of BinaryRider.Reader failed *)
+    IF (r. channel = NIL) THEN  (* initialization of BinaryRider.Reader failed *)
       RETURN NIL
     ELSE
       RETURN r
     END
   END ConnectReader;
   
-PROCEDURE ConnectWriter* (ch: Channel.Channel): Writer;
+PROCEDURE ConnectWriter* (ch: IO.ByteChannel): Writer;
 (**Creates a new writer instance operating on channel @oparam{ch}.  *)
   VAR
     w: Writer;
   BEGIN
     NEW (w);
     InitWriter (w, ch);
-    IF (w. base = NIL) THEN  (* initialization of BinaryRider.Writer failed *)
+    IF (w. channel = NIL) THEN  (* initialization of BinaryRider.Writer failed *)
       RETURN NIL
     ELSE
       RETURN w
@@ -166,12 +144,12 @@ PROCEDURE ConnectWriter* (ch: Channel.Channel): Writer;
 
 
 
-PROCEDURE (r: Reader) ReadObject* (VAR obj: Storable.Object);
+PROCEDURE (r: Reader) ReadObject* (VAR obj: Storable.Object) RAISES IO.Error;
   VAR
     ref, tref: LONGINT;
     module: RT0.Module;
   
-  PROCEDURE ReadType(): LONGINT;
+  PROCEDURE ReadType(): LONGINT RAISES IO.Error;
     VAR
       tref, len, i: LONGINT;
       tp: RT0.Struct;
@@ -193,7 +171,7 @@ PROCEDURE (r: Reader) ReadObject* (VAR obj: Storable.Object);
       
       IF (tref < 0) THEN  (* back reference; return old index *)
         IF (-tref >= r. typeCounter) THEN
-          r. res := GetError (BinaryRider.invalidFormat);
+          IO.RaiseFormatError("Invalid type reference");
           RETURN 0
         ELSE
           RETURN -tref
@@ -201,7 +179,8 @@ PROCEDURE (r: Reader) ReadObject* (VAR obj: Storable.Object);
       
       ELSE  (* first occurence of this type *)
         IF (tref # r. typeCounter) THEN
-          r. res := GetError (BinaryRider.invalidFormat)
+          IO.RaiseFormatError("Type count mismatch");
+          RETURN 0;
         END;
         IF (tref = LEN (r. typeTab^)) THEN
           ExtendTypeTab (r. typeTab)
@@ -253,23 +232,24 @@ PROCEDURE (r: Reader) ReadObject* (VAR obj: Storable.Object);
   BEGIN
     r. ReadNum (ref);
     
-    IF (r. res # BinaryRider.done) OR (ref = 0) THEN
+    IF (ref = 0) THEN
       obj := NIL
       
     ELSE  (* reading object using "compact" format *)
       IF (ref < 0) THEN
         IF (-ref >= r. objCounter) THEN  (* invalid object index *)
-          r. res := GetError (BinaryRider.invalidFormat)
+          IO.RaiseFormatError("Invalid object reference");
+          obj := NIL;
         ELSE
           obj := r. objTab[-ref]
         END
       ELSE  (* first occurence of this object *)
         IF (ref # r. objCounter) THEN  (* invalid object index *)
-          r. res := GetError (BinaryRider.invalidFormat)
+          IO.RaiseFormatError("Object count mismatch");
         END;
         tref := ReadType();
         IF (r. typeTab[tref]. type = NIL) THEN
-          r. res := GetError (Storable.unknownType)
+          Storable.RaiseTypeError("Failed to resolve type name");
         ELSE  (* create new object of the requested type and load it *)
           obj := SYSTEM.VAL (Storable.Object,
                              RT0.NewObject (r. typeTab[tref]. type));
@@ -303,7 +283,7 @@ PROCEDURE (r: Reader) Disconnect*;
 
 
 
-PROCEDURE (w: Writer) WriteObject* (obj: Storable.Object);
+PROCEDURE (w: Writer) WriteObject* (obj: Storable.Object) RAISES IO.Error;
   VAR
     tref: LONGINT;
     type: RT0.Struct;
@@ -353,7 +333,7 @@ PROCEDURE (w: Writer) WriteObject* (obj: Storable.Object);
     END LookupType;
   
   BEGIN
-    IF (obj = NIL) OR (w. byteWriter. res # BinaryRider.done) THEN
+    IF (obj = NIL) THEN
       w. WriteNum (0)
     
     ELSE  (* writing object using "compact" format *)
@@ -395,7 +375,4 @@ PROCEDURE (w: Writer) Disconnect*;
     w. objCounter := 0
   END Disconnect;
 
-BEGIN
-  NEW (errorContext);
-  Msg.InitContext (errorContext, "ADT:Object:Storage");
 END ADT:Object:Storage.

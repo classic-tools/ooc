@@ -6,6 +6,7 @@
 #include <OOC/SymbolTable.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define OOC_C_Naming__suffixPassPerRef "__ref"
 extern Object__String OOC_C_Naming__NameOfDeclaration(OOC_SymbolTable__Declaration decl);
 extern Object__String OOC_C_Naming__NameOfModuleInit(OOC_SymbolTable__Module m, OOC_CHAR8 rtWrapper);
@@ -21,9 +22,9 @@ extern void OOC_OOC_C_Naming_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_C_Naming__Buffer;
 extern RT0__StructDesc _td_OOC_C_Naming__1017;
-extern RT0__StructDesc _td_OOC_C_Naming__4242;
-extern RT0__StructDesc _td_OOC_C_Naming__4921;
-extern RT0__StructDesc _td_OOC_C_Naming__6572;
+extern RT0__StructDesc _td_OOC_C_Naming__4360;
+extern RT0__StructDesc _td_OOC_C_Naming__5039;
+extern RT0__StructDesc _td_OOC_C_Naming__6690;
 #endif /* _MODULE_OOC_C_Naming_ */
 
 /* --- */

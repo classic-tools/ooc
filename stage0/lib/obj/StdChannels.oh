@@ -7,6 +7,7 @@
 #include <Time.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 extern Channel__Channel StdChannels__stdin;
 extern Channel__Channel StdChannels__stdout;
 extern Channel__Channel StdChannels__stderr;

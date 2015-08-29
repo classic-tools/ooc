@@ -9,6 +9,7 @@
 #include <OOC/Scanner/Symbol.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef OOC_Scanner_InputBuffer__CharArray OOC_AST__Name;
 typedef struct OOC_AST__NodeDesc *OOC_AST__Node;
 typedef struct OOC_AST__NodeDesc {

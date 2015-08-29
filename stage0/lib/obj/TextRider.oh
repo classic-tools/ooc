@@ -10,6 +10,7 @@
 #include <Object.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #define TextRider__done  0
 #define TextRider__invalidFormat 8
 #define TextRider__valueOutOfRange 1

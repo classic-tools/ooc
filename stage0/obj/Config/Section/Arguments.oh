@@ -11,6 +11,7 @@
 #include <Config/Section.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef Config_Value__StringPtr Config_Section_Arguments__Argument;
 typedef Config_Value__StringPtr *Config_Section_Arguments__ArgumentArray;
 typedef struct Config_Section_Arguments__SectionDesc *Config_Section_Arguments__Section;

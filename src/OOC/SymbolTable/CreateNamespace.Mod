@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.25 2003/01/01 14:00:49 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.26 2003/01/30 23:38:20 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Msg, ADT:Dictionary, OOC:Error, Sym := OOC:SymbolTable,
+  Msg, IO, ADT:Dictionary, OOC:Error, Sym := OOC:SymbolTable,
   OOC:SymbolTable:Namespace,
   TR := OOC:SymbolTable:TypeRules, OOC:SymbolTable:Builder,
   OOC:SymbolTable:Predef, OOC:SymbolTable:ImportModules, OOC:Doc:ResolveRef;
@@ -148,7 +148,8 @@ PROCEDURE ResolveQualident* (ns: Sym.Namespace; contextOfUse: Sym.Item;
   END ResolveQualident;
 
 PROCEDURE CreateNamespace* (root: Sym.Module;
-                            errList: Error.List);
+                            errList: Error.List)
+RAISES IO.Error;
 (**Populates the namespaces of the symbol table @oparam{root} and performs
    semantic checks on the declarations.  It is assumed, that the namespace
    of module @oparam{root} is nested into the namespace of the pseudo module
@@ -207,7 +208,8 @@ PROCEDURE CreateNamespace* (root: Sym.Module;
       errList. Append (lastError)
     END ErrDecl;
 
-  PROCEDURE ImportAllModules (root: Sym.Module);
+  PROCEDURE ImportAllModules (root: Sym.Module)
+  RAISES IO.Error;
     VAR
       ptr: Sym.Item;
     BEGIN
@@ -1085,8 +1087,12 @@ PROCEDURE Init* ();
     stb := Builder.New();
     predef := Predef.CreatePredef (stb);
     system := Predef.CreateSYSTEM (stb);
-    CreateNamespace (predef, Error.NewList (""));
-    CreateNamespace (system, Error.NewList(""));
+    TRY
+      CreateNamespace (predef, Error.NewList (""));
+      CreateNamespace (system, Error.NewList(""));
+    CATCH IO.Error:
+      (* cannot happen *)
+    END;
     
     predefModule := predef;
     systemModule := system;

@@ -168,24 +168,17 @@ OOC_Error__List OOC_Make_TranslateToIA32__Run(OOC_Repository__Module m, Object__
   OOC_IR__Module moduleIR;
   ADT_Dictionary__Dictionary exports;
   OOC_IA32_Writer__Writer w;
-  Msg__Msg res;
   auto void OOC_Make_TranslateToIA32__Run_CloseFile(OOC_IA32_Writer__Writer w);
     
     void OOC_Make_TranslateToIA32__Run_CloseFile(OOC_IA32_Writer__Writer w) {
       register OOC_INT32 i0,i1;
-      Msg__Msg res;
 
       i0 = (OOC_INT32)w;
       i1 = i0!=(OOC_INT32)0;
-      if (!i1) goto l6;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4972)))), OOC_IA32_Writer__WriterDesc_Newline)),OOC_IA32_Writer__WriterDesc_Newline)((OOC_IA32_Writer__Writer)i0);
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4992)))), OOC_IA32_Writer__WriterDesc_Close)),OOC_IA32_Writer__WriterDesc_Close)((OOC_IA32_Writer__Writer)i0, (void*)(OOC_INT32)&res);
-      i0 = (OOC_INT32)res;
-      i1 = i0!=(OOC_INT32)0;
-      if (!i1) goto l6;
-      i1 = (OOC_INT32)errList;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5052)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i1, (Msg__Msg)i0);
-l6:
+      if (!i1) goto l4;
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4956)))), OOC_IA32_Writer__WriterDesc_Newline)),OOC_IA32_Writer__WriterDesc_Newline)((OOC_IA32_Writer__Writer)i0);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4976)))), OOC_IA32_Writer__WriterDesc_Close)),OOC_IA32_Writer__WriterDesc_Close)((OOC_IA32_Writer__Writer)i0);
+l4:
       return;
       ;
     }
@@ -195,14 +188,13 @@ l6:
   i1 = (OOC_INT32)libraryName;
   OOC_Auxiliary_ParseModule__ParseModule((OOC_Repository__Module)i0, OOC_TRUE, OOC_TRUE, OOC_FALSE, OOC_FALSE, (Object__String)i1, (void*)(OOC_INT32)&ast, (void*)(OOC_INT32)&symTab, (void*)(OOC_INT32)&pragmaHistory, (void*)(OOC_INT32)&errList);
   i1 = (OOC_INT32)errList;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5497)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i1);
-  if (!i1) goto l16;
+  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5406)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i1);
+  if (!i1) goto l12;
   i1 = writeAST;
   if (!i1) goto l5;
-  i1 = (OOC_INT32)StdChannels__stdout;
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5579)))), Channel__ChannelDesc_NewWriter)),Channel__ChannelDesc_NewWriter)((Channel__Channel)i1);
-  i2 = (OOC_INT32)ast;
-  OOC_AST_ExtTree_XML__Write((Channel__Writer)i1, (OOC_AST_ExtTree__Module)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5605)))), &_td_OOC_AST_ExtTree__ModuleDesc, 5605)));
+  i1 = (OOC_INT32)ast;
+  i2 = (OOC_INT32)IO_StdChannels__stdout;
+  OOC_AST_ExtTree_XML__Write((IO__ByteChannel)i2, (OOC_AST_ExtTree__Module)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5502)))), &_td_OOC_AST_ExtTree__ModuleDesc, 5502)));
 l5:
   i1 = (OOC_INT32)ast;
   i2 = (OOC_INT32)symTab;
@@ -210,39 +202,30 @@ l5:
   i4 = (OOC_INT32)errList;
   i5 = (OOC_INT32)OOC_IR_ConstFold__NewConstFold();
   i3 = (OOC_INT32)OOC_IR__NewBuilder((OOC_SymbolTable__Module)i2, (OOC_Config_Pragmas__History)i3, (OOC_Error__List)i4, (OOC_IR__ConstFold)i5);
-  i1 = (OOC_INT32)OOC_AST_ExtTree_CreateIR__CreateIR((OOC_AST_ExtTree__Module)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5675)))), &_td_OOC_AST_ExtTree__ModuleDesc, 5675)), (OOC_SymbolTable__Module)i2, (OOC_IR__Builder)i3);
+  i1 = (OOC_INT32)OOC_AST_ExtTree_CreateIR__CreateIR((OOC_AST_ExtTree__Module)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5572)))), &_td_OOC_AST_ExtTree__ModuleDesc, 5572)), (OOC_SymbolTable__Module)i2, (OOC_IR__Builder)i3);
   moduleIR = (OOC_IR__Module)i1;
   i2 = writeIR;
   if (!i2) goto l8;
-  i2 = (OOC_INT32)StdChannels__stdout;
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5972)))), Channel__ChannelDesc_NewWriter)),Channel__ChannelDesc_NewWriter)((Channel__Channel)i2);
-  OOC_IR_XML__Write((Channel__Writer)i2, (OOC_IR__Module)i1);
+  i2 = (OOC_INT32)IO_StdChannels__stdout;
+  OOC_IR_XML__Write((IO__ByteChannel)i2, (OOC_IR__Module)i1);
 l8:
   i2 = (OOC_INT32)symTab;
   i2 = (OOC_INT32)OOC_SymbolTable_Exports__GetExports((OOC_SymbolTable__Module)i2, OOC_TRUE);
   exports = (ADT_Dictionary__Dictionary)i2;
   i2 = (OOC_INT32)errList;
-  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6091)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
-  if (!i2) goto l16;
-  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6233)))), OOC_Repository__ModuleDesc_GetOutputChannel)),OOC_Repository__ModuleDesc_GetOutputChannel)((OOC_Repository__Module)i0, 14, OOC_TRUE, (void*)(OOC_INT32)&res);
-  i2 = (OOC_INT32)OOC_IA32_Writer__NewWriter((Channel__Channel)i2);
-  i3 = (OOC_INT32)res;
-  i4 = i3==(OOC_INT32)0;
+  i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5975)))), OOC_Error__ListDesc_NoErrors)),OOC_Error__ListDesc_NoErrors)((OOC_Error__List)i2);
+  if (!i2) goto l12;
+  i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6117)))), OOC_Repository__ModuleDesc_GetOutputChannel)),OOC_Repository__ModuleDesc_GetOutputChannel)((OOC_Repository__Module)i0, 14, OOC_TRUE);
+  i2 = (OOC_INT32)OOC_IA32_Writer__NewWriter((IO__ByteChannel)i2);
   w = (OOC_IA32_Writer__Writer)i2;
-  if (i4) goto l13;
-  i1 = (OOC_INT32)errList;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6417)))), OOC_Error__ListDesc_Append)),OOC_Error__ListDesc_Append)((OOC_Error__List)i1, (Msg__Msg)i3);
-  goto l14;
-l13:
   i3 = (OOC_INT32)translator;
   i4 = (OOC_INT32)symTab;
   OOC_Make_TranslateToIA32__WriteCodeFile((OOC_IA32_Writer__Writer)i2, (OOC_Repository__Module)i0, (OOC_SymbolTable__Module)i4, (OOC_IR__Module)i1, (OOC_Make_TranslateToIA32__Translator)i3);
-l14:
   i1 = (OOC_INT32)symTab;
   i3 = (OOC_INT32)errList;
   OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile((OOC_Repository__Module)i0, (OOC_SymbolTable__Module)i1, (OOC_Error__List)i3);
   OOC_Make_TranslateToIA32__Run_CloseFile((OOC_IA32_Writer__Writer)i2);
-l16:
+l12:
   i0 = (OOC_INT32)errList;
   return (OOC_Error__List)i0;
   ;

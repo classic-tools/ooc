@@ -8,6 +8,7 @@
 #include <URI/Error.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct URI_Authority_Unparsed__AuthorityDesc *URI_Authority_Unparsed__Authority;
 typedef struct URI_Authority_Unparsed__AuthorityDesc {
   URI_String__StringPtr unparsed;

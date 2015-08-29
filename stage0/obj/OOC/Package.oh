@@ -4,6 +4,7 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <Msg.oh>
+#include <IO.oh>
 #include <Object.oh>
 #include <ADT/ArrayList.oh>
 #include <XML/Error.oh>
@@ -13,6 +14,7 @@
 #include <OOC/Repository.oh>
 #include <RT0.oh>
 #include <Object.oh>
+#include <Exception.oh>
 typedef struct OOC_Package__VersionDesc *OOC_Package__Version;
 typedef struct OOC_Package__VersionDesc {
   OOC_INT32 current;
@@ -88,8 +90,8 @@ typedef void (*_TBP_OOC_Package__RepositoryDesc_MergePackage)(OOC_Package__Repos
 extern OOC_Package__FileSet OOC_Package__Normalize(OOC_Package__FileSet fileSet);
 extern OOC_Package__Package OOC_Package__GetPackage(const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Repository__Repository *rep);
 extern OOC_CHAR8 OOC_Package__ParseMetaData(Config_Section_Options__Section options, Config_Section_Options__Section pragmas);
-extern void OOC_Package__WritePackage(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, Msg__Msg *res);
-extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, Msg__Msg *res);
+extern void OOC_Package__WritePackage(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
+extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
 extern void OOC_Package__RemovePkgInfoCmd(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 uninstall__ref[], OOC_LEN uninstall_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
 extern OOC_Package__Package OOC_Package__GetPkgInfo(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Error__List *errList);
 extern OOC_CHAR8 OOC_Package__UpdateRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
@@ -100,7 +102,7 @@ extern void OOC_OOC_Package_init0();
 extern RT0__StructDesc _td_OOC_Package__URIBuffer;
 extern RT0__StructDesc _td_OOC_Package__Version;
 extern RT0__StructDesc _td_OOC_Package__VersionDesc;
-extern RT0__StructDesc _td_OOC_Package__847;
+extern RT0__StructDesc _td_OOC_Package__860;
 extern RT0__StructDesc _td_OOC_Package__Executable;
 extern RT0__StructDesc _td_OOC_Package__ExecutableDesc;
 extern RT0__StructDesc _td_OOC_Package__Library;
@@ -119,27 +121,27 @@ extern RT0__StructDesc _td_OOC_Package__Repository;
 extern RT0__StructDesc _td_OOC_Package__RepositoryDesc;
 extern RT0__StructDesc _td_OOC_Package__ErrorContext;
 extern RT0__StructDesc _td_OOC_Package__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Package__3036;
-extern RT0__StructDesc _td_OOC_Package__8494;
-extern RT0__StructDesc _td_OOC_Package__8483;
-extern RT0__StructDesc _td_OOC_Package__13831;
-extern RT0__StructDesc _td_OOC_Package__13820;
-extern RT0__StructDesc _td_OOC_Package__14098;
-extern RT0__StructDesc _td_OOC_Package__15369;
-extern RT0__StructDesc _td_OOC_Package__18573;
-extern RT0__StructDesc _td_OOC_Package__18775;
-extern RT0__StructDesc _td_OOC_Package__28738;
-extern RT0__StructDesc _td_OOC_Package__29454;
-extern RT0__StructDesc _td_OOC_Package__31010;
-extern RT0__StructDesc _td_OOC_Package__31122;
-extern RT0__StructDesc _td_OOC_Package__31152;
-extern RT0__StructDesc _td_OOC_Package__31788;
-extern RT0__StructDesc _td_OOC_Package__34974;
-extern RT0__StructDesc _td_OOC_Package__36299;
-extern RT0__StructDesc _td_OOC_Package__36351;
-extern RT0__StructDesc _td_OOC_Package__36760;
-extern RT0__StructDesc _td_OOC_Package__37334;
-extern RT0__StructDesc _td_OOC_Package__37571;
+extern RT0__StructDesc _td_OOC_Package__3049;
+extern RT0__StructDesc _td_OOC_Package__8507;
+extern RT0__StructDesc _td_OOC_Package__8496;
+extern RT0__StructDesc _td_OOC_Package__13844;
+extern RT0__StructDesc _td_OOC_Package__13833;
+extern RT0__StructDesc _td_OOC_Package__14111;
+extern RT0__StructDesc _td_OOC_Package__15382;
+extern RT0__StructDesc _td_OOC_Package__18586;
+extern RT0__StructDesc _td_OOC_Package__18788;
+extern RT0__StructDesc _td_OOC_Package__28751;
+extern RT0__StructDesc _td_OOC_Package__29461;
+extern RT0__StructDesc _td_OOC_Package__31051;
+extern RT0__StructDesc _td_OOC_Package__31163;
+extern RT0__StructDesc _td_OOC_Package__31193;
+extern RT0__StructDesc _td_OOC_Package__31829;
+extern RT0__StructDesc _td_OOC_Package__34890;
+extern RT0__StructDesc _td_OOC_Package__36122;
+extern RT0__StructDesc _td_OOC_Package__36174;
+extern RT0__StructDesc _td_OOC_Package__36583;
+extern RT0__StructDesc _td_OOC_Package__37173;
+extern RT0__StructDesc _td_OOC_Package__37426;
 #endif /* _MODULE_OOC_Package_ */
 
 /* --- */
