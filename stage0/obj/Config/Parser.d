@@ -1,8 +1,6 @@
 #include "Config/Parser.oh"
 #include "LongStrings.oh"
 #include "XML/UnicodeCodec/Latin1.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void Config_Parser__InitBuilder(Config_Parser__Builder b);
 static Config_Parser__Builder Config_Parser__NewBuilder();
 static void Config_Parser__InitNode(Config_Parser__Node node, Config_Parser__Element parent, XML_Locator__Locator l, struct XML_Locator__Position *pos, RT0__Struct pos__tag);
@@ -26,7 +24,7 @@ RT0__StructDesc _td_Config_Parser__Parser = { (RT0__Struct[]){&_td_Config_Parser
 RT0__StructDesc _td_Config_Parser__ParserDesc = { (RT0__Struct[]){&_td_Config_Parser__ParserDesc}, (void*[]){(void*)Config_Parser__ParserDesc_ParseDocument}, &_mid, "ParserDesc", 20, 0, RT0__strRecord };
 RT0__StructDesc _td_Config_Parser__Resolver = { (RT0__Struct[]){&_td_Config_Parser__ResolverDesc}, NULL, &_mid, "Resolver", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_Config_Parser__ResolverDesc = { (RT0__Struct[]){&_td_XML_EntityResolver__ResolverDesc,&_td_Config_Parser__ResolverDesc}, (void*[]){(void*)XML_EntityResolver__ResolverDesc_GetURI}, &_mid, "ResolverDesc", 0, 1, RT0__strRecord };
-RT0__StructDesc _td_Config_Parser__5879 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Config_Parser__5913 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"Config:Parser", (RT0__Struct[]) { &_td_Config_Parser__String, &_td_Config_Parser__Element, &_td_Config_Parser__Node, &_td_Config_Parser__NodeDesc, &_td_Config_Parser__CharData, &_td_Config_Parser__CharDataDesc, &_td_Config_Parser__ElementDesc, &_td_Config_Parser__Builder, &_td_Config_Parser__BuilderDesc, &_td_Config_Parser__Parser, &_td_Config_Parser__ParserDesc, &_td_Config_Parser__Resolver, &_td_Config_Parser__ResolverDesc, NULL } };
 
 extern void OOC_Config_Parser_init0() {

@@ -47,7 +47,7 @@ l3:
   i1 = (OOC_INT32)auth;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2131));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2131));
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2141)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2141)), (OOC_INT32)0);
   i1 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 2141)), i1);
   *(OOC_INT32*)(_check_pointer(i0, 2100)) = i1;
 l4:
@@ -61,16 +61,16 @@ Msg__Msg URI_Authority_Unparsed__AuthorityDesc_ParseAuthority(URI_Authority_Unpa
 
   i = 0;
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), (OOC_INT32)0);
   i1 = URI_CharClass__SkipAuthChar((void*)(_check_pointer(i0, 2344)), i1, (void*)(OOC_INT32)&i);
   if (!i1) goto l7;
 l2_loop:
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2344)), (OOC_INT32)0);
   i1 = URI_CharClass__SkipAuthChar((void*)(_check_pointer(i0, 2344)), i1, (void*)(OOC_INT32)&i);
   if (i1) goto l2_loop;
 l7:
   i1 = _check_pointer(i0, 2369);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
+  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i3 = i;
   i1 = *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT16, 2369)));
   i1 = i1!=(OOC_CHAR8)'\000';
@@ -97,7 +97,7 @@ void URI_Authority_Unparsed__AuthorityDesc_WriteXML(URI_Authority_Unparsed__Auth
   i1 = (OOC_INT32)auth;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2679));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2679));
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2689)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2689)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2660)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 2689)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2698)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</authority-unparsed>", 22);
   return;
@@ -111,7 +111,7 @@ void URI_Authority_Unparsed__AuthorityDesc_Append(URI_Authority_Unparsed__Author
   i0 = (OOC_INT32)auth;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2881));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 2881));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2891)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2891)), (OOC_INT32)0);
   Strings__Append((void*)(_check_pointer(i1, 2891)), i0, (void*)(OOC_INT32)str, str_0d);
   return;
   ;

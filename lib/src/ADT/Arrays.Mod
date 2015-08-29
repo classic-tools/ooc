@@ -1,4 +1,4 @@
-(*	$Id: Arrays.Mod,v 1.1 2002/07/14 19:49:40 mva Exp $	*)
+(*	$Id: Arrays.Mod,v 1.3 2002/12/20 17:46:21 mva Exp $	*)
 MODULE ADT:Arrays;
 (*  Miscellaneous operations on arrays of objects.
     Copyright (C) 2001  Michael van Acken
@@ -20,7 +20,7 @@ MODULE ADT:Arrays;
 
 
 IMPORT
-  ADT:Object, ADT:Comparator;
+  Object, ADT:Comparator;
 
 
 

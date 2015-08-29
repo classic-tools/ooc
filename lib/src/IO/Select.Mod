@@ -1,4 +1,4 @@
-(*	$Id: Select.Mod,v 1.1 2002/07/16 15:57:43 mva Exp $	*)
+(*	$Id: Select.Mod,v 1.2 2002/12/14 16:30:32 mva Exp $	*)
 MODULE IO:Select [FOREIGN "C"; LINK FILE "Select.c" END];
 (*  Wrapper around the select() function.
     Copyright (C) 2000  Michael van Acken
@@ -26,7 +26,9 @@ TYPE
   FileDescrSet* = POINTER TO FileDescrSetDesc;
   FileDescrSetDesc = RECORD
   (**This class encapsulates the C structure @samp{fd_set}.  *)
+<*PUSH; Warnings:=FALSE*>
     fd_set: SYSTEM.PTR;
+<*POP*>
   END;
 
 VAR

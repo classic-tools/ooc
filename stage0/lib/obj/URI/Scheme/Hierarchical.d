@@ -5,8 +5,6 @@
 #include "URI/CharClass.oh"
 #include "URI/Authority/Unparsed.oh"
 #include "URI/Query/Unparsed.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define URI_Scheme_Hierarchical__illegalPathChar 1
 static URI_Error__Context URI_Scheme_Hierarchical__pathContext;
 

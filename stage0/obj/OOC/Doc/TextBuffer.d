@@ -1,8 +1,6 @@
 #include "OOC/Doc/TextBuffer.oh"
 #include "CharClass.oh"
 #include "Strings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Doc_TextBuffer__minTextWidth 32
 static void OOC_Doc_TextBuffer__Extend(OOC_Doc_TextBuffer__Buffer b, OOC_INT32 to);
 

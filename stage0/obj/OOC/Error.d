@@ -2,8 +2,6 @@
 #include "TextRider.oh"
 #include "LongStrings.oh"
 #include "CharClass.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 OOC_INT8 OOC_Error__style;
 OOC_INT32 OOC_Error__minErrorDistance;
 #define OOC_Error__posAttr "pos"

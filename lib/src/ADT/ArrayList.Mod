@@ -1,4 +1,4 @@
-(*	$Id: ArrayList.Mod,v 1.1 2002/07/14 19:49:40 mva Exp $	*)
+(*	$Id: ArrayList.Mod,v 1.6 2002/12/17 19:33:49 mva Exp $	*)
 MODULE ADT:ArrayList;
 (*  Implements a resizable list of objects.
     Copyright (C) 2000  Michael van Acken
@@ -19,7 +19,7 @@ MODULE ADT:ArrayList;
 *)
 
 IMPORT
-  ADT:Object;
+  ADT:Storable, Object;
 
 
 TYPE
@@ -27,7 +27,7 @@ TYPE
   ArrayList* = POINTER TO ArrayListDesc;
   ArrayListDesc* = RECORD
   (**Resizable-array implementation of a list.  *)
-    (Object.ObjectDesc)
+    (Storable.ObjectDesc)
     array-: Array;
     (**Holds the elements of the list.  The index values in
        @samp{[0..@ofield{size}-1]} refer to valid entries.  *)
@@ -61,7 +61,7 @@ PROCEDURE CreateArray (size: LONGINT; old: ArrayList): Array;
 PROCEDURE Init* (l: ArrayList; initialSize: LONGINT);
 (**Initializes a list with the stated initial size.  *)
   BEGIN
-    Object.Init (l);
+    Storable.Init (l);
     l. array := CreateArray (initialSize, NIL);
     l. size := 0
   END Init;
@@ -307,24 +307,32 @@ PROCEDURE (l: ArrayList) HashCode* (): LONGINT;
     <*PUSH; Assertions:=TRUE*>ASSERT(FALSE)<*POP*>
   END HashCode;
 
-PROCEDURE (l: ArrayList) Store* (w: Object.Writer);
+PROCEDURE (l: ArrayList) Store* (w: Storable.Writer);
   VAR
     i: LONGINT;
+    obj: Object.Object;
   BEGIN
     w. WriteNum (l. size);
     FOR i := 0 TO l. size-1 DO
-      w. WriteObject (l. array[i]);
+      obj := l. array[i];
+      IF (obj = NIL) THEN
+        w. WriteObject (NIL);
+      ELSE
+        w. WriteObject (obj(Storable.Object));
+      END;
     END
   END Store;
 
-PROCEDURE (l: ArrayList) Load* (r: Object.Reader);
+PROCEDURE (l: ArrayList) Load* (r: Storable.Reader);
   VAR
     i, size: LONGINT;
+    obj: Storable.Object;
   BEGIN
     r. ReadNum (size);
     Init (l, size);
     FOR i := 0 TO size-1 DO
-      r. ReadObject (l. array[i])
+      r. ReadObject (obj);
+      l. array[i] := obj;
     END;
     l. size := size
   END Load;

@@ -1,10 +1,9 @@
 #include "OOC/AST/ExtTree/CreateSymTab.oh"
 #include "Msg.oh"
+#include "Object.oh"
 #include "URI/Parser.oh"
 #include "OOC/Scanner/Symbol.oh"
 #include "OOC/Scanner/Builder/BasicList.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static OOC_SymbolTable__Position OOC_AST_ExtTree_CreateSymTab__GetPosition(OOC_AST__Node node);
 static OOC_INT8 OOC_AST_ExtTree_CreateSymTab__ExportMark(OOC_AST__Node id);
 static OOC_INT32 OOC_AST_ExtTree_CreateSymTab__EndOfType(OOC_AST__Node t);

@@ -2,8 +2,6 @@
 #include "libc.oh"
 #include "CharClass.oh"
 #include "Real0.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define RealConv__maxValue "340282347"
 #define RealConv__maxExp 38
 

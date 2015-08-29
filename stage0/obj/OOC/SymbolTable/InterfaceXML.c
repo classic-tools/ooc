@@ -50,7 +50,7 @@ void OOC_SymbolTable_InterfaceXML__Write(Channel__Writer cw, URI__HierarchicalUR
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2394))+12);
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2388))+16);
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 2394))+12);
-          i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2399)), 0);
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2399)), (OOC_INT32)0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2356)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){110,97,109,101,0}), 5, (void*)(_check_pointer(i2, 2399)), i3);
           i0 = *(OOC_INT8*)((_check_pointer(i1, 2420))+24);
           switch (i0) {
@@ -105,7 +105,7 @@ l4:
           i1 = (OOC_INT32)w;
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3207))+12);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3207))+12);
-          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3212)), 0);
+          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3212)), (OOC_INT32)0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3173)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){99,108,97,115,115,0}), 6, (void*)(_check_pointer(i2, 3212)), i0);
 l4:
           return;
@@ -133,7 +133,7 @@ l4:
               i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 3890))+12);
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3879))+52);
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 3890))+12);
-              i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3895)), 0);
+              i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3895)), (OOC_INT32)0);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3842)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){99,108,97,115,115,0}), 6, (void*)(_check_pointer(i2, 3895)), i3);
               i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3938)))), OOC_SymbolTable__ItemDesc_Module)),OOC_SymbolTable__ItemDesc_Module)((OOC_SymbolTable__Item)i1);
               module = (OOC_SymbolTable__Module)i0;
@@ -142,14 +142,14 @@ l4:
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4003))+12);
               i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3997))+16);
               i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 4003))+12);
-              i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 4008)), 0);
+              i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 4008)), (OOC_INT32)0);
               OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3961)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i2, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i3, 4008)), i4);
               i2 = (OOC_INT32)repositories;
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4084))+16);
               i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4090))+12);
               i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4084))+16);
               i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4090))+12);
-              i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4095)), 0);
+              i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4095)), (OOC_INT32)0);
               i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4065)))), OOC_Config_Repositories__SectionDesc_GetModule)),OOC_Config_Repositories__SectionDesc_GetModule)((OOC_Config_Repositories__Section)i2, (void*)(_check_pointer(i3, 4095)), i0);
               i2 = i0!=(OOC_INT32)0;
               moduleRepository = (OOC_Repository__Module)i0;
@@ -195,7 +195,7 @@ l11:
           OOC_SymbolTable_InterfaceXML__Write_WriteItem((OOC_SymbolTable__Item)i1);
 l14:
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6147))+44);
-          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6155)), 0);
+          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6155)), (OOC_INT32)0);
           i1 = i1-1;
           i2 = 0<=i1;
           j = 0;
@@ -204,7 +204,7 @@ l14:
 l17_loop:
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6190))+44);
           i3 = _check_pointer(i3, 6198);
-          i4 = OOC_ARRAY_LENGTH(i3, 0);
+          i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
           i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 6198))*4);
           OOC_SymbolTable_InterfaceXML__Write_WriteItem((OOC_SymbolTable__Item)i3);
           i2 = i2+1;
@@ -303,7 +303,7 @@ l57:
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4830))+12);
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4824))+16);
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4830))+12);
-          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4835)), 0);
+          i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4835)), (OOC_INT32)0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 4788)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i2, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i3, 4835)), i1);
           goto l61;
 l60:
@@ -312,7 +312,7 @@ l60:
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4644))+12);
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4636))+32);
           i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4644))+12);
-          i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4649)), 0);
+          i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4649)), (OOC_INT32)0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4602)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i2, 4649)), i3);
 l61:
           i1 = (OOC_INT32)w;
@@ -320,7 +320,7 @@ l61:
           i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 4903))+12);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4896))+36);
           i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4903))+12);
-          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4908)), 0);
+          i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4908)), (OOC_INT32)0);
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4864)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i1, ((OOC_CHAR16[]){110,97,109,101,0}), 5, (void*)(_check_pointer(i2, 4908)), i0);
           i0 = (OOC_INT32)w;
           OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4923)))), XML_Writer__WriterDesc_EndTag)),XML_Writer__WriterDesc_EndTag)((XML_Writer__Writer)i0);
@@ -395,13 +395,13 @@ l23:
       if (i1) goto l30;
       i1 = *(OOC_UINT8*)((_check_pointer(i0, 8241))+48);
       if (i1) goto l28;
-      _copy_8("var-decl",(OOC_INT32)element,32);
+      _copy_8((const void*)"var-decl",(void*)(OOC_INT32)element,32);
       goto l31;
 l28:
-      _copy_8("parameter-decl",(OOC_INT32)element,32);
+      _copy_8((const void*)"parameter-decl",(void*)(OOC_INT32)element,32);
       goto l31;
 l30:
-      _copy_8("receiver-decl",(OOC_INT32)element,32);
+      _copy_8((const void*)"receiver-decl",(void*)(OOC_INT32)element,32);
 l31:
       OOC_SymbolTable_InterfaceXML__Write_WriteItem_StartDecl((void*)(OOC_INT32)element, 32, (OOC_SymbolTable__Declaration)i0);
       i0 = (OOC_INT32)item;
@@ -447,14 +447,14 @@ l40:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7413))+12);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7401))+40);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 7413))+12);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 7418)), 0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 7418)), (OOC_INT32)0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7367)))), XML_Writer__WriterDesc_AttrStringLatin1)),XML_Writer__WriterDesc_AttrStringLatin1)((XML_Writer__Writer)i0, ((OOC_CHAR16[]){109,111,100,117,108,101,0}), 7, (void*)(_check_pointer(i2, 7418)), i3);
       i0 = (OOC_INT32)repositories;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7481))+40);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7493))+12);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7481))+40);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 7493))+12);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 7498)), 0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 7498)), (OOC_INT32)0);
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7464)))), OOC_Config_Repositories__SectionDesc_GetModule)),OOC_Config_Repositories__SectionDesc_GetModule)((OOC_Config_Repositories__Section)i0, (void*)(_check_pointer(i2, 7498)), i3);
       moduleRepository = (OOC_Repository__Module)i0;
       i2 = i0!=(OOC_INT32)0;
@@ -476,7 +476,7 @@ l45:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6831))+12);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6825))+16);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 6831))+12);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 6836)), 0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 6836)), (OOC_INT32)0);
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6808)))), OOC_Config_Repositories__SectionDesc_GetModule)),OOC_Config_Repositories__SectionDesc_GetModule)((OOC_Config_Repositories__Section)i0, (void*)(_check_pointer(i2, 6836)), i3);
       moduleRepository = (OOC_Repository__Module)i0;
       i2 = i0!=(OOC_INT32)0;

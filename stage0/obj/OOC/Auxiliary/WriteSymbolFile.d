@@ -7,8 +7,6 @@
 #include "IO/Memory.oh"
 #include "OOC/SymbolTable/Builder.oh"
 #include "OOC/SymbolTable/Exports.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

@@ -6,6 +6,8 @@
 #include "TextRider.oh"
 #include "URI.oh"
 #include "URI/Error.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct URI_Scheme_Opaque__GenericDesc *URI_Scheme_Opaque__Generic;
 typedef struct URI_Scheme_Opaque__GenericDesc {
   URI_String__StringPtr schemeId;

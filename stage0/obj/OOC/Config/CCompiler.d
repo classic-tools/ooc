@@ -1,12 +1,10 @@
 #include "OOC/Config/CCompiler.oh"
 #include "Strings.oh"
-#include "ADT/String.oh"
+#include "Object.oh"
 #include "URI/Scheme/File.oh"
 #include "Config/Value/String.oh"
 #include "OOC/Config.oh"
 #include "OOC/Repository.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static Config_Section_Options__Option OOC_Config_CCompiler__cc;
 static Config_Section_Options__Option OOC_Config_CCompiler__cppflags;
 static Config_Section_Options__Option OOC_Config_CCompiler__cflags;
@@ -24,18 +22,17 @@ static void OOC_Config_CCompiler__SetCommand(const OOC_CHAR8 mode__ref[], OOC_LE
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
-RT0__StructDesc _td_OOC_Config_CCompiler__1409 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__1433 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__1922 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__1953 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2048, 2048, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__3760 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__3791 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__4271 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__4295 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__4570 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__4601 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__5244 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Config_CCompiler__5319 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__1405 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__1429 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__1918 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__1949 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2048, 2048, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__3832 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__3863 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__4343 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__4367 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__4642 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__4673 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_CCompiler__5384 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:CCompiler", (RT0__Struct[]) { NULL } };
 
 extern void OOC_OOC_Config_CCompiler_init0() {

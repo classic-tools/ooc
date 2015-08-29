@@ -22,7 +22,7 @@ void OOC_Make_WriteMainFileAssembler__WriteFile(OOC_Repository__Module module, c
       OOC_INITIALIZE_VPAR(suffix__ref,suffix,OOC_CHAR8 ,suffix_0d)
       i0 = (OOC_INT32)module;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1527))+4);
-      _copy_8((_check_pointer(i0, 1533)),(OOC_INT32)str,1024);
+      _copy_8((const void*)(_check_pointer(i0, 1533)),(void*)(OOC_INT32)str,1024);
       i = 0;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT32, 1572)));
       i0 = i0!=(OOC_CHAR8)'\000';

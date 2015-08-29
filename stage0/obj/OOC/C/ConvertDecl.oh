@@ -7,6 +7,8 @@
 #include "OOC/Repository.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/C/DeclWriter.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern OOC_C_DeclWriter__Type OOC_C_ConvertDecl__ConvertType(OOC_C_DeclWriter__Writer w, OOC_SymbolTable__Type resolvedType, OOC_SymbolTable__Type type);
 extern void OOC_C_ConvertDecl__ConvertSymTab(OOC_C_DeclWriter__Writer w, OOC_Repository__Module m, OOC_SymbolTable__Module symTab, ADT_Dictionary__Dictionary exports, OOC_CHAR8 writeExported);
 extern OOC_C_DeclWriter__Declaration OOC_C_ConvertDecl__GetProc(OOC_C_DeclWriter__Writer w, OOC_SymbolTable__ProcDecl procDecl, OOC_CHAR8 nestedPrototype);

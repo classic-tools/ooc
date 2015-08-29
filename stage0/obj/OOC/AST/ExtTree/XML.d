@@ -5,8 +5,6 @@
 #include "XML/UnicodeCodec/Latin1.oh"
 #include "OOC/Doc.oh"
 #include "OOC/Doc/Output/XML.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

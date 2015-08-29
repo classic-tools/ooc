@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "OOC/Error.oh"
 #include "OOC/Repository.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern void OOC_Make_WriteMainFileAssembler__WriteFile(OOC_Repository__Module module, const OOC_Repository__Module imports__ref[], OOC_LEN imports_0d, Msg__Msg *res);
 extern void OOC_OOC_Make_WriteMainFileAssembler_init();
 extern void OOC_OOC_Make_WriteMainFileAssembler_init0();

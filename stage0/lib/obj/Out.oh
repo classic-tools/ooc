@@ -5,6 +5,9 @@
 #include "RT0.oh"
 #include "StdChannels.oh"
 #include "TextRider.oh"
+#include "Object.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern TextRider__Writer Out__writer;
 extern OOC_CHAR8 Out__Done();
 extern void Out__ClearError();
@@ -12,6 +15,7 @@ extern void Out__SetWriter(TextRider__Writer w);
 extern void Out__Flush();
 extern void Out__Char(OOC_CHAR8 ch);
 extern void Out__String(const OOC_CHAR8 s[], OOC_LEN s_0d);
+extern void Out__Str(Object__String s);
 extern void Out__Bool(OOC_CHAR8 _bool);
 extern void Out__LongInt(OOC_INT32 lint, OOC_INT32 n);
 extern void Out__ShortInt(OOC_INT8 sint, OOC_INT32 n);
@@ -29,7 +33,7 @@ extern void OOC_Out_init();
 extern void OOC_Out_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_Out__2240;
+extern RT0__StructDesc _td_Out__2248;
 #endif /* _MODULE_Out_ */
 
 /* --- */

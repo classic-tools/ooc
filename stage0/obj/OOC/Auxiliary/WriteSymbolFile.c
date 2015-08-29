@@ -41,10 +41,10 @@ void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OO
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 968)))), BinaryRider__WriterDesc_WriteBytes)),BinaryRider__WriterDesc_WriteBytes)((BinaryRider__Writer)i3, (void*)(OOC_INT32)OOC_SymbolTable_Builder__magicNumber, 5, 0, 4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1041)))), BinaryRider__WriterDesc_WriteBytes)),BinaryRider__WriterDesc_WriteBytes)((BinaryRider__Writer)i3, (void*)(OOC_INT32)&fp, 4, 0, 4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1405))+64);
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1419)), 0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1419)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1385)))), BinaryRider__WriterDesc_WriteNum)),BinaryRider__WriterDesc_WriteNum)((BinaryRider__Writer)i3, i4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1458))+64);
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1472)), 0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1472)), (OOC_INT32)0);
   i4 = i4-1;
   i5 = 0<=i4;
   i = 0;
@@ -53,12 +53,12 @@ void OOC_Auxiliary_WriteSymbolFile__WriteSymbolFile(OOC_Repository__Module m, OO
 l9_loop:
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1504))+64);
   i6 = _check_pointer(i6, 1518);
-  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
   i6 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 1518))*4);
   mr = (OOC_SymbolTable__ModuleRef)i6;
   i7 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i6, 1559));
   i8 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i6, 1559));
-  i8 = OOC_ARRAY_LENGTH((_check_pointer(i8, 1564)), 0);
+  i8 = OOC_ARRAY_LENGTH((_check_pointer(i8, 1564)), (OOC_INT32)0);
   i7 = Strings__Length((void*)(_check_pointer(i7, 1564)), i8);
   len = i7;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 1581)))), BinaryRider__WriterDesc_WriteNum)),BinaryRider__WriterDesc_WriteNum)((BinaryRider__Writer)i3, i7);

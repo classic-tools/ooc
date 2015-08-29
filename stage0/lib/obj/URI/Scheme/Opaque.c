@@ -50,7 +50,7 @@ void URI_Scheme_Opaque__GenericDesc_Copy(URI_Scheme_Opaque__Generic uri, URI__UR
 l3:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1873))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1873))+4);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1881)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1881)), (OOC_INT32)0);
   i0 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 1881)), i0);
   *(OOC_INT32*)((_check_pointer(i1, 1845))+4) = i0;
 l4:
@@ -95,10 +95,10 @@ Msg__Msg URI_Scheme_Opaque__GenericDesc_ParseOpaquePart(URI_Scheme_Opaque__Gener
   OOC_INT16 pos;
 
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2388)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2388)), (OOC_INT32)0);
   i1 = URI_Scheme_Opaque__IsValidOpaqueStr((void*)(_check_pointer(i0, 2388)), i1);
-  pos = i1;
   i2 = i1<0;
+  pos = i1;
   if (i2) goto l3;
   i0 = offset;
   i2 = (OOC_INT32)URI_Scheme_Opaque__opaqueContext;
@@ -127,14 +127,14 @@ void URI_Scheme_Opaque__GenericDesc_WriteXML(URI_Scheme_Opaque__Generic uri, Tex
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2737)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<scheme>", 10);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2797));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2797));
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2807)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2807)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2779)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 2807)), i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2818)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</scheme>", 10);
 l4:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2860)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<opaque-part>", 15);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2923))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2923))+4);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2931)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 2931)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2905)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 2931)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2940)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</opaque-part>", 15);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2979)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012</opaque-uri>", 15);
@@ -145,12 +145,12 @@ l4:
 void URI_Scheme_Opaque__GenericDesc_GetString(URI_Scheme_Opaque__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d) {
   register OOC_INT32 i0,i1;
 
-  _copy_8("",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)str,str_0d);
   i0 = (OOC_INT32)uri;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3132)))), URI__URIDesc_AppendScheme)),URI__URIDesc_AppendScheme)((URI__URI)i0, (void*)(OOC_INT32)str, str_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3183))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3183))+4);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3191)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3191)), (OOC_INT32)0);
   URI_String__AppendEscaped((void*)(_check_pointer(i1, 3191)), i0, ";/?:@&=+$,[]", 13, (void*)(OOC_INT32)str, str_0d);
   return;
   ;

@@ -16,7 +16,7 @@ static void OOC_SSA_CSE__InitPartition(OOC_SSA_CSE__Partition p) {
 l1_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2676))+12);
   i2 = _check_pointer(i2, 2683);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   *(OOC_INT32*)(i2+(_check_index(i1, i3, OOC_UINT32, 2683))*4) = (OOC_INT32)0;
   i1 = i1+1;
   i = i1;
@@ -29,7 +29,7 @@ l5:
   *(OOC_INT32*)((_check_pointer(i0, 2797))+28) = ((OOC_INT32)RT0__NewObject(_td_OOC_SSA_CSE__ChildrenList.baseTypes[0], 4));
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2833))+28);
   i0 = _check_pointer(i0, 2848);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
+  i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   *(OOC_INT32*)(i0+(_check_index(0, i1, OOC_UINT8, 2848))*4) = (OOC_INT32)0;
   return;
   ;
@@ -76,7 +76,7 @@ void OOC_SSA_CSE__PartitionDesc_Add(OOC_SSA_CSE__Partition p, OOC_SSA__Instr ins
   i = 0;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3463))+12);
   i2 = _check_pointer(i2, 3470);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(0, i3, OOC_UINT32, 3470))*4);
   i2 = i2!=i0;
   if (i2) goto l7;
@@ -89,7 +89,7 @@ l8_loop:
   i = i2;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3463))+12);
   i3 = _check_pointer(i3, 3470);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 3470))*4);
   i3 = i3!=i0;
   if (i3) goto l8_loop;
@@ -98,11 +98,11 @@ l12:
 l13:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3535))+12);
   i2 = _check_pointer(i2, 3542);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3550))+12);
   i4 = _check_pointer(i4, 3557);
   i1 = *(OOC_INT32*)((_check_pointer(i1, 3561))+8);
-  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
   OOC_SSA_CSE__PartitionDesc_Add_Swap((void*)(i2+(_check_index(i0, i3, OOC_UINT32, 3542))*4), (void*)(i4+(_check_index((i1-1), i5, OOC_UINT32, 3557))*4));
 l14:
   i0 = (OOC_INT32)old;
@@ -111,8 +111,8 @@ l14:
 l15:
   i0 = (OOC_INT32)p;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3641))+12);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3648)), (OOC_INT32)0);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 3626))+8);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3648)), 0);
   i1 = i2==i1;
   if (!i1) goto l34;
   i1 = *(OOC_INT32*)((_check_pointer(i0, 3711))+8);
@@ -126,10 +126,10 @@ l15:
   i3=0;
 l20_loop:
   i4 = _check_pointer(i1, 3766);
-  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
   i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3774))+12);
   i6 = _check_pointer(i6, 3781);
-  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
   i6 = (OOC_INT32)*(OOC_INT32*)(i6+(_check_index(i3, i7, OOC_UINT32, 3781))*4);
   *(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 3766))*4) = i6;
   i3 = i3+1;
@@ -137,7 +137,7 @@ l20_loop:
   i = i3;
   if (i4) goto l20_loop;
 l25:
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3831)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3831)), (OOC_INT32)0);
   i2 = i2-1;
   i3 = *(OOC_INT32*)((_check_pointer(i0, 3813))+8);
   i4 = i3<=i2;
@@ -145,7 +145,7 @@ l25:
   if (!i4) goto l33;
 l28_loop:
   i4 = _check_pointer(i1, 3850);
-  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
   *(OOC_INT32*)(i4+(_check_index(i3, i5, OOC_UINT32, 3850))*4) = (OOC_INT32)0;
   i3 = i3+1;
   i4 = i3<=i2;
@@ -157,7 +157,7 @@ l34:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3915))+12);
   i1 = _check_pointer(i1, 3922);
   i2 = *(OOC_INT32*)((_check_pointer(i0, 3924))+8);
-  i3 = OOC_ARRAY_LENGTH(i1, 0);
+  i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i4 = (OOC_INT32)instr;
   *(OOC_INT32*)(i1+(_check_index(i2, i3, OOC_UINT32, 3922))*4) = i4;
   i1 = *(OOC_INT32*)((_check_pointer(i0, 3952))+8);
@@ -198,7 +198,7 @@ void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb) {
 
     
     OOC_SSA_CSE__Partition OOC_SSA_CSE__Transform_SplittedPartition(OOC_SSA_CSE__Partition p, OOC_INT32 opndIndex) {
-      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8,i9;
+      register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7,i8;
       OOC_INT32 i;
       OOC_SSA_CSE__ChildrenList newList;
       OOC_INT32 j;
@@ -222,7 +222,7 @@ l3:
       i = 0;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4892))+28);
       i1 = _check_pointer(i1, 4907);
-      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
       i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(0, i3, OOC_UINT32, 4907))*4);
       i1 = i1!=(OOC_INT32)0;
       if (i1) goto l6;
@@ -231,7 +231,7 @@ l3:
 l6:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4936))+28);
       i1 = _check_pointer(i1, 4951);
-      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
       i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(0, i3, OOC_UINT32, 4951))*4);
       i1 = *(OOC_INT32*)((_check_pointer(i1, 4954))+24);
       i1 = i1!=i2;
@@ -247,7 +247,7 @@ l11_loop:
       i = i1;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4892))+28);
       i3 = _check_pointer(i3, 4907);
-      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
       i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i1, i4, OOC_UINT32, 4907))*4);
       i3 = i3!=(OOC_INT32)0;
       if (i3) goto l14;
@@ -256,7 +256,7 @@ l11_loop:
 l14:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4936))+28);
       i3 = _check_pointer(i3, 4951);
-      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
       i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i1, i4, OOC_UINT32, 4951))*4);
       i3 = *(OOC_INT32*)((_check_pointer(i3, 4954))+24);
       i3 = i3!=i2;
@@ -266,40 +266,39 @@ l16:
 l20:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5039))+28);
       i3 = _check_pointer(i3, 5054);
-      i4 = OOC_ARRAY_LENGTH(i3, 0);
+      i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
       i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i1, i4, OOC_UINT32, 5054))*4);
       i3 = i3==(OOC_INT32)0;
       if (i3) goto l23;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5545))+28);
       i0 = _check_pointer(i0, 5560);
-      i2 = OOC_ARRAY_LENGTH(i0, 0);
+      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
       i0 = (OOC_INT32)*(OOC_INT32*)(i0+(_check_index(i1, i2, OOC_UINT32, 5560))*4);
       return (OOC_SSA_CSE__Partition)i0;
       goto l36;
 l23:
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5096))+28);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 5111)), 0);
-      i4 = i1+1;
-      i3 = i4==i3;
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 5111)), (OOC_INT32)0);
+      i3 = (i1+1)==i3;
       if (!i3) goto l34;
-      i3 = (OOC_INT32)RT0__NewObject(_td_OOC_SSA_CSE__ChildrenList.baseTypes[0], (i4*2));
+      i3 = (OOC_INT32)RT0__NewObject(_td_OOC_SSA_CSE__ChildrenList.baseTypes[0], ((i1+1)*2));
       newList = (OOC_SSA_CSE__ChildrenList)i3;
-      i5 = 0<=i1;
+      i4 = 0<=i1;
       j = 0;
-      if (!i5) goto l33;
-      i5=0;
+      if (!i4) goto l33;
+      i4=0;
 l28_loop:
-      i6 = _check_pointer(i3, 5208);
-      i7 = OOC_ARRAY_LENGTH(i6, 0);
-      i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5216))+28);
-      i8 = _check_pointer(i8, 5231);
-      i9 = OOC_ARRAY_LENGTH(i8, 0);
-      i8 = (OOC_INT32)*(OOC_INT32*)(i8+(_check_index(i5, i9, OOC_UINT32, 5231))*4);
-      *(OOC_INT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 5208))*4) = i8;
-      i5 = i5+1;
-      i6 = i5<=i1;
-      j = i5;
-      if (i6) goto l28_loop;
+      i5 = _check_pointer(i3, 5208);
+      i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
+      i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5216))+28);
+      i7 = _check_pointer(i7, 5231);
+      i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
+      i7 = (OOC_INT32)*(OOC_INT32*)(i7+(_check_index(i4, i8, OOC_UINT32, 5231))*4);
+      *(OOC_INT32*)(i5+(_check_index(i4, i6, OOC_UINT32, 5208))*4) = i7;
+      i4 = i4+1;
+      i5 = i4<=i1;
+      j = i4;
+      if (i5) goto l28_loop;
 l33:
       *(OOC_INT32*)((_check_pointer(i0, 5266))+28) = i3;
 l34:
@@ -309,12 +308,12 @@ l34:
       *(OOC_INT32*)((_check_pointer(i3, 5385))+24) = i2;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5425))+28);
       i2 = _check_pointer(i2, 5440);
-      i5 = OOC_ARRAY_LENGTH(i2, 0);
-      *(OOC_INT32*)(i2+(_check_index(i1, i5, OOC_UINT32, 5440))*4) = i3;
+      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
+      *(OOC_INT32*)(i2+(_check_index(i1, i4, OOC_UINT32, 5440))*4) = i3;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5463))+28);
       i0 = _check_pointer(i0, 5478);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
-      *(OOC_INT32*)(i0+(_check_index(i4, i1, OOC_UINT32, 5478))*4) = (OOC_INT32)0;
+      i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
+      *(OOC_INT32*)(i0+(_check_index((i1+1), i2, OOC_UINT32, 5478))*4) = (OOC_INT32)0;
       return (OOC_SSA_CSE__Partition)i3;
 l36:
       _failed_function(4484); return 0;
@@ -366,7 +365,7 @@ l14:
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6584))+20);
           i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6594))+28);
           i1 = _check_pointer(i1, 6609);
-          i2 = OOC_ARRAY_LENGTH(i1, 0);
+          i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
           i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(1, i2, OOC_UINT8, 6609))*4);
           i1 = i1==(OOC_INT32)0;
           
@@ -449,7 +448,7 @@ l26_loop:
       *(OOC_INT32*)((_check_pointer(i0, 7657))+24) = -1;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7690))+28);
       i1 = _check_pointer(i1, 7705);
-      i2 = OOC_ARRAY_LENGTH(i1, 0);
+      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
       *(OOC_INT32*)(i1+(_check_index(0, i2, OOC_UINT8, 7705))*4) = (OOC_INT32)0;
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7733));
       p = (OOC_SSA_CSE__Partition)i0;
@@ -536,7 +535,7 @@ l8_loop:
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8635))+12);
       i2 = _check_pointer(i2, 8642);
-      i3 = OOC_ARRAY_LENGTH(i2, 0);
+      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(i0, i3, OOC_UINT32, 8642))*4);
       i2 = i2!=(OOC_INT32)0;
       if (!i2) goto l30;
@@ -549,20 +548,20 @@ l13_loop:
       i1 = (OOC_INT32)p;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8740))+12);
       i2 = _check_pointer(i2, 8747);
-      i3 = OOC_ARRAY_LENGTH(i2, 0);
+      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(i0, i3, OOC_UINT32, 8747))*4);
       i2 = i2!=(OOC_INT32)0;
       if (!i2) goto l24;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8792))+12);
       i2 = _check_pointer(i2, 8799);
-      i3 = OOC_ARRAY_LENGTH(i2, 0);
+      i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
       i4 = i;
       i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(i4, i3, OOC_UINT32, 8799))*4);
       i2 = _type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 8807)))), &_td_OOC_SSA__InstrDesc, 8807);
       iInstr = (OOC_SSA__Instr)i2;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8844))+12);
       i1 = _check_pointer(i1, 8851);
-      i3 = OOC_ARRAY_LENGTH(i1, 0);
+      i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
       i1 = (OOC_INT32)*(OOC_INT32*)(i1+(_check_index(i0, i3, OOC_UINT32, 8851))*4);
       i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8859)))), &_td_OOC_SSA__InstrDesc, 8859);
       jInstr = (OOC_SSA__Instr)i1;
@@ -575,7 +574,7 @@ l13_loop:
       i0 = (OOC_INT32)p;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9159))+12);
       i1 = _check_pointer(i1, 9166);
-      i2 = OOC_ARRAY_LENGTH(i1, 0);
+      i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
       i3 = i;
       *(OOC_INT32*)(i1+(_check_index(i3, i2, OOC_UINT32, 9166))*4) = (OOC_INT32)0;
       i0 = *(OOC_INT32*)((_check_pointer(i0, 9204))+8);
@@ -588,7 +587,7 @@ l22:
       i0 = (OOC_INT32)p;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9002))+12);
       i0 = _check_pointer(i0, 9009);
-      i1 = OOC_ARRAY_LENGTH(i0, 0);
+      i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
       i2 = j;
       *(OOC_INT32*)(i0+(_check_index(i2, i1, OOC_UINT32, 9009))*4) = (OOC_INT32)0;
 l24:
@@ -685,7 +684,7 @@ l28_loop:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10390))+12);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10390))+12);
   i0 = *(OOC_INT32*)((_check_pointer(i0, 10401))+8);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 10397)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 10397)), (OOC_INT32)0);
   OOC_SSA_CSE__Transform_Split((void*)(_check_pointer(i1, 10397)), i2, i0);
 l31:
   i0 = (OOC_INT32)worklist;

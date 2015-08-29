@@ -1,4 +1,4 @@
-(*	$Id: StringSearch.Mod,v 1.1 2002/07/13 14:36:16 mva Exp $	*)
+(*	$Id: StringSearch.Mod,v 1.5 2002/12/17 19:33:50 mva Exp $	*)
 MODULE StringSearch [OOC_EXTENSIONS];
 (*  Framework for string searching algorithms.
     Copyright (C) 2001  Michael van Acken
@@ -19,7 +19,7 @@ MODULE StringSearch [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  ADT:Object, ADT:String;
+  Object;
 
 (**This module specifies a common framework for string search algorithms.
    Examples for implementations are @omodule{*StringSearch:SubstringBF}, which
@@ -55,7 +55,7 @@ TYPE
   (**A representation of a search pattern.  An instance of @otype{Matcher} is
      applied to a string by calling one of the match or search methods.  *)
     (Object.ObjectDesc)
-    pattern-: String.String;
+    pattern-: Object.String8;
     (**The pattern string from which the matcher object was compiled.  *)
     flags-: Flags;
     (**The flags argument used when the matcher object was compiled.  *)
@@ -81,7 +81,7 @@ TYPE
     matcher-: Matcher;
     (**The matcher object whose match or search method produced this
        @otype{MatchObject} instance.  *)
-    string-: String.String;
+    string-: Object.String8;
     (**The string passed to a match or search function.  This field is
        @code{NIL} if @oproc{Matcher.MatchChars} or @oproc{Matcher.SearchChars}
        is called without the flag @oconst{copyString}.  *)
@@ -89,9 +89,8 @@ TYPE
 
 
 PROCEDURE InitMatchObject* (m: MatchObject; pos, endpos: LONGINT;
-                            matcher: Matcher; string: String.String);
+                            matcher: Matcher; string: Object.String8);
   BEGIN
-    Object.Init (m);
     m. pos := pos;
     m. endpos := endpos;
     m. matcher := matcher;
@@ -100,7 +99,6 @@ PROCEDURE InitMatchObject* (m: MatchObject; pos, endpos: LONGINT;
 
 PROCEDURE (m: MatchObject) Destroy*;
   BEGIN
-    m. Destroy^;
     m. pos := 0;
     m. endpos := 0;
     m. matcher := NIL;
@@ -131,9 +129,8 @@ PROCEDURE (m: MatchObject) [ABSTRACT] End* (group: LONGINT): LONGINT;
   END End;
 
 
-PROCEDURE InitMatcher* (matcher: Matcher; pattern: String.String; flags: Flags; groups: LONGINT);
+PROCEDURE InitMatcher* (matcher: Matcher; pattern: Object.String8; flags: Flags; groups: LONGINT);
   BEGIN
-    Object.Init (matcher);
     matcher. pattern := pattern;
     matcher. flags := flags;
     matcher. groups := groups;
@@ -141,7 +138,6 @@ PROCEDURE InitMatcher* (matcher: Matcher; pattern: String.String; flags: Flags; 
 
 PROCEDURE (matcher: Matcher) Destroy*;
   BEGIN
-    matcher. Destroy^;
     matcher. pattern := NIL;
     matcher. flags := {};
     matcher. groups := 0;
@@ -173,9 +169,9 @@ PROCEDURE (matcher: Matcher) [ABSTRACT] MatchChars* (string[NO_COPY]: ARRAY OF C
    @end precond *)
   END MatchChars;
 
-PROCEDURE (matcher: Matcher) [ABSTRACT] Match* (string: String.String; pos, endpos: LONGINT): MatchObject;
+PROCEDURE (matcher: Matcher) [ABSTRACT] Match* (string: Object.String8; pos, endpos: LONGINT): MatchObject;
   (**Like @oproc{Matcher.MatchChars}, but works on an instance of
-     @otype{String.String}.  *)
+     @otype{Object.String8}.  *)
   END Match;
 
 PROCEDURE (matcher: Matcher) [ABSTRACT] SearchChars* (string[NO_COPY]: ARRAY OF CHAR; pos, endpos: LONGINT): MatchObject;
@@ -189,22 +185,20 @@ PROCEDURE (matcher: Matcher) [ABSTRACT] SearchChars* (string[NO_COPY]: ARRAY OF 
    meaning as for the @oproc{Matcher.MatchChars} method.  *)
   END SearchChars;
 
-PROCEDURE (matcher: Matcher) [ABSTRACT] Search* (string: String.String; pos, endpos: LONGINT): MatchObject;
+PROCEDURE (matcher: Matcher) [ABSTRACT] Search* (string: Object.String8; pos, endpos: LONGINT): MatchObject;
   (**Like @oproc{Matcher.SearchChars}, but works on an instance of
-     @otype{String.String}.  *)
+     @otype{Object.String8}.  *)
   END Search;
   
 PROCEDURE InitFactory* (f: Factory);
   BEGIN
-    Object.Init (f)
   END InitFactory;
 
 PROCEDURE (f: Factory) Destroy*;
   BEGIN
-    f. Destroy^
   END Destroy;
 
-PROCEDURE (f: Factory) [ABSTRACT] Compile* (pattern: String.String;
+PROCEDURE (f: Factory) [ABSTRACT] Compile* (pattern: Object.String8;
                                             flags: Flags): Matcher;
 (**Compile a expression, for example a regular expression pattern, into a
    @otype{Matcher} expression object.  The matcher object can be used for

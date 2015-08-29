@@ -30,7 +30,7 @@ void URI_Scheme_Hierarchical__ParameterDesc_Copy(URI_Scheme_Hierarchical__Parame
   i1 = (OOC_INT32)param;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3029))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3029))+4);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3037)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3037)), (OOC_INT32)0);
   i1 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 3037)), i1);
   *(OOC_INT32*)((_check_pointer(i0, 3002))+4) = i1;
   return;
@@ -57,7 +57,7 @@ void URI_Scheme_Hierarchical__ParameterDesc_WriteXML(URI_Scheme_Hierarchical__Pa
   i1 = (OOC_INT32)param;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3347))+4);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3347))+4);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3355)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3355)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3327)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 3355)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3364)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</parameter>", 13);
   return;
@@ -70,7 +70,7 @@ void URI_Scheme_Hierarchical__ParameterDesc_Append(URI_Scheme_Hierarchical__Para
   i0 = (OOC_INT32)param;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3512))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3512))+4);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3520)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3520)), (OOC_INT32)0);
   URI_String__AppendEscaped((void*)(_check_pointer(i1, 3520)), i0, ":@&=+$,", 8, (void*)(OOC_INT32)str, str_0d);
   return;
   ;
@@ -138,7 +138,7 @@ void URI_Scheme_Hierarchical__SegmentDesc_Copy(URI_Scheme_Hierarchical__Segment 
   *(OOC_INT32*)(_check_pointer(i0, 4452)) = i2;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4508))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4508))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4516)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 4516)), (OOC_INT32)0);
   i2 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 4516)), i3);
   *(OOC_INT32*)((_check_pointer(i0, 4482))+4) = i2;
   *(OOC_INT32*)((_check_pointer(i0, 4528))+12) = (OOC_INT32)0;
@@ -180,7 +180,7 @@ void URI_Scheme_Hierarchical__SegmentDesc_WriteXML(URI_Scheme_Hierarchical__Segm
   i1 = (OOC_INT32)segm;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5046))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5046))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 5054)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 5054)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5027)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 5054)), i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5063)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</value>", 9);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5108))+12);
@@ -206,7 +206,7 @@ void URI_Scheme_Hierarchical__SegmentDesc_Append(URI_Scheme_Hierarchical__Segmen
   i0 = (OOC_INT32)segm;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5393))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5393))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5401)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5401)), (OOC_INT32)0);
   URI_String__AppendEscaped((void*)(_check_pointer(i1, 5401)), i2, ":@&=+$,", 8, (void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5454))+12);
   i1 = i0!=(OOC_INT32)0;
@@ -439,7 +439,7 @@ l1_loop:
   start = i5;
   if (i4) goto l4;
   i6 = _check_pointer(i3, 9080);
-  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
   i6 = *(OOC_UINT8*)(i6+(_check_index(i5, i7, OOC_UINT16, 9080)));
   i6 = i6!=(OOC_CHAR8)':';
   
@@ -451,7 +451,7 @@ l6:
   i6=OOC_FALSE;
   goto l10;
 l8:
-  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9118)), 0);
+  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9118)), (OOC_INT32)0);
   i6 = URI_CharClass__SkipPChar((void*)(_check_pointer(i3, 9118)), i6, (void*)(OOC_INT32)&i);
   
 l10:
@@ -459,7 +459,7 @@ l10:
 l11_loop:
   if (i4) goto l14;
   i6 = _check_pointer(i3, 9080);
-  i7 = OOC_ARRAY_LENGTH(i6, 0);
+  i7 = OOC_ARRAY_LENGTH(i6, (OOC_INT32)0);
   i8 = i;
   i6 = *(OOC_UINT8*)(i6+(_check_index(i8, i7, OOC_UINT16, 9080)));
   i6 = i6!=(OOC_CHAR8)':';
@@ -472,24 +472,24 @@ l16:
   i6=OOC_FALSE;
   goto l20;
 l18:
-  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9118)), 0);
+  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9118)), (OOC_INT32)0);
   i6 = URI_CharClass__SkipPChar((void*)(_check_pointer(i3, 9118)), i6, (void*)(OOC_INT32)&i);
   
 l20:
   if (i6) goto l11_loop;
 l24:
-  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9170)), 0);
+  i6 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9170)), (OOC_INT32)0);
   i7 = i;
   i5 = (OOC_INT32)URI_String__Extract((void*)(_check_pointer(i3, 9170)), i6, i5, i7);
   substr = (URI_String__StringPtr)i5;
   i6 = (OOC_INT32)URI_String__Unescape((URI_String__StringPtr)i5);
   i6 = (OOC_INT32)URI_Scheme_Hierarchical__NewSegment((URI_String__StringPtr)i6);
   segment = (URI_Scheme_Hierarchical__Segment)i6;
-  i7 = OOC_ARRAY_LENGTH((_check_pointer(i5, 9297)), 0);
+  i7 = OOC_ARRAY_LENGTH((_check_pointer(i5, 9297)), (OOC_INT32)0);
   i5 = URI_CharClass__IsMember((OOC_CHAR8)'%', (void*)(_check_pointer(i5, 9297)), i7);
   *(OOC_UINT8*)((_check_pointer(i6, 9250))+8) = i5;
   i5 = _check_pointer(i3, 9318);
-  i7 = OOC_ARRAY_LENGTH(i5, 0);
+  i7 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
   i8 = i;
   i5 = *(OOC_UINT8*)(i5+(_check_index(i8, i7, OOC_UINT16, 9318)));
   i5 = i5==(OOC_CHAR8)';';
@@ -501,7 +501,7 @@ l26_loop:
   start = i5;
   if (i4) goto l29;
   i7 = _check_pointer(i3, 9401);
-  i8 = OOC_ARRAY_LENGTH(i7, 0);
+  i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
   i7 = *(OOC_UINT8*)(i7+(_check_index(i5, i8, OOC_UINT16, 9401)));
   i7 = i7!=(OOC_CHAR8)':';
   
@@ -513,7 +513,7 @@ l31:
   i7=OOC_FALSE;
   goto l35;
 l33:
-  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9439)), 0);
+  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9439)), (OOC_INT32)0);
   i7 = URI_CharClass__SkipPChar((void*)(_check_pointer(i3, 9439)), i7, (void*)(OOC_INT32)&i);
   
 l35:
@@ -521,7 +521,7 @@ l35:
 l36_loop:
   if (i4) goto l39;
   i7 = _check_pointer(i3, 9401);
-  i8 = OOC_ARRAY_LENGTH(i7, 0);
+  i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
   i9 = i;
   i7 = *(OOC_UINT8*)(i7+(_check_index(i9, i8, OOC_UINT16, 9401)));
   i7 = i7!=(OOC_CHAR8)':';
@@ -534,20 +534,20 @@ l41:
   i7=OOC_FALSE;
   goto l45;
 l43:
-  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9439)), 0);
+  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9439)), (OOC_INT32)0);
   i7 = URI_CharClass__SkipPChar((void*)(_check_pointer(i3, 9439)), i7, (void*)(OOC_INT32)&i);
   
 l45:
   if (i7) goto l36_loop;
 l49:
-  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9550)), 0);
+  i7 = OOC_ARRAY_LENGTH((_check_pointer(i3, 9550)), (OOC_INT32)0);
   i8 = i;
   i5 = (OOC_INT32)URI_String__Extract((void*)(_check_pointer(i3, 9550)), i7, i5, i8);
   i5 = (OOC_INT32)URI_String__Unescape((URI_String__StringPtr)i5);
   i5 = (OOC_INT32)URI_Scheme_Hierarchical__NewParameter((URI_String__StringPtr)i5);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i6, 9476)))), URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)),URI_Scheme_Hierarchical__SegmentDesc_AppendParameter)((URI_Scheme_Hierarchical__Segment)i6, (URI_Scheme_Hierarchical__Parameter)i5);
   i5 = _check_pointer(i3, 9318);
-  i7 = OOC_ARRAY_LENGTH(i5, 0);
+  i7 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
   i8 = i;
   i5 = *(OOC_UINT8*)(i5+(_check_index(i8, i7, OOC_UINT16, 9318)));
   i5 = i5==(OOC_CHAR8)';';
@@ -556,7 +556,7 @@ l54:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9587)))), URI_Scheme_Hierarchical__GenericDesc_AppendSegment)),URI_Scheme_Hierarchical__GenericDesc_AppendSegment)((URI_Scheme_Hierarchical__Generic)i0, (URI_Scheme_Hierarchical__Segment)i6);
   absToggle = OOC_TRUE;
   i4 = _check_pointer(i3, 9652);
-  i5 = OOC_ARRAY_LENGTH(i4, 0);
+  i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
   i6 = i;
   i4 = *(OOC_UINT8*)(i4+(_check_index(i6, i5, OOC_UINT16, 9652)));
   i4 = i4==(OOC_CHAR8)'/';
@@ -566,7 +566,7 @@ l54:
   goto l1_loop;
 l59:
   i3 = _check_pointer(i3, 9738);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i6, i4, OOC_UINT16, 9738)));
   i3 = i3!=(OOC_CHAR8)'\000';
   if (i3) goto l62;
@@ -603,7 +603,7 @@ void URI_Scheme_Hierarchical__GenericDesc_ResolveRelative(URI_Scheme_Hierarchica
 l3:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10153))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10161)),(const void*)"."))==0;
+      _cmp8((const void*)(_check_pointer(i1, 10161)),(const void*)"."))==(OOC_INT32)0;
       
 l5:
       if (i1) goto l7;
@@ -635,7 +635,7 @@ l15:
 l18:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10153))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10161)),(const void*)"."))==0;
+      _cmp8((const void*)(_check_pointer(i1, 10161)),(const void*)"."))==(OOC_INT32)0;
       
 l20:
       if (i1) goto l22;
@@ -673,7 +673,7 @@ l4:
 l6:
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10558))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10566)),(const void*)".."))!=0;
+      _cmp8((const void*)(_check_pointer(i1, 10566)),(const void*)".."))!=(OOC_INT32)0;
       if (i1) goto l9;
       i1 = *(OOC_UINT8*)((_check_pointer(i0, 10583))+8);
       
@@ -696,7 +696,7 @@ l18:
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10647));
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10653))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10661)),(const void*)".."))==0;
+      _cmp8((const void*)(_check_pointer(i1, 10661)),(const void*)".."))==(OOC_INT32)0;
       
 l20:
       if (i1) goto l22;
@@ -739,7 +739,7 @@ l32:
   URI__HierarchicalURIDesc_ResolveRelative((URI__HierarchicalURI)i1, (URI__HierarchicalURI)i0);
   i2 = *(OOC_UINT8*)((_check_pointer(i1, 11109))+16);
   i2 = !i2;
-  if (!i2) goto l34;
+  if (!i2) goto l35;
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11150)))), URI__URIDesc_Clone)),URI__URIDesc_Clone)((URI__URI)i0);
   copy = (URI__URI)i0;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11225)))), &_td_URI_Scheme_Hierarchical__GenericDesc, 11225)), 11233))+12);
@@ -787,17 +787,17 @@ l26:
   URI_Scheme_Hierarchical__GenericDesc_ResolveRelative_RemoveDot((void*)((_check_pointer(i1, 11822))+12));
   i0 = (OOC_INT32)uri;
   i0 = URI_Scheme_Hierarchical__GenericDesc_ResolveRelative_RemoveDotDot((void*)((_check_pointer(i0, 11864))+12));
-  if (!i0) goto l33;
-l28_loop:
+  if (!i0) goto l34;
+l29_loop:
   i0 = (OOC_INT32)uri;
   i0 = URI_Scheme_Hierarchical__GenericDesc_ResolveRelative_RemoveDotDot((void*)((_check_pointer(i0, 11864))+12));
-  if (i0) goto l28_loop;
-l33:
+  if (i0) goto l29_loop;
+l34:
   i0 = (OOC_INT32)uri;
   i1 = (OOC_INT32)copy;
   i1 = *(OOC_UINT8*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11916)))), &_td_URI_Scheme_Hierarchical__GenericDesc, 11916)), 11924))+16);
   *(OOC_UINT8*)((_check_pointer(i0, 11893))+16) = i1;
-l34:
+l35:
   return;
   ;
 }
@@ -856,7 +856,7 @@ l19:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13141))+4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 13162))+4);
   i3 = (
-  _cmp8((const void*)(_check_pointer(i3, 13149)),(const void*)(_check_pointer(i4, 13170))))==0;
+  _cmp8((const void*)(_check_pointer(i3, 13149)),(const void*)(_check_pointer(i4, 13170))))==(OOC_INT32)0;
   
 l21:
   if (!i3) goto l39;
@@ -882,7 +882,7 @@ l31:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 13141))+4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 13162))+4);
   i3 = (
-  _cmp8((const void*)(_check_pointer(i3, 13149)),(const void*)(_check_pointer(i4, 13170))))==0;
+  _cmp8((const void*)(_check_pointer(i3, 13149)),(const void*)(_check_pointer(i4, 13170))))==(OOC_INT32)0;
   
 l33:
   if (i3) goto l24_loop;
@@ -945,7 +945,7 @@ void URI_Scheme_Hierarchical__GenericDesc_WriteXML(URI_Scheme_Hierarchical__Gene
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14220)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "\012<scheme>", 10);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 14280));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 14280));
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 14290)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 14290)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14262)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(_check_pointer(i2, 14290)), i3);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14301)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "</scheme>", 10);
 l3:
@@ -958,10 +958,10 @@ l3:
 l6:
   i2 = *(OOC_UINT8*)((_check_pointer(i1, 14428))+16);
   if (i2) goto l9;
-  _copy_8("\012<relative-path>",(OOC_INT32)pathTag,32);
+  _copy_8((const void*)"\012<relative-path>",(void*)(OOC_INT32)pathTag,32);
   goto l10;
 l9:
-  _copy_8("\012<absolute-path>",(OOC_INT32)pathTag,32);
+  _copy_8((const void*)"\012<absolute-path>",(void*)(OOC_INT32)pathTag,32);
 l10:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14555)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(OOC_INT32)pathTag, 32);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 14595))+12);
@@ -977,10 +977,10 @@ l13_loop:
 l18:
   i2 = *(OOC_UINT8*)((_check_pointer(i1, 14703))+16);
   if (i2) goto l21;
-  _copy_8("\012</relative-path>",(OOC_INT32)pathTag,32);
+  _copy_8((const void*)"\012</relative-path>",(void*)(OOC_INT32)pathTag,32);
   goto l22;
 l21:
-  _copy_8("\012</absolute-path>",(OOC_INT32)pathTag,32);
+  _copy_8((const void*)"\012</absolute-path>",(void*)(OOC_INT32)pathTag,32);
 l22:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 14832)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, (void*)(OOC_INT32)pathTag, 32);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 14868))+8);
@@ -1030,7 +1030,7 @@ l17:
 void URI_Scheme_Hierarchical__GenericDesc_GetString(URI_Scheme_Hierarchical__Generic uri, OOC_CHAR8 str[], OOC_LEN str_0d) {
   register OOC_INT32 i0,i1,i2;
 
-  _copy_8("",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)str,str_0d);
   i0 = (OOC_INT32)uri;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 15537)))), URI__URIDesc_AppendScheme)),URI__URIDesc_AppendScheme)((URI__URI)i0, (void*)(OOC_INT32)str, str_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15570))+4);

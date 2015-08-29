@@ -1,17 +1,17 @@
 MODULE LibSTRING3;
 
 IMPORT
-  Out := Out0, String := Language:String0;
+  Out := Out0, String := Object;
 
 (* This module checks that the predefined type STRING can be used as an
-   alias for Language:String0.String.  *)
+   alias for Object.String.  *)
 
 PROCEDURE Write (s: STRING);
   VAR
     i: LONGINT;
   BEGIN
     FOR i := 0 TO s.length-1 DO
-      Out.Char(" "); Out.Int(s.CharAt(i), 0);
+      Out.Char(" "); Out.Int(ORD(s.CharAt(i)), 0);
     END;
     Out.Ln;
   END Write;

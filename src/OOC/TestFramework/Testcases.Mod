@@ -1,4 +1,4 @@
-(* 	$Id: Testcases.Mod,v 1.9 2001/11/16 12:40:34 mva Exp $	 *)
+(* 	$Id: Testcases.Mod,v 1.11 2002/12/20 10:19:31 mva Exp $	 *)
 MODULE OOC:TestFramework:Testcases;
 (*  Parser for XML testsuite and testcases elements.
     Copyright (C) 2001  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:TestFramework:Testcases;
 
 
 IMPORT
-  Ch := Channel, LongStrings, Strings, ADT:String,
+  Ch := Channel, LongStrings, Strings, Object,
   URI, XMLError := XML:Error, XML:Locator, XML:Basic:Element,
   XML:Basic:Parser, XML:Basic:DataType, XML:Writer,
   OOC:TestFramework:TestSetup;
@@ -65,7 +65,7 @@ TYPE
     file-: URI.URI;
     lang-: Element.String;
     output-: URI.URI;
-    moduleName: String.String;
+    moduleName: STRING;
   END;
 
 TYPE
@@ -310,7 +310,7 @@ PROCEDURE (test: Test) MissingChild* (): Element.String;
     RETURN NIL
   END MissingChild;
 
-PROCEDURE (test: Test) ModuleName* (): String.String;
+PROCEDURE (test: Test) ModuleName* (): STRING;
   VAR
     path: ARRAY 1024 OF CHAR;
     i: INTEGER;
@@ -334,7 +334,7 @@ PROCEDURE (test: Test) ModuleName* (): String.String;
       END;
       Strings.Delete (path, 0, i+1);
       
-      test. moduleName := String.New (path)
+      test. moduleName := Object.NewLatin1(path);
     END;
     RETURN test. moduleName
   END ModuleName;

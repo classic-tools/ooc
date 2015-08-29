@@ -1,4 +1,4 @@
-(* 	$Id: CreateSymTab.Mod,v 1.22 2002/11/28 19:22:05 mva Exp $	 *)
+(* 	$Id: CreateSymTab.Mod,v 1.25 2002/12/20 10:19:34 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateSymTab;
 (*  Creates symbol table from abstract syntax tree of module `ExtTree'.
     Copyright (C) 2000, 2001, 2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:AST:ExtTree:CreateSymTab;
 *)
 
 IMPORT
-  Msg, ADT:String, URI, ParserURI := URI:Parser,
+  Msg, Object, URI, ParserURI := URI:Parser,
   OOC:Scanner:Symbol, OOC:AST, OOC:Scanner:Builder:BasicList, OOC:AST:ExtTree,
   Sym := OOC:SymbolTable,
   SymTabBuilder := OOC:SymbolTable:Builder;
@@ -202,11 +202,12 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
     callConv: Sym.CallConv;
     mf: ExtTree.ModuleFlags;
     uri: URI.URI;
-    str, prefixOption, suffixOption: String.String;
+    str, prefixOption, suffixOption: STRING;
     res: Msg.Msg;
     i, j: LONGINT;
     n: AST.Node;
-    depList: String.StringArrayPtr;
+    depList: Object.StringArrayPtr;
+    chars: Object.CharsLatin1;
   BEGIN
     moduleName := GetName (module. name. nameList. n[0]);
     Sym.InitName (moduleName, module. moduleName, moduleName. pos, 
@@ -224,7 +225,7 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
         class := Sym.mcInterface
       END;
       str := mf. callConv. GetString (TRUE);
-      callConv := Sym.StringToCallConv (str. array^);
+      callConv := Sym.StringToCallConv (str);
 
       v. stb. SetClass (class);
     END;
@@ -236,7 +237,8 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
         n := mf. linkSections. n[i];
         WITH n: ExtTree.LinkFileFlag DO
           str := n. fileName. GetString (TRUE);
-          uri := ParserURI.NewURI (str. array^, v. baseURI, res);
+          chars := str(Object.String8).CharsLatin1();
+          uri := ParserURI.NewURI (chars^, v. baseURI, res);
           ASSERT (res = NIL);
           ASSERT (uri # NIL);
           uri := uri. MakeRelative (v. rootURI);
@@ -605,7 +607,7 @@ PROCEDURE (v: Visitor) VisitProcType* (procType: ExtTree.ProcType);
 
 
 PROCEDURE CreateSymTab* (module: AST.Node; stb: SymTabBuilder.Builder;
-                         libraryName: String.String;
+                         libraryName: STRING;
                          baseURI, rootURI: URI.HierarchicalURI): Sym.Module;
 (**Creates a symbol table from the abstract syntax tree in @oparam{module}.
    The elements of the symbol table are created by calling appropriate 

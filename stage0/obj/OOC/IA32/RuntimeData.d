@@ -1,6 +1,5 @@
 #include "OOC/IA32/RuntimeData.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
+#include "Object.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
@@ -11,4 +10,6 @@ extern void OOC_OOC_IA32_RuntimeData_init0() {
   OOC_OOC_IA32_RuntimeData_init();
 }
 
+static void* _c0;
+static void* _c1;
 /* --- */

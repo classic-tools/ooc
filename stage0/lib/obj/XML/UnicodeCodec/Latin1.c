@@ -86,7 +86,7 @@ l7:
   i5=i2;i2=i1;
 l8_loop:
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2214))*2);
-  i6 = i6>(OOC_CHAR16)255;
+  i6 = i6>(OOC_CHAR8)'\377';
   if (i6) goto l11;
   i6 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 2582))*2);
   *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i5, dest_0d, OOC_UINT32, 2562))) = i6;
@@ -165,8 +165,8 @@ l43:
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 2990))*2);
   *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(i2, dest_0d, OOC_UINT32, 2970))) = i1;
 l44:
-  i1 = i2+1;
   i0 = i0+1;
+  i1 = i2+1;
   
 l45:
   *sourceDone = i0;
@@ -208,7 +208,7 @@ XML_UnicodeCodec_Latin1__Codec XML_UnicodeCodec_Latin1__FactoryDesc_NewCodecBOM(
 
 void XML_UnicodeCodec_Latin1__FactoryDesc_GetEncodingName(XML_UnicodeCodec_Latin1__Factory f, OOC_CHAR8 name[], OOC_LEN name_0d) {
 
-  _copy_8("ISO-8859-1",(OOC_INT32)name,name_0d);
+  _copy_8((const void*)"ISO-8859-1",(void*)(OOC_INT32)name,name_0d);
   return;
   ;
 }

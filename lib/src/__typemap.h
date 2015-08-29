@@ -1,4 +1,4 @@
-/*      $Id: __typemap.h,v 1.7 2002/06/22 21:47:44 mva Exp $    */
+/*      $Id: __typemap.h,v 1.8 2002/12/19 00:05:17 mva Exp $    */
 /*  Mapping of basic types to C types.
     Copyright (C) 1997-2002  Michael van Acken
 
@@ -26,6 +26,7 @@
 typedef unsigned char OOC_BOOLEAN;
 typedef unsigned char OOC_CHAR8;
 typedef unsigned short int OOC_CHAR16;
+typedef unsigned int OOC_CHAR32;
 typedef signed char OOC_INT8;
 typedef signed short int OOC_INT16;
 typedef signed int OOC_INT32;

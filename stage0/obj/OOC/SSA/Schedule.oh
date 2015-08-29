@@ -3,8 +3,10 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#include "ADT/Object.oh"
+#include "Object.oh"
 #include "OOC/SSA.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_SSA_Schedule__BlockDesc *OOC_SSA_Schedule__Block;
 typedef struct OOC_SSA_Schedule__InstrProxyDesc *OOC_SSA_Schedule__InstrProxy;
 typedef struct OOC_SSA_Schedule__BranchBlockDesc *OOC_SSA_Schedule__BranchBlock;
@@ -132,24 +134,24 @@ typedef struct OOC_SSA_Schedule__InstrProxyDesc {
 } OOC_SSA_Schedule__InstrProxyDesc;
 extern void OOC_SSA_Schedule__InitInfo(OOC_SSA_Schedule__Info info);
 extern void OOC_SSA_Schedule__BlockDesc_SetInfo(OOC_SSA_Schedule__Block b, OOC_SSA_Schedule__Info info);
-#define _TBN_OOC_SSA_Schedule__BlockDesc_SetInfo 7
+#define _TBN_OOC_SSA_Schedule__BlockDesc_SetInfo 4
 typedef void (*_TBP_OOC_SSA_Schedule__BlockDesc_SetInfo)(OOC_SSA_Schedule__Block b, OOC_SSA_Schedule__Info info);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__BlockDesc_DefaultTarget(OOC_SSA_Schedule__Block b);
-#define _TBN_OOC_SSA_Schedule__BlockDesc_DefaultTarget 6
+#define _TBN_OOC_SSA_Schedule__BlockDesc_DefaultTarget 3
 typedef OOC_SSA_Schedule__Block (*_TBP_OOC_SSA_Schedule__BlockDesc_DefaultTarget)(OOC_SSA_Schedule__Block b);
 extern OOC_CHAR8 OOC_SSA_Schedule__Dominates(OOC_SSA_Schedule__Block dominator, OOC_SSA_Schedule__Block child);
 extern void OOC_SSA_Schedule__ChangeJumpTarget(OOC_SSA_Schedule__Jump reference, OOC_SSA_Schedule__Block dest);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__BranchBlockDesc_DefaultTarget(OOC_SSA_Schedule__BranchBlock b);
-#define _TBN_OOC_SSA_Schedule__BranchBlockDesc_DefaultTarget 6
+#define _TBN_OOC_SSA_Schedule__BranchBlockDesc_DefaultTarget 3
 typedef OOC_SSA_Schedule__Block (*_TBP_OOC_SSA_Schedule__BranchBlockDesc_DefaultTarget)(OOC_SSA_Schedule__BranchBlock b);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__JumpBlockDesc_DefaultTarget(OOC_SSA_Schedule__JumpBlock b);
-#define _TBN_OOC_SSA_Schedule__JumpBlockDesc_DefaultTarget 6
+#define _TBN_OOC_SSA_Schedule__JumpBlockDesc_DefaultTarget 3
 typedef OOC_SSA_Schedule__Block (*_TBP_OOC_SSA_Schedule__JumpBlockDesc_DefaultTarget)(OOC_SSA_Schedule__JumpBlock b);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__DeadEndBlockDesc_DefaultTarget(OOC_SSA_Schedule__DeadEndBlock b);
-#define _TBN_OOC_SSA_Schedule__DeadEndBlockDesc_DefaultTarget 6
+#define _TBN_OOC_SSA_Schedule__DeadEndBlockDesc_DefaultTarget 3
 typedef OOC_SSA_Schedule__Block (*_TBP_OOC_SSA_Schedule__DeadEndBlockDesc_DefaultTarget)(OOC_SSA_Schedule__DeadEndBlock b);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__SwitchBlockDesc_DefaultTarget(OOC_SSA_Schedule__SwitchBlock b);
-#define _TBN_OOC_SSA_Schedule__SwitchBlockDesc_DefaultTarget 6
+#define _TBN_OOC_SSA_Schedule__SwitchBlockDesc_DefaultTarget 3
 typedef OOC_SSA_Schedule__Block (*_TBP_OOC_SSA_Schedule__SwitchBlockDesc_DefaultTarget)(OOC_SSA_Schedule__SwitchBlock b);
 extern OOC_SSA_Schedule__Block OOC_SSA_Schedule__Schedule(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_Schedule_init();
@@ -173,12 +175,12 @@ extern RT0__StructDesc _td_OOC_SSA_Schedule__BranchBlockDesc;
 extern RT0__StructDesc _td_OOC_SSA_Schedule__JumpBlockDesc;
 extern RT0__StructDesc _td_OOC_SSA_Schedule__DeadEndBlockDesc;
 extern RT0__StructDesc _td_OOC_SSA_Schedule__SwitchBlockDesc;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5425;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5414;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5466;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5455;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5514;
-extern RT0__StructDesc _td_OOC_SSA_Schedule__5503;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5423;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5412;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5464;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5453;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5512;
+extern RT0__StructDesc _td_OOC_SSA_Schedule__5501;
 extern RT0__StructDesc _td_OOC_SSA_Schedule__InstrProxyDesc;
 #endif /* _MODULE_OOC_SSA_Schedule_ */
 

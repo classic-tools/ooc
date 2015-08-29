@@ -1,7 +1,7 @@
 MODULE H2O:Type;
 
 IMPORT
-  O := ADT:Object, ADT:String, ADT:StringBuffer, ADT:ArrayList,
+  Obj := Object, ADT:StringBuffer, ADT:ArrayList,
   H2O:Module;
 
 CONST 
@@ -37,18 +37,18 @@ CONST
   Type* = POINTER TO TypeDesc;
   Object* = POINTER TO ObjectDesc;
 
-  TypeDesc* = RECORD (O.ObjectDesc)
+  TypeDesc* = RECORD (Obj.ObjectDesc)
     class* : SHORTINT;		(* see tXXX above *)
     size* : LONGINT;
     base* : Type;
     link* : Object;
-    name* : String.String;
+    name* : Obj.String8;
     qualifiers* : SET;
     module* : Module.Module;
   END;
 
   ObjectDesc* = RECORD 
-    name* : String.String;
+    name* : Obj.String8;
     addr* : LONGINT;
     type* : Type;
     qualifiers* : SET;
@@ -118,55 +118,57 @@ BEGIN
   Visit(t);
 END Depend;
 
-PROCEDURE (t : Type) ToString* () : String.String;
+PROCEDURE (t : Type) ToString* () : Obj.String8;
 VAR
   b : StringBuffer.StringBuffer;
   o : Object;
+  str: Obj.String;
 BEGIN
   b := StringBuffer.New("");
   CASE t.class OF
   | tArray:
-    b.AppendObject(t.base); b.AppendChar("[");
-    IF t.size >= 0 THEN b.AppendLongInt(t.size) END;
-    b.AppendChar("]");
+    b.Append(t.base); b.AppendLatin1Char("[");
+    IF t.size >= 0 THEN b.AppendInt(t.size) END;
+    b.AppendLatin1Char("]");
   | tPointer:
-    b.AppendObject(t.base); b.AppendChar("*");
+    b.Append(t.base); b.AppendLatin1Char("*");
   | tFunction:
-    b.AppendObject(t.base);
-    b.AppendChar("(");
+    b.Append(t.base);
+    b.AppendLatin1Char("(");
     o := t.link;
     WHILE o # NIL DO
-      b.AppendObject(o.type);
+      b.Append(o.type);
       o := o.next;
-      IF o # NIL THEN b.AppendChar(",") END;
+      IF o # NIL THEN b.AppendLatin1Char(",") END;
     END;
-    b.AppendChar(")");
+    b.AppendLatin1Char(")");
   | tStruct:
-    b.AppendString("struct ");
+    b.Append("struct ");
     IF t.name # NIL THEN b.Append(t.name) END;
   | tUnion:
-    b.AppendString("union ");
+    b.Append("union ");
     IF t.name # NIL THEN b.Append(t.name) END;
   | tEnum:
-    b.AppendString("enum ");
+    b.Append("enum ");
     IF t.name # NIL THEN b.Append(t.name) END;
   | tQualifier:
     IF tqVolatile IN t.qualifiers THEN
-      b.AppendString("volatile ");
+      b.Append("volatile ");
     END;
     IF tqConst IN t.qualifiers THEN
-      b.AppendString("const ");
+      b.Append("const ");
     END;
-    b.AppendObject(t.base);
+    b.Append(t.base);
   | tName:
     b.Append(t.name);
   ELSE
-    IF t.name # NIL THEN b.Append(t.name) ELSE b.AppendString("?TYPE?") END;
+    IF t.name # NIL THEN b.Append(t.name) ELSE b.Append("?TYPE?") END;
   END;
-  RETURN b.ToString();
+  str := b.ToString();
+  RETURN str(Obj.String8);
 END ToString;
 
-PROCEDURE FindObject* (s : Object; name : String.String; VAR result : Object) : BOOLEAN;
+PROCEDURE FindObject* (s : Object; name : Obj.String8; VAR result : Object) : BOOLEAN;
 BEGIN
   WHILE s # NIL DO
     IF name.Equals(s.name) THEN
@@ -191,7 +193,7 @@ BEGIN
   END;
 END AppendObject;
 
-PROCEDURE NewObject* (name : String.String; addr : LONGINT; type : Type) : Object;
+PROCEDURE NewObject* (name : Obj.String8; addr : LONGINT; type : Type) : Object;
 VAR o : Object;
 BEGIN
   NEW(o);
@@ -203,7 +205,7 @@ BEGIN
   RETURN o;
 END NewObject;
 
-PROCEDURE Bind* (VAR s : Object; name : String.String; addr : LONGINT; type : Type);
+PROCEDURE Bind* (VAR s : Object; name : Obj.String8; addr : LONGINT; type : Type);
 BEGIN
   AppendObject(s, NewObject(name, addr, type));
 END Bind;
@@ -227,7 +229,7 @@ PROCEDURE BaseType* (class : SHORTINT; size : LONGINT; name : ARRAY OF CHAR) : T
 VAR t : Type;
 BEGIN
   t := NewType(class, NIL, size, {});
-  t.name := String.New(name);
+  t.name := Obj.NewLatin1(name);
   RETURN t;
 END BaseType;
 

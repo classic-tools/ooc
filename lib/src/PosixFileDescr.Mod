@@ -1,4 +1,4 @@
-(*	$Id: PosixFileDescr.Mod,v 1.2 2002/07/06 09:58:53 mva Exp $	*)
+(*	$Id: PosixFileDescr.Mod,v 1.3 2002/12/19 06:36:46 mva Exp $	*)
 MODULE PosixFileDescr [FOREIGN "C"; LINK FILE "PosixFileDescr.c" END];
 (*  Generalized access to POSIX-style file descriptors.
     Copyright (C) 1997-1999  Michael van Acken
@@ -162,7 +162,7 @@ PROCEDURE (r: Reader) ReadBytes* (VAR x: ARRAY OF SYSTEM.BYTE;
 PROCEDURE (w: Writer) Pos*(): LONGINT;
 PROCEDURE (w: Writer) SetPos* (newPos: LONGINT);
 PROCEDURE (w: Writer) WriteByte* (x: SYSTEM.BYTE);
-PROCEDURE (w: Writer) WriteBytes* (VAR x: ARRAY OF SYSTEM.BYTE; start, n: LONGINT);
+PROCEDURE (w: Writer) WriteBytes* (x: ARRAY OF SYSTEM.BYTE; start, n: LONGINT);
 
 (* Channel methods 
    ------------------------------------------------------------------------ *)

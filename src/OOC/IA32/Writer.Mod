@@ -1,4 +1,4 @@
-(* 	$Id: Writer.Mod,v 1.1 2002/07/07 08:58:35 mva Exp $	 *)
+(* 	$Id: Writer.Mod,v 1.7 2002/12/20 10:19:33 mva Exp $	 *)
 MODULE OOC:IA32:Writer [OOC_EXTENSIONS];
 (*  Write assembler file.
     Copyright (C) 2002  Michael van Acken
@@ -22,8 +22,7 @@ MODULE OOC:IA32:Writer [OOC_EXTENSIONS];
 
 IMPORT
   Ascii, Channel, Files, IntStr, Msg, Strings, TextRider,
-  ADT:Object, ADT:String, ADT:Dictionary,
-  LString := Language:String, Language:String8;
+  Object, Object:Boxed, ADT:Dictionary;
 
 TYPE
   Writer* = POINTER TO WriterDesc;
@@ -66,9 +65,14 @@ PROCEDURE (w: Writer) Write* (str: ARRAY OF CHAR);
     w. textWriter. WriteString (str);
   END Write;
 
-PROCEDURE (w: Writer) Label* (label: ARRAY OF CHAR);
+PROCEDURE (w: Writer) WriteStr* (str: STRING);
   BEGIN
-    w. textWriter. WriteString (label);
+    w. textWriter. WriteStr (str);
+  END WriteStr;
+
+PROCEDURE (w: Writer) Label* (label: STRING);
+  BEGIN
+    w. textWriter. WriteStr (label);
     w. textWriter. WriteChar (":");
     w. textWriter. WriteLn;
   END Label;
@@ -102,20 +106,20 @@ PROCEDURE (w: Writer) StringLiteral* (str: ARRAY OF CHAR);
     w. textWriter. WriteLn;
   END StringLiteral;
 
-PROCEDURE (w: Writer) GetStringLabel* (value: LString.Value): String.String;
+PROCEDURE (w: Writer) GetStringLabel* (value: Boxed.String): STRING;
   VAR
     obj: Object.Object;
-    s: String.String;
+    s: STRING;
     label: ARRAY 32 OF CHAR;
   BEGIN
     IF w. stringData. HasKey (value) THEN
       obj := w. stringData. Get (value);
-      RETURN obj(String.String);
+      RETURN obj(STRING);
     ELSE
       IntStr.IntToStr (w. stringDataCount, label);
       INC (w. stringDataCount);
       Strings.Insert (".LC", 0, label);
-      s := String.New (label);
+      s := Object.NewLatin1(label);
       w. stringData. Set (value, s);
       RETURN s;
     END;
@@ -148,14 +152,16 @@ PROCEDURE (w: Writer) WriteStringData* ();
     strings: Object.ObjectArrayPtr;
     label: Object.Object;
     i: LONGINT;
+    chars: Object.CharsLatin1;
   BEGIN
     w. Section (".data");
     w. Section (".section .rodata");
     strings := w. stringData. Keys();
     FOR i := 0 TO LEN (strings^)-1 DO
       label := w. stringData. Get (strings[i]);
-      w. Label (label(String.String). array^);
-      w. StringLiteral (strings[i](String8.Value). value. array^);
+      w. Label (label(STRING));
+      chars := strings[i](Boxed.String).value(Object.String8).CharsLatin1();
+      w. StringLiteral (chars^);
     END;
   END WriteStringData;
 

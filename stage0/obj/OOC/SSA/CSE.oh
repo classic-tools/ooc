@@ -4,6 +4,8 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "OOC/SSA.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_SSA__Result *OOC_SSA_CSE__ResultList;
 typedef struct OOC_SSA_CSE__PartitionDesc *OOC_SSA_CSE__Partition;
 typedef OOC_SSA_CSE__Partition *OOC_SSA_CSE__ChildrenList;
@@ -21,7 +23,7 @@ typedef struct OOC_SSA_CSE__PartitionDesc {
   OOC_SSA_CSE__ChildrenList splitChildren;
 } OOC_SSA_CSE__PartitionDesc;
 extern void OOC_SSA_CSE__PartitionDesc_Add(OOC_SSA_CSE__Partition p, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_CSE__PartitionDesc_Add 6
+#define _TBN_OOC_SSA_CSE__PartitionDesc_Add 3
 typedef void (*_TBP_OOC_SSA_CSE__PartitionDesc_Add)(OOC_SSA_CSE__Partition p, OOC_SSA__Instr instr);
 extern void OOC_SSA_CSE__Transform(OOC_SSA__ProcBlock pb);
 extern void OOC_OOC_SSA_CSE_init();

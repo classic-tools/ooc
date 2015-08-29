@@ -3,9 +3,11 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#define XML_UnicodeCodec__decodeError ((OOC_CHAR16[]){65533,0})
+#include "RT0.oh"
+#include "Object.oh"
+#define XML_UnicodeCodec__decodeError "\/75"
 #define XML_UnicodeCodec__encodeError "?"
-#define XML_UnicodeCodec__byteOrderMark ((OOC_CHAR16[]){65279,0})
+#define XML_UnicodeCodec__byteOrderMark "\+77"
 #define XML_UnicodeCodec__bomNotApplicable 0
 #define XML_UnicodeCodec__bomOptional 1
 #define XML_UnicodeCodec__bomRequired 2

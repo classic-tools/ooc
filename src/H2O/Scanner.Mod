@@ -24,8 +24,7 @@ MODULE H2O:Scanner [OOC_EXTENSIONS];
 
 IMPORT
   Err, CharClass, TextRider,
-  ADT:String, ADT:StringBuffer, ADT:Object,
-  OOC:Config,
+  Object, ADT:StringBuffer,
   H2O:Source, H2O:Error;
 
 CONST
@@ -112,7 +111,7 @@ CONST
 TYPE
   Token* = POINTER TO TokenDesc;
   TokenDesc* = RECORD (Object.ObjectDesc)
-    name- : String.String;
+    name- : Object.String8;
     sym- : INTEGER;
     len- : INTEGER;
     base- : INTEGER;
@@ -123,7 +122,7 @@ TYPE
   KeyWord* = POINTER TO KeyWordDesc;
   KeyWordDesc* = RECORD
     next : KeyWord;
-    name : String.String;
+    name : Object.String8;
     value : INTEGER;
   END;
 
@@ -143,7 +142,7 @@ TYPE
     err- : Error.Error;
     ch- : CHAR;                  (* current character *)
     buffer- : StringBuffer.StringBuffer;
-    valid : BOOLEAN;		(* FIXME! *)
+    (*valid : BOOLEAN;		(* FIXME! *)*)
   END;
 
 PROCEDURE (s : TokenSource) [ABSTRACT] GetToken* (token : Token; options : SET);
@@ -169,7 +168,7 @@ PROCEDURE AddKeyWord* (VAR keywords : KeyWord; a : ARRAY OF CHAR; value : INTEGE
 VAR k : KeyWord;
 BEGIN
   NEW(k);
-  k.name := String.New(a);
+  k.name := Object.NewLatin1(a);
   k.value := value;
   k.next := keywords;
   keywords := k;
@@ -191,8 +190,11 @@ VAR
   END StartToken;
 
   PROCEDURE EndToken;
+    VAR
+      str: Object.String;
   BEGIN
-    token.name := s.buffer.ToString();
+    str := s.buffer.ToString();
+    token.name := str(Object.String8);
   END EndToken;
 
   PROCEDURE NextChar;
@@ -203,7 +205,7 @@ VAR
 
   PROCEDURE AcceptChar;
   BEGIN
-    s.buffer.AppendChar(ch);
+    s.buffer.AppendLatin1Char(ch);
     NextChar;
   END AcceptChar;
  
@@ -225,7 +227,7 @@ VAR
           NextChar; 
           RETURN
         ELSE
-          s.buffer.AppendChar("*");
+          s.buffer.AppendLatin1Char("*");
         END
       END;
       AcceptChar;
@@ -463,33 +465,34 @@ BEGIN
   RETURN new;
 END Copy;
 
-PROCEDURE (t : Token) ToString* () : String.String;
+PROCEDURE (t : Token) ToString* () : Object.String8;
 VAR b : StringBuffer.StringBuffer;
+  str: Object.String;
 BEGIN
   b := StringBuffer.New("TOKEN(");
-  b.AppendLongInt(t.sym);
+  b.AppendInt(t.sym);
   IF t.name # NIL THEN
-    b.AppendString(",text='");
+    b.Append(",text='");
     b.Append(t.name);
-    b.AppendString("'");
+    b.Append("'");
   END;
   IF (t.sym=number) OR (t.sym=parameter) THEN
-    b.AppendString(",value=");
-    b.AppendLongInt(t.value);
+    b.Append(",value=");
+    b.AppendInt(t.value);
   END;
-  b.AppendString(")");
-  RETURN b.ToString();
+  b.Append(")");
+  str := b.ToString();
+  RETURN str(Object.String8);
 END ToString;
 
 PROCEDURE (t : Token) Write* (wr : TextRider.Writer);
-VAR str : String.String;
+VAR str : Object.String8;
 BEGIN
   str := t.ToString();
-  wr.WriteString(str.array^);
+  wr.WriteStr(str);
 END Write;
 
 PROCEDURE (t : Token) Text* (wr : TextRider.Writer);
-VAR str : String.String;
 BEGIN
   CASE t.sym OF
   | endLine:
@@ -498,15 +501,15 @@ BEGIN
   | comment:
     IF t.value = 0 THEN
       wr.WriteString("/*");
-      wr.WriteString(t.name.array^);
+      wr.WriteStr(t.name);
       wr.WriteString("*/");
     ELSE
       wr.WriteString("//");
-      wr.WriteString(t.name.array^);
+      wr.WriteStr(t.name);
     END;
   ELSE
     IF t.name # NIL THEN
-      wr.WriteString(t.name.array^);
+      wr.WriteStr(t.name);
     ELSE
       t.Write(Err.writer); HALT(0);
     END;

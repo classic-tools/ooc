@@ -1,4 +1,4 @@
-(* 	$Id: LinkProgramC.Mod,v 1.9 2002/11/29 23:17:18 mva Exp $	 *)
+(* 	$Id: LinkProgramC.Mod,v 1.15 2002/12/20 10:19:33 mva Exp $	 *)
 MODULE OOC:Make:LinkProgramC;
 (*  Links object files and libraries to create an executable file.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,26 +21,26 @@ MODULE OOC:Make:LinkProgramC;
 *)
 
 IMPORT
-  Out, Strings, URI, URI:Scheme:File, ADT:Object, ADT:String, ADT:Dictionary,
+  Out, Strings, URI, URI:Scheme:File, Object, ADT:Dictionary,
   ADT:ArrayList, Config:Value, StringValue := Config:Value:String,
   OS:ProcessManagement, OOC:Error, OOC:Repository, OOC:Config,
   OOC:Config:CCompiler, Sym := OOC:SymbolTable;
 
 VAR
-  empty, space: String.String;
+  empty, space: STRING;
   
 PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
-                           thisLibrary: String.String): String.StringArrayPtr;
+                           thisLibrary: STRING): Object.StringArrayPtr;
   VAR
     i, j: LONGINT;
     linkDirective: Sym.LinkDirective;
     libDeps, visited: Dictionary.Dictionary;
     depArray: ArrayList.ArrayList;
-    extLibs: String.StringArrayPtr;
+    extLibs: Object.StringArrayPtr;
     option: Dictionary.Dictionary;
-    prev, new: String.String;
+    prev, new: STRING;
 
-  PROCEDURE GetDepArray (libName: String.String): ArrayList.ArrayList;
+  PROCEDURE GetDepArray (libName: STRING): ArrayList.ArrayList;
     VAR
       obj: Object.Object;
       list: ArrayList.ArrayList;
@@ -55,7 +55,7 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
       END;
     END GetDepArray;
 
-  PROCEDURE AddLibrary (libName: String.String; VAR pos: LONGINT);
+  PROCEDURE AddLibrary (libName: STRING; VAR pos: LONGINT);
     VAR
       depArray: ArrayList.ArrayList;
       i: LONGINT;
@@ -65,10 +65,10 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
         visited.Set(libName, NIL);
         depArray := GetDepArray(libName);
         FOR i := 0 TO depArray.size-1 DO
-          AddLibrary(depArray.array[i](String.String), pos);
+          AddLibrary(depArray.array[i](Object.String), pos);
         END;
         obj := option.Get(libName);
-        extLibs[pos] := obj(String.String);
+        extLibs[pos] := obj(STRING);
         INC (pos);
       END;
     END AddLibrary;
@@ -79,29 +79,30 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
           module.ifData.libraryName.Equals(thisLibrary);
     END IncludeModule;
 
-  PROCEDURE Option(libraryName: String.String): String.String;
+  PROCEDURE Option(libraryName: STRING): STRING;
     VAR
       obj: Object.Object;
-      str: String.String;
+      str: STRING;
     BEGIN
       IF option.HasKey(libraryName) THEN
         obj := option.Get(libraryName);
-        RETURN obj(String.String);
+        RETURN obj(STRING);
       ELSE
-        str := String.New(" -l");
-        str := str.Concat(libraryName);
+        str := " -l"+libraryName;
         option.Set(libraryName, str);
         RETURN str;
       END;
     END Option;
 
-  PROCEDURE LookupValue(optionName: String.String): String.String;
+  PROCEDURE LookupValue(optionName: STRING): STRING;
     VAR
       v: Value.Value;
+      chars: Object.CharsLatin1;
     BEGIN
-      v := Config.options.GetValue(optionName.array^);
+      chars := optionName(Object.String8).CharsLatin1();
+      v := Config.options.GetValue(chars^);
       IF (v # NIL) & (v IS StringValue.Value) THEN
-        RETURN String.New(v(StringValue.Value).string^);
+        RETURN Object.NewLatin1(v(StringValue.Value).string^);
       ELSE
         RETURN empty;
       END;
@@ -165,7 +166,7 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
 
 PROCEDURE Run*(module: Repository.Module;
                imports: ARRAY OF Repository.Module;
-               forLibrary: String.String): BOOLEAN;
+               forLibrary: STRING): BOOLEAN;
   VAR
     str: ARRAY 16*1024 OF CHAR;        (* link commands can get _very_ long *)
     path: Repository.URIBuffer;
@@ -175,9 +176,10 @@ PROCEDURE Run*(module: Repository.Module;
     importedLibs: Dictionary.Dictionary;
     importedLibsList: ArrayList.ArrayList;
     objectFile, outputFile: Repository.FileId;
-    libraryName: String.String;
+    libraryName: STRING;
     import: Repository.Module;
-    extLibs: String.StringArrayPtr;
+    extLibs: Object.StringArrayPtr;
+    chars: Object.CharsLatin1;
   BEGIN
     exit := 0;
     IF (forLibrary # NIL) THEN
@@ -233,7 +235,8 @@ PROCEDURE Run*(module: Repository.Module;
           (* we don't have a .la file, so assume that it's a regularly
              installed libtool library  *)
           Strings.Append(" -l", str);
-          Strings.Append(import.ifData.libraryName.array^, str);
+          chars := import.ifData.libraryName(Object.String8).CharsLatin1();
+          Strings.Append(chars^, str);
         END;
       END;
       
@@ -241,7 +244,8 @@ PROCEDURE Run*(module: Repository.Module;
          first *)
       extLibs := GetExternalLibs(imports, forLibrary);
       FOR i := LEN (extLibs^)-1 TO 0 BY -1 DO
-        Strings.Append (extLibs[i]. array^, str);
+        chars := extLibs[i](Object.String8).CharsLatin1();
+        Strings.Append (chars^, str);
       END;
       Strings.Append (" ", str);
       Strings.Append (CCompiler.libs.value(StringValue.Value).string^, str);
@@ -256,6 +260,6 @@ PROCEDURE Run*(module: Repository.Module;
   END Run;
 
 BEGIN
-  empty := String.New("");
-  space := String.New(" ");
+  empty := Object.emptyString;
+  space := " ";
 END OOC:Make:LinkProgramC.

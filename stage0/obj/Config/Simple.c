@@ -9,7 +9,7 @@ void Config_Simple__Init(Config_Simple__Config config, const OOC_CHAR8 defaultCo
   i0 = (OOC_INT32)config;
   Config__InitConfig((Config__Config)i0);
   i1 = (
-  _cmp8((const void*)(OOC_INT32)defaultConfigFile,(const void*)""))==0;
+  _cmp8((const void*)(OOC_INT32)defaultConfigFile,(const void*)""))==(OOC_INT32)0;
   if (i1) goto l3;
   i1 = (OOC_INT32)Config_Value__GetStringPtr((void*)(OOC_INT32)defaultConfigFile, defaultConfigFile_0d);
   *(OOC_INT32*)(_check_pointer(i0, 1135)) = i1;
@@ -45,13 +45,13 @@ l4:
   i1 = (OOC_INT32)Config_Section__NewSectionList();
   *(OOC_INT32*)((_check_pointer(i0, 1774))+32) = i1;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1853))+24);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1840)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1853))+24);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1827))+32);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1840)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i3, (Config_Section__Section)i2);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1901))+28);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1888)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i2, (Config_Section__Section)i3);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1901))+28);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1875))+32);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1888)))), Config_Section__SectionListDesc_Add)),Config_Section__SectionListDesc_Add)((Config_Section__SectionList)i3, (Config_Section__Section)i2);
   *(OOC_INT32*)((_check_pointer(i0, 1930))+36) = (OOC_INT32)0;
   return;
   ;
@@ -102,7 +102,7 @@ void Config_Simple__ConfigDesc_Read(Config_Simple__Config config, Msg__MsgList e
       Msg__Msg res;
 
       i0 = (OOC_INT32)fileName;
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2844)), 0);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2844)), (OOC_INT32)0);
       i0 = (OOC_INT32)Config_Parser__NewFile((void*)(_check_pointer(i0, 2844)), i1, (void*)(OOC_INT32)&res);
       i1 = (OOC_INT32)res;
       i2 = i1!=(OOC_INT32)0;
@@ -207,9 +207,9 @@ l6:
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4906))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4925))+4);
-  i2 = i2!=i3;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4925))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4906))+4);
+  i2 = i3!=i2;
   
 l13:
   if (!i2) goto l25;
@@ -233,7 +233,7 @@ l25:
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5044)))), Config_Source_Environment__CommandDesc_DoNotWrite)),Config_Source_Environment__CommandDesc_DoNotWrite)((Config_Source_Environment__Command)i1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5076))+8);
   i2 = (
-  _cmp8((const void*)(_check_pointer(i2, 5086)),(const void*)""))==0;
+  _cmp8((const void*)(_check_pointer(i2, 5086)),(const void*)""))==(OOC_INT32)0;
   if (i2) goto l30;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5217))+8);
   *(OOC_INT32*)(_check_pointer(i0, 5198)) = i1;
@@ -256,19 +256,19 @@ l38_loop:
   if (!i2) goto l48;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5771)))), Config_Source_CmdLine__CommandDesc_DoNotWrite)),Config_Source_CmdLine__CommandDesc_DoNotWrite)((Config_Source_CmdLine__Command)i1);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5814))+8);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5823)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 5823)), (OOC_INT32)0);
   i2 = i2>=1;
   if (!i2) goto l48;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5863))+8);
   i2 = _check_pointer(i2, 5872);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(0, i3, OOC_UINT8, 5872))*4);
   i2 = (
-  _cmp8((const void*)(_check_pointer(i2, 5875)),(const void*)""))==0;
+  _cmp8((const void*)(_check_pointer(i2, 5875)),(const void*)""))==(OOC_INT32)0;
   if (i2) goto l45;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6026))+8);
   i2 = _check_pointer(i2, 6035);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = (OOC_INT32)*(OOC_INT32*)(i2+(_check_index(0, i3, OOC_UINT8, 6035))*4);
   *(OOC_INT32*)(_check_pointer(i0, 6003)) = i2;
   goto l48;

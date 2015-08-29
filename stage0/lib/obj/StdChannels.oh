@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "Channel.oh"
 #include "Time.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern Channel__Channel StdChannels__stdin;
 extern Channel__Channel StdChannels__stdout;
 extern Channel__Channel StdChannels__stderr;
@@ -34,9 +36,9 @@ typedef void (*_TBP_StdChannels__WriterDesc_SetPos)(StdChannels__Writer w, OOC_I
 extern void StdChannels__WriterDesc_WriteByte(StdChannels__Writer w, OOC_CHAR8 x);
 #define _TBN_StdChannels__WriterDesc_WriteByte 3
 typedef void (*_TBP_StdChannels__WriterDesc_WriteByte)(StdChannels__Writer w, OOC_CHAR8 x);
-extern void StdChannels__WriterDesc_WriteBytes(StdChannels__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+extern void StdChannels__WriterDesc_WriteBytes(StdChannels__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 #define _TBN_StdChannels__WriterDesc_WriteBytes 4
-typedef void (*_TBP_StdChannels__WriterDesc_WriteBytes)(StdChannels__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+typedef void (*_TBP_StdChannels__WriterDesc_WriteBytes)(StdChannels__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern OOC_INT32 StdChannels__NullChannelDesc_Length(StdChannels__NullChannel ch);
 #define _TBN_StdChannels__NullChannelDesc_Length 4
 typedef OOC_INT32 (*_TBP_StdChannels__NullChannelDesc_Length)(StdChannels__NullChannel ch);
@@ -65,7 +67,7 @@ extern RT0__StructDesc _td_StdChannels__NullChannelDesc;
 extern RT0__StructDesc _td_StdChannels__WriterDesc;
 extern RT0__StructDesc _td_StdChannels__ErrorContext;
 extern RT0__StructDesc _td_StdChannels__ErrorContextDesc;
-extern RT0__StructDesc _td_StdChannels__2841;
+extern RT0__StructDesc _td_StdChannels__2863;
 #endif /* _MODULE_StdChannels_ */
 
 /* --- */

@@ -1,7 +1,5 @@
 #include "Channel.oh"
 #include "Strings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static Channel__ErrorContext Channel__errorContext;
 static Msg__Msg Channel__GetError(OOC_INT32 code);
 
@@ -17,7 +15,7 @@ RT0__StructDesc _td_Channel__ErrorContext = { (RT0__Struct[]){&_td_Channel__Erro
 RT0__StructDesc _td_Channel__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_Channel__ErrorContextDesc}, (void*[]){(void*)Channel__ErrorContextDesc_GetTemplate}, &_mid, "ErrorContextDesc", 4, 1, RT0__strRecord };
 RT0__StructDesc _td_Channel__12140 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
 RT0__StructDesc _td_Channel__16681 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_Channel__20330 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_Channel__20326 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"Channel", (RT0__Struct[]) { &_td_Channel__Channel, &_td_Channel__ChannelDesc, &_td_Channel__Reader, &_td_Channel__ReaderDesc, &_td_Channel__Writer, &_td_Channel__WriterDesc, &_td_Channel__ErrorContext, &_td_Channel__ErrorContextDesc, NULL } };
 
 extern void OOC_Channel_init0() {

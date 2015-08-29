@@ -9,6 +9,8 @@
 #include "Config/Section/Arguments.oh"
 #include "OOC/Config/Pragmas.oh"
 #include "OOC/Config/Repositories.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern Config_Section_Options__Section OOC_Config__options;
 extern Config_Section_Arguments__Section OOC_Config__arguments;
 extern OOC_Config_Pragmas__Section OOC_Config__pragmas;
@@ -23,9 +25,9 @@ extern void OOC_OOC_Config_init();
 extern void OOC_OOC_Config_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Config__694;
-extern RT0__StructDesc _td_OOC_Config__1004;
-extern RT0__StructDesc _td_OOC_Config__1369;
+extern RT0__StructDesc _td_OOC_Config__719;
+extern RT0__StructDesc _td_OOC_Config__1029;
+extern RT0__StructDesc _td_OOC_Config__1394;
 #endif /* _MODULE_OOC_Config_ */
 
 /* --- */

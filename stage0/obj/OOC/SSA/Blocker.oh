@@ -3,11 +3,13 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#include "Channel.oh"
 #include "ADT/Dictionary.oh"
+#include "Channel.oh"
 #include "OOC/SSA.oh"
 #include "OOC/SSA/Opcode.oh"
 #include "OOC/SSA/Opnd.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_SSA_Blocker__ProxyDesc *OOC_SSA_Blocker__Proxy;
 typedef struct OOC_SSA_Blocker__RegionDesc *OOC_SSA_Blocker__Region;
 typedef struct OOC_SSA_Blocker__SelectDesc *OOC_SSA_Blocker__Select;
@@ -106,16 +108,16 @@ typedef struct OOC_SSA_Blocker__DependenceDataDesc {
   ADT_Dictionary__Dictionary proxyMap;
 } OOC_SSA_Blocker__DependenceDataDesc;
 extern void OOC_SSA_Blocker__RegionDesc_Append(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Append 6
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Append 3
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Append)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__RegionDesc_Insert(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Insert 7
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Insert 4
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Insert)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__RegionDesc_Remove(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
-#define _TBN_OOC_SSA_Blocker__RegionDesc_Remove 8
+#define _TBN_OOC_SSA_Blocker__RegionDesc_Remove 5
 typedef void (*_TBP_OOC_SSA_Blocker__RegionDesc_Remove)(OOC_SSA_Blocker__Region r, OOC_SSA_Blocker__Proxy p);
 extern void OOC_SSA_Blocker__LoopDesc_AppendLoop(OOC_SSA_Blocker__Loop loop, OOC_SSA_Blocker__Loop nestedLoop);
-#define _TBN_OOC_SSA_Blocker__LoopDesc_AppendLoop 9
+#define _TBN_OOC_SSA_Blocker__LoopDesc_AppendLoop 6
 typedef void (*_TBP_OOC_SSA_Blocker__LoopDesc_AppendLoop)(OOC_SSA_Blocker__Loop loop, OOC_SSA_Blocker__Loop nestedLoop);
 extern void OOC_SSA_Blocker__RemoveAntiDeps(OOC_SSA__ProcBlock pb);
 extern void OOC_SSA_Blocker__RemoveRegionDeps(OOC_SSA__ProcBlock pb);
@@ -143,14 +145,14 @@ extern RT0__StructDesc _td_OOC_SSA_Blocker__Loop;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__ProxyDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__RegionDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__SelectDesc;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__5580;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__5569;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__5561;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__5550;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__Preceeds;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__PreceedsDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__LoopDesc;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__DependenceData;
 extern RT0__StructDesc _td_OOC_SSA_Blocker__DependenceDataDesc;
-extern RT0__StructDesc _td_OOC_SSA_Blocker__15970;
+extern RT0__StructDesc _td_OOC_SSA_Blocker__15919;
 #endif /* _MODULE_OOC_SSA_Blocker_ */
 
 /* --- */

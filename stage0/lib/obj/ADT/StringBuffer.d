@@ -1,31 +1,31 @@
 #include "ADT/StringBuffer.oh"
-#include "RT0.oh"
 #include "IntStr.oh"
 #include "RealStr.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
-#define ADT_StringBuffer__minimumSize 16
-#define ADT_StringBuffer__rtOverhead 16
-static OOC_INT32 ADT_StringBuffer__ArraySize(OOC_INT32 len);
-static void ADT_StringBuffer__Extend(ADT_StringBuffer__StringBuffer str, OOC_INT32 len, OOC_CHAR8 copyOver);
-static ADT_StringBuffer__StringBuffer ADT_StringBuffer__NewLength(OOC_INT32 len);
+static void ADT_StringBuffer__Init(ADT_StringBuffer__StringBuffer b, OOC_INT32 initialCapacity);
+static OOC_INT32 ADT_StringBuffer__Length(const OOC_CHAR8 data[], OOC_LEN data_0d);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
+RT0__StructDesc _td_ADT_StringBuffer__1005 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__CharsLatin1 = { (RT0__Struct[]){&_td_ADT_StringBuffer__1005}, NULL, &_mid, "CharsLatin1", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_ADT_StringBuffer__1057 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__CharsUCS4 = { (RT0__Struct[]){&_td_ADT_StringBuffer__1057}, NULL, &_mid, "CharsUCS4", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_ADT_StringBuffer__StringBuffer = { (RT0__Struct[]){&_td_ADT_StringBuffer__StringBufferDesc}, NULL, &_mid, "StringBuffer", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_ADT_StringBuffer__StringBufferDesc = { (RT0__Struct[]){&_td_ADT_Object__ObjectDesc,&_td_ADT_StringBuffer__StringBufferDesc}, (void*[]){(void*)ADT_StringBuffer__StringBufferDesc_Destroy,(void*)ADT_StringBuffer__StringBufferDesc_Equals,(void*)ADT_StringBuffer__StringBufferDesc_HashCode,(void*)ADT_StringBuffer__StringBufferDesc_Load,(void*)ADT_StringBuffer__StringBufferDesc_Store,(void*)ADT_StringBuffer__StringBufferDesc_ToString,(void*)ADT_StringBuffer__StringBufferDesc_Append,(void*)ADT_StringBuffer__StringBufferDesc_AppendBool,(void*)ADT_StringBuffer__StringBufferDesc_AppendChar,(void*)ADT_StringBuffer__StringBufferDesc_AppendLongInt,(void*)ADT_StringBuffer__StringBufferDesc_AppendObject,(void*)ADT_StringBuffer__StringBufferDesc_AppendReal,(void*)ADT_StringBuffer__StringBufferDesc_AppendRegion,(void*)ADT_StringBuffer__StringBufferDesc_AppendSet,(void*)ADT_StringBuffer__StringBufferDesc_AppendString,(void*)ADT_StringBuffer__StringBufferDesc_Concat,(void*)ADT_StringBuffer__StringBufferDesc_Copy,(void*)ADT_StringBuffer__StringBufferDesc_Delete,(void*)ADT_StringBuffer__StringBufferDesc_Extract,(void*)ADT_StringBuffer__StringBufferDesc_Insert,(void*)ADT_StringBuffer__StringBufferDesc_IsEmpty,(void*)ADT_StringBuffer__StringBufferDesc_Replace,(void*)ADT_StringBuffer__StringBufferDesc_Size}, &_mid, "StringBufferDesc", 8, 1, RT0__strRecord };
-RT0__StructDesc _td_ADT_StringBuffer__4189 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_ADT_StringBuffer__4563 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_ADT_StringBuffer__12111 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_ADT_StringBuffer__12690 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_ADT_StringBuffer__13452 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_ADT_StringBuffer__13703 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
-RT0__StructDesc _td_ADT_StringBuffer__15337 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 256, 256, RT0__strArray };
-static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"ADT:StringBuffer", (RT0__Struct[]) { &_td_ADT_StringBuffer__StringBuffer, &_td_ADT_StringBuffer__StringBufferDesc, NULL } };
+RT0__StructDesc _td_ADT_StringBuffer__StringBufferDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_ADT_StringBuffer__StringBufferDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)ADT_StringBuffer__StringBufferDesc_ToString,(void*)ADT_StringBuffer__StringBufferDesc_Append,(void*)ADT_StringBuffer__StringBufferDesc_AppendBool,(void*)ADT_StringBuffer__StringBufferDesc_AppendInt,(void*)ADT_StringBuffer__StringBufferDesc_AppendLatin1,(void*)ADT_StringBuffer__StringBufferDesc_AppendLatin1Char,(void*)ADT_StringBuffer__StringBufferDesc_AppendLatin1Region,(void*)ADT_StringBuffer__StringBufferDesc_AppendReal,(void*)ADT_StringBuffer__StringBufferDesc_AppendSet,(void*)ADT_StringBuffer__StringBufferDesc_AppendUCS4Region,(void*)ADT_StringBuffer__StringBufferDesc_CharAt,(void*)ADT_StringBuffer__StringBufferDesc_CharsLatin1,(void*)ADT_StringBuffer__StringBufferDesc_Clear,(void*)ADT_StringBuffer__StringBufferDesc_ConvertTo32,(void*)ADT_StringBuffer__StringBufferDesc_Delete,(void*)ADT_StringBuffer__StringBufferDesc_EnsureCapacity,(void*)ADT_StringBuffer__StringBufferDesc_Insert}, &_mid, "StringBufferDesc", 16, 1, RT0__strRecord };
+RT0__StructDesc _td_ADT_StringBuffer__4503 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__5132 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__5336 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__5743 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__6972 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_ADT_StringBuffer__7288 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+RT0__StructDesc _td_ADT_StringBuffer__7538 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 32, 32, RT0__strArray };
+static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"ADT:StringBuffer", (RT0__Struct[]) { &_td_ADT_StringBuffer__CharsLatin1, &_td_ADT_StringBuffer__CharsUCS4, &_td_ADT_StringBuffer__StringBuffer, &_td_ADT_StringBuffer__StringBufferDesc, NULL } };
 
 extern void OOC_ADT_StringBuffer_init0() {
   RT0__RegisterModule(&_mid);
   OOC_ADT_StringBuffer_init();
 }
 
+static void* _c0;
+static void* _c1;
 /* --- */

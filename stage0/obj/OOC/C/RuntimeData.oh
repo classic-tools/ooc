@@ -5,12 +5,14 @@
 #include "RT0.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/C/DeclWriter.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern void OOC_C_RuntimeData__Write(OOC_C_DeclWriter__Writer declWriter, OOC_SymbolTable__Module symTab, OOC_CHAR8 writeHeader);
 extern void OOC_OOC_C_RuntimeData_init();
 extern void OOC_OOC_C_RuntimeData_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_C_RuntimeData__1731;
+extern RT0__StructDesc _td_OOC_C_RuntimeData__1719;
 #endif /* _MODULE_OOC_C_RuntimeData_ */
 
 /* --- */

@@ -1,7 +1,5 @@
 #include "IO/Memory.oh"
 #include "Strings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define IO_Memory__slack 32
 static IO_Memory__File IO_Memory__fileList;
 static IO_Memory__ErrorContext IO_Memory__errorContext;
@@ -32,12 +30,12 @@ RT0__StructDesc _td_IO_Memory__3621 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid
 RT0__StructDesc _td_IO_Memory__3945 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_Memory__4725 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_Memory__7143 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__9591 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__11471 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__13667 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__14095 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__14862 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_Memory__15487 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__9596 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__11476 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__13672 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__14100 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__14867 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_Memory__15492 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"IO:Memory", (RT0__Struct[]) { &_td_IO_Memory__File, &_td_IO_Memory__Data, &_td_IO_Memory__Name, &_td_IO_Memory__FileDesc, &_td_IO_Memory__Channel, &_td_IO_Memory__ChannelDesc, &_td_IO_Memory__Reader, &_td_IO_Memory__ReaderDesc, &_td_IO_Memory__Writer, &_td_IO_Memory__WriterDesc, &_td_IO_Memory__ErrorContext, &_td_IO_Memory__ErrorContextDesc, NULL } };
 
 extern void OOC_IO_Memory_init0() {

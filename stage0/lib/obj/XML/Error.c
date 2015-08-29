@@ -35,15 +35,15 @@ void XML_Error__ContextDesc_WriteTemplate(XML_Error__Context context, Msg__Msg m
   i1 = i0==(OOC_INT32)0;
   entityName = (Msg__Attribute)i0;
   if (i1) goto l3;
-  _copy_16(((OOC_CHAR16[]){87,104,105,108,101,32,101,120,112,97,110,100,105,110,103,32,101,110,116,105,116,121,32,96,0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){87,104,105,108,101,32,101,120,112,97,110,100,105,110,103,32,101,110,116,105,116,121,32,96,0}),(void*)(OOC_INT32)templ,templ_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2893)))), &_td_Msg__LStringAttributeDesc, 2893)), 2910))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2893)))), &_td_Msg__LStringAttributeDesc, 2893)), 2910))+8);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2918)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2918)), (OOC_INT32)0);
   LongStrings__Append((void*)(_check_pointer(i1, 2918)), i0, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){39,58,32,0}), 4, (void*)(OOC_INT32)templ, templ_0d);
   goto l4;
 l3:
-  _copy_16(((OOC_CHAR16[]){0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){0}),(void*)(OOC_INT32)templ,templ_0d);
 l4:
   LongStrings__Append((void*)(OOC_INT32)msgText, msgText_0d, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Insert(((OOC_CHAR16[]){108,105,110,101,61,36,123,108,105,110,101,125,44,32,99,111,108,117,109,110,61,36,123,99,111,108,117,109,110,125,10,36,123,99,104,97,114,125,58,32,0}), 41, 0, (void*)(OOC_INT32)templ, templ_0d);
@@ -64,8 +64,8 @@ void XML_Error__ContextDesc_GetTemplate(XML_Error__Context context, Msg__Msg msg
   goto l5;
 l3:
   i2 = (OOC_INT32)msg;
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 3311))+4);
   i2 = *(OOC_INT32*)((_check_pointer(i2, 3323))+8);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 3311))+4);
   i2 = i3!=i2;
   
 l5:
@@ -95,7 +95,7 @@ l17:
 l20:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3420))+8);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3420))+8);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3426)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3426)), (OOC_INT32)0);
   i3 = (OOC_INT32)msg;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3397)))), XML_Error__ContextDesc_WriteTemplate)),XML_Error__ContextDesc_WriteTemplate)((XML_Error__Context)i0, (Msg__Msg)i3, (void*)(_check_pointer(i2, 3426)), i1, (void*)(OOC_INT32)templ, templ_0d);
 l21:
@@ -122,7 +122,7 @@ void XML_Error__ContextDesc_SetString(XML_Error__Context context, OOC_INT32 code
       XML_Error__ContextDesc_SetString_Append((void*)(_check_pointer(i0, 4228)));
       goto l8;
 l5:
-      _copy_8to16((OOC_INT32)str,(OOC_INT32)str16,1024);
+      _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)str16,1024);
       i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(OOC_INT32)str16, 1024);
       *(OOC_INT32*)((_check_pointer(i0, 4162))+8) = i1;
       goto l8;
@@ -133,7 +133,7 @@ l7:
       i0 = (OOC_INT32)*mlist;
       i1 = code;
       *(OOC_INT32*)((_check_pointer(i0, 3994))+4) = i1;
-      _copy_8to16((OOC_INT32)str,(OOC_INT32)str16,1024);
+      _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)str16,1024);
       i0 = (OOC_INT32)*mlist;
       i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(OOC_INT32)str16, 1024);
       *(OOC_INT32*)((_check_pointer(i0, 4050))+8) = i1;
@@ -350,7 +350,7 @@ l24:
   Strings__Extract((void*)(OOC_INT32)text, 8192, 0, 5, (void*)(OOC_INT32)repl1, 1024);
   Strings__Capitalize((void*)(OOC_INT32)repl1, 1024);
   i2 = (
-  _cmp8((const void*)(OOC_INT32)repl1,(const void*)"FILE:"))==0;
+  _cmp8((const void*)(OOC_INT32)repl1,(const void*)"FILE:"))==(OOC_INT32)0;
   if (!i2) goto l30;
   Strings__Delete((void*)(OOC_INT32)text, 8192, 0, 5);
 l30:

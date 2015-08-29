@@ -1,4 +1,4 @@
-(* 	$Id: IRtoSSA.Mod,v 1.102 2002/12/06 01:49:27 mva Exp $	 *)
+(* 	$Id: IRtoSSA.Mod,v 1.108 2002/12/20 10:19:32 mva Exp $	 *)
 MODULE OOC:SSA:IRtoSSA;
 (*  Converts the IR of a procedure into its SSA representation.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,8 +21,8 @@ MODULE OOC:SSA:IRtoSSA;
 *)
 
 IMPORT
-  Log, Language:String, Language:String8, Language:Integer,
-  Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
+  Log, Object, Object:Boxed, Object:BigInt,
+  Sym := OOC:SymbolTable, OOC:SymbolTable:Predef, OOC:SymbolTable:Builder,
   TR := OOC:SymbolTable:TypeRules, OOC:IR, 
   OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Result, OOC:SSA:Allocator;
 
@@ -90,8 +90,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       BEGIN
         WITH type: Sym.Array DO
           IF type.isOpenArray THEN
-            len := pb.AddGetLengthInstr (baseArray(SSA.Instr),
-                                         dim+1, type(Sym.Array));
+            len := pb.AddGetLengthInstr (baseArray(SSA.Instr), dim+1, type);
           ELSE
             len := pb.GetConstInt(type.length);
           END;
@@ -159,7 +158,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
       WITH type: Sym.Array DO
         IF (type. elementType IS Sym.PredefType) THEN
           CASE type. elementType(Sym.PredefType). id OF
-          | Predef.char, Predef.longchar:
+          | Predef.char, Predef.longchar, Predef.ucs4char:
             RETURN type. elementType;
           ELSE
             RETURN NIL;
@@ -169,8 +168,8 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         END;
       | type: Sym.PredefType DO
         CASE type. id OF
-        | Predef.charString, Predef.longcharString:
-          RETURN Predef.GetType (type. id-Predef.charString+Predef.char);
+        | Predef.stringChar, Predef.stringLongChar, Predef.stringUCS4Char:
+          RETURN Predef.GetType (type. id-Predef.stringChar+Predef.char);
         ELSE
           RETURN NIL;
         END;
@@ -625,7 +624,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         const: SSA.Result;
         scSource, scDest: Opcode.Subclass;
         len: LONGINT;
-        fct: String8.Value;
+        fct: STRING;
       BEGIN
         IF TR.IsSTRING(conv.type) THEN
           (* converting a character or string constant to STRING *)
@@ -634,19 +633,24 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
           instr := pb.AddInstr(Opcode.preloadedVar, Opcode.scAddress);
           CASE conv.expr.type(Sym.PredefType).id OF
           | Predef.char:
-            fct := String8.NewString("Language_String0__NewLatin1Char");
-          | Predef.charString:
-            fct := String8.NewString("Language_String0__NewLatin1Region");
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewLatin1Char");
+          | Predef.stringChar:
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewLatin1Region");
           | Predef.longchar:
-            fct := String8.NewString("Language_String0__NewUCS2Char");
-          | Predef.longcharString:
-            fct := String8.NewString("Language_String0__NewUCS2Region");
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewUCS2Char");
+          | Predef.stringLongChar:
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewUCS2Region");
+          | Predef.ucs4char:
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewUCS4Char");
+          | Predef.stringUCS4Char:
+            fct := Object.NewLatin1(Builder.stringModuleC+"__NewUCS4Region");
           END;
-          instr.AddOpnd(pb.GetConst(fct, Predef.GetType(Predef.charString)),
+          instr.AddOpnd(pb.GetConst(Boxed.NewString(fct),
+                                    Predef.GetType(Predef.stringChar)),
                         Opnd.arg);
           instr.AddOpnd(const, Opnd.arg);
           IF TR.IsStringConst(conv.expr.type) THEN
-            len := conv.expr(IR.Const).value(String.Value).Length();
+            len := conv.expr(IR.Const).value(Boxed.String).value.length;
             instr.AddOpnd(pb.GetConstInt(len+1), Opnd.arg); (* array len *)
             
             instr.AddOpnd(pb.GetConstInt(0), Opnd.arg); (* start *)
@@ -739,7 +743,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         
       | expr: IR.Len DO
         IF (expr. variant = IR.lenStringConst) THEN
-          RETURN pb. GetConstInt (expr. arrayVariable(IR.Const). value(String8.Value). value. length+1);
+          RETURN pb. GetConstInt (expr. arrayVariable(IR.Const). value(Boxed.String). value. length+1);
         ELSE
           baseArray := Expression (expr. arrayVariable);
           type := expr. arrayVariable. type(Sym.Array). GetNthElementType (expr. dim);
@@ -1230,7 +1234,7 @@ PROCEDURE StatmSeq* (pb: SSA.ProcBlock; s: SSA.Result;
         instr: SSA.Instr;
         cmpClass: Opcode.Class;
       BEGIN
-        IF (forStatm. step(IR.Const). value(Integer.Value). Sign() >= 0) THEN
+        IF (forStatm. step(IR.Const). value(BigInt.BigInt). Sign() >= 0) THEN
           cmpClass := Opcode.leq;
         ELSE
           cmpClass := Opcode.geq;

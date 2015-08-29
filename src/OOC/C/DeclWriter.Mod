@@ -1,4 +1,4 @@
-(* 	$Id: DeclWriter.Mod,v 1.39 2002/12/11 06:20:08 mva Exp $	 *)
+(* 	$Id: DeclWriter.Mod,v 1.50 2002/12/20 10:19:34 mva Exp $	 *)
 MODULE OOC:C:DeclWriter [OOC_EXTENSIONS];
 (*  Defines classes to handle C declarations, types, and include statements.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,12 +21,11 @@ MODULE OOC:C:DeclWriter [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Channel, Err, Files, IntStr, Msg, Strings, TextRider,
-  ADT:Object, ADT:String, ADT:ArrayList,
-  URI, IO:Memory, 
-  Language, Language:Boolean, Language:String8, Language:String16,
-  Language:Integer, Language:Set, Language:Real,
-  OOC:Repository, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef;
+  SYSTEM, Channel, Err, Files, IntStr, Msg, Strings, TextRider,
+  Object, Object:Boxed, Object:BigInt, ADT:ArrayList,
+  URI, IO:Memory,
+  OOC:Repository, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
+  TR := OOC:SymbolTable:TypeRules;
   
 
 
@@ -92,20 +91,23 @@ CONST
   char16* = 11;
   (**This type is mapped to the name @code{OOC_CHAR16}, the type used to store
      16 bit character values.  Usually, this is equvalient to @oconst{uint16}.  *)
-  real32* = 12;
+  char32* = 12;
+  (**This type is mapped to the name @code{OOC_CHAR32}, the type used to store
+     32 bit character values.  Usually, this is equvalient to @oconst{uint32}.  *)
+  real32* = 13;
   (**This is mapped to the IEEE 754 single precision floating point type,
      usually @code{float}.  *)
-  real64* = 13;
+  real64* = 14;
   (**This is mapped to the IEEE 754 double precision floating point type,
      usually @code{double}.  *)
   
-  lengthType* = 14;
+  lengthType* = 15;
   (**This basic type is used to store the length of arrays.  On the C level, it
      is an alias for a signed integer type.  On 32 bit targets, @oconst{int32}
      and @oconst{lengthType} are mapped to the same C type.  When working on
      the level of the @emph{input} language, the symbol type
      @oconst{*OOC:SymbolTable:Predef.lengthType} should be used.  *)
-  typeTagType* = 15;
+  typeTagType* = 16;
   (**This type is used to store type tag values.  This is a pointer with a
      defined meaning within the run-time system.  *)
   
@@ -156,7 +158,7 @@ TYPE
   StructDesc = RECORD
     (TypeDesc)
     isUnion: BOOLEAN;
-    name: String.String;
+    name: STRING;
     members: ArrayList.ArrayList;        (* of Declaration *)
   END;
 
@@ -173,7 +175,7 @@ TYPE
   TypeRefDesc = RECORD
     (TypeDesc)
     class: TypeRefClass;
-    name: String.String;
+    name: STRING;
   END;
   
 TYPE
@@ -213,7 +215,7 @@ TYPE
     typeQualifier: TypeQualifier;
     storageClass: StorageClass;
     type: Type;
-    name-: String.String;
+    name-: STRING;
   END;
 
 TYPE
@@ -231,7 +233,7 @@ TYPE
     (**A special declaration that is translated into a @code{#define} statement
        declaring a symbolic name for a constant.  *)
     (DeclarationDesc)
-    const: Language.Value;
+    const: Boxed.Object;
   END;
   
 TYPE
@@ -269,7 +271,7 @@ CONST
 
 PROCEDURE ^ NewBasicType (id: BasicTypeId; repr: ARRAY OF CHAR): BasicType;
 PROCEDURE ^ (d: Declaration) Write (w: Writer);
-PROCEDURE ^ (w: Writer) NewDeclaration* (name: String.String; typeQualifier: TypeQualifier; storageClass: StorageClass; type: Type): Declaration;
+PROCEDURE ^ (w: Writer) NewDeclaration* (name: STRING; typeQualifier: TypeQualifier; storageClass: StorageClass; type: Type): Declaration;
 
 PROCEDURE InitWriter (w: Writer; ch: Channel.Channel;
                       baseURI: URI.HierarchicalURI);
@@ -299,6 +301,7 @@ PROCEDURE InitWriter (w: Writer; ch: Channel.Channel;
     CreateBasicType (uint64, "OOC_UINT64");
     CreateBasicType (char8, "OOC_CHAR8");
     CreateBasicType (char16, "OOC_CHAR16");
+    CreateBasicType (char32, "OOC_CHAR32");
     CreateBasicType (real32, "OOC_REAL32");
     CreateBasicType (real64, "OOC_REAL64");
     CreateBasicType (lengthType, "OOC_LEN");
@@ -336,6 +339,11 @@ PROCEDURE (w: Writer) WriteString* (str[NO_COPY]: ARRAY OF CHAR);
   BEGIN
     w. textWriter. WriteString (str)
   END WriteString;
+
+PROCEDURE (w: Writer) WriteStr* (str: STRING);
+  BEGIN
+    w.textWriter.WriteStr(str);
+  END WriteStr;
 
 PROCEDURE (w: Writer) WriteChar* (ch: CHAR);
   BEGIN
@@ -396,7 +404,7 @@ PROCEDURE (w: Writer) Close* (VAR res: Msg.Msg);
     END;
   END Close;
 
-PROCEDURE (w: Writer) WriteConst* (value: Language.Value; type: Sym.Type);
+PROCEDURE (w: Writer) WriteConst* (value: Boxed.Object; type: Sym.Type);
 (**Writes the C representation of the constant value @oparam{value} to
    @oparam{w}.  This procedure handles all necessary translations to get a
    faithful representation of the value in the language of C.  *)
@@ -405,8 +413,8 @@ PROCEDURE (w: Writer) WriteConst* (value: Language.Value; type: Sym.Type);
     quotedDelim = '\"';
   VAR
     i, len, charValue: LONGINT;
-    str : String.String;
-
+    s: STRING;
+    
   PROCEDURE WriteOct (ch: LONGINT);
     BEGIN
       w. WriteChar (CHR (ch+ORD("0")));
@@ -429,74 +437,87 @@ PROCEDURE (w: Writer) WriteConst* (value: Language.Value; type: Sym.Type);
     IF (value = NIL) THEN
       w. WriteString ("0");
     ELSE
-      WITH value: Boolean.Value DO
+      WITH value: Boxed.Boolean DO
         IF value. value THEN
           w. WriteString("OOC_TRUE")
         ELSE
           w. WriteString("OOC_FALSE")
         END
             
-      | value: String8.Value DO
-        IF (type(Sym.PredefType). id = Predef.char) THEN
-           (* note: the character value is cast to OOC_CHAR8 to avoid
-              any problems if characters are interpreted as signed values
-              by default; that is, '\377' is _not_ -1 *)
-          charValue := ORD (value. value. array[0]);
-          w. WriteString ("(OOC_CHAR8)'");
-          WriteChar(charValue);
-          w. WriteChar ("'");
-        ELSE
-          w. WriteChar (delim);
-          i := 0; len := value. value. length;
-          WHILE (i # len) DO
-            IF (value. value. array[i] = delim) THEN
-              w. WriteString (quotedDelim)
-            ELSE  (* note: this is a tidbit slow for large strings *)
-              WriteChar(ORD(value. value. array[i]))
-            END;
-            INC (i)
-          END;
-          w. WriteChar (delim);
-        END;
-
-      | value: String16.Value DO
-        IF (type(Sym.PredefType). id = Predef.longchar) THEN
-          charValue := ORD (value. CharAt (0));
-          w. WriteString ("(OOC_CHAR16)");
-          IF (charValue < ORD (" ")) OR (charValue >= 127) OR
-             (charValue = ORD ("'")) OR (charValue = ORD ("\")(*"*)) THEN
-            w. textWriter. WriteLInt (charValue, 0);
+      | value: Boxed.String DO
+        s := value.value;
+        IF TR.IsPredefType(TR.BaseCharType(type), Predef.char) THEN
+          IF (type(Sym.PredefType). id = Predef.char) THEN
+            (* note: the character value is cast to OOC_CHAR8 to avoid
+               any problems if characters are interpreted as signed values
+               by default; that is, '\377' is _not_ -1 *)
+            charValue := ORD(s.CharAt(0));
+            w. WriteString ("(OOC_CHAR8)'");
+            WriteChar(charValue);
+            w. WriteChar ("'");
           ELSE
-            w. WriteChar ("'");
-            w. WriteChar (CHR (charValue));
-            w. WriteChar ("'");
+            w. WriteChar (delim);
+            i := 0; len := s. length;
+            WHILE (i # len) DO
+              IF (s.CharAt(i) = delim) THEN
+                w. WriteString (quotedDelim)
+              ELSE  (* note: this is a tidbit slow for large strings *)
+                WriteChar(ORD(s.CharAt(i)))
+              END;
+              INC (i)
+            END;
+            w. WriteChar (delim);
           END;
+
         ELSE
-          (* Interesting bit of C knowledge: An expression like `(T){1,2}'
-             cannot be passed to a cpp macro, because the preprocessor
-             interprets the `,' as its argument separator.  On the other hand,
-             `((T){1,2})' works.  *)
-          w. WriteString ("((OOC_CHAR16[]){");
-          i := 0; len := value. Length();
-          WHILE (i # len) DO
+          IF TR.IsCharType(type) THEN
+            CASE type(Sym.PredefType).id OF
+            | Predef.longchar:
+              w. WriteString ("(OOC_CHAR16)");
+            | Predef.ucs4char:
+              w. WriteString ("(OOC_CHAR32)");
+            END;
+            charValue := ORD(s.CharAt(0));
+            IF (charValue < ORD (" ")) OR (charValue >= 127) OR
+               (charValue = ORD ("'")) OR (charValue = ORD ("\")(*"*)) THEN
+              w. textWriter. WriteLInt (charValue, 0);
+            ELSE
+              w. WriteChar ("'");
+              w. WriteChar (CHR (charValue));
+              w. WriteChar ("'");
+            END;
+          ELSE
+            (* Interesting bit of C knowledge: An expression like `(T){1,2}'
+               cannot be passed to a cpp macro, because the preprocessor
+               interprets the `,' as its argument separator.  On the other
+               hand, `((T){1,2})' works.  *)
+            CASE type(Sym.PredefType).id OF
+            | Predef.stringLongChar:
+              w. WriteString ("((OOC_CHAR16[]){");
+            | Predef.stringUCS4Char:
+              w. WriteString ("((OOC_CHAR32[]){");
+            END;
+            i := 0; len := s.length;
+            WHILE (i # len) DO
+              IF (i # 0) THEN
+                w. WriteChar (",");
+              END;
+              w. textWriter. WriteLInt (ORD(s.CharAt(i)), 0);
+              INC (i)
+            END;
             IF (i # 0) THEN
               w. WriteChar (",");
             END;
-            w. textWriter. WriteLInt (ORD (value. CharAt (i)), 0);
-            INC (i)
+            w. textWriter. WriteLInt (0, 0);
+            w. WriteString ("})");
           END;
-          IF (i # 0) THEN
-            w. WriteChar (",");
-          END;
-          w. textWriter. WriteLInt (0, 0);
-          w. WriteString ("})");
         END;
         
-      | value: Real.Value DO
-        str := value.ToString();
-        w. WriteString(str.array^);
-      | value: Integer.Value DO
-        IF (value. ToInt() = MIN (LONGINT)) THEN
+      | value: Boxed.LongReal DO
+        w. WriteStr(value.ToString());
+        
+      | value: BigInt.BigInt DO
+        IF (value. ToLongInt() = MIN (LONGINT)) THEN
           (* this assumes that MIN(LONGINT) is also the smallest value of
              the C type "int"; to avoid overflow errors, we must rewrite
              the value slightly *)
@@ -504,21 +525,11 @@ PROCEDURE (w: Writer) WriteConst* (value: Language.Value; type: Sym.Type);
           w. WriteLInt (MAX (LONGINT), 0);
           w. WriteString ("-1)");
         ELSE
-          str := value.ToString();
-          w. WriteString(str.array^);
+          w. WriteStr(value.ToString());
         END;
-      | value: Set.Value DO
-        (* FIXME *)
-        IF (value. ToLInt() = MIN (LONGINT)) THEN
-          (* this assumes that MIN(LONGINT) is also the smallest value of
-             the C type "int"; to avoid overflow errors, we must rewrite
-             the value slightly *)
-          w. WriteString ("(-");
-          w. WriteLInt (MAX (LONGINT), 0);
-          w. WriteString ("-1)");
-        ELSE
-          w. WriteLInt(value.ToLInt(), 0);
-        END;
+        
+      | value: Boxed.Set DO
+        w.WriteConst(BigInt.NewInt(SYSTEM.VAL(LONGINT, value.value)), type);
       END;
     END;
   END WriteConst;
@@ -773,14 +784,14 @@ PROCEDURE (fct: Function) WriteRight (w: Writer);
 
 (* -------- *)
 
-PROCEDURE InitStruct (struct: Struct; isUnion: BOOLEAN; name: String.String);
+PROCEDURE InitStruct (struct: Struct; isUnion: BOOLEAN; name: STRING);
   BEGIN
     struct. isUnion := isUnion;
     struct. members := ArrayList.New (4);
     struct. name := name;
   END InitStruct;
 
-PROCEDURE (w: Writer) NewStruct* (isUnion: BOOLEAN; name: String.String): Struct;
+PROCEDURE (w: Writer) NewStruct* (isUnion: BOOLEAN; name: STRING): Struct;
   VAR
     struct: Struct;
   BEGIN
@@ -800,7 +811,7 @@ PROCEDURE (struct: Struct) AddPadding* (w: Writer; offset: LONGINT);
   BEGIN
     IntStr.IntToStr (offset, str);
     Strings.Insert ("__pad", 0, str);
-    struct. AddMember (w. NewDeclaration (String.New (str), tqNone, scMember,
+    struct. AddMember (w. NewDeclaration (Object.NewLatin1(str), tqNone, scMember,
                                           w. basicType[char8]));
   END AddPadding;
 
@@ -820,7 +831,7 @@ PROCEDURE (struct: Struct) WriteLeft (w: Writer);
     END;
     IF (struct. name # NIL) THEN
       w. WriteString (" ");
-      w. WriteString (struct. name. array^);
+      w. WriteStr (struct. name);
     END;
     w. WriteString (" {");
     w. Indent (1);
@@ -846,13 +857,13 @@ PROCEDURE (struct: Struct) WriteRight (w: Writer);
 
 (* -------- *)
 
-PROCEDURE InitTypeRef (typeRef: TypeRef; class: TypeRefClass; name: String.String);
+PROCEDURE InitTypeRef (typeRef: TypeRef; class: TypeRefClass; name: STRING);
   BEGIN
     typeRef. class := class;
     typeRef. name := name;
   END InitTypeRef;
 
-PROCEDURE (w: Writer) NewTypeRef* (class: TypeRefClass; name: String.String): TypeRef;
+PROCEDURE (w: Writer) NewTypeRef* (class: TypeRefClass; name: STRING): TypeRef;
   VAR
     typeRef: TypeRef;
   BEGIN
@@ -873,7 +884,7 @@ PROCEDURE (typeRef: TypeRef) WriteLeft (w: Writer);
     | refStruct : w. WriteString ("struct ");
     | refUnion  : w. WriteString ("union ");
     END;
-    w. WriteString (typeRef. name. array^);
+    w. WriteStr (typeRef. name);
     w. WriteChar (" ");
   END WriteLeft;
 
@@ -894,18 +905,17 @@ PROCEDURE (w: Writer) WriteType* (t: Type);
 (* Declarations
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitDeclaration (d: Declaration; name: String.String;
+PROCEDURE InitDeclaration (d: Declaration; name: STRING;
                            typeQualifier: TypeQualifier;
                            storageClass: StorageClass; type: Type);
   BEGIN
-    Object.Init (d);
     d. name := name;
     d. typeQualifier := typeQualifier;
     d. storageClass := storageClass;
     d. type := type
   END InitDeclaration;
 
-PROCEDURE (w: Writer) NewDeclaration* (name: String.String; typeQualifier: TypeQualifier; storageClass: StorageClass; type: Type): Declaration;
+PROCEDURE (w: Writer) NewDeclaration* (name: STRING; typeQualifier: TypeQualifier; storageClass: StorageClass; type: Type): Declaration;
   VAR
     d: Declaration;
   BEGIN
@@ -936,7 +946,7 @@ PROCEDURE (d: Declaration) Write (w: Writer);
     END;
     WriteTypeQualifier (w, d. typeQualifier);
     WriteLeft (w, d. type, priDeclaration);
-    w. WriteString (d. name. array^);
+    w. WriteStr (d. name);
     WriteRight (w, d. type, priDeclaration)
   END Write;
 
@@ -982,15 +992,15 @@ PROCEDURE (d: IncludeModule) Write (w: Writer);
   END Write;
 
 
-PROCEDURE InitDefine (d: Define; name: String.String;
-                      const: Language.Value);
+PROCEDURE InitDefine (d: Define; name: STRING;
+                      const: Boxed.Object);
   BEGIN
     InitDeclaration (d, name, tqNone, scAuto, NIL);
     d. const := const;
   END InitDefine;
 
-PROCEDURE (w: Writer) NewDefine* (name: String.String;
-                                  const: Language.Value): Define;
+PROCEDURE (w: Writer) NewDefine* (name: STRING;
+                                  const: Boxed.Object): Define;
   VAR
     d: Define;
   BEGIN
@@ -1002,12 +1012,12 @@ PROCEDURE (w: Writer) NewDefine* (name: String.String;
 PROCEDURE (d: Define) Write (w: Writer);
   BEGIN
     w. WriteString ("#define ");
-    w. WriteString (d. name. array^);
+    w. WriteStr (d. name);
     w. WriteString (" ");
     IF (d. const = NIL) THEN
       w. WriteString (" 0");             (* NULL *)
     ELSE
-      w. WriteConst (d. const, Predef.GetType (Predef.charString));
+      w. WriteConst (d. const, Predef.GetType (Predef.stringChar));
     END;
   END Write;
 
@@ -1022,7 +1032,7 @@ PROCEDURE (w: Writer) WriteTypeCast* (t: Type);
   END WriteTypeCast;
 
 
-
+<*PUSH; Warnings:=FALSE*>
 PROCEDURE Test;
   VAR
     w: Writer;
@@ -1034,7 +1044,7 @@ PROCEDURE Test;
     VAR
       result: ARRAY 4*1024 OF CHAR;
     BEGIN
-      w. WriteDeclaration (w. NewDeclaration (String.New ("x"), tqNone, scAuto, t));
+      w. WriteDeclaration (w. NewDeclaration ("x", tqNone, scAuto, t));
       w. WriteLn;
       
       r. ReadLine (result);
@@ -1090,6 +1100,7 @@ PROCEDURE Test;
     
     Err.String ("no errors"); Err.Ln
   END Test;
+<*POP*>
 
 BEGIN
   (*Test;*)

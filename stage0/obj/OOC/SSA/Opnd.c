@@ -7,64 +7,64 @@ void OOC_SSA_Opnd__GetName(OOC_INT8 _class, OOC_CHAR8 name[], OOC_LEN name_0d) {
   i0 = _class;
   switch (i0) {
   case 1:
-    _copy_8("arg",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"arg",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 2:
-    _copy_8("store",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"store",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 3:
-    _copy_8("proc-adr",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"proc-adr",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 4:
-    _copy_8("read-adr",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"read-adr",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 5:
-    _copy_8("read-design",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"read-design",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 6:
-    _copy_8("write-adr",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"write-adr",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 7:
-    _copy_8("write-design",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"write-design",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 8:
-    _copy_8("source-value",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"source-value",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 9:
-    _copy_8("function-result",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"function-result",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 10:
-    _copy_8("store-enter",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"store-enter",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 11:
-    _copy_8("store-exit",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"store-exit",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 12:
-    _copy_8("type",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"type",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 13:
-    _copy_8("backward-feed",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"backward-feed",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 15:
-    _copy_8("dimension",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"dimension",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 16:
-    _copy_8("labels",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"labels",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 17:
-    _copy_8("loop-external-def",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"loop-external-def",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 18:
-    _copy_8("anti-dependency",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"anti-dependency",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 20:
-    _copy_8("region-dependency",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"region-dependency",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 21:
-    _copy_8("dgate-base",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"dgate-base",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   case 22:
-    _copy_8("dgate-ref",(OOC_INT32)name,name_0d);
+    _copy_8((const void*)"dgate-ref",(void*)(OOC_INT32)name,name_0d);
     goto l23;
   default:
     _failed_case(i0, 5923);

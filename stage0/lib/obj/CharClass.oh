@@ -3,6 +3,8 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define CharClass__eol "\012"
 extern OOC_CHAR8 CharClass__systemEol[3];
 extern OOC_CHAR8 CharClass__IsNumeric(OOC_CHAR8 ch);

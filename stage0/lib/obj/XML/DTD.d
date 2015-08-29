@@ -1,7 +1,5 @@
 #include "XML/DTD.oh"
 #include "LongStrings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 XML_DTD__AttrDecl XML_DTD__undefAttr;
 static void XML_DTD__InitNamespace(XML_DTD__Namespace ns);
 static void XML_DTD__InitEntity(XML_DTD__Entity ent, XML_UnicodeBuffer__CharArray name, OOC_INT8 type, XML_UnicodeBuffer__CharArray entityValue, OOC_CHAR8 externalMarkupDecl);

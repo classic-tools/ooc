@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "Channel.oh"
 #include "Time.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define ProgramArgs__done  0
 #define ProgramArgs__outOfRange 4
 #define ProgramArgs__readAfterEnd 5

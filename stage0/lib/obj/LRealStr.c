@@ -39,7 +39,7 @@ l7:
   d0 = real;
   sprintf((void*)(OOC_INT32)s, "%-+#.*E", (i0-1), d0);
   Real0__NormalizeFloat((void*)(OOC_INT32)s, 32);
-  _copy_8((OOC_INT32)s,(OOC_INT32)str,str_0d);
+  _copy_8((const void*)(OOC_INT32)s,(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }
@@ -65,7 +65,7 @@ l7:
   d0 = real;
   sprintf((void*)(OOC_INT32)s, "%-+#.*E", (i0-1), d0);
   Real0__FormatForEng((void*)(OOC_INT32)s, 32);
-  _copy_8((OOC_INT32)s,(OOC_INT32)str,str_0d);
+  _copy_8((const void*)(OOC_INT32)s,(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }
@@ -86,7 +86,7 @@ l4:
   d0 = real;
   sprintf((void*)(OOC_INT32)s, "%-+#.*f", i1, d0);
   Real0__FormatForFixed((void*)(OOC_INT32)s, 340, i0);
-  _copy_8((OOC_INT32)s,(OOC_INT32)str,str_0d);
+  _copy_8((const void*)(OOC_INT32)s,(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }
@@ -118,7 +118,7 @@ void LRealStr__RealToStr(OOC_REAL64 real, OOC_CHAR8 str[], OOC_LEN str_0d) {
 l12:
   LRealStr__RealToFixed(d0, (i0-1), (void*)(OOC_INT32)s, 340);
 l13:
-  _copy_8((OOC_INT32)s,(OOC_INT32)str,str_0d);
+  _copy_8((const void*)(OOC_INT32)s,(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }

@@ -3,6 +3,7 @@
 #include "Channel.oh"
 #include "Msg.oh"
 #include "StdChannels.oh"
+#include "Object.oh"
 #include "ADT/Dictionary.oh"
 #include "OOC/Config/Pragmas.oh"
 #include "OOC/Auxiliary/ParseModule.oh"
@@ -15,8 +16,6 @@
 #include "OOC/IR/ConstFold.oh"
 #include "OOC/SymbolTable/Exports.oh"
 #include "OOC/IA32/RuntimeData.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void OOC_Make_TranslateToIA32__WriteCodeFile(OOC_IA32_Writer__Writer w, OOC_Repository__Module m, OOC_SymbolTable__Module symTab, OOC_IR__Module moduleIR, OOC_Make_TranslateToIA32__Translator translator);
 
 /* run-time meta data */
@@ -30,4 +29,6 @@ extern void OOC_OOC_Make_TranslateToIA32_init0() {
   OOC_OOC_Make_TranslateToIA32_init();
 }
 
+static void* _c0;
+static void* _c1;
 /* --- */

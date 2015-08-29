@@ -1,12 +1,9 @@
 #include "OOC/C/IRtoC.oh"
 #include "Log.oh"
-#include "ADT/String.oh"
-#include "Language/String8.oh"
+#include "Object/Boxed.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/SymbolTable/Predef.oh"
 #include "OOC/C/Naming.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void OOC_C_IRtoC__Call(OOC_C_DeclWriter__Writer w, OOC_IR__Call statm);
 static void OOC_C_IRtoC__WriteExpr(OOC_C_DeclWriter__Writer w, OOC_IR__Expression expr);
 

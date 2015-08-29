@@ -4,6 +4,8 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "OOC/SymbolTable.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern OOC_SymbolTable__Name OOC_SymbolTable_GetClass__GetClass(OOC_SymbolTable__Item item);
 extern void OOC_OOC_SymbolTable_GetClass_init();
 extern void OOC_OOC_SymbolTable_GetClass_init0();

@@ -3,8 +3,6 @@
 #include "CharClass.oh"
 #include "Strings.oh"
 #include "OOC/Scanner.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 typedef struct OOC_Doc_Decoration__DotLineIndentDesc *OOC_Doc_Decoration__DotLineIndent;
 typedef struct OOC_Doc_Decoration__DotLineIndentDesc {
   OOC_INT32 indent;

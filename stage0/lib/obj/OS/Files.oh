@@ -4,6 +4,10 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "Msg.oh"
+#include "LongStrings.oh"
+#include "CharClass.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef Msg__Msg OS_Files__Result;
 typedef OOC_CHAR8 OS_Files__Path[];
 typedef OOC_INT32 OS_Files__Mode;

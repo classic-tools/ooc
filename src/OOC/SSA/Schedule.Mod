@@ -1,4 +1,4 @@
-(* 	$Id: Schedule.Mod,v 1.34 2002/08/11 18:25:13 mva Exp $	 *)
+(* 	$Id: Schedule.Mod,v 1.37 2002/12/16 19:09:08 mva Exp $	 *)
 MODULE OOC:SSA:Schedule [OOC_EXTENSIONS];
 (*  Generates basic block representation and schedules instructions.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,7 +21,8 @@ MODULE OOC:SSA:Schedule [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  ADT:Object, OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Blocker;
+  Object,
+  OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:Blocker;
 
 TYPE
   Block* = POINTER TO BlockDesc;
@@ -169,7 +170,6 @@ PROCEDURE InitInfo* (info: Info);
 
 PROCEDURE InitBlock (b: Block; dominator: Block);
   BEGIN
-    Object.Init (b);
     b. proxyList := NIL;
     b. proxyTail := NIL;
     b. parent := dominator;

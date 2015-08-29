@@ -1,4 +1,4 @@
-(* 	$Id: Builder.Mod,v 1.23 2002/12/07 17:19:36 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.28 2002/12/19 00:05:15 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
     Copyright (C) 2000-2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Out, Strings, Channel, Language, ADT:Object, ADT:Object:Storage,
+  Out, Strings, Channel, Object:Boxed, ADT:Storable, ADT:Object:Storage,
   OOC:Doc, OOC:AST, Sym := OOC:SymbolTable;
 
 
@@ -54,6 +54,11 @@ TYPE
        to be imported automatically.  This list is never empty, because it
        must include the value of @ofield{module}.  *)
   END;
+
+CONST
+  prefixAutoImport* = "-";
+  stringModule* = "Object";
+  stringModuleC* = "Object";
 
 CONST
   noAutoImport* = 0;
@@ -111,7 +116,7 @@ PROCEDURE (b: Builder) NewConstDecl* (parent: Sym.Item; name: Sym.Name;
                                       visibleFrom: Sym.ModulePos;
                                       exportMark: Sym.ExportMark;
                                       docString: Doc.Document;
-                                      value: Language.Value;
+                                      value: Boxed.Object;
                                       type: Sym.PredefType;
                                       constExpr: AST.Node): Sym.ConstDecl;
 (**Note: If the value and type of the constant are not known yet, then
@@ -546,7 +551,7 @@ PROCEDURE (b: Builder) WriteSymbolTable* (ch: Channel.Channel; symTab: Sym.Modul
 PROCEDURE (b: Builder) ReadSymbolTable* (ch: Channel.Channel;
                                          VAR res: Channel.Result): Sym.Module;
   VAR
-    obj: Object.Object;
+    obj: Storable.Object;
     reader: Storage.Reader;
     fp, i, fpi, len: LONGINT;
     mn: ARRAY magicNumberSize+1 OF CHAR;
@@ -602,7 +607,7 @@ PROCEDURE N (str: ARRAY OF CHAR): Name;
 
 BEGIN
   doAutoImport := noAutoImport;
-  magicNumber := "OOC2";
+  magicNumber := "OOC3";
   
   NEW(autoImport, 2);
   NEW(autoImport[0]);
@@ -611,7 +616,7 @@ BEGIN
   autoImport[0].exclude[0] := autoImport[0].module;
   autoImport[0].exclude[1] := N("Out0");
   NEW(autoImport[1]);
-  autoImport[1].module := N("Language:String0");
+  autoImport[1].module := N(stringModule);
   NEW (autoImport[1].exclude, 3);
   autoImport[1].exclude[0] := autoImport[0].module;
   autoImport[1].exclude[1] := autoImport[1].module;

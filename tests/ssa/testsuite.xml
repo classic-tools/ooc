@@ -10,7 +10,7 @@
 
 <!--<testsuite-ext
   profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; record12 record13 record14 record15">-->
+  select ="&SetupTestCasesWithOut; array11 array12">-->
 
   &TestSetupWithOut;
     
@@ -594,7 +594,7 @@
       Calling <code>LONG</code> for <code>LONGREAL</code> value.
     </test>
     <test id="long4" type="reject" file="Long4.Mod">
-      Calling <code>LONG</code> for <code>LONGCHAR</code> value.
+      Calling <code>LONG</code> for <code>UCS4CHAR</code> value.
     </test>
     <test id="long5" type="reject" file="Long5.Mod">
       Calling <code>LONG</code> for <code>BOOLEAN</code> value.
@@ -770,7 +770,14 @@
       Assignment to a variable parameter of array type is visible
       outside procedure.
     </test>
-
+    <test id="array11" type="accept" file="Array11.Mod">
+      Define an array type with the <code>READ_ONLY</code> flag set.
+    </test>
+    <test id="array12" type="reject" file="Array12.Mod">
+      Trying to assign to an array element imported with
+      <code>READ_ONLY</code>.
+    </test>
+    
     <test id="procvar1" type="run" file="ProcVar1.Mod" output="ProcVar1.Ref">
       Call procedures through procedure variables.  The procedures
       have no arguments.
@@ -931,37 +938,34 @@
     <test id="opRecord5" type="error" file="OpRecord5.Mod">
       Using a record pointer with a value of <code>NIL</code>.
     </test>
+    <test id="opRecord6" type="reject" file="OpRecord6.Mod">
+      Left side of a field sector is an integer constant.
+    </test>
 
     <test id="opPointer1" type="reject" file="OpPointer1.Mod">
       Dereference operator applied to non-pointer.
     </test>
-
-<!--
-    <test id="opPointer2" type="reject" relevance="informal" file="OpPointer2.Mod">
+    <test id="opPointer2" type="reject" file="OpPointer2.Mod">
       Dereference operator applied to type-bound procedure that does not exist
       in the base type.
     </test>
--->
-
     <test id="opPointer3" type="run" file="OpPointer3.Mod"
-    output="OpPointer3.Ref">
+      output="OpPointer3.Ref">
       Super call.
     </test>
-
     <test id="opPointer4" type="reject" file="OpPointer4.Mod">
       Dereference operator applied to function result.
     </test>
-
-<!--
-    <test id="opPointer5" type="reject" relevance="informal" file="OpPointer5.Mod">
+    <test id="opPointer5" type="reject" file="OpPointer5.Mod">
       More than one level of "super" call.
     </test>
--->
-
     <test id="opPointer6" type="error" file="OpPointer6.Mod">
       Dereferencing a <code>NIL</code> pointer.
     </test>
-
+    <test id="opPointer7" type="reject" file="OpPointer7.Mod">
+      Variant of <code>opPointer2</code>, where no base type exists.
+    </test>
+    
     <test id="opTypeGuard1" type="run" file="OpTypeGuard1.Mod"
       output="OpTypeGuard1.Ref">
       Excercise type guards.
@@ -1351,6 +1355,9 @@
     <reject-info id="record14" pos="%x:"
       msg="This name is already defined in the record's base type"/>
     
+    <reject-info id="array12" pos="p%[0]"
+      msg="This variable is read-only"/>
+    
     <reject-info id="typetest5" pos="IS %LONGINT"
       msg="Type must be an extension of the left operand's type"/>
     <reject-info id="typetest6" pos="IS %x"
@@ -1455,7 +1462,7 @@
       msg="Invalid type for operator"/>
     <reject-info id="long3" pos="LONG(%r64)"
       msg="Invalid type for operator"/>
-    <reject-info id="long4" pos="LONG(%c16)"
+    <reject-info id="long4" pos="LONG(%c32)"
       msg="Invalid type for operator"/>
     <reject-info id="long5" pos="LONG(%b)"
       msg="Invalid type for operator"/>
@@ -1508,10 +1515,20 @@
         msg="Undeclared identifier"/>
     <reject-info id="opRecord4" pos="New(1)%.i"
         msg="Operator may not be applied to function result"/>
+    <reject-info id="opRecord6" pos="%r.f :="
+        msg="Expression must be of record type"/>
+    
     <reject-info id="opPointer1" pos=":= %i"
         msg="Expression must be of pointer type"/>
+    <reject-info id="opPointer2" pos="P%^"
+        msg="Called procedure not defined in base type"/>
     <reject-info id="opPointer4" pos="New(1)%"
         msg="Operator may not be applied to function result"/>
+    <reject-info id="opPointer5" pos="P\^%\^"
+        msg="Super call can only apply to the direct base type"/>
+    <reject-info id="opPointer7" pos="P%^"
+        msg="Called procedure not defined in base type"/>
+    
     <reject-info id="opExprCompat2" pos=" %+"
         msg="Incompatible types for operator"/>
     <reject-info id="opExprCompat3" pos=" %+"

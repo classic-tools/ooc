@@ -3,8 +3,6 @@
 #include "Strings.oh"
 #include "LongStrings.oh"
 #include "RT0.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void Config_Source_Environment__Init(Config_Source_Environment__Environment env);
 
 /* run-time meta data */

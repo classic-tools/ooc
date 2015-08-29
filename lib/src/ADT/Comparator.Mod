@@ -1,4 +1,4 @@
-(*	$Id: Comparator.Mod,v 1.1 2002/07/14 19:49:40 mva Exp $	*)
+(*	$Id: Comparator.Mod,v 1.3 2002/12/20 17:46:20 mva Exp $	*)
 MODULE ADT:Comparator [OOC_EXTENSIONS];
 (*  Abstract base type for comparison function for objects.
     Copyright (C) 2001  Michael van Acken
@@ -20,7 +20,7 @@ MODULE ADT:Comparator [OOC_EXTENSIONS];
 
 
 IMPORT
-  ADT:Object;
+  Object;
 
 (**Note: The class @otype{Comparator} is modeled after from Java class
    @samp{java.util.Comparator}, from which the documentation is also derived.  *)
@@ -33,7 +33,6 @@ TYPE
 
 PROCEDURE Init* (cmp: Comparator);
   BEGIN
-    Object.Init (cmp)
   END Init;
 
 PROCEDURE (cmpd: Comparator) [ABSTRACT] Compare* (o1, o2: Object.Object): LONGINT;

@@ -52,7 +52,7 @@ void URI_Scheme_CurrentDoc__CurrentDocDesc_WriteXML(URI_Scheme_CurrentDoc__Curre
 
 void URI_Scheme_CurrentDoc__CurrentDocDesc_GetString(URI_Scheme_CurrentDoc__CurrentDoc uri, OOC_CHAR8 str[], OOC_LEN str_0d) {
 
-  _copy_8("",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }

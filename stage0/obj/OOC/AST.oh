@@ -7,6 +7,8 @@
 #include "OOC/Doc.oh"
 #include "OOC/Scanner/Builder/BasicList.oh"
 #include "OOC/Scanner/Symbol.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_Scanner_InputBuffer__CharArray OOC_AST__Name;
 typedef struct OOC_AST__NodeDesc *OOC_AST__Node;
 typedef struct OOC_AST__NodeDesc {
@@ -176,13 +178,13 @@ extern void OOC_OOC_AST_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_AST__Node;
 extern RT0__StructDesc _td_OOC_AST__NodeDesc;
-extern RT0__StructDesc _td_OOC_AST__1257;
+extern RT0__StructDesc _td_OOC_AST__1290;
 extern RT0__StructDesc _td_OOC_AST__NodeArray;
 extern RT0__StructDesc _td_OOC_AST__NodeList;
 extern RT0__StructDesc _td_OOC_AST__NodeListDesc;
 extern RT0__StructDesc _td_OOC_AST__Builder;
 extern RT0__StructDesc _td_OOC_AST__BuilderDesc;
-extern RT0__StructDesc _td_OOC_AST__7666;
+extern RT0__StructDesc _td_OOC_AST__7699;
 #endif /* _MODULE_OOC_AST_ */
 
 /* --- */

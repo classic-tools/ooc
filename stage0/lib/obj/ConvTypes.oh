@@ -3,6 +3,8 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_INT8 ConvTypes__ConvResults;
 #define ConvTypes__strAllRight 0
 #define ConvTypes__strOutOfRange 1

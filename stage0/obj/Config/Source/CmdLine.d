@@ -3,8 +3,6 @@
 #include "Strings.oh"
 #include "LongStrings.oh"
 #include "TextRider.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define Config_Source_CmdLine__maxLenArgument 2048
 #define Config_Source_CmdLine__connectFailed 1
 #define Config_Source_CmdLine__junkAfterEnd 2

@@ -1,8 +1,6 @@
 #include "Real0.oh"
 #include "CharClass.oh"
 #include "Strings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define Real0__strAllRight 0
 #define Real0__strOutOfRange 1
 #define Real0__strWrongFormat 2

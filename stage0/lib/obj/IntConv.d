@@ -1,7 +1,5 @@
 #include "IntConv.oh"
 #include "CharClass.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static ConvTypes__ScanState IntConv__W;
 static ConvTypes__ScanState IntConv__S;
 static ConvTypes__ScanState IntConv__SI;

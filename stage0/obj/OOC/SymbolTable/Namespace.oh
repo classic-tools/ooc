@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "OOC/Error.oh"
 #include "OOC/SymbolTable.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_SymbolTable_Namespace__NamespaceDesc *OOC_SymbolTable_Namespace__Namespace;
 typedef struct OOC_SymbolTable_Namespace__NamespaceDesc {
   OOC_SymbolTable__DeclarationArray localDecl;

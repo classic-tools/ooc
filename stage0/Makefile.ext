@@ -1,4 +1,4 @@
-OBJ=./lib/obj/ADT/ArrayList.o ./lib/obj/ADT/Dictionary.o ./lib/obj/ADT/Dictionary/AddressKey/IntValue.o ./lib/obj/ADT/Dictionary/IntValue.o ./lib/obj/ADT/Object.o ./lib/obj/ADT/Object/Storage.o ./lib/obj/ADT/String.o ./lib/obj/ADT/StringBuffer.o ./lib/obj/Ascii.o ./lib/obj/BinaryRider.o ./lib/obj/Channel.o ./lib/obj/CharClass.o ./obj/Config.o ./obj/Config/Parser.o ./obj/Config/Section.o ./obj/Config/Section/Arguments.o ./obj/Config/Section/Options.o ./obj/Config/Simple.o ./obj/Config/Source.o ./obj/Config/Source/CmdLine.o ./obj/Config/Source/Environment.o ./obj/Config/Value.o ./obj/Config/Value/Boolean.o ./obj/Config/Value/Integer.o ./obj/Config/Value/String.o ./lib/obj/ConvTypes.o ./lib/obj/Err.o ./lib/obj/Files.o ./lib/obj/IO/Memory.o ./lib/obj/IntConv.o ./lib/obj/IntStr.o ./lib/obj/Integers.o ./lib/obj/LRealConv.o ./lib/obj/LRealStr.o ./obj/Language.o ./obj/Language/Boolean.o ./obj/Language/Char.o ./obj/Language/Integer.o ./obj/Language/Real.o ./obj/Language/Set.o ./obj/Language/String.o ./lib/obj/Language/String0.o ./obj/Language/String16.o ./obj/Language/String8.o ./lib/obj/Log.o ./lib/obj/LongStrings.o ./lib/obj/Msg.o ./obj/OOC/AST.o ./obj/OOC/AST/ExtTree.o ./obj/OOC/AST/ExtTree/CreateIR.o ./obj/OOC/AST/ExtTree/CreateSymTab.o ./obj/OOC/AST/ExtTree/XML.o ./obj/OOC/Auxiliary/ParseModule.o ./obj/OOC/Auxiliary/WriteSymbolFile.o ./obj/OOC/C/ConvertDecl.o ./obj/OOC/C/DeclWriter.o ./obj/OOC/C/IRtoC.o ./obj/OOC/C/Naming.o ./obj/OOC/C/RuntimeData.o ./obj/OOC/Config.o ./obj/OOC/Config/Assembler.o ./obj/OOC/Config/Autoconf.o ./obj/OOC/Config/CCompiler.o ./obj/OOC/Config/Pragmas.o ./obj/OOC/Config/Pragmas/StdPragmas.o ./obj/OOC/Config/Repositories.o ./obj/OOC/Config/Repositories/FileSystem.o ./obj/OOC/Doc.o ./obj/OOC/Doc/Decoration.o ./obj/OOC/Doc/Input/Texinfo.o ./obj/OOC/Doc/Output/XML.o ./obj/OOC/Doc/ResolveRef.o ./obj/OOC/Doc/TextBuffer.o ./obj/OOC/Error.o ./obj/OOC/IA32/RuntimeData.o ./obj/OOC/IA32/WriteAssembler.o ./obj/OOC/IA32/Writer.o ./obj/OOC/IR.o ./obj/OOC/IR/ConstFold.o ./obj/OOC/IR/VisitAll.o ./obj/OOC/IR/XML.o ./obj/OOC/Logger.o ./obj/OOC/Make.o ./obj/OOC/Make/LinkProgramC.o ./obj/OOC/Make/TranslateToC.o ./obj/OOC/Make/TranslateToIA32.o ./obj/OOC/Make/WriteMainFileAssembler.o ./obj/OOC/Make/WriteMainFileC.o ./obj/OOC/Package.o ./obj/OOC/Parser.o ./obj/OOC/Repository.o ./obj/OOC/Repository/FileSystem.o ./obj/OOC/SSA.o ./obj/OOC/SSA/Algebraic.o ./obj/OOC/SSA/Aliasing.o ./obj/OOC/SSA/Allocator.o ./obj/OOC/SSA/Blocker.o ./obj/OOC/SSA/CSE.o ./obj/OOC/SSA/ConstProp.o ./obj/OOC/SSA/DeadCodeElimination.o ./obj/OOC/SSA/Destore.o ./obj/OOC/SSA/IGraph.o ./obj/OOC/SSA/IRtoSSA.o ./obj/OOC/SSA/Opcode.o ./obj/OOC/SSA/Opnd.o ./obj/OOC/SSA/Result.o ./obj/OOC/SSA/Schedule.o ./obj/OOC/SSA/WriteC.o ./obj/OOC/SSA/XML.o ./obj/OOC/Scanner.o ./obj/OOC/Scanner/Builder.o ./obj/OOC/Scanner/Builder/BasicList.o ./obj/OOC/Scanner/InputBuffer.o ./obj/OOC/Scanner/Integer.o ./obj/OOC/Scanner/Pragma.o ./obj/OOC/Scanner/Symbol.o ./obj/OOC/SymbolTable.o ./obj/OOC/SymbolTable/Builder.o ./obj/OOC/SymbolTable/CreateNamespace.o ./obj/OOC/SymbolTable/Exports.o ./obj/OOC/SymbolTable/GetClass.o ./obj/OOC/SymbolTable/ImportModules.o ./obj/OOC/SymbolTable/InterfaceDescr.o ./obj/OOC/SymbolTable/InterfaceXML.o ./obj/OOC/SymbolTable/Namespace.o ./obj/OOC/SymbolTable/Predef.o ./obj/OOC/SymbolTable/TypeRules.o ./lib/obj/OS/Files.o ./lib/obj/OS/Path.o ./lib/obj/OS/ProcessManagement.o ./lib/obj/OS/ProcessParameters.o ./lib/obj/Out.o ./lib/obj/PosixFileDescr.o ./lib/obj/ProgramArgs.o ./lib/obj/RT0.o ./lib/obj/Real0.o ./lib/obj/RealConv.o ./lib/obj/RealStr.o ./lib/obj/StdChannels.o ./lib/obj/StringSearch.o ./lib/obj/StringSearch/NoMatch.o ./lib/obj/Strings.o ./lib/obj/SysClock.o ./lib/obj/Termination.o ./lib/obj/TextRider.o ./lib/obj/Time.o ./lib/obj/URI.o ./lib/obj/URI/Authority/ServerBased.o ./lib/obj/URI/Authority/Unparsed.o ./lib/obj/URI/CharClass.o ./lib/obj/URI/Error.o ./lib/obj/URI/Parser.o ./lib/obj/URI/Query/Unparsed.o ./lib/obj/URI/Scheme/CurrentDoc.o ./lib/obj/URI/Scheme/File.o ./lib/obj/URI/Scheme/Hierarchical.o ./lib/obj/URI/Scheme/Opaque.o ./lib/obj/URI/String.o ./lib/obj/XML/Builder.o ./lib/obj/XML/DTD.o ./lib/obj/XML/EntityResolver.o ./lib/obj/XML/Error.o ./lib/obj/XML/InputBuffer.o ./lib/obj/XML/Locator.o ./lib/obj/XML/Parser.o ./lib/obj/XML/UnicodeBuffer.o ./lib/obj/XML/UnicodeCodec.o ./lib/obj/XML/UnicodeCodec/Latin1.o ./lib/obj/XML/UnicodeCodec/UTF16.o ./lib/obj/XML/UnicodeCodec/UTF8.o ./lib/obj/XML/Writer.o ./obj/oo2c.o obj/oo2c_.o
+OBJ=./lib/obj/ADT/ArrayList.o ./lib/obj/ADT/Dictionary.o ./lib/obj/ADT/Dictionary/AddressKey/IntValue.o ./lib/obj/ADT/Dictionary/IntValue.o ./lib/obj/ADT/Object/Storage.o ./lib/obj/ADT/Storable.o ./lib/obj/ADT/StringBuffer.o ./lib/obj/Ascii.o ./lib/obj/BinaryRider.o ./lib/obj/Channel.o ./lib/obj/CharClass.o ./obj/Config.o ./obj/Config/Parser.o ./obj/Config/Section.o ./obj/Config/Section/Arguments.o ./obj/Config/Section/Options.o ./obj/Config/Simple.o ./obj/Config/Source.o ./obj/Config/Source/CmdLine.o ./obj/Config/Source/Environment.o ./obj/Config/Value.o ./obj/Config/Value/Boolean.o ./obj/Config/Value/Integer.o ./obj/Config/Value/String.o ./lib/obj/ConvTypes.o ./lib/obj/Err.o ./lib/obj/Files.o ./lib/obj/IO/Memory.o ./lib/obj/IntConv.o ./lib/obj/IntStr.o ./lib/obj/LRealConv.o ./lib/obj/LRealStr.o ./lib/obj/Log.o ./lib/obj/LongStrings.o ./lib/obj/Msg.o ./obj/OOC/AST.o ./obj/OOC/AST/ExtTree.o ./obj/OOC/AST/ExtTree/CreateIR.o ./obj/OOC/AST/ExtTree/CreateSymTab.o ./obj/OOC/AST/ExtTree/XML.o ./obj/OOC/Auxiliary/ParseModule.o ./obj/OOC/Auxiliary/WriteSymbolFile.o ./obj/OOC/C/ConvertDecl.o ./obj/OOC/C/DeclWriter.o ./obj/OOC/C/IRtoC.o ./obj/OOC/C/Naming.o ./obj/OOC/C/RuntimeData.o ./obj/OOC/Config.o ./obj/OOC/Config/Assembler.o ./obj/OOC/Config/Autoconf.o ./obj/OOC/Config/CCompiler.o ./obj/OOC/Config/Pragmas.o ./obj/OOC/Config/Pragmas/StdPragmas.o ./obj/OOC/Config/Repositories.o ./obj/OOC/Config/Repositories/FileSystem.o ./obj/OOC/Doc.o ./obj/OOC/Doc/Decoration.o ./obj/OOC/Doc/Input/Texinfo.o ./obj/OOC/Doc/Output/XML.o ./obj/OOC/Doc/ResolveRef.o ./obj/OOC/Doc/TextBuffer.o ./obj/OOC/Error.o ./obj/OOC/IA32/RuntimeData.o ./obj/OOC/IA32/WriteAssembler.o ./obj/OOC/IA32/Writer.o ./obj/OOC/IR.o ./obj/OOC/IR/ConstFold.o ./obj/OOC/IR/VisitAll.o ./obj/OOC/IR/XML.o ./obj/OOC/Logger.o ./obj/OOC/Make.o ./obj/OOC/Make/LinkProgramC.o ./obj/OOC/Make/TranslateToC.o ./obj/OOC/Make/TranslateToIA32.o ./obj/OOC/Make/WriteMainFileAssembler.o ./obj/OOC/Make/WriteMainFileC.o ./obj/OOC/Package.o ./obj/OOC/Parser.o ./obj/OOC/Repository.o ./obj/OOC/Repository/FileSystem.o ./obj/OOC/SSA.o ./obj/OOC/SSA/Algebraic.o ./obj/OOC/SSA/Aliasing.o ./obj/OOC/SSA/Allocator.o ./obj/OOC/SSA/Blocker.o ./obj/OOC/SSA/CSE.o ./obj/OOC/SSA/ConstProp.o ./obj/OOC/SSA/DeadCodeElimination.o ./obj/OOC/SSA/Destore.o ./obj/OOC/SSA/IGraph.o ./obj/OOC/SSA/IRtoSSA.o ./obj/OOC/SSA/Opcode.o ./obj/OOC/SSA/Opnd.o ./obj/OOC/SSA/Result.o ./obj/OOC/SSA/Schedule.o ./obj/OOC/SSA/WriteC.o ./obj/OOC/SSA/XML.o ./obj/OOC/Scanner.o ./obj/OOC/Scanner/Builder.o ./obj/OOC/Scanner/Builder/BasicList.o ./obj/OOC/Scanner/InputBuffer.o ./obj/OOC/Scanner/Integer.o ./obj/OOC/Scanner/Pragma.o ./obj/OOC/Scanner/Symbol.o ./obj/OOC/SymbolTable.o ./obj/OOC/SymbolTable/Builder.o ./obj/OOC/SymbolTable/CreateNamespace.o ./obj/OOC/SymbolTable/Exports.o ./obj/OOC/SymbolTable/GetClass.o ./obj/OOC/SymbolTable/ImportModules.o ./obj/OOC/SymbolTable/InterfaceDescr.o ./obj/OOC/SymbolTable/InterfaceXML.o ./obj/OOC/SymbolTable/Namespace.o ./obj/OOC/SymbolTable/Predef.o ./obj/OOC/SymbolTable/TypeRules.o ./lib/obj/OS/Files.o ./lib/obj/OS/Path.o ./lib/obj/OS/ProcessManagement.o ./lib/obj/OS/ProcessParameters.o ./lib/obj/Object.o ./lib/obj/Object/BigInt.o ./lib/obj/Object/Boxed.o ./lib/obj/Out.o ./lib/obj/PosixFileDescr.o ./lib/obj/ProgramArgs.o ./lib/obj/RT0.o ./lib/obj/Real0.o ./lib/obj/RealConv.o ./lib/obj/RealStr.o ./lib/obj/StdChannels.o ./lib/obj/StringSearch.o ./lib/obj/StringSearch/NoMatch.o ./lib/obj/Strings.o ./lib/obj/SysClock.o ./lib/obj/Termination.o ./lib/obj/TextRider.o ./lib/obj/Time.o ./lib/obj/URI.o ./lib/obj/URI/Authority/ServerBased.o ./lib/obj/URI/Authority/Unparsed.o ./lib/obj/URI/CharClass.o ./lib/obj/URI/Error.o ./lib/obj/URI/Parser.o ./lib/obj/URI/Query/Unparsed.o ./lib/obj/URI/Scheme/CurrentDoc.o ./lib/obj/URI/Scheme/File.o ./lib/obj/URI/Scheme/Hierarchical.o ./lib/obj/URI/Scheme/Opaque.o ./lib/obj/URI/String.o ./lib/obj/XML/Builder.o ./lib/obj/XML/DTD.o ./lib/obj/XML/EntityResolver.o ./lib/obj/XML/Error.o ./lib/obj/XML/InputBuffer.o ./lib/obj/XML/Locator.o ./lib/obj/XML/Parser.o ./lib/obj/XML/UnicodeBuffer.o ./lib/obj/XML/UnicodeCodec.o ./lib/obj/XML/UnicodeCodec/Latin1.o ./lib/obj/XML/UnicodeCodec/UTF16.o ./lib/obj/XML/UnicodeCodec/UTF8.o ./lib/obj/XML/Writer.o ./obj/oo2c.o obj/oo2c_.o
 
 all: oo2c
 
@@ -14,14 +14,11 @@ all: oo2c
 ./lib/obj/ADT/Dictionary/IntValue.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/Dictionary/IntValue.c -o ./lib/obj/ADT/Dictionary/IntValue.o
 
-./lib/obj/ADT/Object.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/Object.c -o ./lib/obj/ADT/Object.o
-
 ./lib/obj/ADT/Object/Storage.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/Object/Storage.c -o ./lib/obj/ADT/Object/Storage.o
 
-./lib/obj/ADT/String.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/String.c -o ./lib/obj/ADT/String.o
+./lib/obj/ADT/Storable.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/Storable.c -o ./lib/obj/ADT/Storable.o
 
 ./lib/obj/ADT/StringBuffer.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/ADT/StringBuffer.c -o ./lib/obj/ADT/StringBuffer.o
@@ -95,44 +92,11 @@ all: oo2c
 ./lib/obj/IntStr.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/IntStr.c -o ./lib/obj/IntStr.o
 
-./lib/obj/Integers.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Integers.c -o ./lib/obj/Integers.o
-
 ./lib/obj/LRealConv.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/LRealConv.c -o ./lib/obj/LRealConv.o
 
 ./lib/obj/LRealStr.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/LRealStr.c -o ./lib/obj/LRealStr.o
-
-./obj/Language.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language.c -o ./obj/Language.o
-
-./obj/Language/Boolean.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/Boolean.c -o ./obj/Language/Boolean.o
-
-./obj/Language/Char.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/Char.c -o ./obj/Language/Char.o
-
-./obj/Language/Integer.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/Integer.c -o ./obj/Language/Integer.o
-
-./obj/Language/Real.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/Real.c -o ./obj/Language/Real.o
-
-./obj/Language/Set.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/Set.c -o ./obj/Language/Set.o
-
-./obj/Language/String.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/String.c -o ./obj/Language/String.o
-
-./lib/obj/Language/String0.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Language/String0.c -o ./lib/obj/Language/String0.o
-
-./obj/Language/String16.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/String16.c -o ./obj/Language/String16.o
-
-./obj/Language/String8.o:
-	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./obj/Language/String8.c -o ./obj/Language/String8.o
 
 ./lib/obj/Log.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Log.c -o ./lib/obj/Log.o
@@ -394,6 +358,15 @@ all: oo2c
 
 ./lib/obj/OS/ProcessParameters.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/src/OS/ProcessParameters.c -o ./lib/obj/OS/ProcessParameters.o
+
+./lib/obj/Object.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Object.c -o ./lib/obj/Object.o
+
+./lib/obj/Object/BigInt.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Object/BigInt.c -o ./lib/obj/Object/BigInt.o
+
+./lib/obj/Object/Boxed.o:
+	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Object/Boxed.c -o ./lib/obj/Object/Boxed.o
 
 ./lib/obj/Out.o:
 	$(CC) $(CFLAGS) $(CPPFLAGS) -Ilib/src -I./lib/obj -I./obj -c ./lib/obj/Out.c -o ./lib/obj/Out.o

@@ -1,4 +1,4 @@
-(*	$Id: Dictionary.Mod,v 1.1 2002/07/13 09:55:01 mva Exp $	*)
+(*	$Id: Dictionary.Mod,v 1.6 2002/12/17 19:33:48 mva Exp $	*)
 MODULE ADT:Dictionary;
 (*  A dictionary implementation using objects' HashCode() as keys.
     Copyright (C) 2000, 2001  Michael van Acken
@@ -39,7 +39,7 @@ MODULE ADT:Dictionary;
    @end itemize  *)
 
 IMPORT
-  S := SYSTEM, ADT:Object;
+  S := SYSTEM, ADT:Storable, Object;
 
 
 TYPE
@@ -81,7 +81,7 @@ TYPE
 
      A dictionary implementation with a value type of @code{LONGINT} is
      implemented by @otype{*ADT:Dictionary:IntValue.Dictionary}.  *)
-    (Object.ObjectDesc)
+    (Storable.ObjectDesc)
     fill: LONGINT;
     (**The number of non-@code{NIL} keys.  *)
     used: LONGINT;
@@ -120,7 +120,7 @@ VAR
 PROCEDURE Init* (dict: Dictionary);
 (**Initializes @oparam{dict} to an empty dictionary.  *)
   BEGIN
-    Object.Init (dict);
+    Storable.Init (dict);
     dict. size := 0;
     dict. poly := 0;
     dict. table := NIL;
@@ -452,24 +452,36 @@ PROCEDURE (dict: Dictionary) HashCode* (): LONGINT;
     <*PUSH; Assertions:=TRUE*>ASSERT(FALSE)<*POP*>
   END HashCode;
 
-PROCEDURE (dict: Dictionary) Store* (w: Object.Writer);
+PROCEDURE (dict: Dictionary) Store* (w: Storable.Writer);
   VAR
     i: LONGINT;
+    obj: Object.Object;
   BEGIN
     w. WriteNum (dict. used);
     IF (dict. used # 0) THEN
       FOR i := 0 TO dict. size-1 DO
         IF IsSet (dict. table[i]. key) THEN
-          w. WriteObject (dict. table[i]. key);
-          w. WriteObject (dict. table[i]. value)
+          obj := dict. table[i]. key;
+          IF (obj = NIL) THEN
+            w. WriteObject (NIL);
+          ELSE
+            w. WriteObject (obj(Storable.Object));
+          END;
+          obj := dict. table[i]. value;
+          IF (obj = NIL) THEN
+            w. WriteObject (NIL);
+          ELSE
+            w. WriteObject (obj(Storable.Object));
+          END;
         END
       END
     END
   END Store;
 
-PROCEDURE (dict: Dictionary) Load* (r: Object.Reader);
+PROCEDURE (dict: Dictionary) Load* (r: Storable.Reader);
   VAR
     i: LONGINT;
+    obj: Storable.Object;
   BEGIN
     Init (dict);
     r. ReadNum (dict. size);
@@ -478,8 +490,10 @@ PROCEDURE (dict: Dictionary) Load* (r: Object.Reader);
          file, then impose the hash structure on it *)
       NEW (dict. table, dict. size);
       FOR i := 0 TO dict. size-1 DO
-        r. ReadObject (dict. table[i]. key);
-        r. ReadObject (dict. table[i]. value);
+        r. ReadObject (obj);
+        dict. table[i]. key := obj;
+        r. ReadObject (obj);
+        dict. table[i]. value := obj;
         dict. table[i]. hash := dict. table[i]. key. HashCode()
       END;
       Resize (dict, (dict. size*3) DIV 2)
@@ -492,8 +506,7 @@ PROCEDURE (dummy: Dummy) Destroy*;
 
 BEGIN
   NEW (dummy);
-  Object.Init (dummy);
-
+  
   polys[0] := 4 + 3;
   polys[1] := 8 + 3;
   polys[2] := 16 + 3;

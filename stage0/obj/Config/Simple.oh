@@ -12,6 +12,8 @@
 #include "Config/Section.oh"
 #include "Config/Section/Options.oh"
 #include "Config/Section/Arguments.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct Config_Simple__ConfigDesc *Config_Simple__Config;
 typedef struct Config_Simple__ConfigDesc {
   Config_Value__StringPtr cfgFile;

@@ -3,6 +3,8 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern void OS_Path__dirname(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 dirname[], OOC_LEN dirname_0d);
 extern void OS_Path__basename(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 basename[], OOC_LEN basename_0d);
 extern void OS_Path__splitext(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 root[], OOC_LEN root_0d, OOC_CHAR8 ext[], OOC_LEN ext_0d);

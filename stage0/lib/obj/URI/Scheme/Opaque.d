@@ -2,8 +2,6 @@
 #include "CharClass.oh"
 #include "URI/CharClass.oh"
 #include "URI/String.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define URI_Scheme_Opaque__illegalOpaqueChar 1
 static URI_Error__Context URI_Scheme_Opaque__opaqueContext;
 static OOC_INT16 URI_Scheme_Opaque__IsValidOpaqueStr(const URI_String__String str__ref, OOC_LEN str_0d);

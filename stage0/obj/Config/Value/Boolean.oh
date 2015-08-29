@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "Msg.oh"
 #include "Config/Value.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_CHAR8 Config_Value_Boolean__Type;
 typedef struct Config_Value_Boolean__ValueDesc *Config_Value_Boolean__Value;
 typedef struct Config_Value_Boolean__ValueDesc {

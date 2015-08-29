@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "ADT/Dictionary.oh"
 #include "OOC/SymbolTable.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern ADT_Dictionary__Dictionary OOC_SymbolTable_Exports__GetExports(OOC_SymbolTable__Module module, OOC_CHAR8 forSymbolFile);
 extern void OOC_OOC_SymbolTable_Exports_init();
 extern void OOC_OOC_SymbolTable_Exports_init0();

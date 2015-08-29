@@ -6,6 +6,8 @@
 #include "OOC/Scanner/InputBuffer.oh"
 #include "OOC/Scanner/Symbol.oh"
 #include "OOC/Scanner/Builder.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_Scanner_Builder_BasicList__SymbolDesc *OOC_Scanner_Builder_BasicList__Symbol;
 typedef struct OOC_Scanner_Builder_BasicList__SymbolDesc {
   OOC_Scanner_Builder_BasicList__Symbol next;

@@ -1,4 +1,4 @@
-(*	$Id: Out0.Mod,v 1.2 2002/07/07 08:56:24 mva Exp $	*)
+(*	$Id: Out0.Mod,v 1.3 2002/12/19 03:18:22 mva Exp $	*)
 MODULE Out0 [FOREIGN "C"; LINK FILE "Out0.c" END];
 <* Warnings := FALSE *>
 
@@ -8,6 +8,7 @@ PROCEDURE Open*;
 PROCEDURE Char* (ch: CHAR);
 PROCEDURE String* (s: ARRAY OF CHAR);
 PROCEDURE LString* (s: ARRAY OF LONGCHAR);
+PROCEDURE UString* (s: ARRAY OF UCS4CHAR);
 PROCEDURE Int* (i, n: LONGINT);
 PROCEDURE Bool* (b : BOOLEAN);
 PROCEDURE Set* (s : SET);

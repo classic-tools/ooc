@@ -56,7 +56,7 @@ void URI_Scheme_File__URIDesc_GetPath(URI_Scheme_File__URI file, OOC_CHAR8 fileP
   register OOC_INT32 i0,i1,i2,i3;
   URI_Scheme_Hierarchical__Segment segm;
 
-  _copy_8("",(OOC_INT32)filePath,filePath_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)filePath,filePath_0d);
   i0 = (OOC_INT32)file;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2420))+12);
   i2 = i1!=(OOC_INT32)0;
@@ -77,7 +77,7 @@ l8:
 l10:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2594))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2594))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2602)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 2602)), (OOC_INT32)0);
   Strings__Append((void*)(_check_pointer(i2, 2602)), i3, (void*)(OOC_INT32)filePath, filePath_0d);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2634));
   segm = (URI_Scheme_Hierarchical__Segment)i1;
@@ -137,7 +137,7 @@ URI_Scheme_File__URI URI_Scheme_File__GetCwd() {
   i0 = (OOC_INT32)res;
   i0 = i0==(OOC_INT32)0;
   if (!i0) goto l6;
-  _copy_8("file:",(OOC_INT32)uriString,4096);
+  _copy_8((const void*)"file:",(void*)(OOC_INT32)uriString,4096);
   URI_String__AppendEscaped((void*)(OOC_INT32)path, 4096, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
   i0 = Strings__Length((void*)(OOC_INT32)uriString, 4096);
   i0 = *(OOC_UINT8*)((OOC_INT32)uriString+(_check_index((i0-1), 4096, OOC_UINT16, 3722)));
@@ -171,7 +171,7 @@ URI_Scheme_File__URI URI_Scheme_File__ToURI(const OOC_CHAR8 filePath__ref[], OOC
   
   goto l4;
 l3:
-  _copy_8("file:",(OOC_INT32)uriString,4096);
+  _copy_8((const void*)"file:",(void*)(OOC_INT32)uriString,4096);
   URI_String__AppendEscaped((void*)(OOC_INT32)filePath, filePath_0d, ":@&=+$,/", 9, (void*)(OOC_INT32)uriString, 4096);
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(OOC_INT32)uriString, 4096, (URI__HierarchicalURI)(OOC_INT32)0, (void*)(OOC_INT32)&res);
   uri = (URI__URI)i0;

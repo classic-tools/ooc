@@ -1,4 +1,4 @@
-(* 	$Id: Repository.Mod,v 1.33 2002/12/12 14:22:38 mva Exp $	 *)
+(* 	$Id: Repository.Mod,v 1.36 2002/12/16 19:09:32 mva Exp $	 *)
 MODULE OOC:Repository [OOC_EXTENSIONS];
 (*  Abstraction of storage of source, intermediate, and target code.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,7 +21,8 @@ MODULE OOC:Repository [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Msg, Channel, TextRider, Strings, Time, ADT:Object, ADT:ArrayList,
+  Msg, Channel, TextRider, Strings, Time,
+  Object, ADT:ArrayList,
   URI, OS:Path, OOC:Logger,
   OOC:Scanner:InputBuffer, Sym := OOC:SymbolTable, OOC:SymbolTable:Builder;
 
@@ -245,7 +246,6 @@ PROCEDURE Init* (rep: Repository; baseRep: Repository; baseURI: URI.Hierarchical
 PROCEDURE InitModule* (m: Module; origin: Repository; name: ModuleName;
                        srcFileOverride: URI.HierarchicalURI);
   BEGIN
-    Object.Init (m);
     m. origin := origin;
     m. name := Msg.GetStringPtr (name);
     m. srcFileOverride := srcFileOverride;

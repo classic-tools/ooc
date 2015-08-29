@@ -1,4 +1,4 @@
-(* 	$Id: Channel.Mod,v 1.2 2002/06/01 09:58:21 mva Exp $	 *)
+(* 	$Id: Channel.Mod,v 1.3 2002/12/19 06:36:46 mva Exp $	 *)
 MODULE Channel [OOC_EXTENSIONS];
 (*  Provides abstract data types Channel, Reader, and Writer for stream I/O.
     Copyright (C) 1997-1999  Michael van Acken
@@ -474,7 +474,7 @@ PROCEDURE (w: Writer) [ABSTRACT] WriteByte* (x: SYSTEM.BYTE);
     *)
   END WriteByte;
   
-PROCEDURE (w: Writer) [ABSTRACT] WriteBytes* (VAR x: ARRAY OF SYSTEM.BYTE; 
+PROCEDURE (w: Writer) [ABSTRACT] WriteBytes* (x: ARRAY OF SYSTEM.BYTE;
                                               start, n: LONGINT);
 (**Writes @oparam{n} bytes from @oparam{x}, starting at position
    @oparam{start}, to the channel @ofield{w.base} at the writing position

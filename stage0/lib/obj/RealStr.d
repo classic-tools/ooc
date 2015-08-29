@@ -3,8 +3,6 @@
 #include "RealConv.oh"
 #include "Real0.oh"
 #include "Strings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define RealStr__prec 9
 
 /* run-time meta data */

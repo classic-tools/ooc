@@ -5,8 +5,6 @@
 #include "OOC/SymbolTable/GetClass.oh"
 #include "OOC/SymbolTable/Exports.oh"
 #include "OOC/Doc/Output/XML.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_SymbolTable_InterfaceXML__dtdPackageName "OOC"
 #define OOC_SymbolTable_InterfaceXML__dtdResourcePath "xml/module-interface.dtd"
 static URI__URI OOC_SymbolTable_InterfaceXML__dtdSystemId;

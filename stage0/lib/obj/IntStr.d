@@ -1,7 +1,5 @@
 #include "IntStr.oh"
 #include "IntConv.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void IntStr__Reverse(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 start, OOC_INT16 end);
 
 /* run-time meta data */

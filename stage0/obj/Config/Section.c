@@ -9,13 +9,13 @@ void Config_Section__ErrorContextDesc_GetTemplate(Config_Section__ErrorContext c
   i1 = *(OOC_INT32*)((_check_pointer(i0, 838))+8);
   switch (i1) {
   case 1:
-    _copy_16(((OOC_CHAR16[]){78,97,109,101,32,111,102,32,114,111,111,116,32,101,108,101,109,101,110,116,32,109,117,115,116,32,98,101,32,96,36,123,110,97,109,101,125,39,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){78,97,109,101,32,111,102,32,114,111,111,116,32,101,108,101,109,101,110,116,32,109,117,115,116,32,98,101,32,96,36,123,110,97,109,101,125,39,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   case 2:
-    _copy_16(((OOC_CHAR16[]){73,110,118,97,108,105,100,32,99,104,97,114,97,99,116,101,114,32,100,97,116,97,32,105,110,32,114,111,111,116,32,101,108,101,109,101,110,116,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){73,110,118,97,108,105,100,32,99,104,97,114,97,99,116,101,114,32,100,97,116,97,32,105,110,32,114,111,111,116,32,101,108,101,109,101,110,116,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   case 3:
-    _copy_16(((OOC_CHAR16[]){85,110,107,110,111,119,110,32,99,111,110,102,105,103,117,114,97,116,105,111,110,32,115,101,99,116,105,111,110,32,96,36,123,110,97,109,101,125,39,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){85,110,107,110,111,119,110,32,99,111,110,102,105,103,117,114,97,116,105,111,110,32,115,101,99,116,105,111,110,32,96,36,123,110,97,109,101,125,39,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   default:
     _failed_case(i1, 830);
@@ -38,8 +38,8 @@ void Config_Section__Init(Config_Section__Section s, const Config_Parser__String
   *(OOC_INT32*)(_check_pointer(i0, 1217)) = ((OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i1+1)));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1268));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 1268));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1274)), 0);
-  _copy_16((OOC_INT32)id,(_check_pointer(i1, 1274)),i0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1274)), (OOC_INT32)0);
+  _copy_16((const void*)(OOC_INT32)id,(void*)(_check_pointer(i1, 1274)),i0);
   return;
   ;
 }
@@ -83,13 +83,13 @@ void Config_Section__SectionListDesc_Add(Config_Section__SectionList sl, Config_
       i2 = (OOC_INT32)section;
       i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2237));
       i1 = (
-      _cmp16((const void*)(_check_pointer(i1, 2226)),(const void*)(_check_pointer(i3, 2243))))==0;
+      _cmp16((const void*)(_check_pointer(i1, 2226)),(const void*)(_check_pointer(i3, 2243))))==(OOC_INT32)0;
       if (i1) goto l9;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2345))+4);
       i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2354));
       i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2371));
       i1 = (
-      _cmp16((const void*)(_check_pointer(i1, 2360)),(const void*)(_check_pointer(i2, 2377))))>0;
+      _cmp16((const void*)(_check_pointer(i1, 2360)),(const void*)(_check_pointer(i2, 2377))))>(OOC_INT32)0;
       if (i1) goto l7;
       Config_Section__SectionListDesc_Add_Insert((void*)(_check_pointer(i0, 2506)));
       goto l12;
@@ -139,7 +139,7 @@ l3:
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 2802));
   i2 = (OOC_INT32)name;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 2808)),(const void*)(_check_pointer(i2, 2816))))!=0;
+  _cmp16((const void*)(_check_pointer(i1, 2808)),(const void*)(_check_pointer(i2, 2816))))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -156,7 +156,7 @@ l11:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2793))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 2802));
   i2 = (
-  _cmp16((const void*)(_check_pointer(i2, 2808)),(const void*)(_check_pointer(i1, 2816))))!=0;
+  _cmp16((const void*)(_check_pointer(i2, 2808)),(const void*)(_check_pointer(i1, 2816))))!=(OOC_INT32)0;
   
 l13:
   if (i2) goto l8_loop;
@@ -201,7 +201,7 @@ void Config_Section__SectionListDesc_ProcessElements(Config_Section__SectionList
   i0 = (OOC_INT32)root;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3354))+28);
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 3360)),(const void*)(OOC_INT32)rootElementName))!=0;
+  _cmp16((const void*)(_check_pointer(i1, 3360)),(const void*)(OOC_INT32)rootElementName))!=(OOC_INT32)0;
   if (!i1) goto l3;
   Config_Section__SectionListDesc_ProcessElements_Err(1, (Config_Parser__Node)i0);
   i0 = (OOC_INT32)lastError;
@@ -237,7 +237,7 @@ l14:
   i1 = (OOC_INT32)node;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3897))+28);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3897))+28);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3903)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3903)), (OOC_INT32)0);
   i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(_check_pointer(i2, 3903)), i1);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3846)))), Msg__MsgDesc_SetLStringAttrib)),Msg__MsgDesc_SetLStringAttrib)((Msg__Msg)i0, "name", 5, (Msg__LStringPtr)i1);
   goto l21;

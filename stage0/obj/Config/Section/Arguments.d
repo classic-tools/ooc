@@ -2,8 +2,6 @@
 #include "TextRider.oh"
 #include "LongStrings.oh"
 #include "XML/Builder.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define Config_Section_Arguments__invalidContent 1
 #define Config_Section_Arguments__invalidAttribute 2
 #define Config_Section_Arguments__requireCharDataContent 5

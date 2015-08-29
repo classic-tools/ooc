@@ -8,6 +8,8 @@
 #include "TextRider.oh"
 #include "URI/String.oh"
 #include "URI/Error.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef URI_String__String URI__String;
 typedef URI_String__StringPtr URI__StringPtr;
 typedef OOC_INT16 URI__Offset;

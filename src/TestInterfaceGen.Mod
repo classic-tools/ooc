@@ -1,7 +1,7 @@
 MODULE TestInterfaceGen;
 
 IMPORT
-  StdChannels, Out, Err, ADT:Object, ADT:Dictionary, ADT:ArrayList,
+  StdChannels, Out, Err, Object, ADT:Dictionary, ADT:ArrayList,
   Config:Section:Arguments, OOC:Config, 
   Config:Section:Options, BooleanValue := Config:Value:Boolean,
   StringValue := Config:Value:String,

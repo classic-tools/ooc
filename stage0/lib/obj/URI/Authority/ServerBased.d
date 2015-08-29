@@ -3,8 +3,6 @@
 #include "IntStr.oh"
 #include "CharClass.oh"
 #include "URI/CharClass.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define URI_Authority_ServerBased__defaultPort -1
 #define URI_Authority_ServerBased__illegalUserInfoChar 1
 #define URI_Authority_ServerBased__malformedIPv4Address 2

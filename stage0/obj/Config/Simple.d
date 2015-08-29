@@ -5,8 +5,6 @@
 #include "Config/Value/String.oh"
 #include "Config/Value/Integer.oh"
 #include "Config/Value/Boolean.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define Config_Simple__rootName "configuration"
 #define Config_Simple__bufferName "/#Config_Simple#"
 

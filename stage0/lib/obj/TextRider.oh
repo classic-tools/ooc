@@ -7,6 +7,9 @@
 #include "CharClass.oh"
 #include "LRealStr.oh"
 #include "Msg.oh"
+#include "Object.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define TextRider__done  0
 #define TextRider__invalidFormat 8
 #define TextRider__valueOutOfRange 1
@@ -181,8 +184,11 @@ extern void TextRider__WriterDesc_SetEol(TextRider__Writer w, const OOC_CHAR8 ma
 #define _TBN_TextRider__WriterDesc_SetEol 2
 typedef void (*_TBP_TextRider__WriterDesc_SetEol)(TextRider__Writer w, const OOC_CHAR8 marker__ref[], OOC_LEN marker_0d, OOC_INT16 markerLen);
 extern void TextRider__WriterDesc_WriteString(TextRider__Writer w, const OOC_CHAR8 s[], OOC_LEN s_0d);
-#define _TBN_TextRider__WriterDesc_WriteString 19
+#define _TBN_TextRider__WriterDesc_WriteString 20
 typedef void (*_TBP_TextRider__WriterDesc_WriteString)(TextRider__Writer w, const OOC_CHAR8 s[], OOC_LEN s_0d);
+extern void TextRider__WriterDesc_WriteStr(TextRider__Writer w, Object__String s);
+#define _TBN_TextRider__WriterDesc_WriteStr 19
+typedef void (*_TBP_TextRider__WriterDesc_WriteStr)(TextRider__Writer w, Object__String s);
 extern void TextRider__WriterDesc_WriteBool(TextRider__Writer w, OOC_CHAR8 _bool);
 #define _TBN_TextRider__WriterDesc_WriteBool 5
 typedef void (*_TBP_TextRider__WriterDesc_WriteBool)(TextRider__Writer w, OOC_CHAR8 _bool);
@@ -237,38 +243,38 @@ extern void OOC_TextRider_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_TextRider__Reader;
 extern RT0__StructDesc _td_TextRider__ReaderDesc;
-extern RT0__StructDesc _td_TextRider__3507;
-extern RT0__StructDesc _td_TextRider__4463;
-extern RT0__StructDesc _td_TextRider__4502;
+extern RT0__StructDesc _td_TextRider__3515;
+extern RT0__StructDesc _td_TextRider__4471;
+extern RT0__StructDesc _td_TextRider__4510;
 extern RT0__StructDesc _td_TextRider__Writer;
 extern RT0__StructDesc _td_TextRider__WriterDesc;
-extern RT0__StructDesc _td_TextRider__4965;
+extern RT0__StructDesc _td_TextRider__4973;
 extern RT0__StructDesc _td_TextRider__String;
 extern RT0__StructDesc _td_TextRider__Scanner;
 extern RT0__StructDesc _td_TextRider__ScannerDesc;
 extern RT0__StructDesc _td_TextRider__ErrorContext;
 extern RT0__StructDesc _td_TextRider__ErrorContextDesc;
-extern RT0__StructDesc _td_TextRider__7795;
-extern RT0__StructDesc _td_TextRider__12104;
-extern RT0__StructDesc _td_TextRider__16566;
-extern RT0__StructDesc _td_TextRider__17759;
-extern RT0__StructDesc _td_TextRider__18708;
-extern RT0__StructDesc _td_TextRider__19917;
-extern RT0__StructDesc _td_TextRider__20352;
-extern RT0__StructDesc _td_TextRider__22545;
-extern RT0__StructDesc _td_TextRider__24885;
-extern RT0__StructDesc _td_TextRider__27193;
-extern RT0__StructDesc _td_TextRider__33057;
-extern RT0__StructDesc _td_TextRider__38063;
-extern RT0__StructDesc _td_TextRider__38927;
-extern RT0__StructDesc _td_TextRider__39769;
-extern RT0__StructDesc _td_TextRider__40951;
-extern RT0__StructDesc _td_TextRider__42429;
-extern RT0__StructDesc _td_TextRider__42802;
-extern RT0__StructDesc _td_TextRider__43245;
-extern RT0__StructDesc _td_TextRider__43630;
-extern RT0__StructDesc _td_TextRider__44078;
-extern RT0__StructDesc _td_TextRider__44461;
+extern RT0__StructDesc _td_TextRider__7803;
+extern RT0__StructDesc _td_TextRider__12112;
+extern RT0__StructDesc _td_TextRider__16574;
+extern RT0__StructDesc _td_TextRider__17767;
+extern RT0__StructDesc _td_TextRider__18716;
+extern RT0__StructDesc _td_TextRider__19925;
+extern RT0__StructDesc _td_TextRider__20360;
+extern RT0__StructDesc _td_TextRider__22553;
+extern RT0__StructDesc _td_TextRider__24893;
+extern RT0__StructDesc _td_TextRider__27201;
+extern RT0__StructDesc _td_TextRider__33065;
+extern RT0__StructDesc _td_TextRider__38071;
+extern RT0__StructDesc _td_TextRider__38935;
+extern RT0__StructDesc _td_TextRider__39777;
+extern RT0__StructDesc _td_TextRider__41625;
+extern RT0__StructDesc _td_TextRider__43103;
+extern RT0__StructDesc _td_TextRider__43476;
+extern RT0__StructDesc _td_TextRider__43919;
+extern RT0__StructDesc _td_TextRider__44304;
+extern RT0__StructDesc _td_TextRider__44752;
+extern RT0__StructDesc _td_TextRider__45135;
 #endif /* _MODULE_TextRider_ */
 
 /* --- */

@@ -4,7 +4,10 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "Channel.oh"
+#include "Object.oh"
 #include "Msg.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define BinaryRider__done  0
 #define BinaryRider__invalidFormat 8
 #define BinaryRider__readAfterEnd 5
@@ -38,7 +41,7 @@ extern OOC_INT32 BinaryRider__ReaderDesc_Pos(BinaryRider__Reader r);
 #define _TBN_BinaryRider__ReaderDesc_Pos 2
 typedef OOC_INT32 (*_TBP_BinaryRider__ReaderDesc_Pos)(BinaryRider__Reader r);
 extern void BinaryRider__ReaderDesc_SetPos(BinaryRider__Reader r, OOC_INT32 newPos);
-#define _TBN_BinaryRider__ReaderDesc_SetPos 18
+#define _TBN_BinaryRider__ReaderDesc_SetPos 19
 typedef void (*_TBP_BinaryRider__ReaderDesc_SetPos)(BinaryRider__Reader r, OOC_INT32 newPos);
 extern void BinaryRider__ReaderDesc_ClearError(BinaryRider__Reader r);
 #define _TBN_BinaryRider__ReaderDesc_ClearError 1
@@ -62,7 +65,7 @@ extern void BinaryRider__ReaderDesc_ReadLChar(BinaryRider__Reader r, OOC_CHAR16 
 #define _TBN_BinaryRider__ReaderDesc_ReadLChar 8
 typedef void (*_TBP_BinaryRider__ReaderDesc_ReadLChar)(BinaryRider__Reader r, OOC_CHAR16 *ch);
 extern void BinaryRider__ReaderDesc_ReadString(BinaryRider__Reader r, OOC_CHAR8 s[], OOC_LEN s_0d);
-#define _TBN_BinaryRider__ReaderDesc_ReadString 16
+#define _TBN_BinaryRider__ReaderDesc_ReadString 17
 typedef void (*_TBP_BinaryRider__ReaderDesc_ReadString)(BinaryRider__Reader r, OOC_CHAR8 s[], OOC_LEN s_0d);
 extern void BinaryRider__ReaderDesc_ReadLString(BinaryRider__Reader r, OOC_CHAR16 s[], OOC_LEN s_0d);
 #define _TBN_BinaryRider__ReaderDesc_ReadLString 11
@@ -88,8 +91,11 @@ typedef void (*_TBP_BinaryRider__ReaderDesc_ReadLReal)(BinaryRider__Reader r, OO
 extern void BinaryRider__ReaderDesc_ReadSet(BinaryRider__Reader r, OOC_UINT32 *s);
 #define _TBN_BinaryRider__ReaderDesc_ReadSet 15
 typedef void (*_TBP_BinaryRider__ReaderDesc_ReadSet)(BinaryRider__Reader r, OOC_UINT32 *s);
+extern void BinaryRider__ReaderDesc_ReadStr(BinaryRider__Reader r, Object__String *s);
+#define _TBN_BinaryRider__ReaderDesc_ReadStr 16
+typedef void (*_TBP_BinaryRider__ReaderDesc_ReadStr)(BinaryRider__Reader r, Object__String *s);
 extern void BinaryRider__ReaderDesc_SetByteOrder(BinaryRider__Reader r, OOC_INT8 order);
-#define _TBN_BinaryRider__ReaderDesc_SetByteOrder 17
+#define _TBN_BinaryRider__ReaderDesc_SetByteOrder 18
 typedef void (*_TBP_BinaryRider__ReaderDesc_SetByteOrder)(BinaryRider__Reader r, OOC_INT8 order);
 extern OOC_INT32 BinaryRider__WriterDesc_Pos(BinaryRider__Writer w);
 #define _TBN_BinaryRider__WriterDesc_Pos 1
@@ -100,9 +106,9 @@ typedef void (*_TBP_BinaryRider__WriterDesc_SetPos)(BinaryRider__Writer w, OOC_I
 extern void BinaryRider__WriterDesc_ClearError(BinaryRider__Writer w);
 #define _TBN_BinaryRider__WriterDesc_ClearError 0
 typedef void (*_TBP_BinaryRider__WriterDesc_ClearError)(BinaryRider__Writer w);
-extern void BinaryRider__WriterDesc_WriteBytes(BinaryRider__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+extern void BinaryRider__WriterDesc_WriteBytes(BinaryRider__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 #define _TBN_BinaryRider__WriterDesc_WriteBytes 5
-typedef void (*_TBP_BinaryRider__WriterDesc_WriteBytes)(BinaryRider__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+typedef void (*_TBP_BinaryRider__WriterDesc_WriteBytes)(BinaryRider__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern void BinaryRider__WriterDesc_WriteBytesOrdered(BinaryRider__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d);
 #define _TBN_BinaryRider__WriterDesc_WriteBytesOrdered 6
 typedef void (*_TBP_BinaryRider__WriterDesc_WriteBytesOrdered)(BinaryRider__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d);
@@ -116,7 +122,7 @@ extern void BinaryRider__WriterDesc_WriteLChar(BinaryRider__Writer w, OOC_CHAR16
 #define _TBN_BinaryRider__WriterDesc_WriteLChar 9
 typedef void (*_TBP_BinaryRider__WriterDesc_WriteLChar)(BinaryRider__Writer w, OOC_CHAR16 ch);
 extern void BinaryRider__WriterDesc_WriteString(BinaryRider__Writer w, const OOC_CHAR8 s[], OOC_LEN s_0d);
-#define _TBN_BinaryRider__WriterDesc_WriteString 17
+#define _TBN_BinaryRider__WriterDesc_WriteString 18
 typedef void (*_TBP_BinaryRider__WriterDesc_WriteString)(BinaryRider__Writer w, const OOC_CHAR8 s[], OOC_LEN s_0d);
 extern void BinaryRider__WriterDesc_WriteLString(BinaryRider__Writer w, const OOC_CHAR8 s[], OOC_LEN s_0d);
 #define _TBN_BinaryRider__WriterDesc_WriteLString 12
@@ -142,6 +148,9 @@ typedef void (*_TBP_BinaryRider__WriterDesc_WriteLReal)(BinaryRider__Writer w, O
 extern void BinaryRider__WriterDesc_WriteSet(BinaryRider__Writer w, OOC_UINT32 s);
 #define _TBN_BinaryRider__WriterDesc_WriteSet 16
 typedef void (*_TBP_BinaryRider__WriterDesc_WriteSet)(BinaryRider__Writer w, OOC_UINT32 s);
+extern void BinaryRider__WriterDesc_WriteStr(BinaryRider__Writer w, Object__String s);
+#define _TBN_BinaryRider__WriterDesc_WriteStr 17
+typedef void (*_TBP_BinaryRider__WriterDesc_WriteStr)(BinaryRider__Writer w, Object__String s);
 extern void BinaryRider__WriterDesc_SetByteOrder(BinaryRider__Writer w, OOC_INT8 order);
 #define _TBN_BinaryRider__WriterDesc_SetByteOrder 2
 typedef void (*_TBP_BinaryRider__WriterDesc_SetByteOrder)(BinaryRider__Writer w, OOC_INT8 order);
@@ -159,15 +168,21 @@ extern RT0__StructDesc _td_BinaryRider__Writer;
 extern RT0__StructDesc _td_BinaryRider__WriterDesc;
 extern RT0__StructDesc _td_BinaryRider__ErrorContext;
 extern RT0__StructDesc _td_BinaryRider__ErrorContextDesc;
-extern RT0__StructDesc _td_BinaryRider__3710;
-extern RT0__StructDesc _td_BinaryRider__4036;
-extern RT0__StructDesc _td_BinaryRider__5169;
-extern RT0__StructDesc _td_BinaryRider__5854;
-extern RT0__StructDesc _td_BinaryRider__9150;
-extern RT0__StructDesc _td_BinaryRider__9480;
-extern RT0__StructDesc _td_BinaryRider__10486;
-extern RT0__StructDesc _td_BinaryRider__10761;
-extern RT0__StructDesc _td_BinaryRider__14337;
+extern RT0__StructDesc _td_BinaryRider__3724;
+extern RT0__StructDesc _td_BinaryRider__4050;
+extern RT0__StructDesc _td_BinaryRider__5183;
+extern RT0__StructDesc _td_BinaryRider__5868;
+extern RT0__StructDesc _td_BinaryRider__8509;
+extern RT0__StructDesc _td_BinaryRider__8563;
+extern RT0__StructDesc _td_BinaryRider__8552;
+extern RT0__StructDesc _td_BinaryRider__8592;
+extern RT0__StructDesc _td_BinaryRider__8652;
+extern RT0__StructDesc _td_BinaryRider__8641;
+extern RT0__StructDesc _td_BinaryRider__10523;
+extern RT0__StructDesc _td_BinaryRider__10853;
+extern RT0__StructDesc _td_BinaryRider__11859;
+extern RT0__StructDesc _td_BinaryRider__12134;
+extern RT0__StructDesc _td_BinaryRider__16319;
 #endif /* _MODULE_BinaryRider_ */
 
 /* --- */

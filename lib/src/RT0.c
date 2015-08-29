@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "__oo2c.c"
 #include "__config.h"
@@ -25,6 +26,7 @@
 #endif
 
 
+OOC_INT32 RT0__poisonHeap = -1;
 static RT0__Module* modules = NULL;
 static int moduleCount = 0, sizeModules = 32;
 
@@ -92,6 +94,8 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     ptr = GC_malloc(prefix+size);
     if (ptr == NULL) {
       _out_of_memory(prefix+size);
+    } else if (RT0__poisonHeap >= 0) {
+      memset(ptr, RT0__poisonHeap, prefix+size);
     }
     var = (char*)ptr+prefix;
     OOC_TYPE_TAG(var) = td;
@@ -102,6 +106,8 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     var = GC_malloc(size);
     if (var == NULL) {
       _out_of_memory(size);
+    } else if (RT0__poisonHeap >= 0) {
+      memset(var, RT0__poisonHeap, size);
     }
     
   } else {			/* dynamic array */
@@ -131,6 +137,8 @@ OOC_PTR RT0__NewObject(RT0__Struct td, ...) {
     ptr = GC_malloc(prefix+size);
     if (ptr == NULL) {
       _out_of_memory(prefix+size);
+    } else if (RT0__poisonHeap >= 0) {
+      memset(ptr, RT0__poisonHeap, prefix+size);
     }
     var = (char*)ptr+prefix;
     
@@ -156,6 +164,8 @@ OOC_PTR RT0__NewBlock(OOC_INT32 bytes) {
   ptr = GC_malloc_atomic(bytes);
   if (ptr == NULL) {
     _out_of_memory(bytes);
+  } else if (RT0__poisonHeap >= 0) {
+    memset(ptr, RT0__poisonHeap, bytes);
   }
   return (OOC_PTR)ptr;
 }
@@ -303,6 +313,7 @@ void OOC_RT0_init() {
   PS(RT0__boolean , "BOOLEAN",  RT0__strBoolean , sizeof(OOC_BOOLEAN));
   PS(RT0__char    , "CHAR",     RT0__strChar    , sizeof(OOC_CHAR8));
   PS(RT0__longchar, "LONGCHAR", RT0__strLongchar, sizeof(OOC_CHAR16));
+  PS(RT0__ucs4char, "UCS4CHAR", RT0__strUCS4Char, sizeof(OOC_CHAR32));
   PS(RT0__shortint, "SHORTINT", RT0__strShortint, sizeof(OOC_INT8));
   PS(RT0__integer , "INTEGER",  RT0__strInteger , sizeof(OOC_INT16));
   PS(RT0__longint , "LONGINT",  RT0__strLongint , sizeof(OOC_INT32));

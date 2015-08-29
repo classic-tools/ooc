@@ -3,10 +3,11 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#include "ADT/String.oh"
 #include "OOC/Scanner/Builder/BasicList.oh"
 #include "OOC/AST.oh"
 #include "OOC/Doc.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_AST_ExtTree__NodeListDesc *OOC_AST_ExtTree__NodeList;
 typedef struct OOC_AST_ExtTree__NodeListDesc {
   OOC_INT32 len;
@@ -474,9 +475,9 @@ typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_Terminal)(OOC_
 extern void OOC_AST_ExtTree__TerminalDesc_Accept(OOC_AST_ExtTree__Terminal terminal, OOC_AST_ExtTree__Visitor v);
 #define _TBN_OOC_AST_ExtTree__TerminalDesc_Accept 1
 typedef void (*_TBP_OOC_AST_ExtTree__TerminalDesc_Accept)(OOC_AST_ExtTree__Terminal terminal, OOC_AST_ExtTree__Visitor v);
-extern ADT_String__String OOC_AST_ExtTree__TerminalDesc_GetString(OOC_AST_ExtTree__Terminal terminal, OOC_CHAR8 stripQuotes);
+extern Object__String OOC_AST_ExtTree__TerminalDesc_GetString(OOC_AST_ExtTree__Terminal terminal, OOC_CHAR8 stripQuotes);
 #define _TBN_OOC_AST_ExtTree__TerminalDesc_GetString 2
-typedef ADT_String__String (*_TBP_OOC_AST_ExtTree__TerminalDesc_GetString)(OOC_AST_ExtTree__Terminal terminal, OOC_CHAR8 stripQuotes);
+typedef Object__String (*_TBP_OOC_AST_ExtTree__TerminalDesc_GetString)(OOC_AST_ExtTree__Terminal terminal, OOC_CHAR8 stripQuotes);
 extern OOC_AST_ExtTree__Node OOC_AST_ExtTree__BuilderDesc_IdentDef(OOC_AST_ExtTree__Builder b, OOC_AST__Node ident, OOC_AST__Node mark);
 #define _TBN_OOC_AST_ExtTree__BuilderDesc_IdentDef 14
 typedef OOC_AST_ExtTree__Node (*_TBP_OOC_AST_ExtTree__BuilderDesc_IdentDef)(OOC_AST_ExtTree__Builder b, OOC_AST__Node ident, OOC_AST__Node mark);

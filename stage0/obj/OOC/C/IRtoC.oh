@@ -6,6 +6,8 @@
 #include "OOC/IR.oh"
 #include "OOC/C/DeclWriter.oh"
 #include "OOC/Make/TranslateToC.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_C_IRtoC__TranslatorDesc *OOC_C_IRtoC__Translator;
 typedef struct OOC_C_IRtoC__TranslatorDesc {
   OOC_C_DeclWriter__Writer w;

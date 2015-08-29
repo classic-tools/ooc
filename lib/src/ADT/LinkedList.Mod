@@ -20,7 +20,7 @@ MODULE ADT:LinkedList;
 *)
 
 IMPORT
-  ADT:Object;
+  ADT:Storable, Object;
 
 TYPE
   Entry = POINTER TO EntryDesc;
@@ -30,7 +30,7 @@ TYPE
   END;
 
   LinkedList* = POINTER TO LinkedListDesc;
-  LinkedListDesc* = RECORD (Object.ObjectDesc)
+  LinkedListDesc* = RECORD (Storable.ObjectDesc)
   (**Linked-list implementation of a list. Objects may be efficiently added to
      or removed from the start or end of the list, making it useful for
      implementing queues. *)
@@ -65,7 +65,7 @@ PROCEDURE Init* (l: LinkedList);
 VAR
   e : Entry;
 BEGIN
-  Object.Init (l);
+  Storable.Init (l);
   e := NewEntry(NIL, NIL, NIL); e.next := e; e.previous := e; 
   l.elements := e;
   l.size := 0
@@ -381,21 +381,27 @@ PROCEDURE (l: LinkedList) HashCode* (): LONGINT;
     <*PUSH; Assertions:=TRUE*>ASSERT(FALSE)<*POP*>
   END HashCode;
 
-PROCEDURE (l: LinkedList) Store* (w: Object.Writer);
+PROCEDURE (l: LinkedList) Store* (w: Storable.Writer);
 VAR
   e : Entry;
+  obj: Object.Object;
 BEGIN
   w. WriteNum (l. size);
   e := l.elements.next;
   WHILE e # l.elements DO
-    w. WriteObject(e.element);
+    obj := e.element;
+    IF (obj = NIL) THEN
+      w.WriteObject(NIL);
+    ELSE
+      w.WriteObject(obj(Storable.Object));
+    END;
     e := e.next;
   END;
 END Store;
 
-PROCEDURE (l: LinkedList) Load* (r: Object.Reader);
+PROCEDURE (l: LinkedList) Load* (r: Storable.Reader);
   VAR
-    o : Object.Object;
+    o : Storable.Object;
     i, size: LONGINT;
   BEGIN
     r. ReadNum (size);
@@ -415,8 +421,6 @@ the result. Otherwise (@oparam{i} is NIL), a new iterator is allocated. *)
 BEGIN
   IF i = NIL THEN
     NEW(i);
-  ELSE
-    ASSERT(i IS Iterator);
   END;
 
   i.list := l;

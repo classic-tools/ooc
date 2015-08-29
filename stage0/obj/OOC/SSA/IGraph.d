@@ -1,6 +1,4 @@
 #include "OOC/SSA/IGraph.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_SSA_IGraph__bitsPerSet 32
 #define OOC_SSA_IGraph__emptySet 0
 static void OOC_SSA_IGraph__InitGraph(OOC_SSA_IGraph__Graph g, OOC_INT32 size);

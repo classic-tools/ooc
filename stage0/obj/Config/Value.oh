@@ -4,6 +4,8 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "Msg.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_CHAR8 Config_Value__Char;
 typedef OOC_CHAR8 Config_Value__String[];
 typedef OOC_CHAR8 *Config_Value__StringPtr;

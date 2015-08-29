@@ -6,6 +6,8 @@
 #include "Channel.oh"
 #include "Msg.oh"
 #include "Time.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define IO_Memory__noLength -1
 #define IO_Memory__noPosition -2
 #define IO_Memory__done  0
@@ -95,9 +97,9 @@ typedef void (*_TBP_IO_Memory__WriterDesc_Truncate)(IO_Memory__Writer w, OOC_INT
 extern void IO_Memory__WriterDesc_WriteByte(IO_Memory__Writer w, OOC_CHAR8 x);
 #define _TBN_IO_Memory__WriterDesc_WriteByte 3
 typedef void (*_TBP_IO_Memory__WriterDesc_WriteByte)(IO_Memory__Writer w, OOC_CHAR8 x);
-extern void IO_Memory__WriterDesc_WriteBytes(IO_Memory__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+extern void IO_Memory__WriterDesc_WriteBytes(IO_Memory__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 #define _TBN_IO_Memory__WriterDesc_WriteBytes 4
-typedef void (*_TBP_IO_Memory__WriterDesc_WriteBytes)(IO_Memory__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+typedef void (*_TBP_IO_Memory__WriterDesc_WriteBytes)(IO_Memory__Writer w, const OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern IO_Memory__Reader IO_Memory__ChannelDesc_NewReader(IO_Memory__Channel ch);
 #define _TBN_IO_Memory__ChannelDesc_NewReader 5
 typedef IO_Memory__Reader (*_TBP_IO_Memory__ChannelDesc_NewReader)(IO_Memory__Channel ch);
@@ -151,12 +153,12 @@ extern RT0__StructDesc _td_IO_Memory__3621;
 extern RT0__StructDesc _td_IO_Memory__3945;
 extern RT0__StructDesc _td_IO_Memory__4725;
 extern RT0__StructDesc _td_IO_Memory__7143;
-extern RT0__StructDesc _td_IO_Memory__9591;
-extern RT0__StructDesc _td_IO_Memory__11471;
-extern RT0__StructDesc _td_IO_Memory__13667;
-extern RT0__StructDesc _td_IO_Memory__14095;
-extern RT0__StructDesc _td_IO_Memory__14862;
-extern RT0__StructDesc _td_IO_Memory__15487;
+extern RT0__StructDesc _td_IO_Memory__9596;
+extern RT0__StructDesc _td_IO_Memory__11476;
+extern RT0__StructDesc _td_IO_Memory__13672;
+extern RT0__StructDesc _td_IO_Memory__14100;
+extern RT0__StructDesc _td_IO_Memory__14867;
+extern RT0__StructDesc _td_IO_Memory__15492;
 #endif /* _MODULE_IO_Memory_ */
 
 /* --- */

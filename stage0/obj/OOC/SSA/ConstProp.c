@@ -5,18 +5,18 @@ static OOC_SSA__Const OOC_SSA_ConstProp__ComputeConst(OOC_SSA__ProcBlock pb, OOC
   register OOC_INT32 i0,i1,i2,i3;
   OOC_SSA__Const arg1;
   OOC_SSA__Const arg2;
-  Language__Value v;
-  Language_Integer__Value _i1;
-  Language_Integer__Value _i2;
+  Object_Boxed__Object v;
+  Object_BigInt__BigInt _i1;
+  Object_BigInt__BigInt _i2;
 
   i0 = (OOC_INT32)instr;
-  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1504)))), OOC_SSA__InstrDesc_SizeOpndList)),OOC_SSA__InstrDesc_SizeOpndList)((OOC_SSA__Instr)i0);
+  i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1485)))), OOC_SSA__InstrDesc_SizeOpndList)),OOC_SSA__InstrDesc_SizeOpndList)((OOC_SSA__Instr)i0);
   i1 = i1>=2;
   if (i1) goto l3;
   i1=OOC_FALSE;
   goto l5;
 l3:
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 1542))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 1523))+36);
   i1 = i1!=73;
   
 l5:
@@ -24,7 +24,7 @@ l5:
   i1=OOC_FALSE;
   goto l9;
 l7:
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 1589))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 1570))+36);
   i1 = i1!=39;
   
 l9:
@@ -32,7 +32,7 @@ l9:
   i1=OOC_FALSE;
   goto l13;
 l11:
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 1630))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 1611))+36);
   i1 = i1!=40;
   
 l13:
@@ -40,7 +40,7 @@ l13:
   i1=OOC_FALSE;
   goto l17;
 l15:
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 1673))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 1654))+36);
   i1 = i1!=52;
   
 l17:
@@ -48,97 +48,97 @@ l17:
   i1=OOC_FALSE;
   goto l21;
 l19:
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 1711))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 1692))+36);
   i1 = i1!=53;
   
 l21:
   if (!i1) goto l54;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1825))+24);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 1835));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1840))+16);
-  i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1851)))), &_td_OOC_SSA__ConstDesc, 1851);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1806))+24);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 1816));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1821))+16);
+  i1 = _type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1832)))), &_td_OOC_SSA__ConstDesc, 1832);
   arg1 = (OOC_SSA__Const)i1;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1878))+24);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1888))+8);
-  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 1898));
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1903))+16);
-  i2 = _type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1914)))), &_td_OOC_SSA__ConstDesc, 1914);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1859))+24);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1869))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 1879));
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1884))+16);
+  i2 = _type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1895)))), &_td_OOC_SSA__ConstDesc, 1895);
   arg2 = (OOC_SSA__Const)i2;
-  v = (Language__Value)(OOC_INT32)0;
-  i3 = *(OOC_INT8*)((_check_pointer(i1, 1960))+5);
+  v = (Object_Boxed__Object)(OOC_INT32)0;
+  i3 = *(OOC_INT8*)((_check_pointer(i1, 1941))+5);
   switch (i3) {
   case 1 ... 9:
-    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2036))+44);
-    i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2043)))), &_td_Language_Integer__ValueDesc);
+    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2017))+44);
+    i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2024)))), &_td_Object_BigInt__BigIntDesc);
     if (i3) goto l27;
     i3=OOC_FALSE;
     goto l29;
 l27:
-    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2068))+44);
-    i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2075)))), &_td_Language_Integer__ValueDesc);
+    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2049))+44);
+    i3 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2056)))), &_td_Object_BigInt__BigIntDesc);
     
 l29:
     if (i3) goto l31;
     i0=(OOC_INT32)0;
     goto l46;
 l31:
-    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2194))+44);
-    i3 = _type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2210)))), &_td_Language_Integer__ValueDesc, 2210);
-    _i1 = (Language_Integer__Value)i3;
-    i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2238))+44);
-    i2 = _type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2254)))), &_td_Language_Integer__ValueDesc, 2254);
-    _i2 = (Language_Integer__Value)i2;
-    i0 = *(OOC_INT8*)((_check_pointer(i0, 2293))+36);
+    i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2175))+44);
+    i3 = _type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2190)))), &_td_Object_BigInt__BigIntDesc, 2190);
+    _i1 = (Object_BigInt__BigInt)i3;
+    i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 2219))+44);
+    i2 = _type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2234)))), &_td_Object_BigInt__BigIntDesc, 2234);
+    _i2 = (Object_BigInt__BigInt)i2;
+    i0 = *(OOC_INT8*)((_check_pointer(i0, 2274))+36);
     switch (i0) {
     case 19:
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2341)))), Language_Integer__ValueDesc_Sum)),Language_Integer__ValueDesc_Sum)((Language_Integer__Value)i3, (Language_Integer__Value)i2);
-      v = (Language__Value)i0;
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2322)))), Object_BigInt__BigIntDesc_Add)),Object_BigInt__BigIntDesc_Add)((Object_BigInt__BigInt)i3, (Object_BigInt__BigInt)i2);
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 20:
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2387)))), Language_Integer__ValueDesc_Difference)),Language_Integer__ValueDesc_Difference)((Language_Integer__Value)i3, (Language_Integer__Value)i2);
-      v = (Language__Value)i0;
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2368)))), Object_BigInt__BigIntDesc_Sub)),Object_BigInt__BigIntDesc_Sub)((Object_BigInt__BigInt)i3, (Object_BigInt__BigInt)i2);
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 22:
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2440)))), Language_Integer__ValueDesc_Product)),Language_Integer__ValueDesc_Product)((Language_Integer__Value)i3, (Language_Integer__Value)i2);
-      v = (Language__Value)i0;
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2414)))), Object_BigInt__BigIntDesc_Mul)),Object_BigInt__BigIntDesc_Mul)((Object_BigInt__BigInt)i3, (Object_BigInt__BigInt)i2);
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 25:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2510)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0==0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2485)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0==0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 26:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2573)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0!=0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2549)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0!=0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 28:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2636)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0<=0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2613)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0<=0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 27:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2699)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0<0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2677)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0<0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 30:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2762)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0>=0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2741)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0>=0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     case 29:
-      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2825)))), Language_Integer__ValueDesc_Compare)),Language_Integer__ValueDesc_Compare)((Language_Integer__Value)i3, (ADT_Object__Object)i2);
-      i0 = (OOC_INT32)Language_Boolean__New((i0>0));
-      v = (Language__Value)i0;
+      i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 2805)))), Object_BigInt__BigIntDesc_Cmp)),Object_BigInt__BigIntDesc_Cmp)((Object_BigInt__BigInt)i3, (Object__Object)i2);
+      i0 = (OOC_INT32)Object_Boxed__NewBoolean((i0>0));
+      v = (Object_Boxed__Object)i0;
       
       goto l46;
     default:
@@ -153,17 +153,17 @@ l31:
 l46:
   i2 = i0!=(OOC_INT32)0;
   if (!i2) goto l54;
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3458)))), &_td_Language_Boolean__ValueDesc);
+  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3434)))), &_td_Object_Boxed__BooleanDesc);
   if (i2) goto l51;
   i2 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3593))+48);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3574)))), OOC_SSA__ProcBlockDesc_GetConst)),OOC_SSA__ProcBlockDesc_GetConst)((OOC_SSA__ProcBlock)i2, (Language__Value)i0, (OOC_SymbolTable__Type)i1);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3569))+48);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3550)))), OOC_SSA__ProcBlockDesc_GetConst)),OOC_SSA__ProcBlockDesc_GetConst)((OOC_SSA__ProcBlock)i2, (Object_Boxed__Object)i0, (OOC_SymbolTable__Type)i1);
   return (OOC_SSA__Const)i0;
   goto l54;
 l51:
   i1 = (OOC_INT32)pb;
-  i0 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3526)))), &_td_Language_Boolean__ValueDesc, 3526)), 3532))+4);
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3500)))), OOC_SSA__ProcBlockDesc_GetConstBool)),OOC_SSA__ProcBlockDesc_GetConstBool)((OOC_SSA__ProcBlock)i1, i0);
+  i0 = *(OOC_UINT8*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3500)))), &_td_Object_Boxed__BooleanDesc, 3500)), 3508));
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3476)))), OOC_SSA__ProcBlockDesc_GetConstBool)),OOC_SSA__ProcBlockDesc_GetConstBool)((OOC_SSA__ProcBlock)i1, i0);
   return (OOC_SSA__Const)i0;
 l54:
   return (OOC_SSA__Const)(OOC_INT32)0;
@@ -185,15 +185,15 @@ void OOC_SSA_ConstProp__Transform(OOC_SSA__ProcBlock pb) {
       OOC_SSA_ConstProp__Worklist wl;
 
       i0 = (OOC_INT32)instr;
-      i1 = *(OOC_INT32*)((_check_pointer(i0, 3926))+20);
+      i1 = *(OOC_INT32*)((_check_pointer(i0, 3902))+20);
       i1 = i1==0;
       if (!i1) goto l4;
-      *(OOC_INT32*)((_check_pointer(i0, 3958))+20) = 1;
+      *(OOC_INT32*)((_check_pointer(i0, 3934))+20) = 1;
       i1 = (OOC_INT32)RT0__NewObject(_td_OOC_SSA_ConstProp__Worklist.baseTypes[0]);
       wl = (OOC_SSA_ConstProp__Worklist)i1;
       i2 = (OOC_INT32)worklist;
-      *(OOC_INT32*)(_check_pointer(i1, 4010)) = i2;
-      *(OOC_INT32*)((_check_pointer(i1, 4040))+4) = i0;
+      *(OOC_INT32*)(_check_pointer(i1, 3986)) = i2;
+      *(OOC_INT32*)((_check_pointer(i1, 4016))+4) = i0;
       worklist = (OOC_SSA_ConstProp__Worklist)i1;
 l4:
       return;
@@ -212,8 +212,8 @@ l4:
       i1 = (OOC_INT32)info;
       
 l3_loop:
-      *(OOC_INT32*)((_check_pointer(i0, 4274))+16) = i1;
-      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4308));
+      *(OOC_INT32*)((_check_pointer(i0, 4250))+16) = i1;
+      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4284));
       res = (OOC_SSA__Result)i0;
       i2 = i0!=(OOC_INT32)0;
       if (i2) goto l3_loop;
@@ -229,19 +229,19 @@ l8:
       OOC_SSA__Instr useInstr;
 
       i0 = (OOC_INT32)res;
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4482))+12);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4458))+12);
       i1 = i0!=(OOC_INT32)0;
       use = (OOC_SSA__Opnd)i0;
       if (!i1) goto l11;
 l3_loop:
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4543))+12);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4519))+12);
       useInstr = (OOC_SSA__Instr)i1;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4572))+16);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4548))+16);
       i2 = i2==(OOC_INT32)0;
       if (!i2) goto l6;
       OOC_SSA_ConstProp__Transform_AddToWorklist((OOC_SSA__Instr)i1);
 l6:
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4667))+16);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4643))+16);
       use = (OOC_SSA__Opnd)i0;
       i1 = i0!=(OOC_INT32)0;
       if (i1) goto l3_loop;
@@ -262,9 +262,9 @@ l11:
       i1 = (OOC_INT32)info;
       
 l3_loop:
-      *(OOC_INT32*)((_check_pointer(i0, 4879))+16) = i1;
+      *(OOC_INT32*)((_check_pointer(i0, 4855))+16) = i1;
       OOC_SSA_ConstProp__Transform_AddUsesToWorklist((OOC_SSA__Result)i0);
-      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4946));
+      i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4922));
       res = (OOC_SSA__Result)i0;
       i2 = i0!=(OOC_INT32)0;
       if (i2) goto l3_loop;
@@ -284,12 +284,12 @@ l8:
         
         OOC_SSA__Opnd OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath(OOC_SSA__Const expr, OOC_CHAR8 isSwitch, OOC_SSA__Opnd branch) {
           register OOC_INT32 i0,i1,i2,i3,i4;
-          auto OOC_CHAR8 OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList(Language__Value expr, OOC_SSA__Opnd opnd);
+          auto OOC_CHAR8 OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList(Object_Boxed__Object expr, OOC_SSA__Opnd opnd);
             
-            OOC_CHAR8 OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList(Language__Value expr, OOC_SSA__Opnd opnd) {
+            OOC_CHAR8 OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList(Object_Boxed__Object expr, OOC_SSA__Opnd opnd) {
               register OOC_INT32 i0,i1,i2,i3;
-              Language__Value lower;
-              Language__Value upper;
+              Object_Boxed__Object lower;
+              Object_Boxed__Object upper;
 
               i0 = (OOC_INT32)opnd;
               i0 = i0!=(OOC_INT32)0;
@@ -297,28 +297,28 @@ l8:
               i0 = (OOC_INT32)expr;
 l3_loop:
               i1 = (OOC_INT32)opnd;
-              i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 5576));
-              i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5586)))), &_td_OOC_SSA__ConstDesc, 5586)), 5592))+44);
-              lower = (Language__Value)i2;
-              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5626))+8);
-              i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 5636));
-              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 5646)))), &_td_OOC_SSA__ConstDesc, 5646)), 5652))+44);
-              upper = (Language__Value)i3;
-              i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5682)))), Language__ValueDesc_Compare)),Language__ValueDesc_Compare)((Language__Value)i2, (ADT_Object__Object)i0);
+              i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 5548));
+              i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5558)))), &_td_OOC_SSA__ConstDesc, 5558)), 5564))+44);
+              lower = (Object_Boxed__Object)i2;
+              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5598))+8);
+              i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 5608));
+              i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 5618)))), &_td_OOC_SSA__ConstDesc, 5618)), 5624))+44);
+              upper = (Object_Boxed__Object)i3;
+              i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 5654)))), Object_Boxed__ObjectDesc_Cmp)),Object_Boxed__ObjectDesc_Cmp)((Object_Boxed__Object)i2, (Object__Object)i0);
               i2 = i2<=0;
               if (i2) goto l6;
               i2=OOC_FALSE;
               goto l8;
 l6:
-              i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5712)))), Language__ValueDesc_Compare)),Language__ValueDesc_Compare)((Language__Value)i0, (ADT_Object__Object)i3);
+              i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5680)))), Object_Boxed__ObjectDesc_Cmp)),Object_Boxed__ObjectDesc_Cmp)((Object_Boxed__Object)i0, (Object__Object)i3);
               i2 = i2<=0;
               
 l8:
               if (!i2) goto l10;
               return OOC_TRUE;
 l10:
-              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5809))+8);
-              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5819))+8);
+              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5773))+8);
+              i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 5783))+8);
               opnd = (OOC_SSA__Opnd)i1;
               i1 = i1!=(OOC_INT32)0;
               if (i1) goto l3_loop;
@@ -336,38 +336,38 @@ l15:
           i0=OOC_FALSE;
           goto l7;
 l5:
-          i0 = *(OOC_INT8*)((_check_pointer(i0, 6320))+4);
+          i0 = *(OOC_INT8*)((_check_pointer(i0, 6284))+4);
           i0 = i0==1;
           
 l7:
           if (!i0) goto l21;
           i0 = (OOC_INT32)expr;
 l9_loop:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6362))+44);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6326))+44);
           i2 = (OOC_INT32)branch;
-          i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 6385));
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6362))+44);
-          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 6395)))), &_td_OOC_SSA__ConstDesc, 6395)), 6401))+44);
-          i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6369)))), Language__ValueDesc_Equals)),Language__ValueDesc_Equals)((Language__Value)i4, (ADT_Object__Object)i3);
+          i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 6349));
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6326))+44);
+          i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 6359)))), &_td_OOC_SSA__ConstDesc, 6359)), 6365))+44);
+          i1 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6333)))), Object__ObjectDesc_Equals)),Object__ObjectDesc_Equals)((Object__Object)i4, (Object__Object)i3);
           if (!i1) goto l12;
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6442))+8);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6406))+8);
           return (OOC_SSA__Opnd)i1;
 l12:
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6499))+8);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6509))+8);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6463))+8);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6473))+8);
           branch = (OOC_SSA__Opnd)i1;
           i2 = i1!=(OOC_INT32)0;
           if (i2) goto l15;
           i1=OOC_FALSE;
           goto l17;
 l15:
-          i1 = *(OOC_INT8*)((_check_pointer(i1, 6320))+4);
+          i1 = *(OOC_INT8*)((_check_pointer(i1, 6284))+4);
           i1 = i1==1;
           
 l17:
           if (i1) goto l9_loop;
 l21:
-          _assert(OOC_FALSE, 127, 6546);
+          _assert(OOC_FALSE, 127, 6510);
           goto l42;
 l22:
           i0 = (OOC_INT32)branch;
@@ -376,7 +376,7 @@ l22:
           i0=OOC_FALSE;
           goto l27;
 l25:
-          i0 = *(OOC_INT8*)((_check_pointer(i0, 5979))+4);
+          i0 = *(OOC_INT8*)((_check_pointer(i0, 5943))+4);
           i0 = i0==16;
           
 l27:
@@ -384,34 +384,34 @@ l27:
 l29_loop:
           i0 = (OOC_INT32)expr;
           i1 = (OOC_INT32)branch;
-          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6051));
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6036))+44);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6061)))), &_td_OOC_SSA__InstrDesc, 6061)), 6067))+24);
-          i0 = OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList((Language__Value)i0, (OOC_SSA__Opnd)i1);
+          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6015));
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6000))+44);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6025)))), &_td_OOC_SSA__InstrDesc, 6025)), 6031))+24);
+          i0 = OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath_InLabelList((Object_Boxed__Object)i0, (OOC_SSA__Opnd)i1);
           i1 = (OOC_INT32)branch;
           if (!i0) goto l32;
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6111))+8);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6075))+8);
           return (OOC_SSA__Opnd)i0;
 l32:
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6168))+8);
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6178))+8);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6132))+8);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6142))+8);
           branch = (OOC_SSA__Opnd)i0;
           i1 = i0!=(OOC_INT32)0;
           if (i1) goto l35;
           i0=OOC_FALSE;
           goto l37;
 l35:
-          i0 = *(OOC_INT8*)((_check_pointer(i0, 5979))+4);
+          i0 = *(OOC_INT8*)((_check_pointer(i0, 5943))+4);
           i0 = i0==16;
           
 l37:
           if (i0) goto l29_loop;
 l41:
           i0 = (OOC_INT32)branch;
-          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6228))+8);
+          i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6192))+8);
           return (OOC_SSA__Opnd)i0;
 l42:
-          _failed_function(5192); return 0;
+          _failed_function(5168); return 0;
           ;
         }
 
@@ -422,32 +422,32 @@ l42:
           OOC_SSA__Opnd opnd;
 
           i0 = (OOC_INT32)select;
-          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6759));
+          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6723));
           res = (OOC_SSA__Result)i0;
           i1 = (OOC_INT32)branch;
-          i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6791));
-          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6796))+8);
-          i2 = *(OOC_INT8*)((_check_pointer(i2, 6803))+36);
+          i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6755));
+          i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6760))+8);
+          i2 = *(OOC_INT8*)((_check_pointer(i2, 6767))+36);
           i2 = i2==6;
           if (i2) goto l3;
           OOC_SSA_ConstProp__Transform_AddUsesToWorklist((OOC_SSA__Result)i0);
-          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7335));
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7314)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i0, (OOC_SSA__Result)i1);
+          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7299));
+          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7278)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i0, (OOC_SSA__Result)i1);
           goto l12;
 l3:
-          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6974));
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6979))+8);
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6986))+24);
+          i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 6938));
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6943))+8);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 6950))+24);
           i2 = i0!=(OOC_INT32)0;
           opnd = (OOC_SSA__Opnd)i1;
           if (!i2) goto l12;
 l6_loop:
           OOC_SSA_ConstProp__Transform_AddUsesToWorklist((OOC_SSA__Result)i0);
-          i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7100));
-          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7081)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i0, (OOC_SSA__Result)i2);
-          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7130));
+          i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7064));
+          OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7045)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i0, (OOC_SSA__Result)i2);
+          i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7094));
           res = (OOC_SSA__Result)i0;
-          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7168))+8);
+          i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7132))+8);
           opnd = (OOC_SSA__Opnd)i1;
           i2 = i0!=(OOC_INT32)0;
           if (i2) goto l6_loop;
@@ -458,33 +458,33 @@ l12:
 
 
       i0 = (OOC_INT32)instr;
-      i1 = *(OOC_INT8*)((_check_pointer(i0, 7412))+36);
+      i1 = *(OOC_INT8*)((_check_pointer(i0, 7376))+36);
       switch (i1) {
       case 6:
       case 5:
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7603))+24);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7567))+24);
         opnd = (OOC_SSA__Opnd)i1;
         i2 = i1!=(OOC_INT32)0;
         if (i2) goto l5;
         i2=OOC_FALSE;
         goto l7;
 l5:
-        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7649));
-        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7654))+16);
+        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7613));
+        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7618))+16);
         i2 = i2!=(OOC_INT32)0;
         
 l7:
         if (!i2) goto l19;
 l10_loop:
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7702))+8);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7666))+8);
         opnd = (OOC_SSA__Opnd)i1;
         i2 = i1!=(OOC_INT32)0;
         if (i2) goto l13;
         i2=OOC_FALSE;
         goto l15;
 l13:
-        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7649));
-        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7654))+16);
+        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7613));
+        i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7618))+16);
         i2 = i2!=(OOC_INT32)0;
         
 l15:
@@ -492,20 +492,20 @@ l15:
 l19:
         i1 = i1==(OOC_INT32)0;
         if (!i1) goto l57;
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7826))+12);
-        _assert((i1==(OOC_INT32)0), 127, 7813);
-        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7867));
-        i1 = *(OOC_INT8*)((_check_pointer(i1, 7879))+4);
-        _assert((i1==2), 127, 7854);
-        i1 = *(OOC_INT8*)((_check_pointer(i0, 7923))+36);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7790))+12);
+        _assert((i1==(OOC_INT32)0), 127, 7777);
+        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7831));
+        i1 = *(OOC_INT8*)((_check_pointer(i1, 7843))+4);
+        _assert((i1==2), 127, 7818);
+        i1 = *(OOC_INT8*)((_check_pointer(i0, 7887))+36);
         i1 = i1==5;
         if (i1) goto l24;
         i1=OOC_FALSE;
         goto l26;
 l24:
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7970))+24);
-        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7980));
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7985))+16);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7934))+24);
+        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 7944));
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7949))+16);
         i2 = (OOC_INT32)OOC_SSA_ConstProp__notConstant;
         i1 = i1!=i2;
         
@@ -515,30 +515,30 @@ l26:
         OOC_SSA_ConstProp__Transform_UpdateInfo((OOC_SSA__Instr)i0, (OOC_SSA__Result)i1);
         goto l57;
 l28:
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8220))+24);
-        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8230));
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8235))+16);
-        i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8299)))), OOC_SSA__InstrDesc_IsSwitchStatm)),OOC_SSA__InstrDesc_IsSwitchStatm)((OOC_SSA__Instr)i0);
-        i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8363))+24);
-        i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 8373))+8);
-        i1 = (OOC_INT32)OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath((OOC_SSA__Const)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8246)))), &_td_OOC_SSA__ConstDesc, 8246)), i2, (OOC_SSA__Opnd)i3);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8184))+24);
+        i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8194));
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8199))+16);
+        i2 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8263)))), OOC_SSA__InstrDesc_IsSwitchStatm)),OOC_SSA__InstrDesc_IsSwitchStatm)((OOC_SSA__Instr)i0);
+        i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8327))+24);
+        i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 8337))+8);
+        i1 = (OOC_INT32)OOC_SSA_ConstProp__Transform_ClassifyInstr_MatchingPath((OOC_SSA__Const)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8210)))), &_td_OOC_SSA__ConstDesc, 8210)), i2, (OOC_SSA__Opnd)i3);
         OOC_SSA_ConstProp__Transform_ClassifyInstr_ReplaceSelect((OOC_SSA__Instr)i0, (OOC_SSA__Opnd)i1);
         goto l57;
       default:
         state = (OOC_SSA__Result)i0;
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8618))+24);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8582))+24);
         opnd = (OOC_SSA__Opnd)i1;
         i2 = (OOC_INT32)OOC_SSA_ConstProp__notConstant;
         i3=i0;
 l32_loop:
         i4 = i1==(OOC_INT32)0;
         if (i4) goto l44;
-        i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8713));
-        i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8718))+16);
+        i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8677));
+        i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8682))+16);
         i4 = i4==(OOC_INT32)0;
         if (i4) goto l41;
-        i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8802));
-        i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8807))+16);
+        i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 8766));
+        i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 8771))+16);
         i4 = i4==i2;
         if (i4) goto l40;
         goto l43;
@@ -550,7 +550,7 @@ l41:
         state = (OOC_SSA__Result)(OOC_INT32)0;
         i3=(OOC_INT32)0;
 l43:
-        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8923))+8);
+        i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 8887))+8);
         opnd = (OOC_SSA__Opnd)i1;
         
         goto l32_loop;
@@ -569,8 +569,8 @@ l51:
         _const = (OOC_SSA__Result)i1;
         i2 = i1==(OOC_INT32)0;
         if (i2) goto l54;
-        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9259));
-        _assert((i2==(OOC_INT32)0), 127, 9246);
+        i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9223));
+        _assert((i2==(OOC_INT32)0), 127, 9210);
         OOC_SSA_ConstProp__Transform_UpdateInfo((OOC_SSA__Instr)i0, (OOC_SSA__Result)i1);
         goto l57;
 l54:
@@ -585,15 +585,15 @@ l57:
 
 
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9821))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9785))+8);
   i1 = i0!=(OOC_INT32)0;
   instr = (OOC_SSA__Instr)i0;
   if (!i1) goto l24;
 l3_loop:
-  *(OOC_INT32*)((_check_pointer(i0, 9872))+20) = 0;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9904)))), &_td_OOC_SSA__ConstDesc);
+  *(OOC_INT32*)((_check_pointer(i0, 9836))+20) = 0;
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9868)))), &_td_OOC_SSA__ConstDesc);
   if (i1) goto l6;
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 9927))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 9891))+36);
   i1 = i1==74;
   
   goto l8;
@@ -601,13 +601,13 @@ l6:
   i1=OOC_TRUE;
 l8:
   if (i1) goto l18;
-  i1 = *(OOC_INT8*)((_check_pointer(i0, 10048))+36);
+  i1 = *(OOC_INT8*)((_check_pointer(i0, 10012))+36);
   i1 = i1!=5;
   if (i1) goto l12;
   i1=OOC_FALSE;
   goto l14;
 l12:
-  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10082)))), OOC_SSA__InstrDesc_GetArgStore)),OOC_SSA__InstrDesc_GetArgStore)((OOC_SSA__Instr)i0);
+  i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10046)))), OOC_SSA__InstrDesc_GetArgStore)),OOC_SSA__InstrDesc_GetArgStore)((OOC_SSA__Instr)i0);
   i1 = i1!=(OOC_INT32)0;
   
 l14:
@@ -619,43 +619,43 @@ l16:
   OOC_SSA_ConstProp__Transform_SetInfo((OOC_SSA__Instr)i0, (OOC_SSA__Result)i1);
   goto l19;
 l18:
-  *(OOC_INT32*)((_check_pointer(i0, 9971))+16) = i0;
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10009));
-  _assert((i0==(OOC_INT32)0), 127, 9996);
+  *(OOC_INT32*)((_check_pointer(i0, 9935))+16) = i0;
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 9973));
+  _assert((i0==(OOC_INT32)0), 127, 9960);
 l19:
   i0 = (OOC_INT32)instr;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10501))+28);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10465))+28);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l3_loop;
 l24:
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10537));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10551))+24);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 10561));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10566))+8);
-  i1 = *(OOC_INT8*)((_check_pointer(i1, 10573))+36);
-  _assert((i1==4), 127, 10527);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10614));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10628))+24);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10638));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10643))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10501));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10515))+24);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 10525));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10530))+8);
+  i1 = *(OOC_INT8*)((_check_pointer(i1, 10537))+36);
+  _assert((i1==4), 127, 10491);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10578));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10592))+24);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 10602));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10607))+8);
   i1 = (OOC_INT32)OOC_SSA_ConstProp__notConstant;
   OOC_SSA_ConstProp__Transform_SetInfo((OOC_SSA__Instr)i0, (OOC_SSA__Result)i1);
   worklist = (OOC_SSA_ConstProp__Worklist)(OOC_INT32)0;
   i0 = (OOC_INT32)pb;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10750))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10714))+8);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (!i1) goto l39;
 l27_loop:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10805))+16);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10769))+16);
   i1 = i1==(OOC_INT32)0;
   if (i1) goto l30;
   i1=OOC_FALSE;
   goto l32;
 l30:
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 10836))+20);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 10800))+20);
   i1 = i1==0;
   
 l32:
@@ -663,7 +663,7 @@ l32:
   OOC_SSA_ConstProp__Transform_ClassifyInstr((OOC_SSA__Instr)i0);
 l34:
   i0 = (OOC_INT32)instr;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11063))+28);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11027))+28);
   instr = (OOC_SSA__Instr)i0;
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l27_loop;
@@ -673,31 +673,31 @@ l39:
   if (!i0) goto l47;
 l42_loop:
   i0 = (OOC_INT32)worklist;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11180))+4);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11144))+4);
   instr = (OOC_SSA__Instr)i1;
-  *(OOC_INT32*)((_check_pointer(i1, 11200))+20) = 0;
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 11241));
+  *(OOC_INT32*)((_check_pointer(i1, 11164))+20) = 0;
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 11205));
   worklist = (OOC_SSA_ConstProp__Worklist)i0;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11268))+16);
-  _assert((i0==(OOC_INT32)0), 127, 11255);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11232))+16);
+  _assert((i0==(OOC_INT32)0), 127, 11219);
   OOC_SSA_ConstProp__Transform_ClassifyInstr((OOC_SSA__Instr)i1);
   i0 = (OOC_INT32)worklist;
   i0 = i0!=(OOC_INT32)0;
   if (i0) goto l42_loop;
 l47:
   i0 = (OOC_INT32)pb;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11416))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11380))+8);
   instr = (OOC_SSA__Instr)i1;
   i2 = i1!=(OOC_INT32)0;
   if (!i2) goto l66;
 l50_loop:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11471))+16);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11435))+16);
   i2 = i2!=(OOC_INT32)0;
   if (i2) goto l53;
   i2=OOC_FALSE;
   goto l55;
 l53:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11511))+16);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11475))+16);
   i3 = (OOC_INT32)OOC_SSA_ConstProp__notConstant;
   i2 = i2!=i3;
   
@@ -706,15 +706,15 @@ l55:
   i2=OOC_FALSE;
   goto l59;
 l57:
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11550))+16);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11514))+16);
   i2 = i2!=i1;
   
 l59:
   if (!i2) goto l61;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11604))+16);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11584)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i1, (OOC_SSA__Result)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11615)))), &_td_OOC_SSA__ResultDesc, 11615)));
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11568))+16);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 11548)))), OOC_SSA__ResultDesc_ReplaceUses)),OOC_SSA__ResultDesc_ReplaceUses)((OOC_SSA__Result)i1, (OOC_SSA__Result)(_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11579)))), &_td_OOC_SSA__ResultDesc, 11579)));
 l61:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11656))+28);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11620))+28);
   instr = (OOC_SSA__Instr)i1;
   i2 = i1!=(OOC_INT32)0;
   if (i2) goto l50_loop;

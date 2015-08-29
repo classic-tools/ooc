@@ -3,8 +3,6 @@
 #include "CharClass.oh"
 #include "URI/String.oh"
 #include "URI/CharClass.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define URI_Query_Unparsed__illegalQueryChar 1
 static URI_Error__Context URI_Query_Unparsed__queryContext;
 

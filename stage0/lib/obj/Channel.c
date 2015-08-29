@@ -19,50 +19,50 @@ void Channel__ErrorContextDesc_GetTemplate(Channel__ErrorContext context, Msg__M
   i0 = *(OOC_INT32*)((_check_pointer(i0, 12179))+8);
   switch (i0) {
   case 1:
-    _copy_8("Invalid channel descriptor",(OOC_INT32)str,128);
+    _copy_8((const void*)"Invalid channel descriptor",(void*)(OOC_INT32)str,128);
     goto l16;
   case 2:
-    _copy_8("Write error",(OOC_INT32)str,128);
+    _copy_8((const void*)"Write error",(void*)(OOC_INT32)str,128);
     goto l16;
   case 3:
-    _copy_8("No space left on device",(OOC_INT32)str,128);
+    _copy_8((const void*)"No space left on device",(void*)(OOC_INT32)str,128);
     goto l16;
   case 4:
-    _copy_8("Trying to set invalid position",(OOC_INT32)str,128);
+    _copy_8((const void*)"Trying to set invalid position",(void*)(OOC_INT32)str,128);
     goto l16;
   case 5:
-    _copy_8("Trying to read past the end of the file",(OOC_INT32)str,128);
+    _copy_8((const void*)"Trying to read past the end of the file",(void*)(OOC_INT32)str,128);
     goto l16;
   case 6:
-    _copy_8("Channel has been closed",(OOC_INT32)str,128);
+    _copy_8((const void*)"Channel has been closed",(void*)(OOC_INT32)str,128);
     goto l16;
   case 7:
-    _copy_8("Read error",(OOC_INT32)str,128);
+    _copy_8((const void*)"Read error",(void*)(OOC_INT32)str,128);
     goto l16;
   case 8:
-    _copy_8("Invalid token type in input stream",(OOC_INT32)str,128);
+    _copy_8((const void*)"Invalid token type in input stream",(void*)(OOC_INT32)str,128);
     goto l16;
   case 9:
-    _copy_8("No read permission for channel",(OOC_INT32)str,128);
+    _copy_8((const void*)"No read permission for channel",(void*)(OOC_INT32)str,128);
     goto l16;
   case 10:
-    _copy_8("No write permission for channel",(OOC_INT32)str,128);
+    _copy_8((const void*)"No write permission for channel",(void*)(OOC_INT32)str,128);
     goto l16;
   case 11:
-    _copy_8("Error while closing the channel",(OOC_INT32)str,128);
+    _copy_8((const void*)"Error while closing the channel",(void*)(OOC_INT32)str,128);
     goto l16;
   case 12:
-    _copy_8("No modification time available",(OOC_INT32)str,128);
+    _copy_8((const void*)"No modification time available",(void*)(OOC_INT32)str,128);
     goto l16;
   case 13:
-    _copy_8("Failed to create unique name for temporary file",(OOC_INT32)str,128);
+    _copy_8((const void*)"Failed to create unique name for temporary file",(void*)(OOC_INT32)str,128);
     goto l16;
   default:
-    _copy_8("[unknown error code]",(OOC_INT32)str,128);
+    _copy_8((const void*)"[unknown error code]",(void*)(OOC_INT32)str,128);
     goto l16;
   }
 l16:
-  _copy_8to16((OOC_INT32)str,(OOC_INT32)templ,templ_0d);
+  _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)templ,templ_0d);
   return;
   ;
 }
@@ -124,8 +124,10 @@ void Channel__WriterDesc_WriteByte(Channel__Writer w, OOC_CHAR8 x) {
   ;
 }
 
-void Channel__WriterDesc_WriteBytes(Channel__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n) {
+void Channel__WriterDesc_WriteBytes(Channel__Writer w, const OOC_CHAR8 x__ref[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n) {
+  OOC_ALLOCATE_VPAR(x,OOC_CHAR8 ,x_0d)
 
+  OOC_INITIALIZE_VPAR(x__ref,x,OOC_CHAR8 ,x_0d)
   return;
   ;
 }
@@ -134,14 +136,14 @@ void Channel__WriterDesc_ClearError(Channel__Writer w) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)w;
-  *(OOC_INT32*)((_check_pointer(i0, 21568))+4) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i0, 21563))+4) = (OOC_INT32)0;
   return;
   ;
 }
 
 OOC_INT32 Channel__ChannelDesc_Length(Channel__Channel ch) {
 
-  _failed_function(21746); return 0;
+  _failed_function(21741); return 0;
   ;
 }
 
@@ -155,14 +157,14 @@ Channel__Reader Channel__ChannelDesc_NewReader(Channel__Channel ch) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)ch;
-  i1 = *(OOC_UINT8*)((_check_pointer(i0, 23172))+6);
+  i1 = *(OOC_UINT8*)((_check_pointer(i0, 23167))+6);
   if (i1) goto l3;
   i1 = (OOC_INT32)Channel__GetError(6);
-  *(OOC_INT32*)(_check_pointer(i0, 23242)) = i1;
+  *(OOC_INT32*)(_check_pointer(i0, 23237)) = i1;
   goto l4;
 l3:
   i1 = (OOC_INT32)Channel__GetError(9);
-  *(OOC_INT32*)(_check_pointer(i0, 23192)) = i1;
+  *(OOC_INT32*)(_check_pointer(i0, 23187)) = i1;
 l4:
   return (Channel__Reader)(OOC_INT32)0;
   ;
@@ -172,14 +174,14 @@ Channel__Writer Channel__ChannelDesc_NewWriter(Channel__Channel ch) {
   register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)ch;
-  i1 = *(OOC_UINT8*)((_check_pointer(i0, 24182))+6);
+  i1 = *(OOC_UINT8*)((_check_pointer(i0, 24177))+6);
   if (i1) goto l3;
   i1 = (OOC_INT32)Channel__GetError(6);
-  *(OOC_INT32*)(_check_pointer(i0, 24253)) = i1;
+  *(OOC_INT32*)(_check_pointer(i0, 24248)) = i1;
   goto l4;
 l3:
   i1 = (OOC_INT32)Channel__GetError(10);
-  *(OOC_INT32*)(_check_pointer(i0, 24202)) = i1;
+  *(OOC_INT32*)(_check_pointer(i0, 24197)) = i1;
 l4:
   return (Channel__Writer)(OOC_INT32)0;
   ;
@@ -201,7 +203,7 @@ void Channel__ChannelDesc_ClearError(Channel__Channel ch) {
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)ch;
-  *(OOC_INT32*)(_check_pointer(i0, 26046)) = (OOC_INT32)0;
+  *(OOC_INT32*)(_check_pointer(i0, 26041)) = (OOC_INT32)0;
   return;
   ;
 }

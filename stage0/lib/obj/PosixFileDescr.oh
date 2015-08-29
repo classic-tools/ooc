@@ -5,8 +5,12 @@
 #include "RT0.oh"
 #include "C.oh"
 #include "Time.oh"
+#include "CharClass.oh"
 #include "Channel.oh"
 #include "Msg.oh"
+#include "LongStrings.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef Msg__Msg PosixFileDescr__Result;
 #define PosixFileDescr__noLength -1
 #define PosixFileDescr__noPosition -2
@@ -110,9 +114,9 @@ typedef void (*_TBP_PosixFileDescr__WriterDesc_SetPos)(PosixFileDescr__Writer w,
 extern void PosixFileDescr__WriterDesc_WriteByte(PosixFileDescr__Writer w, OOC_CHAR8 x);
 #define _TBN_PosixFileDescr__WriterDesc_WriteByte 3
 typedef void (*_TBP_PosixFileDescr__WriterDesc_WriteByte)(PosixFileDescr__Writer w, OOC_CHAR8 x);
-extern void PosixFileDescr__WriterDesc_WriteBytes(PosixFileDescr__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+extern void PosixFileDescr__WriterDesc_WriteBytes(PosixFileDescr__Writer w, const OOC_CHAR8 x__ref[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 #define _TBN_PosixFileDescr__WriterDesc_WriteBytes 4
-typedef void (*_TBP_PosixFileDescr__WriterDesc_WriteBytes)(PosixFileDescr__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+typedef void (*_TBP_PosixFileDescr__WriterDesc_WriteBytes)(PosixFileDescr__Writer w, const OOC_CHAR8 x__ref[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern OOC_INT32 PosixFileDescr__ChannelDesc_Length(PosixFileDescr__Channel ch);
 #define _TBN_PosixFileDescr__ChannelDesc_Length 4
 typedef OOC_INT32 (*_TBP_PosixFileDescr__ChannelDesc_Length)(PosixFileDescr__Channel ch);
@@ -147,7 +151,7 @@ extern RT0__StructDesc _td_PosixFileDescr__WriterDesc;
 extern RT0__StructDesc _td_PosixFileDescr__ErrorContext;
 extern RT0__StructDesc _td_PosixFileDescr__ErrorContextDesc;
 extern RT0__StructDesc _td_PosixFileDescr__5406;
-extern RT0__StructDesc _td_PosixFileDescr__5764;
+extern RT0__StructDesc _td_PosixFileDescr__5760;
 #endif /* _MODULE_PosixFileDescr_ */
 
 /* --- */

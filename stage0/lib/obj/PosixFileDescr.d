@@ -1,8 +1,4 @@
 #include "PosixFileDescr.oh"
-#include "CharClass.oh"
-#include "LongStrings.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
@@ -16,7 +12,7 @@ RT0__StructDesc _td_PosixFileDescr__WriterDesc = { (RT0__Struct[]){&_td_Channel_
 RT0__StructDesc _td_PosixFileDescr__ErrorContext = { (RT0__Struct[]){&_td_PosixFileDescr__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_PosixFileDescr__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_Channel__ErrorContextDesc,&_td_PosixFileDescr__ErrorContextDesc}, (void*[]){(void*)PosixFileDescr__ErrorContextDesc_GetTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
 RT0__StructDesc _td_PosixFileDescr__5406 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_PosixFileDescr__5764 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_PosixFileDescr__5760 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"PosixFileDescr", (RT0__Struct[]) { &_td_PosixFileDescr__Channel, &_td_PosixFileDescr__Reader, &_td_PosixFileDescr__Writer, &_td_PosixFileDescr__ChannelDesc, &_td_PosixFileDescr__ReaderDesc, &_td_PosixFileDescr__WriterDesc, &_td_PosixFileDescr__ErrorContext, &_td_PosixFileDescr__ErrorContextDesc, NULL } };
 
 extern void OOC_PosixFileDescr_init0() {

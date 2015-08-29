@@ -1,4 +1,4 @@
-(* 	$Id: TypeRules.Mod,v 1.30 2002/12/02 15:54:40 mva Exp $	 *)
+(* 	$Id: TypeRules.Mod,v 1.37 2002/12/19 07:44:14 mva Exp $	 *)
 MODULE OOC:SymbolTable:TypeRules;
 (*  Defines the type rules of the language.
     Copyright (C) 2000-2002  Michael van Acken
@@ -28,7 +28,7 @@ MODULE OOC:SymbolTable:TypeRules;
    formal parameters, and so on.  *)
 
 IMPORT
-  Sym := OOC:SymbolTable, OOC:SymbolTable:Predef;
+  Sym := OOC:SymbolTable, OOC:SymbolTable:Predef, OOC:SymbolTable:Builder;
 
 PROCEDURE IsNamedType* (type: Sym.Type): BOOLEAN;
 (**Returns @code{TRUE}, iff the type @oparam{type} can be accessed through
@@ -59,7 +59,7 @@ PROCEDURE IsCharType* (type: Sym.Type): BOOLEAN;
 (**Result is @code{TRUE} iff @oparam{type} is a character type.  *)
   BEGIN
     WITH type: Sym.PredefType DO
-      RETURN (type. id IN {Predef.char, Predef.longchar})
+      RETURN (type. id IN {Predef.char, Predef.longchar, Predef.ucs4char})
     ELSE
       RETURN FALSE
     END;
@@ -69,11 +69,32 @@ PROCEDURE IsStringConst* (type: Sym.Type): BOOLEAN;
 (**Result is @code{TRUE} iff @oparam{type} is a string constant.  *)
   BEGIN
     WITH type: Sym.PredefType DO
-      RETURN (type. id IN {Predef.charString, Predef.longcharString})
+      RETURN (type. id IN {Predef.stringChar, Predef.stringLongChar, Predef.stringUCS4Char})
     ELSE
       RETURN FALSE
     END;
   END IsStringConst;
+
+PROCEDURE IsObject*(type: Sym.Type): BOOLEAN;
+(**Return @code{TRUE} if @oparam{type} is the library type
+   @otype{*Object.Object}, or an extension of this type.  *)
+  VAR
+    r: Sym.Record;
+  BEGIN
+    IF (type IS Sym.Pointer) &
+       (type(Sym.Pointer).baseType IS Sym.Record) THEN
+      r := type(Sym.Pointer).baseType(Sym.Record);
+      WHILE (r.baseType # NIL) DO
+        r := r.baseType(Sym.Record);
+      END;
+      RETURN (r.namingDecl # NIL) & 
+        (r.namingDecl.name.str^ = "ObjectDesc") & 
+        (r.namingDecl.parent IS Sym.Module) & 
+        (r.namingDecl.parent(Sym.Module).name.str^ = "Object");
+    ELSE
+      RETURN FALSE;
+    END;
+  END IsObject;
 
 PROCEDURE IsSTRING* (type: Sym.Type): BOOLEAN;
 (**Return @code{TRUE} if @oparam{type} is the predefined type @code{STRING},
@@ -81,15 +102,17 @@ PROCEDURE IsSTRING* (type: Sym.Type): BOOLEAN;
   VAR
     r: Sym.Record;
   BEGIN
-    IF (type IS Sym.Pointer) & (type(Sym.Pointer). baseType IS Sym.Record) THEN
-      r := type(Sym.Pointer). baseType(Sym.Record);
-      WHILE (r. baseType # NIL) DO
-        r := r. baseType(Sym.Record);
+    IF (type IS Sym.Pointer) &
+       (type(Sym.Pointer).baseType IS Sym.Record) THEN
+      (* the second to last base type must be Object.StringDesc *)
+      r := type(Sym.Pointer).baseType(Sym.Record);
+      WHILE (r.baseType # NIL) & (r.baseType(Sym.Record).baseType # NIL) DO
+        r := r.baseType(Sym.Record);
       END;
       RETURN (r.namingDecl # NIL) & 
         (r.namingDecl.name.str^ = "StringDesc") & 
         (r.namingDecl.parent IS Sym.Module) & 
-        (r.namingDecl.parent(Sym.Module).name.str^ = "Language:String0");
+        (r.namingDecl.parent(Sym.Module).name.str^ = Builder.stringModule);
     ELSE
       RETURN FALSE;
     END;
@@ -112,10 +135,12 @@ PROCEDURE BaseCharType* (type: Sym.Type): Sym.PredefType;
   BEGIN
     WITH type: Sym.PredefType DO
       CASE type. id OF
-      | Predef.char, Predef.charString:
+      | Predef.char, Predef.stringChar:
         RETURN Predef.GetType (Predef.char);
-      | Predef.longchar, Predef.longcharString:
+      | Predef.longchar, Predef.stringLongChar:
         RETURN Predef.GetType (Predef.longchar);
+      | Predef.ucs4char, Predef.stringUCS4Char:
+        RETURN Predef.GetType (Predef.ucs4char);
       ELSE
         RETURN NIL;
       END;
@@ -135,10 +160,12 @@ PROCEDURE StringBase* (type : Sym.Type) : Sym.Type;
 BEGIN
   WITH type : Sym.PredefType DO
     CASE type.id OF
-    | Predef.charString:
+    | Predef.stringChar:
       RETURN Predef.GetType(Predef.char);
-    | Predef.longcharString:
+    | Predef.stringLongChar:
       RETURN Predef.GetType(Predef.longchar);
+    | Predef.stringUCS4Char:
+      RETURN Predef.GetType(Predef.ucs4char);
     END;
   END;
 END StringBase;
@@ -148,8 +175,9 @@ VAR
   id: Sym.PredefId;
 BEGIN
   CASE type(Sym.PredefType). id OF
-  | Predef.char: id := Predef.charString
-  | Predef.longchar:  id := Predef.longcharString
+  | Predef.char: id := Predef.stringChar
+  | Predef.longchar:  id := Predef.stringLongChar
+  | Predef.ucs4char:  id := Predef.stringUCS4Char
   END;
   RETURN Predef.GetType (id);
 END MatchingStringConst;
@@ -423,7 +451,7 @@ PROCEDURE IsArrayCompatible* (argType, fparType: Sym.Type): BOOLEAN;
 (**Returns @code{TRUE}, iff the type of the actual parameter @oparam{argType}
    is array compatible with that of a formal parameter @oparam{fparType}.
    Note: The case where @oparam{argType} is a string constant
-   @oconst{Predef.charString} must be handled by the caller.  In this
+   @oconst{Predef.stringChar} must be handled by the caller.  In this
    the implementation of this function differs from the @cite{Appendix A}
    of the language report.  *)
   BEGIN
@@ -506,6 +534,15 @@ PROCEDURE IsReadOnly* (usingModule: Sym.Module; decl: Sym.Declaration): BOOLEAN;
     RETURN (decl. exportMark = Sym.nameExportedRO) &
         (decl. Module() # usingModule);
   END IsReadOnly;
+
+PROCEDURE IsReadOnlyType* (usingModule: Sym.Module; type: Sym.Type): BOOLEAN;
+(**Returns @code{TRUE}, iff the type @oparam{type} is imported read-only
+   by module @oparam{usingModule}.  *)
+  BEGIN
+    RETURN (type IS Sym.Array) &
+        type(Sym.Array).readOnlyExport &
+        (type.Module() # usingModule);
+  END IsReadOnlyType;
 
 
 PROCEDURE AllocateType* (type: Sym.Type);

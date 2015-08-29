@@ -1,53 +1,55 @@
 MODULE LibAdtStringBuffer;
 
 IMPORT 
-  O := ADT:Object,
-  S := ADT:String,
+  Object,
   B := ADT:StringBuffer,
   Out := Out0;
 
 TYPE
   MyObject = POINTER TO MyObjectDesc;
-  MyObjectDesc = RECORD (O.ObjectDesc)
+  MyObjectDesc = RECORD (Object.ObjectDesc)
   END;
 
 VAR
-  a : S.String;
+  a : Object.String8;
   b : B.StringBuffer;
   m : MyObject;
 
-PROCEDURE OutString(s : S.String);
-BEGIN
-  Out.String(s.array^);
-END OutString;
+PROCEDURE OutString(s : Object.String);
+  VAR
+    chars: Object.CharsLatin1;
+  BEGIN
+    chars := s(Object.String8).CharsLatin1();
+    Out.String(chars^);
+  END OutString;
 
 PROCEDURE Test* ();
   BEGIN
     (* Append various primitive types *)
-    a := S.New("");
+    a := Object.NewLatin1("");
     b := B.New("");
     Out.Bool(a.Equals(b)); Out.Ln;
-    b.AppendString("Text String,");
-    b.Append(S.New("String Object,"));
+    b.Append("Text String,");
+    b.Append(Object.NewLatin1("String Object,"));
     b.AppendSet({1, 3, 5, 7});
-    b.AppendLongInt(1234567);
+    b.AppendInt(1234567);
     b.AppendBool(TRUE);
-    b.AppendObject(b.ToString());
-    b.AppendLongInt(b.Size());
+    b.Append(b.ToString());
+    b.AppendInt(b.length);
     OutString(b.ToString()); Out.Ln;
     
     (* Delete *)
-    b.Delete(1, 5);
+    b.Delete(1, 1+5);
     OutString(b.ToString()); Out.Ln;
     
     (* AppendObject *)
     NEW(m);
     b := B.New("");
-    b.AppendObject(NIL);
-    b.AppendString(",");
-    b.AppendObject(b);
-    b.AppendString(",");
-    (*b.AppendObject(m); omitted, because the memory address is not constant *)
+    b.Append(NIL);
+    b.Append(",");
+    b.Append(b);
+    b.Append(",");
+    (*b.Append(m); omitted, because the memory address is not constant *)
     OutString(b.ToString()); Out.Ln;
   END Test;
 

@@ -1,4 +1,4 @@
-(* 	$Id: Blocker.Mod,v 1.34 2002/12/03 17:12:40 mva Exp $	 *)
+(* 	$Id: Blocker.Mod,v 1.40 2002/12/20 10:19:32 mva Exp $	 *)
 MODULE OOC:SSA:Blocker;
 (*  Imposes a block structure on a flat list of SSA instructions.
     Copyright (C) 2002  Michael van Acken
@@ -24,9 +24,9 @@ MODULE OOC:SSA:Blocker;
 
 IMPORT
   <*IF DEBUG_BLOCKER THEN*>Log,OOC:SSA:Check,StdChannels,<*END*>
-  SYSTEM,
-  Channel, TextRider, ADT:Object, ADT:String, ADT:Dictionary,
-  IntDictionary := ADT:Dictionary:IntValue, Language:Integer,
+  SYSTEM, Object, Object:BigInt, ADT:Dictionary,
+  IntDictionary := ADT:Dictionary:IntValue,
+  Channel, TextRider,
   OOC:SSA, OOC:SSA:Opcode, OOC:SSA:Opnd, OOC:SSA:DeadCodeElimination,
   OOC:SSA:Destore;
   
@@ -500,14 +500,14 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
     VAR
       id, count: LONGINT;
       ptr: SSA.Result;
-      value: String.String;
+      value: STRING;
       instr: SSA.Instr;
       obj: Object.Object;
     BEGIN
       IF marker. HasKey (res) THEN
         obj := marker. Get (res);
         w. WriteChar ("[");
-        w. WriteString (obj(String.String). array^);
+        w. WriteStr (obj(STRING));
         w. WriteChar ("]");
       END;
       
@@ -518,7 +518,7 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
             w. WriteString ("NIL");
           ELSE
             value := instr. value. ToString();
-            w. WriteString (value. array^);
+            w. WriteStr (value);
           END;
         | instr: SSA.DeclRef DO
           w. WriteString (instr. decl. name. str^);
@@ -533,7 +533,7 @@ PROCEDURE WriteBlocks (c: Channel.Channel; pb: SSA.ProcBlock; root: Region;
             w. WriteString (instr. opndList. nextOpnd. nextOpnd.
                             arg(SSA.DeclRef). decl. name. str^);
             w. WriteString ("/dim");
-            w. WriteLInt (instr. opndList. arg(SSA.Const). value(Integer.Value). ToInt(), 0);
+            w. WriteLInt (instr. opndList. arg(SSA.Const). value(BigInt.BigInt). ToLongInt(), 0);
           ELSE
             instr. LogOpcode ("instr.opcode");
             ASSERT (FALSE);

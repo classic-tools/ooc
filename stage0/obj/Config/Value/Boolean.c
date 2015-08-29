@@ -9,7 +9,7 @@ void Config_Value_Boolean__ErrorContextDesc_GetTemplate(Config_Value_Boolean__Er
   i1 = *(OOC_INT32*)((_check_pointer(i0, 569))+8);
   switch (i1) {
   case 1:
-    _copy_16(((OOC_CHAR16[]){78,111,116,32,97,32,98,111,111,108,101,97,110,32,118,97,108,117,101,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){78,111,116,32,97,32,98,111,111,108,101,97,110,32,118,97,108,117,101,0}),(void*)(OOC_INT32)t,128);
     goto l4;
   default:
     _failed_case(i1, 561);
@@ -73,8 +73,8 @@ l17:
   Strings__Delete((void*)(OOC_INT32)str, str_0d, 0, i0);
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   len = i0;
-  i = i0;
   i1 = i0>0;
+  i = i0;
   if (i1) goto l20;
   i1=OOC_FALSE;
   goto l22;
@@ -104,10 +104,10 @@ l30:
 l34:
   Strings__Delete((void*)(OOC_INT32)str, str_0d, i1, (i0-i1));
   i0 = (
-  _cmp8((const void*)(OOC_INT32)str,(const void*)"TRUE"))==0;
+  _cmp8((const void*)(OOC_INT32)str,(const void*)"TRUE"))==(OOC_INT32)0;
   if (i0) goto l41;
   i0 = (
-  _cmp8((const void*)(OOC_INT32)str,(const void*)"FALSE"))==0;
+  _cmp8((const void*)(OOC_INT32)str,(const void*)"FALSE"))==(OOC_INT32)0;
   if (i0) goto l39;
   i0 = (OOC_INT32)Config_Value_Boolean__booleanContext;
   i0 = (OOC_INT32)Msg__New((Msg__Context)i0, 1);
@@ -133,10 +133,10 @@ void Config_Value_Boolean__ValueDesc_ValueToString(Config_Value_Boolean__Value v
   i0 = (OOC_INT32)v;
   i0 = *(OOC_UINT8*)(_check_pointer(i0, 1647));
   if (i0) goto l3;
-  _copy_8("FALSE",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"FALSE",(void*)(OOC_INT32)str,str_0d);
   goto l4;
 l3:
-  _copy_8("TRUE",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"TRUE",(void*)(OOC_INT32)str,str_0d);
 l4:
   return;
   ;
@@ -163,7 +163,7 @@ l4:
 
 void Config_Value_Boolean__ValueDesc_DefiningModule(Config_Value_Boolean__Value v, Config_Value__String str, OOC_LEN str_0d) {
 
-  _copy_8("Config:Value:Boolean",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"Config:Value:Boolean",(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }

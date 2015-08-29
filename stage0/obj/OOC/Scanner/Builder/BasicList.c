@@ -63,8 +63,8 @@ OOC_Scanner_Builder_BasicList__Symbol OOC_Scanner_Builder_BasicList__CloneSymbol
   *(OOC_INT32*)((_check_pointer(i0, 3489))+8) = ((OOC_INT32)RT0__NewObject(_td_OOC_Scanner_InputBuffer__CharArray.baseTypes[0], (i2+1)));
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3527))+8);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3527))+8);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3532)), 0);
-  _copy_8((OOC_INT32)str,(_check_pointer(i2, 3532)),i3);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3532)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)str,(void*)(_check_pointer(i2, 3532)),i3);
   i2 = *(OOC_INT32*)((_check_pointer(i1, 3555))+16);
   *(OOC_INT32*)((_check_pointer(i0, 3543))+16) = i2;
   i2 = *(OOC_INT32*)((_check_pointer(i1, 3582))+20);
@@ -133,13 +133,13 @@ l13:
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 4332));
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4345))+4);
   i0 = _check_pointer(i0, 4352);
-  i2 = OOC_ARRAY_LENGTH(i0, 0);
+  i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4397))+8);
   _move_block((i0+(_check_index(i3, i2, OOC_UINT32, 4352))),(_check_pointer(i1, 4402)),i4);
   i0 = (OOC_INT32)sym;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4421))+8);
   i1 = _check_pointer(i1, 4426);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
+  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i3 = len;
   *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 4426))) = (OOC_CHAR8)'\000';
   *(OOC_INT32*)((_check_pointer(i0, 4448))+12) = i3;

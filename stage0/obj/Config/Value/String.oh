@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "Msg.oh"
 #include "Config/Value.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef Config_Value__StringPtr Config_Value_String__Type;
 typedef struct Config_Value_String__ValueDesc *Config_Value_String__Value;
 typedef struct Config_Value_String__ValueDesc {

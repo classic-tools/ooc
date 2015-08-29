@@ -1,4 +1,4 @@
-(* 	$Id: AST.Mod,v 1.9 2002/11/11 21:44:17 mva Exp $	 *)
+(* 	$Id: AST.Mod,v 1.10 2002/12/13 16:47:54 mva Exp $	 *)
 MODULE OOC:AST [OOC_EXTENSIONS];
 (*  Abstract builder class for parser output.
     Copyright (C) 2000-2002  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:AST [OOC_EXTENSIONS];
 
 IMPORT
   Strings, OOC:Scanner:InputBuffer, OOC:Doc, OOC:Scanner:Builder:BasicList,
-  OOC:Scanner:Symbol (*for refs in docs*);
+  <*PUSH; Warnings:=FALSE*>OOC:Scanner:Symbol<*POP (*for refs in docs*)*>;
 
 TYPE
   Name* = InputBuffer.CharArray;

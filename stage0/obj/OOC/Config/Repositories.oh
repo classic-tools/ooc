@@ -5,13 +5,15 @@
 #include "RT0.oh"
 #include "Msg.oh"
 #include "Channel.oh"
-#include "ADT/String.oh"
+#include "Object.oh"
 #include "URI.oh"
 #include "XML/DTD.oh"
 #include "XML/Locator.oh"
 #include "Config/Parser.oh"
 #include "Config/Section.oh"
 #include "OOC/Repository.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_Config_Repositories__SectionDesc *OOC_Config_Repositories__Section;
 typedef OOC_Repository__Module *OOC_Config_Repositories__ModuleList;
 typedef struct OOC_Config_Repositories__SectionDesc {
@@ -51,27 +53,27 @@ typedef OOC_Repository__Module (*_TBP_OOC_Config_Repositories__SectionDesc_GetMo
 extern URI__URI OOC_Config_Repositories__SectionDesc_GetResource(OOC_Config_Repositories__Section s, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
 #define _TBN_OOC_Config_Repositories__SectionDesc_GetResource 4
 typedef URI__URI (*_TBP_OOC_Config_Repositories__SectionDesc_GetResource)(OOC_Config_Repositories__Section s, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
-extern ADT_String__StringArrayPtr OOC_Config_Repositories__SectionDesc_GetIncludePaths(OOC_Config_Repositories__Section s);
+extern Object__StringArrayPtr OOC_Config_Repositories__SectionDesc_GetIncludePaths(OOC_Config_Repositories__Section s);
 #define _TBN_OOC_Config_Repositories__SectionDesc_GetIncludePaths 2
-typedef ADT_String__StringArrayPtr (*_TBP_OOC_Config_Repositories__SectionDesc_GetIncludePaths)(OOC_Config_Repositories__Section s);
+typedef Object__StringArrayPtr (*_TBP_OOC_Config_Repositories__SectionDesc_GetIncludePaths)(OOC_Config_Repositories__Section s);
 extern void OOC_OOC_Config_Repositories_init();
 extern void OOC_OOC_Config_Repositories_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Config_Repositories__Section;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1218;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1214;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ModuleList;
 extern RT0__StructDesc _td_OOC_Config_Repositories__SectionDesc;
 extern RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntry;
 extern RT0__StructDesc _td_OOC_Config_Repositories__RepositoryEntryDesc;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1525;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1521;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ErrorContext;
 extern RT0__StructDesc _td_OOC_Config_Repositories__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Config_Repositories__1941;
-extern RT0__StructDesc _td_OOC_Config_Repositories__2678;
-extern RT0__StructDesc _td_OOC_Config_Repositories__4498;
-extern RT0__StructDesc _td_OOC_Config_Repositories__5105;
-extern RT0__StructDesc _td_OOC_Config_Repositories__8877;
+extern RT0__StructDesc _td_OOC_Config_Repositories__1937;
+extern RT0__StructDesc _td_OOC_Config_Repositories__2674;
+extern RT0__StructDesc _td_OOC_Config_Repositories__4494;
+extern RT0__StructDesc _td_OOC_Config_Repositories__5101;
+extern RT0__StructDesc _td_OOC_Config_Repositories__8873;
 #endif /* _MODULE_OOC_Config_Repositories_ */
 
 /* --- */

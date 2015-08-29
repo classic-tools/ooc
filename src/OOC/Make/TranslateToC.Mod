@@ -1,4 +1,4 @@
-(* 	$Id: TranslateToC.Mod,v 1.9 2002/12/11 06:20:07 mva Exp $	 *)
+(* 	$Id: TranslateToC.Mod,v 1.11 2002/12/20 09:13:37 mva Exp $	 *)
 MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 (*  Translates a module file into a bunch of C code files.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:Make:TranslateToC [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Channel, StdChannels, ADT:String, ADT:Dictionary, 
+  Channel, StdChannels, ADT:Dictionary, 
   OOC:Config, OOC:Config:Pragmas, OOC:Auxiliary:ParseModule,
   OOC:Auxiliary:WriteSymbolFile, OOC:Error, OOC:Repository, OOC:AST,
   OOC:AST:ExtTree, OOC:AST:ExtTree:CreateIR, ASTtoXML := OOC:AST:ExtTree:XML, 
@@ -211,7 +211,7 @@ PROCEDURE WriteCodeFile (w, wd: DeclWriter.Writer; m: Repository.Module;
   END WriteCodeFile;
 
 
-PROCEDURE Run*(m: Repository.Module; libraryName: String.String;
+PROCEDURE Run*(m: Repository.Module; libraryName: STRING;
                writeAST: BOOLEAN; writeIR: BOOLEAN;
                translator: Translator): Error.List;
 (**Compiles a module, creating the symbol file and all relevant C files.  *)

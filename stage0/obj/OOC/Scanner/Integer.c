@@ -9,10 +9,10 @@ void OOC_Scanner_Integer__ErrorContextDesc_GetTemplate(OOC_Scanner_Integer__Erro
   i1 = *(OOC_INT32*)((_check_pointer(i0, 495))+8);
   switch (i1) {
   case 1:
-    _copy_16(((OOC_CHAR16[]){73,110,116,101,103,101,114,32,118,97,108,117,101,32,111,117,116,32,111,102,32,114,97,110,103,101,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){73,110,116,101,103,101,114,32,118,97,108,117,101,32,111,117,116,32,111,102,32,114,97,110,103,101,0}),(void*)(OOC_INT32)t,128);
     goto l5;
   case 2:
-    _copy_16(((OOC_CHAR16[]){72,101,120,97,100,101,99,105,109,97,108,32,99,111,110,115,116,97,110,116,32,119,111,117,108,100,32,98,101,32,109,97,112,112,101,100,32,116,111,32,110,101,103,97,116,105,118,101,32,118,97,108,117,101,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){72,101,120,97,100,101,99,105,109,97,108,32,99,111,110,115,116,97,110,116,32,119,111,117,108,100,32,98,101,32,109,97,112,112,101,100,32,116,111,32,110,101,103,97,116,105,118,101,32,118,97,108,117,101,0}),(void*)(OOC_INT32)t,128);
     goto l5;
   default:
     _failed_case(i1, 487);
@@ -30,7 +30,7 @@ Msg__Msg OOC_Scanner_Integer__Convert10(OOC_Scanner_InputBuffer__CharArray str, 
   OOC_INT8 format;
 
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 875)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 875)), (OOC_INT32)0);
   IntStr__StrToInt((void*)(_check_pointer(i0, 875)), i1, (void*)(OOC_INT32)_int, (void*)(OOC_INT32)&format);
   i0 = format;
   i0 = i0==1;
@@ -80,12 +80,12 @@ l8:
 
   spos = 0;
   i0 = (OOC_INT32)str;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1647)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1647)), (OOC_INT32)0);
   i1 = Strings__Length((void*)(_check_pointer(i0, 1647)), i1);
   epos = i1;
   *_int = 0;
   i2 = _check_pointer(i0, 1713);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(0, i3, OOC_UINT32, 1713)));
   i2 = i2==(OOC_CHAR8)'0';
   if (i2) goto l3;
@@ -97,7 +97,7 @@ l4_loop:
   i2 = i2+1;
   spos = i2;
   i3 = _check_pointer(i0, 1713);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 1713)));
   i3 = i3==(OOC_CHAR8)'0';
   if (i3) goto l4_loop;
@@ -107,7 +107,7 @@ l9:
   i1 = i2<=i1;
   if (!i1) goto l32;
   i0 = _check_pointer(i0, 2027);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
+  i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 2027)));
   i0 = OOC_Scanner_Integer__Convert16_GetDigit(i0);
   i1 = spos;
@@ -136,7 +136,7 @@ l21:
 l24_loop:
   i2 = (OOC_INT32)str;
   i2 = _check_pointer(i2, 2546);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i1 = *(OOC_UINT8*)(i2+(_check_index(i1, i3, OOC_UINT32, 2546)));
   i1 = OOC_Scanner_Integer__Convert16_GetDigit(i1);
   i0 = (i0*16)+i1;

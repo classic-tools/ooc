@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/SymbolTable/Predef.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_INT8 OOC_SSA_Opcode__Class;
 typedef OOC_INT8 OOC_SSA_Opcode__Subclass;
 #define OOC_SSA_Opcode__const 0
@@ -107,10 +109,10 @@ extern void OOC_OOC_SSA_Opcode_init();
 extern void OOC_OOC_SSA_Opcode_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SSA_Opcode__28851;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__28937;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__29523;
-extern RT0__StructDesc _td_OOC_SSA_Opcode__29626;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__28722;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__28808;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__29394;
+extern RT0__StructDesc _td_OOC_SSA_Opcode__29497;
 #endif /* _MODULE_OOC_SSA_Opcode_ */
 
 /* --- */

@@ -1,7 +1,5 @@
 #include "OOC/SymbolTable/Namespace.oh"
 #include "OOC/SymbolTable/TypeRules.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_SymbolTable_Namespace__multipleDeclForName 1
 #define OOC_SymbolTable_Namespace__multipleMemberForName 2
 #define OOC_SymbolTable_Namespace__definedForBaseType 3

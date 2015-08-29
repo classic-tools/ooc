@@ -59,31 +59,31 @@ l10:
       i2 = i2!=(OOC_CHAR8)'\000';
       
 l12:
-      if (!i2) goto l26;
-l13_loop:
+      if (!i2) goto l27;
+l14_loop:
       i2 = i;
       i2 = i2+1;
       i = i2;
       i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2499)));
       i3 = i3!=(OOC_CHAR8)'?';
-      if (i3) goto l16;
+      if (i3) goto l17;
       i3=OOC_FALSE;
-      goto l18;
-l16:
+      goto l19;
+l17:
       i3 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2516)));
       i3 = i3!=(OOC_CHAR8)'#';
       
-l18:
-      if (i3) goto l20;
+l19:
+      if (i3) goto l21;
       i2=OOC_FALSE;
-      goto l22;
-l20:
+      goto l23;
+l21:
       i2 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i2, str_0d, OOC_UINT16, 2533)));
       i2 = i2!=(OOC_CHAR8)'\000';
       
-l22:
-      if (i2) goto l13_loop;
-l26:
+l23:
+      if (i2) goto l14_loop;
+l27:
       i2 = i;
       i2 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i1, i2);
       substr = (URI_String__StringPtr)i2;
@@ -98,7 +98,7 @@ l26:
   OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
   *res = (Msg__Msg)(OOC_INT32)0;
   i0 = (
-  _cmp8((const void*)(OOC_INT32)str,(const void*)""))==0;
+  _cmp8((const void*)(OOC_INT32)str,(const void*)""))==(OOC_INT32)0;
   if (!i0) goto l3;
   i0 = (OOC_INT32)URI_Scheme_CurrentDoc__New();
   return (URI__URI)i0;
@@ -612,10 +612,9 @@ l20:
   i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8085)))), URI__FragmentDesc_Clone)),URI__FragmentDesc_Clone)((URI__Fragment)i1);
   fragment = (URI__Fragment)i1;
   i3 = Strings__Length((void*)(OOC_INT32)str, str_0d);
-  i0 = i0+1;
-  i3 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, i0, i3);
+  i3 = (OOC_INT32)URI_String__Extract((void*)(OOC_INT32)str, str_0d, (i0+1), i3);
   substr = (URI_String__StringPtr)i3;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8183)))), URI__FragmentDesc_ParseFragment)),URI__FragmentDesc_ParseFragment)((URI__Fragment)i1, (URI_String__StringPtr)i3, i0);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8183)))), URI__FragmentDesc_ParseFragment)),URI__FragmentDesc_ParseFragment)((URI__Fragment)i1, (URI_String__StringPtr)i3, (i0+1));
   *res = (Msg__Msg)i0;
   i3 = i0==(OOC_INT32)0;
   if (i3) goto l25;

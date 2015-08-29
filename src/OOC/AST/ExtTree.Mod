@@ -1,4 +1,4 @@
-(* 	$Id: ExtTree.Mod,v 1.28 2002/11/11 21:44:16 mva Exp $	 *)
+(* 	$Id: ExtTree.Mod,v 1.30 2002/12/20 10:19:34 mva Exp $	 *)
 MODULE OOC:AST:ExtTree [OOC_EXTENSIONS];
 (*  Creates extended abstract syntax tree from the parser output.
     Copyright (C) 2000-2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:AST:ExtTree [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  ADT:String, OOC:Scanner:Builder:BasicList, OOC:AST, OOC:Doc;
+  Object, OOC:Scanner:Builder:BasicList, OOC:AST, OOC:Doc;
 
 
 
@@ -700,13 +700,13 @@ PROCEDURE (terminal: Terminal) Accept* (v: Visitor);
     v. VisitTerminal (terminal)
   END Accept;
 
-PROCEDURE (terminal: Terminal) GetString* (stripQuotes: BOOLEAN): String.String;
+PROCEDURE (terminal: Terminal) GetString* (stripQuotes: BOOLEAN): STRING;
   BEGIN
     IF stripQuotes THEN
-      RETURN String.NewRegion (terminal. sym. str^,
+      RETURN Object.NewLatin1Region (terminal. sym. str^,
                                1, terminal. sym. len-1)
     ELSE
-      RETURN String.New (terminal. sym. str^)
+      RETURN Object.NewLatin1 (terminal. sym. str^)
     END
   END GetString;
 

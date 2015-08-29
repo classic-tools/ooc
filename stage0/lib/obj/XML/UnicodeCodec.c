@@ -33,7 +33,7 @@ void XML_UnicodeCodec__CodecDesc_EncodeBOM(XML_UnicodeCodec__Codec codec, OOC_CH
   i1 = *(OOC_INT8*)((_check_pointer(i0, 11753))+4);
   i1 = i1==0;
   if (i1) goto l3;
-  _copy_16(((OOC_CHAR16[]){65279,0}),(OOC_INT32)source,2);
+  _copy_16((const void*)((OOC_CHAR16[]){65279,0}),(void*)(OOC_INT32)source,2);
   i1 = destEnd;
   i2 = destStart;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11863)))), XML_UnicodeCodec__CodecDesc_Encode)),XML_UnicodeCodec__CodecDesc_Encode)((XML_UnicodeCodec__Codec)i0, (void*)(OOC_INT32)source, 2, 0, 1, (void*)(OOC_INT32)dest, dest_0d, i2, i1, (void*)(OOC_INT32)&sourceDone, (void*)(OOC_INT32)destDone);
@@ -88,7 +88,7 @@ void XML_UnicodeCodec__Register(const OOC_CHAR8 name__ref[], OOC_LEN name_0d, XM
       if (i1) goto l7;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14721))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 14727)),(const void*)(OOC_INT32)name))==0;
+      _cmp8((const void*)(_check_pointer(i1, 14727)),(const void*)(OOC_INT32)name))==(OOC_INT32)0;
       if (i1) goto l5;
       XML_UnicodeCodec__Register_ScanList((void*)(_check_pointer(i0, 14802)));
       goto l8;
@@ -104,8 +104,8 @@ l7:
       i0 = (OOC_INT32)*l;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14643))+4);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 14643))+4);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 14649)), 0);
-      _copy_8((OOC_INT32)name,(_check_pointer(i1, 14649)),i2);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 14649)), (OOC_INT32)0);
+      _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i1, 14649)),i2);
       i1 = (OOC_INT32)factory;
       *(OOC_INT32*)((_check_pointer(i0, 14662))+8) = i1;
       i0 = (OOC_INT32)*l;
@@ -135,7 +135,7 @@ void XML_UnicodeCodec__Unregister(const OOC_CHAR8 name__ref[], OOC_LEN name_0d) 
       if (!i1) goto l7;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15234))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 15240)),(const void*)(OOC_INT32)name))==0;
+      _cmp8((const void*)(_check_pointer(i1, 15240)),(const void*)(OOC_INT32)name))==(OOC_INT32)0;
       if (i1) goto l5;
       XML_UnicodeCodec__Unregister_ScanList((void*)(_check_pointer(i0, 15312)));
       goto l7;
@@ -171,7 +171,7 @@ XML_UnicodeCodec__Factory XML_UnicodeCodec__GetFactory(const OOC_CHAR8 name__ref
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15745))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -185,7 +185,7 @@ l8_loop:
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 15745))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 15751)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l13:
   if (i1) goto l8_loop;

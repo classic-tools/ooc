@@ -9,14 +9,14 @@ void URI__ErrorContextDesc_GetTemplate(URI__ErrorContext context, Msg__Msg msg, 
   i0 = *(OOC_INT32*)((_check_pointer(i0, 5986))+8);
   switch (i0) {
   case 1:
-    _copy_8("The URI `${uri}\047 does not support channel access",(OOC_INT32)t,128);
+    _copy_8((const void*)"The URI `${uri}\047 does not support channel access",(void*)(OOC_INT32)t,128);
     goto l4;
   default:
     _failed_case(i0, 5978);
     goto l4;
   }
 l4:
-  _copy_8to16((OOC_INT32)t,(OOC_INT32)templ,templ_0d);
+  _copy_8to16((const void*)(OOC_INT32)t,(void*)(OOC_INT32)templ,templ_0d);
   return;
   ;
 }
@@ -47,7 +47,7 @@ void URI__URIDesc_Copy(URI__URI uri, URI__URI dest) {
   i1 = (OOC_INT32)dest;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6893));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6893));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6903)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6903)), (OOC_INT32)0);
   i0 = (OOC_INT32)URI_String__Copy((void*)(_check_pointer(i2, 6903)), i0);
   *(OOC_INT32*)(_check_pointer(i1, 6866)) = i0;
   goto l4;
@@ -90,7 +90,7 @@ void URI__URIDesc_AppendScheme(URI__URI uri, OOC_CHAR8 str[], OOC_LEN str_0d) {
   if (!i1) goto l4;
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7919));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 7919));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7929)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7929)), (OOC_INT32)0);
   Strings__Append((void*)(_check_pointer(i1, 7929)), i0, (void*)(OOC_INT32)str, str_0d);
   Strings__Append(":", 2, (void*)(OOC_INT32)str, str_0d);
 l4:
@@ -339,25 +339,25 @@ URI__URI URI__HierarchicalURIDesc_MakeRelative(URI__HierarchicalURI uri, URI__Hi
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 17428));
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 17449));
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 17438)),(const void*)(_check_pointer(i3, 17459))))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 17438)),(const void*)(_check_pointer(i3, 17459))))!=(OOC_INT32)0;
   if (i1) goto l15;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17567))+4);
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17596))+4);
-  i1 = (i1==(OOC_INT32)0)!=(i3==(OOC_INT32)0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 17596))+4);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17567))+4);
+  i1 = (i3==(OOC_INT32)0)!=(i1==(OOC_INT32)0);
   if (i1) goto l13;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17934))+4);
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l18;
-  _copy_8("",(OOC_INT32)a1,1024);
+  _copy_8((const void*)"",(void*)(OOC_INT32)a1,1024);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17977))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 17977))+4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 17988)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i3, (void*)(OOC_INT32)a1, 1024);
-  _copy_8("",(OOC_INT32)a2,1024);
+  _copy_8((const void*)"",(void*)(OOC_INT32)a2,1024);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18026))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 18026))+4);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 18037)))), URI__AuthorityDesc_Append)),URI__AuthorityDesc_Append)((URI__Authority)i0, (void*)(OOC_INT32)a2, 1024);
   i0 = (
-  _cmp8((const void*)(OOC_INT32)a1,(const void*)(OOC_INT32)a2))!=0;
+  _cmp8((const void*)(OOC_INT32)a1,(const void*)(OOC_INT32)a2))!=(OOC_INT32)0;
   if (!i0) goto l18;
   return (URI__URI)i2;
   goto l18;
@@ -462,7 +462,7 @@ void URI__ReferenceDesc_GetString(URI__Reference ref, OOC_CHAR8 str[], OOC_LEN s
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 21115));
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l3;
-  _copy_8("",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)str,str_0d);
   goto l4;
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 21142));
@@ -527,8 +527,8 @@ void URI__RegisterScheme(URI__URI scheme) {
       i3 = (OOC_INT32)scheme;
       i4 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 22185));
       i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 22185));
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22176)), 0);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22195)), 0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22176)), (OOC_INT32)0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22195)), (OOC_INT32)0);
       i1 = URI__Equal((void*)(_check_pointer(i1, 22176)), i2, (void*)(_check_pointer(i4, 22195)), i3);
       if (i1) goto l5;
       URI__RegisterScheme_Append((void*)(_check_pointer(i0, 22265)));
@@ -571,8 +571,8 @@ l3:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22680))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 22688));
   i3 = (OOC_INT32)name;
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22705)), 0);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22698)), 0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22705)), (OOC_INT32)0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 22698)), (OOC_INT32)0);
   i1 = URI__Equal((void*)(_check_pointer(i1, 22698)), i2, (void*)(_check_pointer(i3, 22705)), i4);
   i1 = !i1;
   
@@ -592,8 +592,8 @@ l11:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i2, 22688));
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22680))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i3, 22688));
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 22705)), 0);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22698)), 0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i1, 22705)), (OOC_INT32)0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 22698)), (OOC_INT32)0);
   i2 = URI__Equal((void*)(_check_pointer(i2, 22698)), i3, (void*)(_check_pointer(i1, 22705)), i4);
   i2 = !i2;
   
@@ -638,10 +638,10 @@ void URI__URIAttributeDesc_ReplacementText(URI__URIAttribute attr, Msg__LString 
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23355))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23355))+8);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 23360)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)str, 2048);
-  _copy_8to16((OOC_INT32)str,(OOC_INT32)text,text_0d);
+  _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)text,text_0d);
   goto l4;
 l3:
-  _copy_16(((OOC_CHAR16[]){78,73,76,0}),(OOC_INT32)text,text_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){78,73,76,0}),(void*)(OOC_INT32)text,text_0d);
 l4:
   return;
   ;

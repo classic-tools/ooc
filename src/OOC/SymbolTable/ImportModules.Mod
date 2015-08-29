@@ -1,4 +1,4 @@
-(* 	$Id: ImportModules.Mod,v 1.7 2002/12/07 21:22:29 mva Exp $	 *)
+(* 	$Id: ImportModules.Mod,v 1.8 2002/12/14 23:56:56 mva Exp $	 *)
 MODULE OOC:SymbolTable:ImportModules;
 (*  Retrieve exported symbol data for imported modules.
     Copyright (C) 2000, 2001, 2002  Michael van Acken
@@ -81,7 +81,14 @@ PROCEDURE ImportModules* (systemModule: Sym.Module;
         IF (m = NIL) THEN
           Err (noSuchModule, import. moduleName)
         ELSE
-          symTab := m. ReadSymbolFile (res);
+          IF (m.ifQuality = Repository.importsWithFingerprint) THEN
+            (* we already read the symbol file, and it has not been
+               invalidated at this time: take old data *)
+            symTab := m.ifData;
+            res := NIL;
+          ELSE
+            symTab := m.ReadSymbolFile (res);
+          END;
           IF (res # NIL) THEN
             Err (readErrorSymbolFile, import. moduleName);
             lastError. SetMsgAttrib ("reason", res)

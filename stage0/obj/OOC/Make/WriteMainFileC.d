@@ -2,8 +2,6 @@
 #include "Channel.oh"
 #include "Files.oh"
 #include "TextRider.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

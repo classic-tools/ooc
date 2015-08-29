@@ -29,23 +29,23 @@ l4:
 
 
   i0 = (OOC_INT32)uri;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1891)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1891)), (OOC_INT32)0);
   i1 = LongStrings__Length((void*)(_check_pointer(i0, 1891)), i1);
   len16 = i1;
   i2 = (OOC_INT32)XML_UnicodeCodec_UTF8__factory;
   i2 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1920)))), XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)),XML_UnicodeCodec_UTF8__FactoryDesc_NewCodec)((XML_UnicodeCodec_UTF8__Factory)i2);
-  codec = (XML_UnicodeCodec__Codec)i2;
   i3 = i1!=0;
+  codec = (XML_UnicodeCodec__Codec)i2;
   if (i3) goto l3;
-  _copy_8("",(OOC_INT32)str8,8192);
+  _copy_8((const void*)"",(void*)(OOC_INT32)str8,8192);
   goto l7;
 l3:
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2053)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2053)), (OOC_INT32)0);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2040)))), XML_UnicodeCodec__CodecDesc_Encode)),XML_UnicodeCodec__CodecDesc_Encode)((XML_UnicodeCodec__Codec)i2, (void*)(_check_pointer(i0, 2053)), i3, 0, i1, (void*)(OOC_INT32)str8, 8192, 0, 8192, (void*)(OOC_INT32)&srcDone, (void*)(OOC_INT32)&destDone);
   i3 = srcDone;
   i4 = i3!=i1;
   if (!i4) goto l6;
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2165)), 0);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2165)), (OOC_INT32)0);
   i5 = destDone;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 2152)))), XML_UnicodeCodec__CodecDesc_Encode)),XML_UnicodeCodec__CodecDesc_Encode)((XML_UnicodeCodec__Codec)i2, (void*)(_check_pointer(i0, 2165)), i4, i3, i1, (void*)(OOC_INT32)str8, 8192, i5, 8192, (void*)(OOC_INT32)&srcDone, (void*)(OOC_INT32)&destDone);
   i0 = srcDone;
@@ -104,7 +104,7 @@ l28:
   
   goto l31;
 l30:
-  _copy_8("%HH",(OOC_INT32)repl,4);
+  _copy_8((const void*)"%HH",(void*)(OOC_INT32)repl,4);
   i0 = *(OOC_UINT8*)((OOC_INT32)str8+(_check_index(i0, 8192, OOC_UINT16, 2752)));
   i0 = XML_EntityResolver__NormalizeURI_ToHex((i0>>4));
   *(OOC_UINT8*)((OOC_INT32)repl+(_check_index(1, 4, OOC_UINT8, 2729))) = i0;
@@ -151,12 +151,12 @@ l6:
   
 l8:
   if (i2) goto l10;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4129)), 0);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4129)), (OOC_INT32)0);
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(_check_pointer(i0, 4129)), i1, (URI__HierarchicalURI)(OOC_INT32)0, (void*)(OOC_INT32)res);
   *uri = (URI__URI)i0;
   goto l11;
 l10:
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4050)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4050)), (OOC_INT32)0);
   i0 = (OOC_INT32)URI_Parser__NewURI((void*)(_check_pointer(i0, 4050)), i2, (URI__HierarchicalURI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4065)))), &_td_URI__HierarchicalURIDesc, 4065)), (void*)(OOC_INT32)res);
   *uri = (URI__URI)i0;
 l11:

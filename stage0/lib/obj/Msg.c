@@ -11,8 +11,8 @@ void Msg__InitContext(Msg__Context context, const Msg__String id__ref, OOC_LEN i
   *(OOC_INT32*)(_check_pointer(i0, 6817)) = ((OOC_INT32)RT0__NewObject(_td_Msg__StringPtr.baseTypes[0], (i1+1)));
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6868));
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 6868));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6872)), 0);
-  _copy_8((OOC_INT32)id,(_check_pointer(i1, 6872)),i0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 6872)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)id,(void*)(_check_pointer(i1, 6872)),i0);
   return;
   ;
 }
@@ -22,7 +22,7 @@ void Msg__ContextDesc_GetTemplate(Msg__Context context, Msg__Msg msg, Msg__LStri
   Msg__Attribute attrib;
   OOC_CHAR16 buffer[16384];
 
-  _copy_16(((OOC_CHAR16[]){77,83,71,95,67,79,78,84,69,88,84,58,32,36,123,77,83,71,95,67,79,78,84,69,88,84,125,0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){77,83,71,95,67,79,78,84,69,88,84,58,32,36,123,77,83,71,95,67,79,78,84,69,88,84,125,0}),(void*)(OOC_INT32)templ,templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){10,0}), 2, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){77,83,71,95,67,79,68,69,58,32,36,123,77,83,71,95,67,79,68,69,125,0}), 22, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){10,0}), 2, (void*)(OOC_INT32)templ, templ_0d);
@@ -33,7 +33,7 @@ void Msg__ContextDesc_GetTemplate(Msg__Context context, Msg__Msg msg, Msg__LStri
   if (!i1) goto l8;
 l3_loop:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8256))+4);
-  _copy_8to16((_check_pointer(i1, 8262)),(OOC_INT32)buffer,16384);
+  _copy_8to16((const void*)(_check_pointer(i1, 8262)),(void*)(OOC_INT32)buffer,16384);
   LongStrings__Append((void*)(OOC_INT32)buffer, 16384, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){58,32,36,123,0}), 5, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append((void*)(OOC_INT32)buffer, 16384, (void*)(OOC_INT32)templ, templ_0d);
@@ -59,8 +59,8 @@ void Msg__InitAttribute(Msg__Attribute attr, const Msg__String name__ref, OOC_LE
   *(OOC_INT32*)((_check_pointer(i0, 8848))+4) = ((OOC_INT32)RT0__NewObject(_td_Msg__StringPtr.baseTypes[0], (i1+1)));
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8902))+4);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 8902))+4);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 8908)), 0);
-  _copy_8((OOC_INT32)name,(_check_pointer(i1, 8908)),i0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 8908)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i1, 8908)),i0);
   return;
   ;
 }
@@ -102,12 +102,12 @@ void Msg__MsgDesc_SetAttribute(Msg__Msg msg, Msg__Attribute attr) {
       i2 = (OOC_INT32)attr;
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10328))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10320)),(const void*)(_check_pointer(i3, 10334))))==0;
+      _cmp8((const void*)(_check_pointer(i1, 10320)),(const void*)(_check_pointer(i3, 10334))))==(OOC_INT32)0;
       if (i1) goto l9;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 10457))+4);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10471))+4);
       i1 = (
-      _cmp8((const void*)(_check_pointer(i1, 10463)),(const void*)(_check_pointer(i3, 10476))))>0;
+      _cmp8((const void*)(_check_pointer(i1, 10463)),(const void*)(_check_pointer(i3, 10476))))>(OOC_INT32)0;
       if (i1) goto l7;
       Msg__MsgDesc_SetAttribute_Insert((void*)(_check_pointer(i0, 10672)), (Msg__Attribute)i2);
       goto l12;
@@ -152,7 +152,7 @@ Msg__Attribute Msg__MsgDesc_GetAttribute(Msg__Msg msg, const Msg__String name__r
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11060))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 11066)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 11066)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -166,7 +166,7 @@ l8_loop:
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 11060))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 11066)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 11066)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l13:
   if (i1) goto l8_loop;
@@ -195,7 +195,7 @@ void Msg__MsgDesc_GetLText(Msg__Msg msg, Msg__LString text, OOC_LEN text_0d) {
   if (!i2) goto l15;
 l3_loop:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11983))+4);
-  _copy_8to16((_check_pointer(i2, 11989)),(OOC_INT32)attrName,131);
+  _copy_8to16((const void*)(_check_pointer(i2, 11989)),(void*)(OOC_INT32)attrName,131);
   LongStrings__Insert(((OOC_CHAR16[]){36,123,0}), 3, 0, (void*)(OOC_INT32)attrName, 131);
   LongStrings__Append(((OOC_CHAR16[]){125,0}), 2, (void*)(OOC_INT32)attrName, 131);
   LongStrings__FindNext((void*)(OOC_INT32)attrName, 131, (void*)(OOC_INT32)text, text_0d, 0, (void*)(OOC_INT32)&found, (void*)(OOC_INT32)&pos);
@@ -227,7 +227,7 @@ l15:
   LongStrings__Delete((void*)(OOC_INT32)text, text_0d, i1, 14);
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 12683))+12);
   i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 12692));
-  _copy_8to16((_check_pointer(i1, 12696)),(OOC_INT32)insert,16384);
+  _copy_8to16((const void*)(_check_pointer(i1, 12696)),(void*)(OOC_INT32)insert,16384);
   i1 = pos;
   LongStrings__Insert((void*)(OOC_INT32)insert, 16384, i1, (void*)(OOC_INT32)text, text_0d);
 l18:
@@ -238,7 +238,7 @@ l18:
   LongStrings__Delete((void*)(OOC_INT32)text, text_0d, i1, 11);
   i0 = *(OOC_INT32*)((_check_pointer(i0, 12916))+8);
   IntStr__IntToStr(i0, (void*)(OOC_INT32)num, 48);
-  _copy_8to16((OOC_INT32)num,(OOC_INT32)insert,16384);
+  _copy_8to16((const void*)(OOC_INT32)num,(void*)(OOC_INT32)insert,16384);
   i0 = pos;
   LongStrings__Insert((void*)(OOC_INT32)insert, 16384, i0, (void*)(OOC_INT32)text, text_0d);
 l21:
@@ -256,7 +256,7 @@ void Msg__MsgDesc_GetText(Msg__Msg msg, Msg__String text, OOC_LEN text_0d) {
 l1_loop:
   i0 = i0+1;
   i1 = *(OOC_UINT16*)((OOC_INT32)buffer+(_check_index(i0, 32767, OOC_UINT16, 13420))*2);
-  i1 = i1<=(OOC_CHAR16)255;
+  i1 = i1<=(OOC_CHAR8)'\377';
   if (i1) goto l4;
   *(OOC_UINT8*)((OOC_INT32)text+(_check_index(i0, text_0d, OOC_UINT16, 13498))) = (OOC_CHAR8)'?';
   goto l5;
@@ -390,7 +390,7 @@ void Msg__IntAttributeDesc_ReplacementText(Msg__IntAttribute attr, Msg__LString 
   i0 = (OOC_INT32)attr;
   i0 = *(OOC_INT32*)((_check_pointer(i0, 15709))+8);
   IntStr__IntToStr(i0, (void*)(OOC_INT32)num, 48);
-  _copy_8to16((OOC_INT32)num,(OOC_INT32)text,text_0d);
+  _copy_8to16((const void*)(OOC_INT32)num,(void*)(OOC_INT32)text,text_0d);
   return;
   ;
 }
@@ -428,7 +428,7 @@ void Msg__StringAttributeDesc_ReplacementText(Msg__StringAttribute attr, Msg__LS
 
   i0 = (OOC_INT32)attr;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16329))+8);
-  _copy_8to16((_check_pointer(i0, 16337)),(OOC_INT32)text,text_0d);
+  _copy_8to16((const void*)(_check_pointer(i0, 16337)),(void*)(OOC_INT32)text,text_0d);
   return;
   ;
 }
@@ -466,7 +466,7 @@ void Msg__LStringAttributeDesc_ReplacementText(Msg__LStringAttribute attr, Msg__
 
   i0 = (OOC_INT32)attr;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16942))+8);
-  _copy_16((_check_pointer(i0, 16950)),(OOC_INT32)text,text_0d);
+  _copy_16((const void*)(_check_pointer(i0, 16950)),(void*)(OOC_INT32)text,text_0d);
   return;
   ;
 }
@@ -519,8 +519,8 @@ Msg__StringPtr Msg__GetStringPtr(const Msg__String str__ref, OOC_LEN str_0d) {
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)RT0__NewObject(_td_Msg__StringPtr.baseTypes[0], (i0+1));
   s = (Msg__StringPtr)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 17866)), 0);
-  _copy_8((OOC_INT32)str,(_check_pointer(i0, 17866)),i1);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 17866)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)str,(void*)(_check_pointer(i0, 17866)),i1);
   return (Msg__StringPtr)i0;
   ;
 }
@@ -534,8 +534,8 @@ Msg__LStringPtr Msg__GetLStringPtr(const Msg__LString str__ref, OOC_LEN str_0d) 
   i0 = LongStrings__Length((void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)RT0__NewObject(_td_Msg__LStringPtr.baseTypes[0], (i0+1));
   s = (Msg__LStringPtr)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 18126)), 0);
-  _copy_16((OOC_INT32)str,(_check_pointer(i0, 18126)),i1);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 18126)), (OOC_INT32)0);
+  _copy_16((const void*)(OOC_INT32)str,(void*)(_check_pointer(i0, 18126)),i1);
   return (Msg__LStringPtr)i0;
   ;
 }

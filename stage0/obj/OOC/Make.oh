@@ -5,13 +5,14 @@
 #include "RT0.oh"
 #include "Channel.oh"
 #include "Msg.oh"
-#include "ADT/Object.oh"
+#include "Object.oh"
 #include "ADT/Dictionary.oh"
-#include "ADT/String.oh"
 #include "StringSearch.oh"
 #include "OOC/Error.oh"
 #include "OOC/Repository.oh"
 #include "OOC/SymbolTable/CreateNamespace.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_CHAR8 OOC_Make__ShellCommand[4096];
 typedef struct OOC_Make__ModuleInfoDesc *OOC_Make__ModuleInfo;
 typedef struct OOC_Make__ModuleInfoDesc {
@@ -24,8 +25,8 @@ typedef OOC_Repository__Module *OOC_Make__ModuleList;
 typedef struct OOC_Make__RulesDesc *OOC_Make__Rules;
 typedef struct OOC_Make__RulesDesc {
   OOC_INT32 backend;
-  ADT_String__String libraryName;
-  ADT_String__String libraryVersion;
+  Object__String libraryName;
+  Object__String libraryVersion;
   OOC_Repository__Module checkAllImportsModule;
   OOC_Repository__Repository localRepository;
   OOC_Make__ModuleList imports;
@@ -57,9 +58,9 @@ extern OOC_Make__Rules OOC_Make__NewRules();
 extern void OOC_Make__RulesDesc_SetBackend(OOC_Make__Rules r, OOC_INT32 backend);
 #define _TBN_OOC_Make__RulesDesc_SetBackend 6
 typedef void (*_TBP_OOC_Make__RulesDesc_SetBackend)(OOC_Make__Rules r, OOC_INT32 backend);
-extern void OOC_Make__RulesDesc_SetLibraryName(OOC_Make__Rules r, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, const OOC_CHAR8 version__ref[], OOC_LEN version_0d);
+extern void OOC_Make__RulesDesc_SetLibraryName(OOC_Make__Rules r, Object__String name, Object__String version);
 #define _TBN_OOC_Make__RulesDesc_SetLibraryName 9
-typedef void (*_TBP_OOC_Make__RulesDesc_SetLibraryName)(OOC_Make__Rules r, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, const OOC_CHAR8 version__ref[], OOC_LEN version_0d);
+typedef void (*_TBP_OOC_Make__RulesDesc_SetLibraryName)(OOC_Make__Rules r, Object__String name, Object__String version);
 extern void OOC_Make__RulesDesc_SetAllImportsModule(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_SetAllImportsModule 5
 typedef void (*_TBP_OOC_Make__RulesDesc_SetAllImportsModule)(OOC_Make__Rules r, OOC_Repository__Module module);
@@ -132,7 +133,7 @@ typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateMainFileAssembler)(OOC_Make__
 extern OOC_CHAR8 OOC_Make__RulesDesc_UpdateMainObjectFile(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_UpdateMainObjectFile 22
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateMainObjectFile)(OOC_Make__Rules r, OOC_Repository__Module module);
-extern OOC_Make__ModuleList OOC_Make__ModuleClosure(OOC_Repository__Module module, ADT_String__String restrictToLibrary);
+extern OOC_Make__ModuleList OOC_Make__ModuleClosure(OOC_Repository__Module module, Object__String restrictToLibrary);
 extern OOC_CHAR8 OOC_Make__RulesDesc_UpdateExecutable(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_UpdateExecutable 14
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UpdateExecutable)(OOC_Make__Rules r, OOC_Repository__Module module);
@@ -149,18 +150,17 @@ extern void OOC_OOC_Make_init0();
 extern RT0__StructDesc _td_OOC_Make__ShellCommand;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfo;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfoDesc;
-extern RT0__StructDesc _td_OOC_Make__1933;
-extern RT0__StructDesc _td_OOC_Make__1985;
-extern RT0__StructDesc _td_OOC_Make__2112;
+extern RT0__StructDesc _td_OOC_Make__1917;
+extern RT0__StructDesc _td_OOC_Make__1969;
+extern RT0__StructDesc _td_OOC_Make__2096;
 extern RT0__StructDesc _td_OOC_Make__ModuleList;
 extern RT0__StructDesc _td_OOC_Make__Rules;
 extern RT0__StructDesc _td_OOC_Make__RulesDesc;
-extern RT0__StructDesc _td_OOC_Make__3612;
-extern RT0__StructDesc _td_OOC_Make__3587;
+extern RT0__StructDesc _td_OOC_Make__3582;
+extern RT0__StructDesc _td_OOC_Make__3557;
 extern RT0__StructDesc _td_OOC_Make__ErrorContext;
 extern RT0__StructDesc _td_OOC_Make__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Make__4598;
-extern RT0__StructDesc _td_OOC_Make__5523;
+extern RT0__StructDesc _td_OOC_Make__4568;
 #endif /* _MODULE_OOC_Make_ */
 
 /* --- */

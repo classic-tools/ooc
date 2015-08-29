@@ -5,6 +5,8 @@
 #include "RT0.oh"
 #include "Time.oh"
 #include "Msg.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef Msg__Msg Channel__Result;
 #define Channel__noLength -1
 #define Channel__noPosition -2
@@ -78,9 +80,9 @@ typedef void (*_TBP_Channel__WriterDesc_SetPos)(Channel__Writer w, OOC_INT32 new
 extern void Channel__WriterDesc_WriteByte(Channel__Writer w, OOC_CHAR8 x);
 #define _TBN_Channel__WriterDesc_WriteByte 3
 typedef void (*_TBP_Channel__WriterDesc_WriteByte)(Channel__Writer w, OOC_CHAR8 x);
-extern void Channel__WriterDesc_WriteBytes(Channel__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+extern void Channel__WriterDesc_WriteBytes(Channel__Writer w, const OOC_CHAR8 x__ref[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 #define _TBN_Channel__WriterDesc_WriteBytes 4
-typedef void (*_TBP_Channel__WriterDesc_WriteBytes)(Channel__Writer w, OOC_CHAR8 x[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
+typedef void (*_TBP_Channel__WriterDesc_WriteBytes)(Channel__Writer w, const OOC_CHAR8 x__ref[], OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n);
 extern void Channel__WriterDesc_ClearError(Channel__Writer w);
 #define _TBN_Channel__WriterDesc_ClearError 0
 typedef void (*_TBP_Channel__WriterDesc_ClearError)(Channel__Writer w);
@@ -119,7 +121,7 @@ extern RT0__StructDesc _td_Channel__ErrorContext;
 extern RT0__StructDesc _td_Channel__ErrorContextDesc;
 extern RT0__StructDesc _td_Channel__12140;
 extern RT0__StructDesc _td_Channel__16681;
-extern RT0__StructDesc _td_Channel__20330;
+extern RT0__StructDesc _td_Channel__20326;
 #endif /* _MODULE_Channel_ */
 
 /* --- */

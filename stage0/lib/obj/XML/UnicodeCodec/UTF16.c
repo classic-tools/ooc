@@ -160,10 +160,9 @@ l31:
   goto l36;
 l33:
   *(OOC_UINT16*)((OOC_INT32)dest+(_check_index(i8, dest_0d, OOC_UINT32, 3016))*2) = i9;
-  i9 = i7+2;
-  i10 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i9+i1), source_0d, OOC_UINT32, 3086)));
-  i9 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i9+i2), source_0d, OOC_UINT32, 3146)));
-  *(OOC_UINT16*)((OOC_INT32)dest+(_check_index((i8+1), dest_0d, OOC_UINT32, 3051))*2) = ((i10*256)+i9);
+  i9 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(((i7+2)+i1), source_0d, OOC_UINT32, 3086)));
+  i10 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(((i7+2)+i2), source_0d, OOC_UINT32, 3146)));
+  *(OOC_UINT16*)((OOC_INT32)dest+(_check_index((i8+1), dest_0d, OOC_UINT32, 3051))*2) = ((i9*256)+i10);
   i7 = i7+4;
   i = i7;
   i8 = i8+2;
@@ -399,12 +398,10 @@ l31:
   
   goto l36;
 l33:
-  i9 = i7+2;
-  i10 = i8+1;
-  i11 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i10, source_0d, OOC_UINT32, 6109))*2);
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index((i9+i1), dest_0d, OOC_UINT32, 6079))) = (i11>>8);
-  i10 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i10, source_0d, OOC_UINT32, 6167))*2);
-  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index((i9+i2), dest_0d, OOC_UINT32, 6138))) = (_mod(i10,256));
+  i9 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index((i8+1), source_0d, OOC_UINT32, 6109))*2);
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(((i7+2)+i1), dest_0d, OOC_UINT32, 6079))) = (i9>>8);
+  i9 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index((i8+1), source_0d, OOC_UINT32, 6167))*2);
+  *(OOC_UINT8*)((OOC_INT32)dest+(_check_index(((i7+2)+i2), dest_0d, OOC_UINT32, 6138))) = (_mod(i9,256));
   i8 = i8+2;
   i = i8;
   i7 = i7+4;
@@ -434,7 +431,7 @@ l45:
   if (i2) goto l48;
   *sourceDone = i0;
   *destDone = i1;
-  goto l79;
+  goto l80;
 l48:
   i1 = i0!=i3;
   if (i1) goto l51;
@@ -447,8 +444,8 @@ l51:
   i0 = (i0+i1)<=i2;
   
 l53:
-  if (!i0) goto l63;
-l54_loop:
+  if (!i0) goto l64;
+l55_loop:
   i0 = i;
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 6833))*2);
   i1 = XML_UnicodeCodec_UTF16__CodecDesc_Encode_WordsPerEncoding(i1);
@@ -456,52 +453,52 @@ l54_loop:
   i1 = sourceEnd;
   i1 = i0!=i1;
   i = i0;
-  if (i1) goto l57;
+  if (i1) goto l58;
   i0=OOC_FALSE;
-  goto l59;
-l57:
+  goto l60;
+l58:
   i1 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 6771))*2);
   i1 = XML_UnicodeCodec_UTF16__CodecDesc_Encode_WordsPerEncoding(i1);
   i2 = sourceEnd;
   i0 = (i0+i1)<=i2;
   
-l59:
-  if (i0) goto l54_loop;
-l63:
+l60:
+  if (i0) goto l55_loop;
+l64:
   i0 = sourceStart;
   i1 = i;
   i2 = i1!=i0;
-  if (i2) goto l66;
+  if (i2) goto l67;
   *sourceDone = i1;
   i0 = destStart;
   *destDone = i0;
-  goto l67;
-l66:
+  goto l68;
+l67:
   i2 = (OOC_INT32)codec;
   i3 = destEnd;
   i4 = destStart;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6964)))), XML_UnicodeCodec_UTF16__CodecDesc_Encode)),XML_UnicodeCodec_UTF16__CodecDesc_Encode)((XML_UnicodeCodec_UTF16__Codec)i2, (void*)(OOC_INT32)source, source_0d, i0, (i1+1), (void*)(OOC_INT32)dest, dest_0d, i4, (i3+5), (void*)(OOC_INT32)sourceDone, (void*)(OOC_INT32)destDone);
-l67:
+l68:
   i0 = *sourceDone;
   i1 = i0==i1;
-  if (i1) goto l70;
+  if (i1) goto l71;
   i0=OOC_FALSE;
-  goto l72;
-l70:
+  goto l73;
+l71:
   i1 = sourceEnd;
   i0 = i0!=i1;
   
-l72:
-  if (i0) goto l74;
+l73:
+  if (i0) goto l75;
   i0=OOC_FALSE;
-  goto l76;
-l74:
+  goto l77;
+l75:
   i0 = destEnd;
   i1 = *destDone;
   i0 = i1!=i0;
   
-l76:
-  if (!i0) goto l79;
+l77:
+  if (!i0) goto l80;
   i0 = (OOC_INT32)codec;
   i1 = *(OOC_INT32*)(_check_pointer(i0, 7412));
   i2 = high;
@@ -513,7 +510,7 @@ l76:
   *destDone = (i3+2);
   i0 = sourceEnd;
   *sourceDone = i0;
-l79:
+l80:
   return;
   ;
 }
@@ -538,49 +535,48 @@ XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryDesc_NewCodec(XML_Unicode
 }
 
 XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryDesc_NewCodecBOM(XML_UnicodeCodec_UTF16__Factory f, OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 sourceStart, OOC_INT32 sourceEnd, OOC_INT32 *sourceDone) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
 
   i0 = sourceStart;
-  i1 = i0+1;
-  i2 = sourceEnd;
-  i2 = i1<i2;
-  i3 = (OOC_INT32)f;
-  if (!i2) goto l18;
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 8174)));
-  i2 = i2==(OOC_CHAR8)'\377';
-  if (i2) goto l5;
-  i2=OOC_FALSE;
+  i1 = sourceEnd;
+  i1 = (i0+1)<i1;
+  i2 = (OOC_INT32)f;
+  if (!i1) goto l18;
+  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 8174)));
+  i1 = i1==(OOC_CHAR8)'\377';
+  if (i1) goto l5;
+  i1=OOC_FALSE;
   goto l7;
 l5:
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT32, 8214)));
-  i2 = i2==(OOC_CHAR8)'\376';
+  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 8214)));
+  i1 = i1==(OOC_CHAR8)'\376';
   
 l7:
-  if (i2) goto l16;
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 8329)));
-  i2 = i2==(OOC_CHAR8)'\376';
-  if (i2) goto l11;
+  if (i1) goto l16;
+  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 8329)));
+  i1 = i1==(OOC_CHAR8)'\376';
+  if (i1) goto l11;
   i1=OOC_FALSE;
   goto l13;
 l11:
-  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i1, source_0d, OOC_UINT32, 8372)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 8372)));
   i1 = i1==(OOC_CHAR8)'\377';
   
 l13:
   if (!i1) goto l18;
   *sourceDone = (i0+2);
-  i1 = *(OOC_INT8*)(_check_pointer(i3, 8461));
+  i1 = *(OOC_INT8*)(_check_pointer(i2, 8461));
   i1 = (OOC_INT32)XML_UnicodeCodec_UTF16__NewBE(i1);
   return (XML_UnicodeCodec__Codec)i1;
   goto l18;
 l16:
   *sourceDone = (i0+2);
-  i1 = *(OOC_INT8*)(_check_pointer(i3, 8303));
+  i1 = *(OOC_INT8*)(_check_pointer(i2, 8303));
   i1 = (OOC_INT32)XML_UnicodeCodec_UTF16__NewLE(i1);
   return (XML_UnicodeCodec__Codec)i1;
 l18:
   *sourceDone = i0;
-  i0 = *(OOC_INT8*)(_check_pointer(i3, 8594));
+  i0 = *(OOC_INT8*)(_check_pointer(i2, 8594));
   i0 = (OOC_INT32)XML_UnicodeCodec_UTF16__NewBE(i0);
   return (XML_UnicodeCodec__Codec)i0;
   ;
@@ -588,7 +584,7 @@ l18:
 
 void XML_UnicodeCodec_UTF16__FactoryDesc_GetEncodingName(XML_UnicodeCodec_UTF16__Factory f, OOC_CHAR8 name[], OOC_LEN name_0d) {
 
-  _copy_8("UTF-16",(OOC_INT32)name,name_0d);
+  _copy_8((const void*)"UTF-16",(void*)(OOC_INT32)name,name_0d);
   return;
   ;
 }
@@ -613,7 +609,7 @@ XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryLEDesc_NewCodec(XML_Unico
 }
 
 XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryLEDesc_NewCodecBOM(XML_UnicodeCodec_UTF16__FactoryLE f, OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 sourceStart, OOC_INT32 sourceEnd, OOC_INT32 *sourceDone) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
   XML_UnicodeCodec__Codec codec;
 
   i0 = sourceStart;
@@ -621,29 +617,28 @@ XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryLEDesc_NewCodecBOM(XML_Un
   i1 = (OOC_INT32)f;
   i1 = *(OOC_INT8*)(_check_pointer(i1, 9261));
   i1 = (OOC_INT32)XML_UnicodeCodec_UTF16__NewLE(i1);
-  i2 = i0+1;
-  i3 = sourceEnd;
-  i3 = i2<i3;
+  i2 = sourceEnd;
+  i2 = (i0+1)<i2;
   codec = (XML_UnicodeCodec__Codec)i1;
-  if (!i3) goto l18;
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 9325)));
-  i3 = i3==(OOC_CHAR8)'\376';
-  if (i3) goto l5;
-  i3=OOC_FALSE;
+  if (!i2) goto l18;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 9325)));
+  i2 = i2==(OOC_CHAR8)'\376';
+  if (i2) goto l5;
+  i2=OOC_FALSE;
   goto l7;
 l5:
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 9365)));
-  i3 = i3==(OOC_CHAR8)'\377';
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 9365)));
+  i2 = i2==(OOC_CHAR8)'\377';
   
 l7:
-  if (i3) goto l16;
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 9466)));
-  i3 = i3==(OOC_CHAR8)'\377';
-  if (i3) goto l11;
+  if (i2) goto l16;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 9466)));
+  i2 = i2==(OOC_CHAR8)'\377';
+  if (i2) goto l11;
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 9509)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 9509)));
   i2 = i2==(OOC_CHAR8)'\376';
   
 l13:
@@ -660,7 +655,7 @@ l18:
 
 void XML_UnicodeCodec_UTF16__FactoryLEDesc_GetEncodingName(XML_UnicodeCodec_UTF16__FactoryLE f, OOC_CHAR8 name[], OOC_LEN name_0d) {
 
-  _copy_8("UTF-16LE",(OOC_INT32)name,name_0d);
+  _copy_8((const void*)"UTF-16LE",(void*)(OOC_INT32)name,name_0d);
   return;
   ;
 }
@@ -685,7 +680,7 @@ XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryBEDesc_NewCodec(XML_Unico
 }
 
 XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryBEDesc_NewCodecBOM(XML_UnicodeCodec_UTF16__FactoryBE f, OOC_CHAR8 source[], OOC_LEN source_0d, OOC_INT32 sourceStart, OOC_INT32 sourceEnd, OOC_INT32 *sourceDone) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
   XML_UnicodeCodec__Codec codec;
 
   i0 = sourceStart;
@@ -693,29 +688,28 @@ XML_UnicodeCodec__Codec XML_UnicodeCodec_UTF16__FactoryBEDesc_NewCodecBOM(XML_Un
   i1 = (OOC_INT32)f;
   i1 = *(OOC_INT8*)(_check_pointer(i1, 10266));
   i1 = (OOC_INT32)XML_UnicodeCodec_UTF16__NewBE(i1);
-  i2 = i0+1;
-  i3 = sourceEnd;
-  i3 = i2<i3;
+  i2 = sourceEnd;
+  i2 = (i0+1)<i2;
   codec = (XML_UnicodeCodec__Codec)i1;
-  if (!i3) goto l18;
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 10330)));
-  i3 = i3==(OOC_CHAR8)'\377';
-  if (i3) goto l5;
-  i3=OOC_FALSE;
+  if (!i2) goto l18;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 10330)));
+  i2 = i2==(OOC_CHAR8)'\377';
+  if (i2) goto l5;
+  i2=OOC_FALSE;
   goto l7;
 l5:
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 10370)));
-  i3 = i3==(OOC_CHAR8)'\376';
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 10370)));
+  i2 = i2==(OOC_CHAR8)'\376';
   
 l7:
-  if (i3) goto l16;
-  i3 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 10471)));
-  i3 = i3==(OOC_CHAR8)'\376';
-  if (i3) goto l11;
+  if (i2) goto l16;
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 10471)));
+  i2 = i2==(OOC_CHAR8)'\376';
+  if (i2) goto l11;
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index(i2, source_0d, OOC_UINT32, 10514)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)source+(_check_index((i0+1), source_0d, OOC_UINT32, 10514)));
   i2 = i2==(OOC_CHAR8)'\377';
   
 l13:
@@ -732,7 +726,7 @@ l18:
 
 void XML_UnicodeCodec_UTF16__FactoryBEDesc_GetEncodingName(XML_UnicodeCodec_UTF16__FactoryBE f, OOC_CHAR8 name[], OOC_LEN name_0d) {
 
-  _copy_8("UTF-16BE",(OOC_INT32)name,name_0d);
+  _copy_8((const void*)"UTF-16BE",(void*)(OOC_INT32)name,name_0d);
   return;
   ;
 }

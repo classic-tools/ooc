@@ -1,7 +1,7 @@
 MODULE OOC:Auxiliary:ParseModule;
 
 IMPORT
-  Msg, URI, ADT:String,
+  Msg, URI,
   OOC:Config, OOC:Config:Pragmas, OOC:Repository,
   
   OOC:Error, OOC:Scanner:InputBuffer, 
@@ -16,7 +16,7 @@ IMPORT
 PROCEDURE ParseModule* (m: Repository.Module;
                         checkModuleName, createNamespace,
                         writeSymbolFile, abortAfterImport: BOOLEAN;
-                        libraryName: String.String;
+                        libraryName: STRING;
                         VAR ast: AST.Node;
                         VAR symTab: Sym.Module;
                         VAR pragmaHistory: Pragmas.History;

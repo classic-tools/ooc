@@ -4,8 +4,6 @@
 #include "TextRider.oh"
 #include "LongStrings.oh"
 #include "URI/Scheme/File.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 OOC_INT32 XML_Error__errMsgLineBase;
 OOC_INT32 XML_Error__errMsgColumnBase;
 OOC_INT32 XML_Error__errMsgCharPosBase;

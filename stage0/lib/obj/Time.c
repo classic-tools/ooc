@@ -27,21 +27,21 @@ void Time__GetTime(struct Time__TimeStamp *t, RT0__Struct t__tag) {
 }
 
 void Time__TimeStamp_Add(struct Time__TimeStamp *a, RT0__Struct a__tag, const struct Time__Interval *b__ref) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(b,Time__Interval ,1)
 
   OOC_INITIALIZE_VPAR(b__ref,b,Time__Interval ,8)
-  i0 = (OOC_INT32)a+4;
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = *(OOC_INT32*)i0;
-  *(OOC_INT32*)i0 = (i2+i1);
-  i1 = *(OOC_INT32*)(OOC_INT32)a;
-  i2 = *(OOC_INT32*)(OOC_INT32)b;
-  *(OOC_INT32*)(OOC_INT32)a = (i1+i2);
-  i1 = *(OOC_INT32*)i0;
-  i2 = i1>=86400000;
-  if (!i2) goto l4;
-  *(OOC_INT32*)i0 = (i1-86400000);
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i1+i0);
+  i0 = *(OOC_INT32*)(OOC_INT32)a;
+  i1 = *(OOC_INT32*)(OOC_INT32)b;
+  *(OOC_INT32*)(OOC_INT32)a = (i0+i1);
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i0>=86400000;
+  if (!i0) goto l4;
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i0-86400000);
   i0 = *(OOC_INT32*)(OOC_INT32)a;
   *(OOC_INT32*)(OOC_INT32)a = (i0+1);
 l4:
@@ -50,21 +50,21 @@ l4:
 }
 
 void Time__TimeStamp_Sub(struct Time__TimeStamp *a, RT0__Struct a__tag, const struct Time__Interval *b__ref) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(b,Time__Interval ,1)
 
   OOC_INITIALIZE_VPAR(b__ref,b,Time__Interval ,8)
-  i0 = (OOC_INT32)a+4;
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = *(OOC_INT32*)i0;
-  *(OOC_INT32*)i0 = (i2-i1);
-  i1 = *(OOC_INT32*)(OOC_INT32)a;
-  i2 = *(OOC_INT32*)(OOC_INT32)b;
-  *(OOC_INT32*)(OOC_INT32)a = (i1-i2);
-  i1 = *(OOC_INT32*)i0;
-  i2 = i1<0;
-  if (!i2) goto l4;
-  *(OOC_INT32*)i0 = (i1+86400000);
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i1-i0);
+  i0 = *(OOC_INT32*)(OOC_INT32)a;
+  i1 = *(OOC_INT32*)(OOC_INT32)b;
+  *(OOC_INT32*)(OOC_INT32)a = (i0-i1);
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i0<0;
+  if (!i0) goto l4;
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i0+86400000);
   i0 = *(OOC_INT32*)(OOC_INT32)a;
   *(OOC_INT32*)(OOC_INT32)a = (i0-1);
 l4:
@@ -73,21 +73,21 @@ l4:
 }
 
 void Time__TimeStamp_Delta(struct Time__TimeStamp *a, RT0__Struct a__tag, const struct Time__TimeStamp *b__ref, struct Time__Interval *c, RT0__Struct c__tag) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+  register OOC_INT32 i0,i1,i2,i3;
   OOC_ALLOCATE_VPAR(b,Time__TimeStamp ,1)
 
   OOC_INITIALIZE_VPAR(b__ref,b,Time__TimeStamp ,8)
   i0 = *(OOC_INT32*)((OOC_INT32)b+4);
   i1 = *(OOC_INT32*)((OOC_INT32)a+4);
-  i2 = (OOC_INT32)c+4;
-  i3 = *(OOC_INT32*)(OOC_INT32)a;
-  i4 = *(OOC_INT32*)(OOC_INT32)b;
-  *(OOC_INT32*)i2 = (i1-i0);
-  *(OOC_INT32*)(OOC_INT32)c = (i3-i4);
-  i0 = *(OOC_INT32*)i2;
-  i1 = i0<0;
-  if (!i1) goto l4;
-  *(OOC_INT32*)i2 = (i0+86400000);
+  i2 = *(OOC_INT32*)(OOC_INT32)a;
+  i3 = *(OOC_INT32*)(OOC_INT32)b;
+  *(OOC_INT32*)((OOC_INT32)c+4) = (i1-i0);
+  *(OOC_INT32*)(OOC_INT32)c = (i2-i3);
+  i0 = *(OOC_INT32*)((OOC_INT32)c+4);
+  i0 = i0<0;
+  if (!i0) goto l4;
+  i0 = *(OOC_INT32*)((OOC_INT32)c+4);
+  *(OOC_INT32*)((OOC_INT32)c+4) = (i0+86400000);
   i0 = *(OOC_INT32*)(OOC_INT32)c;
   *(OOC_INT32*)(OOC_INT32)c = (i0-1);
 l4:
@@ -109,9 +109,9 @@ OOC_INT8 Time__TimeStamp_Cmp(struct Time__TimeStamp *a, RT0__Struct a__tag, cons
   i2=OOC_FALSE;
   goto l9;
 l5:
-  i2 = *(OOC_INT32*)((OOC_INT32)a+4);
-  i3 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = i2>i3;
+  i2 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i3 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i2 = i3>i2;
   
   goto l9;
 l7:
@@ -123,9 +123,9 @@ l9:
   i0=OOC_FALSE;
   goto l15;
 l13:
-  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i0 = i0==i1;
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i1==i0;
   
 l15:
   if (i0) goto l17;
@@ -153,21 +153,21 @@ void Time__InitInterval(struct Time__Interval *_int, RT0__Struct _int__tag, OOC_
 }
 
 void Time__Interval_Add(struct Time__Interval *a, RT0__Struct a__tag, const struct Time__Interval *b__ref) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(b,Time__Interval ,1)
 
   OOC_INITIALIZE_VPAR(b__ref,b,Time__Interval ,8)
-  i0 = (OOC_INT32)a+4;
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = *(OOC_INT32*)i0;
-  *(OOC_INT32*)i0 = (i2+i1);
-  i1 = *(OOC_INT32*)(OOC_INT32)a;
-  i2 = *(OOC_INT32*)(OOC_INT32)b;
-  *(OOC_INT32*)(OOC_INT32)a = (i1+i2);
-  i1 = *(OOC_INT32*)i0;
-  i2 = i1>=86400000;
-  if (!i2) goto l4;
-  *(OOC_INT32*)i0 = (i1-86400000);
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i1+i0);
+  i0 = *(OOC_INT32*)(OOC_INT32)a;
+  i1 = *(OOC_INT32*)(OOC_INT32)b;
+  *(OOC_INT32*)(OOC_INT32)a = (i0+i1);
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i0>=86400000;
+  if (!i0) goto l4;
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i0-86400000);
   i0 = *(OOC_INT32*)(OOC_INT32)a;
   *(OOC_INT32*)(OOC_INT32)a = (i0+1);
 l4:
@@ -176,21 +176,21 @@ l4:
 }
 
 void Time__Interval_Sub(struct Time__Interval *a, RT0__Struct a__tag, const struct Time__Interval *b__ref) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(b,Time__Interval ,1)
 
   OOC_INITIALIZE_VPAR(b__ref,b,Time__Interval ,8)
-  i0 = (OOC_INT32)a+4;
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = *(OOC_INT32*)i0;
-  *(OOC_INT32*)i0 = (i2-i1);
-  i1 = *(OOC_INT32*)(OOC_INT32)a;
-  i2 = *(OOC_INT32*)(OOC_INT32)b;
-  *(OOC_INT32*)(OOC_INT32)a = (i1-i2);
-  i1 = *(OOC_INT32*)i0;
-  i2 = i1<0;
-  if (!i2) goto l4;
-  *(OOC_INT32*)i0 = (i1+86400000);
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i1-i0);
+  i0 = *(OOC_INT32*)(OOC_INT32)a;
+  i1 = *(OOC_INT32*)(OOC_INT32)b;
+  *(OOC_INT32*)(OOC_INT32)a = (i0-i1);
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i0<0;
+  if (!i0) goto l4;
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  *(OOC_INT32*)((OOC_INT32)a+4) = (i0+86400000);
   i0 = *(OOC_INT32*)(OOC_INT32)a;
   *(OOC_INT32*)(OOC_INT32)a = (i0-1);
 l4:
@@ -212,9 +212,9 @@ OOC_INT8 Time__Interval_Cmp(struct Time__Interval *a, RT0__Struct a__tag, const 
   i2=OOC_FALSE;
   goto l9;
 l5:
-  i2 = *(OOC_INT32*)((OOC_INT32)a+4);
-  i3 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i2 = i2>i3;
+  i2 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i3 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i2 = i3>i2;
   
   goto l9;
 l7:
@@ -226,9 +226,9 @@ l9:
   i0=OOC_FALSE;
   goto l15;
 l13:
-  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
-  i1 = *(OOC_INT32*)((OOC_INT32)b+4);
-  i0 = i0==i1;
+  i0 = *(OOC_INT32*)((OOC_INT32)b+4);
+  i1 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i0 = i1==i0;
   
 l15:
   if (i0) goto l17;
@@ -245,17 +245,16 @@ l20:
 }
 
 void Time__Interval_Scale(struct Time__Interval *a, RT0__Struct a__tag, OOC_REAL64 b) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1;
   register OOC_REAL64 d0;
 
-  i0 = (OOC_INT32)a+4;
-  i1 = *(OOC_INT32*)i0;
-  i2 = *(OOC_INT32*)(OOC_INT32)a;
+  i0 = *(OOC_INT32*)((OOC_INT32)a+4);
+  i1 = *(OOC_INT32*)(OOC_INT32)a;
   d0 = b;
-  d0 = ((OOC_REAL64)(((OOC_REAL32)i2)+(((OOC_REAL32)i1)/8.6400000000000000E+7)))*d0;
-  i1 = _entier(d0);
-  *(OOC_INT32*)(OOC_INT32)a = i1;
-  *(OOC_INT32*)i0 = (_entier((((d0-((OOC_REAL64)i1))*8.6400000000000000E+7)+5.0000000000000000E-1)));
+  d0 = ((OOC_REAL64)(((OOC_REAL32)i1)+(((OOC_REAL32)i0)/8.6400000000000000E+7)))*d0;
+  i0 = _entier(d0);
+  *(OOC_INT32*)(OOC_INT32)a = i0;
+  *(OOC_INT32*)((OOC_INT32)a+4) = (_entier((((d0-((OOC_REAL64)i0))*8.6400000000000000E+7)+5.0000000000000000E-1)));
   return;
   ;
 }

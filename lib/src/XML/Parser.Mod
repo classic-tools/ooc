@@ -1,4 +1,4 @@
-(*      $Id: Parser.Mod,v 1.2 2002/08/12 18:11:29 mva Exp $   *)
+(*      $Id: Parser.Mod,v 1.3 2002/12/16 18:52:49 mva Exp $   *)
 MODULE XML:Parser;
 (*  Implements the XML parser.
     Copyright (C) 2000, 2001  Michael van Acken
@@ -21,10 +21,10 @@ MODULE XML:Parser;
 
 IMPORT
   Out, Ascii, Channel, Msg, LongStrings, URI, URI:Scheme:File,
-  Codec := XML:UnicodeCodec, XML:UnicodeCodec:UTF8, XML:UnicodeCodec:UTF16,
-  XML:Locator, XML:EntityResolver,
+  Codec := XML:UnicodeCodec, XML:Locator, XML:EntityResolver,
+  <*PUSH; Warnings:=FALSE*>XML:UnicodeCodec:UTF8,XML:UnicodeCodec:UTF16,<*POP*>
   Buffer := XML:UnicodeBuffer, XML:Error, XML:DTD, XML:Builder;
-  (* warning: the modules UTF8 and UTF16 are not used in this module, but
+  (* Warning: the modules UTF8 and UTF16 are not used in this module, but
      they must be imported to guarantee that these codecs are available to
      the XML parser *)
 
@@ -661,7 +661,8 @@ PROCEDURE (p: Parser) ParseDocument*;
         p. builder := Builder.New()
       END
     END ErrPos;
-  
+
+<*PUSH; Warnings:=FALSE*>
   PROCEDURE WriteBuffer (msg: ARRAY OF CHAR);
     VAR
       i, end: LONGINT;
@@ -680,6 +681,7 @@ PROCEDURE (p: Parser) ParseDocument*;
       END;
       Out.Ln;
     END WriteBuffer;
+<*POP*>
   
   PROCEDURE ErrNF (code: Error.Code);
     BEGIN  (* non-fatal error *)

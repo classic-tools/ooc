@@ -14,9 +14,9 @@ void URI_Error__ContextDesc_GetTemplate(URI_Error__Context context, Msg__Msg msg
   i1=OOC_FALSE;
   goto l5;
 l3:
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 1529))+8);
-  i1 = i1!=i3;
+  i1 = *(OOC_INT32*)((_check_pointer(i2, 1529))+8);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 1517))+4);
+  i1 = i3!=i1;
   
 l5:
   if (!i1) goto l17;
@@ -37,12 +37,12 @@ l13:
 l17:
   i1 = i0!=(OOC_INT32)0;
   if (i1) goto l20;
-  _copy_16(((OOC_CHAR16[]){45,45,117,110,107,110,111,119,110,32,101,114,114,111,114,32,99,111,100,101,45,45,0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){45,45,117,110,107,110,111,119,110,32,101,114,114,111,114,32,99,111,100,101,45,45,0}),(void*)(OOC_INT32)templ,templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){10,109,115,103,95,99,111,110,116,101,120,116,61,36,123,77,83,71,95,67,79,78,84,69,88,84,125,10,109,115,103,95,99,111,100,101,61,36,123,77,83,71,95,67,79,68,69,125,0}), 49, (void*)(OOC_INT32)templ, templ_0d);
   goto l21;
 l20:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1603))+8);
-  _copy_16((_check_pointer(i0, 1609)),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)(_check_pointer(i0, 1609)),(void*)(OOC_INT32)templ,templ_0d);
 l21:
   i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 1815)))), Msg__MsgDesc_GetAttribute)),Msg__MsgDesc_GetAttribute)((Msg__Msg)i2, "uri", 4);
   i0 = i0!=(OOC_INT32)0;
@@ -77,7 +77,7 @@ void URI_Error__ContextDesc_SetString(URI_Error__Context context, OOC_INT32 code
       URI_Error__ContextDesc_SetString_Append((void*)(_check_pointer(i0, 2685)));
       goto l8;
 l5:
-      _copy_8to16((OOC_INT32)str,(OOC_INT32)str16,1024);
+      _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)str16,1024);
       i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(OOC_INT32)str16, 1024);
       *(OOC_INT32*)((_check_pointer(i0, 2619))+8) = i1;
       goto l8;
@@ -88,7 +88,7 @@ l7:
       i0 = (OOC_INT32)*mlist;
       i1 = code;
       *(OOC_INT32*)((_check_pointer(i0, 2451))+4) = i1;
-      _copy_8to16((OOC_INT32)str,(OOC_INT32)str16,1024);
+      _copy_8to16((const void*)(OOC_INT32)str,(void*)(OOC_INT32)str16,1024);
       i0 = (OOC_INT32)*mlist;
       i1 = (OOC_INT32)Msg__GetLStringPtr((void*)(OOC_INT32)str16, 1024);
       *(OOC_INT32*)((_check_pointer(i0, 2507))+8) = i1;

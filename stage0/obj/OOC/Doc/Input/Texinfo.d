@@ -11,8 +11,6 @@
 #include "OOC/Scanner.oh"
 #include "OOC/Doc/Decoration.oh"
 #include "OOC/Doc/TextBuffer.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 typedef OOC_INT8 OOC_Doc_Input_Texinfo__Id;
 #define OOC_Doc_Input_Texinfo__class1Low 0
 #define OOC_Doc_Input_Texinfo__cmdAtGlyph 0

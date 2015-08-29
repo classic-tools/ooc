@@ -8,6 +8,8 @@
 #include "OOC/SSA/Opcode.oh"
 #include "OOC/SSA/Schedule.oh"
 #include "OOC/C/DeclWriter.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef ADT_Dictionary__Dictionary OOC_SSA_Allocator__State;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc *OOC_SSA_Allocator__BlockInfo;
 typedef struct OOC_SSA_Allocator__BlockInfoDesc {
@@ -27,23 +29,23 @@ extern void OOC_OOC_SSA_Allocator_init();
 extern void OOC_OOC_SSA_Allocator_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SSA_Allocator__1250;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__1234;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__BlockList;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__1300;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__1284;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__NameArray;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__RegisterFile;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__1407;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__1384;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__RegisterFiles;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__RegisterFileDesc;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__LiveData;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__LiveDataDesc;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__BlockInfo;
 extern RT0__StructDesc _td_OOC_SSA_Allocator__BlockInfoDesc;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__3185;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__3174;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__3229;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__3218;
-extern RT0__StructDesc _td_OOC_SSA_Allocator__17558;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__3162;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__3151;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__3206;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__3195;
+extern RT0__StructDesc _td_OOC_SSA_Allocator__17535;
 #endif /* _MODULE_OOC_SSA_Allocator_ */
 
 /* --- */

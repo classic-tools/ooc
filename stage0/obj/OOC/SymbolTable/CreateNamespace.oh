@@ -6,10 +6,13 @@
 #include "OOC/Error.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/SymbolTable/TypeRules.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_SymbolTable_CreateNamespace__ErrorContextDesc *OOC_SymbolTable_CreateNamespace__ErrorContext;
 typedef struct OOC_SymbolTable_CreateNamespace__ErrorContextDesc {
   Msg__StringPtr id;
 } OOC_SymbolTable_CreateNamespace__ErrorContextDesc;
+extern OOC_SymbolTable__Module OOC_SymbolTable_CreateNamespace__systemModule;
 extern void OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate(OOC_SymbolTable_CreateNamespace__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_SymbolTable_CreateNamespace__ErrorContextDesc_GetTemplate)(OOC_SymbolTable_CreateNamespace__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
@@ -22,7 +25,7 @@ extern void OOC_OOC_SymbolTable_CreateNamespace_init0();
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContext;
 extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2257;
+extern RT0__StructDesc _td_OOC_SymbolTable_CreateNamespace__2258;
 #endif /* _MODULE_OOC_SymbolTable_CreateNamespace_ */
 
 /* --- */

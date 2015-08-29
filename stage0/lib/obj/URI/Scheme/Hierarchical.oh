@@ -6,6 +6,8 @@
 #include "TextRider.oh"
 #include "URI.oh"
 #include "URI/Error.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct URI_Scheme_Hierarchical__ParameterDesc *URI_Scheme_Hierarchical__Parameter;
 typedef struct URI_Scheme_Hierarchical__ParameterDesc {
   URI_Scheme_Hierarchical__Parameter next;

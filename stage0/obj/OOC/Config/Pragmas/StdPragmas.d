@@ -3,8 +3,6 @@
 #include "Config/Value/Integer.oh"
 #include "Config/Value/String.oh"
 #include "OOC/Config/Autoconf.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Config_Pragmas_StdPragmas__defaultWarnings OOC_TRUE
 #define OOC_Config_Pragmas_StdPragmas__defaultAssertions OOC_TRUE
 #define OOC_Config_Pragmas_StdPragmas__defaultIndexCheck OOC_TRUE

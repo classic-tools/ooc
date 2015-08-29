@@ -1,6 +1,4 @@
 #include "OOC/IR/VisitAll.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 static void OOC_IR_VisitAll__VisitStatementSeq(OOC_IR_VisitAll__Visitor v, OOC_IR__StatementSeq statmSeq);
 static void OOC_IR_VisitAll__VisitProcedureList(OOC_IR_VisitAll__Visitor v, OOC_IR__ProcedureList procList);
 

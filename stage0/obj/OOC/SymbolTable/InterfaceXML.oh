@@ -7,6 +7,8 @@
 #include "URI.oh"
 #include "OOC/Config/Repositories.oh"
 #include "OOC/SymbolTable.oh"
+#include "RT0.oh"
+#include "Object.oh"
 extern void OOC_SymbolTable_InterfaceXML__Write(Channel__Writer cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories);
 extern void OOC_OOC_SymbolTable_InterfaceXML_init();
 extern void OOC_OOC_SymbolTable_InterfaceXML_init0();

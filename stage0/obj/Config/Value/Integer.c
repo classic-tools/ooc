@@ -9,13 +9,13 @@ void Config_Value_Integer__ErrorContextDesc_GetTemplate(Config_Value_Integer__Er
   i1 = *(OOC_INT32*)((_check_pointer(i0, 669))+8);
   switch (i1) {
   case 1:
-    _copy_16(((OOC_CHAR16[]){73,110,116,101,103,101,114,32,118,97,108,117,101,32,111,117,116,32,111,102,32,114,97,110,103,101,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){73,110,116,101,103,101,114,32,118,97,108,117,101,32,111,117,116,32,111,102,32,114,97,110,103,101,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   case 2:
-    _copy_16(((OOC_CHAR16[]){73,110,118,97,108,105,100,32,102,111,114,109,97,116,32,102,111,114,32,105,110,116,101,103,101,114,32,118,97,108,117,101,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){73,110,118,97,108,105,100,32,102,111,114,109,97,116,32,102,111,114,32,105,110,116,101,103,101,114,32,118,97,108,117,101,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   case 3:
-    _copy_16(((OOC_CHAR16[]){86,97,108,117,101,32,105,115,32,101,109,112,116,121,0}),(OOC_INT32)t,128);
+    _copy_16((const void*)((OOC_CHAR16[]){86,97,108,117,101,32,105,115,32,101,109,112,116,121,0}),(void*)(OOC_INT32)t,128);
     goto l6;
   default:
     _failed_case(i1, 661);
@@ -81,8 +81,8 @@ l17:
   Strings__Delete((void*)(OOC_INT32)str, str_0d, 0, i0);
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   len = i0;
-  i = i0;
   i1 = i0>0;
+  i = i0;
   if (i1) goto l20;
   i1=OOC_FALSE;
   goto l22;
@@ -162,7 +162,7 @@ l4:
 
 void Config_Value_Integer__ValueDesc_DefiningModule(Config_Value_Integer__Value v, Config_Value__String str, OOC_LEN str_0d) {
 
-  _copy_8("Config:Value:Integer",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"Config:Value:Integer",(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }

@@ -7,8 +7,6 @@
 #include "Config/Value/Boolean.oh"
 #include "Config/Value/Integer.oh"
 #include "Config/Value/String.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Scanner_Pragma__alreadyInPragma 1
 #define OOC_Scanner_Pragma__pragmaNotClosed 2
 #define OOC_Scanner_Pragma__expectKeyword 3

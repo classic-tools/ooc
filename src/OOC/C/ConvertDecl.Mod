@@ -1,7 +1,7 @@
 MODULE OOC:C:ConvertDecl;
 
 IMPORT
-  ADT:String, ADT:Dictionary, Language:Integer,
+  Object, Object:BigInt, ADT:Dictionary,
   OOC:Repository, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
   OOC:C:Naming, OOC:C:DeclWriter;
 
@@ -34,7 +34,7 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
     fct: DeclWriter.Function;
     struct: DeclWriter.Struct;
     trefClass: DeclWriter.TypeRefClass;
-    name: String.String;
+    name: STRING;
     baseType, srcCodeBaseType: Sym.Type;
     dummy: LONGINT;
 
@@ -126,6 +126,8 @@ PROCEDURE ConvertType* (w: DeclWriter.Writer;
           RETURN w. basicType[DeclWriter.char8]
         | Predef.longchar:
           RETURN w. basicType[DeclWriter.char16]
+        | Predef.ucs4char:
+          RETURN w. basicType[DeclWriter.char32]
         | Predef.shortint:
           RETURN w. basicType[DeclWriter.int8]
         | Predef.integer:
@@ -217,7 +219,7 @@ PROCEDURE ConvertDecl (w: DeclWriter.Writer;
   VAR
     sc: DeclWriter.StorageClass;
     tq: DeclWriter.TypeQualifier;
-    name: String.String;
+    name: STRING;
     ctype: DeclWriter.Type;
     fpars: DeclWriter.Type;
   BEGIN
@@ -278,7 +280,7 @@ PROCEDURE ConvertDecl (w: DeclWriter.Writer;
              name of the address passed from the caller is extended; this way,
              it can be distinguished from the name of the local copy of the
              value parameter *)
-          name := name. Concat (String.New (Naming.suffixPassPerRef))
+          name := name. Concat (Object.NewLatin1(Naming.suffixPassPerRef))
         END;
 
         IF item. isPassPerReference & ~(item. type IS Sym.Array) THEN
@@ -344,7 +346,7 @@ PROCEDURE ConvertSymTab* (w: DeclWriter.Writer; m: Repository.Module;
         d: DeclWriter.Declaration;
       BEGIN
         d := w. NewDefine (Naming.NameOfTypeBoundIndex (proc),
-                           Integer.New (proc. tbProcIndex));
+                           BigInt.NewInt(proc. tbProcIndex));
         w. AddDeclaration (d);
 
         d := w. NewDeclaration (Naming.NameOfTypeBoundSignature (proc),
@@ -371,7 +373,7 @@ PROCEDURE ConvertSymTab* (w: DeclWriter.Writer; m: Repository.Module;
                 (* ignore forward declaration, or we get duplicates *)
               ELSE
                 decl := ConvertDecl (w, ptr, mode);
-                IF (decl. name. array[0] # "(") THEN
+                IF (decl. name. CharAt(0) # "(") THEN
                   (* Gross hack: If the declarations name doesn't look like a
                      name, then omit it from the output.  This can (but
                      probably shouldn't ;-) be used to define functions and

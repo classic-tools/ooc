@@ -1,6 +1,4 @@
 #include "XML/UnicodeCodec/Latin1.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 XML_UnicodeCodec_Latin1__Factory XML_UnicodeCodec_Latin1__factory;
 static void XML_UnicodeCodec_Latin1__Init(XML_UnicodeCodec_Latin1__Codec codec, OOC_INT8 bom);
 static XML_UnicodeCodec_Latin1__Codec XML_UnicodeCodec_Latin1__New(OOC_INT8 bom);

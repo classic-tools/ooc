@@ -724,7 +724,7 @@ l181:
 }
 
 void Real0__NormalizeFloat(OOC_CHAR8 s[], OOC_LEN s_0d) {
-  register OOC_INT32 i0,i1,i2,i3;
+  register OOC_INT32 i0,i1,i2;
 
   i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(0, s_0d, OOC_UINT8, 8560)));
   i0 = i0==(OOC_CHAR8)'+';
@@ -744,12 +744,11 @@ l7:
 l8_loop:
   i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 8671)));
   i2 = i2==(OOC_CHAR8)'.';
-  i3 = i0+1;
   if (i2) goto l11;
   i2=OOC_FALSE;
   goto l13;
 l11:
-  i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i3, s_0d, OOC_UINT16, 8686)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i0+1), s_0d, OOC_UINT16, 8686)));
   i2 = i2==(OOC_CHAR8)'E';
   
 l13:
@@ -774,40 +773,36 @@ l23:
   if (i2) goto l25;
   i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 8941)));
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i0-i1), s_0d, OOC_UINT16, 8931))) = i2;
-  i0=i1;
+  
   goto l28;
 l25:
-  i0 = i1+1;
+  i1 = i1+1;
   
   goto l28;
 l27:
-  i0 = i1+1;
+  i1 = i1+1;
   
 l28:
-  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i3, s_0d, OOC_UINT16, 8647)));
-  i1 = i1!=(OOC_CHAR8)'\000';
-  if (!i1) goto l32;
-  i1=i0;i0=i3;
-  goto l8_loop;
-l32:
-  i1=i0;i0=i3;
+  i0 = i0+1;
+  i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 8647)));
+  i2 = i2!=(OOC_CHAR8)'\000';
+  if (i2) goto l8_loop;
 l33:
   i0 = i0-i1;
-  i1 = i0-2;
-  i2 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 8990)));
-  i2 = i2==(OOC_CHAR8)'E';
-  if (i2) goto l36;
+  i1 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i0-2), s_0d, OOC_UINT16, 8990)));
+  i1 = i1==(OOC_CHAR8)'E';
+  if (i1) goto l36;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i0, s_0d, OOC_UINT16, 9091))) = (OOC_CHAR8)'\000';
   goto l37;
 l36:
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 9017))) = (OOC_CHAR8)'\000';
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i0-2), s_0d, OOC_UINT16, 9017))) = (OOC_CHAR8)'\000';
 l37:
   return;
   ;
 }
 
 void Real0__FormatForEng(OOC_CHAR8 s[], OOC_LEN s_0d) {
-  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6,i7;
 
   i0 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(1, s_0d, OOC_UINT8, 9413)));
   i0 = CharClass__IsNumeric(i0);
@@ -896,20 +891,20 @@ l41:
 l44:
   i4=2;
 l45_loop:
-  i5 = i4+1;
-  i6 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i5, s_0d, OOC_UINT16, 10126)));
-  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i4, s_0d, OOC_UINT16, 10118))) = i6;
-  i4 = i5<i2;
-  if (!i4) goto l49;
-  i4=i5;
+  i5 = *(OOC_UINT8*)((OOC_INT32)s+(_check_index((i4+1), s_0d, OOC_UINT16, 10126)));
+  i6 = i4+1;
+  i7 = i6<i2;
+  *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i4, s_0d, OOC_UINT16, 10118))) = i5;
+  if (!i7) goto l49;
+  i4=i6;
   goto l45_loop;
 l49:
-  i2=i5;
+  i2=i6;
 l50:
   i0 = i0-i3;
+  i3 = i0<0;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i2, s_0d, OOC_UINT16, 10160))) = (OOC_CHAR8)'.';
-  i2 = i0<0;
-  if (i2) goto l53;
+  if (i3) goto l53;
   *(OOC_UINT8*)((OOC_INT32)s+(_check_index(i1, s_0d, OOC_UINT16, 10312))) = (OOC_CHAR8)'+';
   
   goto l54;

@@ -7,6 +7,8 @@
 #include "OOC/Repository.oh"
 #include "OOC/IR.oh"
 #include "OOC/Make/TranslateToIA32.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc *OOC_IA32_WriteAssembler__Translator;
 typedef struct OOC_IA32_WriteAssembler__TranslatorDesc {
   OOC_IA32_Writer__Writer w;
@@ -30,9 +32,9 @@ extern void OOC_OOC_IA32_WriteAssembler_init0();
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Translator;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__TranslatorDesc;
 extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__Buffer;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2367;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6598;
-extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6792;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__2278;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6683;
+extern RT0__StructDesc _td_OOC_IA32_WriteAssembler__6877;
 #endif /* _MODULE_OOC_IA32_WriteAssembler_ */
 
 /* --- */

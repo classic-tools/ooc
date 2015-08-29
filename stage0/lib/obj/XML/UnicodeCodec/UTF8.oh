@@ -4,6 +4,8 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "XML/UnicodeCodec.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct XML_UnicodeCodec_UTF8__CodecDesc *XML_UnicodeCodec_UTF8__Codec;
 typedef struct XML_UnicodeCodec_UTF8__CodecDesc {
   OOC_INT32 invalidChars;

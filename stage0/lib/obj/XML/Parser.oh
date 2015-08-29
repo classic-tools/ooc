@@ -7,13 +7,15 @@
 #include "Msg.oh"
 #include "URI.oh"
 #include "XML/UnicodeCodec.oh"
-#include "XML/UnicodeCodec/UTF8.oh"
 #include "XML/Locator.oh"
 #include "XML/EntityResolver.oh"
+#include "XML/UnicodeCodec/UTF8.oh"
 #include "XML/UnicodeBuffer.oh"
 #include "XML/Error.oh"
 #include "XML/DTD.oh"
 #include "XML/Builder.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct XML_Parser__PEInfo {
   XML_UnicodeBuffer__CharArray oldChars;
   OOC_INT32 oldCPos;
@@ -82,27 +84,27 @@ extern void OOC_XML_Parser_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_Parser__PEInfo;
-extern RT0__StructDesc _td_XML_Parser__1530;
+extern RT0__StructDesc _td_XML_Parser__1561;
 extern RT0__StructDesc _td_XML_Parser__NameList;
-extern RT0__StructDesc _td_XML_Parser__1577;
+extern RT0__StructDesc _td_XML_Parser__1608;
 extern RT0__StructDesc _td_XML_Parser__PEInfoList;
 extern RT0__StructDesc _td_XML_Parser__ErrorListener;
 extern RT0__StructDesc _td_XML_Parser__Parser;
 extern RT0__StructDesc _td_XML_Parser__ParserDesc;
-extern RT0__StructDesc _td_XML_Parser__7004;
+extern RT0__StructDesc _td_XML_Parser__7035;
 extern RT0__StructDesc _td_XML_Parser__ErrorListenerDesc;
-extern RT0__StructDesc _td_XML_Parser__23487;
-extern RT0__StructDesc _td_XML_Parser__25144;
-extern RT0__StructDesc _td_XML_Parser__25813;
-extern RT0__StructDesc _td_XML_Parser__35262;
-extern RT0__StructDesc _td_XML_Parser__38714;
-extern RT0__StructDesc _td_XML_Parser__48902;
-extern RT0__StructDesc _td_XML_Parser__48891;
-extern RT0__StructDesc _td_XML_Parser__51854;
-extern RT0__StructDesc _td_XML_Parser__107070;
-extern RT0__StructDesc _td_XML_Parser__107529;
-extern RT0__StructDesc _td_XML_Parser__108024;
-extern RT0__StructDesc _td_XML_Parser__108610;
+extern RT0__StructDesc _td_XML_Parser__23542;
+extern RT0__StructDesc _td_XML_Parser__25207;
+extern RT0__StructDesc _td_XML_Parser__25876;
+extern RT0__StructDesc _td_XML_Parser__35325;
+extern RT0__StructDesc _td_XML_Parser__38777;
+extern RT0__StructDesc _td_XML_Parser__48965;
+extern RT0__StructDesc _td_XML_Parser__48954;
+extern RT0__StructDesc _td_XML_Parser__51917;
+extern RT0__StructDesc _td_XML_Parser__107133;
+extern RT0__StructDesc _td_XML_Parser__107592;
+extern RT0__StructDesc _td_XML_Parser__108087;
+extern RT0__StructDesc _td_XML_Parser__108673;
 #endif /* _MODULE_XML_Parser_ */
 
 /* --- */

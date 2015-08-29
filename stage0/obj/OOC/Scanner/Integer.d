@@ -1,8 +1,6 @@
 #include "OOC/Scanner/Integer.oh"
 #include "Strings.oh"
 #include "IntStr.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Scanner_Integer__outOfRange 1
 #define OOC_Scanner_Integer__negativeHexConst 2
 static OOC_Scanner_Integer__ErrorContext OOC_Scanner_Integer__integerContext;

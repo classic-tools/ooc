@@ -20,13 +20,13 @@ MODULE oob;
 *)
 
 IMPORT
-  Err, Msg, Out, StdChannels, Strings, ADT:Object, ADT:String, ADT:Dictionary,
+  Err, Msg, Out, StdChannels, Strings, 
   Config:Section:Options, Config:Section:Arguments, Config:Value:Boolean,
   OOC:Config, E := OOC:Error, Rep := OOC:Repository, Sym := OOC:SymbolTable,
   OOC:Logger, OOC:Doc, OOC:Doc:Output:Text, OOC:SymbolTable:ImportModules,
   OOC:SymbolTable:Namespace, OOC:SymbolTable:CreateNamespace,
-  <*PUSH; Warnings:=FALSE*>Language:Integer,
-  Language:String8, Language:String16, Language:Set, Language:Real;<*POP*>
+  OOC:SymbolTable:Builder,
+  <*PUSH; Warnings:=FALSE*>Object:Boxed, Object:BigInt;<*POP*>
 
 
 VAR
@@ -84,7 +84,6 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
     currentSection: SHORTINT;
     firstImport: BOOLEAN;
     item: Sym.Item;
-    importNames: Dictionary.Dictionary;
     
   PROCEDURE Newline();
     VAR
@@ -169,7 +168,7 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
   PROCEDURE Type(type, srcCodeType: Sym.Type);
     VAR
       i: LONGINT;
-      name: Object.Object;
+      name: Sym.NameString;
       procDecl: Sym.ProcDecl;
       
     PROCEDURE FieldDecl(fieldDecl: Sym.FieldDecl);
@@ -202,14 +201,33 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
           item := item.nextNested;
         END;
       END RecFields;
+
+    PROCEDURE ModuleName(srcCodeType: Sym.TypeName): Sym.NameString;
+      VAR
+        currModule: Sym.Module;
+        item: Sym.Item;
+      BEGIN
+        currModule := srcCodeType.Module();
+        item := currModule.nestedItems;
+        WHILE (item # NIL) DO
+          WITH item: Sym.Import DO
+            IF (item.name.str^ = srcCodeType.module.str^) THEN
+              RETURN item.moduleName.str;
+            END;
+          ELSE  (* skip *)
+          END;
+          item := item.nextNested;
+        END;
+        RETURN NIL;                      (* should not happen *)
+      END ModuleName;
     
     BEGIN
       WITH srcCodeType: Sym.TypeName DO
         IF (srcCodeType.module # NIL) THEN
           (* expand the locally used module alias to the full module name;
              this way, aliases make no appearance at all in the output *)
-          name := importNames.Get(String.New(srcCodeType.module.str^));
-          Out.String(name(String.String).array^);
+          name := ModuleName(srcCodeType);
+          Out.String(name^);
           Out.String(".");
         END;
         Out.String(srcCodeType.ident.str^);
@@ -278,18 +296,17 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
       END;
       firstImport := FALSE;
       Out.String(import.moduleName.str^);
-      importNames.Set(String.New(import.name.str^),
-                      String.New(import.moduleName.str^));
     END Import;
   
   PROCEDURE ConstDecl(constDecl: Sym.ConstDecl);
-    VAR
-      str: String.String;
     BEGIN
       IdentDef(constDecl);
       Out.String (" = ");
-      str := constDecl.value.ToString();
-      Out.String(str.array^);
+      IF (constDecl.value = NIL) THEN
+        Out.String("NIL");
+      ELSE
+        Out.Str(constDecl.value.ToString());
+      END;
     END ConstDecl;
   
   PROCEDURE TypeDecl(typeDecl: Sym.TypeDecl);
@@ -334,15 +351,16 @@ PROCEDURE WriteSymTab(symTab: Sym.Module);
     indent := 0;
     currentSection := noSection;
     firstImport := TRUE;
-    importNames := Dictionary.New();
     Out.String("MODULE "); Out.String(symTab.name.str^); Out.String(";");
 
     item := symTab.nestedItems;
     WHILE (item # NIL) DO
       IF WriteTopLevel(item) THEN
         WITH item: Sym.Import DO
-          SetSection(import);
-          Import(item);
+          IF (item.name.str[0] # Builder.prefixAutoImport) THEN
+            SetSection(import);
+            Import(item);
+          END;
         | item: Sym.ConstDecl DO
           SetSection(constDecl);
           ConstDecl(item);
@@ -410,7 +428,7 @@ BEGIN
     arg := Config.arguments.Get(0);
     symTab := GetSymTab(GetModule(arg^));
     errList := E.NewList("");
-    ImportModules.ImportModules(NIL, symTab, errList);
+    ImportModules.ImportModules(CreateNamespace.systemModule, symTab, errList);
     IF errList.NoErrors() THEN
       CreateNamespace.CreateNamespace(symTab, errList);
       IF errList.NoErrors() THEN

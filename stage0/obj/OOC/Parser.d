@@ -4,8 +4,6 @@
 #include "OOC/Scanner/Symbol.oh"
 #include "OOC/Doc.oh"
 #include "OOC/Doc/Input/Texinfo.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Parser__trailingJunk 1
 #define OOC_Parser__expectKeyword 2
 #define OOC_Parser__expectSymbol 3

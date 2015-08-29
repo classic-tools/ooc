@@ -3,11 +3,12 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#include "ADT/String.oh"
 #include "OOC/Error.oh"
 #include "OOC/Repository.oh"
 #include "OOC/IR.oh"
 #include "OOC/C/DeclWriter.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_Make_TranslateToC__TranslatorDesc *OOC_Make_TranslateToC__Translator;
 typedef struct OOC_Make_TranslateToC__TranslatorDesc {
   OOC_C_DeclWriter__Writer w;
@@ -34,16 +35,16 @@ typedef void (*_TBP_OOC_Make_TranslateToC__TranslatorDesc_WriteProcedure)(OOC_Ma
 extern void OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures(OOC_Make_TranslateToC__Translator t);
 #define _TBN_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures 3
 typedef void (*_TBP_OOC_Make_TranslateToC__TranslatorDesc_WriteNestedProcedures)(OOC_Make_TranslateToC__Translator t);
-extern OOC_Error__List OOC_Make_TranslateToC__Run(OOC_Repository__Module m, ADT_String__String libraryName, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToC__Translator translator);
+extern OOC_Error__List OOC_Make_TranslateToC__Run(OOC_Repository__Module m, Object__String libraryName, OOC_CHAR8 writeAST, OOC_CHAR8 writeIR, OOC_Make_TranslateToC__Translator translator);
 extern void OOC_OOC_Make_TranslateToC_init();
 extern void OOC_OOC_Make_TranslateToC_init0();
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__Translator;
 extern RT0__StructDesc _td_OOC_Make_TranslateToC__TranslatorDesc;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4375;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4452;
-extern RT0__StructDesc _td_OOC_Make_TranslateToC__4501;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4364;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4441;
+extern RT0__StructDesc _td_OOC_Make_TranslateToC__4490;
 #endif /* _MODULE_OOC_Make_TranslateToC_ */
 
 /* --- */

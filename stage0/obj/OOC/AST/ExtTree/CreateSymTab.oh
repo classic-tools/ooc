@@ -3,12 +3,13 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
-#include "ADT/String.oh"
 #include "URI.oh"
 #include "OOC/AST.oh"
 #include "OOC/AST/ExtTree.oh"
 #include "OOC/SymbolTable.oh"
 #include "OOC/SymbolTable/Builder.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct OOC_AST_ExtTree_CreateSymTab__VisitorDesc *OOC_AST_ExtTree_CreateSymTab__Visitor;
 typedef struct OOC_AST_ExtTree_CreateSymTab__VisitorDesc {
   OOC_SymbolTable_Builder__Builder stb;
@@ -73,7 +74,7 @@ typedef void (*_TBP_OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitArrayType)(OO
 extern void OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST_ExtTree__ProcType procType);
 #define _TBN_OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType 30
 typedef void (*_TBP_OOC_AST_ExtTree_CreateSymTab__VisitorDesc_VisitProcType)(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST_ExtTree__ProcType procType);
-extern OOC_SymbolTable__Module OOC_AST_ExtTree_CreateSymTab__CreateSymTab(OOC_AST__Node module, OOC_SymbolTable_Builder__Builder stb, ADT_String__String libraryName, URI__HierarchicalURI baseURI, URI__HierarchicalURI rootURI);
+extern OOC_SymbolTable__Module OOC_AST_ExtTree_CreateSymTab__CreateSymTab(OOC_AST__Node module, OOC_SymbolTable_Builder__Builder stb, Object__String libraryName, URI__HierarchicalURI baseURI, URI__HierarchicalURI rootURI);
 extern void OOC_OOC_AST_ExtTree_CreateSymTab_init();
 extern void OOC_OOC_AST_ExtTree_CreateSymTab_init0();
 

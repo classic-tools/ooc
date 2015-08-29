@@ -5,8 +5,6 @@
 #include "URI/CharClass.oh"
 #include "XML/UnicodeCodec.oh"
 #include "XML/UnicodeCodec/UTF8.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

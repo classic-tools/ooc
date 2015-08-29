@@ -1,7 +1,7 @@
 MODULE OOC:C:IRtoC;
 
 IMPORT
-  Log, ADT:String, Language:String8,
+  Log, Object:Boxed, 
   OOC:IR,  Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
   OOC:C:DeclWriter, OOC:C:Naming, OOC:Make:TranslateToC;
 
@@ -18,12 +18,12 @@ PROCEDURE Call (w : DeclWriter.Writer; statm: IR.Call);
   VAR
     i: LONGINT;
     design: IR.Expression;
-    name: String.String;
+    name: STRING;
   BEGIN
     design := statm. design;
     WITH design: IR.ProcedureRef DO
       name := Naming.NameOfDeclaration (design. decl);
-      w. WriteString (name. array^)
+      w. WriteStr (name)
     END;
     w. WriteString ("(");
     FOR i := 0 TO LEN (statm. arguments^)-1 DO
@@ -41,7 +41,7 @@ PROCEDURE Call (w : DeclWriter.Writer; statm: IR.Call);
 PROCEDURE WriteExpr (w: DeclWriter.Writer;
                      expr: IR.Expression);
   VAR
-    name: String.String;
+    name: STRING;
 
   PROCEDURE SetRange(expr : IR.SetRange);
     
@@ -71,7 +71,7 @@ PROCEDURE WriteExpr (w: DeclWriter.Writer;
           
     | expr: IR.Var DO
       name := Naming.NameOfDeclaration (expr. decl);
-      w. WriteString (name. array^);
+      w. WriteStr (name);
       
     | expr: IR.Adr DO
       (* FIXME... this is a workaround to get addresses of string constants
@@ -81,8 +81,8 @@ PROCEDURE WriteExpr (w: DeclWriter.Writer;
     | expr: IR.Len DO
       (* FIXME... there are a lot more variants to LEN than the length
          of a string constant *)
-      ASSERT (expr. array. type(Sym.PredefType). id = Predef.charString);
-      w. WriteLInt (expr. array(IR.Const). value(String8.Value). value. length+1, 0);
+      ASSERT (expr. array. type(Sym.PredefType). id = Predef.stringChar);
+      w. WriteLInt (expr. array(IR.Const). value(Boxed.String). value. length+1, 0);
       
     | expr: IR.Negate DO
       w. WriteChar ("-");

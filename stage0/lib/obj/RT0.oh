@@ -6,9 +6,10 @@
 #define RT0__strBoolean 0
 #define RT0__strChar 1
 #define RT0__strLongchar 2
-#define RT0__strShortint 3
-#define RT0__strInteger 4
-#define RT0__strLongint 5
+#define RT0__strUCS4Char 3
+#define RT0__strShortint 4
+#define RT0__strInteger 5
+#define RT0__strLongint 6
 #define RT0__strReal 7
 #define RT0__strLongreal 8
 #define RT0__strSet32 9
@@ -41,6 +42,7 @@ typedef struct RT0__ModuleDesc {
 extern struct RT0__StructDesc RT0__boolean;
 extern struct RT0__StructDesc RT0__char;
 extern struct RT0__StructDesc RT0__longchar;
+extern struct RT0__StructDesc RT0__ucs4char;
 extern struct RT0__StructDesc RT0__shortint;
 extern struct RT0__StructDesc RT0__integer;
 extern struct RT0__StructDesc RT0__longint;
@@ -51,6 +53,7 @@ extern struct RT0__StructDesc RT0__byte;
 extern struct RT0__StructDesc RT0__ptr;
 extern OOC_INT32 RT0__argc;
 extern OOC_CHAR8 **RT0__argv;
+extern OOC_INT32 RT0__poisonHeap;
 extern OOC_PTR RT0__NewObject(RT0__Struct td, ...);
 extern RT0__Struct RT0__TypeOf(OOC_PTR ptr);
 extern OOC_PTR RT0__NewBlock(OOC_INT32 bytes);
@@ -76,17 +79,17 @@ extern void OOC_RT0_init0();
 extern RT0__StructDesc _td_RT0__Name;
 extern RT0__StructDesc _td_RT0__Module;
 extern RT0__StructDesc _td_RT0__Struct;
-extern RT0__StructDesc _td_RT0__4673;
-extern RT0__StructDesc _td_RT0__4893;
+extern RT0__StructDesc _td_RT0__4697;
+extern RT0__StructDesc _td_RT0__4917;
 extern RT0__StructDesc _td_RT0__Object;
 extern RT0__StructDesc _td_RT0__ModuleDesc;
-extern RT0__StructDesc _td_RT0__6019;
-extern RT0__StructDesc _td_RT0__6674;
-extern RT0__StructDesc _td_RT0__6600;
-extern RT0__StructDesc _td_RT0__8615;
-extern RT0__StructDesc _td_RT0__8821;
-extern RT0__StructDesc _td_RT0__9020;
-extern RT0__StructDesc _td_RT0__9046;
+extern RT0__StructDesc _td_RT0__6043;
+extern RT0__StructDesc _td_RT0__6723;
+extern RT0__StructDesc _td_RT0__6649;
+extern RT0__StructDesc _td_RT0__8946;
+extern RT0__StructDesc _td_RT0__9152;
+extern RT0__StructDesc _td_RT0__9351;
+extern RT0__StructDesc _td_RT0__9377;
 #endif /* _MODULE_RT0_ */
 
 /* --- */

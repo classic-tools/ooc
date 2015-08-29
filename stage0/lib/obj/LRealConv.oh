@@ -4,6 +4,8 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "ConvTypes.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_INT8 LRealConv__ConvResults;
 #define LRealConv__strAllRight 0
 #define LRealConv__strOutOfRange 1

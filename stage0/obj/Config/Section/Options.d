@@ -3,8 +3,6 @@
 #include "LongStrings.oh"
 #include "XML/Builder.oh"
 #include "XML/DTD.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define Config_Section_Options__invalidContent 1
 #define Config_Section_Options__invalidAttribute 2
 #define Config_Section_Options__requireNameAttribute 3

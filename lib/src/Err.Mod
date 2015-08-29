@@ -1,4 +1,4 @@
-(*	$Id: Err.Mod,v 1.2 2002/06/16 15:02:24 mva Exp $	*)
+(*	$Id: Err.Mod,v 1.3 2002/12/17 19:33:50 mva Exp $	*)
 MODULE Err;
 
 (*
@@ -25,7 +25,7 @@ MODULE Err;
    StdChannels.stderr per default (can be redirected by calling SetWriter) *)
    
 IMPORT
-  StdChannels, TextRider;
+  StdChannels, TextRider, Object;
 
 VAR
   writer-: TextRider.Writer;
@@ -71,6 +71,11 @@ PROCEDURE String* (s: ARRAY OF CHAR);
   BEGIN
     writer. WriteString (s)
   END String;
+  
+PROCEDURE Str* (s: Object.String);
+  BEGIN
+    writer. WriteStr (s)
+  END Str;
   
 PROCEDURE Bool* (bool: BOOLEAN);
   BEGIN

@@ -8,6 +8,8 @@
 #include "URI/Error.oh"
 #include "URI/Scheme/Hierarchical.oh"
 #include "URI/Authority/ServerBased.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct URI_Scheme_File__URIDesc *URI_Scheme_File__URI;
 typedef struct URI_Scheme_File__URIDesc {
   URI_String__StringPtr schemeId;

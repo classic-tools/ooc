@@ -44,7 +44,7 @@ OOC_CHAR8 XML_DTD__NamespaceDesc_Add(XML_DTD__Namespace ns, XML_DTD__Declaration
       i2 = (OOC_INT32)decl;
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 15982))+4);
       i1 = (
-      _cmp16((const void*)(_check_pointer(i1, 15974)),(const void*)(_check_pointer(i2, 15988))))!=0;
+      _cmp16((const void*)(_check_pointer(i1, 15974)),(const void*)(_check_pointer(i2, 15988))))!=(OOC_INT32)0;
       if (i1) goto l5;
       return OOC_FALSE;
       goto l8;
@@ -85,7 +85,7 @@ l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16317))+4);
   i2 = (OOC_INT32)name;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 16323)),(const void*)(_check_pointer(i2, 16331))))!=0;
+  _cmp16((const void*)(_check_pointer(i1, 16323)),(const void*)(_check_pointer(i2, 16331))))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -101,7 +101,7 @@ l8_loop:
 l11:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 16317))+4);
   i2 = (
-  _cmp16((const void*)(_check_pointer(i2, 16323)),(const void*)(_check_pointer(i1, 16331))))!=0;
+  _cmp16((const void*)(_check_pointer(i2, 16323)),(const void*)(_check_pointer(i1, 16331))))!=(OOC_INT32)0;
   
 l13:
   if (i2) goto l8_loop;
@@ -165,9 +165,9 @@ l3:
   i6=0;
 l6_loop:
   i7 = _check_pointer(i3, 17196);
-  i8 = OOC_ARRAY_LENGTH(i7, 0);
+  i8 = OOC_ARRAY_LENGTH(i7, (OOC_INT32)0);
   i9 = _check_pointer(i5, 17209);
-  i10 = OOC_ARRAY_LENGTH(i9, 0);
+  i10 = OOC_ARRAY_LENGTH(i9, (OOC_INT32)0);
   i9 = *(OOC_UINT16*)(i9+(_check_index((i1+i6), i10, OOC_UINT32, 17209))*2);
   *(OOC_UINT16*)(i7+(_check_index(i6, i8, OOC_UINT32, 17196))*2) = i9;
   i6 = i6+1;
@@ -290,7 +290,7 @@ l11:
   if (i2) goto l14;
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19045))+4);
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 19045))+4);
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 19051)), 0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i3, 19051)), (OOC_INT32)0);
   i2 = LongStrings__Length((void*)(_check_pointer(i2, 19051)), i3);
   i1 = i1+(i2+2);
   len = i1;
@@ -344,11 +344,11 @@ XML_UnicodeBuffer__CharArray XML_DTD__AttValueDesc_FlattenValue(XML_DTD__AttValu
           
 l3_loop:
           i4 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 20124))*2);
-          i4 = i4==(OOC_CHAR16)' ';
+          i4 = i4==(OOC_CHAR8)' ';
           if (i4) goto l6;
           skipSpace = OOC_FALSE;
           i4 = _check_pointer(i2, 20409);
-          i5 = OOC_ARRAY_LENGTH(i4, 0);
+          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
           i6 = pos;
           i7 = *(OOC_UINT16*)((OOC_INT32)source+(_check_index(i0, source_0d, OOC_UINT32, 20424))*2);
           *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 20409))*2) = i7;
@@ -362,9 +362,9 @@ l6:
           goto l11;
 l9:
           i4 = _check_pointer(i2, 20188);
-          i5 = OOC_ARRAY_LENGTH(i4, 0);
+          i5 = OOC_ARRAY_LENGTH(i4, (OOC_INT32)0);
           i6 = pos;
-          *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 20188))*2) = (OOC_CHAR16)' ';
+          *(OOC_UINT16*)(i4+(_check_index(i6, i5, OOC_UINT32, 20188))*2) = (OOC_CHAR8)' ';
           pos = (i6+1);
           skipSpace = i3;
 l11:
@@ -395,7 +395,7 @@ l8:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20888))+4);
       i3 = *(OOC_INT32*)((_check_pointer(i0, 20900))+8);
       i0 = *(OOC_INT32*)((_check_pointer(i0, 20916))+12);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20896)), 0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20896)), (OOC_INT32)0);
       XML_DTD__AttValueDesc_FlattenValue_Append_Copy((void*)(_check_pointer(i1, 20896)), i2, i3, i0);
       goto l15;
 l10:
@@ -408,9 +408,9 @@ l10:
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20757))+4);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20790))+4);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20790))+4);
-      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20796)), 0);
+      i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 20796)), (OOC_INT32)0);
       i0 = LongStrings__Length((void*)(_check_pointer(i3, 20796)), i0);
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20763)), 0);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 20763)), (OOC_INT32)0);
       XML_DTD__AttValueDesc_FlattenValue_Append_Copy((void*)(_check_pointer(i1, 20763)), i2, 0, i0);
       XML_DTD__AttValueDesc_FlattenValue_Append_Copy(((OOC_CHAR16[]){59,0}), 2, 0, 1);
       goto l15;
@@ -455,9 +455,9 @@ l4:
 l7:
   i0 = _check_pointer(i1, 21304);
   i2 = pos;
-  i3 = OOC_ARRAY_LENGTH(i0, 0);
+  i3 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i0 = *(OOC_UINT16*)(i0+(_check_index((i2-1), i3, OOC_UINT32, 21304))*2);
-  i0 = i0==(OOC_CHAR16)' ';
+  i0 = i0==(OOC_CHAR8)' ';
   
 l9:
   if (!i0) goto l11;
@@ -466,9 +466,9 @@ l9:
   *didNormalization = OOC_TRUE;
 l11:
   i0 = _check_pointer(i1, 21382);
-  i2 = OOC_ARRAY_LENGTH(i0, 0);
+  i2 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i3 = pos;
-  *(OOC_UINT16*)(i0+(_check_index(i3, i2, OOC_UINT32, 21382))*2) = (OOC_CHAR16)0;
+  *(OOC_UINT16*)(i0+(_check_index(i3, i2, OOC_UINT32, 21382))*2) = (OOC_CHAR8)'\000';
   return (XML_UnicodeBuffer__CharArray)i1;
   ;
 }
@@ -564,7 +564,7 @@ OOC_CHAR8 XML_DTD__EnumerationDesc_Matches(XML_DTD__Enumeration _enum, XML_DTD__
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23492))+4);
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 23498)),(const void*)(OOC_INT32)name))!=0;
+  _cmp16((const void*)(_check_pointer(i1, 23498)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -578,7 +578,7 @@ l8_loop:
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23492))+4);
   i1 = (
-  _cmp16((const void*)(_check_pointer(i1, 23498)),(const void*)(OOC_INT32)name))!=0;
+  _cmp16((const void*)(_check_pointer(i1, 23498)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l13:
   if (i1) goto l8_loop;
@@ -748,7 +748,7 @@ OOC_INT32 XML_DTD__EntityDesc_LengthValue(XML_DTD__Entity entity) {
 
   i0 = (OOC_INT32)entity;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 26827))+12);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 26840)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 26840)), (OOC_INT32)0);
   return (i0-2);
   ;
 }
@@ -790,29 +790,29 @@ OOC_CHAR8 XML_DTD__BuilderDesc_IsValidEntityDecl(XML_DTD__Builder b, XML_Unicode
 
   i0 = (OOC_INT32)name;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28068)),(const void*)((OOC_CHAR16[]){108,116,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28068)),(const void*)((OOC_CHAR16[]){108,116,0})))==(OOC_INT32)0;
   if (i1) goto l31;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28136)),(const void*)((OOC_CHAR16[]){97,109,112,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28136)),(const void*)((OOC_CHAR16[]){97,109,112,0})))==(OOC_INT32)0;
   if (i1) goto l29;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28205)),(const void*)((OOC_CHAR16[]){103,116,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28205)),(const void*)((OOC_CHAR16[]){103,116,0})))==(OOC_INT32)0;
   if (i1) goto l23;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28297)),(const void*)((OOC_CHAR16[]){97,112,111,115,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28297)),(const void*)((OOC_CHAR16[]){97,112,111,115,0})))==(OOC_INT32)0;
   if (i1) goto l17;
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 28391)),(const void*)((OOC_CHAR16[]){113,117,111,116,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28391)),(const void*)((OOC_CHAR16[]){113,117,111,116,0})))==(OOC_INT32)0;
   if (i0) goto l11;
   return OOC_TRUE;
   goto l32;
 l11:
   i0 = (OOC_INT32)entityValue;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28433)),(const void*)((OOC_CHAR16[]){34,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28433)),(const void*)((OOC_CHAR16[]){34,0})))==(OOC_INT32)0;
   if (i1) goto l14;
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 28457)),(const void*)((OOC_CHAR16[]){38,35,51,52,59,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28457)),(const void*)((OOC_CHAR16[]){38,35,51,52,59,0})))==(OOC_INT32)0;
   
   goto l15;
 l14:
@@ -823,10 +823,10 @@ l15:
 l17:
   i0 = (OOC_INT32)entityValue;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28339)),(const void*)((OOC_CHAR16[]){39,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28339)),(const void*)((OOC_CHAR16[]){39,0})))==(OOC_INT32)0;
   if (i1) goto l20;
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 28363)),(const void*)((OOC_CHAR16[]){38,35,51,57,59,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28363)),(const void*)((OOC_CHAR16[]){38,35,51,57,59,0})))==(OOC_INT32)0;
   
   goto l21;
 l20:
@@ -837,10 +837,10 @@ l21:
 l23:
   i0 = (OOC_INT32)entityValue;
   i1 = (
-  _cmp16((const void*)(_check_pointer(i0, 28245)),(const void*)((OOC_CHAR16[]){62,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28245)),(const void*)((OOC_CHAR16[]){62,0})))==(OOC_INT32)0;
   if (i1) goto l26;
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 28269)),(const void*)((OOC_CHAR16[]){38,35,54,50,59,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 28269)),(const void*)((OOC_CHAR16[]){38,35,54,50,59,0})))==(OOC_INT32)0;
   
   goto l27;
 l26:
@@ -851,12 +851,12 @@ l27:
 l29:
   i0 = (OOC_INT32)entityValue;
   return ((
-  _cmp16((const void*)(_check_pointer(i0, 28177)),(const void*)((OOC_CHAR16[]){38,35,51,56,59,0})))==0);
+  _cmp16((const void*)(_check_pointer(i0, 28177)),(const void*)((OOC_CHAR16[]){38,35,51,56,59,0})))==(OOC_INT32)0);
   goto l32;
 l31:
   i0 = (OOC_INT32)entityValue;
   return ((
-  _cmp16((const void*)(_check_pointer(i0, 28108)),(const void*)((OOC_CHAR16[]){38,35,54,48,59,0})))==0);
+  _cmp16((const void*)(_check_pointer(i0, 28108)),(const void*)((OOC_CHAR16[]){38,35,54,48,59,0})))==(OOC_INT32)0);
 l32:
   _failed_function(27719); return 0;
   ;
@@ -1133,7 +1133,7 @@ l10:
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 33923))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 33930)))), &_td_XML_DTD__NameCPDesc, 33930)), 33937))+8);
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 33943)),(const void*)((OOC_CHAR16[]){35,80,67,68,65,84,65,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 33943)),(const void*)((OOC_CHAR16[]){35,80,67,68,65,84,65,0})))==(OOC_INT32)0;
   
 l12:
   if (i0) goto l14;
@@ -1145,11 +1145,11 @@ l14:
 l17:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 33524))+8);
   i2 = (
-  _cmp16((const void*)(_check_pointer(i2, 33530)),(const void*)((OOC_CHAR16[]){69,77,80,84,89,0})))==0;
+  _cmp16((const void*)(_check_pointer(i2, 33530)),(const void*)((OOC_CHAR16[]){69,77,80,84,89,0})))==(OOC_INT32)0;
   if (i2) goto l24;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 33623))+8);
   i0 = (
-  _cmp16((const void*)(_check_pointer(i0, 33629)),(const void*)((OOC_CHAR16[]){65,78,89,0})))==0;
+  _cmp16((const void*)(_check_pointer(i0, 33629)),(const void*)((OOC_CHAR16[]){65,78,89,0})))==(OOC_INT32)0;
   if (i0) goto l22;
   *(OOC_INT8*)((_check_pointer(i1, 33722))+16) = 1;
   goto l27;
@@ -1262,15 +1262,15 @@ XML_UnicodeBuffer__CharArray XML_DTD__GetString(OOC_CHAR16 string[], OOC_LEN str
   i1 = start;
   i0 = i0-i1;
   i2 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i0+1));
-  s = (XML_UnicodeBuffer__CharArray)i2;
   i3 = i0-1;
+  s = (XML_UnicodeBuffer__CharArray)i2;
   i4 = 0<=i3;
   i = 0;
   if (!i4) goto l8;
   i4=0;
 l3_loop:
   i5 = _check_pointer(i2, 36332);
-  i6 = OOC_ARRAY_LENGTH(i5, 0);
+  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
   i7 = *(OOC_UINT16*)((OOC_INT32)string+(_check_index((i1+i4), string_0d, OOC_UINT32, 36345))*2);
   *(OOC_UINT16*)(i5+(_check_index(i4, i6, OOC_UINT32, 36332))*2) = i7;
   i4 = i4+1;
@@ -1279,8 +1279,8 @@ l3_loop:
   if (i5) goto l3_loop;
 l8:
   i1 = _check_pointer(i2, 36369);
-  i3 = OOC_ARRAY_LENGTH(i1, 0);
-  *(OOC_UINT16*)(i1+(_check_index(i0, i3, OOC_UINT32, 36369))*2) = (OOC_CHAR16)0;
+  i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
+  *(OOC_UINT16*)(i1+(_check_index(i0, i3, OOC_UINT32, 36369))*2) = (OOC_CHAR8)'\000';
   return (XML_UnicodeBuffer__CharArray)i2;
   ;
 }
@@ -1305,15 +1305,15 @@ XML_DTD__StringURI XML_DTD__GetStringURI(OOC_CHAR8 string[], OOC_LEN string_0d, 
   i1 = start;
   i0 = i0-i1;
   i2 = (OOC_INT32)RT0__NewObject(_td_XML_DTD__StringURI.baseTypes[0], (i0+1));
-  s = (XML_DTD__StringURI)i2;
   i3 = i0-1;
+  s = (XML_DTD__StringURI)i2;
   i4 = 0<=i3;
   i = 0;
   if (!i4) goto l8;
   i4=0;
 l3_loop:
   i5 = _check_pointer(i2, 36770);
-  i6 = OOC_ARRAY_LENGTH(i5, 0);
+  i6 = OOC_ARRAY_LENGTH(i5, (OOC_INT32)0);
   i7 = *(OOC_UINT8*)((OOC_INT32)string+(_check_index((i1+i4), string_0d, OOC_UINT32, 36783)));
   *(OOC_UINT8*)(i5+(_check_index(i4, i6, OOC_UINT32, 36770))) = i7;
   i4 = i4+1;
@@ -1322,7 +1322,7 @@ l3_loop:
   if (i5) goto l3_loop;
 l8:
   i1 = _check_pointer(i2, 36807);
-  i3 = OOC_ARRAY_LENGTH(i1, 0);
+  i3 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   *(OOC_UINT8*)(i1+(_check_index(i0, i3, OOC_UINT32, 36807))) = (OOC_CHAR8)'\000';
   return (XML_DTD__StringURI)i2;
   ;
@@ -1345,16 +1345,16 @@ void XML_DTD__Init(XML_DTD__Builder b) {
       i0 = LongStrings__Length((void*)(OOC_INT32)name, name_0d);
       i0 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i0+1));
       nameString = (XML_UnicodeBuffer__CharArray)i0;
-      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 37287)), 0);
-      _copy_16((OOC_INT32)name,(_check_pointer(i0, 37287)),i1);
+      i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 37287)), (OOC_INT32)0);
+      _copy_16((const void*)(OOC_INT32)name,(void*)(_check_pointer(i0, 37287)),i1);
       i1 = LongStrings__Length((void*)(OOC_INT32)replacement, replacement_0d);
       i1 = (OOC_INT32)RT0__NewObject(_td_XML_UnicodeBuffer__CharArray.baseTypes[0], (i1+2));
       replString = (XML_UnicodeBuffer__CharArray)i1;
-      i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 37386)), 0);
-      _copy_16((OOC_INT32)replacement,(_check_pointer(i1, 37386)),i2);
+      i2 = OOC_ARRAY_LENGTH((_check_pointer(i1, 37386)), (OOC_INT32)0);
+      _copy_16((const void*)(OOC_INT32)replacement,(void*)(_check_pointer(i1, 37386)),i2);
       i2 = _check_pointer(i1, 37406);
-      i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 37422)), 0);
-      i4 = OOC_ARRAY_LENGTH(i2, 0);
+      i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 37422)), (OOC_INT32)0);
+      i4 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
       *(OOC_UINT16*)(i2+(_check_index((i3-2), i4, OOC_UINT32, 37406))*2) = (OOC_CHAR16)65535;
       i2 = (OOC_INT32)b;
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 37480)))), XML_DTD__BuilderDesc_NewInternalEntity)),XML_DTD__BuilderDesc_NewInternalEntity)((XML_DTD__Builder)i2, (XML_UnicodeBuffer__CharArray)i0, 0, (XML_UnicodeBuffer__CharArray)i1, OOC_FALSE);

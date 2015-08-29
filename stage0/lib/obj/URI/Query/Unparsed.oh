@@ -6,6 +6,8 @@
 #include "TextRider.oh"
 #include "URI.oh"
 #include "URI/Error.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct URI_Query_Unparsed__QueryDesc *URI_Query_Unparsed__Query;
 typedef struct URI_Query_Unparsed__QueryDesc {
   URI_String__StringPtr unparsed;

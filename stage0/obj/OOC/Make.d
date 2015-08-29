@@ -33,8 +33,6 @@
 #include "OOC/Make/TranslateToIA32.oh"
 #include "OOC/Make/WriteMainFileAssembler.oh"
 #include "OOC/IA32/WriteAssembler.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Make__stylesheetPackageName "OOC"
 #define OOC_Make__stylesheetPath "xml/interface-description.xsl"
 static OOC_CHAR8 OOC_Make__fileIdNames[21][24];
@@ -58,19 +56,18 @@ static OOC_CHAR8 OOC_Make__UpdateCompilerOutput(OOC_Make__Rules r, OOC_Repositor
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Make__ShellCommand = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, "ShellCommand", 4096, 4096, RT0__strArray };
 RT0__StructDesc _td_OOC_Make__ModuleInfo = { (RT0__Struct[]){&_td_OOC_Make__ModuleInfoDesc}, NULL, &_mid, "ModuleInfo", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_OOC_Make__ModuleInfoDesc = { (RT0__Struct[]){&_td_ADT_Object__ObjectDesc,&_td_OOC_Make__ModuleInfoDesc}, (void*[]){(void*)ADT_Object__ObjectDesc_Destroy,(void*)ADT_Object__ObjectDesc_Equals,(void*)ADT_Object__ObjectDesc_HashCode,(void*)ADT_Object__ObjectDesc_Load,(void*)ADT_Object__ObjectDesc_Store,(void*)ADT_Object__ObjectDesc_ToString}, &_mid, "ModuleInfoDesc", 44, 1, RT0__strRecord };
-RT0__StructDesc _td_OOC_Make__1933 = { (RT0__Struct[]){&RT0__boolean}, NULL, &_mid, NULL, 21, 21, RT0__strArray };
-RT0__StructDesc _td_OOC_Make__1985 = { (RT0__Struct[]){&RT0__boolean}, NULL, &_mid, NULL, 21, 21, RT0__strArray };
-RT0__StructDesc _td_OOC_Make__2112 = { (RT0__Struct[]){&_td_OOC_Repository__Module}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_OOC_Make__ModuleList = { (RT0__Struct[]){&_td_OOC_Make__2112}, NULL, &_mid, "ModuleList", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_OOC_Make__ModuleInfoDesc = { (RT0__Struct[]){&_td_Object__ObjectDesc,&_td_OOC_Make__ModuleInfoDesc}, (void*[]){(void*)Object__ObjectDesc_Equals,(void*)Object__ObjectDesc_HashCode,(void*)Object__ObjectDesc_ToString}, &_mid, "ModuleInfoDesc", 44, 1, RT0__strRecord };
+RT0__StructDesc _td_OOC_Make__1917 = { (RT0__Struct[]){&RT0__boolean}, NULL, &_mid, NULL, 21, 21, RT0__strArray };
+RT0__StructDesc _td_OOC_Make__1969 = { (RT0__Struct[]){&RT0__boolean}, NULL, &_mid, NULL, 21, 21, RT0__strArray };
+RT0__StructDesc _td_OOC_Make__2096 = { (RT0__Struct[]){&_td_OOC_Repository__Module}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Make__ModuleList = { (RT0__Struct[]){&_td_OOC_Make__2096}, NULL, &_mid, "ModuleList", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Make__Rules = { (RT0__Struct[]){&_td_OOC_Make__RulesDesc}, NULL, &_mid, "Rules", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Make__RulesDesc = { (RT0__Struct[]){&_td_OOC_Make__RulesDesc}, (void*[]){(void*)OOC_Make__RulesDesc_CheckAllImports,(void*)OOC_Make__RulesDesc_CompileModule,(void*)OOC_Make__RulesDesc_GetImports,(void*)OOC_Make__RulesDesc_GetModuleInfo,(void*)OOC_Make__RulesDesc_SelectBackend,(void*)OOC_Make__RulesDesc_SetAllImportsModule,(void*)OOC_Make__RulesDesc_SetBackend,(void*)OOC_Make__RulesDesc_SetErrOut,(void*)OOC_Make__RulesDesc_SetExtensionDict,(void*)OOC_Make__RulesDesc_SetLibraryName,(void*)OOC_Make__RulesDesc_Update,(void*)OOC_Make__RulesDesc_UpdateAssemblerFile,(void*)OOC_Make__RulesDesc_UpdateCodeFileC,(void*)OOC_Make__RulesDesc_UpdateDeclFileC,(void*)OOC_Make__RulesDesc_UpdateExecutable,(void*)OOC_Make__RulesDesc_UpdateHeaderFileC,(void*)OOC_Make__RulesDesc_UpdateInterfaceDescr,(void*)OOC_Make__RulesDesc_UpdateInterfaceHTML,(void*)OOC_Make__RulesDesc_UpdateInterfaceXML,(void*)OOC_Make__RulesDesc_UpdateLibrary,(void*)OOC_Make__RulesDesc_UpdateMainFileAssembler,(void*)OOC_Make__RulesDesc_UpdateMainFileC,(void*)OOC_Make__RulesDesc_UpdateMainObjectFile,(void*)OOC_Make__RulesDesc_UpdateObjectFile,(void*)OOC_Make__RulesDesc_UpdateObjectFileLib,(void*)OOC_Make__RulesDesc_UpdateSymbolFile,(void*)OOC_Make__RulesDesc_UpdateSymbolTableXML,(void*)OOC_Make__RulesDesc_WriteErrList,(void*)OOC_Make__RulesDesc_WriteError}, &_mid, "RulesDesc", 40, 0, RT0__strRecord };
-RT0__StructDesc _td_OOC_Make__3612 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 24, 24, RT0__strArray };
-RT0__StructDesc _td_OOC_Make__3587 = { (RT0__Struct[]){&_td_OOC_Make__3612}, NULL, &_mid, NULL, 504, 21, RT0__strArray };
+RT0__StructDesc _td_OOC_Make__3582 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 24, 24, RT0__strArray };
+RT0__StructDesc _td_OOC_Make__3557 = { (RT0__Struct[]){&_td_OOC_Make__3582}, NULL, &_mid, NULL, 504, 21, RT0__strArray };
 RT0__StructDesc _td_OOC_Make__ErrorContext = { (RT0__Struct[]){&_td_OOC_Make__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Make__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Make__ErrorContextDesc}, (void*[]){(void*)OOC_Make__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Make__4598 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Make__5523 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_OOC_Make__4568 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Make", (RT0__Struct[]) { &_td_OOC_Make__ShellCommand, &_td_OOC_Make__ModuleInfo, &_td_OOC_Make__ModuleInfoDesc, &_td_OOC_Make__ModuleList, &_td_OOC_Make__Rules, &_td_OOC_Make__RulesDesc, &_td_OOC_Make__ErrorContext, &_td_OOC_Make__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Make_init0() {

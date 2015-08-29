@@ -2,8 +2,6 @@
 #include "RT0.oh"
 #include "CharClass.oh"
 #include "Msg.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 ProgramArgs__Channel ProgramArgs__args;
 typedef struct ProgramArgs__ErrorContextDesc *ProgramArgs__ErrorContext;
 static ProgramArgs__ErrorContext ProgramArgs__errorContext;

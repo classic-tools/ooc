@@ -4,9 +4,12 @@
 #include "__typemap.h"
 #include "RT0.oh"
 #include "Channel.oh"
+#include "Object.oh"
 #include "URI.oh"
 #include "XML/UnicodeCodec.oh"
 #include "XML/UnicodeBuffer.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_CHAR16 XML_Writer__Char;
 typedef OOC_CHAR16 *XML_Writer__String;
 typedef struct {
@@ -42,59 +45,62 @@ typedef struct XML_Writer__WriterDesc {
 extern void XML_Writer__Init(XML_Writer__Writer w, Channel__Writer writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 writeBOM, OOC_INT32 indentLevel);
 extern XML_Writer__Writer XML_Writer__New(Channel__Writer writer, XML_UnicodeCodec__Factory codecFactory, OOC_CHAR8 writeBOM, OOC_INT32 indentLevel);
 extern void XML_Writer__WriterDesc_SetBaseURI(XML_Writer__Writer w, URI__HierarchicalURI baseURI);
-#define _TBN_XML_Writer__WriterDesc_SetBaseURI 16
+#define _TBN_XML_Writer__WriterDesc_SetBaseURI 17
 typedef void (*_TBP_XML_Writer__WriterDesc_SetBaseURI)(XML_Writer__Writer w, URI__HierarchicalURI baseURI);
 extern void XML_Writer__WriterDesc_SetEmptyElementHTML(XML_Writer__Writer w, OOC_CHAR8 html);
-#define _TBN_XML_Writer__WriterDesc_SetEmptyElementHTML 17
+#define _TBN_XML_Writer__WriterDesc_SetEmptyElementHTML 18
 typedef void (*_TBP_XML_Writer__WriterDesc_SetEmptyElementHTML)(XML_Writer__Writer w, OOC_CHAR8 html);
 extern void XML_Writer__WriterDesc_WriteTextDecl(XML_Writer__Writer w, const OOC_CHAR8 version__ref[], OOC_LEN version_0d, const OOC_CHAR8 standalone__ref[], OOC_LEN standalone_0d);
-#define _TBN_XML_Writer__WriterDesc_WriteTextDecl 26
+#define _TBN_XML_Writer__WriterDesc_WriteTextDecl 27
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteTextDecl)(XML_Writer__Writer w, const OOC_CHAR8 version__ref[], OOC_LEN version_0d, const OOC_CHAR8 standalone__ref[], OOC_LEN standalone_0d);
 extern void XML_Writer__WriterDesc_NewLine(XML_Writer__Writer w);
-#define _TBN_XML_Writer__WriterDesc_NewLine 15
+#define _TBN_XML_Writer__WriterDesc_NewLine 16
 typedef void (*_TBP_XML_Writer__WriterDesc_NewLine)(XML_Writer__Writer w);
 extern void XML_Writer__WriterDesc_CloseStartTag(XML_Writer__Writer w);
-#define _TBN_XML_Writer__WriterDesc_CloseStartTag 10
+#define _TBN_XML_Writer__WriterDesc_CloseStartTag 11
 typedef void (*_TBP_XML_Writer__WriterDesc_CloseStartTag)(XML_Writer__Writer w);
 extern void XML_Writer__WriterDesc_WriteI(XML_Writer__Writer w, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 s, OOC_INT32 e);
-#define _TBN_XML_Writer__WriterDesc_WriteI 21
+#define _TBN_XML_Writer__WriterDesc_WriteI 22
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteI)(XML_Writer__Writer w, const OOC_CHAR16 str[], OOC_LEN str_0d, OOC_INT32 s, OOC_INT32 e);
 extern void XML_Writer__WriterDesc_WriteLatin1I(XML_Writer__Writer w, const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 s, OOC_INT32 e);
-#define _TBN_XML_Writer__WriterDesc_WriteLatin1I 24
+#define _TBN_XML_Writer__WriterDesc_WriteLatin1I 25
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteLatin1I)(XML_Writer__Writer w, const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 s, OOC_INT32 e);
 extern void XML_Writer__WriterDesc_Write(XML_Writer__Writer w, const OOC_CHAR16 str[], OOC_LEN str_0d);
-#define _TBN_XML_Writer__WriterDesc_Write 20
+#define _TBN_XML_Writer__WriterDesc_Write 21
 typedef void (*_TBP_XML_Writer__WriterDesc_Write)(XML_Writer__Writer w, const OOC_CHAR16 str[], OOC_LEN str_0d);
 extern void XML_Writer__WriterDesc_WriteLatin1(XML_Writer__Writer w, const OOC_CHAR8 str[], OOC_LEN str_0d);
-#define _TBN_XML_Writer__WriterDesc_WriteLatin1 23
+#define _TBN_XML_Writer__WriterDesc_WriteLatin1 24
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteLatin1)(XML_Writer__Writer w, const OOC_CHAR8 str[], OOC_LEN str_0d);
 extern void XML_Writer__WriterDesc_WriteURI(XML_Writer__Writer w, URI__URI uri, OOC_CHAR8 absolute);
-#define _TBN_XML_Writer__WriterDesc_WriteURI 27
+#define _TBN_XML_Writer__WriterDesc_WriteURI 28
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteURI)(XML_Writer__Writer w, URI__URI uri, OOC_CHAR8 absolute);
 extern void XML_Writer__WriterDesc_WriteLInt(XML_Writer__Writer w, OOC_INT32 value);
-#define _TBN_XML_Writer__WriterDesc_WriteLInt 22
+#define _TBN_XML_Writer__WriterDesc_WriteLInt 23
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteLInt)(XML_Writer__Writer w, OOC_INT32 value);
 extern void XML_Writer__WriterDesc_WriteRealFix(XML_Writer__Writer w, OOC_REAL32 real, OOC_INT32 k);
-#define _TBN_XML_Writer__WriterDesc_WriteRealFix 25
+#define _TBN_XML_Writer__WriterDesc_WriteRealFix 26
 typedef void (*_TBP_XML_Writer__WriterDesc_WriteRealFix)(XML_Writer__Writer w, OOC_REAL32 real, OOC_INT32 k);
 extern void XML_Writer__WriterDesc_StartTag(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_CHAR8 mixedContent);
-#define _TBN_XML_Writer__WriterDesc_StartTag 18
+#define _TBN_XML_Writer__WriterDesc_StartTag 19
 typedef void (*_TBP_XML_Writer__WriterDesc_StartTag)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_CHAR8 mixedContent);
 extern void XML_Writer__WriterDesc_StartTagLatin1(XML_Writer__Writer w, const OOC_CHAR8 name[], OOC_LEN name_0d, OOC_CHAR8 mixedContent);
-#define _TBN_XML_Writer__WriterDesc_StartTagLatin1 19
+#define _TBN_XML_Writer__WriterDesc_StartTagLatin1 20
 typedef void (*_TBP_XML_Writer__WriterDesc_StartTagLatin1)(XML_Writer__Writer w, const OOC_CHAR8 name[], OOC_LEN name_0d, OOC_CHAR8 mixedContent);
 extern void XML_Writer__WriterDesc_EmptyTag(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d);
-#define _TBN_XML_Writer__WriterDesc_EmptyTag 11
+#define _TBN_XML_Writer__WriterDesc_EmptyTag 12
 typedef void (*_TBP_XML_Writer__WriterDesc_EmptyTag)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d);
 extern void XML_Writer__WriterDesc_EmptyTagLatin1(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d);
-#define _TBN_XML_Writer__WriterDesc_EmptyTagLatin1 12
+#define _TBN_XML_Writer__WriterDesc_EmptyTagLatin1 13
 typedef void (*_TBP_XML_Writer__WriterDesc_EmptyTagLatin1)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d);
 extern void XML_Writer__WriterDesc_AttrString(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR16 value[], OOC_LEN value_0d);
-#define _TBN_XML_Writer__WriterDesc_AttrString 7
+#define _TBN_XML_Writer__WriterDesc_AttrString 8
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrString)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR16 value[], OOC_LEN value_0d);
 extern void XML_Writer__WriterDesc_AttrStringLatin1(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR8 value[], OOC_LEN value_0d);
-#define _TBN_XML_Writer__WriterDesc_AttrStringLatin1 8
+#define _TBN_XML_Writer__WriterDesc_AttrStringLatin1 9
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrStringLatin1)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, const OOC_CHAR8 value[], OOC_LEN value_0d);
+extern void XML_Writer__WriterDesc_AttrStr(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
+#define _TBN_XML_Writer__WriterDesc_AttrStr 7
+typedef void (*_TBP_XML_Writer__WriterDesc_AttrStr)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, Object__String value);
 extern void XML_Writer__WriterDesc_AttrInt(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_INT32 value);
 #define _TBN_XML_Writer__WriterDesc_AttrInt 6
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrInt)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_INT32 value);
@@ -102,50 +108,51 @@ extern void XML_Writer__WriterDesc_AttrBool(XML_Writer__Writer w, const OOC_CHAR
 #define _TBN_XML_Writer__WriterDesc_AttrBool 5
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrBool)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, OOC_CHAR8 value);
 extern void XML_Writer__WriterDesc_AttrURI(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, URI__URI uri, OOC_CHAR8 absolute);
-#define _TBN_XML_Writer__WriterDesc_AttrURI 9
+#define _TBN_XML_Writer__WriterDesc_AttrURI 10
 typedef void (*_TBP_XML_Writer__WriterDesc_AttrURI)(XML_Writer__Writer w, const OOC_CHAR16 name[], OOC_LEN name_0d, URI__URI uri, OOC_CHAR8 absolute);
 extern void XML_Writer__WriterDesc_EndTag(XML_Writer__Writer w);
-#define _TBN_XML_Writer__WriterDesc_EndTag 14
+#define _TBN_XML_Writer__WriterDesc_EndTag 15
 typedef void (*_TBP_XML_Writer__WriterDesc_EndTag)(XML_Writer__Writer w);
 extern void XML_Writer__WriterDesc_EndOfText(XML_Writer__Writer w);
-#define _TBN_XML_Writer__WriterDesc_EndOfText 13
+#define _TBN_XML_Writer__WriterDesc_EndOfText 14
 typedef void (*_TBP_XML_Writer__WriterDesc_EndOfText)(XML_Writer__Writer w);
 extern void OOC_XML_Writer_init();
 extern void OOC_XML_Writer_init0();
 
 /* run-time meta data */
-extern RT0__StructDesc _td_XML_Writer__1475;
+extern RT0__StructDesc _td_XML_Writer__1483;
 extern RT0__StructDesc _td_XML_Writer__String;
-extern RT0__StructDesc _td_XML_Writer__1538;
-extern RT0__StructDesc _td_XML_Writer__1514;
+extern RT0__StructDesc _td_XML_Writer__1546;
+extern RT0__StructDesc _td_XML_Writer__1522;
 extern RT0__StructDesc _td_XML_Writer__Elements;
 extern RT0__StructDesc _td_XML_Writer__Writer;
 extern RT0__StructDesc _td_XML_Writer__WriterDesc;
-extern RT0__StructDesc _td_XML_Writer__1894;
-extern RT0__StructDesc _td_XML_Writer__3645;
-extern RT0__StructDesc _td_XML_Writer__3681;
-extern RT0__StructDesc _td_XML_Writer__4794;
-extern RT0__StructDesc _td_XML_Writer__5354;
-extern RT0__StructDesc _td_XML_Writer__5949;
-extern RT0__StructDesc _td_XML_Writer__6086;
-extern RT0__StructDesc _td_XML_Writer__6263;
-extern RT0__StructDesc _td_XML_Writer__6500;
-extern RT0__StructDesc _td_XML_Writer__6680;
-extern RT0__StructDesc _td_XML_Writer__6829;
-extern RT0__StructDesc _td_XML_Writer__7022;
-extern RT0__StructDesc _td_XML_Writer__7886;
-extern RT0__StructDesc _td_XML_Writer__7982;
-extern RT0__StructDesc _td_XML_Writer__8145;
-extern RT0__StructDesc _td_XML_Writer__8530;
-extern RT0__StructDesc _td_XML_Writer__8564;
-extern RT0__StructDesc _td_XML_Writer__8732;
-extern RT0__StructDesc _td_XML_Writer__9479;
-extern RT0__StructDesc _td_XML_Writer__9551;
-extern RT0__StructDesc _td_XML_Writer__10290;
-extern RT0__StructDesc _td_XML_Writer__10337;
-extern RT0__StructDesc _td_XML_Writer__10497;
-extern RT0__StructDesc _td_XML_Writer__10715;
-extern RT0__StructDesc _td_XML_Writer__10811;
+extern RT0__StructDesc _td_XML_Writer__1902;
+extern RT0__StructDesc _td_XML_Writer__3653;
+extern RT0__StructDesc _td_XML_Writer__3689;
+extern RT0__StructDesc _td_XML_Writer__4802;
+extern RT0__StructDesc _td_XML_Writer__5362;
+extern RT0__StructDesc _td_XML_Writer__5957;
+extern RT0__StructDesc _td_XML_Writer__6094;
+extern RT0__StructDesc _td_XML_Writer__6271;
+extern RT0__StructDesc _td_XML_Writer__6508;
+extern RT0__StructDesc _td_XML_Writer__6688;
+extern RT0__StructDesc _td_XML_Writer__6842;
+extern RT0__StructDesc _td_XML_Writer__7035;
+extern RT0__StructDesc _td_XML_Writer__7899;
+extern RT0__StructDesc _td_XML_Writer__7995;
+extern RT0__StructDesc _td_XML_Writer__8158;
+extern RT0__StructDesc _td_XML_Writer__8543;
+extern RT0__StructDesc _td_XML_Writer__8577;
+extern RT0__StructDesc _td_XML_Writer__8745;
+extern RT0__StructDesc _td_XML_Writer__9492;
+extern RT0__StructDesc _td_XML_Writer__9564;
+extern RT0__StructDesc _td_XML_Writer__10303;
+extern RT0__StructDesc _td_XML_Writer__10623;
+extern RT0__StructDesc _td_XML_Writer__10670;
+extern RT0__StructDesc _td_XML_Writer__10830;
+extern RT0__StructDesc _td_XML_Writer__11048;
+extern RT0__StructDesc _td_XML_Writer__11144;
 #endif /* _MODULE_XML_Writer_ */
 
 /* --- */

@@ -160,8 +160,8 @@ l25:
   i1 = *(OOC_UINT8*)((OOC_INT32)path+(_check_index(i0, path_0d, OOC_UINT16, 3177)));
   i1 = i1==(OOC_CHAR8)'.';
   if (i1) goto l28;
-  _copy_8((OOC_INT32)path,(OOC_INT32)root,root_0d);
-  _copy_8("",(OOC_INT32)ext,ext_0d);
+  _copy_8((const void*)(OOC_INT32)path,(void*)(OOC_INT32)root,root_0d);
+  _copy_8((const void*)"",(void*)(OOC_INT32)ext,ext_0d);
   goto l29;
 l28:
   Strings__Extract((void*)(OOC_INT32)path, path_0d, 0, i0, (void*)(OOC_INT32)root, root_0d);

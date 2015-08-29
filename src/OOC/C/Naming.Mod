@@ -1,7 +1,7 @@
 MODULE OOC:C:Naming;
 
 IMPORT
-  IntStr, Strings, ADT:Object, ADT:String, ADT:Dictionary,
+  IntStr, Strings, Object, ADT:Dictionary,
   OOC:Config, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef;
 
 TYPE
@@ -17,19 +17,20 @@ CONST
 VAR
   keywords: Dictionary.Dictionary;
   (* maps C/C++ keywords to a safer counterpart *)
-  rwPrefix: String.String;
+  rwPrefix: STRING;
   (* prefix string used to mangle reserved names *)
-  tdPrefix: String.String;
+  tdPrefix: STRING;
   (* prefix of the type descriptor namespace *)
 
-PROCEDURE NameOfDeclaration* (decl: Sym.Declaration): String.String;
+PROCEDURE NameOfDeclaration* (decl: Sym.Declaration): STRING;
   VAR
     relativeId: Sym.NameString;
     str: Buffer;
     i: LONGINT;
     m: Sym.Item;
     relativeName: BOOLEAN;
-    name: String.String;
+    name: STRING;
+    string: STRING;
     obj: Object.Object;
 
   PROCEDURE IsReservedName (VAR str: ARRAY OF CHAR): BOOLEAN;
@@ -108,18 +109,19 @@ PROCEDURE NameOfDeclaration* (decl: Sym.Declaration): String.String;
       END
     END;
 
-    name := String.New (str);
+    name := Object.NewLatin1(str);
     IF keywords. HasKey (name) THEN
       obj := keywords. Get (name);
-      RETURN obj(String.String);
+      RETURN obj(STRING);
     ELSIF IsReservedName (str) THEN
-      RETURN rwPrefix. Concat (name);
+      string := rwPrefix. Concat (name);
+      RETURN string;
     ELSE
       RETURN name;
     END;
   END NameOfDeclaration;
 
-PROCEDURE NameOfModuleInit* (m: Sym.Module; rtWrapper: BOOLEAN): String.String;
+PROCEDURE NameOfModuleInit* (m: Sym.Module; rtWrapper: BOOLEAN): STRING;
   VAR
     str: Buffer;
     i: LONGINT;
@@ -136,34 +138,23 @@ PROCEDURE NameOfModuleInit* (m: Sym.Module; rtWrapper: BOOLEAN): String.String;
     ELSE      
       Strings.Append ("_init", str);
     END;
-    RETURN String.New (str)
+    RETURN Object.NewLatin1(str)
   END NameOfModuleInit;
 
-PROCEDURE NameOfLengthParam* (param: Sym.VarDecl; dim: LONGINT): String.String;
+PROCEDURE NameOfLengthParam* (param: Sym.VarDecl; dim: LONGINT): STRING;
   VAR
-    str: Buffer;
-    name: String.String;
+    str: ARRAY 16 OF CHAR;
   BEGIN
-    name := NameOfDeclaration (param);
     IntStr.IntToStr (dim, str);
-    Strings.Insert ("_", 0, str);
-    Strings.Append ("d", str);
-    Strings.Insert (name. array^, 0, str);
-    RETURN String.New (str)
+    RETURN NameOfDeclaration(param)+"_"+Object.NewLatin1(str)+"d";
   END NameOfLengthParam;
 
-PROCEDURE NameOfTypeTagParam* (param: Sym.VarDecl): String.String;
-  VAR
-    str: Buffer;
-    name: String.String;
+PROCEDURE NameOfTypeTagParam* (param: Sym.VarDecl): STRING;
   BEGIN
-    name := NameOfDeclaration (param);
-    COPY (name. array^, str);
-    Strings.Append ("__tag", str);
-    RETURN String.New (str)
+    RETURN NameOfDeclaration(param)+"__tag";
   END NameOfTypeTagParam;
 
-PROCEDURE NameOfType* (type: Sym.Type): String.String;
+PROCEDURE NameOfType* (type: Sym.Type): STRING;
 (**@precond
    @samp{type. namingDecl # NIL}
    @end precond *)
@@ -172,12 +163,12 @@ PROCEDURE NameOfType* (type: Sym.Type): String.String;
     RETURN NameOfDeclaration (type. namingDecl);
   END NameOfType;
 
-PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): String.String;
+PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): STRING;
 (**@precond
    @samp{type. namingDecl # NIL}
    @end precond *)
   VAR
-    name: String.String;
+    string: STRING;
     str, str2: ARRAY 32 OF CHAR;
   BEGIN
     WITH type: Sym.PredefType DO
@@ -185,6 +176,7 @@ PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): String.String;
       | Predef.boolean : str := "boolean"
       | Predef.char    : str := "char"
       | Predef.longchar: str := "longchar"
+      | Predef.ucs4char: str := "ucs4char"
       | Predef.shortint: str := "shortint"
       | Predef.integer : str := "integer"
       | Predef.longint : str := "longint"
@@ -197,51 +189,47 @@ PROCEDURE NameOfTypeDescriptor* (type: Sym.Type): String.String;
       str2 := Config.runtimeModule;
       Strings.Append ("__", str2);
       Strings.Append (str, str2);
-      RETURN String.New (str2);
+      RETURN Object.NewLatin1(str2);
     ELSE
       IF (type. namingDecl = NIL) THEN
-        name := tdPrefix. Concat (NameOfDeclaration (type. Module()));
+        string := tdPrefix. Concat (NameOfDeclaration (type. Module()));
         IntStr.IntToStr (type. position. pos, str);
-        RETURN name. Concat (String.New (str));
+        string := string. Concat (Object.NewLatin1(str));
+        RETURN string;
       ELSE
-        RETURN tdPrefix. Concat (NameOfType (type));
+        string := tdPrefix. Concat (NameOfType (type));
+        RETURN string;
       END;
     END;
   END NameOfTypeDescriptor;
 
-PROCEDURE NameOfTypeBoundIndex* (proc: Sym.ProcDecl): String.String;
+PROCEDURE NameOfTypeBoundIndex* (proc: Sym.ProcDecl): STRING;
 (**Return the name of the C #define that holds the index of this
    type-bound procedure.  *)
-  VAR
-    name: String.String;
   BEGIN
-    name := String.New ("_TBN_");
-    RETURN name. Concat (NameOfDeclaration (proc));
+    RETURN "_TBN_"+NameOfDeclaration (proc);
   END NameOfTypeBoundIndex;
 
-PROCEDURE NameOfTypeBoundSignature* (proc: Sym.ProcDecl): String.String;
+PROCEDURE NameOfTypeBoundSignature* (proc: Sym.ProcDecl): STRING;
 (**Return the name of the C typedef that defines the signature of this
    type-bound procedure.  *)
-  VAR
-    name: String.String;
   BEGIN
-    name := String.New ("_TBP_");
-    RETURN name. Concat (NameOfDeclaration (proc));
+    RETURN "_TBP_"+NameOfDeclaration (proc);
   END NameOfTypeBoundSignature;
 
 PROCEDURE Init ();
   PROCEDURE RW (str: ARRAY OF CHAR);
     VAR
-      name: String.String;
+      name: STRING;
     BEGIN
-      name := String.New (str);
+      name := Object.NewLatin1(str);
       keywords. Set (name, rwPrefix. Concat (name));
     END RW;
   
   BEGIN
     keywords := Dictionary.New();
-    rwPrefix := String.New ("_");
-    tdPrefix := String.New ("_td_");
+    rwPrefix := "_";
+    tdPrefix := "_td_";
     
     (* reserved words of ANSI-C *)
     RW ("auto"); RW ("break"); RW ("case"); RW ("char"); RW ("const"); 

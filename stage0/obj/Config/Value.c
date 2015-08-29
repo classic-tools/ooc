@@ -3,7 +3,7 @@
 
 void Config_Value__ErrorContextDesc_WriteTemplate(Config_Value__ErrorContext ec, Msg__Msg msg, Msg__LString text, OOC_LEN text_0d, Msg__LString templ, OOC_LEN templ_0d) {
 
-  _copy_16((OOC_INT32)text,(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)(OOC_INT32)text,(void*)(OOC_INT32)templ,templ_0d);
   return;
   ;
 }
@@ -41,8 +41,8 @@ Config_Value__StringPtr Config_Value__GetStringPtr(Config_Value__String str, OOC
   i0 = Strings__Length((void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)RT0__NewObject(_td_Config_Value__StringPtr.baseTypes[0], (i0+1));
   s = (Config_Value__StringPtr)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1275)), 0);
-  _copy_8((OOC_INT32)str,(_check_pointer(i0, 1275)),i1);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1275)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)str,(void*)(_check_pointer(i0, 1275)),i1);
   return (Config_Value__StringPtr)i0;
   ;
 }
@@ -77,7 +77,7 @@ void Config_Value__PrototypeListDesc_RegisterPrototype(Config_Value__PrototypeLi
 l3:
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1679))+4);
   i2 = (
-  _cmp8((const void*)(_check_pointer(i2, 1685)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i2, 1685)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l5:
   if (i2) goto l8_loop;
@@ -94,7 +94,7 @@ l8_loop:
 l11:
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1679))+4);
   i3 = (
-  _cmp8((const void*)(_check_pointer(i3, 1685)),(const void*)(OOC_INT32)name))!=0;
+  _cmp8((const void*)(_check_pointer(i3, 1685)),(const void*)(OOC_INT32)name))!=(OOC_INT32)0;
   
 l13:
   if (!i3) goto l16;
@@ -111,8 +111,8 @@ l17:
   *(OOC_INT32*)((_check_pointer(i1, 1848))+4) = ((OOC_INT32)RT0__NewObject(_td_Config_Value__PrototypeName.baseTypes[0], (i3+1)));
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1910))+4);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1910))+4);
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1916)), 0);
-  _copy_8((OOC_INT32)name,(_check_pointer(i3, 1916)),i4);
+  i4 = OOC_ARRAY_LENGTH((_check_pointer(i4, 1916)), (OOC_INT32)0);
+  _copy_8((const void*)(OOC_INT32)name,(void*)(_check_pointer(i3, 1916)),i4);
   i3 = (OOC_INT32)prototype;
   *(OOC_INT32*)((_check_pointer(i1, 1936))+8) = i3;
   i3 = i2==(OOC_INT32)0;
@@ -142,7 +142,7 @@ Config_Value__Value Config_Value__PrototypeListDesc_GetClone(Config_Value__Proto
 l3:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2261))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=(OOC_INT32)0;
   
 l5:
   if (!i1) goto l17;
@@ -156,7 +156,7 @@ l8_loop:
 l11:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2261))+4);
   i1 = (
-  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=0;
+  _cmp8((const void*)(_check_pointer(i1, 2267)),(const void*)(OOC_INT32)prototypeName))!=(OOC_INT32)0;
   
 l13:
   if (i1) goto l8_loop;

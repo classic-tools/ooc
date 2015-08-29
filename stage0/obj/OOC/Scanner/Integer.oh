@@ -6,6 +6,8 @@
 #include "Msg.oh"
 #include "OOC/Error.oh"
 #include "OOC/Scanner/InputBuffer.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef OOC_INT32 OOC_Scanner_Integer__Integer;
 typedef struct OOC_Scanner_Integer__ErrorContextDesc *OOC_Scanner_Integer__ErrorContext;
 typedef struct OOC_Scanner_Integer__ErrorContextDesc {

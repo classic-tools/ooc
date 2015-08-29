@@ -3,6 +3,8 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef void (*Termination__Proc)();
 extern void Termination__RegisterProc(Termination__Proc proc);
 extern void Termination__UnregisterProc(Termination__Proc proc);

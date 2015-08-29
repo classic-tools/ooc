@@ -105,7 +105,7 @@ l4:
 l3_loop:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3276))+4);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3276))+4);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 3282)), 0);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 3282)), (OOC_INT32)0);
   i1 = RT0__GetEnv((void*)(_check_pointer(i1, 3282)), i2, (void*)(OOC_INT32)value, 1024);
   found = i1;
   if (!i1) goto l6;
@@ -300,7 +300,7 @@ l69:
   return;
 l3:
   i1 = (
-  _cmp16((const void*)(OOC_INT32)rootTag,(const void*)((OOC_CHAR16[]){0})))!=0;
+  _cmp16((const void*)(OOC_INT32)rootTag,(const void*)((OOC_CHAR16[]){0})))!=(OOC_INT32)0;
   if (!i1) goto l6;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4894)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i0, "<?xml version=\0471.0\047 encoding=\047ISO-8859-1\047 standalone=\047yes\047?>", 61);
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4981)))), TextRider__WriterDesc_WriteLn)),TextRider__WriterDesc_WriteLn)((TextRider__Writer)i0);
@@ -324,7 +324,7 @@ l9_loop:
   pattern = (Config_Value__StringPtr)i0;
   i = 0;
   i0 = _check_pointer(i0, 5338);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
+  i1 = OOC_ARRAY_LENGTH(i0, (OOC_INT32)0);
   i0 = *(OOC_UINT8*)(i0+(_check_index(0, i1, OOC_UINT32, 5338)));
   i0 = i0!=(OOC_CHAR8)'\000';
   if (!i0) goto l44;
@@ -333,7 +333,7 @@ l14_loop:
   j = i0;
   i1 = (OOC_INT32)pattern;
   i2 = _check_pointer(i1, 5393);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 5393)));
   i2 = i2!=(OOC_CHAR8)'\000';
   if (i2) goto l17;
@@ -341,7 +341,7 @@ l14_loop:
   goto l19;
 l17:
   i2 = _check_pointer(i1, 5413);
-  i3 = OOC_ARRAY_LENGTH(i2, 0);
+  i3 = OOC_ARRAY_LENGTH(i2, (OOC_INT32)0);
   i2 = *(OOC_UINT8*)(i2+(_check_index(i0, i3, OOC_UINT32, 5413)));
   i2 = i2!=(OOC_CHAR8)'$';
   
@@ -355,7 +355,7 @@ l22_loop:
   i2 = i2+1;
   i = i2;
   i3 = _check_pointer(i1, 5393);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 5393)));
   i3 = i3!=(OOC_CHAR8)'\000';
   if (i3) goto l25;
@@ -363,7 +363,7 @@ l22_loop:
   goto l27;
 l25:
   i3 = _check_pointer(i1, 5413);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 5413)));
   i3 = i3!=(OOC_CHAR8)'$';
   
@@ -371,7 +371,7 @@ l27:
   if (i3) goto l22_loop;
 l31:
   i3 = _check_pointer(i1, 5484);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index(i2, i4, OOC_UINT32, 5484)));
   i3 = i3==(OOC_CHAR8)'$';
   if (i3) goto l34;
@@ -379,7 +379,7 @@ l31:
   goto l36;
 l34:
   i3 = _check_pointer(i1, 5505);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
+  i4 = OOC_ARRAY_LENGTH(i3, (OOC_INT32)0);
   i3 = *(OOC_UINT8*)(i3+(_check_index((i2+1), i4, OOC_UINT32, 5505)));
   i3 = i3==(OOC_CHAR8)'1';
   
@@ -399,7 +399,7 @@ l38:
   i0 = (OOC_INT32)command;
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5616))+8);
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5616))+8);
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5626)), 0);
+  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5626)), (OOC_INT32)0);
   Config_Source_Environment__EnvironmentDesc_Write_WriteQuoted((TextRider__Writer)i3, (void*)(_check_pointer(i1, 5626)), i0);
   i0 = i;
   i0 = i0+2;
@@ -408,7 +408,7 @@ l38:
 l39:
   i1 = (OOC_INT32)pattern;
   i1 = _check_pointer(i1, 5338);
-  i2 = OOC_ARRAY_LENGTH(i1, 0);
+  i2 = OOC_ARRAY_LENGTH(i1, (OOC_INT32)0);
   i1 = *(OOC_UINT8*)(i1+(_check_index(i0, i2, OOC_UINT32, 5338)));
   i1 = i1!=(OOC_CHAR8)'\000';
   if (i1) goto l14_loop;
@@ -423,7 +423,7 @@ l45:
   if (i1) goto l9_loop;
 l50:
   i0 = (
-  _cmp16((const void*)(OOC_INT32)rootTag,(const void*)((OOC_CHAR16[]){0})))!=0;
+  _cmp16((const void*)(OOC_INT32)rootTag,(const void*)((OOC_CHAR16[]){0})))!=(OOC_INT32)0;
   i1 = (OOC_INT32)w;
   if (!i0) goto l53;
   OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5868)))), TextRider__WriterDesc_WriteString)),TextRider__WriterDesc_WriteString)((TextRider__Writer)i1, "</", 3);

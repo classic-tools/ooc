@@ -1,12 +1,10 @@
 #include "OOC/Doc/ResolveRef.oh"
 #include "Msg.oh"
 #include "Strings.oh"
-#include "ADT/Object.oh"
+#include "Object.oh"
 #include "ADT/Dictionary.oh"
 #include "OOC/Doc.oh"
 #include "OOC/SymbolTable/Exports.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 #define OOC_Doc_ResolveRef__refEmpty 0
 #define OOC_Doc_ResolveRef__refHasMarkup 1
 #define OOC_Doc_ResolveRef__invalidCharacter 2
@@ -29,9 +27,9 @@ static OOC_CHAR8 OOC_Doc_ResolveRef__ParseRef(OOC_Doc__OberonRef ref, OOC_Error_
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContext = { (RT0__Struct[]){&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_OOC_Error__ContextDesc,&_td_OOC_Doc_ResolveRef__ErrorContextDesc}, (void*[]){(void*)OOC_Doc_ResolveRef__ErrorContextDesc_GetTemplate,(void*)OOC_Error__ContextDesc_BaseTemplate}, &_mid, "ErrorContextDesc", 4, 2, RT0__strRecord };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__747 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__3687 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_OOC_Doc_ResolveRef__3903 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__743 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__3683 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_OOC_Doc_ResolveRef__3899 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Doc:ResolveRef", (RT0__Struct[]) { &_td_OOC_Doc_ResolveRef__ErrorContext, &_td_OOC_Doc_ResolveRef__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Doc_ResolveRef_init0() {

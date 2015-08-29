@@ -1,4 +1,4 @@
-(* 	$Id: CreateIR.Mod,v 1.57 2002/11/18 00:28:30 mva Exp $	 *)
+(* 	$Id: CreateIR.Mod,v 1.59 2002/12/17 01:23:14 mva Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateIR;
 (*  Creates an IR representation from the abstract syntax tree.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:AST:ExtTree:CreateIR;
 *)
 
 IMPORT
-  Log, Language:Integer,
+  Log, Object:BigInt,
   OOC:Scanner:Symbol, OOC:Scanner:Builder:BasicList,
   OOC:AST:ExtTree, Sym := OOC:SymbolTable, TR := OOC:SymbolTable:TypeRules,
   OOC:SymbolTable:Predef, OOC:IR;
@@ -55,13 +55,13 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
           RETURN b. NewQualident (currentNamespace, left, currentSourceContext,
                                   design. right(ExtTree.Terminal). sym);
           
-        | left: IR.Const DO
-          ASSERT (left = b. errorExpr);
-          RETURN b. errorExpr;           (* left side has errors *)
-
         ELSE                             (* field or tb procedure selector *)
-          RETURN b. NewSelect (design. op. sym, left, currentSourceContext,
-                               design. right(ExtTree.Terminal). sym);
+          IF (left = b.errorExpr) THEN
+            RETURN b. errorExpr;           (* left side has errors *)
+          ELSE
+            RETURN b. NewSelect (design. op. sym, left, currentSourceContext,
+                                 design. right(ExtTree.Terminal). sym);
+          END;
         END
       END Select;
     
@@ -617,9 +617,9 @@ PROCEDURE CreateIR* (module: ExtTree.Module;
         IF ~item. isOpenArray THEN
           expr := Expr (item. lengthExpr(ExtTree.Node));
           IF (expr = b. errorExpr) THEN  (* error in array length *)
-            item. SetLength (1);
+            item. SetLength(1);
           ELSE
-            item. SetLength (expr(IR.Const). value(Integer.Value). ToInt());
+            item. SetLength(expr(IR.Const).value(BigInt.BigInt).ToLongInt());
           END;
         END;
 

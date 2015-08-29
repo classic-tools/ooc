@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.18 2002/08/11 13:56:12 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.21 2002/12/20 10:19:32 mva Exp $	 *)
 MODULE OOC:SSA:XML;
 (*  Produces a canonical representation of SSA code in XML.
     Copyright (C) 2001, 2002  Michael van Acken
@@ -22,8 +22,8 @@ MODULE OOC:SSA:XML;
 
 
 IMPORT
-  Channel, Dictionary := ADT:Dictionary:IntValue, 
-  ADT:String, ADT:StringBuffer, WriterXML := XML:Writer, XML:UnicodeCodec:Latin1,
+  Channel, Object, Dictionary := ADT:Dictionary:IntValue, 
+  ADT:StringBuffer, WriterXML := XML:Writer, XML:UnicodeCodec:Latin1,
   OOC:SSA:Opcode, OOC:SSA:Result, OOC:SSA:Opnd, OOC:SSA, OOC:SSA:Schedule;
 
 
@@ -77,11 +77,11 @@ PROCEDURE (w: Writer) AttrId* (name: ARRAY OF LONGCHAR; result: SSA.Result);
     countSameId, posSameId: LONGINT;
   BEGIN
     w. sb. Delete (0, w. sb. length);
-    w. sb. AppendLongInt (ABS (w. GetId (result. instr)));
+    w. sb. AppendInt (ABS (w. GetId (result. instr)));
     IF (result # result. instr) THEN
-      w. sb. AppendChar (".");
+      w. sb. AppendLatin1Char (".");
       Result.GetName (result. class, str);
-      w. sb. AppendString (str);
+      w. sb. AppendLatin1 (str);
       
       countSameId := 0; posSameId := 0;
       res := result. instr. nextResult;
@@ -95,27 +95,27 @@ PROCEDURE (w: Writer) AttrId* (name: ARRAY OF LONGCHAR; result: SSA.Result);
         res := res. nextResult
       UNTIL (res = NIL);
       IF (countSameId # 1) THEN
-        w. sb. AppendChar (".");
-        w. sb. AppendLongInt (posSameId);
+        w. sb. AppendLatin1Char (".");
+        w. sb. AppendInt (posSameId);
       END;
     END;
-    w. AttrStringLatin1 (name, w. sb. array^);
+    w. AttrStr(name, w. sb.ToString());
   END AttrId;
 
 PROCEDURE (w: Writer) AttrRef* (res: SSA.Result);
   VAR
-    value: String.String;
+    value: Object.String;
   BEGIN
     IF (res = NIL) THEN
       w. AttrString ("argref", "NIL");
     ELSE
       WITH res: SSA.Const DO
         IF (res. value = SSA.nil) THEN
-          value := String.New ("NIL");
+          value := "NIL";
         ELSE
           value := res. value. ToString();
         END;
-        w. AttrStringLatin1 ("const-value", value. array^);
+        w. AttrStr ("const-value", value(Object.String8));
       | res: SSA.DeclRef DO
         w. AttrStringLatin1 ("declref", res. decl. name. str^);
       | res: SSA.Address DO
@@ -133,7 +133,7 @@ PROCEDURE Omit (instr: SSA.Instr): BOOLEAN;
 
 PROCEDURE (w: Writer) WriteInstr (instr: SSA.Instr);
   VAR
-    value: String.String;
+    value: Object.String;
     res: SSA.Result;
     opnd: SSA.Opnd;
     
@@ -189,11 +189,11 @@ PROCEDURE (w: Writer) WriteInstr (instr: SSA.Instr);
     
     WITH instr: SSA.Const DO
       IF (instr. value = SSA.nil) THEN
-        value := String.New ("NIL");
+        value := "NIL";
       ELSE
         value := instr. value. ToString();        
       END;
-      w. AttrStringLatin1 ("value", value. array^);
+      w. AttrStr ("value", value(Object.String8));
 
     | instr: SSA.Address DO
       w. AttrStringLatin1 ("address-of", instr. decl. name. str^);

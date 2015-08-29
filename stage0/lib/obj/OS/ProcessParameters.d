@@ -1,9 +1,4 @@
 #include "OS/ProcessParameters.oh"
-#include "LongStrings.oh"
-#include "CharClass.oh"
-#include "C.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
 typedef struct OS_ProcessParameters__ErrorContextDesc *OS_ProcessParameters__ErrorContext;
 typedef struct OS_ProcessParameters__ErrorContextDesc {
   Msg__StringPtr id;

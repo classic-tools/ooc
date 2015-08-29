@@ -20,7 +20,7 @@ void OOC_Make_WriteMainFileC__WriteFile(OOC_Repository__Module module, const OOC
       OOC_INITIALIZE_VPAR(suffix__ref,suffix,OOC_CHAR8 ,suffix_0d)
       i0 = (OOC_INT32)module;
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1488))+4);
-      _copy_8((_check_pointer(i0, 1494)),(OOC_INT32)str,1024);
+      _copy_8((const void*)(_check_pointer(i0, 1494)),(void*)(OOC_INT32)str,1024);
       i = 0;
       i0 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(0, 1024, OOC_UINT32, 1533)));
       i0 = i0!=(OOC_CHAR8)'\000';

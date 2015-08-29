@@ -1,4 +1,4 @@
-(* 	$Id: Make.Mod,v 1.27 2002/12/12 14:22:38 mva Exp $	 *)
+(* 	$Id: Make.Mod,v 1.33 2002/12/20 09:13:39 mva Exp $	 *)
 MODULE OOC:Make;
 (*  Builds object files, libraries, binaries, and the like.
     Copyright (C) 2002  Michael van Acken
@@ -24,7 +24,7 @@ IMPORT
   <*IF COMPILER_MAJOR>=2 THEN*>RT0,<*END*>
   Channel, Files, Msg, Out, StdChannels, Strings, Time,
 
-  ADT:Object, ADT:ArrayList, ADT:Dictionary, ADT:String, StringSearch,
+  Object, ADT:ArrayList, ADT:Dictionary, StringSearch,
   StringSearch:NoMatch, OS:Path,
   OSFiles := OS:Files, OS:ProcessManagement, URI, URI:Scheme:File,
 
@@ -57,9 +57,9 @@ TYPE
   Rules* = POINTER TO RulesDesc;
   RulesDesc* = RECORD
     backend: LONGINT;
-    libraryName: String.String;
+    libraryName: STRING;
     (**If set, then all modules are compiled for this library.  *)
-    libraryVersion: String.String;
+    libraryVersion: STRING;
     (**When building a library, then version used in the final link step
        is taken from this field.  *)
     checkAllImportsModule: Rep.Module;
@@ -164,17 +164,12 @@ PROCEDURE (r: Rules) SetBackend* (backend: LONGINT);
     r.backend := backend;
   END SetBackend;
 
-PROCEDURE (r: Rules) SetLibraryName* (name, version: ARRAY OF CHAR);
+PROCEDURE (r: Rules) SetLibraryName* (name, version: STRING);
 (**Calling this method with empty string as @oparam{name} clears all
    library specific data from @oparam{r}.  *)
   BEGIN
-    IF (name = "") THEN
-      r.libraryName := NIL;
-      r.libraryVersion := NIL;
-    ELSE
-      r.libraryName := String.New(name);
-      r.libraryVersion := String.New(version);
-    END;
+    r.libraryName := name;
+    r.libraryVersion := version;
   END SetLibraryName;
 
 PROCEDURE (r: Rules) SetAllImportsModule*(module: Rep.Module);
@@ -212,7 +207,6 @@ PROCEDURE (r: Rules) GetModuleInfo* (module: Rep.Module): ModuleInfo;
       mInfo := obj(ModuleInfo);
     ELSE
       NEW(mInfo);
-      Object.Init(mInfo);
       FOR i := 0 TO Rep.maxFileId DO
         mInfo.updated[i] := FALSE;
         mInfo.updateResult[i] := FALSE;
@@ -315,6 +309,7 @@ PROCEDURE (r: Rules) WriteError(module: Rep.Module; res: Msg.Msg);
     r.WriteErrList(errList);
   END WriteError;
 
+<*PUSH; Warnings:=FALSE*>
 PROCEDURE WriteImports (module: Rep.Module);
   VAR
     import: Rep.Module;
@@ -335,6 +330,7 @@ PROCEDURE WriteImports (module: Rep.Module);
       END;
     END;
   END WriteImports;
+<*POP*>
 
 PROCEDURE (r: Rules) GetImports(module: Rep.Module): BOOLEAN;
 (**Retrieves the imports of @oparam{module} together with any other data from
@@ -450,9 +446,9 @@ PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN;
     success: BOOLEAN;
     mInfo: ModuleInfo;
     errList: Error.List;
-    libraryName: String.String;
+    libraryName: STRING;
     
-  PROCEDURE DoEmptyBackend(libraryName: String.String): Error.List;
+  PROCEDURE DoEmptyBackend(libraryName: STRING): Error.List;
     VAR
       ast: AST.Node;
       symTab: Sym.Module;
@@ -464,7 +460,7 @@ PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN;
       RETURN errList;
     END DoEmptyBackend;
   
-  PROCEDURE DoSSAtoC(libraryName: String.String): Error.List;
+  PROCEDURE DoSSAtoC(libraryName: STRING): Error.List;
     VAR
       t: TranslateToC.Translator;
     BEGIN
@@ -472,7 +468,7 @@ PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN;
       RETURN TranslateToC.Run(module, libraryName, writeAST, writeIR, t);
     END DoSSAtoC;
   
-  PROCEDURE DoIRtoC(libraryName: String.String): Error.List;
+  PROCEDURE DoIRtoC(libraryName: STRING): Error.List;
     VAR
       t: TranslateToC.Translator;
     BEGIN
@@ -480,7 +476,7 @@ PROCEDURE (r: Rules) CompileModule*(module: Rep.Module): BOOLEAN;
       RETURN TranslateToC.Run(module, libraryName, writeAST, writeIR, t);
     END DoIRtoC;
   
-  PROCEDURE DoSSAtoIA32(libraryName: String.String): Error.List;
+  PROCEDURE DoSSAtoIA32(libraryName: STRING): Error.List;
     VAR
       t: TranslateToIA32.Translator;
     BEGIN
@@ -543,6 +539,7 @@ PROCEDURE (r: Rules) UpdateSymbolFile(module: Rep.Module): BOOLEAN;
     isUpToDate: BOOLEAN;
     errList: Error.List;
     err: Error.Msg;
+    chars: Object.CharsLatin1;
   BEGIN
     IF (module.ifQuality = Rep.completeInterface) THEN
       (* we have the results cached *)
@@ -565,8 +562,8 @@ PROCEDURE (r: Rules) UpdateSymbolFile(module: Rep.Module): BOOLEAN;
              the same repository; assume that this is not intended and
              report a fatal error *)
           err := Error.New (makeContext, partOfAnotherLibrary);
-          err. SetStringAttrib ("name", Msg.GetStringPtr
-                                (module.ifData.libraryName.array^));
+          chars := module.ifData.libraryName(Object.String8).CharsLatin1();
+          err. SetStringAttrib ("name", Msg.GetStringPtr(chars^));
           r.WriteError(module, err);
           RETURN FALSE;
         END;
@@ -608,7 +605,10 @@ PROCEDURE (r: Rules) UpdateSymbolFile(module: Rep.Module): BOOLEAN;
         errList := CreateErrList(module);
         CreateNamespace.CreateNamespace(module.ifData, errList);
         r.WriteErrList(errList);
-        ASSERT(errList.NoErrors());
+        IF ~errList.NoErrors() THEN
+          r.WriteErrList(errList);
+          isUpToDate := FALSE;
+        END;
       END;
       
       RETURN isUpToDate;
@@ -1053,7 +1053,7 @@ PROCEDURE (r: Rules) UpdateMainObjectFile (module: Rep.Module): BOOLEAN;
     RETURN success;
   END UpdateMainObjectFile;
 
-PROCEDURE ModuleClosure*(module: Rep.Module; restrictToLibrary: String.String): ModuleList;
+PROCEDURE ModuleClosure*(module: Rep.Module; restrictToLibrary: STRING): ModuleList;
   VAR
     i: LONGINT;
     dict: Dictionary.Dictionary;

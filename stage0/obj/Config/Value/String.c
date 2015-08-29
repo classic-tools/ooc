@@ -33,7 +33,7 @@ void Config_Value_String__ValueDesc_ValueToString(Config_Value_String__Value v, 
 
   i0 = (OOC_INT32)v;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 652));
-  _copy_8((_check_pointer(i0, 660)),(OOC_INT32)str,str_0d);
+  _copy_8((const void*)(_check_pointer(i0, 660)),(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }
@@ -59,7 +59,7 @@ l4:
 
 void Config_Value_String__ValueDesc_DefiningModule(Config_Value_String__Value v, Config_Value__String str, OOC_LEN str_0d) {
 
-  _copy_8("Config:Value:String",(OOC_INT32)str,str_0d);
+  _copy_8((const void*)"Config:Value:String",(void*)(OOC_INT32)str,str_0d);
   return;
   ;
 }

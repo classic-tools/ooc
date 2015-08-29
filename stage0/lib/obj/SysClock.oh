@@ -3,6 +3,8 @@
 
 #include "__typemap.h"
 #include "RT0.oh"
+#include "RT0.oh"
+#include "Object.oh"
 #define SysClock__maxSecondParts 999
 #define SysClock__zoneMin -780
 #define SysClock__zoneMax 720

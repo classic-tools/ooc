@@ -8,6 +8,8 @@
 #include "Config/Value.oh"
 #include "Config/Source.oh"
 #include "Config/Parser.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct Config_Source_CmdLine__OptionTemplateDesc *Config_Source_CmdLine__OptionTemplate;
 typedef Config_Value__StringPtr *Config_Source_CmdLine__NameArray;
 typedef struct Config_Source_CmdLine__OptionTemplateDesc {

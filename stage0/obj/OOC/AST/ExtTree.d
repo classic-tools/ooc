@@ -1,6 +1,5 @@
 #include "OOC/AST/ExtTree.oh"
-#include "RT0.oh"
-#include "Language/String0.oh"
+#include "Object.oh"
 static void OOC_AST_ExtTree__InitType(OOC_AST_ExtTree__Type t);
 
 /* run-time meta data */

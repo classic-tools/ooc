@@ -1,4 +1,4 @@
-(*	$Id: Memory.Mod,v 1.1 2002/07/16 15:57:43 mva Exp $	*)
+(*	$Id: Memory.Mod,v 1.2 2002/12/19 06:36:46 mva Exp $	*)
 MODULE IO:Memory;
 (*  Implementation of a simple file system in memory.
     Copyright (C) 1999-2001  Michael van Acken
@@ -358,7 +358,7 @@ PROCEDURE (w: Writer) WriteByte* (x: SYSTEM.BYTE);
     END
   END WriteByte;
   
-PROCEDURE (w: Writer) WriteBytes* (VAR x: ARRAY OF SYSTEM.BYTE; 
+PROCEDURE (w: Writer) WriteBytes* (x[NO_COPY]: ARRAY OF SYSTEM.BYTE; 
                                    start: LONGINT; n: LONGINT);
   VAR
     b: File;

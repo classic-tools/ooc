@@ -8,6 +8,8 @@
 #include "Config/Value.oh"
 #include "Config/Source.oh"
 #include "Config/Parser.oh"
+#include "RT0.oh"
+#include "Object.oh"
 typedef struct Config_Source_Environment__VariableTemplateDesc *Config_Source_Environment__VariableTemplate;
 typedef struct Config_Source_Environment__VariableTemplateDesc {
   Config_Source_Environment__VariableTemplate next;

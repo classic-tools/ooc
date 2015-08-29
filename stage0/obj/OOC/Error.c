@@ -31,7 +31,7 @@ OOC_Error__List OOC_Error__NewList(const OOC_CHAR8 fileName__ref[], OOC_LEN file
   i0 = (OOC_INT32)RT0__NewObject(_td_OOC_Error__List.baseTypes[0]);
   list = (OOC_Error__List)i0;
   Msg__InitMsgList((Msg__MsgList)i0);
-  _copy_8((OOC_INT32)fileName,((_check_pointer(i0, 3110))+12),256);
+  _copy_8((const void*)(OOC_INT32)fileName,(void*)((_check_pointer(i0, 3110))+12),256);
   *(OOC_UINT8*)((_check_pointer(i0, 3131))+268) = OOC_FALSE;
   *(OOC_UINT8*)((_check_pointer(i0, 3165))+269) = OOC_TRUE;
   return (OOC_Error__List)i0;
@@ -144,8 +144,8 @@ void OOC_Error__ContextDesc_BaseTemplate(OOC_Error__Context c, Msg__Msg msg, con
   if (i1) goto l15;
   i0 = i0==0;
   if (i0) goto l13;
-  _copy_16((OOC_INT32)text,(OOC_INT32)templ,templ_0d);
-  _copy_16(((OOC_CHAR16[]){10,0}),(OOC_INT32)repl,8192);
+  _copy_16((const void*)(OOC_INT32)text,(void*)(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){10,0}),(void*)(OOC_INT32)repl,8192);
   LongStrings__Append((void*)(OOC_INT32)repl, 8192, (void*)(OOC_INT32)templ, templ_0d);
   i0 = (OOC_INT32)msg;
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5207))+16);
@@ -154,12 +154,12 @@ void OOC_Error__ContextDesc_BaseTemplate(OOC_Error__Context c, Msg__Msg msg, con
   if (!i1) goto l16;
 l7_loop:
   i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5267))+4);
-  _copy_8to16((_check_pointer(i1, 5273)),(OOC_INT32)repl,8192);
+  _copy_8to16((const void*)(_check_pointer(i1, 5273)),(void*)(OOC_INT32)repl,8192);
   LongStrings__Append((void*)(OOC_INT32)repl, 8192, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){61,36,123,0}), 4, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append((void*)(OOC_INT32)repl, 8192, (void*)(OOC_INT32)templ, templ_0d);
   LongStrings__Append(((OOC_CHAR16[]){125,0}), 2, (void*)(OOC_INT32)templ, templ_0d);
-  _copy_16(((OOC_CHAR16[]){10,0}),(OOC_INT32)repl,8192);
+  _copy_16((const void*)((OOC_CHAR16[]){10,0}),(void*)(OOC_INT32)repl,8192);
   LongStrings__Append((void*)(OOC_INT32)repl, 8192, (void*)(OOC_INT32)templ, templ_0d);
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5549));
   attr = (Msg__Attribute)i0;
@@ -167,11 +167,11 @@ l7_loop:
   if (i1) goto l7_loop;
   goto l16;
 l13:
-  _copy_16(((OOC_CHAR16[]){58,36,123,108,105,110,101,125,58,36,123,99,111,108,117,109,110,125,58,32,0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){58,36,123,108,105,110,101,125,58,36,123,99,111,108,117,109,110,125,58,32,0}),(void*)(OOC_INT32)templ,templ_0d);
   LongStrings__Append((void*)(OOC_INT32)text, text_0d, (void*)(OOC_INT32)templ, templ_0d);
   goto l16;
 l15:
-  _copy_16(((OOC_CHAR16[]){36,123,112,111,115,125,58,49,48,48,32,0}),(OOC_INT32)templ,templ_0d);
+  _copy_16((const void*)((OOC_CHAR16[]){36,123,112,111,115,125,58,49,48,48,32,0}),(void*)(OOC_INT32)templ,templ_0d);
   LongStrings__Append((void*)(OOC_INT32)text, text_0d, (void*)(OOC_INT32)templ, templ_0d);
 l16:
   return;
@@ -222,8 +222,8 @@ l5:
       
 l7:
       if (!i3) goto l10;
-      i2 = *(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6839)))), &_td_Msg__IntAttributeDesc, 6839)), 6852))+8);
       i1 = *(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6899)))), &_td_Msg__IntAttributeDesc, 6899)), 6912))+8);
+      i2 = *(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6839)))), &_td_Msg__IntAttributeDesc, 6839)), 6852))+8);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6804)))), Msg__MsgDesc_SetIntAttrib)),Msg__MsgDesc_SetIntAttrib)((Msg__Msg)i0, "pos", 4, (i2-i1));
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6933)))), Msg__MsgDesc_GetText)),Msg__MsgDesc_GetText)((Msg__Msg)i0, (void*)(OOC_INT32)text, 8192);
       i1 = (OOC_INT32)attrPos;
@@ -349,7 +349,7 @@ l25:
   _assert((i0!=(OOC_INT32)0), 127, 8460);
   i1 = (OOC_INT32)errList;
   i2 = (
-  _cmp8((const void*)((_check_pointer(i1, 8503))+12),(const void*)""))!=0;
+  _cmp8((const void*)((_check_pointer(i1, 8503))+12),(const void*)""))!=(OOC_INT32)0;
   if (i2) goto l3;
   i2=OOC_FALSE;
   goto l5;

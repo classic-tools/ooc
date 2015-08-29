@@ -1,4 +1,4 @@
-/*	$Id: PFD.c,v 1.3 2002/12/08 22:30:02 mva Exp $	*/
+/*	$Id: PFD.c,v 1.4 2002/12/19 06:36:46 mva Exp $	*/
 /*  Generalized access to POSIX-style file descriptors.
     Copyright (C) 1997-2000  Michael van Acken
 
@@ -319,7 +319,7 @@ void IO_PFD__WriterDesc_SetPos(IO_PFD__Writer w, OOC_INT32 newPos) {
   }
 }
 
-void IO_PFD__WriterDesc_WriteBytes(IO_PFD__Writer w, OOC_BYTE* x, OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n) {
+void IO_PFD__WriterDesc_WriteBytes(IO_PFD__Writer w, const OOC_BYTE* x, OOC_LEN x_0d, OOC_INT32 start, OOC_INT32 n) {
   IO_PFD__Channel ch = (IO_PFD__Channel)w->base;
 
   if (w->res == Channel__done) {
