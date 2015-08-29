@@ -1545,7 +1545,7 @@ l103:
   goto l108;
 l105:
   Out__String("oo2c/gcc ", 10);
-  Out__String("2.0.3", 6);
+  Out__String("2.0.4", 6);
   Out__Ln();
   _halt((OOC_INT32)0);
   goto l108;

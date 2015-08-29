@@ -21,7 +21,7 @@
 #define Ascii__cr "\015"
 #define Ascii__so "\016"
 #define Ascii__si "\017"
-#define Ascii__dle "\001"
+#define Ascii__dle "\020"
 #define Ascii__dc1 "\021"
 #define Ascii__dc2 "\022"
 #define Ascii__dc3 "\023"

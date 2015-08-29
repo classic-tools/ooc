@@ -1,4 +1,4 @@
-(*	$Id: Ascii.Mod,v 1.1 2002/04/15 22:42:48 mva Exp $	*)
+(*	$Id: Ascii.Mod,v 1.2 2003/01/04 10:19:19 mva Exp $	*)
 MODULE Ascii;
 (*  Standard short character names for control chars.
     Copyright (C) 2002  Michael van Acken
@@ -23,7 +23,7 @@ CONST
   eot* = 04X;   enq* = 05X;   ack* = 06X;   bel* = 07X;
   bs * = 08X;   ht * = 09X;   lf * = 0AX;   vt * = 0BX;
   ff * = 0CX;   cr * = 0DX;   so * = 0EX;   si * = 0FX;
-  dle* = 01X;   dc1* = 11X;   dc2* = 12X;   dc3* = 13X;
+  dle* = 10X;   dc1* = 11X;   dc2* = 12X;   dc3* = 13X;
   dc4* = 14X;   nak* = 15X;   syn* = 16X;   etb* = 17X;
   can* = 18X;   em * = 19X;   sub* = 1AX;   esc* = 1BX;
   fs * = 1CX;   gs * = 1DX;   rs * = 1EX;   us * = 1FX;

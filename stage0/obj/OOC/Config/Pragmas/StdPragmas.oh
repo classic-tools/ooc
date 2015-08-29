@@ -6,7 +6,7 @@
 #include <OOC/Config/Pragmas.oh>
 #include <RT0.oh>
 #include <Object.oh>
-#define OOC_Config_Pragmas_StdPragmas__defaultCompilerVersion "2.0.3"
+#define OOC_Config_Pragmas_StdPragmas__defaultCompilerVersion "2.0.4"
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__warnings;
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__assertions;
 extern Config_Section_Options__Option OOC_Config_Pragmas_StdPragmas__indexCheck;

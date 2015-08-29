@@ -1,6 +1,6 @@
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
-    Copyright (C) 2001, 2002  Michael van Acken, Stewart Greenhill
+    Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
 
     This file is part of OOC.
 
@@ -1414,13 +1414,17 @@ PROCEDURE (b: Builder) WarnSym (code: Error.Code; sym: Symbol);
   VAR
     e: Error.Msg;
   BEGIN
+    e := Error.New (irContext, code);
+    e. SetIntAttrib ("pos", sym. pos);
+    e. SetIntAttrib ("line", sym. line);
+    e. SetIntAttrib ("column", sym. column);
+
+    (* set lastError even if the warning is discard, so that attributes
+       can be added to it without any precautions *)
+    b. lastError := e;
+    
     IF GetPragmaValue(b, StdPragmas.warnings, sym.pos) THEN
-      e := Error.New (irContext, code);
-      e. SetIntAttrib ("pos", sym. pos);
-      e. SetIntAttrib ("line", sym. line);
-      e. SetIntAttrib ("column", sym. column);
       b. errList. Append (e);
-      b. lastError := e;
     END;
   END WarnSym;
 
@@ -1745,6 +1749,7 @@ PROCEDURE (b: Builder) NewCharConst16* (sym: Symbol): Expression;
   VAR
     v: LONGINT;
     type: INTEGER;
+    str: STRING;
 
   PROCEDURE ValueOf(str[NO_COPY]: ARRAY OF CHAR): LONGINT;
     VAR
@@ -1807,13 +1812,15 @@ PROCEDURE (b: Builder) NewCharConst16* (sym: Symbol): Expression;
     ELSE
       IF (v <= ORD (Predef.maxChar)) THEN
         type := Predef.char;
+        str := Object.NewLatin1Char(CHR(v));
       ELSIF (v <= ORD(Predef.maxLongChar)) THEN
         type := Predef.longchar;
+        str := Object.NewUCS4Char(UCS4CHR(v));
       ELSE
         type := Predef.ucs4char;
+        str := Object.NewUCS4Char(UCS4CHR(v));
       END;
-      RETURN NewConst(sym, Predef.GetType(type),
-                      Boxed.NewString(Object.NewUCS4Char(UCS4CHR(v))));
+      RETURN NewConst(sym, Predef.GetType(type), Boxed.NewString(str));
     END
   END NewCharConst16;
 
@@ -2370,6 +2377,11 @@ PROCEDURE (b: Builder) NewLen* (sym: Symbol; array: Expression;
     variant: Variant;
     arrayVariable: Expression;
   BEGIN
+    IF ~(array.type IS Sym.Array) & ~TR.IsStringConst(array.type) THEN
+      b.ErrSym(notArray, array.sym);
+      RETURN b.errorExpr;
+    END;
+    
     NEW (len);
 
     arrayVariable := array;
@@ -5218,7 +5230,7 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
       ELSIF (id = Id.plus) & 
             (isChar OR
              TR.IsStringConst(left.type) OR
-             (left.type = b.stringType)) THEN
+             TR.IsSTRING(left.type)) THEN
         NEW(exprList, 2);
         exprList[0] := left;
         exprList[1] := right;

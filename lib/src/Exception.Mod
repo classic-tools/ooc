@@ -1,4 +1,4 @@
-(* 	$Id: Exception.Mod,v 1.3 2003/01/01 14:02:23 mva Exp $	 *)
+(* 	$Id: Exception.Mod,v 1.4 2003/01/05 18:23:48 mva Exp $	 *)
 MODULE Exception [FOREIGN "C"; LINK FILE "Exception.c" END];
 (*  Implements the run-time part of the exceptions mechanism.
     Copyright (C) 2002,2003  Michael van Acken
@@ -52,6 +52,7 @@ IMPORT
 
    @example
    Exception.PopContext;
+   temp := Exception.Current();
    WITH temp: T1 DO
      C1;
    | temp: T2 DO
