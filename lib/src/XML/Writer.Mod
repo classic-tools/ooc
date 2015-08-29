@@ -1,4 +1,4 @@
-(*      $Id: Writer.Mod,v 1.7 2003/03/11 22:08:43 mva Exp $   *)
+(*      $Id: Writer.Mod,v 1.11 2003/06/23 20:56:01 mva Exp $   *)
 MODULE XML:Writer [OOC_EXTENSIONS];
 (*  Support for generating XML documents.
     Copyright (C) 2000-2003  Michael van Acken
@@ -222,20 +222,29 @@ PROCEDURE (w: Writer) Write* (str[NO_COPY]: ARRAY OF Char);
     w. WriteI (str, 0, LongStrings.Length (str))
   END Write;
 
+PROCEDURE (w: Writer) WriteObject*(obj: Object.Object);
+  VAR
+    str: STRING;
+    str8: Object.String8;
+    chars: Object.CharsLatin1;
+  BEGIN
+    str := obj.ToString();
+    str8 := str.ToString8("?");
+    chars := str8.CharsLatin1();
+    w.WriteLatin1I(chars^, 0, str8.length);
+  END WriteObject;
+
 PROCEDURE (w: Writer) WriteLatin1* (str[NO_COPY]: ARRAY OF CHAR);
   BEGIN
     w. WriteLatin1I (str, 0, Strings.Length (str))
   END WriteLatin1;
 
 PROCEDURE (w: Writer) WriteURI* (uri: URI.URI; absolute: BOOLEAN);
-  VAR
-    str: ARRAY 1024 OF CHAR;
   BEGIN
     IF ~absolute THEN
-      uri := uri. MakeRelative (w. baseURI)
+      uri := uri.MakeRelative(w.baseURI);
     END;
-    uri. GetString (str);
-    w. WriteLatin1 (str)
+    w.WriteObject(uri.ToString())
   END WriteURI;
 
 PROCEDURE (w: Writer) WriteLInt* (value: LONGINT);
@@ -391,7 +400,7 @@ PROCEDURE (w: Writer) AttrObject* (name[NO_COPY]: ARRAY OF Char;
     chars: Object.CharsLatin1;
     s: Object.String;
   BEGIN  (* FIXME... handle wide chars *)
-    s := value.ToString();
+    s := value.ToString8("?");
     chars := s(Object.String8).CharsLatin1();
     w.AttrStringLatin1(name, chars^);
   END AttrObject;
@@ -415,15 +424,12 @@ PROCEDURE (w: Writer) AttrBool* (name[NO_COPY]: ARRAY OF Char; value: BOOLEAN);
 
 PROCEDURE (w: Writer) AttrURI* (name[NO_COPY]: ARRAY OF Char; uri: URI.URI;
                                 absolute: BOOLEAN);
-  VAR
-    str: ARRAY 1024 OF CHAR;
   BEGIN
     ASSERT (w. openStartTag);
     IF ~absolute THEN
       uri := uri. MakeRelative (w. baseURI)
     END;
-    uri. GetString (str);
-    w. AttrStringLatin1 (name, str)
+    w.AttrObject(name, uri.ToString());
   END AttrURI;
 
 

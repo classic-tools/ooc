@@ -45,30 +45,30 @@ typedef struct OOC_SSA_XML__WriterDesc {
 extern void OOC_SSA_XML__InitWriter(OOC_SSA_XML__Writer w, IO__ByteChannel cw);
 extern OOC_SSA_XML__Writer OOC_SSA_XML__NewWriter(IO__ByteChannel cw);
 extern void OOC_SSA_XML__WriterDesc_WriteInstrAttr(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstrAttr 33
+#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstrAttr 34
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteInstrAttr)(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
 extern void OOC_SSA_XML__WriterDesc_WriteInstrChildren(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstrChildren 34
+#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstrChildren 35
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteInstrChildren)(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
 extern OOC_INT32 OOC_SSA_XML__WriterDesc_GetId(OOC_SSA_XML__Writer w, OOC_SSA__Result result);
-#define _TBN_OOC_SSA_XML__WriterDesc_GetId 31
+#define _TBN_OOC_SSA_XML__WriterDesc_GetId 32
 typedef OOC_INT32 (*_TBP_OOC_SSA_XML__WriterDesc_GetId)(OOC_SSA_XML__Writer w, OOC_SSA__Result result);
 extern void OOC_SSA_XML__WriterDesc_AttrId(OOC_SSA_XML__Writer w, const OOC_CHAR16 name__ref[], OOC_LEN name_0d, OOC_SSA__Result result);
-#define _TBN_OOC_SSA_XML__WriterDesc_AttrId 29
+#define _TBN_OOC_SSA_XML__WriterDesc_AttrId 30
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_AttrId)(OOC_SSA_XML__Writer w, const OOC_CHAR16 name__ref[], OOC_LEN name_0d, OOC_SSA__Result result);
 extern void OOC_SSA_XML__WriterDesc_AttrRef(OOC_SSA_XML__Writer w, OOC_SSA__Result res);
-#define _TBN_OOC_SSA_XML__WriterDesc_AttrRef 30
+#define _TBN_OOC_SSA_XML__WriterDesc_AttrRef 31
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_AttrRef)(OOC_SSA_XML__Writer w, OOC_SSA__Result res);
 extern void OOC_SSA_XML__WriterDesc_WriteInstr(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
-#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstr 32
+#define _TBN_OOC_SSA_XML__WriterDesc_WriteInstr 33
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteInstr)(OOC_SSA_XML__Writer w, OOC_SSA__Instr instr);
 extern void OOC_SSA_XML__WriterDesc_WriteProcBody(OOC_SSA_XML__Writer w, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
-#define _TBN_OOC_SSA_XML__WriterDesc_WriteProcBody 35
+#define _TBN_OOC_SSA_XML__WriterDesc_WriteProcBody 36
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteProcBody)(OOC_SSA_XML__Writer w, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
 extern void OOC_SSA_XML__Write(IO__ByteChannel cw, OOC_SSA__ProcBlock pb, OOC_CHAR8 includeDeadCode);
 extern void OOC_SSA_XML__ToStderr(volatile OOC_SSA__ProcBlock pb);
 extern void OOC_SSA_XML__WriterDesc_WriteSchedule(OOC_SSA_XML__Writer w, OOC_SSA_Schedule__Block domRoot);
-#define _TBN_OOC_SSA_XML__WriterDesc_WriteSchedule 36
+#define _TBN_OOC_SSA_XML__WriterDesc_WriteSchedule 37
 typedef void (*_TBP_OOC_SSA_XML__WriterDesc_WriteSchedule)(OOC_SSA_XML__Writer w, OOC_SSA_Schedule__Block domRoot);
 extern void OOC_SSA_XML__WriteSchedule(IO__ByteChannel cw, OOC_SSA_Schedule__Block domRoot);
 extern void OOC_OOC_SSA_XML_init(void);

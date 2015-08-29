@@ -8,7 +8,7 @@
 #include <Object.oh>
 #include <ADT/ArrayList.oh>
 #include <XML/Error.oh>
-#include <Config/Value.oh>
+#include <Config.oh>
 #include <Config/Section/Options.oh>
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
@@ -53,7 +53,7 @@ typedef struct OOC_Package__FileSetDesc {
 typedef struct OOC_Package__KeyValueDesc *OOC_Package__KeyValue;
 typedef struct OOC_Package__KeyValueDesc {
   Object__String key;
-  Config_Value__Value value;
+  Config__Variable value;
 } OOC_Package__KeyValueDesc;
 typedef struct OOC_Package__PackageDesc *OOC_Package__Package;
 typedef struct OOC_Package__PackageDesc {
@@ -83,27 +83,29 @@ extern void OOC_Package__FileSetDesc_Append(OOC_Package__FileSet fileSet, OOC_Pa
 #define _TBN_OOC_Package__FileSetDesc_Append 0
 typedef void (*_TBP_OOC_Package__FileSetDesc_Append)(OOC_Package__FileSet fileSet, OOC_Package__FileData fdata);
 extern OOC_Package__File OOC_Package__NewFile(Object__String name, Object__String destName);
-extern OOC_Package__KeyValue OOC_Package__NewKeyValue(Object__String key, Config_Value__Value value);
+extern OOC_Package__KeyValue OOC_Package__NewKeyValue(Object__String key, Config__Variable value);
 extern void OOC_Package__RepositoryDesc_MergePackage(OOC_Package__Repository r, OOC_Package__Package pkg);
 #define _TBN_OOC_Package__RepositoryDesc_MergePackage 0
 typedef void (*_TBP_OOC_Package__RepositoryDesc_MergePackage)(OOC_Package__Repository r, OOC_Package__Package pkg);
+extern OOC_CHAR8 OOC_Package__RepositoryDesc_PackageInstalled(OOC_Package__Repository r, Object__String pkgName);
+#define _TBN_OOC_Package__RepositoryDesc_PackageInstalled 1
+typedef OOC_CHAR8 (*_TBP_OOC_Package__RepositoryDesc_PackageInstalled)(OOC_Package__Repository r, Object__String pkgName);
 extern OOC_Package__FileSet OOC_Package__Normalize(OOC_Package__FileSet fileSet);
-extern OOC_Package__Package OOC_Package__GetPackage(const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Repository__Repository *rep);
+extern OOC_Package__Package OOC_Package__GetPackage(Object__String pkgName, OOC_Repository__Repository *rep);
 extern OOC_CHAR8 OOC_Package__ParseMetaData(Config_Section_Options__Section options, Config_Section_Options__Section pragmas);
-extern void OOC_Package__WritePackage(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
-extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
-extern void OOC_Package__RemovePkgInfoCmd(OOC_Package__Package pkg, const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 uninstall__ref[], OOC_LEN uninstall_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern OOC_Package__Package OOC_Package__GetPkgInfo(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, const OOC_CHAR8 pkgName__ref[], OOC_LEN pkgName_0d, OOC_Error__List *errList);
-extern OOC_Package__Repository OOC_Package__GetRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d, OOC_Error__List *errList);
-extern OOC_CHAR8 OOC_Package__UpdateRepository(const OOC_CHAR8 targetDir__ref[], OOC_LEN targetDir_0d);
+extern void OOC_Package__WritePackage(OOC_Package__Package pkg, Object__String targetDir);
+extern void OOC_Package__WriteRepository(OOC_Package__Repository rep, Object__String targetDir);
+extern Object__String OOC_Package__RemovePkgInfoCmd(OOC_Package__Package pkg, Object__String targetDir, Object__String uninstall);
+extern OOC_Package__Package OOC_Package__GetPkgInfo(Object__String targetDir, Object__String pkgName, OOC_Error__List *errList);
+extern OOC_Package__Repository OOC_Package__GetRepository(Object__String targetDir, OOC_Error__List *errList);
+extern OOC_CHAR8 OOC_Package__UpdateRepository(Object__String targetDir);
 extern void OOC_OOC_Package_init(void);
 extern void OOC_OOC_Package_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Package__URIBuffer;
 extern RT0__StructDesc _td_OOC_Package__Version;
 extern RT0__StructDesc _td_OOC_Package__VersionDesc;
-extern RT0__StructDesc _td_OOC_Package__860;
+extern RT0__StructDesc _td_OOC_Package__715;
 extern RT0__StructDesc _td_OOC_Package__Executable;
 extern RT0__StructDesc _td_OOC_Package__ExecutableDesc;
 extern RT0__StructDesc _td_OOC_Package__Library;
@@ -122,28 +124,17 @@ extern RT0__StructDesc _td_OOC_Package__Repository;
 extern RT0__StructDesc _td_OOC_Package__RepositoryDesc;
 extern RT0__StructDesc _td_OOC_Package__ErrorContext;
 extern RT0__StructDesc _td_OOC_Package__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Package__3049;
-extern RT0__StructDesc _td_OOC_Package__8507;
-extern RT0__StructDesc _td_OOC_Package__8496;
-extern RT0__StructDesc _td_OOC_Package__13844;
-extern RT0__StructDesc _td_OOC_Package__13833;
-extern RT0__StructDesc _td_OOC_Package__14111;
-extern RT0__StructDesc _td_OOC_Package__15382;
-extern RT0__StructDesc _td_OOC_Package__18586;
-extern RT0__StructDesc _td_OOC_Package__18788;
-extern RT0__StructDesc _td_OOC_Package__29512;
-extern RT0__StructDesc _td_OOC_Package__30222;
-extern RT0__StructDesc _td_OOC_Package__31812;
-extern RT0__StructDesc _td_OOC_Package__31924;
-extern RT0__StructDesc _td_OOC_Package__31954;
-extern RT0__StructDesc _td_OOC_Package__32593;
-extern RT0__StructDesc _td_OOC_Package__35678;
-extern RT0__StructDesc _td_OOC_Package__36913;
-extern RT0__StructDesc _td_OOC_Package__36965;
-extern RT0__StructDesc _td_OOC_Package__37374;
-extern RT0__StructDesc _td_OOC_Package__37961;
-extern RT0__StructDesc _td_OOC_Package__38450;
-extern RT0__StructDesc _td_OOC_Package__38703;
+extern RT0__StructDesc _td_OOC_Package__2921;
+extern RT0__StructDesc _td_OOC_Package__8593;
+extern RT0__StructDesc _td_OOC_Package__8582;
+extern RT0__StructDesc _td_OOC_Package__13969;
+extern RT0__StructDesc _td_OOC_Package__13958;
+extern RT0__StructDesc _td_OOC_Package__14236;
+extern RT0__StructDesc _td_OOC_Package__15799;
+extern RT0__StructDesc _td_OOC_Package__18934;
+extern RT0__StructDesc _td_OOC_Package__19136;
+extern RT0__StructDesc _td_OOC_Package__32044;
+extern RT0__StructDesc _td_OOC_Package__32162;
 #endif /* _MODULE_OOC_Package_ */
 
 /* --- */

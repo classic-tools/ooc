@@ -1,4 +1,4 @@
-(* 	$Id: Predef.Mod,v 1.54 2003/05/04 12:02:57 mva Exp $	 *)
+(* 	$Id: Predef.Mod,v 1.56 2003/07/04 08:50:25 mva Exp $	 *)
 MODULE OOC:SymbolTable:Predef;
 (*  Defines symbol table of pseudo module with predefined entities.
     Copyright (C) 2000-2003  Michael van Acken
@@ -85,9 +85,9 @@ CONST
      name when producing values the are array indices or lengths.  *)
 
 CONST
-  minChar* = MIN(CHAR);         maxChar* = MAX(CHAR);
-  minLongChar* = MIN(LONGCHAR); maxLongChar* = MAX(LONGCHAR);
-  minUCS4Char* = MIN(UCS4CHAR); maxUCS4Char* = MAX(UCS4CHAR);
+  minChar* = 0X;     maxChar* = 0FFX;
+  minLongChar* = 0X; maxLongChar* = 0FFFFX;
+  minUCS4Char* = 0X; maxUCS4Char* = 10FFFFX;
   
 VAR
   minConst, maxConst: ARRAY lastId+1 OF Boxed.Object;
@@ -224,8 +224,8 @@ PROCEDURE CreatePredef* (stb: Builder.Builder): Sym.Module;
                          Boxed.NewString(Object.NewLatin1Char(minChar)),
                          Boxed.NewString(Object.NewLatin1Char(maxChar)));
     ptype := PredefType (stb, module, longchar, "LONGCHAR", 2, 2,
-                         Boxed.NewString(Object.NewUCS2Char(minLongChar)),
-                         Boxed.NewString(Object.NewUCS2Char(maxLongChar)));
+                         Boxed.NewString(Object.NewUTF16Char(minLongChar)),
+                         Boxed.NewString(Object.NewUTF16Char(maxLongChar)));
     ptype := PredefType (stb, module, ucs4char, "UCS4CHAR", 4, 4,
                          Boxed.NewString(Object.NewUCS4Char(minUCS4Char)),
                          Boxed.NewString(Object.NewUCS4Char(maxUCS4Char)));
@@ -240,8 +240,8 @@ PROCEDURE CreatePredef* (stb: Builder.Builder): Sym.Module;
                          BigInt.NewInt(MAX (LONGINT)));
     IF (Autoconf.bitsTargetInteger > 32) THEN
       ptype := PredefType (stb, module, hugeint, "HUGEINT", 8, 8,
-                           BigInt.NewString("-9223372036854775808", 10),
-                           BigInt.NewString("9223372036854775807", 10));
+                           BigInt.NewLatin1("-9223372036854775808", 10),
+                           BigInt.NewLatin1("9223372036854775807", 10));
     END;
     ptype := PredefType (stb, module, real, "REAL", 4, 4,
                          Boxed.NewLongReal(MIN (REAL)),

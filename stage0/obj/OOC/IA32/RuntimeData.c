@@ -27,9 +27,9 @@ void OOC_IA32_RuntimeData__Write(OOC_IA32_Writer__Writer w, OOC_SymbolTable__Mod
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1326)))), OOC_IA32_Writer__WriterDesc_Label)),OOC_IA32_Writer__WriterDesc_Label)((OOC_IA32_Writer__Writer)i0, (Object__String)((OOC_INT32)_c1));
       i0 = (OOC_INT32)w;
       i1 = (OOC_INT32)symTab;
-      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1374))+16);
+      i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1374))+20);
       i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1380))+12);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1374))+16);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1374))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1380))+12);
       i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 1385)), 0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1351)))), OOC_IA32_Writer__WriterDesc_StringLiteral)),OOC_IA32_Writer__WriterDesc_StringLiteral)((OOC_IA32_Writer__Writer)i0, (void*)(_check_pointer(i2, 1385)), i1);

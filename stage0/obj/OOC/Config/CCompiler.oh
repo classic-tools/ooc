@@ -16,27 +16,16 @@ extern Config_Section_Options__Option OOC_Config_CCompiler__uninstall;
 extern Config_Section_Options__Option OOC_Config_CCompiler__bindir;
 extern Config_Section_Options__Option OOC_Config_CCompiler__oocdir;
 extern OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool(void);
-extern void OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_Config_CCompiler__InstallDirectoryCmd(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_Config_CCompiler__InstallProgramCmd(URI__URI file, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
-extern void OOC_Config_CCompiler__UninstallProgramCmd(Object__String path, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
+extern Object__String OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary);
+extern Object__String OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary);
+extern Object__String OOC_Config_CCompiler__InstallDirectoryCmd(Object__String path);
+extern Object__String OOC_Config_CCompiler__InstallProgramCmd(URI__URI file, OOC_CHAR8 asLibrary);
+extern Object__String OOC_Config_CCompiler__UninstallProgramCmd(Object__String path, OOC_CHAR8 asLibrary);
 extern void OOC_Config_CCompiler__RegisterConfig(void);
 extern void OOC_OOC_Config_CCompiler_init(void);
 extern void OOC_OOC_Config_CCompiler_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Config_CCompiler__1405;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__1429;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__1918;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__1949;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__3832;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__3863;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__4343;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__4367;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__4642;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__4673;
-extern RT0__StructDesc _td_OOC_Config_CCompiler__5384;
 #endif /* _MODULE_OOC_Config_CCompiler_ */
 
 /* --- */

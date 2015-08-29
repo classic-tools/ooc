@@ -1,4 +1,4 @@
-(* 	$Id: CreateSymTab.Mod,v 1.40 2003/05/11 13:56:32 mva Exp $	 *)
+(* 	$Id: CreateSymTab.Mod,v 1.45 2003/06/11 14:02:44 sgreenhill Exp $	 *)
 MODULE OOC:AST:ExtTree:CreateSymTab;
 (*  Creates symbol table from abstract syntax tree of module `ExtTree'.
     Copyright (C) 2000-2003  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:AST:ExtTree:CreateSymTab;
 *)
 
 IMPORT
-  Msg, Object, URI, ParserURI := URI:Parser,
+  Object, Exception, URI, ParserURI := URI:Parser,
   OOC:Scanner:Symbol, OOC:AST, OOC:Scanner:BasicList, OOC:AST:ExtTree,
   Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
   SymTabBuilder := OOC:SymbolTable:Builder;
@@ -218,11 +218,9 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
     mf: ExtTree.ModuleFlags;
     uri: URI.URI;
     str, prefixOption, suffixOption: STRING;
-    res: Msg.Msg;
     i, j: LONGINT;
     n: AST.Node;
     depList: Object.StringArrayPtr;
-    chars: Object.CharsLatin1;
   BEGIN
     moduleName := GetName (module. name. nameList. n[0]);
     Sym.InitName (moduleName, module. moduleName, moduleName. pos, 
@@ -243,7 +241,6 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
           END;
           str := mf. callConv. GetString (TRUE);
           callConv := Sym.StringToCallConv (str);
-          
           v. stb. SetClass (class);
           
         | n: ExtTree.Terminal DO
@@ -251,7 +248,7 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
         END;
       END;
     END;
-    
+
     moduleDecl := v. stb. NewModule (moduleName, module. name. docString,
                                      class, callConv, module);
     IF (module. flags # NIL) THEN  (* process list of flag names *)
@@ -274,9 +271,11 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
         IF (n # NIL) THEN  (* skip empty section *)
           WITH n: ExtTree.LinkFileFlag DO
             str := n. fileName. GetString (TRUE);
-            chars := str(Object.String8).CharsLatin1();
-            uri := ParserURI.NewURI (chars^, v. baseURI, res);
-            ASSERT (res = NIL);
+            TRY
+              uri := ParserURI.NewURI(str(Object.String8), v.baseURI);
+            CATCH Exception.ParseError:
+              ASSERT(FALSE);
+            END;
             ASSERT (uri # NIL);
             uri := uri. MakeRelative (v. rootURI);
             IF (n. prefixOpt # NIL) THEN
@@ -312,7 +311,15 @@ PROCEDURE (v: Visitor) VisitModule* (module: ExtTree.Module);
                 depList[j DIV 2] := n. dependencies. n[j](ExtTree.Terminal). GetString (TRUE);
               END;
             END;
-            moduleDecl. AddLinkLib (str, depList, prefixOption, suffixOption);
+
+           IF n.lib(ExtTree.Terminal).sym.str^="LIB" THEN
+              moduleDecl. AddLinkLib (str, depList, prefixOption, suffixOption,Sym.libTypeStandard);
+            ELSIF n.lib(ExtTree.Terminal).sym.str^="FRAMEWORK" THEN
+              moduleDecl. AddLinkLib (str, depList, prefixOption, suffixOption,Sym.libTypeFramework);
+            ELSE
+              (* This should never happen, precondition in the parser! *)
+              ASSERT(FALSE);
+            END;
           ELSE
             (* ignore list of flags for now *)
           END;
@@ -498,6 +505,24 @@ PROCEDURE (v: Visitor) VisitFPSection* (fpSection: ExtTree.FPSection);
     END
   END VisitFPSection;
 
+  PROCEDURE ParseFormalParsFlags (fpars: Sym.FormalPars; flags: ExtTree.NodeList);
+    VAR
+      i: LONGINT;
+      n: ExtTree.Node;
+    BEGIN
+      FOR i := 0 TO flags. len-1 BY 2 DO
+        n := flags. n[i](ExtTree.Node);
+        WITH n: ExtTree.Terminal DO
+          CASE n.sym.id OF
+          | Symbol.stringSingle, Symbol.stringDouble:
+            fpars. callConv := Sym.StringToCallConv(n. GetString (TRUE));
+          ELSE
+            fpars. AddFlag(GetName(n));
+          END;
+        END;
+      END;
+    END ParseFormalParsFlags;
+
 PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
   VAR
     proc: Sym.ProcDecl;
@@ -509,7 +534,7 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
     i: LONGINT;
     nodePtr: AST.Node;
 
-  PROCEDURE ParseFlags (proc: Sym.ProcDecl; flags: ExtTree.NodeList);
+  PROCEDURE ParseProcDeclFlags (proc: Sym.ProcDecl; flags: ExtTree.NodeList);
     VAR
       i: LONGINT;
       n: ExtTree.Node;
@@ -525,9 +550,9 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
           END;
         END;
       END;
-    END ParseFlags;
+    END ParseProcDeclFlags;
   
-  BEGIN
+   BEGIN
     endPos := EndOfType (procDecl. formalPars);
     IF (endPos < 0) THEN
       endPos := EndOfType (procDecl. identDef. ident)
@@ -561,7 +586,9 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
     END;
     IF (procDecl. formalPars # NIL) THEN
       fpar := procDecl. formalPars(ExtTree.FormalPars);
-      AddFlags(formalPars, fpar.flags);
+      IF fpar.flags # NIL THEN
+        ParseFormalParsFlags(formalPars, fpar.flags.flagList(ExtTree.NodeList));
+      END;
       IF (fpar. fpSections # NIL) THEN
         FOR i := 0 TO fpar. fpSections. len-1 BY 2 DO
           nodePtr := fpar. fpSections. n[i];
@@ -587,7 +614,7 @@ PROCEDURE (v: Visitor) VisitProcDecl* (procDecl: ExtTree.ProcDecl);
       END;
     END;
     IF (procDecl. flags # NIL) THEN
-      ParseFlags (proc, procDecl. flags. flagList(ExtTree.NodeList));
+      ParseProcDeclFlags (proc, procDecl. flags. flagList(ExtTree.NodeList));
     END;
     
     IF (procDecl. body # NIL) THEN
@@ -699,6 +726,7 @@ PROCEDURE (v: Visitor) VisitProcType* (procType: ExtTree.ProcType);
     i: LONGINT;
     nodePtr: AST.Node;
     type: Sym.Type;
+    fpars : ExtTree.FormalPars;
   BEGIN
     formalPars := v. stb. NewFormalPars (v. parent, 
                                       GetPosition (procType. procedure));
@@ -709,7 +737,11 @@ PROCEDURE (v: Visitor) VisitProcType* (procType: ExtTree.ProcType);
                          formalPars));
     END;
     IF (procType.formalPars # NIL) THEN
-      AddFlags(formalPars, procType.formalPars(ExtTree.FormalPars).flags);
+      fpars := procType.formalPars(ExtTree.FormalPars);
+      IF fpars.flags # NIL THEN
+        ParseFormalParsFlags(formalPars,
+          fpars.flags.flagList(ExtTree.NodeList))
+      END
     END;
     IF (procType. formalPars # NIL) THEN
       fpar := procType. formalPars(ExtTree.FormalPars);

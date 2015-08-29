@@ -1,4 +1,4 @@
-(* 	$Id: CreateNamespace.Mod,v 1.50 2003/05/11 14:52:54 mva Exp $	 *)
+(* 	$Id: CreateNamespace.Mod,v 1.59 2003/07/06 21:49:42 mva Exp $	 *)
 MODULE OOC:SymbolTable:CreateNamespace [OOC_EXTENSIONS];
 (*  Creates namespaces for module, and resolves type names in declarations.
     Copyright (C) 2000-2003  Michael van Acken
@@ -519,19 +519,23 @@ RAISES IO.Error;
         WITH typeName: Sym.TypeName DO
           ns := contextOfUse. Namespace();
           IF (typeName. module # NIL) THEN
-            (* resolve module name to get to external namespace *)
-            item := ns. Identify (contextOfUse, typeName. module, FALSE);
-            Uses.Mark(item, uses, typeName.module);
-            IF (item = NIL) THEN
-              Err (undeclaredModule, typeName);
-              RETURN typeName
-            ELSIF ~(item IS Sym.Import) THEN
-              Err (notModule, typeName);
-              RETURN typeName
+            IF typeName.IsPredefReference() THEN
+              ns := predefModule.ns;
             ELSE
-              ns := item(Sym.Import). externalSymTab. ns;
-              ASSERT (ns # NIL)
-            END
+              (* resolve module name to get to external namespace *)
+              item := ns. Identify (contextOfUse, typeName. module, FALSE);
+              Uses.Mark(item, uses, typeName.module);
+              IF (item = NIL) THEN
+                Err (undeclaredModule, typeName);
+                RETURN typeName
+              ELSIF ~(item IS Sym.Import) THEN
+                Err (notModule, typeName);
+                RETURN typeName
+              ELSE
+                ns := item(Sym.Import). externalSymTab. ns;
+                ASSERT (ns # NIL)
+              END
+            END;
           END;
           item := ns. Identify (contextOfUse, typeName. ident, FALSE);
           IF (item = NIL) & extendedSearch THEN
@@ -549,6 +553,12 @@ RAISES IO.Error;
             Err (undeclaredIdent, typeName);
             RETURN typeName
           ELSE
+            IF (typeName.module = NIL) &
+               (item IS Sym.TypeDecl) & (item.parent = predefModule) THEN
+              (* mark type name as predefined type *)
+              typeName.MarkAsPredefReference();
+            END;
+            
             (* if the type name refers to a name redirection, then resolve the
                redirection and continue with the resulting symbol table entry  *)
             Uses.Mark(item, uses, typeName.ident);
@@ -567,7 +577,12 @@ RAISES IO.Error;
               Err (notTypeName, typeName);
               RETURN typeName
             ELSE
-              type := item(Sym.TypeDecl).type;
+              (* the right hand side of a type declaration might be another
+                 type name *)
+              type := GetTypeByName(item(Sym.TypeDecl).type, contextOfUse,
+                                    extendedSearch, addQualTypeDefaults,
+                                    errList);
+              
               IF addQualTypeDefaults & (type.typePars # NIL) &
                  ~(type IS Sym.TypeVar) THEN
                 NEW(qt);
@@ -623,8 +638,8 @@ RAISES IO.Error;
         END;
       END CollectFormalPars;
 
-    PROCEDURE ResolverReceiver(procDecl: Sym.ProcDecl;
-                               receiver: Sym.VarDecl);
+    PROCEDURE ResolveReceiver(procDecl: Sym.ProcDecl;
+                              receiver: Sym.VarDecl);
       VAR
         class: Sym.Record;
         ptr: Sym.Item;
@@ -633,38 +648,58 @@ RAISES IO.Error;
         receiver.SetType(GetTypeByName(receiver.type, contextOfUse, FALSE,
                                        FALSE, errList));
         class := procDecl.Class();
+        IF (class = NIL) THEN
+          (* some previous error prevents the class lookup: bail out *)
+          RETURN;
+        END;
         procDecl.formalPars.SetTypePars(class.typePars);
         (*item.formalPars.SetTypePars(receiver.type.typePars);*)
-
-        count := 0;
-        ptr := procDecl.formalPars.nestedItems;
-        WHILE (ptr # NIL) DO
-          WITH ptr: Sym.TypeDecl DO
-            IF (ptr.type = NIL) THEN
-              (* unfinished alias declaration: fixup type reference; if this
-                 is read from the symbol file, the `ptr.type' is alread set *)
-              ptr.type := class.typePars.params[count];
-              ptr.srcCodeType := ptr.type;
-            END;
-            INC(count);
-          ELSE
-            (* ignore *)
-          END;
-          ptr := ptr.nextNested;
-        END;
 
         IF (class.typePars = NIL) THEN
           IF receiver.hasAliasList THEN
             ErrType(cannotDefineTypeAliases, receiver.srcCodeType);
+
+            (* finish the type alias declarations by assigning them the type
+               of the receiver; this gets rid of a NIL pointer that may trip
+               up later stages *)
+            ptr := procDecl.formalPars.nestedItems;
+            WHILE (ptr # NIL) DO
+              WITH ptr: Sym.TypeDecl DO
+                IF (ptr.type = NIL) THEN
+                  ptr.type := receiver.type;
+                  ptr.srcCodeType := receiver.srcCodeType;
+                END;
+              ELSE
+                (* ignore *)
+              END;
+              ptr := ptr.nextNested;
+            END;
           END;
         ELSE
+          count := 0;
+          ptr := procDecl.formalPars.nestedItems;
+          WHILE (ptr # NIL) DO
+            WITH ptr: Sym.TypeDecl DO
+              IF (ptr.type = NIL) THEN
+                (* unfinished alias declaration: fixup type reference; if this
+                   is read from the symbol file, the `ptr.type' is alread set  *)
+                ptr.type := class.typePars.params[count];
+                ptr.srcCodeType := ptr.type;
+              END;
+              INC(count);
+            ELSE
+              (* ignore *)
+            END;
+            ptr := ptr.nextNested;
+          END;
+          
           IF ~receiver.hasAliasList OR
              (count # LEN(class.typePars.params^)) THEN
             ErrType(tooFewTypeAliases, receiver.srcCodeType);
             lastError.SetIntAttrib("count", LEN(class.typePars.params^));
           END;
         END;
-      END ResolverReceiver;
+      END ResolveReceiver;
     
     BEGIN
       IF (item # NIL) THEN
@@ -735,7 +770,7 @@ RAISES IO.Error;
           contextOfUse := item
         | item: Sym.ProcDecl DO
           IF (item.formalPars # NIL) & (item.formalPars.receiver # NIL) THEN
-            ResolverReceiver(item, item.formalPars.receiver);
+            ResolveReceiver(item, item.formalPars.receiver);
           END;
           contextOfUse := item
         | item: Sym.TypePars DO
@@ -1102,7 +1137,16 @@ RAISES IO.Error;
             InvalidFlag(flag, modifierFlagWithoutEffect);
           END;
         END SetFlag;
-      
+
+      PROCEDURE SetAlign(VAR alignAttribute : INTEGER; newValue : INTEGER);
+        BEGIN
+          IF (alignAttribute = 0) THEN
+            alignAttribute := newValue;
+          ELSE
+            InvalidFlag(flag, modifierFlagWithoutEffect);
+          END;
+        END SetAlign;
+
       BEGIN
         IF ~visited.HasKey(item) THEN
           visited.Set(item, NIL);
@@ -1128,7 +1172,7 @@ RAISES IO.Error;
               ELSE
                 InvalidFlag(flag, invalidModifierFlag);
               END;
-              
+
             | item: Sym.ConstDecl DO
               CASE flag.id OF
               | Sym.flagDeprecated:
@@ -1187,8 +1231,18 @@ RAISES IO.Error;
                 SetFlag(item.hasDescriptor, FALSE);
               | Sym.flagNotExtensible:
                 SetFlag(item.isExtensible, FALSE);
+              | Sym.flagExtensible:
+                SetFlag(item.isExtensible, TRUE);
               | Sym.flagUnion:
                 SetFlag(item.isUnion, TRUE);
+              | Sym.flagAlign1:
+                SetAlign(item.fieldAlign, 1);
+              | Sym.flagAlign2:
+                SetAlign(item.fieldAlign, 2);
+              | Sym.flagAlign4:
+                SetAlign(item.fieldAlign, 4);
+              | Sym.flagAlign8:
+                SetAlign(item.fieldAlign, 8);
               ELSE
                 InvalidFlag(flag, invalidModifierFlag);
               END;
@@ -1240,7 +1294,24 @@ RAISES IO.Error;
           ResolveFlags(item);
         END;
       END ResolveFlagsDirect;
-    
+
+    PROCEDURE ResolveCallingConvention(fpars : Sym.FormalPars);
+      (**Resolve the calling convention for formal parameter declaration. If
+        "default", then the declaration inherits the calling convention
+        declared for the enclosing module. *)
+
+        VAR 
+          parentItem : Sym.Item;
+        BEGIN
+          IF fpars.callConv = Sym.callConvDefault THEN
+            parentItem := fpars.parent;
+            WHILE parentItem.parent # NIL DO 
+              parentItem := parentItem.parent;
+            END;
+            fpars.callConv := parentItem(Sym.Module).callConv;
+          END;
+        END ResolveCallingConvention;
+
     BEGIN
       IF (item # NIL) THEN
         ResolveFlags(item);
@@ -1270,6 +1341,8 @@ RAISES IO.Error;
               type := type(Sym.Record).baseType;
             END;
           END;
+        | item: Sym.FormalPars DO
+          ResolveCallingConvention(item);
         ELSE  (* ignore *)
         END;
         

@@ -3,28 +3,19 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <Msg.oh>
-#include <LongStrings.oh>
 #include <CharClass.oh>
 #include <C.oh>
+#include <IO.oh>
+#include <IO/StdChannels.oh>
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-typedef Msg__Msg OS_HostPath__Result;
-typedef OOC_CHAR8 OS_HostPath__Path[];
-#define OS_HostPath__done  0
-#define OS_HostPath__pathTooLong 0
-extern void OS_HostPath__Normalize(OOC_CHAR8 path[], OOC_LEN path_0d, Msg__Msg *res);
-extern void OS_HostPath__Denormalize(OOC_CHAR8 path[], OOC_LEN path_0d, Msg__Msg *res);
+extern Object__String OS_HostPath__Normalize(Object__String path);
+extern Object__String OS_HostPath__Denormalize(Object__String path);
 extern void OOC_OS_HostPath_init(void);
 extern void OOC_OS_HostPath_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OS_HostPath__Path;
-extern RT0__StructDesc _td_OS_HostPath__ErrorContext;
-extern RT0__StructDesc _td_OS_HostPath__ErrorContextDesc;
-extern RT0__StructDesc _td_OS_HostPath__3734;
-extern RT0__StructDesc _td_OS_HostPath__3853;
 #endif /* _MODULE_OS_HostPath_ */
 
 /* --- */

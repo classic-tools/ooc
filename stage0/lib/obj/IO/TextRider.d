@@ -14,13 +14,13 @@ RT0__StructDesc _td_IO_TextRider__1874 = { (RT0__Struct[]){&RT0__char}, NULL, &_
 RT0__StructDesc _td_IO_TextRider__2774 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_TextRider__3680 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_TextRider__3929 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_TextRider__5548 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__7026 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__7399 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__7842 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__8227 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__8675 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
-RT0__StructDesc _td_IO_TextRider__9058 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__5551 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 16, 16, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__7029 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__7402 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__7845 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__8230 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__8678 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_IO_TextRider__9061 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"IO:TextRider", (RT0__Struct[]) { &_td_IO_TextRider__Writer, &_td_IO_TextRider__WriterDesc, NULL } };
 
 extern void OOC_IO_TextRider_init0() {

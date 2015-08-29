@@ -7,13 +7,11 @@
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-extern void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d);
+extern Object__String OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out);
 extern void OOC_OOC_Config_Assembler_init(void);
 extern void OOC_OOC_Config_Assembler_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Config_Assembler__1005;
-extern RT0__StructDesc _td_OOC_Config_Assembler__1036;
 #endif /* _MODULE_OOC_Config_Assembler_ */
 
 /* --- */

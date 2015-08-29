@@ -1,7 +1,7 @@
-(* 	$Id: Object.Mod,v 1.13 2002/12/30 07:02:16 mva Exp $	 *)
+(* 	$Id: Object.Mod,v 1.23 2003/07/04 21:55:38 mva Exp $	 *)
 MODULE Object;
 (*  Low-level object and string implementation.
-    Copyright (C) 2002  Michael van Acken
+    Copyright (C) 2002,2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -26,15 +26,19 @@ MODULE Object;
    are added on demand.  If it is not used, it has no place here.  *)
 
 IMPORT
-  S := SYSTEM, RT0;
-  
+  S := SYSTEM, RT0, HashCode;
+  (* Because this module is implicitly imported by almost all other modules,
+     normal modules cannot be added to this import list.  Before a module can
+     be imported here, it must be added to the `exclude' list of the
+     `autoImport' entries of all modules importing `Object'.  *)
+     
 TYPE
   Hash* = LONGINT;
   (**The integer type used to store hash values.  *)
   
   Object* = POINTER TO ObjectDesc;
-  ObjectArray* = ARRAY OF Object;
-  ObjectArrayPtr* = POINTER TO ObjectArray;
+  ObjectArray*(E: Object) = ARRAY OF E;
+  ObjectArrayPtr*(E: Object) = POINTER TO ObjectArray(E);
   ObjectDesc* = RECORD [ABSTRACT]
   (**This class is the common base type of (almost) all classes defined in this
      module and the ADT library.  It provides the methods @oproc{Object.Equals}
@@ -52,6 +56,12 @@ TYPE
      @emph{not} each time its surrounding code is evaluated.  *)
   END;
 
+CONST
+  surrogateLow* = 0D800X;
+  surrogateHigh* = 0DC00X;
+  surrogateEnd* = 0E000X;
+  surrogateLimit* = 10000X;
+  
 TYPE
   String* = POINTER TO StringDesc;
   StringArray* = ARRAY OF String;
@@ -72,15 +82,18 @@ TYPE
      @otype{String}.  *)
     (ObjectDesc)
     length-: LONGINT;
-    (**Number of code points in the sequence.  Because surrogate pairs
-       are not allowed, this equals the number of characters.  *)
+    (**Number of words points in the sequence.  For an instance of
+       @otype{String8}, this is the number of characters in the string.  For
+       @otype{String16}, it is the number of 16-bit words in the sequence.
+       This number may differ from the number of characters in the presence of
+       surrogate pairs.  *)
   END;
 
 TYPE
   CharsLatin1* = POINTER TO ARRAY[READ_ONLY] OF CHAR;
   (**Note: The elements of this type should be considered read-only in
      importing modules, similar to read-only exported record fields.  *)
-  CharsUCS4* = POINTER TO ARRAY[READ_ONLY] OF UCS4CHAR;
+  CharsUTF16* = POINTER TO ARRAY[READ_ONLY] OF LONGCHAR;
   (**Note: The elements of this type should be considered read-only in
      importing modules, similar to read-only exported record fields.  *)
   
@@ -96,14 +109,15 @@ TYPE
   END;
   
 TYPE
-  String32* = POINTER TO String32Desc;
-  String32Desc = RECORD
+  String16* = POINTER TO String16Desc;
+  String16Desc = RECORD
   (**Concrete class for 32-bit strings.  *)
     (StringDesc) 
-    data: CharsUCS4;
+    data: CharsUTF16;
     (**Holds a sequence of Unicode code points in the range @samp{U+0000} to
        @samp{U+10FFFF}, excluding the surrogate area @samp{[U+DC00, U+DFFFF]}.
-       The array is of length @samp{@ofield{length}+1}, with
+       Characters with a code point of @samp{U+10000} or higher are encoded as
+       surrogate pairs.  The array is of length @samp{@ofield{length}+1}, with
        @samp{data[length]} having the value @samp{0X}.  *)
   END;
 
@@ -246,13 +260,7 @@ PROCEDURE (x: Object) HashCode*(): Hash;
    of the object into an integer, but this implementation technique is not
    required.)  *)
   BEGIN
-<*IF TARGET_ADDRESS=64 THEN*>
-    RETURN S.VAL(Hash,
-                 S.VAL(SET, SHORT(S.LSH(S.LSH(S.VAL(S.ADDRESS,x), 32), -32))) /
-                 S.VAL(SET, SHORT(S.LSH(S.VAL(S.ADDRESS,x), -32))))
-<*ELSE*>
-    RETURN S.VAL(Hash, x)
-<*END*>
+    RETURN HashCode.Ptr(x);
   END HashCode;
 
 
@@ -271,19 +279,19 @@ PROCEDURE NewString8(source: S.ADDRESS; length: LONGINT): String8;
     RETURN s;
   END NewString8;
 
-PROCEDURE NewString32(source: S.ADDRESS; length: LONGINT): String32;
+PROCEDURE NewString16(source: S.ADDRESS; length: LONGINT): String16;
   VAR
-    s: String32;
-    d: CharsUCS4;
+    s: String16;
+    d: CharsUTF16;
   BEGIN
     NEW(s);
     NEW(d, length+1);
     s. length := length;
     s. data := d;
-    S.MOVE(source, S.ADR(d^), length*SIZE(UCS4CHAR));
+    S.MOVE(source, S.ADR(d^), length*SIZE(LONGCHAR));
     d[length] := 0X;
     RETURN s;
-  END NewString32;
+  END NewString16;
 
 
 PROCEDURE NewLatin1*(str[NO_COPY]: ARRAY OF CHAR): String8;
@@ -310,7 +318,7 @@ PROCEDURE NewLatin1Region*(str[NO_COPY]: ARRAY OF CHAR; start, end: LONGINT): St
    The characters in @oparam{str} are Latin-1 code points.
    @end precond  *)
   BEGIN
-    RETURN NewString8(S.ADR(str[start]), end-start);
+    RETURN NewString8(S.ADR(str)+start, end-start);
   END NewLatin1Region;
 
 PROCEDURE NewLatin1Char*(ch: CHAR): String8;
@@ -323,7 +331,7 @@ PROCEDURE NewLatin1Char*(ch: CHAR): String8;
     RETURN NewString8(S.ADR(ch), 1);
   END NewLatin1Char;
 
-PROCEDURE NewUCS2*(str[NO_COPY]: ARRAY OF LONGCHAR): String;
+PROCEDURE NewUTF16*(str[NO_COPY]: ARRAY OF LONGCHAR): String;
 (**Create a string value from @oparam{str} without any translation.
 
    @precond
@@ -332,8 +340,8 @@ PROCEDURE NewUCS2*(str[NO_COPY]: ARRAY OF LONGCHAR): String;
    @end precond  *)
   VAR
     i, j: LONGINT;
-    s: String32;
-    d: CharsUCS4;
+    s: String16;
+    d: CharsUTF16;
   BEGIN
     i := 0;
     WHILE(str[i] # 0X) DO
@@ -348,9 +356,9 @@ PROCEDURE NewUCS2*(str[NO_COPY]: ARRAY OF LONGCHAR): String;
       d[j] := str[j];
     END;
     RETURN s;
-  END NewUCS2;
+  END NewUTF16;
 
-PROCEDURE NewUCS2Region*(str[NO_COPY]: ARRAY OF LONGCHAR; start, end: LONGINT): String;
+PROCEDURE NewUTF16Region*(str[NO_COPY]: ARRAY OF LONGCHAR; start, end: LONGINT): String;
 (**Create a string value from @samp{str[start, end-1]} without any
    translation.
 
@@ -361,8 +369,8 @@ PROCEDURE NewUCS2Region*(str[NO_COPY]: ARRAY OF LONGCHAR; start, end: LONGINT): 
    @end precond  *)
   VAR
     i, j: LONGINT;
-    s: String32;
-    d: CharsUCS4;
+    s: String16;
+    d: CharsUTF16;
   BEGIN
     i := end-start;
     NEW(s);
@@ -374,9 +382,9 @@ PROCEDURE NewUCS2Region*(str[NO_COPY]: ARRAY OF LONGCHAR; start, end: LONGINT): 
     END;
     d[i] := 0X;
     RETURN s;
-  END NewUCS2Region;
+  END NewUTF16Region;
 
-PROCEDURE NewUCS2Char*(ch: LONGCHAR): String;
+PROCEDURE NewUTF16Char*(ch: LONGCHAR): String;
 (**Create a string value of length 1 from @samp{ch} without any translation.
 
    @precond
@@ -384,8 +392,8 @@ PROCEDURE NewUCS2Char*(ch: LONGCHAR): String;
    surrogate areas.
    @end precond  *)
   VAR
-    s: String32;
-    d: CharsUCS4;
+    s: String16;
+    d: CharsUTF16;
   BEGIN
     NEW(s);
     NEW(d, 2);
@@ -394,9 +402,37 @@ PROCEDURE NewUCS2Char*(ch: LONGCHAR): String;
     d[0] := ch;
     d[1] := 0X;
     RETURN s;
-  END NewUCS2Char;
+  END NewUTF16Char;
 
-PROCEDURE NewUCS4Region*(str[NO_COPY]: ARRAY OF UCS4CHAR;
+PROCEDURE NewUCS4Char*(ch: UCS4CHAR): String;
+(**Create a string value from @oparam{ch}.  The length of the string instance
+   is 2 of @samp{@oparam{ch} >= @oconst{surrogateLimit}}, and 1 otherwise.
+
+   @precond
+   @oparam{ch} is a Unicode code point.
+   @end precond  *)
+  VAR
+    s: String16;
+    d: CharsUTF16;
+    v: LONGINT;
+  BEGIN
+    IF (ch < surrogateLimit) THEN
+      RETURN NewUTF16Char(SHORT(ch));
+    ELSE
+      NEW(s);
+      NEW(d, 3);
+      s. length := 2;
+      s. data := d;
+
+      v := ORD(ch)-ORD(surrogateLimit);
+      d[0] := LONGCHR(ORD(surrogateLow) + v DIV 1024);
+      d[1] := LONGCHR(ORD(surrogateHigh) + v MOD 1024);
+      d[2] := 0X;
+      RETURN s;
+    END;
+  END NewUCS4Char;
+
+(*PROCEDURE NewUCS4Region*(str[NO_COPY]: ARRAY OF UCS4CHAR;
                           start, end: LONGINT): String;
 (**Create a string value from @samp{str[start, end]} without any translation.
 
@@ -405,18 +441,8 @@ PROCEDURE NewUCS4Region*(str[NO_COPY]: ARRAY OF UCS4CHAR;
    All characters are Unicode 3.1 code points outside the surrogate areas.
    @end precond  *)
   BEGIN
-    RETURN NewString32 (S.ADR(str[start]), end-start);
+    RETURN NewString32 (S.ADR(str)+start*SIZE(UCS4CHAR), end-start);
   END NewUCS4Region;
-
-PROCEDURE NewUCS4Char*(ch: UCS4CHAR): String;
-(**Create a string value of length 1 from @samp{ch} without any translation.
-
-   @precond
-   @oparam{ch} is a Unicode 3.1 code point.
-   @end precond  *)
-  BEGIN
-    RETURN NewString32(S.ADR(ch), 1);
-  END NewUCS4Char;
 
 PROCEDURE NewUCS4*(str[NO_COPY]: ARRAY OF UCS4CHAR): String;
 (**Create a string value from @oparam{str} without any translation.
@@ -433,7 +459,7 @@ PROCEDURE NewUCS4*(str[NO_COPY]: ARRAY OF UCS4CHAR): String;
       INC(i);
     END;
     RETURN NewString32 (S.ADR(str), i);
-  END NewUCS4;
+  END NewUCS4;*)
 
 PROCEDURE Concat2* (s1, s2: String): String;
 (**Concatenates two strings.
@@ -443,7 +469,7 @@ PROCEDURE Concat2* (s1, s2: String): String;
    @end precond *)
   VAR
     c8: String8;
-    c32: String32;
+    c32: String16;
     i: LONGINT;
   BEGIN
     WITH s1: String8 DO
@@ -455,11 +481,11 @@ PROCEDURE Concat2* (s1, s2: String): String;
                     S.ADR(c8.data^),
                     s1.length*SIZE(CHAR));
         S.MOVE(S.ADR(s2.data^),
-                    S.ADR(c8.data[s1.length]),
+                    S.ADR(c8.data^)+s1.length,
                     s2.length*SIZE(CHAR)+SIZE(CHAR));
         RETURN c8;
         
-      | s2: String32 DO                  (* String8+String32 *)
+      | s2: String16 DO                  (* String8+String16 *)
         NEW(c32);
         c32.length := s1.length+s2.length;
         NEW(c32.data, s1.length+s2.length+1);
@@ -467,34 +493,34 @@ PROCEDURE Concat2* (s1, s2: String): String;
           c32.data[i] := s1.data[i];
         END;
         S.MOVE(S.ADR(s2.data^),
-                    S.ADR(c32.data[s1.length]),
-                    s2.length*SIZE(UCS4CHAR)+SIZE(UCS4CHAR));
+                    S.ADR(c32.data^)+s1.length*SIZE(LONGCHAR),
+                    s2.length*SIZE(LONGCHAR)+SIZE(LONGCHAR));
         RETURN c32;
       END;
       
-    | s1: String32 DO
+    | s1: String16 DO
       WITH s2: String8 DO
         NEW(c32);
         c32.length := s1.length+s2.length;
         NEW(c32.data, s1.length+s2.length+1);
         S.MOVE(S.ADR(s1.data^),
                     S.ADR(c32.data^),
-                    s1.length*SIZE(UCS4CHAR));
+                    s1.length*SIZE(LONGCHAR));
         FOR i := 0 TO s2.length DO
           c32.data[s1.length+i] := s2.data[i];
         END;
         RETURN c32;
         
-      | s2: String32 DO                  (* String32+String32 *)
+      | s2: String16 DO                  (* String16+String16 *)
         NEW(c32);
         c32.length := s1.length+s2.length;
         NEW(c32.data, s1.length+s2.length+1);
         S.MOVE(S.ADR(s1.data^),
                     S.ADR(c32.data^),
-                    s1.length*SIZE(UCS4CHAR));
+                    s1.length*SIZE(LONGCHAR));
         S.MOVE(S.ADR(s2.data^),
-                    S.ADR(c32.data[s1.length]),
-                    s2.length*SIZE(UCS4CHAR)+SIZE(UCS4CHAR));
+                    S.ADR(c32.data^)+s1.length*SIZE(LONGCHAR),
+                    s2.length*SIZE(LONGCHAR)+SIZE(LONGCHAR));
         RETURN c32;
       END;
     END;
@@ -518,19 +544,78 @@ PROCEDURE (s: String8) CharsLatin1*(): CharsLatin1;
     RETURN s.data;
   END CharsLatin1;
 
-PROCEDURE (s: String32) CharsUCS4*(): CharsUCS4;
+PROCEDURE (s: String16) CharsUTF16*(): CharsUTF16;
 (**Return a reference to the string's content.  The characters from the
    index range @samp{[0, @ofield{s.length}[} hold valid data.  The character
    at position @ofield{s.length} is @code{0X}.  *)
   BEGIN
     RETURN s.data;
-  END CharsUCS4;
+  END CharsUTF16;
 
 PROCEDURE (s: String) ToString*(): String;
 (**Identity operation returning @oparam{s}.  *)
   BEGIN
     RETURN s;
   END ToString;
+
+PROCEDURE (s: String) [ABSTRACT] ToString8*(replace: CHAR): String8;
+(**Identity operation returning @oparam{s} if all characters are in the range
+   of @otype{String8}.  Otherwise, characters outside this range are
+   substituted with @oparam{replace}.  *)
+  END ToString8;
+
+PROCEDURE (s: String8) ToString8*(replace: CHAR): String8;
+  BEGIN
+    RETURN s;
+  END ToString8;
+
+PROCEDURE (s: String16) ToString8*(replace: CHAR): String8;
+  VAR
+    data8: CharsLatin1;
+    i: LONGINT;
+    s8: String8;
+  BEGIN
+    NEW(data8, s.length+1);
+    FOR i := 0 TO s.length DO
+      IF (s.data[i] > 0FFX) THEN
+        (* FIXME... take surrogate pairs into account *)
+        data8[i] := replace;
+      ELSE
+        data8[i] := SHORT(s.data[i]);
+      END;
+    END;
+
+    NEW(s8);
+    s8.length := s.length;
+    s8.data := data8;
+    RETURN s8;
+  END ToString8;
+
+PROCEDURE (s: String) [ABSTRACT] ToString16*(): String16;
+(**Identity operation returning @oparam{s} as an instance of @otype{String16}.  *)
+  END ToString16;
+
+PROCEDURE (s: String8) ToString16*(): String16;
+  VAR
+    data16: CharsUTF16;
+    i: LONGINT;
+    s16: String16;
+  BEGIN
+    NEW(data16, s.length+1);
+    FOR i := 0 TO s.length DO
+      data16[i] := s.data[i];
+    END;
+    
+    NEW(s16);
+    s16.length := s.length;
+    s16.data := data16;
+    RETURN s16;
+  END ToString16;
+
+PROCEDURE (s: String16) ToString16*(): String16;
+  BEGIN
+    RETURN s;
+  END ToString16;
 
 PROCEDURE (s: String) [ABSTRACT] Equals*(y: Object): BOOLEAN;
   END Equals;
@@ -548,7 +633,7 @@ PROCEDURE (s: String8) Equals*(y: Object): BOOLEAN;
           INC(i);
         END;
         RETURN (i = s.length);
-      | y: String32 DO
+      | y: String16 DO
         i := 0;
         WHILE (i # s.length) & (s.data[i] = y.data[i]) DO
           INC(i);
@@ -558,7 +643,7 @@ PROCEDURE (s: String8) Equals*(y: Object): BOOLEAN;
     END;
   END Equals;
 
-PROCEDURE (s: String32) Equals*(y: Object): BOOLEAN;
+PROCEDURE (s: String16) Equals*(y: Object): BOOLEAN;
   VAR
     i: LONGINT;
   BEGIN
@@ -571,7 +656,7 @@ PROCEDURE (s: String32) Equals*(y: Object): BOOLEAN;
           INC(i);
         END;
         RETURN (i = s.length);
-      | y: String32 DO
+      | y: String16 DO
         i := 0;
         WHILE (i # s.length) & (s.data[i] = y.data[i]) DO
           INC(i);
@@ -580,6 +665,57 @@ PROCEDURE (s: String32) Equals*(y: Object): BOOLEAN;
       END;
     END;
   END Equals;
+
+PROCEDURE (s: String) [ABSTRACT] EqualsIgnoreCase*(y: Object): BOOLEAN;
+  END EqualsIgnoreCase;
+
+PROCEDURE (s: String8) EqualsIgnoreCase*(y: Object): BOOLEAN;
+  VAR
+    i: LONGINT;
+  BEGIN
+    IF (y = NIL) OR ~(y IS String) OR (s.length # y(String).length) THEN
+      RETURN FALSE;
+    ELSE
+      (* note: using CAP() restricts the usefulness to ASCII -- for now *)
+      WITH y: String8 DO
+        i := 0;
+        WHILE (i # s.length) & (CAP(s.data[i]) = CAP(y.data[i])) DO
+          INC(i);
+        END;
+        RETURN (i = s.length);
+      | y: String16 DO
+        i := 0;
+        WHILE (i # s.length) & (CAP(s.data[i]) = CAP(y.data[i])) DO
+          INC(i);
+        END;
+        RETURN (i = s.length);
+      END;
+    END;
+  END EqualsIgnoreCase;
+
+PROCEDURE (s: String16) EqualsIgnoreCase*(y: Object): BOOLEAN;
+  VAR
+    i: LONGINT;
+  BEGIN
+    IF (y = NIL) OR ~(y IS String) OR (s.length # y(String).length) THEN
+      RETURN FALSE;
+    ELSE
+      (* note: using CAP() restricts the usefulness to ASCII -- for now *)
+      WITH y: String8 DO
+        i := 0;
+        WHILE (i # s.length) & (CAP(s.data[i]) = CAP(y.data[i])) DO
+          INC(i);
+        END;
+        RETURN (i = s.length);
+      | y: String16 DO
+        i := 0;
+        WHILE (i # s.length) & (CAP(s.data[i]) = CAP(y.data[i])) DO
+          INC(i);
+        END;
+        RETURN (i = s.length);
+      END;
+    END;
+  END EqualsIgnoreCase;
 
 PROCEDURE (s: String) [ABSTRACT] Compare*(y: Object): LONGINT;
 (**Compares the two strings @oparam{s} and @oparam{y}.  The sign of the result 
@@ -615,7 +751,7 @@ PROCEDURE (s: String8) Compare*(y: Object): LONGINT;
       ELSE
         RETURN (ORD(s.data[i]) - ORD(y.data[i]));
       END;
-    | y: String32 DO
+    | y: String16 DO
       IF (y.length < min) THEN min := y.length; END;
       i := 0;
       WHILE (i # min) & (s.data[i] = y.data[i]) DO
@@ -629,7 +765,7 @@ PROCEDURE (s: String8) Compare*(y: Object): LONGINT;
     END;
   END Compare;
 
-PROCEDURE (s: String32) Compare*(y: Object): LONGINT;
+PROCEDURE (s: String16) Compare*(y: Object): LONGINT;
   VAR
     min, i: LONGINT;
   BEGIN
@@ -645,7 +781,7 @@ PROCEDURE (s: String32) Compare*(y: Object): LONGINT;
       ELSE
         RETURN (ORD(s.data[i]) - ORD(y.data[i]));
       END;
-    | y: String32 DO
+    | y: String16 DO
       IF (y.length < min) THEN min := y.length; END;
       i := 0;
       WHILE (i # min) & (s.data[i] = y.data[i]) DO
@@ -663,48 +799,16 @@ PROCEDURE (s: String) [ABSTRACT] HashCode*(): Hash;
   END HashCode;
 
 PROCEDURE (s: String8) HashCode*(): Hash;
-  VAR
-    len, p: LONGINT;
-    x: Hash;
   BEGIN
-    (* this is intended as a reimplementation of the Python hash code on
-       strings; any errors are mine, of course *)
-    len := s.length;
-    x := ASH(LONG(ORD(s.data[0])), 7);
-    p := 0;
-    WHILE (p # len) DO
-      <* PUSH; OverflowCheck := FALSE *>
-      x := S.VAL(Hash, S.VAL(SET, 1000003*x) /
-                 S.VAL(SET, LONG(ORD(s.data[p]))));
-      <* POP *>
-      INC(p);
-    END;
-    x := S.VAL(Hash, S.VAL(SET,x) / S.VAL(SET,len));
-    RETURN x
+    RETURN HashCode.CharRegion(s.data^, 0, s.length);
   END HashCode;
 
-PROCEDURE (s: String32) HashCode*(): Hash;
-  VAR
-    len, p: LONGINT;
-    x: Hash;
+PROCEDURE (s: String16) HashCode*(): Hash;
   BEGIN
-    (* this is intended as a reimplementation of the Python hash code on
-       strings; any errors are mine, of course *)
-    len := s.length;
-    x := ASH(ORD(s.data[0]), 7);
-    p := 0;
-    WHILE (p # len) DO
-      <* PUSH; OverflowCheck := FALSE *>
-      x := S.VAL(Hash, S.VAL(SET, 1000003*x) /
-                 S.VAL(SET, s.data[p]));
-      <* POP *>
-      INC(p);
-    END;
-    x := S.VAL(Hash, S.VAL(SET,x) / S.VAL(SET,len));
-    RETURN x
+    RETURN HashCode.LongCharRegion(s.data^, 0, s.length);
   END HashCode;
 
-PROCEDURE (s: String) [ABSTRACT] CharAt* (index: LONGINT): UCS4CHAR;
+PROCEDURE (s: String) [ABSTRACT] CharAt*(index: LONGINT): UCS4CHAR;
 (**Return the character at position @oparam{index}.
 
    @precond
@@ -712,15 +816,77 @@ PROCEDURE (s: String) [ABSTRACT] CharAt* (index: LONGINT): UCS4CHAR;
    @end precond *)
   END CharAt;
 
-PROCEDURE (s: String8) CharAt* (index: LONGINT): UCS4CHAR;
+PROCEDURE (s: String8) CharAt*(index: LONGINT): UCS4CHAR;
   BEGIN
-    RETURN s. data[index];
+    RETURN s.data[index];
   END CharAt;
 
-PROCEDURE (s: String32) CharAt* (index: LONGINT): UCS4CHAR;
+PROCEDURE (s: String16) CharAt*(index: LONGINT): UCS4CHAR;
+  VAR
+    w1, w2: LONGCHAR;
   BEGIN
-    RETURN s. data[index];
+    w1 := s.data[index];
+    IF (w1 < surrogateLow) OR (w1 >= surrogateEnd) THEN
+      (* non-surrgate character *)
+      RETURN w1;
+    ELSE
+      (* because `data' is 0X terminated and `w1' is not 0X, there is no need
+         to check index+1 versus the string's length *)
+      w2 := s.data[index+1];
+      IF (w1 < surrogateHigh) &
+         (surrogateHigh <= w2) & (w2 < surrogateEnd) THEN
+        RETURN UCS4CHR((ORD(w1) MOD 1024)*1024 +
+                       (ORD(w2) MOD 1024) +
+                       ORD(surrogateLimit));
+      ELSE  (* invalid surrogate pair *)
+        RETURN w1;
+      END;
+    END;
   END CharAt;
+
+PROCEDURE (s: String) [ABSTRACT] NextChar*(VAR index: LONGINT): UCS4CHAR;
+(**Return the character at position @oparam{index} and increment @oparam{index}
+   to point to the next character in the string.  If @oparam{index} equals
+   the length of the string, then result is @samp{0X}.
+
+   @precond
+   @samp{0 <= @oparam{index} <= @ofield{s.length}}
+   @end precond *)
+  END NextChar;
+
+PROCEDURE (s: String8) NextChar*(VAR index: LONGINT): UCS4CHAR;
+  VAR
+    c: CHAR;
+  BEGIN
+    c := s.data[index];
+    INC(index);
+    RETURN c;
+  END NextChar;
+
+PROCEDURE (s: String16) NextChar*(VAR index: LONGINT): UCS4CHAR;
+  VAR
+    w1, w2: LONGCHAR;
+  BEGIN
+    w1 := s.data[index];
+    INC(index);
+    IF (w1 < surrogateLow) OR (w1 >= surrogateEnd) THEN
+      (* non-surrogate character *)
+      RETURN w1;
+    ELSE
+      (* because `data' is 0X terminated and `w1' is not 0X, there is no need
+         to check index versus the string's length *)
+      w2 := s.data[index];
+      IF (w1 < surrogateHigh) &
+         (surrogateHigh <= w2) & (w2 < surrogateEnd) THEN
+        INC(index);
+        RETURN UCS4CHR((ORD(w1) MOD 1024)*1024 +
+                       (ORD(w2) MOD 1024)+
+                       ORD(surrogateLimit));
+      ELSE  (* invalid surrogate pair *)
+        RETURN w1;
+      END;
+    END;
+  END NextChar;
 
 PROCEDURE (s: String) [ABSTRACT] Substring* (start, end: LONGINT): String;
 (**Return the substring of @oparam{s} starting at @oparam{start} (inclusive)
@@ -732,15 +898,53 @@ PROCEDURE (s: String) [ABSTRACT] Substring* (start, end: LONGINT): String;
    @end precond *)
   END Substring;
 
-PROCEDURE (s: String8) Substring* (start, end: LONGINT): String;
+PROCEDURE (s: String8) Substring* (start, end: LONGINT): String8;
   BEGIN
-    RETURN NewString8(S.ADR(s. data[start]), end-start);
+    RETURN NewString8(S.ADR(s.data^)+start, end-start);
   END Substring;
 
-PROCEDURE (s: String32) Substring* (start, end: LONGINT): String;
+PROCEDURE (s: String16) Substring* (start, end: LONGINT): String16;
   BEGIN
-    RETURN NewString32(S.ADR(s. data[start]), end-start);
+    RETURN NewString16(S.ADR(s.data^)+start*SIZE(LONGCHAR), end-start);
   END Substring;
+
+
+PROCEDURE (s: String) [ABSTRACT] Trim*(): String;
+(**Return the substring beginning with the first character of @oparam{s} and
+   ending with the last character of @oparam{s} with a code greater than space
+   (@samp{20X}).  If @oparam{s} contains no such characters, then result is the
+   empty string.  *)
+  END Trim;
+
+PROCEDURE (s: String8) Trim*(): String8;
+  VAR
+    a, b: LONGINT;
+  BEGIN
+    a := 0;
+    WHILE (a # s.length) & (s.data[a] <= " ") DO
+      INC(a);
+    END;
+    b := s.length;
+    WHILE (b # a) & (s.data[b-1] <= " ") DO
+      DEC(b);
+    END;
+    RETURN NewString8(S.ADR(s.data^)+a, b-a);
+  END Trim;
+
+PROCEDURE (s: String16) Trim*(): String16;
+  VAR
+    a, b: LONGINT;
+  BEGIN
+    a := 0;
+    WHILE (a # s.length) & (s.data[a] <= " ") DO
+      INC(a);
+    END;
+    b := s.length;
+    WHILE (b # a) & (s.data[b-1] <= " ") DO
+      DEC(b);
+    END;
+    RETURN NewString16(S.ADR(s.data^)+a*SIZE(LONGCHAR), b-a);
+  END Trim;
 
 
 PROCEDURE (s: String) [ABSTRACT] IndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
@@ -753,23 +957,7 @@ PROCEDURE (s: String) [ABSTRACT] IndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT
    @end precond *)
   END IndexOf;
 
-PROCEDURE (s: String8) IndexOf* (char: UCS4CHAR; pos: LONGINT): LONGINT;
-  VAR
-    endpos: LONGINT;
-  BEGIN
-    IF (char <= MAX(CHAR)) THEN
-      endpos := s.length;
-      WHILE (pos # endpos) DO
-        IF (s.data[pos] = char) THEN
-          RETURN pos;
-        END;
-        INC (pos)
-      END;
-    END;
-    RETURN -1
-  END IndexOf;
-
-PROCEDURE (s: String32) IndexOf* (char: UCS4CHAR; pos: LONGINT): LONGINT;
+PROCEDURE (s: String8) IndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
   VAR
     endpos: LONGINT;
   BEGIN
@@ -778,10 +966,134 @@ PROCEDURE (s: String32) IndexOf* (char: UCS4CHAR; pos: LONGINT): LONGINT;
       IF (s.data[pos] = char) THEN
         RETURN pos;
       END;
-      INC (pos)
+      INC (pos);
     END;
     RETURN -1
   END IndexOf;
+
+PROCEDURE (s: String16) IndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
+  VAR
+    endpos, v: LONGINT;
+    w1, w2: LONGCHAR;
+  BEGIN
+    IF (char < surrogateLimit) THEN
+      endpos := s.length;
+      WHILE (pos # endpos) DO
+        IF (s.data[pos] = char) THEN
+          RETURN pos;
+        END;
+        INC(pos);
+      END;
+      RETURN -1;
+    ELSE
+      v := ORD(char)-ORD(surrogateLimit);
+      w1 := LONGCHR(ORD(surrogateLow) + v DIV 1024);
+      w2 := LONGCHR(ORD(surrogateHigh) + v MOD 1024);
+      
+      endpos := s.length;
+      WHILE (pos # endpos) DO
+        IF (s.data[pos] = w1) & (s.data[pos+1] = w2) THEN
+          (* because `data' is 0X terminated, there is no need to check
+             pos+1 versus the string's length *)
+          RETURN pos;
+        END;
+        INC(pos);
+      END;
+      RETURN -1;
+    END;
+  END IndexOf;
+
+
+PROCEDURE (s: String) [ABSTRACT] LastIndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
+(**Return the index of the last character matching @oparam{char}.  Search
+   starts with the character before @oparam{pos} and progresses to the
+   beginning of the string @oparam{s}.  If no matching character is found,
+   result is @samp{-1}.
+
+   @precond
+   @samp{0 <= @oparam{pos} <= @ofield{s.length}}
+   @end precond  *)
+  END LastIndexOf;
+
+PROCEDURE (s: String8) LastIndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
+  BEGIN
+    WHILE (pos > 0) DO
+      DEC(pos);
+      IF (s.data[pos] = char) THEN
+        RETURN pos;
+      END;
+    END;
+    RETURN -1;
+  END LastIndexOf;
+
+PROCEDURE (s: String16) LastIndexOf*(char: UCS4CHAR; pos: LONGINT): LONGINT;
+  VAR
+    v: LONGINT;
+    w1, w2: LONGCHAR;
+  BEGIN
+    IF (char < surrogateLimit) THEN
+      WHILE (pos > 0) DO
+        DEC(pos);
+        IF (s.data[pos] = char) THEN
+          RETURN pos;
+        END;
+      END;
+      RETURN -1;
+    ELSE
+      v := ORD(char)-ORD(surrogateLimit);
+      w1 := LONGCHR(ORD(surrogateLow) + v DIV 1024);
+      w2 := LONGCHR(ORD(surrogateHigh) + v MOD 1024);
+      
+      WHILE (pos > 0) DO
+        DEC(pos);
+        IF (s.data[pos] = w1) & (s.data[pos+1] = w2) THEN
+          (* because `data' is 0X terminated and `data[pos]' is not 0X, there
+             is no need to check pos+1 versus the string's length *)
+          RETURN pos;
+        END;
+      END;
+      RETURN -1;
+    END;
+  END LastIndexOf;
+
+
+PROCEDURE (s: String) EndsWith*(suffix: String): BOOLEAN;
+(**Return @code{TRUE} is the last characters in @oparam{s} equal
+   @oparam{suffix}.  Result is @code{FALSE} if @samp{@ofield{s.length} <
+   @ofield{suffix.length}}.
+
+   @precond
+   @samp{@oparam{suffix} # @code{NIL}}
+   @end precond  *)
+  VAR
+    e: String;
+  BEGIN
+    IF (s.length >= suffix.length) THEN
+      e := s.Substring(s.length-suffix.length, s.length);
+      RETURN e.Equals(suffix);
+    ELSE
+      RETURN FALSE;
+    END;
+  END EndsWith;
+
+PROCEDURE (s: String) StartsWith*(prefix: String): BOOLEAN;
+(**Return @code{TRUE} is the first characters in @oparam{s} equal
+   @oparam{prefix}.  Result is @code{FALSE} if @samp{@ofield{s.length} <
+   @ofield{prefix.length}}.
+
+   @precond
+   @samp{@oparam{prefix} # @code{NIL}}
+   @end precond  *)
+  VAR
+    e: String;
+  BEGIN
+    IF (s.length >= prefix.length) THEN
+      e := s.Substring(0, prefix.length);
+      RETURN e.Equals(prefix);
+    ELSE
+      RETURN FALSE;
+    END;
+  END StartsWith;
 
 BEGIN
   emptyString := NewLatin1("");

@@ -11,16 +11,16 @@
 #include <StringSearch.oh>
 #include <OOC/Error.oh>
 #include <OOC/Repository.oh>
+#include <OOC/SymbolTable.oh>
 #include <OOC/SymbolTable/CreateNamespace.oh>
 #include <OOC/SymbolTable/Uses.oh>
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-typedef OOC_CHAR8 OOC_Make__ShellCommand[4096];
 typedef struct OOC_Make__ModuleInfoDesc *OOC_Make__ModuleInfo;
 typedef struct OOC_Make__ModuleInfoDesc {
-  OOC_CHAR8 updated[21];
-  OOC_CHAR8 updateResult[21];
+  OOC_CHAR8 updated[22];
+  OOC_CHAR8 updateResult[22];
   OOC_CHAR8 compiled;
   OOC_CHAR8 compileResult;
 } OOC_Make__ModuleInfoDesc;
@@ -34,7 +34,7 @@ typedef struct OOC_Make__RulesDesc {
   OOC_Repository__Repository localRepository;
   OOC_Make__ModuleList imports;
   ADT_Dictionary__Dictionary mInfo;
-  ADT_Dictionary__Dictionary extensionDict;
+  OOC_SymbolTable__ExtensionDict extensionDict;
   OOC_CHAR8 runCreateNamespace;
   OOC_CHAR8 __pad33;
   OOC_CHAR8 __pad34;
@@ -79,12 +79,12 @@ typedef void (*_TBP_OOC_Make__RulesDesc_SetErrOut)(OOC_Make__Rules r, Channel__C
 extern void OOC_Make__RulesDesc_SetForceUpdate(OOC_Make__Rules r, OOC_CHAR8 forceUpdate);
 #define _TBN_OOC_Make__RulesDesc_SetForceUpdate 9
 typedef void (*_TBP_OOC_Make__RulesDesc_SetForceUpdate)(OOC_Make__Rules r, OOC_CHAR8 forceUpdate);
-extern OOC_CHAR8 OOC_Make__RulesDesc_UsageTracking(OOC_Make__Rules r, const OOC_CHAR8 extIdent__ref[], OOC_LEN extIdent_0d);
+extern OOC_CHAR8 OOC_Make__RulesDesc_UsageTracking(OOC_Make__Rules r, Object__String extIdent);
 #define _TBN_OOC_Make__RulesDesc_UsageTracking 28
-typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UsageTracking)(OOC_Make__Rules r, const OOC_CHAR8 extIdent__ref[], OOC_LEN extIdent_0d);
-extern void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, ADT_Dictionary__Dictionary dict);
+typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_UsageTracking)(OOC_Make__Rules r, Object__String extIdent);
+extern void OOC_Make__RulesDesc_SetExtensionDict(OOC_Make__Rules r, OOC_SymbolTable__ExtensionDict dict);
 #define _TBN_OOC_Make__RulesDesc_SetExtensionDict 8
-typedef void (*_TBP_OOC_Make__RulesDesc_SetExtensionDict)(OOC_Make__Rules r, ADT_Dictionary__Dictionary dict);
+typedef void (*_TBP_OOC_Make__RulesDesc_SetExtensionDict)(OOC_Make__Rules r, OOC_SymbolTable__ExtensionDict dict);
 extern OOC_CHAR8 OOC_Make__RulesDesc_CheckAllImports(OOC_Make__Rules r, OOC_Repository__Module module);
 #define _TBN_OOC_Make__RulesDesc_CheckAllImports 0
 typedef OOC_CHAR8 (*_TBP_OOC_Make__RulesDesc_CheckAllImports)(OOC_Make__Rules r, OOC_Repository__Module module);
@@ -162,21 +162,19 @@ extern void OOC_OOC_Make_init(void);
 extern void OOC_OOC_Make_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Make__ShellCommand;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfo;
 extern RT0__StructDesc _td_OOC_Make__ModuleInfoDesc;
-extern RT0__StructDesc _td_OOC_Make__1899;
-extern RT0__StructDesc _td_OOC_Make__1951;
-extern RT0__StructDesc _td_OOC_Make__2078;
+extern RT0__StructDesc _td_OOC_Make__1832;
+extern RT0__StructDesc _td_OOC_Make__1884;
+extern RT0__StructDesc _td_OOC_Make__2011;
 extern RT0__StructDesc _td_OOC_Make__ModuleList;
 extern RT0__StructDesc _td_OOC_Make__Rules;
 extern RT0__StructDesc _td_OOC_Make__RulesDesc;
-extern RT0__StructDesc _td_OOC_Make__3883;
-extern RT0__StructDesc _td_OOC_Make__3858;
+extern RT0__StructDesc _td_OOC_Make__3812;
+extern RT0__StructDesc _td_OOC_Make__3787;
 extern RT0__StructDesc _td_OOC_Make__ErrorContext;
 extern RT0__StructDesc _td_OOC_Make__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Make__5018;
-extern RT0__StructDesc _td_OOC_Make__6643;
+extern RT0__StructDesc _td_OOC_Make__4947;
 #endif /* _MODULE_OOC_Make_ */
 
 /* --- */

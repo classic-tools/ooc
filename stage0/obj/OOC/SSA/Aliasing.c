@@ -70,7 +70,7 @@ l5:
 l7:
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5518));
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5528)))), &_td_OOC_SSA__DeclRefDesc, 5528)), 5536))+44);
-      i0 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5547)))), &_td_OOC_SymbolTable__VarDeclDesc, 5547)), 5555))+55);
+      i0 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5547)))), &_td_OOC_SymbolTable__VarDeclDesc, 5547)), 5555))+59);
       i0 = !i0;
       
 l8:
@@ -100,7 +100,7 @@ l5:
 l7:
       i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 5823));
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5833)))), &_td_OOC_SSA__DeclRefDesc, 5833)), 5841))+44);
-      i0 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5852)))), &_td_OOC_SymbolTable__VarDeclDesc, 5852)), 5860))+55);
+      i0 = *(OOC_UINT8*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5852)))), &_td_OOC_SymbolTable__VarDeclDesc, 5852)), 5860))+59);
       
 l8:
       return i0;
@@ -335,7 +335,7 @@ l37:
   i0 = (OOC_INT32)instr;
   i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i0, 11834));
   i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11844)))), &_td_OOC_SSA__DeclRefDesc, 11844)), 11852))+44);
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11863)))), &_td_OOC_SymbolTable__VarDeclDesc, 11863)), 11871))+44);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11863)))), &_td_OOC_SymbolTable__VarDeclDesc, 11863)), 11871))+48);
   typeInstr = (OOC_SymbolTable__Type)i0;
   i1 = (OOC_INT32)reference;
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 11900));
@@ -354,7 +354,7 @@ l43:
 l45:
   i2 = (OOC_INT32)*(OOC_INT32*)(_check_pointer(i1, 11957));
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11967)))), &_td_OOC_SSA__DeclRefDesc, 11967)), 11975))+44);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11986)))), &_td_OOC_SymbolTable__VarDeclDesc, 11986)), 11994))+44);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i2, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 11986)))), &_td_OOC_SymbolTable__VarDeclDesc, 11986)), 11994))+48);
   typeRef = (OOC_SymbolTable__Type)i2;
 l46:
   i2 = (OOC_INT32)typeRef;

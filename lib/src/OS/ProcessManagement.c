@@ -1,4 +1,4 @@
-/* 	$Id: ProcessManagement.c,v 1.7 2003/05/12 03:57:16 sgreenhill Exp $	 */
+/* 	$Id: ProcessManagement.c,v 1.9 2003/05/18 15:58:10 mva Exp $	 */
 #include <stdlib.h>
 #include <stdio.h>
 #include <__oo2c.h>
@@ -143,13 +143,21 @@ int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
 }
 
 #else
-int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
-  return new_system((const char*)command);
+int OS_ProcessManagement__system(Object__String command) {
+  if (command == NULL) {
+    return new_system(NULL);
+  } else {
+    return new_system(OS_Path__Encode(command));
+  }
 }
 #endif
 #else
-int OS_ProcessManagement__system(const OOC_CHAR8* command, OOC_LEN command_0d) {
-  return system((const char*)command);
+int OS_ProcessManagement__system(Object__String command) {
+  if (command == NULL) {
+    return system(NULL);
+  } else {
+    return system(OS_Path__Encode(command));
+  }
 }
 #endif
 

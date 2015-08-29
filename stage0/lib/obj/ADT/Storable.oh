@@ -29,10 +29,6 @@ typedef struct ADT_Storable__WriterDesc {
   OOC_CHAR8 __pad3;
   IO__ByteChannel channel;
 } ADT_Storable__WriterDesc;
-typedef struct ADT_Storable__StringDesc *ADT_Storable__String;
-typedef struct ADT_Storable__StringDesc {
-  char __dummy;
-} ADT_Storable__StringDesc;
 typedef struct ADT_Storable__TypeErrorDesc *ADT_Storable__TypeError;
 typedef struct ADT_Storable__TypeErrorDesc {
   Object__String msg;
@@ -40,27 +36,23 @@ typedef struct ADT_Storable__TypeErrorDesc {
   OOC_INT32 backtraceSize;
 } ADT_Storable__TypeErrorDesc;
 extern void NORETURN ADT_Storable__RaiseTypeError(Object__String msg) NORETURN2;
-extern void ADT_Storable__Init(ADT_Storable__Object obj);
-extern void ADT_Storable__ObjectDesc_Destroy(ADT_Storable__Object obj);
-#define _TBN_ADT_Storable__ObjectDesc_Destroy 3
-typedef void (*_TBP_ADT_Storable__ObjectDesc_Destroy)(ADT_Storable__Object obj);
 extern void ADT_Storable__ObjectDesc_Store(ADT_Storable__Object obj, ADT_Storable__Writer w);
-#define _TBN_ADT_Storable__ObjectDesc_Store 5
+#define _TBN_ADT_Storable__ObjectDesc_Store 4
 typedef void (*_TBP_ADT_Storable__ObjectDesc_Store)(ADT_Storable__Object obj, ADT_Storable__Writer w);
 extern void ADT_Storable__ObjectDesc_Load(ADT_Storable__Object obj, ADT_Storable__Reader r);
-#define _TBN_ADT_Storable__ObjectDesc_Load 4
+#define _TBN_ADT_Storable__ObjectDesc_Load 3
 typedef void (*_TBP_ADT_Storable__ObjectDesc_Load)(ADT_Storable__Object obj, ADT_Storable__Reader r);
 extern void ADT_Storable__InitWriter(ADT_Storable__Writer w, IO__ByteChannel ch);
 extern void ADT_Storable__InitReader(ADT_Storable__Reader r, IO__ByteChannel ch);
-extern void ADT_Storable__WriterDesc_WriteObject(ADT_Storable__Writer w, ADT_Storable__Object obj);
+extern void ADT_Storable__WriterDesc_WriteObject(ADT_Storable__Writer w, Object__Object obj);
 #define _TBN_ADT_Storable__WriterDesc_WriteObject 18
-typedef void (*_TBP_ADT_Storable__WriterDesc_WriteObject)(ADT_Storable__Writer w, ADT_Storable__Object obj);
+typedef void (*_TBP_ADT_Storable__WriterDesc_WriteObject)(ADT_Storable__Writer w, Object__Object obj);
 extern void ADT_Storable__WriterDesc_Disconnect(ADT_Storable__Writer w);
 #define _TBN_ADT_Storable__WriterDesc_Disconnect 17
 typedef void (*_TBP_ADT_Storable__WriterDesc_Disconnect)(ADT_Storable__Writer w);
-extern void ADT_Storable__ReaderDesc_ReadObject(ADT_Storable__Reader r, ADT_Storable__Object *obj);
+extern void ADT_Storable__ReaderDesc_ReadObject(ADT_Storable__Reader r, Object__Object *obj);
 #define _TBN_ADT_Storable__ReaderDesc_ReadObject 18
-typedef void (*_TBP_ADT_Storable__ReaderDesc_ReadObject)(ADT_Storable__Reader r, ADT_Storable__Object *obj);
+typedef void (*_TBP_ADT_Storable__ReaderDesc_ReadObject)(ADT_Storable__Reader r, Object__Object *obj);
 extern void ADT_Storable__ReaderDesc_Disconnect(ADT_Storable__Reader r);
 #define _TBN_ADT_Storable__ReaderDesc_Disconnect 17
 typedef void (*_TBP_ADT_Storable__ReaderDesc_Disconnect)(ADT_Storable__Reader r);
@@ -74,8 +66,6 @@ extern RT0__StructDesc _td_ADT_Storable__Reader;
 extern RT0__StructDesc _td_ADT_Storable__ReaderDesc;
 extern RT0__StructDesc _td_ADT_Storable__Writer;
 extern RT0__StructDesc _td_ADT_Storable__WriterDesc;
-extern RT0__StructDesc _td_ADT_Storable__String;
-extern RT0__StructDesc _td_ADT_Storable__StringDesc;
 extern RT0__StructDesc _td_ADT_Storable__TypeError;
 extern RT0__StructDesc _td_ADT_Storable__TypeErrorDesc;
 #endif /* _MODULE_ADT_Storable_ */

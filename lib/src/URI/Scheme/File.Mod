@@ -1,4 +1,4 @@
-(* 	$Id: File.Mod,v 1.7 2003/04/16 01:46:02 sgreenhill Exp $	 *)
+(* 	$Id: File.Mod,v 1.12 2003/06/05 22:09:35 mva Exp $	 *)
 MODULE URI:Scheme:File;
 (*  Implementation of the "file" URI scheme.
     Copyright (C) 2000, 2003  Michael van Acken
@@ -20,8 +20,8 @@ MODULE URI:Scheme:File;
 
 
 IMPORT
-  Msg, Strings, OS:ProcessParameters, OS:HostPath, Object, IO, IO:FileChannel,
-  URI0 := URI, URI:CharClass, URI:String, 
+  OS:ProcessParameters, OS:HostPath, Object, Exception, ADT:StringBuffer,
+  IO, IO:FileChannel, URI0 := URI, URI:CharClass, URI:String,
   URI:Scheme:Hierarchical, URI:Authority:ServerBased, URI:Parser;
 
 
@@ -35,13 +35,13 @@ TYPE
   END;
 
 
-PROCEDURE Init* (file: URI; schemeId: URI0.StringPtr;
+PROCEDURE Init* (file: URI; schemeId: STRING;
                  authority: URI0.Authority; query: URI0.Query);
   BEGIN
     Hierarchical.Init (file, schemeId, authority, query)
   END Init;
 
-PROCEDURE New* (schemeId: URI0.StringPtr;
+PROCEDURE New* (schemeId: STRING;
                 authority: URI0.Authority; query: URI0.Query): URI;
   VAR
     file: URI;
@@ -53,8 +53,13 @@ PROCEDURE New* (schemeId: URI0.StringPtr;
 
 PROCEDURE (file: URI) NewAuthority* (): URI0.Authority;
   BEGIN
-    RETURN ServerBased.New (NIL, String.Copy (""), -1, -1)
+    RETURN ServerBased.New (NIL, "", -1, -1)
   END NewAuthority;
+
+PROCEDURE (file: URI) AuthorityMandatory*(): BOOLEAN;
+  BEGIN
+    RETURN TRUE;
+  END AuthorityMandatory;
 
 PROCEDURE (file: URI) NewQuery* (): URI0.Query;
   BEGIN
@@ -70,33 +75,34 @@ PROCEDURE (file: URI) Clone* (): URI;
     RETURN copy
   END Clone;
 
-PROCEDURE (file: URI) GetPath* (VAR filePath: ARRAY OF CHAR);
+PROCEDURE (file: URI) GetPath*(): Object.String8;
 (**Returns the file path associated with the URI @oparam{file}.  On a Unix 
    system, this is identical to the URI's path component.  *)
   VAR
     segm: Hierarchical.Segment;
-    res : Msg.Msg;
+    sb: StringBuffer.StringBuffer;
+    str: STRING;
   BEGIN
-    COPY ("", filePath);
+    sb := StringBuffer.New("");
     segm := file. pathList;
     WHILE (segm # NIL) DO
       IF (segm # file. pathList) OR file. absolutePath THEN
-        Strings.Append ("/", filePath)
+        sb.Append("/");
       END;
-      Strings.Append (segm. string^, filePath);
+      sb.Append(segm.string);
       segm := segm. next
     END;
-    HostPath.Denormalize(filePath, res);
+    
+    str := HostPath.Denormalize(sb.ToString());
+    RETURN str(Object.String8);
   END GetPath;
 
 PROCEDURE (file: URI) GetChannel* (mode: URI0.ChannelMode): IO.ByteChannel
 RAISES IO.Error;
   VAR
-    filePath: ARRAY 2*1024 OF CHAR;
-    s: Object.String8;
+    s: STRING;
   BEGIN
-    file. GetPath (filePath);
-    s := Object.NewLatin1(filePath);
+    s := file.GetPath();
     CASE mode OF
     | URI0.channelNew:
       RETURN FileChannel.Open(s,
@@ -113,7 +119,7 @@ RAISES IO.Error;
 
 PROCEDURE NewPrototype*(): URI;
   BEGIN
-    RETURN New (String.Copy ("file"), NIL, NIL)
+    RETURN New("file", NIL, NIL);
   END NewPrototype;
 
 PROCEDURE GetCwd*(): URI;
@@ -122,24 +128,26 @@ PROCEDURE GetCwd*(): URI;
    returned.  *)
   VAR
     uri: URI0.URI;
-    path, uriString: ARRAY 4*1024 OF CHAR;
-    res: Msg.Msg;
+    uriString: StringBuffer.StringBuffer;
+    cwd, str: STRING;
   BEGIN
-    ProcessParameters.getcwd (path, res);
-    IF (res = NIL) THEN 
-      HostPath.Normalize(path, res) 
-    END;
-    IF (res = NIL) THEN
-      uriString := "file:";
-      String.AppendEscaped (path, CharClass.unreservedPChar+"/", uriString);
-      IF (uriString[Strings.Length (uriString)-1] # "/") THEN
-        Strings.Append ("/", uriString)
+    TRY
+      cwd := HostPath.Normalize(ProcessParameters.GetCwd());
+      uriString := StringBuffer.New("file://");
+      String.AppendEscaped(cwd, CharClass.unreservedPChar+"/", uriString);
+      IF (uriString.CharAt(uriString.length-1) # "/") THEN
+        uriString.Append ("/");
       END;
-      uri := Parser.NewURI (uriString, NIL, res);
-      ASSERT (uri # NIL);
-      RETURN uri(URI)
+      str := uriString.ToString();
+      TRY
+        uri := Parser.NewURI(str(Object.String8), NIL);
+        RETURN uri(URI);
+      CATCH Exception.ParseError:
+        ASSERT(FALSE);
+      END;
+    CATCH IO.Error:
+      RETURN NIL;
     END;
-    RETURN NIL
   END GetCwd;
 
 PROCEDURE ToURI* (filePath: ARRAY OF CHAR): URI;
@@ -147,28 +155,30 @@ PROCEDURE ToURI* (filePath: ARRAY OF CHAR): URI;
    are not valid within an URI are escaped.  *)
   VAR
     uri: URI0.URI;
-    uriString, normPath: ARRAY 4*1024 OF CHAR;
-    res: Msg.Msg;
+    uriString: StringBuffer.StringBuffer;
+    normPath: STRING;
+    str: STRING;
   BEGIN
-    COPY(filePath, normPath);
-    HostPath.Normalize(normPath, res);
-    IF res # NIL THEN RETURN NIL END;
-    IF (normPath[0] = "/") THEN
-      uriString := "file:";
-      String.AppendEscaped (normPath, CharClass.unreservedPChar+"/", uriString);
-      uri := Parser.NewURI (uriString, NIL, res)
-    ELSE
-      uriString := "";
-      String.AppendEscaped (normPath, CharClass.unreservedChar+"/", uriString);
-      uri := Parser.NewURI (uriString, GetCwd(), res)
+    TRY
+      normPath := HostPath.Normalize(Object.NewLatin1(filePath));
+      
+      IF (normPath.CharAt(0) = "/") THEN
+        uriString := StringBuffer.New("file://");
+        String.AppendEscaped (normPath, CharClass.unreservedPChar+"/", uriString);
+        str := uriString.ToString();
+        uri := Parser.NewURI (str(Object.String8), NIL)
+      ELSE
+        uriString := StringBuffer.New("");
+        String.AppendEscaped (normPath, CharClass.unreservedChar+"/", uriString);
+        str := uriString.ToString();
+        uri := Parser.NewURI (str(Object.String8), GetCwd())
+      END;
+      RETURN uri(URI);
+    CATCH IO.Error:
+      RETURN NIL;
+    CATCH Exception.ParseError:
+      RETURN NIL;
     END;
-    IF (uri = NIL) THEN
-      RETURN NIL
-    ELSE
-      RETURN uri(URI)
-    END
   END ToURI;
 
-BEGIN
-  URI0.RegisterScheme (NewPrototype())
 END URI:Scheme:File.

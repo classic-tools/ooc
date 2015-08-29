@@ -16,16 +16,13 @@ VAR
 
 
 PROCEDURE WriteURI (uri: URI.URI);
-  VAR
-    str: ARRAY 1024 OF CHAR;
   BEGIN
-    WITH uri: File.URI DO
-      uri.GetPath(str);
-    ELSE
-      uri.GetString(str);
-    END;
     IF ~silence THEN
-      Out.String(str);
+      WITH uri: File.URI DO
+        Out.Object(uri.GetPath());
+      ELSE
+        Out.Object(uri.ToString());
+      END;
     END;
   END WriteURI;
 
@@ -39,11 +36,11 @@ PROCEDURE ReadFile* (uri: URI.URI);
     END;
   END ReadFile;
 
-PROCEDURE ReadFileName* (fileName: ARRAY OF CHAR);
+PROCEDURE ReadFileName* (fileName: STRING);
   BEGIN
     IF ~silence THEN
       Out.String("- ");
-      Out.String(fileName);
+      Out.Object(fileName);
       Out.Ln;
       Out.Flush;
     END;
@@ -59,20 +56,20 @@ PROCEDURE WriteFile* (uri: URI.URI);
     END;
   END WriteFile;
 
-PROCEDURE WriteFileName* (fileName: ARRAY OF CHAR);
+PROCEDURE WriteFileName* (fileName: STRING);
   BEGIN
     IF ~silence THEN
       Out.String("+ ");
-      Out.String(fileName);
+      Out.Object(fileName);
       Out.Ln;
       Out.Flush;
     END;
   END WriteFileName;
 
-PROCEDURE ShellCommand* (str: ARRAY OF CHAR);
+PROCEDURE ShellCommand* (str: STRING);
   BEGIN
     IF ~silence THEN
-      Out.String (str);
+      Out.Object(str);
       Out.Ln;
       Out.Flush;
     END;

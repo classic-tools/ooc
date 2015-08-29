@@ -151,11 +151,11 @@ extern RT0__StructDesc _td_IO_BinaryRider__6399;
 extern RT0__StructDesc _td_IO_BinaryRider__6439;
 extern RT0__StructDesc _td_IO_BinaryRider__6499;
 extern RT0__StructDesc _td_IO_BinaryRider__6488;
-extern RT0__StructDesc _td_IO_BinaryRider__8109;
-extern RT0__StructDesc _td_IO_BinaryRider__8400;
-extern RT0__StructDesc _td_IO_BinaryRider__9255;
-extern RT0__StructDesc _td_IO_BinaryRider__9496;
-extern RT0__StructDesc _td_IO_BinaryRider__13152;
+extern RT0__StructDesc _td_IO_BinaryRider__8111;
+extern RT0__StructDesc _td_IO_BinaryRider__8402;
+extern RT0__StructDesc _td_IO_BinaryRider__9257;
+extern RT0__StructDesc _td_IO_BinaryRider__9498;
+extern RT0__StructDesc _td_IO_BinaryRider__13156;
 #endif /* _MODULE_IO_BinaryRider_ */
 
 /* --- */

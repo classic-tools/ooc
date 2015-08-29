@@ -65,7 +65,6 @@ PROCEDURE Init* (l: LinkedList);
 VAR
   e : Entry;
 BEGIN
-  Storable.Init (l);
   e := NewEntry(NIL, NIL, NIL); e.next := e; e.previous := e; 
   l.elements := e;
   l.size := 0
@@ -384,24 +383,18 @@ PROCEDURE (l: LinkedList) HashCode* (): LONGINT;
 PROCEDURE (l: LinkedList) Store* (w: Storable.Writer) RAISES IO.Error;
 VAR
   e : Entry;
-  obj: Object.Object;
 BEGIN
   w. WriteNum (l. size);
   e := l.elements.next;
   WHILE e # l.elements DO
-    obj := e.element;
-    IF (obj = NIL) THEN
-      w.WriteObject(NIL);
-    ELSE
-      w.WriteObject(obj(Storable.Object));
-    END;
+    w.WriteObject(e.element);
     e := e.next;
   END;
 END Store;
 
 PROCEDURE (l: LinkedList) Load* (r: Storable.Reader) RAISES IO.Error;
   VAR
-    o : Storable.Object;
+    o : Object.Object;
     i, size: LONGINT;
   BEGIN
     r. ReadNum (size);

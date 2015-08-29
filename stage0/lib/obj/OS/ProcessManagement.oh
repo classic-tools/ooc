@@ -4,17 +4,18 @@
 #include <__typemap.h>
 #include <RT0.oh>
 #include <C.oh>
+#include <Object.oh>
+#include <OS/Path.oh>
 #include <RT0.oh>
 #include <Object.oh>
 #include <Exception.oh>
-extern OOC_INT32 OS_ProcessManagement__system(const OOC_CHAR8 command__ref[], OOC_LEN command_0d);
+extern OOC_INT32 OS_ProcessManagement__system(Object__String command);
 extern OOC_INT32 OS_ProcessManagement__ExitStatus(OOC_INT32 status);
 extern OOC_INT32 OS_ProcessManagement__TermSignal(OOC_INT32 status);
 extern void OOC_OS_ProcessManagement_init(void);
 extern void OOC_OS_ProcessManagement_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OS_ProcessManagement__1289;
 #endif /* _MODULE_OS_ProcessManagement_ */
 
 /* --- */

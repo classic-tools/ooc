@@ -3,15 +3,12 @@ MODULE H2O:Source [OOC_EXTENSIONS];
 IMPORT
   H2O:Module,
   Object, Err, ADT:ArrayList,
-  OOC:Config, OOC:Repository, URI, IO, IO:FileChannel, Exception;
+  IO, IO:FileChannel, Exception;
 
 CONST
   cr = 0DX;
   eol* = 0AX;
   eof* = 04X;
-
-  debugText = 0;  (* output each character of input as it is read *)
-  debug = {};
 
 TYPE
   Source* = POINTER TO SourceDesc;
@@ -119,7 +116,7 @@ BEGIN
     obj := i.path.Get(pos);
     path := obj(STRING) + "/" + fileName;
     TRY
-      channel := FileChannel.Open(path(Object.String8), {FileChannel.read});
+      channel := FileChannel.Open(path, {FileChannel.read});
       RETURN TRUE;
     CATCH IO.Error:
     END;
@@ -134,7 +131,6 @@ VAR
   module : Module.Module;
   s : Source;
   channel : IO.ByteChannel;
-  chars : Object.CharsLatin1;
 BEGIN
   TRY
     IF search THEN
@@ -146,7 +142,7 @@ BEGIN
       END;    
     ELSE
       realFileName := fileName;
-      channel := FileChannel.Open(fileName(Object.String8), {FileChannel.read});
+      channel := FileChannel.Open(fileName, {FileChannel.read});
     END;
   CATCH IO.Error:
 	i.Exception(Exception.Current());

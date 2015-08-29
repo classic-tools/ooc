@@ -1,0 +1,18 @@
+***************
+*** 102,107 ****
+    flagDeprecated* = 10;
+    flagOOCExtensions* = 11;
+    flagExtensible* = 12;
+    
+  CONST
+    nameNotExported* = 0;
+--- 102,110 ----
+    flagDeprecated* = 10;
+    flagOOCExtensions* = 11;
+    flagExtensible* = 12;
++ 
++   libTypeStandard*       = 0; (** Library is a "normal" hared or static link library *)
++   libTypeFramework* = 1; (** Library is a special Mac OS X framework library *)
+    
+  CONST
+    nameNotExported* = 0;

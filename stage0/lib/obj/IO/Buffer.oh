@@ -3,6 +3,8 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
+#include <Ascii.oh>
+#include <Object.oh>
 #include <IO.oh>
 #include <RT0.oh>
 #include <Object.oh>
@@ -30,6 +32,9 @@ typedef void (*_TBP_IO_Buffer__ChannelDesc_SetPos)(IO_Buffer__Channel ch, OOC_IN
 extern OOC_INT32 IO_Buffer__ChannelDesc_Read(IO_Buffer__Channel ch, OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
 #define _TBN_IO_Buffer__ChannelDesc_Read 8
 typedef OOC_INT32 (*_TBP_IO_Buffer__ChannelDesc_Read)(IO_Buffer__Channel ch, OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
+extern Object__String8 IO_Buffer__ChannelDesc_ReadLineLF(IO_Buffer__Channel ch);
+#define _TBN_IO_Buffer__ChannelDesc_ReadLineLF 11
+typedef Object__String8 (*_TBP_IO_Buffer__ChannelDesc_ReadLineLF)(IO_Buffer__Channel ch);
 extern OOC_INT32 IO_Buffer__ChannelDesc_Write(IO_Buffer__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
 #define _TBN_IO_Buffer__ChannelDesc_Write 10
 typedef OOC_INT32 (*_TBP_IO_Buffer__ChannelDesc_Write)(IO_Buffer__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
@@ -51,9 +56,9 @@ extern void OOC_IO_Buffer_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_IO_Buffer__Channel;
 extern RT0__StructDesc _td_IO_Buffer__ChannelDesc;
-extern RT0__StructDesc _td_IO_Buffer__1328;
-extern RT0__StructDesc _td_IO_Buffer__2277;
-extern RT0__StructDesc _td_IO_Buffer__4142;
+extern RT0__StructDesc _td_IO_Buffer__1361;
+extern RT0__StructDesc _td_IO_Buffer__2303;
+extern RT0__StructDesc _td_IO_Buffer__6244;
 #endif /* _MODULE_IO_Buffer_ */
 
 /* --- */

@@ -1,4 +1,4 @@
-(*	$Id: SocketChannel.Mod,v 1.2 2003/02/05 21:31:58 mva Exp $	*)
+(*	$Id: SocketChannel.Mod,v 1.5 2003/07/01 22:22:37 mva Exp $	*)
 MODULE IO:SocketChannel;
 (*  Access to TCP connections through channel objects.
     Copyright (C) 2003  Michael van Acken
@@ -27,6 +27,7 @@ TYPE
   ChannelDesc = RECORD
     (IO.ByteChannelDesc)
     socket-: Socket.Socket;
+    blocking: BOOLEAN;
     connected-: BOOLEAN;
     connectionPending-: BOOLEAN;
   END;
@@ -41,23 +42,29 @@ TYPE
 PROCEDURE (ch: Channel) SetBlocking*(block: BOOLEAN) RAISES IO.Error;
   BEGIN
     ch.socket.SetBlocking(block);
+    ch.blocking := block;
   END SetBlocking;
 
 PROCEDURE (ch: Channel) Connect*(endPoint: Address.Socket): BOOLEAN
 (**Note: Non-blocking connect is not supported yet.  *)
 RAISES IO.Error;
   BEGIN
-    ch.socket.Connect(endPoint);
-    ch.connected := TRUE;
-    RETURN TRUE;  (* no nonblocking for now *)
+    ch.connected := ch.socket.Connect(endPoint);
+    RETURN ch.connected;
   END Connect;
 
-PROCEDURE (ch: Channel) FinishConnect*(): BOOLEAN;
-  BEGIN  (* not implemented yet *)
+PROCEDURE (ch: Channel) FinishConnect*(): BOOLEAN
+RAISES IO.Error;
+  BEGIN
+    ch.connected := ch.socket.FinishConnect();
+    IF ch.connected THEN
+      EXCL(ch.readyOps, IO.opConnect);
+    END;
+    RETURN ch.connected;
   END FinishConnect;
 
 PROCEDURE (ch: Channel) Read*(VAR buffer: ARRAY OF SYSTEM.BYTE;
-                                start, length: LONGINT): LONGINT
+                              start, length: LONGINT): LONGINT
 RAISES IO.Error;
   VAR
     res: LONGINT;
@@ -70,7 +77,7 @@ RAISES IO.Error;
   END Read;
   
 PROCEDURE (ch: Channel) Write*(buffer[NO_COPY]: ARRAY OF SYSTEM.BYTE;
-                                 start, length: LONGINT): LONGINT
+                               start, length: LONGINT): LONGINT
 RAISES IO.Error;
   VAR
     res: LONGINT;
@@ -85,6 +92,8 @@ RAISES IO.Error;
 PROCEDURE (ch: Channel) Close*() RAISES IO.Error;
   BEGIN
     ch.Close^();
+    ch.connected := FALSE;
+    ch.connectionPending := FALSE;
     ch.socket.Close();
   END Close;
 
@@ -95,6 +104,7 @@ PROCEDURE Open*(): Channel RAISES IO.Error;
     NEW(ch);
     ch.socket := Socket.New();
     IO.InitByteChannel(ch);
+    ch.blocking := TRUE;
     ch.connected := FALSE;
     ch.connectionPending := FALSE;
     RETURN ch;
@@ -137,7 +147,7 @@ PROCEDURE (ch: ServerChannel) Accept*(): Channel RAISES IO.Error;
 (**Accepts a connection request from a remote socket.
 
    On success, result is a channel for the incoming connection.  If the server
-   socket is in non-blocking more, and there are no more pending connections,
+   socket is in non-blocking mode, and there are no more pending connections,
    then result is @code{NIL}.  An error raises an exception of type
    @otype{IO.Error}.  *)
   VAR

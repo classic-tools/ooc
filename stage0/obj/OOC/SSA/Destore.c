@@ -215,7 +215,7 @@ l13:
       return 1u;
       goto l4;
 l3:
-      i0 = *(OOC_UINT8*)((_check_pointer(i0, 8155))+48);
+      i0 = *(OOC_UINT8*)((_check_pointer(i0, 8155))+52);
       return i0;
 l4:
       _failed_function(7979); return 0;
@@ -284,7 +284,7 @@ l3:
       i0=0u;
       goto l7;
 l6:
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9012))+16);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9012))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 9017))+12);
       i0 = (
       _cmp8((const void*)(_check_pointer(i0, 9021)),(const void*)(OOC_INT32)moduleName))==0;
@@ -883,7 +883,7 @@ l13:
               i0 = (OOC_INT32)var;
               i1 = i0==(OOC_INT32)0;
               if (i1) goto l3;
-              i1 = *(OOC_UINT8*)((_check_pointer(i0, 21913))+55);
+              i1 = *(OOC_UINT8*)((_check_pointer(i0, 21913))+59);
               
               goto l5;
 l3:

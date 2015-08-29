@@ -19,17 +19,17 @@ l4:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipAlpha(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipAlpha(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2206)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2211)));
   i1 = (OOC_UINT8)65u<=(OOC_UINT8)(_cap(i1));
   if (i1) goto l3;
   i1=0u;
   goto l5;
 l3:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2225)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2230)));
   i1 = (OOC_UINT8)(_cap(i1))<=(OOC_UINT8)90u;
   
 l5:
@@ -60,17 +60,17 @@ l4:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipDigit(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipDigit(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2535)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2545)));
   i1 = (OOC_UINT8)48u<=(OOC_UINT8)i1;
   if (i1) goto l3;
   i1=0u;
   goto l5;
 l3:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2548)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 2558)));
   i1 = (OOC_UINT8)i1<=(OOC_UINT8)57u;
   
 l5:
@@ -81,7 +81,7 @@ l7:
   *pos = (i0+1);
   return 1u;
 l8:
-  _failed_function(2445); return 0;
+  _failed_function(2450); return 0;
   ;
 }
 
@@ -101,7 +101,7 @@ l4:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipAlphaNum(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipAlphaNum(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0;
 
   i0 = URI_CharClass__SkipAlpha((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -121,13 +121,13 @@ OOC_CHAR8 URI_CharClass__IsMember(OOC_CHAR8 ch, const OOC_CHAR8 set__ref[], OOC_
   OOC_ALLOCATE_VPAR(set,OOC_CHAR8 ,set_0d)
 
   OOC_INITIALIZE_VPAR(set__ref,set,OOC_CHAR8 ,set_0d)
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 3045)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 3060)));
   i0 = i0!=0u;
   if (i0) goto l3;
   i0=0u;
   goto l5;
 l3:
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 3061)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(0, set_0d, OOC_UINT16, 3076)));
   i1 = ch;
   i0 = i0!=i1;
   
@@ -140,13 +140,13 @@ l7:
   i1=0;
 l8_loop:
   i1 = i1+1;
-  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3045)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3060)));
   i2 = i2!=0u;
   if (i2) goto l11;
   i2=0u;
   goto l13;
 l11:
-  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3061)));
+  i2 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i1, set_0d, OOC_UINT16, 3076)));
   i2 = i2!=i0;
   
 l13:
@@ -154,7 +154,7 @@ l13:
 l16:
   i0=i1;
 l17:
-  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i0, set_0d, OOC_UINT16, 3112)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)set+(_check_index(i0, set_0d, OOC_UINT16, 3127)));
   return (i0!=0u);
   ;
 }
@@ -168,11 +168,11 @@ OOC_CHAR8 URI_CharClass__IsReserved(OOC_CHAR8 ch) {
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipReserved(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipReserved(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3349)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3369)));
   i1 = URI_CharClass__IsMember(i1, ";/?:@&=+$,[]", 13);
   if (i1) goto l3;
   return 0u;
@@ -181,7 +181,7 @@ l3:
   *pos = (i0+1);
   return 1u;
 l4:
-  _failed_function(3254); return 0;
+  _failed_function(3269); return 0;
   ;
 }
 
@@ -206,15 +206,15 @@ OOC_CHAR8 URI_CharClass__IsMark(OOC_CHAR8 ch) {
     goto l4;
   }
 l4:
-  _failed_function(3473); return 0;
+  _failed_function(3493); return 0;
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipMark(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipMark(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3744)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 3769)));
   i1 = URI_CharClass__IsMark(i1);
   if (i1) goto l3;
   return 0u;
@@ -223,7 +223,7 @@ l3:
   *pos = (i0+1);
   return 1u;
 l4:
-  _failed_function(3655); return 0;
+  _failed_function(3675); return 0;
   ;
 }
 
@@ -243,7 +243,7 @@ l4:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipUnreserved(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipUnreserved(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0;
 
   i0 = URI_CharClass__SkipAlphaNum((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -258,7 +258,7 @@ l4:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipEscaped(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipEscaped(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
   auto OOC_CHAR8 URI_CharClass__SkipEscaped_SkipHex(OOC_CHAR8 ch);
     
@@ -293,13 +293,13 @@ l12:
 
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4370)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4405)));
   i1 = i1==37u;
   if (i1) goto l3;
   i1=0u;
   goto l5;
 l3:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4397)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+1), str_0d, OOC_UINT16, 4432)));
   i1 = URI_CharClass__SkipEscaped_SkipHex(i1);
   
 l5:
@@ -307,7 +307,7 @@ l5:
   i1=0u;
   goto l9;
 l7:
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4420)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index((i0+2), str_0d, OOC_UINT16, 4455)));
   i1 = URI_CharClass__SkipEscaped_SkipHex(i1);
   
 l9:
@@ -318,15 +318,15 @@ l11:
   *pos = (i0+3);
   return 1u;
 l12:
-  _failed_function(4138); return 0;
+  _failed_function(4168); return 0;
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipPChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipPChar(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0,i1;
 
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4630)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 4670)));
   i1 = URI_CharClass__IsMember(i1, ":@&=+$,", 8);
   if (i1) goto l7;
   i0 = URI_CharClass__SkipUnreserved((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -343,11 +343,11 @@ l7:
   *pos = (i0+1);
   return 1u;
 l8:
-  _failed_function(4538); return 0;
+  _failed_function(4573); return 0;
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipURIC(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipURIC(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0;
 
   i0 = URI_CharClass__SkipUnreserved((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);
@@ -369,13 +369,13 @@ l8:
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipMember(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos, const OOC_CHAR8 set__ref[], OOC_LEN set_0d) {
+OOC_CHAR8 URI_CharClass__SkipMember(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos, const OOC_CHAR8 set__ref[], OOC_LEN set_0d) {
   register OOC_INT32 i0,i1;
   OOC_ALLOCATE_VPAR(set,OOC_CHAR8 ,set_0d)
 
   OOC_INITIALIZE_VPAR(set__ref,set,OOC_CHAR8 ,set_0d)
   i0 = *pos;
-  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5150)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)str+(_check_index(i0, str_0d, OOC_UINT16, 5200)));
   i1 = URI_CharClass__IsMember(i1, (void*)(OOC_INT32)set, set_0d);
   if (i1) goto l3;
   return 0u;
@@ -384,11 +384,11 @@ l3:
   *pos = (i0+1);
   return 1u;
 l4:
-  _failed_function(5014); return 0;
+  _failed_function(5059); return 0;
   ;
 }
 
-OOC_CHAR8 URI_CharClass__SkipAuthChar(OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
+OOC_CHAR8 URI_CharClass__SkipAuthChar(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT16 *pos) {
   register OOC_INT32 i0;
 
   i0 = URI_CharClass__SkipUnreserved((void*)(OOC_INT32)str, str_0d, (void*)(OOC_INT32)pos);

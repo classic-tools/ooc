@@ -1,4 +1,4 @@
-(* 	$Id: DeclWriter.Mod,v 1.63 2003/04/14 19:14:24 mva Exp $	 *)
+(* 	$Id: DeclWriter.Mod,v 1.67 2003/06/11 14:02:46 sgreenhill Exp $	 *)
 MODULE OOC:C:DeclWriter [OOC_EXTENSIONS];
 (*  Defines classes to handle C declarations, types, and include statements.
     Copyright (C) 2001-2003  Michael van Acken
@@ -24,7 +24,7 @@ IMPORT
   SYSTEM, IntStr, Strings, IO, IO:TextRider,
   Object, Object:Boxed, Object:BigInt, ADT:ArrayList, URI, 
   OOC:Repository, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
-  TR := OOC:SymbolTable:TypeRules;
+  TR := OOC:SymbolTable:TypeRules, OOC:Repository:FileSystem;
   
 
 
@@ -151,6 +151,7 @@ TYPE
     parameters: ArrayList.ArrayList;
     restParameters: BOOLEAN;
     noReturn: BOOLEAN;
+    callConv: Sym.CallConv;
   END;
 
 TYPE
@@ -496,8 +497,7 @@ PROCEDURE (w: Writer) WriteConst* (value: Boxed.Object; type: Sym.Type);
               IF (i # 0) THEN
                 w. WriteChar (",");
               END;
-              w. textWriter. WriteLInt (ORD(s.CharAt(i)), 0);
-              INC (i)
+              w. textWriter. WriteLInt (ORD(s.NextChar(i)), 0);
             END;
             IF (i # 0) THEN
               w. WriteChar (",");
@@ -701,8 +701,7 @@ PROCEDURE (w: Writer) WriteStringConst* (value: Boxed.Object; type: Sym.Type);
         IF (i # 0) THEN
           w. WriteChar (",");
         END;
-        w. textWriter. WriteLInt (ORD(s.CharAt(i)), 0);
-        INC (i)
+        w. textWriter. WriteLInt (ORD(s.NextChar(i)), 0);
       END;
       IF (i # 0) THEN
         w. WriteChar (",");
@@ -918,6 +917,7 @@ PROCEDURE InitFunction (fct: Function; resultType: Type; restParameters: BOOLEAN
     fct. parameters := ArrayList.New (4);
     fct. restParameters := restParameters;
     fct. noReturn := FALSE;
+    fct. callConv := Sym.callConvDefault;
   END InitFunction;
 
 PROCEDURE (w: Writer) NewFunction* (resultType: Type; restParameters: BOOLEAN): Function;
@@ -933,6 +933,11 @@ PROCEDURE (fct: Function) SetNoReturn* (noReturn: BOOLEAN);
   BEGIN
     fct.noReturn := noReturn;
   END SetNoReturn;
+
+PROCEDURE (fct: Function) SetCallConv* (callConv: Sym.CallConv);
+  BEGIN
+    fct.callConv := callConv;
+  END SetCallConv;
 
 PROCEDURE (fct: Function) AddParameter* (param: Declaration);
   BEGIN
@@ -963,6 +968,13 @@ PROCEDURE (fct: Function) WriteLeft (w: Writer);
     WriteLeft (w, fct. resultType, priFunction);
     IF fct.noReturn THEN
       w.WriteString("NORETURN ");
+    END;
+    CASE fct.callConv OF
+    | Sym.callConvC:
+      (* w.WriteString("__attribute__ ((cdecl)) "); *)
+    | Sym.callConvPascal:
+      w.WriteString("__attribute__ ((stdcall)) ");
+    ELSE
     END;
   END WriteLeft;
 
@@ -1185,19 +1197,13 @@ PROCEDURE (w: Writer) NewIncludeModule* (module: Repository.Module): IncludeModu
 PROCEDURE (w: Writer) WriteModuleInclude*(m: Repository.Module;
                                           fileId: Repository.FileId);
   VAR
-    path: Repository.URIBuffer;
-    i: LONGINT;
+    path: STRING;
+    chars: Object.CharsLatin1;
   BEGIN
-    m.origin.GetDefaultSuffix(fileId, path);
-    Strings.Insert(m.name^, 0, path);
-    i := 0;
-    WHILE (path[i] # 0X) DO
-      IF (path[i] = ":") THEN
-        path[i] := "/";
-      END;
-      INC(i);
-    END;
-    w. WriteInclude (path)
+    path := FileSystem.ModuleToFileName(m.name^)+
+        m.origin.GetDefaultSuffix(fileId);
+    chars := path(Object.String8).CharsLatin1();
+    w. WriteInclude(chars^);
   END WriteModuleInclude;
 
 PROCEDURE (d: IncludeModule) Write (w: Writer);

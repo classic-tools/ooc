@@ -58,7 +58,7 @@ extern RT0__StructDesc _td_OOC_Scanner_Pragma__ConditionStackDesc;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__State;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContext;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Scanner_Pragma__3785;
+extern RT0__StructDesc _td_OOC_Scanner_Pragma__3649;
 extern RT0__StructDesc _td_OOC_Scanner_Pragma__ParsePragma_Value;
 #endif /* _MODULE_OOC_Scanner_Pragma_ */
 

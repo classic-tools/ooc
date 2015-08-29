@@ -1,4 +1,4 @@
-(*	$Id: IO.Mod,v 1.4 2003/02/05 21:32:03 mva Exp $	*)
+(*	$Id: IO.Mod,v 1.12 2003/06/04 22:36:16 mva Exp $	*)
 MODULE IO;
 (*  Defines common behaviour of I/O channel and selector.
     Copyright (C) 2003  Michael van Acken
@@ -80,9 +80,9 @@ TYPE
 TYPE
   Selector* = POINTER TO SelectorDesc;
   SelectorDesc* = RECORD [ABSTRACT]
-  (**A mechanism to discover channels that have become ready for I/O
-     operations.  For example, a selector can be used to find out for which
-     channels new input data has arrived.
+  (**A mechanism to discover channels that are ready for I/O operations.  For
+     example, a selector can be used to find out for which channels input
+     data is available.
 
      Note: The definition of this class covers both selectors that report the
      current state of a channel, and those that only report an event if a
@@ -90,7 +90,8 @@ TYPE
      but never clears them.  I/O operations like @oproc{ByteChannel.Read},
      @oproc{ByteChannel.Write}, @oproc{*SocketChannel.Channel.Connect}, and
      @oproc{*SocketChannel.ServerChannel.Accept} clear the corresponding flag
-     if the channel is in non-blocking mode.  *)
+     if the channel is in non-blocking mode and they get an @samp{EWOULDBLOCK}
+     error from the libc function.  *)
     (Object.ObjectDesc)
     keys-: SelectionKey;
     (**A list of selection keys registered for this selector.  The keys are
@@ -138,6 +139,33 @@ TYPE
   (**This exception is raised if a C function returns a @samp{ENOENT} error. *)
     (ErrorDesc)
   END;
+  AccessDenied* = POINTER TO AccessDeniedDesc;
+  AccessDeniedDesc = RECORD
+  (**This exception is raised if a C function returns a @samp{EACCES} error. *)
+    (ErrorDesc)
+  END;
+  FileExists* = POINTER TO FileExistsDesc;
+  FileExistsDesc = RECORD
+  (**This exception is raised if a C function returns a @samp{EEXIST} error. *)
+    (ErrorDesc)
+  END;
+  FileBusy* = POINTER TO FileBusyDesc;
+  FileBusyDesc = RECORD
+  (**This exception is raised if a C function returns a @samp{EBUSY} error. *)
+    (ErrorDesc)
+  END;
+  InvalidArgument* = POINTER TO InvalidArgumentDesc;
+  InvalidArgumentDesc = RECORD
+  (**This exception is raised if a C function returns a @samp{EINVAL} error. *)
+    (ErrorDesc)
+  END;
+  OutOfRange* = POINTER TO OutOfRangeDesc;
+  OutOfRangeDesc = RECORD
+  (**This exception is raised if a C function returns a @samp{ERANGE} error. *)
+    (ErrorDesc)
+  END;
+
+TYPE
   NotImplemented* = POINTER TO NotImplementedDesc;
   NotImplementedDesc = RECORD
   (**Raised when a method is called that is not implemented for a particular
@@ -152,33 +180,43 @@ TYPE
      or because the data is syntactically wrong.  *)
     (ErrorDesc) 
   END;
+  ProtocolError* = POINTER TO ProtocolErrorDesc;
+  ProtocolErrorDesc = RECORD
+  (**Raised if malformed data is received from the remote side of a
+     conversation.  This is @emph{not} used for responses that indicate failure
+     to process a request.  An example for a protocol error is an NNTP response
+     message that does not begin with a three digit status code.  After such an
+     error, the connection should be closed immediately.  *)
+    (ErrorDesc)
+  END;
+  ErrorResponse* = POINTER TO ErrorResponseDesc;
+  ErrorResponseDesc* = RECORD
+  (**Raised if the remote side of a conversation sends a reply with an error
+     status code.  *)
+    (ErrorDesc)
+  END;
 
-PROCEDURE InitError*(e: Error; msg: STRING);
+
+PROCEDURE (e: Error) INIT*(msg: STRING);
   BEGIN
-    Exception.Init(e, msg);
-  END InitError;
+    e.INIT^(msg);
+  END INIT;
 
 PROCEDURE NewFormatError*(msg: STRING): FormatError;
-  VAR
-    e: FormatError;
   BEGIN
-    NEW(e);
-    InitError(e, msg);
-    RETURN e;
+    RETURN NEW(FormatError, msg);
   END NewFormatError;
 
-PROCEDURE RaiseFormatError*(msg: STRING) RAISES FormatError;
+PROCEDURE RaiseFormatError*(msg: STRING)
+RAISES FormatError;
   BEGIN
     RAISE(NewFormatError(msg));
   END RaiseFormatError;
 
-PROCEDURE RaiseNotImplemented*() RAISES NotImplemented;
-  VAR
-    e: NotImplemented;
+PROCEDURE RaiseNotImplemented*()
+RAISES NotImplemented;
   BEGIN
-    NEW(e);
-    InitError(e, NIL);
-    RAISE(e);
+    RAISE(NEW(NotImplemented, NIL));
   END RaiseNotImplemented;
 
 PROCEDURE InitSelectionKey*(k: SelectionKey; fd: FileDescriptor;
@@ -240,21 +278,15 @@ PROCEDURE (s: Selector) Close*();
 
 PROCEDURE (s: Selector) [ABSTRACT] Select*(sec, usec: LONGINT): LONGINT
 RAISES Error;
-(**Determine if operations on registered channels have become ready.  The
-   function returns the number of ready sets that have been modified.  This may
-   differ from the number of channels that have a non-empty ready set on
-   completion, if any channels where already marked as ready at the time of the
-   call.
+(**Determine if operations on registered channels are ready.  The function
+   returns the number of channels with a non-empty ready set.  Result is
+   @samp{0} if no channels are ready or have become ready until the time the
+   specified timeout expires.  If this function is called with a channel
+   already being ready, then it behaves as if a timeout of zero had been
+   requested.
 
-   Result is @samp{0} if no channels have become ready until the time the
-   specified timeout expires.  After a call to @oproc{Selector.Select}, the
-   method @oproc{Selector.NextKey} iterates over all ready channels.
-
-   Note: Unlike the C function @samp{select()}, this method reports on
-   operations that have @emph{become} ready, instead of the operations the are
-   @emph{currently} ready.  For example, if a channel is marked as ``ready to
-   read'' when @oproc{Selector.Select} is called, then this particular
-   operation is not tested for and will not count in the method's result value.  *)
+   After a call to @oproc{Selector.Select}, the method @oproc{Selector.NextKey}
+   iterates over all ready channels.  *)
   END Select;
 
 PROCEDURE (s: Selector) [ABSTRACT] NextKey*(): SelectionKey;
@@ -364,7 +396,8 @@ PROCEDURE (ch: Channel) KeyForSelector*(sel: Selector): SelectionKey;
     RETURN ch.keys[i];
   END KeyForSelector;
 
-PROCEDURE (ch: Channel) [ABSTRACT] SetBlocking*(block: BOOLEAN) RAISES Error;
+PROCEDURE (ch: Channel) [ABSTRACT] SetBlocking*(block: BOOLEAN)
+RAISES Error;
 (**Change the channel's blocking mode.  Channels typically default to
    blocking mode on creation.
 
@@ -373,7 +406,8 @@ PROCEDURE (ch: Channel) [ABSTRACT] SetBlocking*(block: BOOLEAN) RAISES Error;
    @omodule{*IO:TextRider} only work with blocking channels.  *)
   END SetBlocking;
 
-PROCEDURE (ch: Channel) Close*() RAISES Error;
+PROCEDURE (ch: Channel) Close*()
+RAISES Error;
 (**Cancel all selection keys registered for the channel @oparam{ch} and close
    the channel.  *)
   VAR
@@ -386,7 +420,8 @@ PROCEDURE (ch: Channel) Close*() RAISES Error;
     END;
   END Close;
 
-PROCEDURE (ch: Channel) CloseAndRegister*() RAISES Error;
+PROCEDURE (ch: Channel) CloseAndRegister*()
+RAISES Error;
 (**Like @oproc{Channel.Close}, but register the channel's target with its
    naming service once done.  Right now, only @omodule{*IO:FileChannel}
    supports this feature; see @oconst{*IO:FileChannel.tmpFile} for details.
@@ -400,14 +435,15 @@ PROCEDURE InitByteChannel*(ch: ByteChannel);
     InitChannel(ch);
   END InitByteChannel;
 
-PROCEDURE (ch: Channel) SetPos*(pos: LONGINT) RAISES Error;
+PROCEDURE (ch: Channel) SetPos*(pos: LONGINT)
+RAISES Error;
 (**Change the channels position to @oparam{pos}.  *)
   BEGIN
     RaiseNotImplemented();
   END SetPos;
 
 PROCEDURE (ch: ByteChannel) [ABSTRACT] Read*(VAR buffer: ARRAY OF SYSTEM.BYTE;
-                                               start, length: LONGINT): LONGINT
+                                             start, length: LONGINT): LONGINT
 RAISES Error;
 (**Read a sequence of bytes from the channel into the buffer.
 
@@ -433,7 +469,7 @@ RAISES Error;
   END Read;
 
 PROCEDURE (ch: ByteChannel) [ABSTRACT] Write*(buffer[NO_COPY]: ARRAY OF SYSTEM.BYTE;
-                                     start, length: LONGINT): LONGINT
+                                              start, length: LONGINT): LONGINT
 RAISES Error;
 (**Write a sequence of bytes to this channel from the buffer.
 
@@ -452,7 +488,8 @@ RAISES Error;
    @end precond  *)
   END Write;
 
-PROCEDURE (ch: ByteChannel) Flush*() RAISES Error;
+PROCEDURE (ch: ByteChannel) Flush*()
+RAISES Error;
 (**Flush all buffers associated with channel @oparam{ch}.  *)
   END Flush;
 

@@ -18,7 +18,16 @@ typedef struct Exception__Context {
   Exception__ContextPtr next;
   OOC_PTR jmpbuf;
 } Exception__Context;
-extern void Exception__Init(Exception__Exception e, Object__String msg);
+typedef struct Exception__ParseErrorDesc *Exception__ParseError;
+typedef struct Exception__ParseErrorDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+  OOC_INT32 offset;
+} Exception__ParseErrorDesc;
+extern void Exception__ExceptionDesc_INIT(Exception__Exception e, Object__String msg);
+#define _TBN_Exception__ExceptionDesc_INIT 1
+typedef void (*_TBP_Exception__ExceptionDesc_INIT)(Exception__Exception e, Object__String msg);
 extern void NORETURN Exception__Raise(Exception__Exception e) NORETURN2;
 extern Exception__Exception Exception__Current(void);
 extern void Exception__Clear(void);
@@ -29,8 +38,12 @@ extern Object__String Exception__ExceptionDesc_GetMessage(Exception__Exception e
 #define _TBN_Exception__ExceptionDesc_GetMessage 0
 typedef Object__String (*_TBP_Exception__ExceptionDesc_GetMessage)(Exception__Exception e);
 extern void Exception__ExceptionDesc_WriteBacktrace(Exception__Exception e);
-#define _TBN_Exception__ExceptionDesc_WriteBacktrace 1
+#define _TBN_Exception__ExceptionDesc_WriteBacktrace 2
 typedef void (*_TBP_Exception__ExceptionDesc_WriteBacktrace)(Exception__Exception e);
+extern void Exception__ParseErrorDesc_INIT(Exception__ParseError e, Object__String msg, OOC_INT32 offset);
+#define _TBN_Exception__ParseErrorDesc_INIT 1
+typedef void (*_TBP_Exception__ParseErrorDesc_INIT)(Exception__ParseError e, Object__String msg, OOC_INT32 offset);
+extern void NORETURN Exception__FatalError(void) NORETURN2;
 extern void OOC_Exception_init(void);
 extern void OOC_Exception_init0(void);
 
@@ -39,6 +52,8 @@ extern RT0__StructDesc _td_Exception__Exception;
 extern RT0__StructDesc _td_Exception__ExceptionDesc;
 extern RT0__StructDesc _td_Exception__3915;
 extern RT0__StructDesc _td_Exception__ContextPtr;
+extern RT0__StructDesc _td_Exception__ParseError;
+extern RT0__StructDesc _td_Exception__ParseErrorDesc;
 #endif /* _MODULE_Exception_ */
 
 /* --- */

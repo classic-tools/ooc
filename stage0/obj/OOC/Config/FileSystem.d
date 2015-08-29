@@ -1,6 +1,7 @@
 #include <OOC/Config/FileSystem.oh>
 #include <LongStrings.oh>
 #include <Strings.oh>
+#include <Exception.oh>
 #include <URI.oh>
 #include <URI/Parser.oh>
 #include <XML/DTD.oh>
@@ -18,8 +19,8 @@ RT0__StructDesc _td_OOC_Config_FileSystem__RepositoryEntry = { (RT0__Struct[]){&
 RT0__StructDesc _td_OOC_Config_FileSystem__RepositoryEntryDesc = { (RT0__Struct[]){&_td_OOC_Config_Repositories__RepositoryEntryDesc,&_td_OOC_Config_FileSystem__RepositoryEntryDesc}, (void*[]){(void*)OOC_Config_FileSystem__RepositoryEntryDesc_ProcessElement}, &_mid, "RepositoryEntryDesc", 68, 1, RT0__strRecord };
 RT0__StructDesc _td_OOC_Config_FileSystem__ErrorContext = { (RT0__Struct[]){&_td_OOC_Config_FileSystem__ErrorContextDesc}, NULL, &_mid, "ErrorContext", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_OOC_Config_FileSystem__ErrorContextDesc = { (RT0__Struct[]){&_td_Msg__ContextDesc,&_td_XML_Error__ContextDesc,&_td_Config_Section__ErrorContextDesc,&_td_OOC_Config_FileSystem__ErrorContextDesc}, (void*[]){(void*)OOC_Config_FileSystem__ErrorContextDesc_GetTemplate,(void*)XML_Error__ContextDesc_SetString,(void*)XML_Error__ContextDesc_WriteTemplate}, &_mid, "ErrorContextDesc", 8, 3, RT0__strRecord };
-RT0__StructDesc _td_OOC_Config_FileSystem__1678 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
-RT0__StructDesc _td_OOC_Config_FileSystem__2624 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 4096, 4096, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_FileSystem__1689 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 256, 128, RT0__strArray };
+RT0__StructDesc _td_OOC_Config_FileSystem__2617 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 4096, 4096, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"OOC:Config:FileSystem", (RT0__Struct[]) { &_td_OOC_Config_FileSystem__RepositoryEntry, &_td_OOC_Config_FileSystem__RepositoryEntryDesc, &_td_OOC_Config_FileSystem__ErrorContext, &_td_OOC_Config_FileSystem__ErrorContextDesc, NULL } };
 
 extern void OOC_OOC_Config_FileSystem_init0() {

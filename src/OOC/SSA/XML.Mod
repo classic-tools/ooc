@@ -1,4 +1,4 @@
-(* 	$Id: XML.Mod,v 1.26 2003/03/11 22:08:41 mva Exp $	 *)
+(* 	$Id: XML.Mod,v 1.27 2003/05/31 16:51:53 mva Exp $	 *)
 MODULE OOC:SSA:XML;
 (*  Produces a canonical representation of SSA code in XML.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -115,8 +115,8 @@ PROCEDURE (w: Writer) AttrRef* (res: SSA.Result);
         ELSE
           value := res. value. ToString();
         END;
-        IF (value IS Object.String32) THEN
-          w. AttrObject ("const-value", "[Object.String32]");
+        IF (value IS Object.String16) THEN
+          w. AttrObject ("const-value", "[Object.String16]");
         ELSE
           w. AttrObject ("const-value", value(Object.String8));
         END;

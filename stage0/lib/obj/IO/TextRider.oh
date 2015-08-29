@@ -84,13 +84,13 @@ extern RT0__StructDesc _td_IO_TextRider__1874;
 extern RT0__StructDesc _td_IO_TextRider__2774;
 extern RT0__StructDesc _td_IO_TextRider__3680;
 extern RT0__StructDesc _td_IO_TextRider__3929;
-extern RT0__StructDesc _td_IO_TextRider__5548;
-extern RT0__StructDesc _td_IO_TextRider__7026;
-extern RT0__StructDesc _td_IO_TextRider__7399;
-extern RT0__StructDesc _td_IO_TextRider__7842;
-extern RT0__StructDesc _td_IO_TextRider__8227;
-extern RT0__StructDesc _td_IO_TextRider__8675;
-extern RT0__StructDesc _td_IO_TextRider__9058;
+extern RT0__StructDesc _td_IO_TextRider__5551;
+extern RT0__StructDesc _td_IO_TextRider__7029;
+extern RT0__StructDesc _td_IO_TextRider__7402;
+extern RT0__StructDesc _td_IO_TextRider__7845;
+extern RT0__StructDesc _td_IO_TextRider__8230;
+extern RT0__StructDesc _td_IO_TextRider__8678;
+extern RT0__StructDesc _td_IO_TextRider__9061;
 #endif /* _MODULE_IO_TextRider_ */
 
 /* --- */

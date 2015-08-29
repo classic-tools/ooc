@@ -402,7 +402,7 @@ OOC_INT8 OOC_SSA_Opcode__TypeToSubclass(OOC_SymbolTable__Type type) {
   _assert(0u, 127, 39154);
   goto l43;
 l13:
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39063))+36);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 39063))+40);
   i0 = OOC_SSA_Opcode__TypeToSubclass((OOC_SymbolTable__Type)i0);
   return i0;
   goto l43;
@@ -419,7 +419,7 @@ l21:
   return 0;
   goto l43;
 l23:
-  i0 = *(OOC_INT16*)((_check_pointer(i0, 38070))+36);
+  i0 = *(OOC_INT16*)((_check_pointer(i0, 38070))+40);
   switch (i0) {
   case 17:
     return 0;

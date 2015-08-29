@@ -1,4 +1,4 @@
-(*	$Id: Address.Mod,v 1.2 2003/02/05 21:32:02 mva Exp $	*)
+(*	$Id: Address.Mod,v 1.3 2003/06/01 19:03:03 mva Exp $	*)
 MODULE IO:Address [FOREIGN "C"; LINK FILE "Address.c" END];
 (*  Types and functions for Internet and socket addresses.
     Copyright (C) 2003  Michael van Acken
@@ -20,7 +20,7 @@ MODULE IO:Address [FOREIGN "C"; LINK FILE "Address.c" END];
 <*Warnings:=FALSE*>
 
 IMPORT
-  RT0, Exception, Object;
+  RT0, Exception, Object, IO;
   
 TYPE
   Inet* = POINTER TO InetDesc;
@@ -65,7 +65,7 @@ TYPE
 TYPE
   UnknownHostException* = POINTER TO UnknownHostExceptionDesc;
   UnknownHostExceptionDesc = RECORD
-    (Exception.ExceptionDesc)
+    (IO.ErrorDesc)
   END;
 
 VAR

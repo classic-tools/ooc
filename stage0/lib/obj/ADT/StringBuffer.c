@@ -12,10 +12,10 @@ static void ADT_StringBuffer__Init(ADT_StringBuffer__StringBuffer b, OOC_INT32 i
   i0=8;
 l4:
   i1 = (OOC_INT32)b;
-  *(OOC_INT32*)(_check_pointer(i1, 1961)) = i0;
-  *(OOC_INT32*)((_check_pointer(i1, 1996))+4) = 0;
-  *(OOC_INT32*)((_check_pointer(i1, 2019))+8) = ((OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsLatin1.baseTypes[0], i0));
-  *(OOC_INT32*)((_check_pointer(i1, 2050))+12) = 0;
+  *(OOC_INT32*)(_check_pointer(i1, 1973)) = i0;
+  *(OOC_INT32*)((_check_pointer(i1, 2008))+4) = 0;
+  *(OOC_INT32*)((_check_pointer(i1, 2031))+8) = ((OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsLatin1.baseTypes[0], i0));
+  *(OOC_INT32*)((_check_pointer(i1, 2062))+12) = 0;
   return;
   ;
 }
@@ -34,51 +34,96 @@ Object__String ADT_StringBuffer__StringBufferDesc_ToString(ADT_StringBuffer__Str
   register OOC_INT32 i0,i1,i2;
 
   i0 = (OOC_INT32)b;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2319))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2331))+8);
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l3;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2442))+12);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2442))+12);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2449)), 0);
-  i0 = *(OOC_INT32*)((_check_pointer(i0, 2456))+4);
-  i0 = (OOC_INT32)Object__NewUCS4Region((void*)(_check_pointer(i1, 2449)), i2, 0, i0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2455))+12);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2455))+12);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2462)), 0);
+  i0 = *(OOC_INT32*)((_check_pointer(i0, 2469))+4);
+  i0 = (OOC_INT32)Object__NewUTF16Region((void*)(_check_pointer(i1, 2462)), i2, 0, i0);
   return (Object__String)i0;
   goto l4;
 l3:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2375))+8);
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2375))+8);
-  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2381)), 0);
-  i0 = *(OOC_INT32*)((_check_pointer(i0, 2388))+4);
-  i0 = (OOC_INT32)Object__NewLatin1Region((void*)(_check_pointer(i1, 2381)), i2, 0, i0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2387))+8);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2387))+8);
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i2, 2393)), 0);
+  i0 = *(OOC_INT32*)((_check_pointer(i0, 2400))+4);
+  i0 = (OOC_INT32)Object__NewLatin1Region((void*)(_check_pointer(i1, 2393)), i2, 0, i0);
   return (Object__String)i0;
 l4:
-  _failed_function(2282); return 0;
+  _failed_function(2294); return 0;
   ;
 }
 
 OOC_CHAR32 ADT_StringBuffer__StringBufferDesc_CharAt(ADT_StringBuffer__StringBuffer b, OOC_INT32 index) {
-  register OOC_INT32 i0,i1,i2;
+  register OOC_INT32 i0,i1,i2,i3;
+  OOC_CHAR16 _w1;
 
   i0 = (OOC_INT32)b;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2572))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2613))+8);
   i1 = i1!=(OOC_INT32)0;
-  if (i1) goto l3;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2643))+12);
-  i0 = _check_pointer(i0, 2650);
+  if (i1) goto l27;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2683))+12);
+  i1 = _check_pointer(i1, 2690);
+  i2 = OOC_ARRAY_LENGTH(i1, 0);
+  i3 = index;
+  i1 = *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 2690))*2);
+  _w1 = i1;
+  i2 = (OOC_UINT16)i1<(OOC_UINT16)55296u;
+  if (i2) goto l5;
+  i2 = (OOC_UINT16)i1>=(OOC_UINT16)57344u;
+  
+  goto l7;
+l5:
+  i2=1u;
+l7:
+  if (i2) goto l9;
+  i2 = *(OOC_INT32*)((_check_pointer(i0, 2799))+4);
+  i2 = (i3+1)==i2;
+  
+  goto l11;
+l9:
+  i2=1u;
+l11:
+  if (i2) goto l25;
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2924))+12);
+  i0 = _check_pointer(i0, 2931);
+  i2 = OOC_ARRAY_LENGTH(i0, 0);
+  i0 = *(OOC_UINT16*)(i0+(_check_index((i3+1), i2, OOC_UINT32, 2931))*2);
+  i2 = (OOC_UINT16)i1<(OOC_UINT16)56320u;
+  if (i2) goto l15;
+  i2=0u;
+  goto l17;
+l15:
+  i2 = (OOC_UINT16)56320u<=(OOC_UINT16)i0;
+  
+l17:
+  if (i2) goto l19;
+  i2=0u;
+  goto l21;
+l19:
+  i2 = (OOC_UINT16)i0<(OOC_UINT16)57344u;
+  
+l21:
+  if (i2) goto l23;
+  return i1;
+  goto l28;
+l23:
+  return (((_mod(i1,1024))*1024)+(_mod(i0,1024)));
+  goto l28;
+l25:
+  return i1;
+  goto l28;
+l27:
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2646))+8);
+  i0 = _check_pointer(i0, 2652);
   i1 = OOC_ARRAY_LENGTH(i0, 0);
   i2 = index;
-  i0 = *(OOC_UINT32*)(i0+(_check_index(i2, i1, OOC_UINT32, 2650))*4);
+  i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 2652)));
   return i0;
-  goto l4;
-l3:
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2605))+8);
-  i0 = _check_pointer(i0, 2611);
-  i1 = OOC_ARRAY_LENGTH(i0, 0);
-  i2 = index;
-  i0 = *(OOC_UINT8*)(i0+(_check_index(i2, i1, OOC_UINT32, 2611)));
-  return i0;
-l4:
-  _failed_function(2520); return 0;
+l28:
+  _failed_function(2533); return 0;
   ;
 }
 
@@ -86,7 +131,7 @@ void ADT_StringBuffer__StringBufferDesc_Clear(ADT_StringBuffer__StringBuffer b) 
   register OOC_INT32 i0;
 
   i0 = (OOC_INT32)b;
-  *(OOC_INT32*)((_check_pointer(i0, 2732))+4) = 0;
+  *(OOC_INT32*)((_check_pointer(i0, 3288))+4) = 0;
   return;
   ;
 }
@@ -95,14 +140,14 @@ void ADT_StringBuffer__StringBufferDesc_EnsureCapacity(ADT_StringBuffer__StringB
   register OOC_INT32 i0,i1,i2,i3;
   OOC_INT32 newCap;
   ADT_StringBuffer__CharsLatin1 new8;
-  ADT_StringBuffer__CharsUCS4 new32;
+  ADT_StringBuffer__CharsUTF16 new16;
 
   i0 = (OOC_INT32)b;
-  i1 = *(OOC_INT32*)(_check_pointer(i0, 2908));
+  i1 = *(OOC_INT32*)(_check_pointer(i0, 3465));
   i2 = cap;
   i1 = i1<i2;
   if (!i1) goto l16;
-  i1 = *(OOC_INT32*)(_check_pointer(i0, 2947));
+  i1 = *(OOC_INT32*)(_check_pointer(i0, 3504));
   newCap = i1;
   i3 = i1<i2;
   if (!i3) goto l11;
@@ -112,28 +157,28 @@ l6_loop:
   i3 = i1<i2;
   if (i3) goto l6_loop;
 l11:
-  *(OOC_INT32*)(_check_pointer(i0, 3034)) = i1;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3073))+8);
+  *(OOC_INT32*)(_check_pointer(i0, 3591)) = i1;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3630))+8);
   i2 = i2!=0;
   if (i2) goto l14;
-  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsUCS4.baseTypes[0], i1);
-  new32 = (ADT_StringBuffer__CharsUCS4)i1;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3273))+12);
-  i0 = *(OOC_INT32*)((_check_pointer(i0, 3300))+4);
-  _move_block((_check_pointer(i2, 3280)),(_check_pointer(i1, 3295)),(i0*4));
+  i1 = (OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsUTF16.baseTypes[0], i1);
+  new16 = (ADT_StringBuffer__CharsUTF16)i1;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3830))+12);
+  i0 = *(OOC_INT32*)((_check_pointer(i0, 3857))+4);
+  _move_block((_check_pointer(i2, 3837)),(_check_pointer(i1, 3852)),(i0*2));
   i0 = (OOC_INT32)b;
-  i1 = (OOC_INT32)new32;
-  *(OOC_INT32*)((_check_pointer(i0, 3334))+12) = i1;
+  i1 = (OOC_INT32)new16;
+  *(OOC_INT32*)((_check_pointer(i0, 3891))+12) = i1;
   goto l16;
 l14:
   i1 = (OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsLatin1.baseTypes[0], i1);
   new8 = (ADT_StringBuffer__CharsLatin1)i1;
-  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3141))+8);
-  i0 = *(OOC_INT32*)((_check_pointer(i0, 3166))+4);
-  _move_block((_check_pointer(i2, 3147)),(_check_pointer(i1, 3161)),i0);
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3698))+8);
+  i0 = *(OOC_INT32*)((_check_pointer(i0, 3723))+4);
+  _move_block((_check_pointer(i2, 3704)),(_check_pointer(i1, 3718)),i0);
   i0 = (OOC_INT32)b;
   i1 = (OOC_INT32)new8;
-  *(OOC_INT32*)((_check_pointer(i0, 3196))+8) = i1;
+  *(OOC_INT32*)((_check_pointer(i0, 3753))+8) = i1;
 l16:
   return;
   ;
@@ -143,50 +188,50 @@ ADT_StringBuffer__CharsLatin1 ADT_StringBuffer__StringBufferDesc_CharsLatin1(ADT
   register OOC_INT32 i0,i1,i2,i3;
 
   i0 = (OOC_INT32)b;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4085))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4642))+8);
   i1 = i1!=(OOC_INT32)0;
   if (!i1) goto l3;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 4128))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 4685))+4);
   ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i0, (i1+1));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4147))+8);
-  i1 = _check_pointer(i1, 4153);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4704))+8);
+  i1 = _check_pointer(i1, 4710);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 4155))+4);
-  *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 4153))) = 0u;
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 4712))+4);
+  *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 4710))) = 0u;
 l3:
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4192))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4749))+8);
   return (ADT_StringBuffer__CharsLatin1)i0;
   ;
 }
 
-void ADT_StringBuffer__StringBufferDesc_ConvertTo32(ADT_StringBuffer__StringBuffer b) {
+void ADT_StringBuffer__StringBufferDesc_ConvertTo16(ADT_StringBuffer__StringBuffer b) {
   register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
   OOC_INT32 i;
 
   i0 = (OOC_INT32)b;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4314))+8);
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4320)), 0);
-  *(OOC_INT32*)((_check_pointer(i0, 4300))+12) = ((OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsUCS4.baseTypes[0], i1));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4871))+8);
+  i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 4877)), 0);
+  *(OOC_INT32*)((_check_pointer(i0, 4857))+12) = ((OOC_INT32)RT0__NewObject(_td_ADT_StringBuffer__CharsUTF16.baseTypes[0], i1));
   i = 0;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 4344))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 4901))+4);
   i2 = 0<i1;
   if (!i2) goto l8;
   i2=0;
 l3_loop:
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4365))+12);
-  i3 = _check_pointer(i3, 4372);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4922))+12);
+  i3 = _check_pointer(i3, 4929);
   i4 = OOC_ARRAY_LENGTH(i3, 0);
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4380))+8);
-  i5 = _check_pointer(i5, 4386);
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4937))+8);
+  i5 = _check_pointer(i5, 4943);
   i6 = OOC_ARRAY_LENGTH(i5, 0);
-  i5 = *(OOC_UINT8*)(i5+(_check_index(i2, i6, OOC_UINT32, 4386)));
-  *(OOC_UINT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 4372))*4) = i5;
+  i5 = *(OOC_UINT8*)(i5+(_check_index(i2, i6, OOC_UINT32, 4943)));
+  *(OOC_UINT16*)(i3+(_check_index(i2, i4, OOC_UINT32, 4929))*2) = i5;
   i2 = i2+1;
   i = i2;
   i3 = i2<i1;
   if (i3) goto l3_loop;
 l8:
-  *(OOC_INT32*)((_check_pointer(i0, 4405))+8) = (OOC_INT32)0;
+  *(OOC_INT32*)((_check_pointer(i0, 4962))+8) = (OOC_INT32)0;
   return;
   ;
 }
@@ -198,28 +243,28 @@ void ADT_StringBuffer__StringBufferDesc_AppendLatin1Region(ADT_StringBuffer__Str
 
   i0 = start;
   i1 = end;
-  _assert((i0>=0), 127, 4627);
-  _assert((i0<=i1), 127, 4651);
-  _assert((i1<=data_0d), 127, 4677);
+  _assert((i0>=0), 127, 5184);
+  _assert((i0<=i1), 127, 5208);
+  _assert((i1<=data_0d), 127, 5234);
   i2 = i1-i0;
   len = i2;
   i3 = (OOC_INT32)b;
-  i4 = *(OOC_INT32*)((_check_pointer(i3, 4752))+4);
+  i4 = *(OOC_INT32*)((_check_pointer(i3, 5309))+4);
   ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i3, (i4+i2));
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4775))+8);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 5332))+8);
   i4 = i4!=(OOC_INT32)0;
   if (i4) goto l11;
-  i2 = *(OOC_INT32*)((_check_pointer(i3, 4927))+4);
+  i2 = *(OOC_INT32*)((_check_pointer(i3, 5484))+4);
   i = i2;
   i4 = i0!=i1;
   if (!i4) goto l12;
   {register OOC_INT32 h0=i0;i0=i2;i2=h0;}
 l5_loop:
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4974))+12);
-  i4 = _check_pointer(i4, 4981);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 5531))+12);
+  i4 = _check_pointer(i4, 5538);
   i5 = OOC_ARRAY_LENGTH(i4, 0);
-  i6 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(i2, data_0d, OOC_UINT32, 4992)));
-  *(OOC_UINT32*)(i4+(_check_index(i0, i5, OOC_UINT32, 4981))*4) = i6;
+  i6 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(i2, data_0d, OOC_UINT32, 5549)));
+  *(OOC_UINT16*)(i4+(_check_index(i0, i5, OOC_UINT32, 5538))*2) = i6;
   i2 = i2+1;
   start = i2;
   i0 = i0+1;
@@ -228,14 +273,14 @@ l5_loop:
   if (i4) goto l5_loop;
   goto l12;
 l11:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 4862))+8);
-  i3 = *(OOC_INT32*)((_check_pointer(i3, 4870))+4);
-  _move_block(((OOC_INT32)data+i0),((_check_pointer(i1, 4868))+i3),i2);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 5419))+8);
+  i3 = *(OOC_INT32*)((_check_pointer(i3, 5427))+4);
+  _move_block(((OOC_INT32)data+i0),((_check_pointer(i1, 5425))+i3),i2);
 l12:
   i0 = (OOC_INT32)b;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 5058))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 5615))+4);
   i2 = len;
-  *(OOC_INT32*)((_check_pointer(i0, 5058))+4) = (i1+i2);
+  *(OOC_INT32*)((_check_pointer(i0, 5615))+4) = (i1+i2);
   return;
   ;
 }
@@ -243,7 +288,7 @@ l12:
 static OOC_INT32 ADT_StringBuffer__Length(const OOC_CHAR8 data[], OOC_LEN data_0d) {
   register OOC_INT32 i0,i1;
 
-  i0 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(0, data_0d, OOC_UINT32, 5214)));
+  i0 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(0, data_0d, OOC_UINT32, 5771)));
   i0 = i0!=0u;
   if (i0) goto l3;
   i0=0;
@@ -252,7 +297,7 @@ l3:
   i0=0;
 l4_loop:
   i0 = i0+1;
-  i1 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(i0, data_0d, OOC_UINT32, 5214)));
+  i1 = *(OOC_UINT8*)((OOC_INT32)data+(_check_index(i0, data_0d, OOC_UINT32, 5771)));
   i1 = i1!=0u;
   if (i1) goto l4_loop;
 l9:
@@ -265,7 +310,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendLatin1(ADT_StringBuffer__StringBuf
 
   i0 = (OOC_INT32)b;
   i1 = ADT_StringBuffer__Length((void*)(OOC_INT32)data, data_0d);
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5365)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)data, data_0d, 0, i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5922)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)data, data_0d, 0, i1);
   return;
   ;
 }
@@ -274,58 +319,110 @@ void ADT_StringBuffer__StringBufferDesc_AppendLatin1Char(ADT_StringBuffer__Strin
   register OOC_INT32 i0,i1,i2,i3,i4;
 
   i0 = (OOC_INT32)b;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 5517))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 6074))+4);
   ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i0, (i1+1));
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5538))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6095))+8);
   i1 = i1!=(OOC_INT32)0;
   if (i1) goto l3;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5604))+12);
-  i1 = _check_pointer(i1, 5611);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6161))+12);
+  i1 = _check_pointer(i1, 6168);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 5613))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 6170))+4);
   i4 = ch;
-  *(OOC_UINT32*)(i1+(_check_index(i3, i2, OOC_UINT32, 5611))*4) = i4;
+  *(OOC_UINT16*)(i1+(_check_index(i3, i2, OOC_UINT32, 6168))*2) = i4;
   goto l4;
 l3:
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5564))+8);
-  i1 = _check_pointer(i1, 5570);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 6121))+8);
+  i1 = _check_pointer(i1, 6127);
   i2 = OOC_ARRAY_LENGTH(i1, 0);
-  i3 = *(OOC_INT32*)((_check_pointer(i0, 5572))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 6129))+4);
   i4 = ch;
-  *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 5570))) = i4;
+  *(OOC_UINT8*)(i1+(_check_index(i3, i2, OOC_UINT32, 6127))) = i4;
 l4:
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 5647))+4);
-  *(OOC_INT32*)((_check_pointer(i0, 5647))+4) = (i1+1);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 6204))+4);
+  *(OOC_INT32*)((_check_pointer(i0, 6204))+4) = (i1+1);
   return;
   ;
 }
 
-void ADT_StringBuffer__StringBufferDesc_AppendUCS4Region(ADT_StringBuffer__StringBuffer b, const OOC_CHAR32 data[], OOC_LEN data_0d, OOC_INT32 start, OOC_INT32 end) {
+void ADT_StringBuffer__StringBufferDesc_AppendLn(ADT_StringBuffer__StringBuffer b) {
+  register OOC_INT32 i0;
+
+  i0 = (OOC_INT32)b;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6360)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 10u);
+  return;
+  ;
+}
+
+void ADT_StringBuffer__StringBufferDesc_AppendUTF16Region(ADT_StringBuffer__StringBuffer b, const OOC_CHAR16 data[], OOC_LEN data_0d, OOC_INT32 start, OOC_INT32 end) {
   register OOC_INT32 i0,i1,i2,i3;
   OOC_INT32 len;
 
   i0 = start;
   i1 = end;
-  _assert((i0>=0), 127, 5866);
-  _assert((i0<=i1), 127, 5890);
-  _assert((i1<=data_0d), 127, 5916);
+  _assert((i0>=0), 127, 6591);
+  _assert((i0<=i1), 127, 6615);
+  _assert((i1<=data_0d), 127, 6641);
   i1 = i1-i0;
   len = i1;
   i2 = (OOC_INT32)b;
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 5991))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 6716))+4);
   ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i2, (i3+i1));
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6014))+12);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6739))+12);
   i3 = i3==(OOC_INT32)0;
   if (!i3) goto l4;
-  ADT_StringBuffer__StringBufferDesc_ConvertTo32((ADT_StringBuffer__StringBuffer)i2);
+  ADT_StringBuffer__StringBufferDesc_ConvertTo16((ADT_StringBuffer__StringBuffer)i2);
 l4:
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6130))+12);
-  i2 = *(OOC_INT32*)((_check_pointer(i2, 6139))+4);
-  _move_block(((OOC_INT32)data+i0*4),((_check_pointer(i3, 6137))+i2*4),(i1*4));
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 6855))+12);
+  i2 = *(OOC_INT32*)((_check_pointer(i2, 6864))+4);
+  _move_block(((OOC_INT32)data+i0*2),((_check_pointer(i3, 6862))+i2*2),(i1*2));
   i0 = (OOC_INT32)b;
-  i1 = *(OOC_INT32*)((_check_pointer(i0, 6188))+4);
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 6913))+4);
   i2 = len;
-  *(OOC_INT32*)((_check_pointer(i0, 6188))+4) = (i1+i2);
+  *(OOC_INT32*)((_check_pointer(i0, 6913))+4) = (i1+i2);
+  return;
+  ;
+}
+
+void ADT_StringBuffer__StringBufferDesc_AppendChar(ADT_StringBuffer__StringBuffer b, OOC_CHAR32 ch) {
+  register OOC_INT32 i0,i1,i2,i3,i4;
+  OOC_INT32 v;
+
+  i0 = (OOC_INT32)b;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 7061))+4);
+  ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i0, (i1+2));
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7082))+12);
+  i1 = i1==(OOC_INT32)0;
+  if (!i1) goto l3;
+  ADT_StringBuffer__StringBufferDesc_ConvertTo16((ADT_StringBuffer__StringBuffer)i0);
+l3:
+  i1 = ch;
+  i2 = (OOC_UINT32)i1<(OOC_UINT32)65536u;
+  if (i2) goto l6;
+  i1 = i1-65536;
+  v = i1;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7301))+12);
+  i2 = _check_pointer(i2, 7308);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 7310))+4);
+  i4 = OOC_ARRAY_LENGTH(i2, 0);
+  *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 7308))*2) = (55296+(i1>>10));
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7377))+12);
+  i2 = _check_pointer(i2, 7384);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 7386))+4);
+  i4 = OOC_ARRAY_LENGTH(i2, 0);
+  *(OOC_UINT16*)(i2+(_check_index((i3+1), i4, OOC_UINT32, 7384))*2) = (56320+(_mod(i1,1024)));
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 7460))+4);
+  *(OOC_INT32*)((_check_pointer(i0, 7460))+4) = (i1+2);
+  goto l7;
+l6:
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7185))+12);
+  i2 = _check_pointer(i2, 7192);
+  i3 = *(OOC_INT32*)((_check_pointer(i0, 7194))+4);
+  i4 = OOC_ARRAY_LENGTH(i2, 0);
+  *(OOC_UINT16*)(i2+(_check_index(i3, i4, OOC_UINT32, 7192))*2) = i1;
+  i1 = *(OOC_INT32*)((_check_pointer(i0, 7228))+4);
+  *(OOC_INT32*)((_check_pointer(i0, 7228))+4) = (i1+1);
+l7:
   return;
   ;
 }
@@ -334,14 +431,14 @@ void ADT_StringBuffer__StringBufferDesc_Append(ADT_StringBuffer__StringBuffer b,
   register OOC_INT32 i0,i1,i2,i3;
   Object__String s;
   Object__CharsLatin1 c8;
-  Object__CharsUCS4 c32;
+  Object__CharsUTF16 c16;
 
   i0 = (OOC_INT32)obj;
   i1 = i0==(OOC_INT32)0;
   if (i1) goto l15;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6439)))), &_td_Object__StringDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7713)))), &_td_Object__StringDesc);
   if (i1) goto l5;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6496)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7770)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
   s = (Object__String)i0;
   
   goto l6;
@@ -349,31 +446,31 @@ l5:
   s = (Object__String)i0;
   
 l6:
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6539)))), &_td_Object__String8Desc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7813)))), &_td_Object__String8Desc);
   if (i1) goto l13;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6647)))), &_td_Object__String32Desc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7921)))), &_td_Object__String16Desc);
   if (i1) goto l11;
-  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6644)))), 6644);
+  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7918)))), 7918);
   goto l16;
 l11:
-  i1 = (OOC_INT32)Object__String32Desc_CharsUCS4((Object__String32)i0);
-  c32 = (Object__CharsUCS4)i1;
+  i1 = (OOC_INT32)Object__String16Desc_CharsUTF16((Object__String16)i0);
+  c16 = (Object__CharsUTF16)i1;
   i2 = (OOC_INT32)b;
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6728)), 0);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 6735));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6707)))), ADT_StringBuffer__StringBufferDesc_AppendUCS4Region)),ADT_StringBuffer__StringBufferDesc_AppendUCS4Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(_check_pointer(i1, 6728)), i3, 0, i0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 8004)), 0);
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 8011));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7982)))), ADT_StringBuffer__StringBufferDesc_AppendUTF16Region)),ADT_StringBuffer__StringBufferDesc_AppendUTF16Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(_check_pointer(i1, 8004)), i3, 0, i0);
   goto l16;
 l13:
   i1 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
   c8 = (Object__CharsLatin1)i1;
   i2 = (OOC_INT32)b;
-  i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 6621)), 0);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 6628));
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 6599)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(_check_pointer(i1, 6621)), i3, 0, i0);
+  i3 = OOC_ARRAY_LENGTH((_check_pointer(i1, 7895)), 0);
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 7902));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 7873)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(_check_pointer(i1, 7895)), i3, 0, i0);
   goto l16;
 l15:
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 6400)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c0));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7674)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c0));
 l16:
   return;
   ;
@@ -384,10 +481,10 @@ ADT_StringBuffer__StringBuffer ADT_StringBuffer__New(Object__String str) {
   ADT_StringBuffer__StringBuffer b;
 
   i0 = (OOC_INT32)str;
-  i1 = *(OOC_INT32*)(_check_pointer(i0, 6882));
+  i1 = *(OOC_INT32*)(_check_pointer(i0, 8158));
   i1 = (OOC_INT32)ADT_StringBuffer__NewCapacity(i1);
   b = (ADT_StringBuffer__StringBuffer)i1;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 6897)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 8173)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i0);
   return (ADT_StringBuffer__StringBuffer)i1;
   ;
 }
@@ -399,8 +496,21 @@ ADT_StringBuffer__StringBuffer ADT_StringBuffer__NewLatin1(const OOC_CHAR8 str[]
   i0 = ADT_StringBuffer__Length((void*)(OOC_INT32)str, str_0d);
   i0 = (OOC_INT32)ADT_StringBuffer__NewCapacity(i0);
   b = (ADT_StringBuffer__StringBuffer)i0;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7077)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)str, str_0d);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8353)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)str, str_0d);
   return (ADT_StringBuffer__StringBuffer)i0;
+  ;
+}
+
+ADT_StringBuffer__StringBuffer ADT_StringBuffer__NewLatin1Region(const OOC_CHAR8 str[], OOC_LEN str_0d, OOC_INT32 start, OOC_INT32 end) {
+  register OOC_INT32 i0,i1,i2;
+  ADT_StringBuffer__StringBuffer b;
+
+  i0 = end;
+  i1 = start;
+  i2 = (OOC_INT32)ADT_StringBuffer__NewCapacity((i0-i1));
+  b = (ADT_StringBuffer__StringBuffer)i2;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 8597)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Region)((ADT_StringBuffer__StringBuffer)i2, (void*)(OOC_INT32)str, str_0d, i1, i0);
+  return (ADT_StringBuffer__StringBuffer)i2;
   ;
 }
 
@@ -411,7 +521,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendInt(ADT_StringBuffer__StringBuffer
   i0 = val;
   IntStr__IntToStr(i0, (void*)(OOC_INT32)a, 32);
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7348)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)a, 32);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8892)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)a, 32);
   return;
   ;
 }
@@ -424,7 +534,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendReal(ADT_StringBuffer__StringBuffe
   f0 = val;
   RealStr__RealToStr(f0, (void*)(OOC_INT32)a, 32);
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7600)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)a, 32);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9144)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, (void*)(OOC_INT32)a, 32);
   return;
   ;
 }
@@ -436,7 +546,7 @@ void ADT_StringBuffer__StringBufferDesc_AppendSet(ADT_StringBuffer__StringBuffer
   OOC_INT8 begin;
 
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 7842)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 123u);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9386)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 123u);
   comma = 0u;
   i1 = val;
   i = 0;
@@ -475,20 +585,20 @@ l17:
   if (i5) goto l12_loop;
 l22:
   if (!i3) goto l24;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8070)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 44u);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9614)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 44u);
 l24:
   comma = 1u;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8138)))), ADT_StringBuffer__StringBufferDesc_AppendInt)),ADT_StringBuffer__StringBufferDesc_AppendInt)((ADT_StringBuffer__StringBuffer)i0, i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9682)))), ADT_StringBuffer__StringBufferDesc_AppendInt)),ADT_StringBuffer__StringBufferDesc_AppendInt)((ADT_StringBuffer__StringBuffer)i0, i2);
   i3 = i2<i4;
   if (!i3) goto l31;
   i2 = i4==(i2+1);
   if (i2) goto l29;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8280)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "..", 3);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9824)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "..", 3);
   goto l30;
 l29:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8228)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 44u);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9772)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 44u);
 l30:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8327)))), ADT_StringBuffer__StringBufferDesc_AppendInt)),ADT_StringBuffer__StringBufferDesc_AppendInt)((ADT_StringBuffer__StringBuffer)i0, i4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9871)))), ADT_StringBuffer__StringBufferDesc_AppendInt)),ADT_StringBuffer__StringBufferDesc_AppendInt)((ADT_StringBuffer__StringBuffer)i0, i4);
 l31:
   i3=i4;i2=1u;
 l32:
@@ -499,7 +609,7 @@ l32:
   {register OOC_INT32 h0=i2;i2=i3;i3=h0;}
   goto l1_loop;
 l36:
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8394)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 125u);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9938)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)),ADT_StringBuffer__StringBufferDesc_AppendLatin1Char)((ADT_StringBuffer__StringBuffer)i0, 125u);
   return;
   ;
 }
@@ -510,11 +620,11 @@ void ADT_StringBuffer__StringBufferDesc_AppendBool(ADT_StringBuffer__StringBuffe
   i0 = val;
   if (i0) goto l3;
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8659)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "FALSE", 6);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10203)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "FALSE", 6);
   goto l4;
 l3:
   i0 = (OOC_INT32)b;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8621)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "TRUE", 5);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10165)))), ADT_StringBuffer__StringBufferDesc_AppendLatin1)),ADT_StringBuffer__StringBufferDesc_AppendLatin1)((ADT_StringBuffer__StringBuffer)i0, "TRUE", 5);
 l4:
   return;
   ;
@@ -525,14 +635,14 @@ void ADT_StringBuffer__StringBufferDesc_Insert(ADT_StringBuffer__StringBuffer b,
   Object__String s;
   Object__CharsLatin1 c8;
   OOC_INT32 i;
-  Object__CharsUCS4 c32;
+  Object__CharsUTF16 c16;
 
   i0 = (OOC_INT32)obj;
   i1 = i0==(OOC_INT32)0;
   if (i1) goto l70;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8953)))), &_td_Object__StringDesc);
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10498)))), &_td_Object__StringDesc);
   if (i1) goto l5;
-  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9010)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10555)))), Object__ObjectDesc_ToString)),Object__ObjectDesc_ToString)((Object__Object)i0);
   s = (Object__String)i0;
   
   goto l6;
@@ -541,57 +651,57 @@ l5:
   
 l6:
   i1 = (OOC_INT32)b;
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 9059))+4);
-  i3 = *(OOC_INT32*)(_check_pointer(i0, 9068));
+  i2 = *(OOC_INT32*)((_check_pointer(i1, 10604))+4);
+  i3 = *(OOC_INT32*)(_check_pointer(i0, 10613));
   ADT_StringBuffer__StringBufferDesc_EnsureCapacity((ADT_StringBuffer__StringBuffer)i1, (i2+i3));
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9090)))), &_td_Object__String8Desc);
+  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10635)))), &_td_Object__String8Desc);
   if (i2) goto l32;
-  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9612)))), &_td_Object__String32Desc);
+  i2 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11157)))), &_td_Object__String16Desc);
   if (i2) goto l11;
-  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 9609)))), 9609);
+  _failed_with(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 11154)))), 11154);
   goto l69;
 l11:
-  i2 = (OOC_INT32)Object__String32Desc_CharsUCS4((Object__String32)i0);
-  c32 = (Object__CharsUCS4)i2;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9676))+12);
+  i2 = (OOC_INT32)Object__String16Desc_CharsUTF16((Object__String16)i0);
+  c16 = (Object__CharsUTF16)i2;
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11222))+12);
   i3 = i3==(OOC_INT32)0;
   if (!i3) goto l14;
-  ADT_StringBuffer__StringBufferDesc_ConvertTo32((ADT_StringBuffer__StringBuffer)i1);
+  ADT_StringBuffer__StringBufferDesc_ConvertTo16((ADT_StringBuffer__StringBuffer)i1);
 l14:
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 9752))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 11298))+4);
   i3 = i3-1;
   i = i3;
   i4 = at;
   i5 = i3>=i4;
   if (!i5) goto l22;
 l17_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9788))+12);
-  i5 = _check_pointer(i5, 9795);
-  i6 = *(OOC_INT32*)(_check_pointer(i0, 9799));
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11334))+12);
+  i5 = _check_pointer(i5, 11341);
+  i6 = *(OOC_INT32*)(_check_pointer(i0, 11345));
   i7 = OOC_ARRAY_LENGTH(i5, 0);
-  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9812))+12);
-  i8 = _check_pointer(i8, 9819);
+  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11358))+12);
+  i8 = _check_pointer(i8, 11365);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT32*)(i8+(_check_index(i3, i9, OOC_UINT32, 9819))*4);
-  *(OOC_UINT32*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 9795))*4) = i8;
+  i8 = *(OOC_UINT16*)(i8+(_check_index(i3, i9, OOC_UINT32, 11365))*2);
+  *(OOC_UINT16*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 11341))*2) = i8;
   i3 = i3+(-1);
   i = i3;
   i5 = i3>=i4;
   if (i5) goto l17_loop;
 l22:
   i = 0;
-  i3 = *(OOC_INT32*)(_check_pointer(i0, 9860));
+  i3 = *(OOC_INT32*)(_check_pointer(i0, 11406));
   i5 = 0<i3;
   if (!i5) goto l69;
   i5=i4;i4=0;
 l25_loop:
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9884))+12);
-  i6 = _check_pointer(i6, 9891);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11430))+12);
+  i6 = _check_pointer(i6, 11437);
   i7 = OOC_ARRAY_LENGTH(i6, 0);
-  i8 = _check_pointer(i2, 9904);
+  i8 = _check_pointer(i2, 11450);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT32*)(i8+(_check_index(i4, i9, OOC_UINT32, 9904))*4);
-  *(OOC_UINT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 9891))*4) = i8;
+  i8 = *(OOC_UINT16*)(i8+(_check_index(i4, i9, OOC_UINT32, 11450))*2);
+  *(OOC_UINT16*)(i6+(_check_index(i5, i7, OOC_UINT32, 11437))*2) = i8;
   i4 = i4+1;
   i = i4;
   i5 = i5+1;
@@ -601,43 +711,43 @@ l25_loop:
 l32:
   i2 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)i0);
   c8 = (Object__CharsLatin1)i2;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9154))+8);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10699))+8);
   i3 = i3!=(OOC_INT32)0;
   if (i3) goto l51;
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 9402))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 10947))+4);
   i3 = i3-1;
   i = i3;
   i4 = at;
   i5 = i3>=i4;
   if (!i5) goto l42;
 l37_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9440))+12);
-  i5 = _check_pointer(i5, 9447);
-  i6 = *(OOC_INT32*)(_check_pointer(i0, 9451));
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10985))+12);
+  i5 = _check_pointer(i5, 10992);
+  i6 = *(OOC_INT32*)(_check_pointer(i0, 10996));
   i7 = OOC_ARRAY_LENGTH(i5, 0);
-  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9464))+12);
-  i8 = _check_pointer(i8, 9471);
+  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11009))+12);
+  i8 = _check_pointer(i8, 11016);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT32*)(i8+(_check_index(i3, i9, OOC_UINT32, 9471))*4);
-  *(OOC_UINT32*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 9447))*4) = i8;
+  i8 = *(OOC_UINT16*)(i8+(_check_index(i3, i9, OOC_UINT32, 11016))*2);
+  *(OOC_UINT16*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 10992))*2) = i8;
   i3 = i3+(-1);
   i = i3;
   i5 = i3>=i4;
   if (i5) goto l37_loop;
 l42:
   i = 0;
-  i3 = *(OOC_INT32*)(_check_pointer(i0, 9516));
+  i3 = *(OOC_INT32*)(_check_pointer(i0, 11061));
   i5 = 0<i3;
   if (!i5) goto l69;
   i5=i4;i4=0;
 l45_loop:
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9542))+12);
-  i6 = _check_pointer(i6, 9549);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 11087))+12);
+  i6 = _check_pointer(i6, 11094);
   i7 = OOC_ARRAY_LENGTH(i6, 0);
-  i8 = _check_pointer(i2, 9561);
+  i8 = _check_pointer(i2, 11106);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT8*)(i8+(_check_index(i4, i9, OOC_UINT32, 9561)));
-  *(OOC_UINT32*)(i6+(_check_index(i5, i7, OOC_UINT32, 9549))*4) = i8;
+  i8 = *(OOC_UINT8*)(i8+(_check_index(i4, i9, OOC_UINT32, 11106)));
+  *(OOC_UINT16*)(i6+(_check_index(i5, i7, OOC_UINT32, 11094))*2) = i8;
   i4 = i4+1;
   i = i4;
   i5 = i5+1;
@@ -645,54 +755,54 @@ l45_loop:
   if (i6) goto l45_loop;
   goto l69;
 l51:
-  i3 = *(OOC_INT32*)((_check_pointer(i1, 9193))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i1, 10738))+4);
   i3 = i3-1;
   i = i3;
   i4 = at;
   i5 = i3>=i4;
   if (!i5) goto l59;
 l54_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9231))+8);
-  i5 = _check_pointer(i5, 9237);
-  i6 = *(OOC_INT32*)(_check_pointer(i0, 9241));
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10776))+8);
+  i5 = _check_pointer(i5, 10782);
+  i6 = *(OOC_INT32*)(_check_pointer(i0, 10786));
   i7 = OOC_ARRAY_LENGTH(i5, 0);
-  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9254))+8);
-  i8 = _check_pointer(i8, 9260);
+  i8 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10799))+8);
+  i8 = _check_pointer(i8, 10805);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT8*)(i8+(_check_index(i3, i9, OOC_UINT32, 9260)));
-  *(OOC_UINT8*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 9237))) = i8;
+  i8 = *(OOC_UINT8*)(i8+(_check_index(i3, i9, OOC_UINT32, 10805)));
+  *(OOC_UINT8*)(i5+(_check_index((i3+i6), i7, OOC_UINT32, 10782))) = i8;
   i3 = i3+(-1);
   i = i3;
   i5 = i3>=i4;
   if (i5) goto l54_loop;
 l59:
   i = 0;
-  i3 = *(OOC_INT32*)(_check_pointer(i0, 9305));
+  i3 = *(OOC_INT32*)(_check_pointer(i0, 10850));
   i5 = 0<i3;
   if (!i5) goto l69;
   i5=i4;i4=0;
 l62_loop:
-  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 9331))+8);
-  i6 = _check_pointer(i6, 9337);
+  i6 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 10876))+8);
+  i6 = _check_pointer(i6, 10882);
   i7 = OOC_ARRAY_LENGTH(i6, 0);
-  i8 = _check_pointer(i2, 9349);
+  i8 = _check_pointer(i2, 10894);
   i9 = OOC_ARRAY_LENGTH(i8, 0);
-  i8 = *(OOC_UINT8*)(i8+(_check_index(i4, i9, OOC_UINT32, 9349)));
-  *(OOC_UINT8*)(i6+(_check_index(i5, i7, OOC_UINT32, 9337))) = i8;
+  i8 = *(OOC_UINT8*)(i8+(_check_index(i4, i9, OOC_UINT32, 10894)));
+  *(OOC_UINT8*)(i6+(_check_index(i5, i7, OOC_UINT32, 10882))) = i8;
   i4 = i4+1;
   i = i4;
   i5 = i5+1;
   i6 = i4<i3;
   if (i6) goto l62_loop;
 l69:
-  i2 = *(OOC_INT32*)((_check_pointer(i1, 9944))+4);
-  i0 = *(OOC_INT32*)(_check_pointer(i0, 9954));
-  *(OOC_INT32*)((_check_pointer(i1, 9944))+4) = (i2+i0);
+  i2 = *(OOC_INT32*)((_check_pointer(i1, 11490))+4);
+  i0 = *(OOC_INT32*)(_check_pointer(i0, 11500));
+  *(OOC_INT32*)((_check_pointer(i1, 11490))+4) = (i2+i0);
   goto l71;
 l70:
   i0 = (OOC_INT32)b;
   i1 = at;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 8910)))), ADT_StringBuffer__StringBufferDesc_Insert)),ADT_StringBuffer__StringBufferDesc_Insert)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c1), i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 10455)))), ADT_StringBuffer__StringBufferDesc_Insert)),ADT_StringBuffer__StringBufferDesc_Insert)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c1), i1);
 l71:
   return;
   ;
@@ -705,23 +815,23 @@ void ADT_StringBuffer__StringBufferDesc_Delete(ADT_StringBuffer__StringBuffer b,
 
   i0 = start;
   i1 = end;
-  _assert((i0>=0), 127, 10083);
-  _assert((i0<=i1), 127, 10108);
+  _assert((i0>=0), 127, 11629);
+  _assert((i0<=i1), 127, 11654);
   i2 = (OOC_INT32)b;
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 10151))+4);
-  _assert((i1<=i3), 127, 10135);
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 10181))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 11697))+4);
+  _assert((i1<=i3), 127, 11681);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 11727))+4);
   i3 = i1==i3;
   if (i3) goto l26;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10232))+8);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11778))+8);
   i3 = i3!=(OOC_INT32)0;
   if (i3) goto l16;
-  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10396))+12);
+  i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11942))+12);
   i3 = i3!=(OOC_INT32)0;
   if (!i3) goto l27;
   i1 = i1-i0;
   d = i1;
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 10463))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 12009))+4);
   i3 = i3-i1;
   i = i0;
   i4 = i0<i3;
@@ -729,27 +839,27 @@ void ADT_StringBuffer__StringBufferDesc_Delete(ADT_StringBuffer__StringBuffer b,
   i4 = i1+i0;
   
 l9_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10487))+12);
-  i5 = _check_pointer(i5, 10494);
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 12033))+12);
+  i5 = _check_pointer(i5, 12040);
   i6 = OOC_ARRAY_LENGTH(i5, 0);
-  i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10502))+12);
-  i7 = _check_pointer(i7, 10509);
+  i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 12048))+12);
+  i7 = _check_pointer(i7, 12055);
   i8 = OOC_ARRAY_LENGTH(i7, 0);
-  i7 = *(OOC_UINT32*)(i7+(_check_index(i4, i8, OOC_UINT32, 10509))*4);
-  *(OOC_UINT32*)(i5+(_check_index(i0, i6, OOC_UINT32, 10494))*4) = i7;
+  i7 = *(OOC_UINT16*)(i7+(_check_index(i4, i8, OOC_UINT32, 12055))*2);
+  *(OOC_UINT16*)(i5+(_check_index(i0, i6, OOC_UINT32, 12040))*2) = i7;
   i0 = i0+1;
   i = i0;
   i4 = i4+1;
   i5 = i0<i3;
   if (i5) goto l9_loop;
 l14:
-  i0 = *(OOC_INT32*)((_check_pointer(i2, 10538))+4);
-  *(OOC_INT32*)((_check_pointer(i2, 10538))+4) = (i0-i1);
+  i0 = *(OOC_INT32*)((_check_pointer(i2, 12084))+4);
+  *(OOC_INT32*)((_check_pointer(i2, 12084))+4) = (i0-i1);
   goto l27;
 l16:
   i1 = i1-i0;
   d = i1;
-  i3 = *(OOC_INT32*)((_check_pointer(i2, 10298))+4);
+  i3 = *(OOC_INT32*)((_check_pointer(i2, 11844))+4);
   i3 = i3-i1;
   i = i0;
   i4 = i0<i3;
@@ -757,25 +867,25 @@ l16:
   i4 = i1+i0;
   
 l19_loop:
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10322))+8);
-  i5 = _check_pointer(i5, 10328);
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11868))+8);
+  i5 = _check_pointer(i5, 11874);
   i6 = OOC_ARRAY_LENGTH(i5, 0);
-  i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 10336))+8);
-  i7 = _check_pointer(i7, 10342);
+  i7 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 11882))+8);
+  i7 = _check_pointer(i7, 11888);
   i8 = OOC_ARRAY_LENGTH(i7, 0);
-  i7 = *(OOC_UINT8*)(i7+(_check_index(i4, i8, OOC_UINT32, 10342)));
-  *(OOC_UINT8*)(i5+(_check_index(i0, i6, OOC_UINT32, 10328))) = i7;
+  i7 = *(OOC_UINT8*)(i7+(_check_index(i4, i8, OOC_UINT32, 11888)));
+  *(OOC_UINT8*)(i5+(_check_index(i0, i6, OOC_UINT32, 11874))) = i7;
   i0 = i0+1;
   i = i0;
   i4 = i4+1;
   i5 = i0<i3;
   if (i5) goto l19_loop;
 l24:
-  i0 = *(OOC_INT32*)((_check_pointer(i2, 10371))+4);
-  *(OOC_INT32*)((_check_pointer(i2, 10371))+4) = (i0-i1);
+  i0 = *(OOC_INT32*)((_check_pointer(i2, 11917))+4);
+  *(OOC_INT32*)((_check_pointer(i2, 11917))+4) = (i0-i1);
   goto l27;
 l26:
-  *(OOC_INT32*)((_check_pointer(i2, 10202))+4) = i0;
+  *(OOC_INT32*)((_check_pointer(i2, 11748))+4) = i0;
 l27:
   return;
   ;

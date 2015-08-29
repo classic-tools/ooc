@@ -411,7 +411,7 @@ l20:
   wd = (OOC_C_DeclWriter__Writer)i0;
 l21:
   i0 = (OOC_INT32)symTab;
-  i0 = *(OOC_INT8*)((_check_pointer(i0, 10087))+48);
+  i0 = *(OOC_INT8*)((_check_pointer(i0, 10087))+52);
   i0 = i0==0;
   if (i0) goto l24;
   i0=0u;

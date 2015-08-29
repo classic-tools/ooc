@@ -1,4 +1,4 @@
-(*	$Id: TextRider.Mod,v 1.3 2003/02/05 21:31:58 mva Exp $	*)
+(*	$Id: TextRider.Mod,v 1.4 2003/05/31 16:51:54 mva Exp $	*)
 MODULE IO:TextRider [OOC_EXTENSIONS];
 
 (*
@@ -155,8 +155,8 @@ PROCEDURE (w: Writer) WriteObject*(obj: Object.Object);
         WITH s: Object.String8 DO
           chars := s.CharsLatin1();
           i := w.channel.Write(chars^, 0, s.length);
-        | s: Object.String32 DO
-          w.WriteString("[TextRider.WriteObject: String32 not implemented]");
+        | s: Object.String16 DO
+          w.WriteString("[IO:TextRider.WriteObject: String16 not implemented]");
         END;
       CATCH IO.Error:
         SetError(w);

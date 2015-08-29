@@ -1,4 +1,4 @@
-(* 	$Id: TypeRules.Mod,v 1.61 2003/05/10 20:46:29 mva Exp $	 *)
+(* 	$Id: TypeRules.Mod,v 1.66 2003/06/19 13:50:49 mva Exp $	 *)
 MODULE OOC:SymbolTable:TypeRules;
 (*  Defines the type rules of the language.
     Copyright (C) 2000-2003  Michael van Acken
@@ -249,6 +249,7 @@ PROCEDURE IsOpenArrayType* (type: Sym.Type): BOOLEAN;
    length is not known at compile time.  *)
   BEGIN
     ASSERT (~(type IS Sym.TypeName));
+    type := type.Deparam();
     RETURN (type IS Sym.Array) & type(Sym.Array). isOpenArray
   END IsOpenArrayType;
 
@@ -576,13 +577,29 @@ PROCEDURE FunctionResultType*(formalPars: Sym.Type): Sym.Type;
     END;
   END FunctionResultType;
 
+PROCEDURE CallingConventionsMatch* (a, b : Sym.CallConv) : BOOLEAN;
+(**Returns @code{TRUE} iff calling conventions @oparam{a} and @oparam{b} are
+  compatible. For the current C back-end "callConvDefault" is compatible with
+  "callConvC". This is required by @code{FOREIGN "C"} modules. *)
+CONST
+  DefaultConvention = {Sym.callConvDefault, Sym.callConvC};
+BEGIN
+  IF (a = Sym.callConvInvalid) OR (b = Sym.callConvInvalid) THEN
+    RETURN FALSE
+  ELSIF a IN DefaultConvention THEN
+    RETURN b IN DefaultConvention
+  ELSE
+    RETURN a = b;
+  END;
+END CallingConventionsMatch;
+
 PROCEDURE FormalParamsMatch* (baseFParsClosure: Sym.Type;
                               procFPars: Sym.FormalPars;
                               allowSpecialization: BOOLEAN): BOOLEAN;
 (**Returns @code{TRUE}, iff the formal parameter lists described by
    @oparam{baseFParsClosure} and @oparam{procFPars} match.  The comparison
-   includes the formal parameters, the result type, and any rest parameter.
-   The receiver of the formal parameter lists is ignored.
+   includes the formal parameters, the result type, calling convention, and any
+   rest parameter.  The receiver of the formal parameter lists is ignored.
 
    If @oparam{allowSpecialization} is @code{TRUE}, then @oparam{procFPars} must
    not be equal to @oparam{baseFParsClosure}, but may be a specialized version
@@ -683,7 +700,11 @@ PROCEDURE FormalParamsMatch* (baseFParsClosure: Sym.Type;
           END;
         END;
       END;
-      
+
+      IF ~CallingConventionsMatch(baseFPars.callConv, procFPars.callConv) THEN
+        RETURN FALSE
+      END;
+
       RETURN TRUE
     END
   END FormalParamsMatch;
@@ -731,11 +752,11 @@ PROCEDURE IsArrayCompatible* (argType, fparType: Sym.Type): BOOLEAN;
    the implementation of this function differs from the @cite{Appendix A}
    of the language report.  *)
   BEGIN
-    WHILE IsOpenArrayType (fparType) & (argType IS Sym.Array) DO
-      argType := argType(Sym.Array). elementType;
-      fparType := fparType(Sym.Array). elementType
+    WHILE IsOpenArrayType(fparType) & IsArrayType(argType) DO
+      argType := ArrayElementType(argType);
+      fparType := ArrayElementType(fparType);
     END;
-    RETURN SameType (argType, fparType)
+    RETURN SameType(argType, fparType);
   END IsArrayCompatible;
 
 PROCEDURE IsComponentOf* (subType, superType: Sym.Type;
@@ -786,6 +807,13 @@ PROCEDURE IsByteCompatible* (type: Sym.Type): BOOLEAN;
       RETURN FALSE;
     END;
   END IsByteCompatible;
+
+PROCEDURE IsPtrCompatible* (type: Sym.Type): BOOLEAN;
+(**Returns @code{TRUE}, iff the type @oparam{type} can be assigned to
+   a @samp{PTR} variable.  *)
+  BEGIN
+    RETURN IsPointer(type);
+  END IsPtrCompatible;
 
 PROCEDURE IsNilCompatible* (type: Sym.Type): BOOLEAN;
 (**Returns @code{TRUE}, iff the value @code{NIL} can be assigned to
@@ -890,15 +918,11 @@ PROCEDURE AllocateType* (type: Sym.Type);
         END;
       
         (* determine maximum alignment value, as selected by ALIGN[1248] *)
-        (*IF (t. beFlags*{structAlign1..structAlign8} # {}) THEN
-          i := structAlign8;
-          WHILE ~(i IN t. beFlags) DO
-            DEC (i)
-          END;
-          maxAlign := SHORT (ASH (1, i-structAlign1))
-        ELSE*)
-          maxAlign := MAX (INTEGER);
-        (*END;*)
+        IF type.fieldAlign = 0 THEN
+          maxAlign := MAX (INTEGER)
+        ELSE
+          maxAlign := type.fieldAlign;
+        END;
 
         nested := type. nestedItems;
         WHILE (nested # NIL) DO

@@ -2,6 +2,7 @@
 #include <Out.oh>
 #include <Ascii.oh>
 #include <LongStrings.oh>
+#include <Object.oh>
 #include <URI/Scheme/File.oh>
 #include <XML/UnicodeCodec/UTF16.oh>
 #define XML_Parser__tabWidth 8
@@ -86,32 +87,33 @@ static OOC_CHAR8 XML_Parser__IsLetter(OOC_CHAR16 ch);
 static OOC_CHAR8 XML_Parser__IsPubidChar(OOC_CHAR16 ch);
 static OOC_CHAR8 XML_Parser__IsVersionNumChar(OOC_CHAR16 ch);
 static OOC_CHAR8 XML_Parser__IsEncNameChar(OOC_CHAR16 ch, OOC_CHAR8 first);
+static void XML_Parser__SetBaseURI(Msg__Msg err, const OOC_CHAR8 name__ref[], OOC_LEN name_0d, URI__URI uri);
 static void XML_Parser__Init(XML_Parser__Parser p, OOC_CHAR8 _new, IO__ByteChannel reader, URI__URI baseURI, XML_UnicodeCodec__Factory codecFactory, XML_EntityResolver__Resolver entityResolver, XML_Builder__Builder builder);
 static void XML_Parser__SetErrorMessages(void);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
 RT0__StructDesc _td_XML_Parser__PEInfo = { (RT0__Struct[]){&_td_XML_Parser__PEInfo}, (void*[]){}, &_mid, "PEInfo", 28, 0, RT0__strRecord };
-RT0__StructDesc _td_XML_Parser__1562 = { (RT0__Struct[]){&_td_XML_UnicodeBuffer__CharArray}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__NameList = { (RT0__Struct[]){&_td_XML_Parser__1562}, NULL, &_mid, "NameList", 4, -1, RT0__strPointer };
-RT0__StructDesc _td_XML_Parser__1609 = { (RT0__Struct[]){&_td_XML_Parser__PEInfo}, NULL, &_mid, NULL, 28, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__PEInfoList = { (RT0__Struct[]){&_td_XML_Parser__1609}, NULL, &_mid, "PEInfoList", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_XML_Parser__1571 = { (RT0__Struct[]){&_td_XML_UnicodeBuffer__CharArray}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__NameList = { (RT0__Struct[]){&_td_XML_Parser__1571}, NULL, &_mid, "NameList", 4, -1, RT0__strPointer };
+RT0__StructDesc _td_XML_Parser__1618 = { (RT0__Struct[]){&_td_XML_Parser__PEInfo}, NULL, &_mid, NULL, 28, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__PEInfoList = { (RT0__Struct[]){&_td_XML_Parser__1618}, NULL, &_mid, "PEInfoList", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_XML_Parser__ErrorListener = { (RT0__Struct[]){&_td_XML_Parser__ErrorListenerDesc}, NULL, &_mid, "ErrorListener", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_XML_Parser__Parser = { (RT0__Struct[]){&_td_XML_Parser__ParserDesc}, NULL, &_mid, "Parser", 4, -1, RT0__strPointer };
 RT0__StructDesc _td_XML_Parser__ParserDesc = { (RT0__Struct[]){&_td_XML_Parser__ParserDesc}, (void*[]){(void*)XML_Parser__ParserDesc_ParseDocument}, &_mid, "ParserDesc", 108, 0, RT0__strRecord };
-RT0__StructDesc _td_XML_Parser__7036 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 64, 32, RT0__strArray };
+RT0__StructDesc _td_XML_Parser__7045 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 64, 32, RT0__strArray };
 RT0__StructDesc _td_XML_Parser__ErrorListenerDesc = { (RT0__Struct[]){&_td_XML_Locator__ErrorListenerDesc,&_td_XML_Parser__ErrorListenerDesc}, (void*[]){(void*)XML_Parser__ErrorListenerDesc_Error}, &_mid, "ErrorListenerDesc", 4, 1, RT0__strRecord };
-RT0__StructDesc _td_XML_Parser__23561 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__25555 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2048, 2048, RT0__strArray };
-RT0__StructDesc _td_XML_Parser__35092 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__38632 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
-RT0__StructDesc _td_XML_Parser__48988 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__48977 = { (RT0__Struct[]){&_td_XML_Parser__48988}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_XML_Parser__51958 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__107222 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__107674 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__108185 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
-RT0__StructDesc _td_XML_Parser__108766 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
+RT0__StructDesc _td_XML_Parser__17958 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__23844 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__35276 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__38816 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 2, 2, RT0__strArray };
+RT0__StructDesc _td_XML_Parser__49172 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__49161 = { (RT0__Struct[]){&_td_XML_Parser__49172}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
+RT0__StructDesc _td_XML_Parser__52142 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__107406 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__107858 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__108369 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
+RT0__StructDesc _td_XML_Parser__108950 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 128, 128, RT0__strArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"XML:Parser", (RT0__Struct[]) { &_td_XML_Parser__PEInfo, &_td_XML_Parser__NameList, &_td_XML_Parser__PEInfoList, &_td_XML_Parser__ErrorListener, &_td_XML_Parser__Parser, &_td_XML_Parser__ParserDesc, &_td_XML_Parser__ErrorListenerDesc, NULL } };
 
 extern void OOC_XML_Parser_init0() {

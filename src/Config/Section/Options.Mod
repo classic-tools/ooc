@@ -1,9 +1,9 @@
 MODULE Config:Section:Options;
 
 IMPORT
-  Msg, Channel, TextRider, LongStrings,
+  Exception, Object, Msg, Channel, TextRider, LongStrings,
   XMLBuilder := XML:Builder, XML:DTD, XML:Locator,
-  Config:Value, Config:Parser, CS := Config:Section;
+  Config, Config:Parser, CS := Config:Section;
 
 
 TYPE
@@ -14,13 +14,13 @@ TYPE
   SectionDesc* = RECORD
     (CS.SectionDesc)
     optionList: Option;
-    typeList-: Value.PrototypeList;
+    typeMap-: Config.PrototypeMap;
   END;
   
   OptionDesc = RECORD
     next: Option;
-    name-: Value.StringPtr;
-    value-: Value.Value;
+    name-: STRING;
+    value-: Config.Variable;
   END;
 
 
@@ -73,30 +73,30 @@ PROCEDURE (context: ErrorContext) GetTemplate* (msg: Msg.Msg; VAR templ: Msg.LSt
   END GetTemplate;
 
 
-PROCEDURE Init* (s: Section; id: Parser.String; typeList: Value.PrototypeList);
+PROCEDURE Init* (s: Section; id: Parser.String; typeMap: Config.PrototypeMap);
   BEGIN
     CS.Init (s, id);
     s. optionList := NIL;
-    s. typeList := typeList
+    s. typeMap := typeMap
   END Init;
 
-PROCEDURE New* (sectionName: Parser.String; typeList: Value.PrototypeList): Section;
+PROCEDURE New* (sectionName: Parser.String; typeMap: Config.PrototypeMap): Section;
   VAR
     s: Section;
   BEGIN
     NEW (s);
-    Init (s, sectionName, typeList);
+    Init (s, sectionName, typeMap);
     RETURN s
   END New;
 
-PROCEDURE InitOption (opt: Option; VAR name: Value.String; value: Value.Value);
+PROCEDURE InitOption (opt: Option; name: STRING; value: Config.Variable);
   BEGIN
     opt. next := NIL;
-    opt. name := Value.GetStringPtr (name);
+    opt. name := name;
     opt. value := value;
   END InitOption;
 
-PROCEDURE NewOption (VAR name: Value.String; value: Value.Value): Option;
+PROCEDURE NewOption (name: STRING; value: Config.Variable): Option;
   VAR
     opt: Option;
   BEGIN
@@ -111,7 +111,7 @@ PROCEDURE Insert (VAR list: Option; opt: Option);
     IF (list = NIL) THEN
       opt. next := NIL;
       list := opt
-    ELSIF (list. name^ < opt. name^) THEN
+    ELSIF (list.name.Compare(opt.name) < 0) THEN
       Insert (list. next, opt)
     ELSE
       opt. next := list;
@@ -120,23 +120,23 @@ PROCEDURE Insert (VAR list: Option; opt: Option);
   END Insert;
 
 
-PROCEDURE (opt: Option) Set* (value: Value.Value);
+PROCEDURE (opt: Option) Set* (value: Config.Variable);
   BEGIN
     opt. value := value
   END Set;
 
-PROCEDURE (s: Section) Get* (name: Value.String): Option;
+PROCEDURE (s: Section) Get* (name: STRING): Option;
   VAR
     opt: Option;
   BEGIN
     opt := s. optionList;
-    WHILE (opt # NIL) & (opt. name^ # name) DO
+    WHILE (opt # NIL) & ~opt.name.Equals(name) DO
       opt := opt. next
     END;
     RETURN opt
   END Get;
 
-PROCEDURE (s: Section) Set* (name: Value.String; value: Value.Value): Option;
+PROCEDURE (s: Section) Set* (name: STRING; value: Config.Variable): Option;
   VAR
     opt: Option;
   BEGIN
@@ -150,7 +150,7 @@ PROCEDURE (s: Section) Set* (name: Value.String; value: Value.Value): Option;
     RETURN opt
   END Set;
 
-PROCEDURE (s: Section) GetValue* (name: Value.String): Value.Value;
+PROCEDURE (s: Section) GetValue* (name: STRING): Config.Variable;
   VAR
     opt: Option;
   BEGIN
@@ -166,10 +166,10 @@ PROCEDURE (s: Section) Copy* (dest: Section);
   VAR
     opt, newOpt: Option;
   BEGIN
-    Init (dest, s. name^, s. typeList);
+    Init (dest, s. name^, s. typeMap);
     opt := s. optionList;
     WHILE (opt # NIL) DO
-      newOpt := dest. Set (opt. name^, opt. value. Clone());
+      newOpt := dest. Set (opt. name, opt. value. Clone());
       opt := opt. next
     END
   END Copy;
@@ -191,9 +191,9 @@ PROCEDURE (s: Section) ProcessElements* (sectionRoot: Parser.Element;
     parserString: Parser.StringPtr;
     att: XMLBuilder.Attribute;
     name, type: DTD.String;
-    lastError, errMsg: Msg.Msg;
-    name8, type8, valueString: ARRAY 1024 OF CHAR;
-    newValue: Value.Value;
+    lastError: Msg.Msg;
+    name8: STRING;
+    newValue: Config.Variable;
     option: Option;
     i: LONGINT;
     
@@ -201,6 +201,16 @@ PROCEDURE (s: Section) ProcessElements* (sectionRoot: Parser.Element;
     BEGIN
       lastError := errorListener. Error (optionsContext, code, FALSE, xmlNode. pos)
     END Err;
+
+  PROCEDURE SetReason(e: Exception.Exception);
+    VAR
+      chars: Object.CharsLatin1;
+      msg: STRING;
+    BEGIN
+      msg := e.GetMessage();
+      chars := msg(Object.String8).CharsLatin1();
+      lastError.SetStringAttrib("reason", Msg.GetStringPtr(chars^));
+    END SetReason;
   
   BEGIN
     node := sectionRoot. content;
@@ -223,23 +233,18 @@ PROCEDURE (s: Section) ProcessElements* (sectionRoot: Parser.Element;
           ELSIF ~node. HasNoElementContent() THEN
             Err (requireCharDataContent, node)
           ELSE
-            LongStrings.Short (name^, "?", name8);
-            option := s. Get (name8);
+            option := s. Get (Object.NewUTF16(name^));
             IF (option = NIL) THEN
               Err (optionNotDefined, node);
               lastError. SetLStringAttrib ("name", Msg.GetLStringPtr (name^))
             ELSE
               parserString := node. GetCharDataContent();
-              (* ... get rid of this Short() once Value.String and
-                 XML.String are the same *)
-              LongStrings.Short (parserString^, "?", valueString);
-              option. value. StringToValue (valueString, errMsg);
-              IF (errMsg = NIL) THEN
-                (*s. Set (name8, option. value)  this is a noop *)
-              ELSE
+              TRY
+                option.value.StringToValue(Object.NewUTF16(parserString^));
+              CATCH Exception.ParseError:
                 Err (invalidValue, node);
-                lastError. SetMsgAttrib ("reason", errMsg)
-              END
+                SetReason(Exception.Current());
+              END;
             END
           END
           
@@ -264,27 +269,23 @@ PROCEDURE (s: Section) ProcessElements* (sectionRoot: Parser.Element;
           ELSIF ~node. HasNoElementContent() THEN
             Err (requireCharDataContent, node)
           ELSE
-            LongStrings.Short (name^, "?", name8);
+            name8 := Object.NewUTF16(name^);
             IF (s. Get (name8) # NIL) THEN
               Err (optionAlreadyDefined, node);
               lastError. SetLStringAttrib ("name", Msg.GetLStringPtr (name^))
             ELSE
-              LongStrings.Short (type^, "?", type8);
-              newValue := s. typeList. GetClone (type8);
+              newValue := Config.GetClone(s.typeMap, Object.NewUTF16(type^));
               IF (newValue = NIL) THEN
                 Err (unknownType, node);
                 lastError. SetLStringAttrib ("type", Msg.GetLStringPtr (type^))
               ELSE
                 parserString := node. GetCharDataContent();
-                (* ... get rid of this Short() once Value.String and
-                   XML.String are the same *)
-                LongStrings.Short (parserString^, "?", valueString);
-                newValue. StringToValue (valueString, errMsg);
-                IF (errMsg = NIL) THEN
-                  option := s. Set (name8, newValue)
-                ELSE
+                TRY
+                  newValue.StringToValue(Object.NewUTF16(parserString^));
+                  option := s. Set (name8, newValue);
+                CATCH Exception.ParseError:
                   Err (invalidValue, node);
-                  lastError. SetMsgAttrib ("reason", errMsg)
+                  SetReason(Exception.Current());
                 END
               END
             END
@@ -318,14 +319,10 @@ PROCEDURE (s: Section) DumpContent* (ch: Channel.Channel);
     opt := s. optionList;
     WHILE (opt # NIL) DO
       w. WriteString ("  <value name='");
-      w. WriteString (opt. name^);
-      w. WriteString ("' defining_module='");
-      opt. value. DefiningModule (str8);
-      w. WriteString (str8);
+      w. WriteObject (opt. name);
       w. WriteString ("'>");
       
-      opt. value. ValueToString (str8);
-      w. WriteString (str8);
+      w. WriteObject(opt.value);
       
       w. WriteString ("</value>");
       w. WriteLn;

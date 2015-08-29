@@ -22,9 +22,9 @@ extern void OOC_OOC_Doc_ResolveRef_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContext;
 extern RT0__StructDesc _td_OOC_Doc_ResolveRef__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_Doc_ResolveRef__743;
-extern RT0__StructDesc _td_OOC_Doc_ResolveRef__3683;
-extern RT0__StructDesc _td_OOC_Doc_ResolveRef__3899;
+extern RT0__StructDesc _td_OOC_Doc_ResolveRef__1656;
+extern RT0__StructDesc _td_OOC_Doc_ResolveRef__4596;
+extern RT0__StructDesc _td_OOC_Doc_ResolveRef__4812;
 #endif /* _MODULE_OOC_Doc_ResolveRef_ */
 
 /* --- */

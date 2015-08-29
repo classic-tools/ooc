@@ -17,14 +17,14 @@ RT0__StructDesc _td_IO_BinaryRider__4276 = { (RT0__Struct[]){&RT0__longchar}, NU
 RT0__StructDesc _td_IO_BinaryRider__6356 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1024, 1024, RT0__strArray };
 RT0__StructDesc _td_IO_BinaryRider__6410 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_BinaryRider__6399 = { (RT0__Struct[]){&_td_IO_BinaryRider__6410}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_IO_BinaryRider__6439 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, &_mid, NULL, 2048, 512, RT0__strArray };
-RT0__StructDesc _td_IO_BinaryRider__6499 = { (RT0__Struct[]){&RT0__ucs4char}, NULL, &_mid, NULL, 4, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__6439 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 1024, 512, RT0__strArray };
+RT0__StructDesc _td_IO_BinaryRider__6499 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
 RT0__StructDesc _td_IO_BinaryRider__6488 = { (RT0__Struct[]){&_td_IO_BinaryRider__6499}, NULL, &_mid, NULL, 4, -1, RT0__strPointer };
-RT0__StructDesc _td_IO_BinaryRider__8109 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_BinaryRider__8400 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_BinaryRider__9255 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_BinaryRider__9496 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
-RT0__StructDesc _td_IO_BinaryRider__13152 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__8111 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__8402 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__9257 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__9498 = { (RT0__Struct[]){&RT0__longchar}, NULL, &_mid, NULL, 2, 1, RT0__strOpenArray };
+RT0__StructDesc _td_IO_BinaryRider__13156 = { (RT0__Struct[]){&RT0__byte}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"IO:BinaryRider", (RT0__Struct[]) { &_td_IO_BinaryRider__Reader, &_td_IO_BinaryRider__ReaderDesc, &_td_IO_BinaryRider__Writer, &_td_IO_BinaryRider__WriterDesc, NULL } };
 
 extern void OOC_IO_BinaryRider_init0() {

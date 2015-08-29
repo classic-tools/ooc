@@ -3,61 +3,56 @@
 #include <setjmp.h>
 
 OOC_CHAR8 OOC_Config_CCompiler__HaveLibtool(void) {
-  register OOC_INT32 i0;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)OOC_Config_CCompiler__libtool;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1315))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1334)))), &_td_Config_Value_String__ValueDesc, 1334)), 1340));
-  return ((
-  _cmp8((const void*)(_check_pointer(i0, 1347)),(const void*)"no"))!=0);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1311))+8);
+  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1326)))), &_td_Config__StringVarDesc, 1326)), 1336));
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1311))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1326)))), &_td_Config__StringVarDesc, 1326)), 1336));
+  i0 = OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1343)))), Object__StringDesc_Equals)),Object__StringDesc_Equals)((Object__String)i0, (Object__Object)((OOC_INT32)_c0));
+  return (!i0);
   ;
 }
 
-static void OOC_Config_CCompiler__SetCommand(const OOC_CHAR8 mode__ref[], OOC_LEN mode_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
-  register OOC_INT32 i0,i1;
-  OOC_ALLOCATE_VPAR(mode,OOC_CHAR8 ,mode_0d)
+static ADT_StringBuffer__StringBuffer OOC_Config_CCompiler__SetCommand(Object__String mode) {
+  register OOC_INT32 i0,i1,i2;
+  ADT_StringBuffer__StringBuffer sb;
 
-  OOC_INITIALIZE_VPAR(mode__ref,mode,OOC_CHAR8 ,mode_0d)
-  i0 = (
-  _cmp8((const void*)(OOC_INT32)mode,(const void*)""))!=0;
-  if (i0) goto l3;
-  i0=0u;
+  i0 = (OOC_INT32)ADT_StringBuffer__New((Object__String)((OOC_INT32)_c1));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  i1 = (OOC_INT32)mode;
+  i2 = *(OOC_INT32*)(_check_pointer(i1, 1534));
+  i2 = i2!=0;
+  if (i2) goto l3;
+  i2=0u;
   goto l5;
 l3:
-  i0 = OOC_Config_CCompiler__HaveLibtool();
+  i2 = OOC_Config_CCompiler__HaveLibtool();
   
 l5:
-  if (i0) goto l7;
-  _copy_8((const void*)"",(void*)(OOC_INT32)cmd,cmd_0d);
-  goto l8;
+  if (!i2) goto l7;
+  i2 = (OOC_INT32)OOC_Config_CCompiler__libtool;
+  i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 1591))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1576)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i2);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1608)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c2));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1637)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1660)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c3));
 l7:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__libtool;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1512))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1532)))), &_td_Config_Value_String__ValueDesc, 1532)), 1538));
-  _copy_8((const void*)(_check_pointer(i0, 1546)),(void*)(OOC_INT32)cmd,cmd_0d);
-  Strings__Append(" --mode=", 9, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append((void*)(OOC_INT32)mode, mode_0d, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-l8:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__cc;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1723))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1743)))), &_td_Config_Value_String__ValueDesc, 1743)), 1749));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1723))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1743)))), &_td_Config_Value_String__ValueDesc, 1743)), 1749));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 1757)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 1757)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__cc;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 1699))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1689)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1714)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c4));
+  return (ADT_StringBuffer__StringBuffer)i0;
   ;
 }
 
-void OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
-  register OOC_INT32 i0,i1,i2,i3,i4;
+Object__String OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 forLibrary) {
+  register OOC_INT32 i0,i1,i2,i3,i4,i5,i6;
+  ADT_StringBuffer__StringBuffer sb;
   URI_Scheme_File__URI f;
-  OOC_CHAR8 str[2048];
   Object__StringArrayPtr include;
   OOC_INT32 i;
-  Object__CharsLatin1 chars;
   auto URI_Scheme_File__URI OOC_Config_CCompiler__CompileFileCmd_GetURIofRT(void);
     
     URI_Scheme_File__URI OOC_Config_CCompiler__CompileFileCmd_GetURIofRT(void) {
@@ -69,12 +64,12 @@ void OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 f
       i0 = (OOC_INT32)OOC_Config__repositories;
       i0 = (OOC_INT32)OOC_Config_Repositories__SectionDesc_GetModule((OOC_Config_Repositories__Section)i0, "RT0", 4);
       m = (OOC_Repository__Module)i0;
-      _assert((i0!=(OOC_INT32)0), 127, 2281);
-      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2364)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 1u);
+      _assert((i0!=(OOC_INT32)0), 127, 2157);
+      i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2240)))), OOC_Repository__ModuleDesc_GetURI)),OOC_Repository__ModuleDesc_GetURI)((OOC_Repository__Module)i0, 0, 1u);
       uri = (URI__HierarchicalURI)i0;
-      i0 = _type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2429)))), &_td_URI_Scheme_File__URIDesc, 2429);
+      i0 = _type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2305)))), &_td_URI_Scheme_File__URIDesc, 2305);
       f = (URI_Scheme_File__URI)i0;
-      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2442)))), URI_Scheme_Hierarchical__GenericDesc_StripSegments)),URI_Scheme_Hierarchical__GenericDesc_StripSegments)((URI_Scheme_Hierarchical__Generic)i0, 1);
+      OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2318)))), URI_Scheme_Hierarchical__GenericDesc_StripSegments)),URI_Scheme_Hierarchical__GenericDesc_StripSegments)((URI_Scheme_Hierarchical__Generic)i0, 1);
       return (URI_Scheme_File__URI)i0;
       ;
     }
@@ -82,249 +77,221 @@ void OOC_Config_CCompiler__CompileFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 f
 
   i0 = forLibrary;
   if (i0) goto l3;
-  OOC_Config_CCompiler__SetCommand("", 1, (void*)(OOC_INT32)cmd, cmd_0d);
+  i0 = (OOC_INT32)OOC_Config_CCompiler__SetCommand((Object__String)((OOC_INT32)_c5));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  
   goto l4;
 l3:
-  OOC_Config_CCompiler__SetCommand("compile", 8, (void*)(OOC_INT32)cmd, cmd_0d);
+  i0 = (OOC_INT32)OOC_Config_CCompiler__SetCommand((Object__String)((OOC_INT32)_c6));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  
 l4:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__cflags;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2638))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2658)))), &_td_Config_Value_String__ValueDesc, 2658)), 2664));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2638))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2658)))), &_td_Config_Value_String__ValueDesc, 2658)), 2664));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2672)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 2672)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)OOC_Config_CCompiler__cppflags;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2740))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2760)))), &_td_Config_Value_String__ValueDesc, 2760)), 2766));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 2740))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2760)))), &_td_Config_Value_String__ValueDesc, 2760)), 2766));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 2774)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 2774)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
+  i1 = (OOC_INT32)OOC_Config_CCompiler__cflags;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2510))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2496)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2525)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c7));
+  i1 = (OOC_INT32)OOC_Config_CCompiler__cppflags;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2561))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2545)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
   i0 = (OOC_INT32)OOC_Config_CCompiler__CompileFileCmd_GetURIofRT();
   f = (URI_Scheme_File__URI)i0;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)str, 2048);
-  Strings__Append(" -I", 4, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append((void*)(OOC_INT32)str, 2048, (void*)(OOC_INT32)cmd, cmd_0d);
+  i1 = (OOC_INT32)sb;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2977)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)((OOC_INT32)_c8));
+  i0 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 2999)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i0);
   i0 = (OOC_INT32)OOC_Config__repositories;
   i0 = (OOC_INT32)OOC_Config_Repositories__SectionDesc_GetIncludePaths((OOC_Config_Repositories__Section)i0);
   include = (Object__StringArrayPtr)i0;
   i = 0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3360)), 0);
-  i2 = 0<i1;
-  if (!i2) goto l12;
-  i2=0;
+  i2 = OOC_ARRAY_LENGTH((_check_pointer(i0, 3111)), 0);
+  i3 = 0<i2;
+  if (!i3) goto l12;
+  i3 = (OOC_INT32)_c9;
+  i4=0;
 l7_loop:
-  Strings__Append(" -I", 4, (void*)(OOC_INT32)cmd, cmd_0d);
-  i3 = _check_pointer(i0, 3425);
-  i4 = OOC_ARRAY_LENGTH(i3, 0);
-  i3 = (OOC_INT32)*(OOC_INT32*)(i3+(_check_index(i2, i4, OOC_UINT32, 3425))*4);
-  i3 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i3, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i3, 3436)))), &_td_Object__String8Desc, 3436)));
-  chars = (Object__CharsLatin1)i3;
-  i4 = OOC_ARRAY_LENGTH((_check_pointer(i3, 3487)), 0);
-  Strings__Append((void*)(_check_pointer(i3, 3487)), i4, (void*)(OOC_INT32)cmd, cmd_0d);
-  i2 = i2+1;
-  i = i2;
-  i3 = i2<i1;
-  if (i3) goto l7_loop;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3127)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i3);
+  i5 = _check_pointer(i0, 3166);
+  i6 = OOC_ARRAY_LENGTH(i5, 0);
+  i5 = (OOC_INT32)*(OOC_INT32*)(i5+(_check_index(i4, i6, OOC_UINT32, 3166))*4);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3151)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i5);
+  i4 = i4+1;
+  i = i4;
+  i5 = i4<i2;
+  if (i5) goto l7_loop;
 l12:
-  Strings__Append(" -c ", 5, (void*)(OOC_INT32)cmd, cmd_0d);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3192)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)((OOC_INT32)_c10));
   i0 = (OOC_INT32)in;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3555)))), &_td_URI_Scheme_File__URIDesc, 3555)), (void*)(OOC_INT32)str, 2048);
-  Strings__Append((void*)(OOC_INT32)str, 2048, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" -o ", 5, (void*)(OOC_INT32)cmd, cmd_0d);
+  i0 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3231)))), &_td_URI_Scheme_File__URIDesc, 3231)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3215)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i0);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3254)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)((OOC_INT32)_c11));
   i0 = (OOC_INT32)out;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3654)))), &_td_URI_Scheme_File__URIDesc, 3654)), (void*)(OOC_INT32)str, 2048);
-  Strings__Append((void*)(OOC_INT32)str, 2048, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  i0 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3294)))), &_td_URI_Scheme_File__URIDesc, 3294)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3277)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i1, (Object__Object)i0);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3324)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i1);
+  return (Object__String)i0;
   ;
 }
 
-void OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
+Object__String OOC_Config_CCompiler__LinkProgramCmd(URI__URI execFile, OOC_CHAR8 forLibrary) {
   register OOC_INT32 i0,i1;
-  OOC_CHAR8 str[1024];
+  ADT_StringBuffer__StringBuffer sb;
 
-  OOC_Config_CCompiler__SetCommand("link", 5, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append("-o ", 4, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)execFile;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3971)))), &_td_URI_Scheme_File__URIDesc, 3971)), (void*)(OOC_INT32)str, 1024);
-  Strings__Append((void*)(OOC_INT32)str, 1024, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = forLibrary;
-  if (i0) goto l3;
-  i0=0u;
+  i0 = (OOC_INT32)OOC_Config_CCompiler__SetCommand((Object__String)((OOC_INT32)_c12));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3521)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c13));
+  i1 = (OOC_INT32)execFile;
+  i1 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3565)))), &_td_URI_Scheme_File__URIDesc, 3565)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3543)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  i1 = forLibrary;
+  if (i1) goto l3;
+  i1=0u;
   goto l5;
 l3:
-  i0 = OOC_Config_CCompiler__HaveLibtool();
+  i1 = OOC_Config_CCompiler__HaveLibtool();
   
 l5:
-  if (!i0) goto l7;
-  Strings__Append(" -rpath ", 9, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)OOC_Config_CCompiler__libdir;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4130))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4150)))), &_td_Config_Value_String__ValueDesc, 4150)), 4156));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4130))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4150)))), &_td_Config_Value_String__ValueDesc, 4150)), 4156));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4164)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 4164)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
+  if (!i1) goto l7;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3629)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c14));
+  i1 = (OOC_INT32)OOC_Config_CCompiler__libdir;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3672))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3658)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
 l7:
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)OOC_Config_CCompiler__ldflags;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4240))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4260)))), &_td_Config_Value_String__ValueDesc, 4260)), 4266));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4240))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4260)))), &_td_Config_Value_String__ValueDesc, 4260)), 4266));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4274)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 4274)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3696)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c15));
+  i1 = (OOC_INT32)OOC_Config_CCompiler__ldflags;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3731))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3716)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3753)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  return (Object__String)i0;
   ;
 }
 
-void OOC_Config_CCompiler__InstallDirectoryCmd(const OOC_CHAR8 path__ref[], OOC_LEN path_0d, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
-  register OOC_INT32 i0;
-  OOC_ALLOCATE_VPAR(path,OOC_CHAR8 ,path_0d)
+Object__String OOC_Config_CCompiler__InstallDirectoryCmd(Object__String path) {
+  register OOC_INT32 i0,i1;
+  ADT_StringBuffer__StringBuffer sb;
 
-  OOC_INITIALIZE_VPAR(path__ref,path,OOC_CHAR8 ,path_0d)
   i0 = (OOC_INT32)OOC_Config_CCompiler__install;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4407))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4426)))), &_td_Config_Value_String__ValueDesc, 4426)), 4432));
-  _copy_8((const void*)(_check_pointer(i0, 4439)),(void*)(OOC_INT32)cmd,cmd_0d);
-  Strings__Append(" -d ", 5, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append((void*)(OOC_INT32)path, path_0d, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3926))+8);
+  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 3926))+8);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3932)))), Config__VariableDesc_ToString)),Config__VariableDesc_ToString)((Config__Variable)i0);
+  i0 = (OOC_INT32)ADT_StringBuffer__New((Object__String)i0);
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3952)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c16));
+  i1 = (OOC_INT32)path;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 3975)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4003)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  return (Object__String)i0;
   ;
 }
 
-void OOC_Config_CCompiler__InstallProgramCmd(URI__URI file, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
+Object__String OOC_Config_CCompiler__InstallProgramCmd(URI__URI file, OOC_CHAR8 asLibrary) {
   register OOC_INT32 i0,i1;
-  OOC_CHAR8 str[1024];
+  ADT_StringBuffer__StringBuffer sb;
 
-  i0 = OOC_Config_CCompiler__HaveLibtool();
-  if (i0) goto l3;
-  _copy_8((const void*)"",(void*)(OOC_INT32)cmd,cmd_0d);
-  goto l4;
+  i0 = (OOC_INT32)ADT_StringBuffer__New((Object__String)((OOC_INT32)_c17));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  i1 = OOC_Config_CCompiler__HaveLibtool();
+  if (!i1) goto l3;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__libtool;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4247))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4232)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4264)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c18));
 l3:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__libtool;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4746))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4765)))), &_td_Config_Value_String__ValueDesc, 4765)), 4771));
-  _copy_8((const void*)(_check_pointer(i0, 4778)),(void*)(OOC_INT32)cmd,cmd_0d);
-  Strings__Append(" --mode=install ", 17, (void*)(OOC_INT32)cmd, cmd_0d);
-l4:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__installProgram;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4911))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4930)))), &_td_Config_Value_String__ValueDesc, 4930)), 4936));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 4911))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4930)))), &_td_Config_Value_String__ValueDesc, 4930)), 4936));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 4943)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 4943)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)file;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4996)))), &_td_URI_Scheme_File__URIDesc, 4996)), (void*)(OOC_INT32)str, 1024);
-  Strings__Append((void*)(OOC_INT32)str, 1024, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = asLibrary;
-  if (i0) goto l7;
-  i0 = (OOC_INT32)OOC_Config_CCompiler__bindir;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5203))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5222)))), &_td_Config_Value_String__ValueDesc, 5222)), 5228));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5203))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5222)))), &_td_Config_Value_String__ValueDesc, 5222)), 5228));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5235)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 5235)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  goto l8;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__installProgram;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4335))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4313)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4350)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c19));
+  i1 = (OOC_INT32)file;
+  i1 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 4388)))), &_td_URI_Scheme_File__URIDesc, 4388)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4370)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4411)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c20));
+  i1 = asLibrary;
+  if (i1) goto l6;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__bindir;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4509))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4495)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  goto l7;
+l6:
+  i1 = (OOC_INT32)OOC_Config_CCompiler__libdir;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4469))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4455)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
 l7:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__libdir;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5125))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5144)))), &_td_Config_Value_String__ValueDesc, 5144)), 5150));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5125))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5144)))), &_td_Config_Value_String__ValueDesc, 5144)), 5150));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5157)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 5157)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-l8:
-  return;
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4540)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  return (Object__String)i0;
   ;
 }
 
-void OOC_Config_CCompiler__UninstallProgramCmd(Object__String path, OOC_CHAR8 asLibrary, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
+Object__String OOC_Config_CCompiler__UninstallProgramCmd(Object__String path, OOC_CHAR8 asLibrary) {
   register OOC_INT32 i0,i1;
-  Object__CharsLatin1 chars;
+  ADT_StringBuffer__StringBuffer sb;
 
-  i0 = OOC_Config_CCompiler__HaveLibtool();
-  if (i0) goto l3;
-  _copy_8((const void*)"",(void*)(OOC_INT32)cmd,cmd_0d);
-  goto l4;
-l3:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__libtool;
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5490))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5509)))), &_td_Config_Value_String__ValueDesc, 5509)), 5515));
-  _copy_8((const void*)(_check_pointer(i0, 5522)),(void*)(OOC_INT32)cmd,cmd_0d);
-  Strings__Append(" --mode=uninstall ", 19, (void*)(OOC_INT32)cmd, cmd_0d);
+  i0 = (OOC_INT32)ADT_StringBuffer__New((Object__String)((OOC_INT32)_c21));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  i1 = OOC_Config_CCompiler__HaveLibtool();
+  if (!i1) goto l4;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__libtool;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4783))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4768)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4800)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c22));
 l4:
-  i0 = (OOC_INT32)OOC_Config_CCompiler__uninstall;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5652))+8);
-  i1 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 5671)))), &_td_Config_Value_String__ValueDesc, 5671)), 5677));
-  i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 5652))+8);
-  i0 = (OOC_INT32)*(OOC_INT32*)(_check_pointer((_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5671)))), &_td_Config_Value_String__ValueDesc, 5671)), 5677));
-  i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5684)), 0);
-  Strings__Append((void*)(_check_pointer(i1, 5684)), i0, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" ", 2, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)path;
-  i0 = (OOC_INT32)Object__String8Desc_CharsLatin1((Object__String8)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 5748)))), &_td_Object__String8Desc, 5748)));
-  chars = (Object__CharsLatin1)i0;
-  i1 = OOC_ARRAY_LENGTH((_check_pointer(i0, 5796)), 0);
-  Strings__Append((void*)(_check_pointer(i0, 5796)), i1, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  i1 = (OOC_INT32)OOC_Config_CCompiler__uninstall;
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 4868))+8);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4851)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4883)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c23));
+  i1 = (OOC_INT32)path;
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4903)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 4931)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  return (Object__String)i0;
   ;
 }
 
 void OOC_Config_CCompiler__RegisterConfig(void) {
   register OOC_INT32 i0;
 
-  i0 = (OOC_INT32)Config_Value_String__New("gcc", 4);
-  i0 = (OOC_INT32)OOC_Config__AddOption("cc", 3, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c24));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c25), (Config__Variable)i0);
   OOC_Config_CCompiler__cc = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("", 1);
-  i0 = (OOC_INT32)OOC_Config__AddOption("cppflags", 9, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c26));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c27), (Config__Variable)i0);
   OOC_Config_CCompiler__cppflags = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("-O2 -g", 7);
-  i0 = (OOC_INT32)OOC_Config__AddOption("cflags", 7, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c28));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c29), (Config__Variable)i0);
   OOC_Config_CCompiler__cflags = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("", 1);
-  i0 = (OOC_INT32)OOC_Config__AddOption("ldflags", 8, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c30));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c31), (Config__Variable)i0);
   OOC_Config_CCompiler__ldflags = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("-lgc", 5);
-  i0 = (OOC_INT32)OOC_Config__AddOption("libs", 5, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c32));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c33), (Config__Variable)i0);
   OOC_Config_CCompiler__libs = (Config_Section_Options__Option)i0;
   OOC_Config__AddCmdLine("--cc", 5, "<options><set name=\047cc\047>$1</set></options>", 43);
   OOC_Config__AddCmdLine("--cppflags", 11, "<options><set name=\047cppflags\047>$1</set></options>", 49);
   OOC_Config__AddCmdLine("--cflags", 9, "<options><set name=\047cflags\047>$1</set></options>", 47);
   OOC_Config__AddCmdLine("--ldflags", 10, "<options><set name=\047ldflags\047>$1</set></options>", 48);
   OOC_Config__AddCmdLine("--libs", 7, "<options><set name=\047libs\047>$1</set></options>", 45);
-  i0 = (OOC_INT32)Config_Value_String__New("libtool", 8);
-  i0 = (OOC_INT32)OOC_Config__AddOption("libtool", 8, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c34));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c35), (Config__Variable)i0);
   OOC_Config_CCompiler__libtool = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("libdir", 7);
-  i0 = (OOC_INT32)OOC_Config__AddOption("libdir", 7, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c36));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c37), (Config__Variable)i0);
   OOC_Config_CCompiler__libdir = (Config_Section_Options__Option)i0;
   OOC_Config__AddCmdLine("--libtool", 10, "<options><set name=\047libtool\047>$1</set></options>", 48);
   OOC_Config__AddCmdLine("--libdir", 9, "<options><set name=\047libdir\047>$1</set></options>", 47);
-  i0 = (OOC_INT32)Config_Value_String__New("install -c", 11);
-  i0 = (OOC_INT32)OOC_Config__AddOption("install", 8, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c38));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c39), (Config__Variable)i0);
   OOC_Config_CCompiler__install = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("install -c", 11);
-  i0 = (OOC_INT32)OOC_Config__AddOption("installProgram", 15, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c40));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c41), (Config__Variable)i0);
   OOC_Config_CCompiler__installProgram = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("install -c -m 644", 18);
-  i0 = (OOC_INT32)OOC_Config__AddOption("installData", 12, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c42));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c43), (Config__Variable)i0);
   OOC_Config_CCompiler__installData = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("rm -f", 6);
-  i0 = (OOC_INT32)OOC_Config__AddOption("uninstall", 10, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c44));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c45), (Config__Variable)i0);
   OOC_Config_CCompiler__uninstall = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("bindir", 7);
-  i0 = (OOC_INT32)OOC_Config__AddOption("bindir", 7, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c46));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c47), (Config__Variable)i0);
   OOC_Config_CCompiler__bindir = (Config_Section_Options__Option)i0;
-  i0 = (OOC_INT32)Config_Value_String__New("oocdir", 7);
-  i0 = (OOC_INT32)OOC_Config__AddOption("oocdir", 7, (Config_Value__Value)i0);
+  i0 = (OOC_INT32)Config__NewStringVar((Object__String8)((OOC_INT32)_c48));
+  i0 = (OOC_INT32)OOC_Config__AddOption((Object__String)((OOC_INT32)_c49), (Config__Variable)i0);
   OOC_Config_CCompiler__oocdir = (Config_Section_Options__Option)i0;
   OOC_Config__AddCmdLine("--install", 10, "<options><set name=\047install\047>$1</set></options>", 48);
   OOC_Config__AddCmdLine("--install-program", 18, "<options><set name=\047installProgram\047>$1</set></options>", 55);
@@ -337,6 +304,56 @@ void OOC_Config_CCompiler__RegisterConfig(void) {
 }
 
 void OOC_OOC_Config_CCompiler_init(void) {
+  _c0 = Object__NewLatin1Region("no", 3, 0, 2);
+  _c1 = Object__NewLatin1Region("", 1, 0, 0);
+  _c2 = Object__NewLatin1Region(" --mode=", 9, 0, 8);
+  _c3 = Object__NewLatin1Char(32u);
+  _c4 = Object__NewLatin1Char(32u);
+  _c5 = Object__NewLatin1Region("", 1, 0, 0);
+  _c6 = Object__NewLatin1Region("compile", 8, 0, 7);
+  _c7 = Object__NewLatin1Char(32u);
+  _c8 = Object__NewLatin1Region(" -I", 4, 0, 3);
+  _c9 = Object__NewLatin1Region(" -I", 4, 0, 3);
+  _c10 = Object__NewLatin1Region(" -c ", 5, 0, 4);
+  _c11 = Object__NewLatin1Region(" -o ", 5, 0, 4);
+  _c12 = Object__NewLatin1Region("link", 5, 0, 4);
+  _c13 = Object__NewLatin1Region("-o ", 4, 0, 3);
+  _c14 = Object__NewLatin1Region(" -rpath ", 9, 0, 8);
+  _c15 = Object__NewLatin1Char(32u);
+  _c16 = Object__NewLatin1Region(" -d ", 5, 0, 4);
+  _c17 = Object__NewLatin1Region("", 1, 0, 0);
+  _c18 = Object__NewLatin1Region(" --mode=install ", 17, 0, 16);
+  _c19 = Object__NewLatin1Char(32u);
+  _c20 = Object__NewLatin1Char(32u);
+  _c21 = Object__NewLatin1Region("", 1, 0, 0);
+  _c22 = Object__NewLatin1Region(" --mode=uninstall ", 19, 0, 18);
+  _c23 = Object__NewLatin1Char(32u);
+  _c24 = Object__NewLatin1Region("gcc", 4, 0, 3);
+  _c25 = Object__NewLatin1Region("cc", 3, 0, 2);
+  _c26 = Object__NewLatin1Region("", 1, 0, 0);
+  _c27 = Object__NewLatin1Region("cppflags", 9, 0, 8);
+  _c28 = Object__NewLatin1Region("-O2 -g", 7, 0, 6);
+  _c29 = Object__NewLatin1Region("cflags", 7, 0, 6);
+  _c30 = Object__NewLatin1Region("", 1, 0, 0);
+  _c31 = Object__NewLatin1Region("ldflags", 8, 0, 7);
+  _c32 = Object__NewLatin1Region("-lgc", 5, 0, 4);
+  _c33 = Object__NewLatin1Region("libs", 5, 0, 4);
+  _c34 = Object__NewLatin1Region("libtool", 8, 0, 7);
+  _c35 = Object__NewLatin1Region("libtool", 8, 0, 7);
+  _c36 = Object__NewLatin1Region("libdir", 7, 0, 6);
+  _c37 = Object__NewLatin1Region("libdir", 7, 0, 6);
+  _c38 = Object__NewLatin1Region("install -c", 11, 0, 10);
+  _c39 = Object__NewLatin1Region("install", 8, 0, 7);
+  _c40 = Object__NewLatin1Region("install -c", 11, 0, 10);
+  _c41 = Object__NewLatin1Region("installProgram", 15, 0, 14);
+  _c42 = Object__NewLatin1Region("install -c -m 644", 18, 0, 17);
+  _c43 = Object__NewLatin1Region("installData", 12, 0, 11);
+  _c44 = Object__NewLatin1Region("rm -f", 6, 0, 5);
+  _c45 = Object__NewLatin1Region("uninstall", 10, 0, 9);
+  _c46 = Object__NewLatin1Region("bindir", 7, 0, 6);
+  _c47 = Object__NewLatin1Region("bindir", 7, 0, 6);
+  _c48 = Object__NewLatin1Region("oocdir", 7, 0, 6);
+  _c49 = Object__NewLatin1Region("oocdir", 7, 0, 6);
 
   return;
   ;

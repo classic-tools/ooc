@@ -1,4 +1,4 @@
-(* 	$Id: URI.Mod,v 1.2 2003/01/30 23:34:32 mva Exp $	 *)
+(* 	$Id: URI.Mod,v 1.6 2003/05/22 20:20:34 mva Exp $	 *)
 MODULE URI [OOC_EXTENSIONS];
 (*  Implements RFC2396 "Uniform Resource Identifiers: Generic Syntax"
     Copyright (C) 2000, 2003  Michael van Acken
@@ -38,17 +38,12 @@ MODULE URI [OOC_EXTENSIONS];
    implement concrete authority, query, and fragment instances.  *)
 
 IMPORT
-  Strings, Msg, CharClass, TextRider, IO, Str := URI:String, URI:Error;
+  CharClass, TextRider, Object, Exception, IO, ADT:StringBuffer,
+  Str := URI:String;
 
 TYPE
-  String* = Str.String;
-  (**An open array type to hold an URI string.  This type is typically used for
-     parameters.  *)
-  StringPtr* = Str.StringPtr;
-  (**A pointer type with @otype{String} as its base.  *)
   Offset* = Str.Offset;
-  (**A character offset into an instance of @otype{String} or
-     @otype{StringPtr}.  This is an integer type.  *)
+  (**A character offset.  *)
   
 TYPE
   URI* = POINTER TO URIDesc;
@@ -58,7 +53,8 @@ TYPE
      specializations (@otype{HierarchicalURI} and @otype{OpaqueURI}) in this
      module.  All concrete specializations should be in modules with the name
      prefix @samp{URI:Scheme:*}.  *)
-    schemeId-: StringPtr;
+    (Object.ObjectDesc)
+    schemeId-: STRING;
     (**Scheme part of the URI.  For a relative URI (and all instances of
        @otype{*URI:Scheme:CurrentDoc.CurrentDoc}), this field is @code{NIL}. *)
   END;
@@ -120,16 +116,6 @@ TYPE
 
 
 
-TYPE
-  URIAttribute* = POINTER TO URIAttributeDesc;
-  URIAttributeDesc* = RECORD
-  (**Extends @otype{Msg.Attribute} to provide a message attribute that 
-     holds an URI.  *)
-    (Msg.AttributeDesc)
-    uri-: URI;
-  END;
-
-
 CONST
   channelNew* = 0;
   (**Open the channel on a new resource, truncating any existing resource of
@@ -157,35 +143,10 @@ VAR
   schemeList: List;
 
 
-CONST
-  noChannelAvailable = 1;
-  
-TYPE
-  ErrorContext = POINTER TO ErrorContextDesc;
-  ErrorContextDesc = RECORD  (* stateless *)
-    (Msg.ContextDesc)
-  END;
-
-VAR
-  uriContext: ErrorContext;
-
-
-PROCEDURE (context: ErrorContext) GetTemplate* (msg: Error.Msg; VAR templ: Error.LString);
-  VAR
-    t: ARRAY 128 OF CHAR;
-  BEGIN
-    CASE msg. code OF
-    | noChannelAvailable:
-      t := "The URI `${uri}' does not support channel access"
-    END;
-    COPY (t, templ)
-  END GetTemplate;
-
-
 (* URI
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitURI* (uri: URI; schemeId: StringPtr);
+PROCEDURE InitURI* (uri: URI; schemeId: STRING);
   BEGIN
     uri. schemeId := schemeId
   END InitURI;
@@ -206,11 +167,11 @@ PROCEDURE (uri: URI) Copy* (dest: URI);
     IF (uri. schemeId = NIL) THEN
       dest. schemeId := NIL
     ELSE
-      dest. schemeId := Str.Copy (uri. schemeId^)
+      dest. schemeId := uri. schemeId
     END
   END Copy;
 
-PROCEDURE (uri: URI) SetSchemeId* (schemeId: StringPtr);
+PROCEDURE (uri: URI) SetSchemeId* (schemeId: STRING);
 (**Sets the scheme identifier of @oparam{uri}.  If @oparam{schemeId} is
    @code{NIL}, then @oparam{uri} is a relative URI.  *)
   BEGIN
@@ -222,19 +183,18 @@ PROCEDURE (uri: URI) [ABSTRACT] WriteXML* (w: TextRider.Writer);
    @oparam{w}.  *)
   END WriteXML;
 
-PROCEDURE (uri: URI) [ABSTRACT] GetString* (VAR str: ARRAY OF CHAR);
-(**Converts the URI @oparam{uri} to its string representation @oparam{str}.
+PROCEDURE (uri: URI) [ABSTRACT] ToString*(): Object.String8;
+(**Converts the URI @oparam{uri} to its string representation.
    Reserved characters in the URI and characters that may not appear in a valid
-   URI are escaped where necessary.  If @oparam{str} is not large enough to
-   hold the string, the result is truncated.  *)
-  END GetString;
+   URI are escaped where necessary.  *)
+  END ToString;
 
-PROCEDURE (uri: URI) AppendScheme* (VAR str: ARRAY OF CHAR);
-(**Appends the scheme component of @oparam{uri} to the string @oparam{str}.  *)
+PROCEDURE (uri: URI) AppendScheme* (sb: StringBuffer.StringBuffer);
+(**Appends the scheme component of @oparam{uri} to the string @oparam{sb}.  *)
   BEGIN
     IF (uri. schemeId # NIL) THEN
-      Strings.Append (uri. schemeId^, str);
-      Strings.Append (":", str)
+      sb.Append(uri. schemeId);
+      sb.Append(":");
     END
   END AppendScheme;
 
@@ -285,24 +245,21 @@ RAISES IO.Error;
 
    Note: Currently, only the @samp{file} URI (@omodule{*URI:Scheme:File}) and
    the @samp{http} URI (@omodule{*URI:Scheme:HTTP}) support this method.  *)
-  VAR
-    e: IO.NotImplemented;
   BEGIN
-    NEW(e);
-    IO.InitError(e, NIL);
-    RAISE(e);
+    RAISE(NEW(IO.NotImplemented, NIL));
   END GetChannel;
 
 
 (* Opaque URI
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitOpaqueURI* (uri: OpaqueURI; schemeId: StringPtr);
+PROCEDURE InitOpaqueURI* (uri: OpaqueURI; schemeId: STRING);
   BEGIN
     InitURI (uri, schemeId)
   END InitOpaqueURI;
 
-PROCEDURE (uri: OpaqueURI) [ABSTRACT] ParseOpaquePart* (str: StringPtr; offset: Offset): Error.Msg;
+PROCEDURE (uri: OpaqueURI) [ABSTRACT] ParseOpaquePart* (str: Object.CharsLatin1; offset: Offset)
+RAISES Exception.ParseError;
 (**Parses the opaque component @oparam{str} of an URI.  On success, the data is
    stored in the URI @oparam{uri} and the result is @code{NIL}.  In case of 
    error, e.g., because @oparam{str} contains characters that are not allowed
@@ -333,7 +290,8 @@ PROCEDURE (auth: Authority) [ABSTRACT] Copy* (dest: Authority);
    @end precond  *)
   END Copy;
 
-PROCEDURE (auth: Authority) [ABSTRACT] ParseAuthority* (str: StringPtr; offset: Offset): Error.Msg;
+PROCEDURE (auth: Authority) [ABSTRACT] ParseAuthority* (str: Object.CharsLatin1; offset: Offset)
+RAISES Exception.ParseError;
 (**Parses the authority component @oparam{str} of an hierarchical URI.  On
    success, the data is stored in the authority object @oparam{auth} and the
    result is @code{NIL}.  In case of error, a message object is returned and
@@ -347,9 +305,9 @@ PROCEDURE (auth: Authority) [ABSTRACT] WriteXML* (w: TextRider.Writer);
    @oparam{w}.  *)
   END WriteXML;
 
-PROCEDURE (auth: Authority) [ABSTRACT] Append* (VAR str: ARRAY OF CHAR);
+PROCEDURE (auth: Authority) [ABSTRACT] Append* (sb: StringBuffer.StringBuffer);
 (**Appends the textual representation of the authority component
-   @oparam{auth} to the string @oparam{str}.  *)
+   @oparam{auth} to the string @oparam{sb}.  *)
   END Append;
 
 
@@ -374,7 +332,8 @@ PROCEDURE (query: Query) [ABSTRACT] Copy* (dest: Query);
    @end precond  *)
   END Copy;
 
-PROCEDURE (query: Query) [ABSTRACT] ParseQuery* (str: StringPtr; offset: Offset): Error.Msg;
+PROCEDURE (query: Query) [ABSTRACT] ParseQuery* (str: Object.CharsLatin1; offset: Offset)
+RAISES Exception.ParseError;
 (**Parses the query component @oparam{str} of an hierarchical URI.  On
    success, the data is stored in the query object @oparam{query} and the
    result is @code{NIL}.  In case of error, a message object is returned and
@@ -388,22 +347,32 @@ PROCEDURE (query: Query) [ABSTRACT] WriteXML* (w: TextRider.Writer);
    @oparam{w}.  *)
   END WriteXML;
 
-PROCEDURE (query: Query) [ABSTRACT] Append* (VAR str: ARRAY OF CHAR);
+PROCEDURE (query: Query) [ABSTRACT] Append* (sb: StringBuffer.StringBuffer);
 (**Appends the textual representation of the query component
-   @oparam{query} to the string @oparam{str}.  *)
+   @oparam{query} to the string @oparam{sb}.  *)
   END Append;
 
 
 (* HierarchicalURI
    ------------------------------------------------------------------------ *)
 
-PROCEDURE InitHierarchicalURI* (uri: HierarchicalURI; schemeId: StringPtr;
+PROCEDURE InitHierarchicalURI* (uri: HierarchicalURI; schemeId: STRING;
                                 authority: Authority; query: Query);
   BEGIN
     InitURI (uri, schemeId);
     uri. authority := authority;
     uri. query := query
   END InitHierarchicalURI;
+
+PROCEDURE (uri: HierarchicalURI) AuthorityMandatory*(): BOOLEAN;
+(**If @code{TRUE} and the URI has a scheme component, then require that an
+   authority is present when parsing the URI, and include an empty authority
+   part when converting the URI to a string, if no authority is defined.
+
+   By default, this method returns @code{FALSE}.  *)
+  BEGIN
+    RETURN FALSE;
+  END AuthorityMandatory;
 
 PROCEDURE (uri: HierarchicalURI) Copy* (dest: URI);
   BEGIN
@@ -466,7 +435,8 @@ PROCEDURE (uri: HierarchicalURI) [ABSTRACT] ClearPath*;
    authority or query component, an URI always includes a path component.  *)
   END ClearPath;
 
-PROCEDURE (uri: HierarchicalURI) [ABSTRACT] ParsePath* (str: StringPtr; absolute: BOOLEAN; offset: Offset): Error.Msg;
+PROCEDURE (uri: HierarchicalURI) [ABSTRACT] ParsePath* (str: Object.CharsLatin1; absolute: BOOLEAN; offset: Offset)
+RAISES Exception.ParseError;
 (**Parses the path component @oparam{str} of an URI.  The parameter
    @oparam{absolute} indicates, whether the path is absolute or relative.  On
    success, the data is stored in the URI @oparam{uri} and the result is
@@ -477,13 +447,19 @@ PROCEDURE (uri: HierarchicalURI) [ABSTRACT] ParsePath* (str: StringPtr; absolute
 
 PROCEDURE (uri: HierarchicalURI) MakeRelative* (baseURI: HierarchicalURI): URI;
   VAR
-    a1, a2: ARRAY 1024 OF CHAR;
+    a1, a2: StringBuffer.StringBuffer;
     copy: URI;
+
+  PROCEDURE Equal(s1, s2: STRING): BOOLEAN;
+    BEGIN
+      RETURN s1.Equals(s2);
+    END Equal;
+  
   BEGIN
     IF (baseURI = NIL) THEN
       (* no base URI given; cannot make a relative URI from this *)
       RETURN uri
-    ELSIF (uri. schemeId^ # baseURI. schemeId^) THEN
+    ELSIF ~uri.schemeId.Equals(baseURI.schemeId) THEN
       (* URIs use different schemes: cannot make a relative path *)
       RETURN uri
     ELSIF ((uri. authority = NIL) # (baseURI. authority = NIL)) THEN
@@ -493,9 +469,9 @@ PROCEDURE (uri: HierarchicalURI) MakeRelative* (baseURI: HierarchicalURI): URI;
          the scheme id; in the latter case, no rel_path can be used *)
       RETURN uri
     ELSIF (uri. authority # NIL) THEN
-      a1 := ""; uri. authority. Append (a1);
-      a2 := ""; baseURI. authority. Append (a2);
-      IF (a1 # a2) THEN
+      a1 := StringBuffer.New(""); uri. authority. Append (a1);
+      a2 := StringBuffer.New(""); baseURI. authority. Append (a2);
+      IF (a1.length # a2.length) OR ~Equal(a1.ToString(), a2.ToString()) THEN
         (* authority components differ; again the result would need to
            include the net_path *)
         RETURN uri
@@ -508,9 +484,9 @@ PROCEDURE (uri: HierarchicalURI) MakeRelative* (baseURI: HierarchicalURI): URI;
     RETURN copy(HierarchicalURI)
   END MakeRelative;
 
-PROCEDURE (uri: HierarchicalURI) [ABSTRACT] AppendPath* (VAR str: ARRAY OF CHAR);
+PROCEDURE (uri: HierarchicalURI) [ABSTRACT] AppendPath* (sb: StringBuffer.StringBuffer);
 (**Appends the textual representation of the path component of @oparam{uri}
-   to the string @oparam{str}.  *)
+   to the string @oparam{sb}.  *)
   END AppendPath;
 
 
@@ -535,7 +511,9 @@ PROCEDURE (frag: Fragment) [ABSTRACT] Copy* (dest: Fragment);
    @end precond  *)
   END Copy;
 
-PROCEDURE (frag: Fragment) [ABSTRACT] ParseFragment* (str: StringPtr; offset: Offset): Error.Msg;
+PROCEDURE (frag: Fragment) [ABSTRACT] ParseFragment* (str: Object.CharsLatin1;
+                                                      offset: Offset)
+RAISES Exception.ParseError;
 (**Parses the fragment component @oparam{str} of an URI.  On
    success, the data is stored in the fragment object @oparam{frag} and the
    result is @code{NIL}.  In case of error, a message object is returned and
@@ -549,9 +527,9 @@ PROCEDURE (frag: Fragment) [ABSTRACT] WriteXML* (w: TextRider.Writer);
    @oparam{w}.  *)
   END WriteXML;
 
-PROCEDURE (frag: Fragment) [ABSTRACT] Append* (VAR str: ARRAY OF CHAR);
+PROCEDURE (frag: Fragment) [ABSTRACT] Append* (sb: StringBuffer.StringBuffer);
 (**Appends the textual representation of the fragment identifier
-   @oparam{frag} to the string @oparam{str}.  *)
+   @oparam{frag} to the string @oparam{sb}.  *)
   END Append;
 
 
@@ -580,39 +558,28 @@ PROCEDURE (ref: Reference) WriteXML* (w: TextRider.Writer);
     w. WriteString (CharClass.eol+"</uri-reference>")
   END WriteXML;
 
-PROCEDURE (ref: Reference) GetString* (VAR str: ARRAY OF CHAR);
-(**Converts the URI reference @oparam{ref} to its string representation
-   @oparam{str}.  Reserved characters in the URI and fragment identifier are
-   escaped where necessary.  If @oparam{str} is not large enough to hold the
-   string, the result is truncated.  *)
+PROCEDURE (ref: Reference) ToString*(): Object.String8;
+(**Converts the URI reference @oparam{ref} to its string representation.
+   Reserved characters in the URI and fragment identifier are escaped where
+   necessary.  *)
+  VAR
+    sb: StringBuffer.StringBuffer;
+    str: STRING;
   BEGIN
     IF (ref. uri # NIL) THEN
-      ref. uri. GetString (str)
+      sb := StringBuffer.New(ref.uri.ToString());
     ELSE
-      COPY ("", str)
+      sb := StringBuffer.New("");
     END;
-    IF (ref. fragment # NIL) THEN
-      ref. fragment. Append (str)
-    END
-  END GetString;
+    IF (ref.fragment # NIL) THEN
+      ref.fragment.Append(sb);
+    END;
+    str := sb.ToString();
+    RETURN str(Object.String8);
+  END ToString;
 
 
 (* ------------------------------------------------------------------------ *)
-
-PROCEDURE Equal (VAR a, b: String): BOOLEAN;
-  VAR
-    i: LONGINT;
-  BEGIN
-    i := 0;
-    WHILE (a[i] # 0X) DO
-      IF (CAP (a[i]) = CAP (b[i])) THEN
-        INC (i)
-      ELSE
-        RETURN FALSE
-      END
-    END;
-    RETURN (b[i] = 0X)
-  END Equal;
 
 PROCEDURE RegisterScheme* (scheme: URI);
 (**Registers a new prototype object @oparam{scheme} under the name
@@ -626,7 +593,7 @@ PROCEDURE RegisterScheme* (scheme: URI);
         NEW (list);
         list. next := NIL;
         list. scheme := scheme
-      ELSIF Equal (list. scheme. schemeId^, scheme. schemeId^) THEN
+      ELSIF scheme.schemeId.EqualsIgnoreCase(list.scheme.schemeId) THEN
         list. scheme := scheme
       ELSE
         Append (list. next)
@@ -637,7 +604,7 @@ PROCEDURE RegisterScheme* (scheme: URI);
     Append (schemeList)
   END RegisterScheme;
 
-PROCEDURE GetScheme* (name: Str.StringPtr): URI;
+PROCEDURE GetScheme* (name: Str.STRING): URI;
 (**Returns a prototype object for URI scheme @oparam{name}.  If no matching
    scheme was registered previously with @oproc{RegisterScheme}, @code{NIL}
    is returned.  *)
@@ -646,7 +613,7 @@ PROCEDURE GetScheme* (name: Str.StringPtr): URI;
   
   BEGIN
     scheme := schemeList;
-    WHILE (scheme # NIL) & ~Equal (scheme. scheme. schemeId^, name^) DO
+    WHILE (scheme # NIL) & ~name.EqualsIgnoreCase(scheme.scheme.schemeId) DO
       scheme := scheme. next
     END;
     IF (scheme = NIL) THEN
@@ -656,33 +623,6 @@ PROCEDURE GetScheme* (name: Str.StringPtr): URI;
     END
   END GetScheme;
 
-(* ------------------------------------------------------------------------ *)
-
-PROCEDURE NewURIAttribute* (name: Msg.String; value: URI): URIAttribute;
-  VAR
-    attr: URIAttribute;
-  BEGIN
-    NEW (attr);
-    Msg.InitAttribute (attr, name);
-    attr. uri := value;
-    RETURN attr
-  END NewURIAttribute;
-
-PROCEDURE (attr: URIAttribute) ReplacementText* (VAR text: Msg.LString);
-  VAR
-    str: ARRAY 2*1024 OF CHAR;
-  BEGIN
-    IF (attr. uri = NIL) THEN
-      COPY ("NIL", text)
-    ELSE
-      attr. uri. GetString (str);
-      COPY (str, text)
-    END
-  END ReplacementText;
-
-
 BEGIN
-  NEW (uriContext);
-  Msg.InitContext (uriContext, "URI");
   schemeList := NIL;
 END URI.

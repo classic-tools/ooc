@@ -1,4 +1,4 @@
-(* 	$Id: Repository.Mod,v 1.37 2003/01/30 23:38:28 mva Exp $	 *)
+(* 	$Id: Repository.Mod,v 1.42 2003/06/20 19:54:26 mva Exp $	 *)
 MODULE OOC:Repository [OOC_EXTENSIONS];
 (*  Abstraction of storage of source, intermediate, and target code.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -135,10 +135,13 @@ CONST
      dependency on this file is @oconst{modSymbolFile}.  *)
   modSymbolFile* = 1;
   (**A module's symbol file holds all information that is made available to
-     importing modules.  When compiling the module, then this file is always
-     the one with the oldest time stamp of all generated files.  This way,
-     within a make graph any other output file of the compiler can register a
-     dependency on this file, instead of @oconst{modModuleSource}.  *)
+     importing modules.  When compiling the module, this file is always the one
+     with the oldest time stamp of all generated files.  This way, within a
+     make graph any other output file of the compiler can register a dependency
+     on this file, instead of @oconst{modModuleSource}.
+
+     The documentation strings of a module are stored separately in a file
+     @oconst{modSymbolFileDoc}.  *)
   modSymbolTableXML* = 2;
   (**This is an XML representation of the internal symbol table built of the
      datatypes defined in @omodule{*OOC:SymbolTable}.  It is used for
@@ -217,10 +220,12 @@ CONST
      by the string @samp{lib}.  This means, that @oproc{Module.GetURI}
      return the same URI for all modules of the library.
      
-     [These statements should be general enough to bes true.  Since this topic
+     [These statements should be general enough to be true.  Since this topic
      is highly dependent on the operating system, I'm not willing to bet much
      on this, though.  As it is, it is the current working hypothesis ;-)]  *)
-  resourceFile* = 20;
+  modSymbolFileDoc* = 20;
+  (**Holds the documentation strings of a symbol file.  *)
+  resourceFile* = 21;
   (**A resource file is a non-Oberon file that accompanies a package.
      Resources are typically located in the @file{rsrc} subdirectory of a
      package or repository.  For example, XML DTD files and XSL stylesheets
@@ -232,12 +237,14 @@ CONST
   maxFileId* = resourceFile;
 
 
+VAR
+  readDocStrings*: BOOLEAN;
+  (**If @code{TRUE}, the doc strings of a module are read with its symbol file.
+     Otherwise, the doc strings are omitted and set to @code{NIL}.  The latter
+     is the default.  *)
+
 PROCEDURE Init* (rep: Repository; baseRep: Repository; baseURI: URI.HierarchicalURI);
-  VAR
-    str: URIBuffer;
   BEGIN
-    baseURI. GetString (str);
-    ASSERT ((str # "") & (str[Strings.Length (str)-1] = "/"));
     rep. baseRep := baseRep;
     rep. baseURI := baseURI;
     rep. packageInfo := NIL;
@@ -386,8 +393,7 @@ PROCEDURE (m: Module) GetImportedModule*(name: ARRAY OF CHAR): Module;
     END;
   END GetImportedModule;
 
-PROCEDURE (rep: Repository) [ABSTRACT] GetLocalPath*(m: Module; fileId: FileId;
-                                                     VAR path: ARRAY OF CHAR);
+PROCEDURE (rep: Repository) [ABSTRACT] GetLocalPath*(m: Module; fileId: FileId): Object.String8;
 (**Return the path to the indicated module file, relative to the
    repositories base URI.  *)
   END GetLocalPath;
@@ -417,13 +423,13 @@ PROCEDURE (m: Module) MatchesURI* (fileId: FileId; uri: URI.URI): BOOLEAN;
 (**Returns @code{TRUE} if the given @oparam{uri} matches the URI of the
    module's file.  *)
   VAR
-    a, b: URIBuffer;
+    a, b: STRING;
     muri: URI.HierarchicalURI;
   BEGIN
     muri := m. GetURI (fileId, FALSE);
-    muri. GetString (a);
-    uri. GetString (b);
-    RETURN (a = b)
+    a := muri.ToString();
+    b := uri.ToString();
+    RETURN a.Equals(b);
   END MatchesURI;
 
 PROCEDURE (m: Module) [ABSTRACT] GetTimeStamp* (fileId: FileId; VAR ts: Time.TimeStamp);
@@ -443,71 +449,73 @@ PROCEDURE (m: Module) [ABSTRACT] GetOutputChannel* (fileId: FileId;
 RAISES IO.Error;
   END GetOutputChannel;
 
-PROCEDURE (rep: Repository) GetDefaultSubdir* (id: FileId; VAR subdir: ARRAY OF CHAR);
+PROCEDURE (rep: Repository) GetDefaultSubdir* (id: FileId): Object.String8;
   BEGIN
     CASE id OF
     | modModuleSource:
-      COPY ("src", subdir)
-    | modSymbolFile:
-      COPY ("sym", subdir)
+      RETURN "src";
+    | modSymbolFile, modSymbolFileDoc:
+      RETURN "sym";
     | modSymbolTableXML, modInterfaceXML, modInterfaceDescr, modOpTreeXML:
-      COPY ("oocdoc/xml", subdir)
+      RETURN "oocdoc/xml";
     | modInterfaceHTML:
-      COPY ("oocdoc/html", subdir)
+      RETURN "oocdoc/html";
     | modObjectFile, modCodeFileC, modDeclFileC, modHeaderFileC,
       modAssemblerFile, modObjectFileDynamicLoad,
       modMainFileC, modMainFileAssembler, modMainObjectFile:
-      COPY ("obj", subdir)
+      RETURN "obj";
     | modObjectFileLib:
-      COPY ("obj", subdir)
+      RETURN "obj";
     | modExecutable:
-      COPY ("bin", subdir)
+      RETURN "bin";
     | modLibrary:
-      COPY ("obj", subdir)
+      RETURN "obj";
     | resourceFile:
-      COPY ("rsrc", subdir)
+      RETURN "rsrc";
     END
   END GetDefaultSubdir;
 
-PROCEDURE (rep: Repository) GetDefaultSuffix* (id: FileId; VAR suffix: ARRAY OF CHAR);
+PROCEDURE (rep: Repository) GetDefaultSuffix* (id: FileId): Object.String8;
   BEGIN
     CASE id OF
     | modModuleSource:
-      COPY (".Mod", suffix)
+      RETURN ".Mod";
     | modSymbolFile:
-      COPY (".Sym", suffix)
+      RETURN ".Sym";
+    | modSymbolFileDoc:
+      RETURN ".Doc";
     | modSymbolTableXML:
-      COPY ("_symtab.xml", suffix)
+      RETURN "_symtab.xml";
     | modInterfaceXML:
-      COPY ("_sym.xml", suffix)
+      RETURN "_sym.xml";
     | modInterfaceDescr:
-      COPY (".xml", suffix)
+      RETURN ".xml";
     | modInterfaceHTML:
-      COPY (".html", suffix)
+      RETURN ".html";
     | modOpTreeXML:
-      COPY ("_op.xml", suffix)
+      RETURN "_op.xml";
     | modObjectFile, modObjectFileDynamicLoad:
-      COPY (".o", suffix)
+      RETURN ".o";
     | modObjectFileLib:
-      COPY (".lo", suffix)
+      RETURN ".lo";
     | modCodeFileC:
-      COPY (".c", suffix)
+      RETURN ".c";
     | modDeclFileC:
-      COPY (".d", suffix)
+      RETURN ".d";
     | modHeaderFileC:
-      COPY (headerSuffix, suffix);
+      RETURN headerSuffix;
     | modAssemblerFile:
-      COPY (".s", suffix)
+      RETURN ".s";
     | modMainFileC:
-      COPY ("_.c", suffix)
+      RETURN "_.c";
     | modMainFileAssembler:
-      COPY ("_.s", suffix)
+      RETURN "_.s";
     | modMainObjectFile:
-      COPY ("_.o", suffix)
+      RETURN "_.o";
     | modExecutable:
-      COPY ("", suffix)
+      RETURN "";
     | modLibrary:
-      COPY (".la", suffix)
+      RETURN ".la";
     | resourceFile:
       ASSERT (FALSE)
     END
@@ -543,39 +551,43 @@ PROCEDURE ValidModuleName* (moduleName: ARRAY OF CHAR): BOOLEAN;
 PROCEDURE (rep: Repository) GetModuleByURI* (uri: URI.HierarchicalURI; force: BOOLEAN): Module;
   VAR
     relURI: URI.URI;
-    str, subdir, ext: URIBuffer;
-    i: INTEGER;
+    str: URIBuffer;
+    s, ext: STRING;
+    subdir, s8: Object.String8;
+    chars: Object.CharsLatin1;
+    i: LONGINT;
     m: Module;
   BEGIN
     m := NIL;
     
     IF force THEN
       (* force: take basename of uri minus extension as module name *)
-      uri. GetString (str);
-      Path.basename(str, str);
-      Path.splitext(str, str, ext);
-      IF ValidModuleName (str) THEN
-        m := rep. GetModule (str, uri)
+      s := Path.BaseName(uri.ToString());
+      Path.SplitExt(s, s, ext);
+      chars := s(Object.String8).CharsLatin1();
+      IF ValidModuleName (chars^) THEN
+        m := rep. GetModule (chars^, uri)
       END
     ELSE
 
       relURI := uri. MakeRelative (rep. baseURI);
       IF (relURI. schemeId = NIL) THEN  (* uri is relative to baseURI *)
-        relURI. GetString (str);
-        rep. GetDefaultSubdir (modModuleSource, subdir);
+        s := relURI.ToString();
+        subdir := rep.GetDefaultSubdir (modModuleSource);
 
         (* the string representation of the relative URI must begin with the
            default subdirectory for sources, followed by a slash; note: this
            only works if `subdir' is not empty *)
-        ASSERT (subdir # "");
-        i := 0;
-        WHILE (str[i] # 0X) & (subdir[i] # 0X) & (str[i] = subdir[i]) DO
-          INC (i)
-        END;
-        IF (str[i] = "/") & (subdir[i] = 0X) THEN
+        ASSERT (subdir.length # 0);
+        i := subdir.length;
+        IF s.StartsWith(subdir) & (s.CharAt(i) = "/") THEN
           (* approximate module name by stripping subdir prefix and replacing
              "/" with ":"; everything after the first "." is discarded *)
-          Strings.Delete (str, 0, i+1);
+          s8 := s.ToString8("?");
+          chars := s8.CharsLatin1();
+          COPY(chars^, str);
+          
+          Strings.Delete (str, 0, SHORT(i)+1);
           i := 0;
           WHILE (str[i] # 0X) & (str[i] # ".") DO
             IF (str[i] = "/") THEN
@@ -611,7 +623,7 @@ RAISES IO.Error;
    knows about the quality of the imported data.  *)
   VAR
     stb: Builder.Builder;
-    ch: IO.ByteChannel;
+    ch, chDoc: IO.ByteChannel;
     uri: URI.URI;
     symTab: Sym.Module;
   BEGIN
@@ -621,11 +633,22 @@ RAISES IO.Error;
       uri := m. GetURI (modSymbolFile, TRUE);
       ch := uri. GetChannel (URI.channelOld);
       Logger.ReadFile(uri);
+
+      IF readDocStrings THEN
+        uri := m. GetURI (modSymbolFileDoc, TRUE);
+        chDoc := uri. GetChannel (URI.channelOld);
+        Logger.ReadFile(uri);
+      ELSE
+        chDoc := NIL;
+      END;
+      
       stb := Builder.New();
-      symTab := stb. ReadSymbolTable (ch);
+      symTab := stb. ReadSymbolTable (ch, chDoc);
       ch. Close;
       RETURN symTab;
     END;
   END ReadSymbolFile;
 
+BEGIN
+  readDocStrings := FALSE;
 END OOC:Repository.

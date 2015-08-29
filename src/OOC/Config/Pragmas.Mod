@@ -1,4 +1,4 @@
-(* 	$Id: Pragmas.Mod,v 1.3 2001/10/17 22:04:21 mva Exp $	 *)
+(* 	$Id: Pragmas.Mod,v 1.6 2003/05/17 18:52:16 mva Exp $	 *)
 MODULE OOC:Config:Pragmas;
 (*  Implements pragma variables.
     Copyright (C) 2001  Michael van Acken
@@ -21,10 +21,7 @@ MODULE OOC:Config:Pragmas;
 *)
 
 IMPORT
-  Config:Value, Config:Parser, Config:Section:Options,
-  StringValue := Config:Value:String,
-  IntegerValue := Config:Value:Integer,
-  BooleanValue := Config:Value:Boolean;
+  Config, Config:Parser, Config:Section:Options;
 
 
 TYPE
@@ -39,11 +36,11 @@ TYPE
 TYPE
   CharPos* = LONGINT;
   Variable = POINTER TO VariableDesc;
-  ValueArray = POINTER TO ARRAY OF Value.Value;
+  ValueArray = POINTER TO ARRAY OF Config.Variable;
   CharPosArray = POINTER TO ARRAY OF CharPos;
   VariableDesc = RECORD
     next: Variable;
-    name: Value.StringPtr;
+    name: STRING;
     
     values: ValueArray;
     valuePos: CharPosArray;
@@ -63,9 +60,9 @@ TYPE
 
 
 
-PROCEDURE Init (s: Section; id: Parser.String; prototypeList: Value.PrototypeList);
+PROCEDURE Init (s: Section; id: Parser.String; prototypeMap: Config.PrototypeMap);
   BEGIN
-    Options.Init (s, id, prototypeList)
+    Options.Init (s, id, prototypeMap)
   END Init;
 
 PROCEDURE New*(): Section;
@@ -73,14 +70,14 @@ PROCEDURE New*(): Section;
     sectionName = "pragmas";
   VAR
     s: Section;
-    prototypeList: Value.PrototypeList;
+    prototypeMap: Config.PrototypeMap;
   BEGIN
-    NEW (s);
-    prototypeList := Value.NewPrototypeList();
-    prototypeList. RegisterPrototype ("boolean", BooleanValue.New (FALSE));
-    prototypeList. RegisterPrototype ("integer", IntegerValue.New (0));
-    prototypeList. RegisterPrototype ("string", StringValue.New (""));
-    Init (s, sectionName, prototypeList);
+    NEW(s);
+    prototypeMap := NEW(Config.PrototypeMap);
+    Config.SetPrototype(prototypeMap, "boolean", Config.NewBooleanVar(FALSE));
+    Config.SetPrototype(prototypeMap, "integer", Config.NewIntegerVar(0));
+    Config.SetPrototype(prototypeMap, "string", Config.NewStringVar(""));
+    Init(s, sectionName, prototypeMap);
     RETURN s
   END New;
 
@@ -125,7 +122,7 @@ PROCEDURE NewHistory* (startVariables: Section): History;
   END NewHistory;
 
 PROCEDURE GetValue (h: History; var: Variable;
-                    charPos: CharPos): Value.Value;
+                    charPos: CharPos): Config.Variable;
   VAR
     l, r, m: LONGINT;
   BEGIN
@@ -134,7 +131,7 @@ PROCEDURE GetValue (h: History; var: Variable;
       (* if the given character position is before the very first assignment,
          then take the variable's value from the list inherited from the file's
          environment *)
-      RETURN h. startVariables. GetValue (var. name^)
+      RETURN h. startVariables. GetValue (var. name)
     ELSE
       l := 0; r := var. numValues;
       WHILE (l+1 # r) DO
@@ -152,13 +149,12 @@ PROCEDURE GetValue (h: History; var: Variable;
     END
   END GetValue;
 
-PROCEDURE (h: History) GetValue* (name: Value.String;
-                                  charPos: CharPos): Value.Value;
+PROCEDURE (h: History) GetValue* (name: STRING; charPos: CharPos): Config.Variable;
   VAR
     var: Variable;
   BEGIN
     var := h. varList;
-    WHILE (var # NIL) & (var. name^ # name) DO
+    WHILE (var # NIL) & ~var.name.Equals(name) DO
       var := var. next
     END;
     IF (var = NIL) THEN
@@ -175,7 +171,7 @@ PROCEDURE LastCharPos (h: History; charPos: CharPos);
   END LastCharPos;
 
 PROCEDURE SetValue (var: Variable;charPos: CharPos;
-                    value: Value.Value);
+                    value: Config.Variable);
   CONST
     incrementSize = 4;
   
@@ -211,9 +207,9 @@ PROCEDURE SetValue (var: Variable;charPos: CharPos;
     INC (var. numValues)
   END SetValue;
 
-PROCEDURE (h: History) SetValue* (name: Value.String;
+PROCEDURE (h: History) SetValue* (name: STRING;
                                   charPos: CharPos;
-                                  value: Value.Value);
+                                  value: Config.Variable);
 (* @precond
    @oparam{charPos} is strict monotonically increasing.  That is, if first
    the value of variable @samp{A} is set, and then the value of variable
@@ -227,7 +223,7 @@ PROCEDURE (h: History) SetValue* (name: Value.String;
     LastCharPos (h, charPos);
     
     var := h. varList;
-    WHILE (var # NIL) & (var. name^ # name) DO
+    WHILE (var # NIL) & ~var.name.Equals(name) DO
       var := var. next
     END;
     
@@ -236,7 +232,7 @@ PROCEDURE (h: History) SetValue* (name: Value.String;
          initialize it *)
       NEW (var);
       var. next := h. varList;
-      var. name := Value.GetStringPtr (name);
+      var. name := name;
       NEW (var. values, initialSize);
       NEW (var. valuePos, initialSize);
       var. numValues := 0;
@@ -267,7 +263,7 @@ PROCEDURE (h: History) Pop* (charPos: CharPos);
   VAR
     pushPos: CharPos;
     var: Variable;
-    oldValue: Value.Value;
+    oldValue: Config.Variable;
   BEGIN
     LastCharPos (h, charPos);
     

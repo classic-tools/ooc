@@ -45,7 +45,6 @@ RAISES IO.Error;
     astBuilder: ExtTree.Builder;
     stb: Builder.Builder;
     uri: URI.URI;
-    uriStr: Repository.URIBuffer;
     scannerFlags, parserFlags: SET;
   BEGIN
     inputBuffer := m. GetInputBuffer();
@@ -54,8 +53,7 @@ RAISES IO.Error;
       symTab := NIL;
       pragmaHistory := NIL;
       uri := m. GetURI (Repository.modModuleSource, TRUE);
-      uri. GetString (uriStr);
-      errList := Error.NewList (uriStr);
+      errList := Error.NewList(uri.ToString());
     ELSE
       errList := inputBuffer. errList;
       scannerBuilder := BasicList.New (inputBuffer, TRUE);

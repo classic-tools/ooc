@@ -1,7 +1,7 @@
-(* 	$Id: MailTo.Mod,v 1.1 2002/07/16 20:31:28 mva Exp $	 *)
+(* 	$Id: MailTo.Mod,v 1.4 2003/06/03 21:05:18 mva Exp $	 *)
 MODULE URI:Scheme:MailTo;
 (*  Implementation of the "mailto" URI scheme.
-    Copyright (C) 2000  Michael van Acken
+    Copyright (C) 2000, 2003  Michael van Acken
 
     This module is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public License
@@ -20,7 +20,7 @@ MODULE URI:Scheme:MailTo;
 
 
 IMPORT
-  URI0 := URI, URI:String, URI:Scheme:Opaque;
+  URI:Scheme:Opaque;
 
 
 TYPE
@@ -32,12 +32,12 @@ TYPE
   END;
 
 
-PROCEDURE Init* (mailto: URI; schemeId, opaque: URI0.StringPtr);
+PROCEDURE Init* (mailto: URI; schemeId, opaque: STRING);
   BEGIN
     Opaque.Init (mailto, schemeId, opaque)
   END Init;
 
-PROCEDURE New* (schemeId, opaque: URI0.StringPtr): URI;
+PROCEDURE New* (schemeId, opaque: STRING): URI;
   VAR
     mailto: URI;
   BEGIN
@@ -57,9 +57,7 @@ PROCEDURE (mailto: URI) Clone* (): URI;
 
 PROCEDURE NewPrototype*(): URI;
   BEGIN
-    RETURN New (String.Copy ("mailto"), String.Copy (""))
+    RETURN New("mailto", "");
   END NewPrototype;
 
-BEGIN
-  URI0.RegisterScheme (NewPrototype())
 END URI:Scheme:MailTo.

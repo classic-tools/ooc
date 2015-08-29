@@ -13,9 +13,8 @@ extern void OOC_OOC_Make_LinkProgramC_init(void);
 extern void OOC_OOC_Make_LinkProgramC_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_Make_LinkProgramC__1256;
-extern RT0__StructDesc _td_OOC_Make_LinkProgramC__5888;
-extern RT0__StructDesc _td_OOC_Make_LinkProgramC__5992;
+extern RT0__StructDesc _td_OOC_Make_LinkProgramC__1234;
+extern RT0__StructDesc _td_OOC_Make_LinkProgramC__5901;
 #endif /* _MODULE_OOC_Make_LinkProgramC_ */
 
 /* --- */

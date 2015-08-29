@@ -84,26 +84,26 @@ extern void OOC_XML_Parser_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_XML_Parser__PEInfo;
-extern RT0__StructDesc _td_XML_Parser__1562;
+extern RT0__StructDesc _td_XML_Parser__1571;
 extern RT0__StructDesc _td_XML_Parser__NameList;
-extern RT0__StructDesc _td_XML_Parser__1609;
+extern RT0__StructDesc _td_XML_Parser__1618;
 extern RT0__StructDesc _td_XML_Parser__PEInfoList;
 extern RT0__StructDesc _td_XML_Parser__ErrorListener;
 extern RT0__StructDesc _td_XML_Parser__Parser;
 extern RT0__StructDesc _td_XML_Parser__ParserDesc;
-extern RT0__StructDesc _td_XML_Parser__7036;
+extern RT0__StructDesc _td_XML_Parser__7045;
 extern RT0__StructDesc _td_XML_Parser__ErrorListenerDesc;
-extern RT0__StructDesc _td_XML_Parser__23561;
-extern RT0__StructDesc _td_XML_Parser__25555;
-extern RT0__StructDesc _td_XML_Parser__35092;
-extern RT0__StructDesc _td_XML_Parser__38632;
-extern RT0__StructDesc _td_XML_Parser__48988;
-extern RT0__StructDesc _td_XML_Parser__48977;
-extern RT0__StructDesc _td_XML_Parser__51958;
-extern RT0__StructDesc _td_XML_Parser__107222;
-extern RT0__StructDesc _td_XML_Parser__107674;
-extern RT0__StructDesc _td_XML_Parser__108185;
-extern RT0__StructDesc _td_XML_Parser__108766;
+extern RT0__StructDesc _td_XML_Parser__17958;
+extern RT0__StructDesc _td_XML_Parser__23844;
+extern RT0__StructDesc _td_XML_Parser__35276;
+extern RT0__StructDesc _td_XML_Parser__38816;
+extern RT0__StructDesc _td_XML_Parser__49172;
+extern RT0__StructDesc _td_XML_Parser__49161;
+extern RT0__StructDesc _td_XML_Parser__52142;
+extern RT0__StructDesc _td_XML_Parser__107406;
+extern RT0__StructDesc _td_XML_Parser__107858;
+extern RT0__StructDesc _td_XML_Parser__108369;
+extern RT0__StructDesc _td_XML_Parser__108950;
 #endif /* _MODULE_XML_Parser_ */
 
 /* --- */

@@ -1,4 +1,4 @@
-(* 	$Id: Make.Mod,v 1.47 2003/05/12 17:48:20 mva Exp $	 *)
+(* 	$Id: Make.Mod,v 1.61 2003/06/20 19:54:26 mva Exp $	 *)
 MODULE OOC:Make;
 (*  Builds object files, libraries, binaries, and the like.
     Copyright (C) 2002, 2003  Michael van Acken
@@ -21,13 +21,13 @@ MODULE OOC:Make;
 *)
 
 IMPORT
-  Channel, Msg, Out, StdChannels, Strings, Time, IO,
+  Channel, Msg, Out, StdChannels, Time, IO,
 
-  Object, ADT:ArrayList, ADT:Dictionary, StringSearch,
+  Object, ADT:ArrayList, ADT:Dictionary, ADT:StringBuffer, StringSearch,
   StringSearch:NoMatch, OS:Path,
   OSFiles := OS:Files, OS:ProcessManagement, URI, URI:Scheme:File,
 
-  OOC:Logger, OOC:Error, OOC:Config, StringValue := Config:Value:String,
+  OOC:Logger, OOC:Error, OOC:Config,
   OOC:Config:Pragmas, OOC:Config:Repositories,
   OOC:Doc:ResolveRef, Rep := OOC:Repository, OOC:AST,
   Sym := OOC:SymbolTable, OOC:SymbolTable:CreateNamespace,
@@ -41,7 +41,6 @@ IMPORT
       OOC:Make:WriteMainFileAssembler, SSAtoIA32 := OOC:IA32:WriteAssembler;
 
 TYPE
-  ShellCommand* = ARRAY 4*1024 OF CHAR;
   ModuleInfo = POINTER TO ModuleInfoDesc;
   ModuleInfoDesc = RECORD
     (Object.ObjectDesc)
@@ -71,7 +70,7 @@ TYPE
     imports-: ModuleList;
     mInfo: Dictionary.Dictionary;
     
-    extensionDict: Dictionary.Dictionary;
+    extensionDict: Sym.ExtensionDict;
     (**Used by @oproc{Rules.UpdateInterfaceDescr}.  It maps record types
        to a list of known extensions.  *)
        
@@ -200,7 +199,7 @@ PROCEDURE (r: Rules) SetForceUpdate*(forceUpdate: BOOLEAN);
     r.forceUpdate := forceUpdate;
   END SetForceUpdate;
 
-PROCEDURE (r: Rules) UsageTracking*(extIdent: ARRAY OF CHAR): BOOLEAN;
+PROCEDURE (r: Rules) UsageTracking*(extIdent: STRING): BOOLEAN;
   VAR
     syntaxError: BOOLEAN;
   BEGIN
@@ -208,7 +207,7 @@ PROCEDURE (r: Rules) UsageTracking*(extIdent: ARRAY OF CHAR): BOOLEAN;
     RETURN ~syntaxError;
   END UsageTracking;
 
-PROCEDURE (r: Rules) SetExtensionDict*(dict: Dictionary.Dictionary);
+PROCEDURE (r: Rules) SetExtensionDict*(dict: Sym.ExtensionDict);
   BEGIN
     r.extensionDict := dict;
   END SetExtensionDict;
@@ -312,11 +311,9 @@ PROCEDURE FingerprintMismatch (descendentModule: Rep.Module;
 PROCEDURE CreateErrList(module: Rep.Module): Error.List;
   VAR
     uri: URI.URI;
-    uriStr: Rep.URIBuffer;
   BEGIN
     uri := module.GetURI(Rep.modModuleSource, TRUE);
-    uri. GetString(uriStr);
-    RETURN Error.NewList (uriStr);
+    RETURN Error.NewList(uri.ToString());
   END CreateErrList;
 
 PROCEDURE (r: Rules) WriteErrList* (errList: Error.List);
@@ -584,7 +581,7 @@ RAISES IO.Error;
       
       IF (r.libraryName # NIL) & (module.origin = r.localRepository) THEN
         IF (module.ifData.libraryName = NIL) THEN
-          (* the symbol file does not exist, or it does not associated the
+          (* the symbol file does not exist, or it does not associate the
              module with any library: force compilation of module *)
           Logger.ExplainMake("module is not part of a library");
           isUpToDate := FALSE;
@@ -622,6 +619,10 @@ RAISES IO.Error;
         END;
         INC(i);
       END;
+
+      (* with the doc strings split off into a separate file, this file must
+         exist as well or we may fail to read the symbol file back again *)
+      isUpToDate := isUpToDate & Exists(module, Rep.modSymbolFileDoc);
       
       IF isUpToDate THEN
         (* if the file is current, then GetImports() has already read it
@@ -740,14 +741,13 @@ RAISES IO.Error;
 PROCEDURE (r: Rules) UpdateInterfaceHTML(module: Rep.Module): BOOLEAN
 RAISES IO.Error;
   VAR
-    res: Msg.Msg;
-    str: ShellCommand;
+    sb: StringBuffer.StringBuffer;
+    cmd, path: STRING;
     success: BOOLEAN;
-    path: Rep.URIBuffer;
     uri: URI.URI;
     exit: LONGINT;
     errList: Error.List;
-
+    
   PROCEDURE GetSystemId (repositories: Repositories.Section): URI.URI;
     BEGIN
       IF (stylesheetSystemId = NIL) THEN
@@ -770,43 +770,35 @@ RAISES IO.Error;
     IF success THEN
       IF DerivedIsOlder(module, Rep.modInterfaceHTML, Rep.modInterfaceDescr) THEN
         exit := 0;
-        (* put file name of style sheet into str *)
-        uri := GetSystemId (Config.repositories);
-        uri(File.URI). GetPath (str);
-                
+
+        (* xsltproc command name *)
+        sb := StringBuffer.New(Config.xsltproc.value.ToString());
+        
         (* put -o <file> option in front of style sheet  *)
-        Strings.Insert (" ", 0, str);
+        sb.Append(" -o ");
         uri := module. GetURI (Rep.modInterfaceHTML, TRUE);
-        uri(File.URI). GetPath (path);
-        Strings.Insert (path, 0, str);
-        Strings.Insert (" -o ", 0, str);
+        path := uri(File.URI).GetPath();
+        sb.Append(path);
 
         (* create directory for HTML file, if it does not exist *)
-        Path.dirname (path, path);
-        OSFiles.makedirs (path, OSFiles.defaultMode, res);
+        OSFiles.MakeDirs (Path.DirName(path), OSFiles.defaultMode);
         
-        (* prefix option and style sheet argument with command name *)
-        Strings.Insert(Config.xsltproc.value(StringValue.Value).string^,
-                       0, str);
-
+        (* append file name of style sheet *)
+        uri := GetSystemId (Config.repositories);
+        sb.Append(" ");
+        sb.Append(uri(File.URI).GetPath());
+        
         (* append name of XML file *)
         uri := module. GetURI (Rep.modInterfaceDescr, TRUE);
-        uri(File.URI). GetPath (path);
-        Strings.Append (" ", str);
-        Strings.Append (path, str);
+        sb.Append(" ");
+        sb.Append(uri(File.URI).GetPath());
         
-        IF (res = NIL) THEN
-          Logger.ShellCommand(str);
-          exit := ProcessManagement.system (str)
-        END;
+        cmd := sb.ToString();
+        Logger.ShellCommand(cmd);
+        exit := ProcessManagement.system(cmd);
         
         errList := NIL;
-        IF (res # NIL) THEN
-          errList := Error.NewList("");
-          errList. Append (res)
-        END;
-        
-        success :=  (res = NIL) & (exit = 0);
+        success := (exit = 0);
       END;
     END;
     RETURN success;
@@ -899,7 +891,7 @@ RAISES IO.Error;
    update if the interface of an included header file may have changed in a
    significant way.  *)
   VAR
-    str: ShellCommand;
+    cmd: STRING;
     success: BOOLEAN;
   BEGIN
     IF ~CCompiler.HaveLibtool() &
@@ -918,10 +910,10 @@ RAISES IO.Error;
       success := r.Update(module, Rep.modAssemblerFile);
       IF DerivedIsOlder(module, Rep.modObjectFile, Rep.modAssemblerFile) THEN
         module.CreateOutputDir (Rep.modObjectFile);
-        Assembler.AssembleFileCmd(module.GetURI(Rep.modAssemblerFile, TRUE),
-                                  module.GetURI(Rep.modObjectFile, TRUE), str);
-        Logger.ShellCommand(str);
-        success := (ProcessManagement.system (str) = 0);
+        cmd := Assembler.AssembleFileCmd(module.GetURI(Rep.modAssemblerFile, TRUE),
+                                  module.GetURI(Rep.modObjectFile, TRUE));
+        Logger.ShellCommand(cmd);
+        success := (ProcessManagement.system (cmd) = 0);
       END;
       
     ELSE
@@ -929,11 +921,11 @@ RAISES IO.Error;
       IF success &
          DerivedIsOlder(module, Rep.modObjectFile, Rep.modCodeFileC) THEN
         module.CreateOutputDir (Rep.modObjectFile);
-        CCompiler.CompileFileCmd(module.GetURI(Rep.modCodeFileC, TRUE),
-                                 module.GetURI(Rep.modObjectFile, TRUE),
-                                 FALSE, str);
-        Logger.ShellCommand(str);
-        success := (ProcessManagement.system (str) = 0);
+        cmd := CCompiler.CompileFileCmd(module.GetURI(Rep.modCodeFileC, TRUE),
+                                        module.GetURI(Rep.modObjectFile, TRUE),
+                                        FALSE);
+        Logger.ShellCommand(cmd);
+        success := (ProcessManagement.system(cmd) = 0);
       END;
     END;
     RETURN success;
@@ -948,7 +940,7 @@ RAISES IO.Error;
    This method is called from @oproc{Rules.UpdateLibrary}.  
    @end precond *)
   VAR
-    str: ShellCommand;
+    cmd: STRING;
     success: BOOLEAN;
     outputFile: URI.URI;
   BEGIN
@@ -956,11 +948,11 @@ RAISES IO.Error;
     IF DerivedIsOlder(module, Rep.modObjectFileLib, Rep.modCodeFileC) THEN
       module.CreateOutputDir (Rep.modObjectFile);
       outputFile := module.GetURI(Rep.modObjectFileLib, TRUE);
-      CCompiler.CompileFileCmd(module.GetURI(Rep.modCodeFileC, TRUE),
-                               module.GetURI(Rep.modObjectFileLib, TRUE),
-                               TRUE, str);
-      Logger.ShellCommand(str);
-      success := (ProcessManagement.system (str) = 0);
+      cmd := CCompiler.CompileFileCmd(module.GetURI(Rep.modCodeFileC, TRUE),
+                                      module.GetURI(Rep.modObjectFileLib, TRUE),
+                                      TRUE);
+      Logger.ShellCommand(cmd);
+      success := (ProcessManagement.system(cmd) = 0);
     END;
     RETURN success;
   END UpdateObjectFileLib;
@@ -1032,7 +1024,7 @@ RAISES IO.Error;
    This method is called within @oproc{Rules.UpdateExecutable}.
    @endprecond *)
   VAR
-    str: ShellCommand;
+    cmd: STRING;
     success: BOOLEAN;
   BEGIN
     IF (r.backend = backendSSAtoIA32) THEN
@@ -1040,21 +1032,21 @@ RAISES IO.Error;
       IF DerivedIsOlder(module, Rep.modMainObjectFile,
                         Rep.modMainFileAssembler) THEN
         module.CreateOutputDir (Rep.modMainObjectFile);
-        Assembler.AssembleFileCmd(module.GetURI(Rep.modMainFileAssembler, TRUE),
-                                  module.GetURI(Rep.modMainObjectFile, TRUE), str);
-        Logger.ShellCommand(str);
-        success := (ProcessManagement.system (str) = 0);
+        cmd := Assembler.AssembleFileCmd(module.GetURI(Rep.modMainFileAssembler, TRUE),
+                                  module.GetURI(Rep.modMainObjectFile, TRUE));
+        Logger.ShellCommand(cmd);
+        success := (ProcessManagement.system(cmd) = 0);
       END;
       
     ELSE
       success := r.Update(module, Rep.modMainFileC);
       IF DerivedIsOlder(module, Rep.modMainObjectFile, Rep.modMainFileC) THEN
         module.CreateOutputDir (Rep.modMainObjectFile);
-        CCompiler.CompileFileCmd(module.GetURI(Rep.modMainFileC, TRUE),
-                                 module.GetURI(Rep.modMainObjectFile, TRUE),
-                                 FALSE, str);
-        Logger.ShellCommand(str);
-        success := (ProcessManagement.system (str) = 0);
+        cmd := CCompiler.CompileFileCmd(module.GetURI(Rep.modMainFileC, TRUE),
+                                        module.GetURI(Rep.modMainObjectFile, TRUE),
+                                        FALSE);
+        Logger.ShellCommand(cmd);
+        success := (ProcessManagement.system(cmd) = 0);
       END;
     END;
     RETURN success;

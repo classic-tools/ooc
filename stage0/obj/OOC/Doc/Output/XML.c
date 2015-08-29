@@ -20,7 +20,7 @@ void OOC_Doc_Output_XML__WriteOberonDoc(XML_Writer__Writer w, OOC_Doc__Document 
       i0=0u;
       goto l5;
 l3:
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1739))+16);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1739))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 1745))+12);
       i1 = (OOC_INT32)module;
       i0 = (
@@ -72,7 +72,7 @@ l18:
       i0 = (OOC_INT32)target;
       i1 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2314)))), OOC_SymbolTable__ItemDesc_Module)),OOC_SymbolTable__ItemDesc_Module)((OOC_SymbolTable__Item)i0);
       module = (OOC_SymbolTable__Module)i1;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2356))+16);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2356))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 2362))+12);
       i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 2375)))), OOC_SymbolTable__DeclarationDesc_GetId)),OOC_SymbolTable__DeclarationDesc_GetId)((OOC_SymbolTable__Declaration)i0);
       OOC_Doc_Output_XML__WriteOberonDoc_AttrExternalHref((OOC_Scanner_InputBuffer__CharArray)i1, (OOC_Scanner_InputBuffer__CharArray)i0);
@@ -304,9 +304,9 @@ l64:
       goto l69;
 l66:
       i2 = (OOC_INT32)w;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3854)))), &_td_OOC_SymbolTable__DeclarationDesc, 3854)), 3866))+16);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3854)))), &_td_OOC_SymbolTable__DeclarationDesc, 3854)), 3866))+20);
       i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i3, 3872))+12);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3854)))), &_td_OOC_SymbolTable__DeclarationDesc, 3854)), 3866))+16);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer((_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 3854)))), &_td_OOC_SymbolTable__DeclarationDesc, 3854)), 3866))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 3872))+12);
       i1 = OOC_ARRAY_LENGTH((_check_pointer(i1, 3877)), 0);
       OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i2, 3823)))), XML_Writer__WriterDesc_WriteLatin1)),XML_Writer__WriterDesc_WriteLatin1)((XML_Writer__Writer)i2, (void*)(_check_pointer(i3, 3877)), i1);

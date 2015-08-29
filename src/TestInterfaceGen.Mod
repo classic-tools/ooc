@@ -1,10 +1,9 @@
 MODULE TestInterfaceGen;
 
 IMPORT
-  StdChannels, Out, Err, Object, ADT:Dictionary, ADT:ArrayList,
-  Config:Section:Arguments, OOC:Config, 
-  Config:Section:Options, BooleanValue := Config:Value:Boolean,
-  StringValue := Config:Value:String, OOC:SymbolTable:InterfaceDescr,
+  Object, StdChannels, Out, Err, ADT:Dictionary, ADT:ArrayList,
+  CfgData := Config, Config:Section:Options,
+  OOC:Config, OOC:SymbolTable:InterfaceDescr,
   OOC:Error, Rep := OOC:Repository, Sym := OOC:SymbolTable, OOC:Make;
   
 
@@ -12,7 +11,8 @@ IMPORT
 VAR
   cfgErrList: Error.List;
   i: LONGINT;
-  arg: Arguments.Argument;
+  arg: STRING;
+  chars: Object.CharsLatin1;
   m: Rep.Module;
   mode: SHORTINT;
   makeRules: Make.Rules;
@@ -26,9 +26,9 @@ VAR
 
 PROCEDURE NewConfig;
   BEGIN
-    buildHTML := Config.AddOption ("build-html", BooleanValue.New (FALSE));
-    closure := Config.AddOption ("closure", BooleanValue.New (FALSE));
-    errorStyle := Config.AddOption ("error-style", StringValue.New ("default"));
+    buildHTML := Config.AddOption ("build-html", CfgData.NewBooleanVar(FALSE));
+    closure := Config.AddOption ("closure", CfgData.NewBooleanVar(FALSE));
+    errorStyle := Config.AddOption ("error-style", CfgData.NewStringVar("default"));
     
     Config.AddCmdLine ("--repository,-r",
                  "<repositories><file-system>$1</file-system></repositories>");
@@ -40,16 +40,15 @@ PROCEDURE NewConfig;
                  "<options><set name='error-style'>$1</set></options>");
   END NewConfig;
 
-PROCEDURE CollectExtensions (moduleList: ARRAY OF Rep.Module): Dictionary.Dictionary;
+PROCEDURE CollectExtensions (moduleList: ARRAY OF Rep.Module): Sym.ExtensionDict;
   VAR
-    extensionDict: Dictionary.Dictionary;
+    extensionDict: Sym.ExtensionDict;
     visited: Dictionary.Dictionary;
 
   PROCEDURE Scan(m: Rep.Module);
     VAR
       ptr: Sym.Item;
       base: Sym.Type;
-      obj: Object.Object;
       list: ArrayList.ArrayList;
       i: LONGINT;
     BEGIN
@@ -66,8 +65,7 @@ PROCEDURE CollectExtensions (moduleList: ARRAY OF Rep.Module): Dictionary.Dictio
             base := ptr(Sym.Record). baseType;
             ASSERT(base IS Sym.Record);
             IF extensionDict. HasKey (base) THEN
-              obj := extensionDict. Get (base);
-              list := obj(ArrayList.ArrayList)
+              list := extensionDict. Get (base);
             ELSE
               list := ArrayList.New (4);
               extensionDict. Set (base, list)
@@ -80,7 +78,7 @@ PROCEDURE CollectExtensions (moduleList: ARRAY OF Rep.Module): Dictionary.Dictio
     END Scan;
   
   BEGIN
-    extensionDict := Dictionary.New();
+    extensionDict := NEW(Sym.ExtensionDict);
     visited := Dictionary.New();
     FOR i := 0 TO LEN(moduleList)-1 DO
       Scan(moduleList[i]);
@@ -90,6 +88,7 @@ PROCEDURE CollectExtensions (moduleList: ARRAY OF Rep.Module): Dictionary.Dictio
 
 BEGIN
   InterfaceDescr.absoluteDtdSystemId := FALSE;
+  Rep.readDocStrings := TRUE;
   
   cfgErrList := Error.NewList ("");
   NewConfig;
@@ -109,10 +108,10 @@ BEGIN
     makeRules.SetErrOut(StdChannels.stderr);
     ok := TRUE;
     
-    IF (errorStyle. value(StringValue.Value). string^ = "oo2c") THEN
+    IF errorStyle.value(CfgData.StringVar).string.Equals("oo2c") THEN
       Error.style := Error.styleCharPos;
     END;
-    IF buildHTML. value(BooleanValue.Value). boolean THEN
+    IF buildHTML.value(CfgData.BooleanVar). boolean THEN
       mode := Rep.modInterfaceHTML
     ELSE
       mode := Rep.modInterfaceDescr
@@ -120,12 +119,14 @@ BEGIN
 
     NEW(moduleList, Config.arguments.ArgNumber());
     FOR i := 0 TO Config.arguments. ArgNumber()-1 DO
-      arg := Config.arguments. Get (i);
-      IF Rep.ValidModuleName (arg^) THEN
-        m := Config.repositories. GetModule (arg^);
+      arg := Config.arguments.Get(i);
+      arg := arg.ToString8("?");
+      chars := arg(Object.String8).CharsLatin1();
+      IF Rep.ValidModuleName (chars^) THEN
+        m := Config.repositories. GetModule (chars^);
         IF (m = NIL) THEN
           Err.String ("Error: Cannot locate module ");
-          Err.String (arg^);
+          Err.Object (arg);
           Err.Ln;
           HALT (1)
         ELSE
@@ -133,7 +134,7 @@ BEGIN
         END
       ELSE
         Err.String ("Error: Invalid module name ");
-        Err.String (arg^);
+        Err.Object (arg);
         Err.Ln;
         HALT (1)
       END

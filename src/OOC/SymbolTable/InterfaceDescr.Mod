@@ -1,4 +1,4 @@
-(* 	$Id: InterfaceDescr.Mod,v 1.18 2003/05/12 07:56:46 mva Exp $	 *)
+(* 	$Id: InterfaceDescr.Mod,v 1.22 2003/07/06 21:49:42 mva Exp $	 *)
 MODULE OOC:SymbolTable:InterfaceDescr;
 (*  Writes a description of a module's interface as XML.
     Copyright (C) 2000, 2001, 2002, 2003  Michael van Acken
@@ -52,7 +52,7 @@ PROCEDURE GetSystemId (repositories: Repositories.Section): URI.URI;
 
 PROCEDURE Write* (cw: IO.ByteChannel; baseURI: URI.HierarchicalURI;
                   module: Sym.Module; repositories: Repositories.Section;
-                  extensionDict: Dictionary.Dictionary)
+                  extensionDict: Sym.ExtensionDict)
 RAISES IO.Error;
 (**Writes the exported parts of the symbol table with root @oparam{module} as
    XML to the output writer @oparam{cw}.  Includes descriptions for
@@ -204,11 +204,17 @@ RAISES IO.Error;
         import: Sym.Import;
         repModule: Repository.Module;
         id: Sym.NameString;
+        typeModule: Sym.Name;
       BEGIN
         WITH type: Sym.TypeName DO
           w. StartTag ("type-name", FALSE);
-          IF (type. module # NIL) THEN
-            w. AttrStringLatin1 ("module", type. module. str^)
+          IF type.IsPredefReference() THEN
+            typeModule := NIL;
+          ELSE
+            typeModule := type.module;
+          END;
+          IF (typeModule # NIL) THEN
+            w. AttrStringLatin1 ("module", typeModule. str^)
           ELSIF (resolvedType # NIL) & (resolvedType IS Sym.PredefType) THEN
             (* note: this produces a wrong reference if the original type name
                is an alias of a predefined type; it is not clear how this 
@@ -219,14 +225,14 @@ RAISES IO.Error;
           END;
           w. AttrStringLatin1 ("name", type. ident. str^);
           
-          IF (type. module # NIL) OR
+          IF (typeModule # NIL) OR
              (resolvedType = NIL) OR ~(resolvedType IS Sym.PredefType) THEN
             IF (resolvedType IS Sym.TypeVar) THEN
               id := resolvedType.namingDecl.GetId();
               COPY ("#", href);
               Strings.Append(id^, href);
             ELSE
-              IF (type. module # NIL) THEN
+              IF (typeModule # NIL) THEN
                 import := type. GetImport();
                 COPY (import. externalSymTab. name. str^, href);
                 repModule := repositories. GetModule (import. externalSymTab. name. str^);
@@ -480,7 +486,6 @@ RAISES IO.Error;
     VAR
       i: LONGINT;
       thisModule, remoteMod: Repository.Module;
-      str: ARRAY 2*1024 OF CHAR;
       remoteURI, relativeURI: URI.URI;
       baseURI: URI.HierarchicalURI;
       keys: Object.ObjectArrayPtr;
@@ -499,8 +504,7 @@ RAISES IO.Error;
         w. AttrStringLatin1 ("type", "html");
         remoteURI := remoteMod. GetURI (Repository.modInterfaceHTML, FALSE);
         relativeURI := remoteURI. MakeRelative (baseURI);
-        relativeURI. GetString (str);
-        w. AttrStringLatin1 ("relative-uri", str);
+        w. AttrObject ("relative-uri", relativeURI.ToString());
         w. EndTag;
 
         w. EndTag
@@ -577,13 +581,11 @@ RAISES IO.Error;
   PROCEDURE WriteKnownExtensions (type: Object.Object);
     VAR
       i: LONGINT;
-      obj: Object.Object;
       list: ArrayList.ArrayList;
       item: Sym.Item;
     BEGIN
       IF (extensionDict # NIL) & extensionDict. HasKey (type) THEN
-        obj := extensionDict. Get (type);
-        list := obj(ArrayList.ArrayList);
+        list := extensionDict. Get (type);
         FOR i := 0 TO list. size-1 DO
           item := list. array[i](Sym.Record). parent. nestedItems;
           WHILE ~((item IS Sym.TypeDecl) &

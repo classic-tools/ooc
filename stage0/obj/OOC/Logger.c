@@ -4,20 +4,19 @@
 
 static void OOC_Logger__WriteURI(URI__URI uri) {
   register OOC_INT32 i0,i1;
-  OOC_CHAR8 str[1024];
 
-  i0 = (OOC_INT32)uri;
-  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 316)))), &_td_URI_Scheme_File__URIDesc);
-  if (i1) goto l3;
-  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 372)))), URI__URIDesc_GetString)),URI__URIDesc_GetString)((URI__URI)i0, (void*)(OOC_INT32)str, 1024);
-  goto l4;
-l3:
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0, (void*)(OOC_INT32)str, 1024);
-l4:
   i0 = OOC_Logger__silence;
   i0 = !i0;
   if (!i0) goto l7;
-  Out__String((void*)(OOC_INT32)str, 1024);
+  i0 = (OOC_INT32)uri;
+  i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 304)))), &_td_URI_Scheme_File__URIDesc);
+  if (i1) goto l5;
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 386)))), URI__URIDesc_ToString)),URI__URIDesc_ToString)((URI__URI)i0);
+  Out__Object((Object__Object)i0);
+  goto l7;
+l5:
+  i0 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)i0);
+  Out__Object((Object__Object)i0);
 l7:
   return;
   ;
@@ -39,16 +38,15 @@ l4:
   ;
 }
 
-void OOC_Logger__ReadFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d) {
+void OOC_Logger__ReadFileName(Object__String fileName) {
   register OOC_INT32 i0;
-  OOC_ALLOCATE_VPAR(fileName,OOC_CHAR8 ,fileName_0d)
 
-  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
   if (!i0) goto l4;
   Out__String("- ", 3);
-  Out__String((void*)(OOC_INT32)fileName, fileName_0d);
+  i0 = (OOC_INT32)fileName;
+  Out__Object((Object__Object)i0);
   Out__Ln();
   Out__Flush();
 l4:
@@ -72,16 +70,15 @@ l4:
   ;
 }
 
-void OOC_Logger__WriteFileName(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d) {
+void OOC_Logger__WriteFileName(Object__String fileName) {
   register OOC_INT32 i0;
-  OOC_ALLOCATE_VPAR(fileName,OOC_CHAR8 ,fileName_0d)
 
-  OOC_INITIALIZE_VPAR(fileName__ref,fileName,OOC_CHAR8 ,fileName_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
   if (!i0) goto l4;
   Out__String("+ ", 3);
-  Out__String((void*)(OOC_INT32)fileName, fileName_0d);
+  i0 = (OOC_INT32)fileName;
+  Out__Object((Object__Object)i0);
   Out__Ln();
   Out__Flush();
 l4:
@@ -89,15 +86,14 @@ l4:
   ;
 }
 
-void OOC_Logger__ShellCommand(const OOC_CHAR8 str__ref[], OOC_LEN str_0d) {
+void OOC_Logger__ShellCommand(Object__String str) {
   register OOC_INT32 i0;
-  OOC_ALLOCATE_VPAR(str,OOC_CHAR8 ,str_0d)
 
-  OOC_INITIALIZE_VPAR(str__ref,str,OOC_CHAR8 ,str_0d)
   i0 = OOC_Logger__silence;
   i0 = !i0;
   if (!i0) goto l4;
-  Out__String((void*)(OOC_INT32)str, str_0d);
+  i0 = (OOC_INT32)str;
+  Out__Object((Object__Object)i0);
   Out__Ln();
   Out__Flush();
 l4:

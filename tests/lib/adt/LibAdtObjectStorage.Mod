@@ -1,7 +1,7 @@
 MODULE LibAdtObjectStorage;
 
 IMPORT
-  Out, IO, IO:FileChannel, ADT:Storable, ADT:Object:Storage;
+  Out, Object, IO, IO:FileChannel, ADT:Storable, ADT:Object:Storage;
 
 TYPE
   Data = POINTER TO DataDesc;
@@ -22,7 +22,7 @@ PROCEDURE (d: Data) Store* (w: Storable.Writer) RAISES IO.Error;
 
 PROCEDURE (d: Data) Load* (r: Storable.Reader) RAISES IO.Error;
   VAR
-    obj: Storable.Object;
+    obj: Object.Object;
   BEGIN
     r.ReadObject(obj);
     IF (obj = NIL) THEN
@@ -58,7 +58,6 @@ PROCEDURE GenData(): Data;
       d: Data;
     BEGIN
       NEW (d);
-      Storable.Init(d);
       d.next := NIL;
       COPY(name, d.name);
       d.num := num;
@@ -82,7 +81,7 @@ PROCEDURE Test* () RAISES IO.Error;
     w: Storage.Writer;
     r: Storage.Reader;
     data1, data2: Data;
-    obj: Storable.Object;
+    obj: Object.Object;
   CONST
     dumpFile = "wd/storage.data";
   BEGIN

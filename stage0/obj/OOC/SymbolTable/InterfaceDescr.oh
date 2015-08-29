@@ -3,7 +3,6 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
-#include <ADT/Dictionary.oh>
 #include <IO.oh>
 #include <URI.oh>
 #include <OOC/Config/Repositories.oh>
@@ -12,20 +11,19 @@
 #include <Object.oh>
 #include <Exception.oh>
 extern OOC_CHAR8 OOC_SymbolTable_InterfaceDescr__absoluteDtdSystemId;
-extern void OOC_SymbolTable_InterfaceDescr__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, ADT_Dictionary__Dictionary extensionDict);
+extern void OOC_SymbolTable_InterfaceDescr__Write(IO__ByteChannel cw, URI__HierarchicalURI baseURI, OOC_SymbolTable__Module module, OOC_Config_Repositories__Section repositories, OOC_SymbolTable__ExtensionDict extensionDict);
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init(void);
 extern void OOC_OOC_SymbolTable_InterfaceDescr_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2747;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2898;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6525;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6640;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7079;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7295;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__11092;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__16742;
-extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__17817;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2743;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__2894;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6521;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__6636;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7075;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__7291;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__11253;
+extern RT0__StructDesc _td_OOC_SymbolTable_InterfaceDescr__17920;
 #endif /* _MODULE_OOC_SymbolTable_InterfaceDescr_ */
 
 /* --- */

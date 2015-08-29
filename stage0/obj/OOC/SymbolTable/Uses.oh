@@ -32,7 +32,7 @@ typedef struct OOC_SymbolTable_Uses__ErrorContextDesc {
 extern void OOC_SymbolTable_Uses__ErrorContextDesc_GetTemplate(OOC_SymbolTable_Uses__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
 #define _TBN_OOC_SymbolTable_Uses__ErrorContextDesc_GetTemplate 0
 typedef void (*_TBP_OOC_SymbolTable_Uses__ErrorContextDesc_GetTemplate)(OOC_SymbolTable_Uses__ErrorContext context, Msg__Msg msg, Msg__LString templ, OOC_LEN templ_0d);
-extern OOC_SymbolTable_Uses__Uses OOC_SymbolTable_Uses__New(const OOC_CHAR8 extIdent__ref[], OOC_LEN extIdent_0d, OOC_CHAR8 *syntaxError);
+extern OOC_SymbolTable_Uses__Uses OOC_SymbolTable_Uses__New(Object__String extIdent, OOC_CHAR8 *syntaxError);
 extern OOC_CHAR8 OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations(OOC_SymbolTable_Uses__Uses u);
 #define _TBN_OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations 3
 typedef OOC_CHAR8 (*_TBP_OOC_SymbolTable_Uses__UsesDesc_TrackingDeclarations)(OOC_SymbolTable_Uses__Uses u);
@@ -51,19 +51,18 @@ extern void OOC_OOC_SymbolTable_Uses_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__Uses;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1015;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1023;
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__Selector;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1069;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1060;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1077;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1068;
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__StoredUses;
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__UsesDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__ErrorContext;
 extern RT0__StructDesc _td_OOC_SymbolTable_Uses__ErrorContextDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1748;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__2300;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__2633;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__2930;
-extern RT0__StructDesc _td_OOC_SymbolTable_Uses__3044;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__1756;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__2691;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__2988;
+extern RT0__StructDesc _td_OOC_SymbolTable_Uses__3102;
 #endif /* _MODULE_OOC_SymbolTable_Uses_ */
 
 /* --- */

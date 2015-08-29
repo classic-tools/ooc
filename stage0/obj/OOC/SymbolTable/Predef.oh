@@ -36,7 +36,7 @@
 #define OOC_SymbolTable_Predef__minLongChar "\000"
 #define OOC_SymbolTable_Predef__maxLongChar "\/77"
 #define OOC_SymbolTable_Predef__minUCS4Char "\000"
-#define OOC_SymbolTable_Predef__maxUCS4Char "\/77"
+#define OOC_SymbolTable_Predef__maxUCS4Char "\/77\¯77"
 #define OOC_SymbolTable_Predef__assert 0
 #define OOC_SymbolTable_Predef__halt 1
 #define OOC_SymbolTable_Predef__len 2
@@ -84,13 +84,13 @@ extern void OOC_OOC_SymbolTable_Predef_init(void);
 extern void OOC_OOC_SymbolTable_Predef_init0(void);
 
 /* run-time meta data */
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__3727;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__5768;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6145;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6846;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7185;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7921;
-extern RT0__StructDesc _td_OOC_SymbolTable_Predef__14309;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__3676;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__5717;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6094;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__6795;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7134;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__7870;
+extern RT0__StructDesc _td_OOC_SymbolTable_Predef__14260;
 #endif /* _MODULE_OOC_SymbolTable_Predef_ */
 
 /* --- */

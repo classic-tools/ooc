@@ -1,6 +1,6 @@
 dnl Autoconf requirements
 AC_PREREQ(2.53)
-AC_INIT(OOC,2.0.9,mva@users.sf.net)
+AC_INIT(OOC,2.0.10,mva@users.sf.net)
 AC_CONFIG_SRCDIR(src/OOC/Parser.Mod)
 AC_CONFIG_HEADER(lib/src/__config.h)
 
@@ -61,6 +61,7 @@ if test $ooc_target_address = 64; then
 fi
 
 dnl checks for structures
+AC_CHECK_MEMBER(struct stat.st_mtime_usec,[AC_DEFINE(HAVE_STRUCT_STAT_USEC,1,[Define to 1 if struct stat has usec members.])],,[#include <sys/stat.h>])
 
 dnl checks for compiler characteristics
 

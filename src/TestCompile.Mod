@@ -2,16 +2,15 @@ MODULE TestCompile;
 
 IMPORT
   StdChannels, Out, Err, Object, StringSearch, StringSearch:RegexpDFA,
-  Config:Section:Arguments,
-  Config:Section:Options, BooleanValue := Config:Value:Boolean,
-  StringValue := Config:Value:String, 
-  OOC:Config, OOC:Config:Pragmas, OOC:Config:CCompiler, OOC:Config:Autoconf,
+  CfgData := Config, Config:Section:Options, OOC:Config,
+  OOC:Config:Pragmas, OOC:Config:CCompiler, OOC:Config:Autoconf,
   OOC:SymbolTable:Builder, OOC:Error, Rep := OOC:Repository, OOC:Make;
 
 VAR
   cfgErrList: Error.List;
   i: LONGINT;
-  arg: Arguments.Argument;
+  arg: STRING;
+  chars: Object.CharsLatin1;
   m: Rep.Module;
   mode: SHORTINT;
   makeRules: Make.Rules;
@@ -30,10 +29,8 @@ VAR
 PROCEDURE OptionToMatcher (option: Options.Option; cmdLineName: ARRAY OF CHAR): StringSearch.Matcher;
   VAR
     matcher: StringSearch.Matcher;
-    str: Object.String8;
   BEGIN
-    str := Object.NewLatin1 (option. value(StringValue.Value). string^);
-    matcher := RegexpDFA.factory. Compile (str, {});
+    matcher := RegexpDFA.factory.Compile(option.value(CfgData.StringVar).string(Object.String8), {});
     IF (matcher = NIL) THEN
       Err.String ("Warning: Cannot parse regular expression in ");
       Err.String (cmdLineName);
@@ -49,15 +46,15 @@ PROCEDURE NewConfig;
     haveLibM: Pragmas.Pragma;
   BEGIN
     errorStyle := Config.AddOption("errorStyle",
-                                   StringValue.New("file:line:column"));
+                                CfgData.NewStringVar("file:line:column"));
     
-    make := Config.AddOption ("make", BooleanValue.New (FALSE));
-    writeAST := Config.AddOption ("write-ast", BooleanValue.New (FALSE));
-    writeIR := Config.AddOption ("write-ir", BooleanValue.New (FALSE));
-    useSSA := Config.AddOption ("use-ssa", BooleanValue.New (FALSE));
-    translateIA32 := Config.AddOption ("translate-ia32", BooleanValue.New (FALSE));
-    inspectProc := Config.AddOption ("inspect-proc", StringValue.New ("$"));
-    inspectStage := Config.AddOption ("inspect-stage", StringValue.New ("$"));
+    make := Config.AddOption ("make",CfgData.NewBooleanVar(FALSE));
+    writeAST := Config.AddOption ("write-ast",CfgData.NewBooleanVar(FALSE));
+    writeIR := Config.AddOption ("write-ir",CfgData.NewBooleanVar(FALSE));
+    useSSA := Config.AddOption ("use-ssa",CfgData.NewBooleanVar(FALSE));
+    translateIA32 := Config.AddOption ("translate-ia32",CfgData.NewBooleanVar(FALSE));
+    inspectProc := Config.AddOption ("inspect-proc",CfgData.NewStringVar("$"));
+    inspectStage := Config.AddOption ("inspect-stage",CfgData.NewStringVar("$"));
     
     Config.AddCmdLine ("--repository,-r",
                  "<repositories><file-system>$1</file-system></repositories>");
@@ -77,7 +74,7 @@ PROCEDURE NewConfig;
                  "<options><set name='inspect-proc'>$1</set><set name='inspect-stage'>$2</set></options>");
 
     haveLibM := Config.pragmas.Set("HAVE_LIB_M", (* added for module RT0 *)
-                                   BooleanValue.New(Autoconf.haveLibM));
+                                  CfgData.NewBooleanVar(Autoconf.haveLibM));
     
     CCompiler.RegisterConfig;
   END NewConfig;
@@ -88,21 +85,21 @@ BEGIN
   NewConfig;
   Config.Read (cfgErrList);
   
-  IF make. value(BooleanValue.Value). boolean THEN
+  IF make. value(CfgData.BooleanVar). boolean THEN
     mode := Rep.modExecutable
-  ELSIF translateIA32. value(BooleanValue.Value). boolean THEN
+  ELSIF translateIA32. value(CfgData.BooleanVar). boolean THEN
     mode := Rep.modObjectFile;
   ELSE
     mode := Rep.modCodeFileC
   END;
-  IF (errorStyle.value(StringValue.Value).string^ = "file:line:column") THEN
+  IF errorStyle.value(CfgData.StringVar).string.Equals("file:line:column") THEN
     Error.style := Error.styleFileLineColumn;
-  ELSIF (errorStyle.value(StringValue.Value).string^ = "char-pos") THEN
+  ELSIF errorStyle.value(CfgData.StringVar).string.Equals("char-pos") THEN
     Error.style := Error.styleCharPos;
   END;
   
-  Make.writeAST := writeAST.value(BooleanValue.Value).boolean;
-  Make.writeIR := writeIR.value(BooleanValue.Value).boolean;
+  Make.writeAST := writeAST.value(CfgData.BooleanVar).boolean;
+  Make.writeIR := writeIR.value(CfgData.BooleanVar).boolean;
   Make.inspectProc := OptionToMatcher(inspectProc, "--inspect.1");
   Make.inspectStage := OptionToMatcher(inspectStage, "--inspect.2");
   
@@ -116,9 +113,9 @@ BEGIN
     HALT (1)
   ELSE
     makeRules := Make.NewRules();
-    IF translateIA32.value(BooleanValue.Value).boolean THEN
+    IF translateIA32.value(CfgData.BooleanVar).boolean THEN
       makeRules.SetBackend(Make.backendSSAtoIA32);
-    ELSIF useSSA.value(BooleanValue.Value).boolean THEN
+    ELSIF useSSA.value(CfgData.BooleanVar).boolean THEN
       makeRules.SetBackend(Make.backendSSAtoC);
     ELSE
       makeRules.SetBackend(Make.backendIRtoC);
@@ -128,11 +125,13 @@ BEGIN
     
     ok := TRUE;
     FOR i := 0 TO Config.arguments. ArgNumber()-1 DO
-      arg := Config.arguments. Get (i);
-      m := Config.repositories. GetModule (arg^);
+      arg := Config.arguments.Get(i);
+      arg := arg.ToString8("?");
+      chars := arg(Object.String8).CharsLatin1();
+      m := Config.repositories. GetModule (chars^);
       IF (m = NIL) THEN
         Err.String ("Error: Cannot locate module ");
-        Err.String (arg^);
+        Err.Object (arg);
         Err.Ln;
         HALT (1)
       ELSE

@@ -1,7 +1,7 @@
 MODULE Config:Simple;
 
 IMPORT
-  Msg, ProgramArgs, IO, IO:Memory,
+  Object, Msg, ProgramArgs, IO, IO:Memory,
   
   C := Config,
   Config:Parser,
@@ -9,11 +9,6 @@ IMPORT
   Config:Source,
   Config:Source:Environment,
   Config:Source:CmdLine,
-  
-  Config:Value,
-  StringValue := Config:Value:String,
-  IntegerValue := Config:Value:Integer,
-  BooleanValue := Config:Value:Boolean,
   
   Config:Section,
   Config:Section:Options,
@@ -26,14 +21,14 @@ TYPE
   Config* = POINTER TO ConfigDesc;
   ConfigDesc* = RECORD
     (C.ConfigDesc)
-    cfgFile: Value.StringPtr;
+    cfgFile: Object.String8;
     cfgFileEnvVar: Environment.VariableTemplate;
     cfgFileCmdLineOption: CmdLine.OptionTemplate;
     
     envVars-: Environment.Environment;
     cmdLine-: CmdLine.CmdLine;
     
-    typeList-: Value.PrototypeList;
+    typeMap-: C.PrototypeMap;
     
     options-: Options.Section;
     arguments-: Arguments.Section;
@@ -43,14 +38,14 @@ TYPE
   END;
 
 
-PROCEDURE Init* (config: Config; defaultConfigFile: ARRAY OF CHAR);
+PROCEDURE Init* (config: Config; defaultConfigFile: Object.String8);
   BEGIN
     C.InitConfig (config);
     
-    IF (defaultConfigFile = "") THEN
+    IF (defaultConfigFile.length = 0) THEN
       config. cfgFile := NIL
     ELSE
-      config. cfgFile := Value.GetStringPtr (defaultConfigFile)
+      config. cfgFile := defaultConfigFile
     END;
     config. cfgFileEnvVar := NIL;
     config. cfgFileCmdLineOption := NIL;
@@ -58,12 +53,12 @@ PROCEDURE Init* (config: Config; defaultConfigFile: ARRAY OF CHAR);
     config. envVars := Environment.New();
     config. cmdLine := CmdLine.New();
     
-    config. typeList := Value.NewPrototypeList();
-    config. typeList. RegisterPrototype ("string", StringValue.New (""));
-    config. typeList. RegisterPrototype ("integer", IntegerValue.New (0));
-    config. typeList. RegisterPrototype ("boolean", BooleanValue.New (FALSE));
+    config. typeMap := NEW(C.PrototypeMap);
+    C.SetPrototype(config.typeMap, "string", C.NewStringVar(""));
+    C.SetPrototype(config.typeMap, "integer", C.NewIntegerVar(0));
+    C.SetPrototype(config.typeMap, "boolean", C.NewBooleanVar(FALSE));
     
-    config. options := Options.New ("options", config. typeList);
+    config. options := Options.New("options", config.typeMap);
     config. arguments := Arguments.New ("arguments");
     config. sectionList := Section.NewSectionList();
     config. sectionList. Add (config. options);
@@ -74,7 +69,7 @@ PROCEDURE Init* (config: Config; defaultConfigFile: ARRAY OF CHAR);
   END Init;
 
 
-PROCEDURE New* (defaultConfigFile: ARRAY OF CHAR): Config;
+PROCEDURE New* (defaultConfigFile: Object.String8): Config;
   VAR
     config: Config;
   BEGIN
@@ -100,12 +95,12 @@ PROCEDURE (config: Config) Read* (errList: Msg.MsgList) RAISES IO.Error;
     cmdEnv: Environment.Command;
     cmdCmdLine: CmdLine.Command;
     
-  PROCEDURE EvaluateFile (fileName: Value.StringPtr) RAISES IO.Error;
+  PROCEDURE EvaluateFile (fileName: Object.String8) RAISES IO.Error;
     VAR
       p: Parser.Parser;
     BEGIN
       (* create parser for `fileName' *)
-      p := Parser.NewFile (fileName^);
+      p := Parser.NewFile (fileName);
       (* parse the XML document in `buffer'; if the XML parser does not
          report any errors, process the elements of the document;
          otherwise, transfer the error messages into `errList' *)
@@ -157,7 +152,7 @@ PROCEDURE (config: Config) Read* (errList: Msg.MsgList) RAISES IO.Error;
       
       IF (cmdEnv # NIL) THEN
         cmdEnv. DoNotWrite;
-        IF (cmdEnv. argument^ = "") THEN (* empty string: don't parse file *)
+        IF (cmdEnv.argument.length = 0) THEN (* empty string: don't parse file *)
           config. cfgFile := NIL
         ELSE
           config. cfgFile := cmdEnv. argument
@@ -175,7 +170,7 @@ PROCEDURE (config: Config) Read* (errList: Msg.MsgList) RAISES IO.Error;
         IF (cmdCmdLine. template = config. cfgFileCmdLineOption) THEN
           cmdCmdLine. DoNotWrite;
           IF (LEN (cmdCmdLine. argList^) >= 1) THEN
-            IF (cmdCmdLine. argList[0]^ = "") THEN
+            IF (cmdCmdLine.argList[0].length = 0) THEN
               config. cfgFile := NIL     (* empty string: don't parse file *)
             ELSE
               config. cfgFile := cmdCmdLine. argList[0]

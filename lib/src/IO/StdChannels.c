@@ -29,6 +29,16 @@ void IO_StdChannels__IOError(Object__String suffix) {
   switch (errno) {
   case ENOENT:
     e_type = OOC_TYPE_DESCR(IO,FileNotFoundDesc); break;
+  case EACCES:
+    e_type = OOC_TYPE_DESCR(IO,AccessDeniedDesc); break;
+  case EEXIST:
+    e_type = OOC_TYPE_DESCR(IO,FileExistsDesc); break;
+  case EBUSY:
+    e_type = OOC_TYPE_DESCR(IO,FileBusyDesc); break;
+  case EINVAL:
+    e_type = OOC_TYPE_DESCR(IO,InvalidArgumentDesc); break;
+  case ERANGE:
+    e_type = OOC_TYPE_DESCR(IO,OutOfRangeDesc); break;
   default:
     e_type = OOC_TYPE_DESCR(IO,ErrorDesc);
   }
@@ -41,7 +51,7 @@ void IO_StdChannels__IOError(Object__String suffix) {
   } else {
     str = (Object__String)msg;
   }
-  IO__InitError((IO__Error)e, str);
+  IO__ErrorDesc_INIT((IO__Error)e, str);
   Exception__Raise(e);
 }
 

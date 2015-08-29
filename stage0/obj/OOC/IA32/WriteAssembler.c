@@ -345,10 +345,10 @@ l9:
       Out__String("PROCEDURE ", 11);
       i0 = (OOC_INT32)pb;
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+16);
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7126))+16);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7126))+20);
       i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i1, 7132))+12);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7116))+16);
-      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7126))+16);
+      i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7126))+20);
       i0 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7132))+12);
       i0 = OOC_ARRAY_LENGTH((_check_pointer(i0, 7137)), 0);
       Out__String((void*)(_check_pointer(i1, 7137)), i0);
@@ -389,10 +389,10 @@ l18:
   i2 = (OOC_INT32)t;
   i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7575))+20);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7606))+4);
-  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 7612))+16);
+  i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 7612))+20);
   i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i4, 7618))+12);
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 7606))+4);
-  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 7612))+16);
+  i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 7612))+20);
   i5 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i5, 7618))+12);
   i5 = OOC_ARRAY_LENGTH((_check_pointer(i5, 7623)), 0);
   i2 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 7575))+20);

@@ -1,4 +1,4 @@
-(* 	$Id: Error.Mod,v 1.13 2003/05/02 10:06:45 mva Exp $	 *)
+(* 	$Id: Error.Mod,v 1.15 2003/05/18 15:58:10 mva Exp $	 *)
 MODULE OOC:Error;
 (*  Creates lists of error messages and converts them to text.
     Copyright (C) 1999, 2000-2003  Michael van Acken
@@ -22,7 +22,7 @@ MODULE OOC:Error;
 
 
 IMPORT
-  Channel, TextRider, LongStrings, CharClass, M := Msg;
+  Channel, TextRider, LongStrings, CharClass, M := Msg, Object, OS:Path;
   
   
 TYPE
@@ -89,14 +89,17 @@ PROCEDURE New* (context: Context; code: Code): Msg;
     RETURN M.New (context, code)
   END New;
 
-PROCEDURE NewList* (fileName: ARRAY OF CHAR): List;
+PROCEDURE NewList* (fileName: STRING): List;
 (**Creates new error list for the file @oparam{fileName}.  *)
   VAR
     list: List;
+    chars: Object.CharsLatin1;
   BEGIN
+    chars := Path.Encode(fileName);
+    
     NEW (list);
     M.InitMsgList (list);
-    COPY (fileName, list. fileName);
+    COPY (chars^, list. fileName);
     list. adjustCharPos := FALSE;
     list. noError := TRUE;
     RETURN list

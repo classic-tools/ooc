@@ -1,7 +1,7 @@
-(* 	$Id: CCompiler.Mod,v 1.26 2002/12/20 09:13:37 mva Exp $	 *)
+(* 	$Id: CCompiler.Mod,v 1.32 2003/05/19 22:56:49 mva Exp $	 *)
 MODULE OOC:Config:CCompiler;
 (*  Generates command lines for the C compiler and linker.
-    Copyright (C) 2001, 2002  Michael van Acken
+    Copyright (C) 2001, 2002, 2003  Michael van Acken
 
     This file is part of OOC.
 
@@ -21,9 +21,8 @@ MODULE OOC:Config:CCompiler;
 *)
 
 IMPORT
-  Strings, Object, URI, URI:Scheme:File,
-  Config:Section:Options, StringValue := Config:Value:String,
-  OOC:Config, OOC:Repository;
+  Object, ADT:StringBuffer, URI, URI:Scheme:File,
+  CfgData := Config, Config:Section:Options, OOC:Config, OOC:Repository;
 
 VAR
   cc, cppflags, cflags, ldflags, libs-, libtool, libdir-: Options.Option;
@@ -32,31 +31,31 @@ VAR
 
 PROCEDURE HaveLibtool*(): BOOLEAN;
   BEGIN
-    RETURN (libtool.value(StringValue.Value).string^ # "no");
+    RETURN ~libtool.value(CfgData.StringVar).string.Equals("no");
   END HaveLibtool;
 
-PROCEDURE SetCommand(mode: ARRAY OF CHAR; VAR cmd: ARRAY OF CHAR);
+PROCEDURE SetCommand(mode: STRING): StringBuffer.StringBuffer;
+  VAR
+    sb: StringBuffer.StringBuffer;
   BEGIN
-    IF (mode # "") & HaveLibtool() THEN
-      COPY (libtool. value(StringValue.Value). string^, cmd);
-      Strings.Append (" --mode=", cmd);
-      Strings.Append (mode, cmd);
-      Strings.Append (" ", cmd);
-    ELSE
-      COPY("", cmd);
+    sb := StringBuffer.New("");
+    IF (mode.length # 0) & HaveLibtool() THEN
+      sb.Append(libtool.value);
+      sb.Append(" --mode=");
+      sb.Append(mode);
+      sb.Append(" ");
     END;
-    Strings.Append (cc. value(StringValue.Value). string^, cmd);
-    Strings.Append (" ", cmd);
+    sb.Append(cc.value);
+    sb.Append(" ");
+    RETURN sb;
   END SetCommand;
 
-PROCEDURE CompileFileCmd* (in, out: URI.URI; forLibrary: BOOLEAN;
-                           VAR cmd: ARRAY OF CHAR);
+PROCEDURE CompileFileCmd* (in, out: URI.URI; forLibrary: BOOLEAN): STRING;
   VAR
-    str: ARRAY 2*1024 OF CHAR;
+    sb: StringBuffer.StringBuffer;
     include: Object.StringArrayPtr;
     i: LONGINT;
     f: File.URI;
-    chars: Object.CharsLatin1;
     
   PROCEDURE GetURIofRT(): File.URI;
     VAR
@@ -74,13 +73,13 @@ PROCEDURE CompileFileCmd* (in, out: URI.URI; forLibrary: BOOLEAN;
   
   BEGIN
     IF forLibrary THEN
-      SetCommand("compile", cmd);
+      sb := SetCommand("compile");
     ELSE
-      SetCommand("", cmd);
+      sb := SetCommand("");
     END;
-    Strings.Append (cflags. value(StringValue.Value). string^, cmd);
-    Strings.Append (" ", cmd);
-    Strings.Append (cppflags. value(StringValue.Value). string^, cmd);
+    sb.Append(cflags.value);
+    sb.Append(" ");
+    sb.Append(cppflags.value);
     
     (* Add include path for the run-time header files.  In theory, this include
        directory should have the highest priority, but _only_ for run-time
@@ -88,98 +87,93 @@ PROCEDURE CompileFileCmd* (in, out: URI.URI; forLibrary: BOOLEAN;
        currently no .h files except for the run-time data are installed in the
        src/ directory, putting this first should be safe.   *)
     f := GetURIofRT();
-    f. GetPath (str);
-    Strings.Append (" -I", cmd);
-    Strings.Append (str, cmd);
+    sb.Append(" -I");
+    sb.Append(f.GetPath());
     
     include := Config.repositories. GetIncludePaths();
     FOR i := 0 TO LEN (include^)-1 DO
-      Strings.Append (" -I", cmd);
-      chars := include[i](Object.String8).CharsLatin1();
-      Strings.Append (chars^, cmd)
+      sb.Append(" -I");
+      sb.Append(include[i]);
     END;
     
-    Strings.Append (" -c ", cmd);
-    in(File.URI). GetPath (str);
-    Strings.Append (str, cmd);
-    Strings.Append (" -o ", cmd);
-    out(File.URI). GetPath (str);
-    Strings.Append (str, cmd);
+    sb.Append(" -c ");
+    sb.Append(in(File.URI).GetPath());
+    sb.Append(" -o ");
+    sb.Append(out(File.URI).GetPath());
+    RETURN sb.ToString();
   END CompileFileCmd;
 
-PROCEDURE LinkProgramCmd* (execFile: URI.URI; forLibrary: BOOLEAN;
-                           VAR cmd: ARRAY OF CHAR);
+PROCEDURE LinkProgramCmd* (execFile: URI.URI; forLibrary: BOOLEAN): STRING;
   VAR
-    str: ARRAY 1024 OF CHAR;
+    sb: StringBuffer.StringBuffer;
   BEGIN
-    SetCommand("link", cmd);
-    Strings.Append ("-o ", cmd);
-    execFile(File.URI). GetPath (str);
-    Strings.Append (str, cmd);
+    sb := SetCommand("link");
+    sb.Append("-o ");
+    sb.Append(execFile(File.URI).GetPath());
     IF forLibrary & HaveLibtool() THEN
-      Strings.Append (" -rpath ", cmd);
-      Strings.Append (libdir. value(StringValue.Value). string^, cmd);
+      sb.Append(" -rpath ");
+      sb.Append(libdir.value);
     END;
-    Strings.Append (" ", cmd);
-    Strings.Append (ldflags. value(StringValue.Value). string^, cmd);
+    sb.Append(" ");
+    sb.Append(ldflags.value);
+    RETURN sb.ToString();
   END LinkProgramCmd;
 
-PROCEDURE InstallDirectoryCmd*(path: ARRAY OF CHAR; VAR cmd: ARRAY OF CHAR);
+PROCEDURE InstallDirectoryCmd*(path: STRING): STRING;
+  VAR
+    sb: StringBuffer.StringBuffer;
   BEGIN
-    COPY(install.value(StringValue.Value).string^, cmd);
-    Strings.Append(" -d ", cmd);
-    Strings.Append(path, cmd);
+    sb := StringBuffer.New(install.value.ToString());
+    sb.Append(" -d ");
+    sb.Append(path);
+    RETURN sb.ToString();
   END InstallDirectoryCmd;
 
-PROCEDURE InstallProgramCmd*(file: URI.URI; asLibrary: BOOLEAN;
-                             VAR cmd: ARRAY OF CHAR);
+PROCEDURE InstallProgramCmd*(file: URI.URI; asLibrary: BOOLEAN): STRING;
   VAR
-    str: ARRAY 1024 OF CHAR;
+    sb: StringBuffer.StringBuffer;
   BEGIN
+    sb := StringBuffer.New("");
     IF HaveLibtool() THEN
-      COPY (libtool.value(StringValue.Value).string^, cmd);
-      Strings.Append(" --mode=install ", cmd);
-    ELSE
-      COPY("", cmd);
+      sb.Append(libtool.value);
+      sb.Append(" --mode=install ");
     END;
     
-    Strings.Append(installProgram.value(StringValue.Value).string^, cmd);
-    Strings.Append(" ", cmd);
-    file(File.URI).GetPath(str);
-    Strings.Append(str, cmd);
-    Strings.Append(" ", cmd);
+    sb.Append(installProgram.value);
+    sb.Append(" ");
+    sb.Append(file(File.URI).GetPath());
+    sb.Append(" ");
     IF asLibrary THEN
-      Strings.Append (libdir.value(StringValue.Value).string^, cmd);
+      sb.Append(libdir.value);
     ELSE
-      Strings.Append (bindir.value(StringValue.Value).string^, cmd);
+      sb.Append(bindir.value);
     END;
+    RETURN sb.ToString();
   END InstallProgramCmd;
 
-PROCEDURE UninstallProgramCmd*(path: STRING; asLibrary: BOOLEAN;
-                               VAR cmd: ARRAY OF CHAR);
+PROCEDURE UninstallProgramCmd*(path: STRING; asLibrary: BOOLEAN): STRING;
   VAR
-    chars: Object.CharsLatin1;
+    sb: StringBuffer.StringBuffer;
   BEGIN
+    sb := StringBuffer.New("");
     IF HaveLibtool() THEN
-      COPY (libtool.value(StringValue.Value).string^, cmd);
-      Strings.Append(" --mode=uninstall ", cmd);
-    ELSE
-      COPY("", cmd);
+      sb.Append(libtool.value);
+      sb.Append(" --mode=uninstall ");
     END;
     
-    Strings.Append(uninstall.value(StringValue.Value).string^, cmd);
-    Strings.Append(" ", cmd);
-    chars := path(Object.String8).CharsLatin1();
-    Strings.Append(chars^, cmd);
+    sb.Append(uninstall.value);
+    sb.Append(" ");
+    sb.Append(path);
+    RETURN sb.ToString();
   END UninstallProgramCmd;
 
 PROCEDURE RegisterConfig*;
   BEGIN
-    cc := Config.AddOption ("cc", StringValue.New ("gcc"));
-    cppflags := Config.AddOption ("cppflags", StringValue.New (""));
-    cflags := Config.AddOption ("cflags", StringValue.New ("-O2 -g"));
-    ldflags := Config.AddOption ("ldflags", StringValue.New (""));
-    libs := Config.AddOption ("libs", StringValue.New ("-lgc"));
+    cc := Config.AddOption ("cc", CfgData.NewStringVar("gcc"));
+    cppflags := Config.AddOption ("cppflags", CfgData.NewStringVar(""));
+    cflags := Config.AddOption ("cflags", CfgData.NewStringVar("-O2 -g"));
+    ldflags := Config.AddOption ("ldflags", CfgData.NewStringVar(""));
+    libs := Config.AddOption ("libs", CfgData.NewStringVar("-lgc"));
     Config.AddCmdLine ("--cc",
                        "<options><set name='cc'>$1</set></options>");
     Config.AddCmdLine ("--cppflags",
@@ -191,22 +185,22 @@ PROCEDURE RegisterConfig*;
     Config.AddCmdLine ("--libs",
                        "<options><set name='libs'>$1</set></options>");
     
-    libtool := Config.AddOption ("libtool", StringValue.New ("libtool"));
-    libdir := Config.AddOption ("libdir", StringValue.New ("libdir"));
+    libtool := Config.AddOption ("libtool", CfgData.NewStringVar("libtool"));
+    libdir := Config.AddOption ("libdir", CfgData.NewStringVar("libdir"));
     Config.AddCmdLine ("--libtool",
                        "<options><set name='libtool'>$1</set></options>");
     Config.AddCmdLine ("--libdir",
                        "<options><set name='libdir'>$1</set></options>");
 
-    install := Config.AddOption ("install", StringValue.New ("install -c"));
+    install := Config.AddOption ("install", CfgData.NewStringVar("install -c"));
     installProgram := Config.AddOption ("installProgram",
-                                        StringValue.New ("install -c"));
+                                        CfgData.NewStringVar("install -c"));
     installData := Config.AddOption ("installData",
-                                     StringValue.New ("install -c -m 644"));
+                                     CfgData.NewStringVar("install -c -m 644"));
     uninstall := Config.AddOption ("uninstall",
-                                   StringValue.New ("rm -f"));
-    bindir := Config.AddOption ("bindir", StringValue.New ("bindir"));
-    oocdir := Config.AddOption ("oocdir", StringValue.New ("oocdir"));
+                                   CfgData.NewStringVar("rm -f"));
+    bindir := Config.AddOption ("bindir", CfgData.NewStringVar("bindir"));
+    oocdir := Config.AddOption ("oocdir", CfgData.NewStringVar("oocdir"));
     Config.AddCmdLine ("--install",
                        "<options><set name='install'>$1</set></options>");
     Config.AddCmdLine ("--install-program",

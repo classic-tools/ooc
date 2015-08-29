@@ -1,4 +1,4 @@
-(* 	$Id: Assembler.Mod,v 1.6 2002/11/16 10:23:04 mva Exp $	 *)
+(* 	$Id: Assembler.Mod,v 1.8 2003/05/19 22:56:49 mva Exp $	 *)
 MODULE OOC:Config:Assembler;
 (*  Generates command lines for the assembler.
     Copyright (C) 2002  Michael van Acken
@@ -21,20 +21,18 @@ MODULE OOC:Config:Assembler;
 *)
 
 IMPORT
-  Strings, URI, URI:Scheme:File;
+  ADT:StringBuffer, URI, URI:Scheme:File;
 
 
-PROCEDURE AssembleFileCmd* (in, out: URI.URI; VAR cmd: ARRAY OF CHAR);
+PROCEDURE AssembleFileCmd* (in, out: URI.URI): STRING;
   VAR
-    str: ARRAY 2*1024 OF CHAR;
+    sb: StringBuffer.StringBuffer;
   BEGIN
-    COPY ("as ", cmd);
-    
-    in(File.URI). GetPath (str);
-    Strings.Append (str, cmd);
-    Strings.Append (" -o ", cmd);
-    out(File.URI). GetPath (str);
-    Strings.Append (str, cmd);
+    sb := StringBuffer.New("as ");
+    sb.Append(in(File.URI).GetPath());
+    sb.Append(" -o ");
+    sb.Append(out(File.URI).GetPath());
+    RETURN sb.ToString();
   END AssembleFileCmd;
 
 END OOC:Config:Assembler.

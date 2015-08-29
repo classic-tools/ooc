@@ -1,4 +1,4 @@
-(*	$Id: FileChannel.Mod,v 1.3 2003/02/05 21:32:02 mva Exp $	*)
+(*	$Id: FileChannel.Mod,v 1.6 2003/06/09 17:49:16 mva Exp $	*)
 MODULE IO:FileChannel [FOREIGN "C"; LINK FILE "FileChannel.c" END];
 (*  Access to files through channel objects.
     Copyright (C) 2003  Michael van Acken
@@ -20,7 +20,7 @@ MODULE IO:FileChannel [FOREIGN "C"; LINK FILE "FileChannel.c" END];
 <*Warnings:=FALSE*>
 
 IMPORT
-  SYSTEM, RT0, Object, Termination, IO, IO:StdChannels, IO:Buffer;
+  SYSTEM, RT0, Object, Termination, OS:Path, IO, IO:StdChannels, IO:Buffer;
   
 TYPE
   Channel* = POINTER TO ChannelDesc;
@@ -30,7 +30,8 @@ TYPE
        by itself.  *)
     (IO.ByteChannelDesc)
     fd: IO.FileDescriptor;
-    origName, tmpName: Object.String8;
+    origName: STRING;
+    tmpName: Object.String8;
     tmpIndex: LONGINT;
     (* For a temporary file, this is an index into an array of all open
        temporary files.  For all other files, this is @samp{-1}.  *)
@@ -61,16 +62,18 @@ CONST
      terminates, an attempt is made to close and remove all @oconst{tmpFile}
      files that are still open.  *)
 
-PROCEDURE OpenUnbuffered*(file: Object.String8; mode: SET): Channel
-(**Return a file channel for the name @oparam{file}.
+PROCEDURE OpenUnbuffered*(file: STRING; mode: SET): Channel
+(**Return a file channel for the name @oparam{file}.  @oproc{Path.Encode} is
+   used to calculate the path name that is passed to the OS.
 
    @precond
    @oparam{file} is a non-empty string.
    @end precond  *)
   RAISES IO.Error;
 
-PROCEDURE Open*(file: Object.String8; mode: SET): Buffer.Channel
-(**Return a buffered channel for @oparam{file}.
+PROCEDURE Open*(file: STRING; mode: SET): Buffer.Channel
+(**Return a buffered channel for @oparam{file}.  @oproc{Path.Encode} is
+   used to calculate the path name that is passed to the OS.
 
    @precond
    @oparam{file} is a non-empty string.
@@ -96,6 +99,7 @@ PROCEDURE (ch: Channel) CloseAndRegister*() RAISES IO.Error;
 
 PROCEDURE (ch: Channel) SetPos*(pos: LONGINT) RAISES IO.Error;
 
+PROCEDURE (ch: Channel) Length*(): LONGINT RAISES IO.Error;
 
 PROCEDURE (ch: Channel) FileDescriptor*(): IO.FileDescriptor;
 

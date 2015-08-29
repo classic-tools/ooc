@@ -3,7 +3,9 @@
 
 #include <__typemap.h>
 #include <RT0.oh>
+#include <Object.oh>
 #include <Object/Boxed.oh>
+#include <ADT/Dictionary.oh>
 #include <IO.oh>
 #include <OOC/Doc.oh>
 #include <OOC/AST.oh>
@@ -15,6 +17,21 @@ typedef struct OOC_SymbolTable_Builder__BuilderDesc *OOC_SymbolTable_Builder__Bu
 typedef struct OOC_SymbolTable_Builder__BuilderDesc {
   OOC_INT8 _class;
 } OOC_SymbolTable_Builder__BuilderDesc;
+typedef struct OOC_SymbolTable_Builder__WriterDesc *OOC_SymbolTable_Builder__Writer;
+typedef struct OOC_SymbolTable_Builder__WriterDesc {
+  OOC_INT8 byteOrder;
+  OOC_CHAR8 __pad1;
+  OOC_CHAR8 __pad2;
+  OOC_CHAR8 __pad3;
+  IO__ByteChannel channel;
+  OOC_INT32 objCounter;
+  ADT_Object_Storage__TypeRefMap typeRefMap;
+  OOC_INT32 typeRefSize;
+  ADT_Dictionary_AddressKey_IntValue__Dictionary objHash;
+  ADT_Object_Storage__CharBuffer charBuffer;
+  ADT_Object_Storage__Writer docWriter;
+  ADT_Dictionary__Dictionary names;
+} OOC_SymbolTable_Builder__WriterDesc;
 typedef struct OOC_SymbolTable_Builder__AutoImportDesc *OOC_SymbolTable_Builder__AutoImport;
 typedef OOC_CHAR8 *OOC_SymbolTable_Builder__Name;
 typedef struct OOC_SymbolTable_Builder__AutoImportDesc {
@@ -93,30 +110,43 @@ typedef OOC_SymbolTable__Module (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_NewM
 extern void OOC_SymbolTable_Builder__BuilderDesc_Finalize(OOC_SymbolTable_Builder__Builder b, OOC_SymbolTable__Module module);
 #define _TBN_OOC_SymbolTable_Builder__BuilderDesc_Finalize 0
 typedef void (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_Finalize)(OOC_SymbolTable_Builder__Builder b, OOC_SymbolTable__Module module);
-extern void OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, OOC_SymbolTable__Module symTab);
+extern void OOC_SymbolTable_Builder__WriterDesc_INIT(OOC_SymbolTable_Builder__Writer w, IO__ByteChannel ch, IO__ByteChannel chDoc);
+#define _TBN_OOC_SymbolTable_Builder__WriterDesc_INIT 19
+typedef void (*_TBP_OOC_SymbolTable_Builder__WriterDesc_INIT)(OOC_SymbolTable_Builder__Writer w, IO__ByteChannel ch, IO__ByteChannel chDoc);
+extern void OOC_SymbolTable_Builder__WriterDesc_WriteObject(OOC_SymbolTable_Builder__Writer w, Object__Object obj);
+#define _TBN_OOC_SymbolTable_Builder__WriterDesc_WriteObject 18
+typedef void (*_TBP_OOC_SymbolTable_Builder__WriterDesc_WriteObject)(OOC_SymbolTable_Builder__Writer w, Object__Object obj);
+extern void OOC_SymbolTable_Builder__WriterDesc_Disconnect(OOC_SymbolTable_Builder__Writer w);
+#define _TBN_OOC_SymbolTable_Builder__WriterDesc_Disconnect 17
+typedef void (*_TBP_OOC_SymbolTable_Builder__WriterDesc_Disconnect)(OOC_SymbolTable_Builder__Writer w);
+extern void OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, IO__ByteChannel chDoc, OOC_SymbolTable__Module symTab);
 #define _TBN_OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable 21
-typedef void (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, OOC_SymbolTable__Module symTab);
-extern OOC_SymbolTable__Module OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch);
+typedef void (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_WriteSymbolTable)(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, IO__ByteChannel chDoc, OOC_SymbolTable__Module symTab);
+extern OOC_SymbolTable__Module OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, IO__ByteChannel chDoc);
 #define _TBN_OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable 19
-typedef OOC_SymbolTable__Module (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch);
+typedef OOC_SymbolTable__Module (*_TBP_OOC_SymbolTable_Builder__BuilderDesc_ReadSymbolTable)(OOC_SymbolTable_Builder__Builder b, IO__ByteChannel ch, IO__ByteChannel chDoc);
 extern void OOC_OOC_SymbolTable_Builder_init(void);
 extern void OOC_OOC_SymbolTable_Builder_init0(void);
 
 /* run-time meta data */
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__Builder;
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__BuilderDesc;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__Writer;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__WriterDesc;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__Reader;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__ReaderDesc;
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__AutoImport;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__1977;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2338;
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__Name;
 extern RT0__StructDesc _td_OOC_SymbolTable_Builder__AutoImportDesc;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2176;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2165;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2851;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2840;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__3028;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__18184;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__20162;
-extern RT0__StructDesc _td_OOC_SymbolTable_Builder__21234;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2537;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__2526;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__3212;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__3201;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__3389;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__20821;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__23786;
+extern RT0__StructDesc _td_OOC_SymbolTable_Builder__24854;
 #endif /* _MODULE_OOC_SymbolTable_Builder_ */
 
 /* --- */

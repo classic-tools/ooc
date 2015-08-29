@@ -1,4 +1,4 @@
-(* 	$Id: LinkProgramC.Mod,v 1.17 2003/02/01 12:45:40 mva Exp $	 *)
+(* 	$Id: LinkProgramC.Mod,v 1.26 2003/05/29 16:59:04 mva Exp $	 *)
 MODULE OOC:Make:LinkProgramC;
 (*  Links object files and libraries to create an executable file.
     Copyright (C) 2001, 2002, 2003  Michael van Acken
@@ -21,8 +21,8 @@ MODULE OOC:Make:LinkProgramC;
 *)
 
 IMPORT
-  Out, Strings, IO, URI, URI:Scheme:File, Object, ADT:Dictionary,
-  ADT:ArrayList, Config:Value, StringValue := Config:Value:String,
+  Out, IO, URI, URI:Scheme:File, Object, ADT:Dictionary,
+  ADT:ArrayList, ADT:StringBuffer, CfgData := Config,
   OS:ProcessManagement, OOC:Repository, OOC:Config,
   OOC:Config:CCompiler, Sym := OOC:SymbolTable;
 
@@ -34,7 +34,8 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
   VAR
     i, j: LONGINT;
     linkDirective: Sym.LinkDirective;
-    libDeps, visited: Dictionary.Dictionary;
+    libDeps: Dictionary.Dictionary(STRING, ArrayList.ArrayList);
+    visited: Dictionary.Dictionary;
     depArray: ArrayList.ArrayList;
     extLibs: Object.StringArrayPtr;
     option: Dictionary.Dictionary;
@@ -42,12 +43,10 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
 
   PROCEDURE GetDepArray (libName: STRING): ArrayList.ArrayList;
     VAR
-      obj: Object.Object;
       list: ArrayList.ArrayList;
     BEGIN
       IF libDeps.HasKey(libName) THEN
-        obj := libDeps.Get(libName);
-        RETURN obj(ArrayList.ArrayList);
+        RETURN libDeps.Get(libName);
       ELSE
         list := ArrayList.New(4);
         libDeps.Set(libName, list);
@@ -79,30 +78,33 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
           module.ifData.libraryName.Equals(thisLibrary);
     END IncludeModule;
 
-  PROCEDURE Option(libraryName: STRING): STRING;
+  PROCEDURE Option(lib: Sym.LinkLib): STRING;
     VAR
       obj: Object.Object;
       str: STRING;
     BEGIN
-      IF option.HasKey(libraryName) THEN
-        obj := option.Get(libraryName);
+      IF option.HasKey(lib.libraryName) THEN
+        obj := option.Get(lib.libraryName);
         RETURN obj(STRING);
       ELSE
-        str := " -l"+libraryName;
-        option.Set(libraryName, str);
+        CASE lib.type OF
+        | Sym.libTypeStandard:
+          str := " -l"+lib.libraryName;
+        | Sym.libTypeFramework:
+          str := " -framework "+lib.libraryName;
+        END;
+        option.Set(lib.libraryName, str);
         RETURN str;
       END;
     END Option;
 
   PROCEDURE LookupValue(optionName: STRING): STRING;
     VAR
-      v: Value.Value;
-      chars: Object.CharsLatin1;
+      v: CfgData.Variable;
     BEGIN
-      chars := optionName(Object.String8).CharsLatin1();
-      v := Config.options.GetValue(chars^);
-      IF (v # NIL) & (v IS StringValue.Value) THEN
-        RETURN Object.NewLatin1(v(StringValue.Value).string^);
+      v := Config.options.GetValue(optionName);
+      IF (v # NIL) & (v IS CfgData.StringVar) THEN
+        RETURN v(CfgData.StringVar).string;
       ELSE
         RETURN empty;
       END;
@@ -112,7 +114,8 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
     (* In the a first pass over all object files, pick up any references
        to external libraries.  Ignore any modules that have been put into
        libraries themselves.  *)
-    libDeps := Dictionary.New();
+    NEW(libDeps);
+    libDeps.INIT();
     option := Dictionary.New();
     FOR i := 0 TO LEN(moduleList)-1 DO
       IF IncludeModule(moduleList[i]) THEN
@@ -124,11 +127,11 @@ PROCEDURE GetExternalLibs (moduleList: ARRAY OF Repository.Module;
             FOR j := 0 TO LEN(linkDirective.dependencies^)-1 DO
               depArray.Append(linkDirective.dependencies[j]);
             END;
-            prev := Option(linkDirective.libraryName);
+            prev := Option(linkDirective);
             IF (linkDirective.prefixOption # NIL) THEN
               new := space.Concat(LookupValue(linkDirective.prefixOption));
               option.Set(linkDirective.libraryName, new.Concat(prev));
-              prev := Option(linkDirective.libraryName); (* refresh *)
+              prev := Option(linkDirective); (* refresh *)
             END;
             IF (linkDirective.suffixOption # NIL) THEN
               new := space.Concat(LookupValue(linkDirective.suffixOption));
@@ -169,8 +172,8 @@ PROCEDURE Run*(module: Repository.Module;
                forLibrary: STRING): BOOLEAN
 RAISES IO.Error;
   VAR
-    str: ARRAY 16*1024 OF CHAR;        (* link commands can get _very_ long *)
-    path: Repository.URIBuffer;
+    sb: StringBuffer.StringBuffer;
+    cmd: STRING;
     uri: URI.URI;
     exit, i: LONGINT;
     importedLibs: Dictionary.Dictionary;
@@ -179,7 +182,6 @@ RAISES IO.Error;
     libraryName: STRING;
     import: Repository.Module;
     extLibs: Object.StringArrayPtr;
-    chars: Object.CharsLatin1;
   BEGIN
     exit := 0;
     IF (forLibrary # NIL) THEN
@@ -191,8 +193,9 @@ RAISES IO.Error;
     END;
     
     module. CreateOutputDir (outputFile);
-    CCompiler.LinkProgramCmd
-        (module. GetURI (outputFile, TRUE), (forLibrary # NIL), str);
+    sb := StringBuffer.New(CCompiler.LinkProgramCmd
+                           (module. GetURI (outputFile, TRUE),
+                            (forLibrary # NIL)));
 
     importedLibs := Dictionary.New();
     importedLibsList := ArrayList.New(4);
@@ -208,18 +211,16 @@ RAISES IO.Error;
         END;
       ELSIF ~imports[i].ifData.NoObjectFile() THEN
         uri := imports[i]. GetURI (objectFile, TRUE);
-        uri(File.URI). GetPath (path);
-        Strings.Append (" ", str);
-        Strings.Append (path, str);
+        sb.Append(" ");
+        sb.Append(uri(File.URI).GetPath());
       END;
     END;
 
     IF (forLibrary = NIL) THEN
       (* add file with function main() *)
       uri := module. GetURI (Repository.modMainObjectFile, TRUE);
-      uri(File.URI). GetPath (path);
-      Strings.Append (" ", str);
-      Strings.Append (path, str);
+      sb.Append(" ");
+      sb.Append(uri(File.URI).GetPath());
     END;
 
     FOR i := 0 TO importedLibsList.size-1 DO
@@ -227,15 +228,13 @@ RAISES IO.Error;
       IF import.FileExists(Repository.modLibrary) THEN
         (* looks like an uninstalled library *)
         uri := import.GetURI(Repository.modLibrary, TRUE);
-        uri(File.URI). GetPath (path);
-        Strings.Append (" ", str);
-        Strings.Append (path, str);
+        sb.Append(" ");
+        sb.Append(uri(File.URI).GetPath());
       ELSE
         (* we don't have a .la file, so assume that it's a regularly
            installed libtool library  *)
-        Strings.Append(" -l", str);
-        chars := import.ifData.libraryName(Object.String8).CharsLatin1();
-        Strings.Append(chars^, str);
+        sb.Append(" -l");
+        sb.Append(import.ifData.libraryName);
       END;
     END;
     
@@ -243,15 +242,15 @@ RAISES IO.Error;
        first *)
     extLibs := GetExternalLibs(imports, forLibrary);
     FOR i := LEN (extLibs^)-1 TO 0 BY -1 DO
-      chars := extLibs[i](Object.String8).CharsLatin1();
-      Strings.Append (chars^, str);
+      sb.Append(extLibs[i]);
     END;
-    Strings.Append (" ", str);
-    Strings.Append (CCompiler.libs.value(StringValue.Value).string^, str);
-    
-    Out.String (str);
+    sb.Append(" ");
+    sb.Append(CCompiler.libs.value);
+
+    cmd := sb.ToString();
+    Out.Object(cmd);
     Out.Ln;
-    exit := ProcessManagement.system (str);
+    exit := ProcessManagement.system(cmd);
     RETURN (exit = 0)
   END Run;
 

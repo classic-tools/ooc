@@ -1,21 +1,17 @@
 MODULE TestConfigSections;
 
 IMPORT
-  ProgramArgs, StdChannels, TextRider, Out, Msg,
-  XMLBuilder := XML:Builder, XML:DTD, Config:Value, Config:Parser,
+  Object, ProgramArgs, StdChannels, TextRider, Out, Msg,
+  XMLBuilder := XML:Builder, XML:DTD, Config, Config:Parser,
   
   Config:Section,
   Config:Section:Options,
-  Config:Section:Arguments,
-  
-  StringValue := Config:Value:String,
-  IntegerValue := Config:Value:Integer,
-  BooleanValue := Config:Value:Boolean;
+  Config:Section:Arguments;
 
 
 VAR
   p: Parser.Parser;
-  typeList: Value.PrototypeList;
+  typeMap: Config.PrototypeMap;
   sl: Section.SectionList;
   argReader: TextRider.Reader;
   arg, configFile: ARRAY 1024 OF CHAR;
@@ -82,17 +78,17 @@ BEGIN  <*Warnings:=FALSE*>
     argReader. ReadLine (arg);           (* skip command name *)
     argReader. ReadLine (configFile);
     
-    p := Parser.NewFile (configFile);
+    p := Parser.NewFile(Object.NewLatin1(configFile));
     ASSERT (res = NIL);
     p. ParseDocument;
     
-    typeList := Value.NewPrototypeList();
-    typeList. RegisterPrototype ("string", StringValue.New (""));
-    typeList. RegisterPrototype ("integer", IntegerValue.New (0));
-    typeList. RegisterPrototype ("boolean", BooleanValue.New (FALSE));
+    typeMap := NEW(Config.PrototypeMap);
+    Config.SetPrototype(typeMap, "string", Config.NewStringVar(""));
+    Config.SetPrototype(typeMap, "integer", Config.NewIntegerVar(0));
+    Config.SetPrototype(typeMap, "boolean", Config.NewBooleanVar(FALSE));
     
     sl := Section.NewSectionList();
-    sl. Add (Options.New ("options", typeList));
+    sl. Add (Options.New ("options", typeMap));
     sl. Add (Arguments.New ("arguments"));
     
     sl. ProcessElements (p. root, "configuration", p);

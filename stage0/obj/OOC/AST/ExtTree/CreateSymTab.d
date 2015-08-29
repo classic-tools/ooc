@@ -1,6 +1,6 @@
 #include <OOC/AST/ExtTree/CreateSymTab.oh>
-#include <Msg.oh>
 #include <Object.oh>
+#include <Exception.oh>
 #include <URI/Parser.oh>
 #include <OOC/Scanner/Symbol.oh>
 #include <OOC/Scanner/BasicList.oh>
@@ -13,6 +13,7 @@ static void OOC_AST_ExtTree_CreateSymTab__AcceptParent(OOC_AST_ExtTree_CreateSym
 static OOC_SymbolTable__Type OOC_AST_ExtTree_CreateSymTab__GetType(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST__Node node);
 static OOC_SymbolTable__Type OOC_AST_ExtTree_CreateSymTab__GetTypeParent(OOC_AST_ExtTree_CreateSymTab__Visitor v, OOC_AST__Node node, OOC_SymbolTable__Item newParent);
 static void OOC_AST_ExtTree_CreateSymTab__AddFlags(OOC_SymbolTable__Item item, OOC_AST_ExtTree__Flags flags);
+static void OOC_AST_ExtTree_CreateSymTab__ParseFormalParsFlags(OOC_SymbolTable__FormalPars fpars, OOC_AST_ExtTree__NodeList flags);
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;

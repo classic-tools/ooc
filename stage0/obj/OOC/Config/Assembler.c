@@ -2,23 +2,27 @@
 #include <__oo2c.h>
 #include <setjmp.h>
 
-void OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out, OOC_CHAR8 cmd[], OOC_LEN cmd_0d) {
-  register OOC_INT32 i0;
-  OOC_CHAR8 str[2048];
+Object__String OOC_Config_Assembler__AssembleFileCmd(URI__URI in, URI__URI out) {
+  register OOC_INT32 i0,i1;
+  ADT_StringBuffer__StringBuffer sb;
 
-  _copy_8((const void*)"as ",(void*)(OOC_INT32)cmd,cmd_0d);
-  i0 = (OOC_INT32)in;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1106)))), &_td_URI_Scheme_File__URIDesc, 1106)), (void*)(OOC_INT32)str, 2048);
-  Strings__Append((void*)(OOC_INT32)str, 2048, (void*)(OOC_INT32)cmd, cmd_0d);
-  Strings__Append(" -o ", 5, (void*)(OOC_INT32)cmd, cmd_0d);
-  i0 = (OOC_INT32)out;
-  URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i0, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1205)))), &_td_URI_Scheme_File__URIDesc, 1205)), (void*)(OOC_INT32)str, 2048);
-  Strings__Append((void*)(OOC_INT32)str, 2048, (void*)(OOC_INT32)cmd, cmd_0d);
-  return;
+  i0 = (OOC_INT32)ADT_StringBuffer__New((Object__String)((OOC_INT32)_c0));
+  sb = (ADT_StringBuffer__StringBuffer)i0;
+  i1 = (OOC_INT32)in;
+  i1 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1120)))), &_td_URI_Scheme_File__URIDesc, 1120)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1104)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1143)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)((OOC_INT32)_c1));
+  i1 = (OOC_INT32)out;
+  i1 = (OOC_INT32)URI_Scheme_File__URIDesc_GetPath((URI_Scheme_File__URI)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 1183)))), &_td_URI_Scheme_File__URIDesc, 1183)));
+  OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1166)))), ADT_StringBuffer__StringBufferDesc_Append)),ADT_StringBuffer__StringBufferDesc_Append)((ADT_StringBuffer__StringBuffer)i0, (Object__Object)i1);
+  i0 = (OOC_INT32)OOC_TBCALL(((OOC_INT32)OOC_TBPROC_ADR(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 1213)))), ADT_StringBuffer__StringBufferDesc_ToString)),ADT_StringBuffer__StringBufferDesc_ToString)((ADT_StringBuffer__StringBuffer)i0);
+  return (Object__String)i0;
   ;
 }
 
 void OOC_OOC_Config_Assembler_init(void) {
+  _c0 = Object__NewLatin1Region("as ", 4, 0, 3);
+  _c1 = Object__NewLatin1Region(" -o ", 5, 0, 4);
 
   return;
   ;

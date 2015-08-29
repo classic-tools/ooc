@@ -1,4 +1,4 @@
-(*	$Id: IntValue.Mod,v 1.8 2003/02/04 20:55:33 mva Exp $	*)
+(*	$Id: IntValue.Mod,v 1.12 2003/07/06 11:31:40 mva Exp $	*)
 MODULE ADT:Dictionary:AddressKey:IntValue;
 (*  A dictionary implementation using objects' addresses as keys.
     Copyright (C) 2000-2003  Michael van Acken
@@ -39,7 +39,7 @@ MODULE ADT:Dictionary:AddressKey:IntValue;
    @end itemize  *)
 
 IMPORT
-  S := SYSTEM, Object, IO, ADT:Storable;
+  S := SYSTEM, HashCode, Object, IO, ADT:Storable;
 
 
 TYPE
@@ -114,7 +114,6 @@ VAR
 PROCEDURE Init* (dict: Dictionary);
 (**Initializes @oparam{dict} to an empty dictionary.  *)
   BEGIN
-    Storable.Init (dict);
     dict. size := 0;
     dict. poly := 0;
     dict. table := NIL;
@@ -147,17 +146,6 @@ PROCEDURE (dict: Dictionary) Destroy*;
   END Destroy;
 
 
-
-PROCEDURE HashCode (obj: Key): LONGINT;
-  BEGIN
-<*IF TARGET_ADDRESS = 64 THEN*>
-    RETURN S.VAL (LONGINT,
-      S.VAL (SET, SHORT (S.LSH (S.ROT (S.VAL (S.ADDRESS, obj), 32), -32))) /
-      S.VAL (SET, SHORT (S.LSH (S.VAL (S.ADDRESS, obj), -32))))
-<*ELSE*>
-    RETURN S.VAL (LONGINT, obj)
-<*END*>
-  END HashCode;
 
 PROCEDURE IsSet (key: Key): BOOLEAN;
 (* Returns TRUE iff `key' does not stand for an unused dictionary slot.  *)
@@ -305,7 +293,7 @@ PROCEDURE (dict: Dictionary) HasKey* (key: Key): BOOLEAN;
     IF (dict. used = 0) THEN
       RETURN FALSE
     ELSE
-      index := Lookup (dict, key, HashCode (key));
+      index := Lookup (dict, key, HashCode.Ptr(key));
       RETURN IsSet (dict. table[index]. key)
     END
   END HasKey;
@@ -329,7 +317,7 @@ PROCEDURE (dict: Dictionary) Get* (key: Key): Value;
   BEGIN
     ASSERT (key # NIL);
     ASSERT (dict. used # 0);
-    i := Lookup (dict, key, HashCode (key));
+    i := Lookup (dict, key, HashCode.Ptr(key));
     ASSERT (IsSet (dict. table[i]. key));
     RETURN dict. table[i]. value
   END Get;
@@ -348,7 +336,7 @@ PROCEDURE (dict: Dictionary) Set* (key: Key; value: Value);
     IF (dict. fill*3 >= dict. size*2) THEN
       Resize (dict, dict. used*2)
     END;
-    Insert (dict, key, HashCode (key), value)
+    Insert (dict, key, HashCode.Ptr(key), value)
   END Set;
 
 PROCEDURE (dict: Dictionary) Copy* (): Dictionary;
@@ -384,7 +372,7 @@ PROCEDURE (dict: Dictionary) Delete* (key: Key);
   BEGIN
     ASSERT (key # NIL);
     ASSERT (dict. used # 0);
-    i := Lookup (dict, key, HashCode (key));
+    i := Lookup (dict, key, HashCode.Ptr(key));
     ASSERT (IsSet (dict. table[i]. key));
     dict. table[i]. key := dummy;       (* replace key with dummy, _not_ NIL *)
     dict. table[i]. value := 0;
@@ -449,18 +437,12 @@ PROCEDURE (dict: Dictionary) Keys* (): Object.ObjectArrayPtr;
 PROCEDURE (dict: Dictionary) Store* (w: Storable.Writer) RAISES IO.Error;
   VAR
     i: LONGINT;
-    obj: Object.Object;
   BEGIN
     w. WriteNum (dict. used);
     IF (dict. used # 0) THEN
       FOR i := 0 TO dict. size-1 DO
         IF IsSet (dict. table[i]. key) THEN
-          obj := dict. table[i]. key;
-          IF (obj = NIL) THEN
-            w. WriteObject (NIL);
-          ELSE
-            w. WriteObject (obj(Storable.Object));
-          END;
+          w. WriteObject (dict. table[i]. key);
           w. WriteNum (dict. table[i]. value)
         END
       END
@@ -470,7 +452,7 @@ PROCEDURE (dict: Dictionary) Store* (w: Storable.Writer) RAISES IO.Error;
 PROCEDURE (dict: Dictionary) Load* (r: Storable.Reader) RAISES IO.Error;
   VAR
     i: LONGINT;
-    obj: Storable.Object;
+    obj: Object.Object;
   BEGIN
     Init (dict);
     r. ReadNum (dict. size);
@@ -482,7 +464,7 @@ PROCEDURE (dict: Dictionary) Load* (r: Storable.Reader) RAISES IO.Error;
         r. ReadObject (obj);
         dict. table[i]. key := obj;
         r. ReadNum (dict. table[i]. value);
-        dict. table[i]. hash := HashCode (dict. table[i]. key)
+        dict. table[i]. hash := HashCode.Ptr(dict. table[i]. key)
       END;
       Resize (dict, (dict. size*3) DIV 2)
     END

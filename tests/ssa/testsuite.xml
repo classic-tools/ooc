@@ -14,10 +14,13 @@
   generic36 generic37 generic38 generic39 generic40 generic41
   generic42 generic43 generic44 generic45 generic46 generic47
   generic48 generic48 generic49 generic50 generic52
-  generic53 generic54 generic55">-->
+  generic53 generic54 generic55 generic56 generic57 generic58">-->
 
 <!--<testsuite-ext profile="Test Suite for Translation Patterns"
-  select ="&SetupTestCasesWithOut; generic1 generic15">-->
+  select ="&SetupTestCasesWithOut; bugExport1 bugExport2">-->
+
+<!--<testsuite-ext profile="Test Suite for Translation Patterns"
+  select ="&SetupTestCasesWithOut; callconv1 callconv2 callconv3 callconv4 cstring1">-->
 
   &TestSetupWithOut;
     
@@ -127,7 +130,11 @@
       Assignment to value parameter of type <code>INTEGER</code> has
       no effect outside procedure.
     </test>
-    
+    <test id="proc14" type="accept" file="Proc14.Mod">
+      Any pointer type can be passed to a formal <code>VAR</code>
+      parameter of type <code>PTR</code>.
+    </test>
+
     <test id="function1" type="run"
       file="../compile/HOTFunction1.Mod" output="../compile/HOTFunction1.Ref">
       A very simple function: No input arguments, and a return
@@ -451,6 +458,9 @@
     </test>
     <test id="abs2" type="reject" file="Abs2.Mod">
       Calling <code>ABS</code> for a character value.
+    </test>
+    <test id="abs3" type="reject" file="Abs3.Mod">
+      Calling <code>ABS</code> as a normal procedure.
     </test>
     
     <test id="ash1" type="run" file="Ash1.Mod" output="Ash1.Ref">
@@ -1515,6 +1525,23 @@
       If the base record type is not parametric, no list of alias
       names must be present.
     </test>
+    <test id="generic56" type="accept" file="Generic56.Mod">
+      Apply type closure to formal parameters of the function variant
+      of <code>NEW</code>.
+    </test>
+    <test id="generic57" type="accept" file="Generic57.Mod">
+      Regression test: Call procedure <code>NEW</code> for a
+      parametric array pointer.
+    </test>
+    <test id="generic58" type="accept" file="Generic58.Mod">
+      Regression test: Pass parametric type to a variable open array
+      parameter.
+    </test>
+    <test id="generic59" type="reject" file="Generic59.Mod">
+      Regression test: Defining an <code>INIT</code> procedure with a
+      type parameter, even though the base record is a non-parametric
+      type.
+    </test>
   </testcases>
 
   <testcases profile="Tests for Warnings" default-lang="OOC O2">
@@ -1686,8 +1713,47 @@
       flattened summations.
     </test>
 
+    <test id="bugDeclC1" type="run" file="BugDeclC1.Mod">
+      Declaring a pointer to a type alias of a record type might cause
+      problems.
+    </test>
+    <test id="bugExport1" type="accept" file="BugExport1.Mod">
+      Regression test: Create an alias for a predefined type name and
+      export it.  Import of this type name should not crash the
+      compiler.
+    </test>
+    <test id="bugExport2" type="accept" file="BugExport2.Mod">
+      Regression test: Create an alias for a predefined type name and
+      export it.  Import of this type name should not crash the
+      compiler.
+    </test>
   </testcases>
   
+  <testcases profile="C language Interface" default-lang="O2">
+    <test id="align1" type="run" file="Align1.Mod" output="Align1.Ref">
+      Check that alignment produces correct field offsets for a number of 
+      alignment options.
+    </test>
+    <test id="align2" type="reject" file="Align2.Mod">
+    Reject case with more than one alignment specified
+    </test>
+    <test id="callconv1" type = "accept" file="CallConv1.Mod">
+      Accept calling conventions flags on procedures and procedure types.
+    </test>
+    <test id="callconv2" type = "accept" file="CallConv2.Mod">
+      Accept assignment of procedure variables with correct calling convention.
+    </test>
+    <test id="callconv3" type = "accept" file="CallConv3.Mod">
+      Accept assignment to procedure type from "C" type.
+    </test>
+    <test id="callconv4" type = "reject" file="CallConv4.Mod">
+      Reject assignment to procedure type from "Pascal" type.
+    </test>
+    <test id="cstring1" type = "run" file="CString1.Mod" output="CString1.Ref">
+      Accept various kinds of strings as POINTER [CSTRING].
+    </test>
+  </testcases>
+
   <processor-info processor-name="TestCompile">
     <reject-info id="assign1" pos="%c :=" msg="This must be a variable"/>
     <reject-info id="assign2" pos="r%. TBProc :=" msg="This must be a variable"/>
@@ -1805,6 +1871,7 @@
       msg="This must be a pointer variable"/>
     
     <reject-info id="abs2" pos="ABS(%0X)" msg="Expression must be numeric"/>
+    <reject-info id="abs3" pos="%ABS(-1)" msg="This is a function procedure"/>
 
     <reject-info id="ash2" pos="ASH(%1X"
       msg="Expression must be of integer type"/>
@@ -2125,6 +2192,15 @@
         msg="The base record type has 2 type parameter(s)"/>
     <reject-info id="generic55" pos="(a: %A())"
         msg="The base record type has no type parameters"/>
+    <reject-info id="generic59" pos="r: %R(T)"
+        msg="The base record type has no type parameters"/>
+
+    <reject-info id="align2" pos=", %ALIGN2"
+        msg="This modifier flag has no effect here"/>
+
+    <reject-info id="callconv4" pos="%:="
+        msg="Expression not compatible with variable type `CallConv1.Proc'"/>
+
 
     <warning-info id="undef1" pos="x := %y;"
         msg="Warning: Undefined variable"/>

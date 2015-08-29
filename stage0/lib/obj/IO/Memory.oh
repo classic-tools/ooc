@@ -32,6 +32,9 @@ typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Read)(IO_Memory__Channel ch, OOC
 extern OOC_INT32 IO_Memory__ChannelDesc_Write(IO_Memory__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
 #define _TBN_IO_Memory__ChannelDesc_Write 10
 typedef OOC_INT32 (*_TBP_IO_Memory__ChannelDesc_Write)(IO_Memory__Channel ch, const OOC_CHAR8 buffer[], OOC_LEN buffer_0d, OOC_INT32 start, OOC_INT32 length);
+extern void IO_Memory__ChannelDesc_Truncate(IO_Memory__Channel ch, OOC_INT32 newLength);
+#define _TBN_IO_Memory__ChannelDesc_Truncate 12
+typedef void (*_TBP_IO_Memory__ChannelDesc_Truncate)(IO_Memory__Channel ch, OOC_INT32 newLength);
 extern void IO_Memory__ChannelDesc_Fingerprint(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
 #define _TBN_IO_Memory__ChannelDesc_Fingerprint 11
 typedef void (*_TBP_IO_Memory__ChannelDesc_Fingerprint)(IO_Memory__Channel ch, OOC_CHAR8 key[], OOC_LEN key_0d, OOC_INT32 start, OOC_INT32 end);
@@ -43,9 +46,9 @@ extern RT0__StructDesc _td_IO_Memory__927;
 extern RT0__StructDesc _td_IO_Memory__Data;
 extern RT0__StructDesc _td_IO_Memory__Channel;
 extern RT0__StructDesc _td_IO_Memory__ChannelDesc;
-extern RT0__StructDesc _td_IO_Memory__1761;
-extern RT0__StructDesc _td_IO_Memory__2504;
-extern RT0__StructDesc _td_IO_Memory__3185;
+extern RT0__StructDesc _td_IO_Memory__1774;
+extern RT0__StructDesc _td_IO_Memory__2517;
+extern RT0__StructDesc _td_IO_Memory__3375;
 #endif /* _MODULE_IO_Memory_ */
 
 /* --- */

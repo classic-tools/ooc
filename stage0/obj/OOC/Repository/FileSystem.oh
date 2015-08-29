@@ -5,6 +5,7 @@
 #include <RT0.oh>
 #include <TextRider.oh>
 #include <Time.oh>
+#include <Object.oh>
 #include <IO.oh>
 #include <URI.oh>
 #include <OOC/Scanner/InputBuffer.oh>
@@ -39,19 +40,20 @@ typedef struct OOC_Repository_FileSystem__ModuleDesc {
 } OOC_Repository_FileSystem__ModuleDesc;
 extern URI__HierarchicalURI OOC_Repository_FileSystem__baseURI;
 extern OOC_Repository_FileSystem__Repository OOC_Repository_FileSystem__New(OOC_Repository__Repository baseRep, URI__HierarchicalURI baseDir);
-extern OOC_Repository_FileSystem__Module OOC_Repository_FileSystem__RepositoryDesc_GetModule(OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 moduleName__ref[], OOC_LEN moduleName_0d, URI__HierarchicalURI srcFileOverride);
+extern Object__String8 OOC_Repository_FileSystem__ModuleToFileName(const OOC_CHAR8 name__ref[], OOC_LEN name_0d);
+extern OOC_Repository_FileSystem__Module OOC_Repository_FileSystem__RepositoryDesc_GetModule(volatile OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 moduleName__ref[], volatile OOC_LEN moduleName_0d, volatile URI__HierarchicalURI srcFileOverride);
 #define _TBN_OOC_Repository_FileSystem__RepositoryDesc_GetModule 4
 typedef OOC_Repository_FileSystem__Module (*_TBP_OOC_Repository_FileSystem__RepositoryDesc_GetModule)(OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 moduleName__ref[], OOC_LEN moduleName_0d, URI__HierarchicalURI srcFileOverride);
-extern URI__URI OOC_Repository_FileSystem__RepositoryDesc_GetResource(OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
+extern URI__URI OOC_Repository_FileSystem__RepositoryDesc_GetResource(volatile OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 package__ref[], volatile OOC_LEN package_0d, const OOC_CHAR8 path__ref[], volatile OOC_LEN path_0d);
 #define _TBN_OOC_Repository_FileSystem__RepositoryDesc_GetResource 6
 typedef URI__URI (*_TBP_OOC_Repository_FileSystem__RepositoryDesc_GetResource)(OOC_Repository_FileSystem__Repository rep, const OOC_CHAR8 package__ref[], OOC_LEN package_0d, const OOC_CHAR8 path__ref[], OOC_LEN path_0d);
 extern void OOC_Repository_FileSystem__RepositoryDesc_DumpContent(OOC_Repository_FileSystem__Repository rep, TextRider__Writer w);
 #define _TBN_OOC_Repository_FileSystem__RepositoryDesc_DumpContent 0
 typedef void (*_TBP_OOC_Repository_FileSystem__RepositoryDesc_DumpContent)(OOC_Repository_FileSystem__Repository rep, TextRider__Writer w);
-extern void OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath(OOC_Repository_FileSystem__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 path[], OOC_LEN path_0d);
+extern Object__String8 OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath(OOC_Repository_FileSystem__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId);
 #define _TBN_OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath 3
-typedef void (*_TBP_OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath)(OOC_Repository_FileSystem__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId, OOC_CHAR8 path[], OOC_LEN path_0d);
-extern URI__HierarchicalURI OOC_Repository_FileSystem__ModuleDesc_GetURI(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 allowRelative);
+typedef Object__String8 (*_TBP_OOC_Repository_FileSystem__RepositoryDesc_GetLocalPath)(OOC_Repository_FileSystem__Repository rep, OOC_Repository__Module m, OOC_INT8 fileId);
+extern URI__HierarchicalURI OOC_Repository_FileSystem__ModuleDesc_GetURI(volatile OOC_Repository_FileSystem__Module m, volatile OOC_INT8 fileId, volatile OOC_CHAR8 allowRelative);
 #define _TBN_OOC_Repository_FileSystem__ModuleDesc_GetURI 9
 typedef URI__HierarchicalURI (*_TBP_OOC_Repository_FileSystem__ModuleDesc_GetURI)(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, OOC_CHAR8 allowRelative);
 extern void OOC_Repository_FileSystem__ModuleDesc_GetTimeStamp(OOC_Repository_FileSystem__Module m, OOC_INT8 fileId, struct Time__TimeStamp *ts, RT0__Struct ts__tag);
@@ -77,10 +79,9 @@ extern RT0__StructDesc _td_OOC_Repository_FileSystem__Repository;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__RepositoryDesc;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__Module;
 extern RT0__StructDesc _td_OOC_Repository_FileSystem__ModuleDesc;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__2662;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__2911;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__4677;
-extern RT0__StructDesc _td_OOC_Repository_FileSystem__5987;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__2660;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__2961;
+extern RT0__StructDesc _td_OOC_Repository_FileSystem__4661;
 #endif /* _MODULE_OOC_Repository_FileSystem_ */
 
 /* --- */

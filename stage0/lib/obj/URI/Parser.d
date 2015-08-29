@@ -5,21 +5,13 @@
 #include <URI/Scheme/Hierarchical.oh>
 #include <URI/Scheme/Opaque.oh>
 #include <URI/Scheme/CurrentDoc.oh>
-#define URI_Parser__illegalSchemeChar 1
-#define URI_Parser__expectedHierarchicalPath 2
-#define URI_Parser__expectedOpaquePart 3
-#define URI_Parser__authorityNotSupported 4
-#define URI_Parser__queryNotSupported 5
-#define URI_Parser__junkAfterURI 6
-#define URI_Parser__absoluteWithoutPath 7
-#define URI_Parser__emptyOpaquePart 8
-#define URI_Parser__invalidRelativeReference 9
-static URI_Error__Context URI_Parser__uriContext;
 static URI__HierarchicalURI URI_Parser__defaultHierarchical;
 static URI__OpaqueURI URI_Parser__defaultOpaque;
 
 /* run-time meta data */
 static RT0__ModuleDesc _mid;
+RT0__StructDesc _td_URI_Parser__1147 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
+RT0__StructDesc _td_URI_Parser__7521 = { (RT0__Struct[]){&RT0__char}, NULL, &_mid, NULL, 1, 1, RT0__strOpenArray };
 static RT0__ModuleDesc _mid = { (OOC_CHAR8*)"URI:Parser", (RT0__Struct[]) { NULL } };
 
 extern void OOC_URI_Parser_init0() {
@@ -27,4 +19,15 @@ extern void OOC_URI_Parser_init0() {
   OOC_URI_Parser_init();
 }
 
+static void* _c0;
+static void* _c1;
+static void* _c2;
+static void* _c3;
+static void* _c4;
+static void* _c5;
+static void* _c6;
+static void* _c7;
+static void* _c8;
+static void* _c9;
+static void* _c10;
 /* --- */

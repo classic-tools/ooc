@@ -1,4 +1,4 @@
-/*      $Id: __oo2c.c,v 1.15 2003/01/08 22:04:29 mva Exp $        */
+/*      $Id: __oo2c.c,v 1.16 2003/06/28 10:39:26 mva Exp $        */
 /*  Run-time system for C back-ends of OOC2
     Copyright (C) 2001, 2002  Michael van Acken
 
@@ -22,10 +22,12 @@
 #include <__oo2c.h>
 
 /* --- string compare */
+#ifndef HAVE_BUILTIN_STRCMP
 OOC_INT32 _cmp8(const OOC_CHAR8* l, const OOC_CHAR8* r) {
   while ((*l == *r) && *l) { l++; r++; }
   return ((OOC_INT32)*l-(OOC_INT32)*r);
 }
+#endif
 
 OOC_INT32 _cmp16(const OOC_CHAR16* l, const OOC_CHAR16* r) {
   while ((*l == *r) && *l) { l++; r++; }

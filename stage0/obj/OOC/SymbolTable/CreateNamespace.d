@@ -56,4 +56,6 @@ extern void OOC_OOC_SymbolTable_CreateNamespace_init0() {
   OOC_OOC_SymbolTable_CreateNamespace_init();
 }
 
+static void* _c0;
+static void* _c1;
 /* --- */

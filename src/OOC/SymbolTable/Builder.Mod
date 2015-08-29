@@ -1,4 +1,4 @@
-(* 	$Id: Builder.Mod,v 1.45 2003/05/11 13:56:32 mva Exp $	 *)
+(* 	$Id: Builder.Mod,v 1.53 2003/07/07 07:42:24 mva Exp $	 *)
 MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 (*  Defines a builder class with factory methods for symbol table entries.
     Copyright (C) 2000-2003  Michael van Acken
@@ -21,7 +21,7 @@ MODULE OOC:SymbolTable:Builder [OOC_EXTENSIONS];
 *)
 
 IMPORT
-  Out, Strings, Object:Boxed, ADT:Storable, ADT:Object:Storage, IO,
+  Out, Strings, Object, Object:Boxed, ADT:Dictionary, IO,
   OOC:Doc, OOC:AST, Sym := OOC:SymbolTable;
 
 
@@ -42,6 +42,21 @@ TYPE
        adjusted for this.  *)
   END;
 
+TYPE
+  Writer = POINTER TO WriterDesc;
+  WriterDesc = RECORD
+    (**This special writer maps all @otype{Sym.Name} instances with the same
+       value onto a single object in the symbol file.  *)
+    (Sym.WriterDesc)
+    names: Dictionary.Dictionary(STRING, Sym.Name);
+  END;
+  
+TYPE
+  Reader = POINTER TO ReaderDesc;
+  ReaderDesc = RECORD
+    (Sym.ReaderDesc)
+  END;
+  
 TYPE
   AutoImport* = POINTER TO AutoImportDesc;
   Name = POINTER TO ARRAY OF CHAR;
@@ -387,6 +402,10 @@ PROCEDURE (b: Builder) NewModule* (name: Sym.Name; docString: Doc.Document;
 
 
 PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
+  VAR
+    getPointerDecl: Dictionary.Dictionary(STRING, Sym.TypeDecl);
+    hasTypeBoundProc: Dictionary.Dictionary(STRING, Object.Object);
+    
   PROCEDURE CollectFormalPars (item: Sym.Item);
   (* Sets the field @ofield{Sym.FormalPars.params} for all formal parameter
      definitions under @oparam{item}.  Strictly speaking, this is not necessary
@@ -434,6 +453,46 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
         END
       END
     END CollectFormalPars;
+
+  PROCEDURE PreprocessSetClassName(module: Sym.Module);
+    VAR
+      ptr: Sym.Item;
+      name: Object.String8;
+
+    PROCEDURE UnqualifiedName(type: Sym.Type): BOOLEAN;
+      BEGIN
+        WITH type: Sym.TypeName DO
+          RETURN (type.module = NIL);
+        ELSE
+          RETURN FALSE;
+        END
+      END UnqualifiedName;
+    
+    BEGIN
+      ptr := module.nestedItems;
+      WHILE (ptr # NIL) DO
+        WITH ptr: Sym.TypeDecl DO
+          IF (ptr.type IS Sym.Pointer) &
+             UnqualifiedName(ptr.type(Sym.Pointer).srcCodeBaseType) THEN
+            name := Object.NewLatin1(ptr.type(Sym.Pointer).srcCodeBaseType(Sym.TypeName).ident.str^);
+            IF getPointerDecl.HasKey(name) THEN
+              (* multiple pointers to one record or array type *)
+              getPointerDecl.Set(name, NIL);
+            ELSE
+              getPointerDecl.Set(name, ptr);
+            END;
+          END;
+
+        | ptr: Sym.ProcDecl DO
+          IF ptr.IsTypeBound() THEN
+            name := Object.NewLatin1(ptr.formalPars.receiver.srcCodeType(Sym.TypeName).ident.str^);
+            hasTypeBoundProc.Set(name, NIL)
+          END;
+        ELSE
+        END;
+        ptr := ptr.nextNested;
+      END;
+    END PreprocessSetClassName;
   
   PROCEDURE SetClassName (item: Sym.Item);
     VAR
@@ -458,45 +517,69 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
       VAR
         ptr: Sym.Item;
         pointerDecl: Sym.TypeDecl;
+        name: Object.String8;
       BEGIN
-        pointerDecl := NIL;
-        ptr := scope. nestedItems;
-        WHILE (ptr # NIL) DO
-          WITH ptr: Sym.TypeDecl DO
-            IF (ptr. type IS Sym.Pointer) &
-               SameType (typeName, ptr.type(Sym.Pointer).srcCodeBaseType) THEN
-              IF (pointerDecl = NIL) THEN
-                pointerDecl := ptr
-              ELSE
-                RETURN NIL
-              END
-            END
+        IF (scope IS Sym.Module) THEN
+          name := Object.NewLatin1(typeName.str^);
+          IF getPointerDecl.HasKey(name) THEN
+            RETURN getPointerDecl.Get(name);
           ELSE
+            RETURN NIL;
           END;
-          ptr := ptr. nextNested
+        ELSE  (* not in module scope: fallback to old search *)
+          pointerDecl := NIL;
+          ptr := scope.nestedItems;
+          WHILE (ptr # NIL) DO
+            WITH ptr: Sym.TypeDecl DO
+              IF (ptr.type IS Sym.Pointer) &
+                 SameType(typeName, ptr.type(Sym.Pointer).srcCodeBaseType) THEN
+                IF (pointerDecl = NIL) THEN
+                  pointerDecl := ptr;
+                ELSE
+                  RETURN NIL;
+                END;
+              END;
+            ELSE
+            END;
+            ptr := ptr.nextNested;
+          END;
+          RETURN pointerDecl;
         END;
-        RETURN pointerDecl
       END GetPointerDecl;
     
     PROCEDURE HasTypeBoundProcedures (scope: Sym.Item;
                                       record, pointer: Sym.Name): BOOLEAN;
       VAR
         ptr: Sym.Item;
+        name: Object.String8;
       BEGIN
-        ptr := scope. nestedItems;
-        WHILE (ptr # NIL) DO
-          WITH ptr: Sym.ProcDecl DO
-            IF ptr.IsTypeBound() &
-               (SameType (record, ptr.formalPars.receiver.srcCodeType) OR
-                (pointer # NIL) &
-                SameType (pointer, ptr.formalPars.receiver.srcCodeType)) THEN
-              RETURN TRUE
-            END
-          ELSE
+        IF (scope IS Sym.Module) THEN
+          name := Object.NewLatin1(record.str^);
+          IF hasTypeBoundProc.HasKey(name) THEN
+            RETURN TRUE;
+          ELSIF (pointer # NIL) THEN
+            name := Object.NewLatin1(pointer.str^);
+            IF hasTypeBoundProc.HasKey(name) THEN
+              RETURN TRUE;
+            END;
           END;
-          ptr := ptr. nextNested
+          RETURN FALSE;
+        ELSE  (* not in module scope: fallback to old search *)
+          ptr := scope. nestedItems;
+          WHILE (ptr # NIL) DO
+            WITH ptr: Sym.ProcDecl DO
+              IF ptr.IsTypeBound() &
+                 (SameType(record, ptr.formalPars.receiver.srcCodeType) OR
+                  (pointer # NIL) &
+                  SameType(pointer, ptr.formalPars.receiver.srcCodeType)) THEN
+                RETURN TRUE;
+              END;
+            ELSE
+            END;
+            ptr := ptr.nextNested;
+          END;
+          RETURN FALSE;
         END;
-        RETURN FALSE
       END HasTypeBoundProcedures;
     
     BEGIN
@@ -577,7 +660,13 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
   
   BEGIN
     CollectFormalPars (module);
+
+    (* compute `getPointerDecl' for `SetClassName()' *)
+    getPointerDecl := NEW(Dictionary.Dictionary(STRING, Sym.TypeDecl));
+    hasTypeBoundProc := NEW(Dictionary.Dictionary(STRING, Object.Object));
+    PreprocessSetClassName(module);
     SetClassName (module);
+    
     IF (module.class = Sym.mcInternal) THEN
       (* no auto imports at all *)
     ELSIF (doAutoImport = fullAutoImport) THEN
@@ -587,30 +676,65 @@ PROCEDURE (b: Builder) Finalize* (module: Sym.Module);
     END;
   END Finalize;
 
-PROCEDURE (b: Builder) WriteSymbolTable* (ch: IO.ByteChannel;
+
+
+PROCEDURE (w: Writer) INIT*(ch, chDoc: IO.ByteChannel);
+  BEGIN
+    w.INIT^(ch, chDoc);
+    w.names := NEW(Dictionary.Dictionary(STRING, Sym.Name));
+  END INIT;
+
+PROCEDURE (w: Writer) WriteObject* (obj: Object.Object) RAISES IO.Error;
+  VAR
+    str: STRING;
+  BEGIN
+    IF (obj = NIL) THEN
+      w.WriteObject^(NIL);
+    ELSE
+      WITH obj: Sym.Name DO
+        str := Object.NewLatin1(obj.str^);
+        IF w.names.HasKey(str) THEN
+          w.WriteObject^(w.names.Get(str));
+        ELSE
+          w.WriteObject^(obj);
+          w.names.Set(str, obj);
+        END;
+      ELSE
+        w.WriteObject^(obj);
+      END;
+    END;
+  END WriteObject;
+
+PROCEDURE (w: Writer) Disconnect*;
+  BEGIN
+    w.Disconnect^;
+    w.names := NIL;
+  END Disconnect;
+
+PROCEDURE (b: Builder) WriteSymbolTable* (ch, chDoc: IO.ByteChannel;
                                           symTab: Sym.Module)
 RAISES IO.Error;
   VAR
-    writer: Storage.Writer;
+    writer: Writer;
   BEGIN
     (* Note: This method omits the magic number and the fingerprint value and
        is therefore not symmetric to ReadSymbolTable.  The two values are
        written by OOC:Auxiliary:WriteSymbolFile.WriteSymbolFile *)
-    writer := Storage.ConnectWriter (ch);
+    writer := NEW(Writer, ch, chDoc);
     writer. WriteObject (symTab);
   END WriteSymbolTable;
 
-PROCEDURE (b: Builder) ReadSymbolTable* (ch: IO.ByteChannel): Sym.Module
+PROCEDURE (b: Builder) ReadSymbolTable* (ch, chDoc: IO.ByteChannel): Sym.Module
 RAISES IO.Error;
   VAR
-    obj: Storable.Object;
-    reader: Storage.Reader;
+    obj: Object.Object;
+    reader: Reader;
     fp, i, fpi, len: LONGINT;
     mn: ARRAY magicNumberSize+1 OF CHAR;
     prunedImports: Sym.ModuleRefArray;
     str: Sym.NameString;
   BEGIN
-    reader := Storage.ConnectReader (ch);
+    reader := NEW(Reader, ch, chDoc);
     reader. ReadBytes(mn, 0, magicNumberSize);
     mn[magicNumberSize] := 0X;
     IF (mn # magicNumber) THEN
@@ -658,7 +782,7 @@ PROCEDURE N (str: ARRAY OF CHAR): Name;
 
 BEGIN
   doAutoImport := noAutoImport;
-  magicNumber := "OOC6";
+  magicNumber := "OOC7";
   
   NEW(autoImport, 3);
   NEW(autoImport[0]);
@@ -669,16 +793,18 @@ BEGIN
   
   NEW(autoImport[1]);
   autoImport[1].module := N(stringModule);
-  NEW (autoImport[1].exclude, 3);
+  NEW (autoImport[1].exclude, 4);
   autoImport[1].exclude[0] := autoImport[0].module;
   autoImport[1].exclude[1] := autoImport[1].module;
   autoImport[1].exclude[2] := N("Out0");
+  autoImport[1].exclude[3] := N("HashCode");
   
   NEW(autoImport[2]);
   autoImport[2].module := N("Exception");
-  NEW (autoImport[2].exclude, 4);
+  NEW (autoImport[2].exclude, 5);
   autoImport[2].exclude[0] := autoImport[0].module;
   autoImport[2].exclude[1] := autoImport[1].module;
   autoImport[2].exclude[2] := autoImport[2].module;
   autoImport[2].exclude[3] := N("Out0");
+  autoImport[2].exclude[4] := N("HashCode");
 END OOC:SymbolTable:Builder.

@@ -1,4 +1,4 @@
-(* 	$Id: IR.Mod,v 1.242 2003/05/11 15:13:45 mva Exp $	 *)
+(* 	$Id: IR.Mod,v 1.252 2003/07/04 08:54:17 mva Exp $	 *)
 MODULE OOC:IR [OOC_EXTENSIONS];
 (*  High-level intermediate code representation.
     Copyright (C) 2001-2003  Michael van Acken, Stewart Greenhill
@@ -23,8 +23,7 @@ MODULE OOC:IR [OOC_EXTENSIONS];
 IMPORT
 Log,
   Msg, Object, Object:Boxed, Object:BigInt, Strings,
-  ADT:ArrayList, ADT:StringBuffer,
-  Config:Value, BooleanValue := Config:Value:Boolean, 
+  ADT:ArrayList, ADT:StringBuffer, Config,
   Id := OOC:Scanner:Symbol, OOC:Scanner:BasicList, OOC:Error,
   OOC:Config:Pragmas, OOC:Config:StdPragmas,
   OOC:AST, Sym := OOC:SymbolTable, OOC:SymbolTable:Predef,
@@ -1501,10 +1500,10 @@ PROCEDURE (b: Builder) SetNameToType(type: Sym.Type);
 
 PROCEDURE GetPragmaValue (b: Builder; pragma: Pragmas.Pragma; charPos: Pragmas.CharPos): BOOLEAN;
   VAR
-    value: Value.Value;
+    value: Config.Variable;
   BEGIN
-    value := b. pragmaHistory. GetValue (pragma. name^, charPos);
-    RETURN value(BooleanValue.Value). boolean
+    value := b.pragmaHistory.GetValue (pragma.name, charPos);
+    RETURN value(Config.BooleanVar). boolean
   END GetPragmaValue;
 
 PROCEDURE (b: Builder) WarnSym (code: Error.Code; sym: Symbol);
@@ -1706,7 +1705,7 @@ PROCEDURE (b: Builder) NewIntConst10* (sym: Symbol): Expression;
   VAR
     v: BigInt.BigInt;
   BEGIN
-    v := BigInt.NewString(sym. str^, 10);
+    v := BigInt.NewLatin1(sym. str^, 10);
     IF (v = NIL) THEN
       b. ErrSym (numberOutOfRange, sym);
       RETURN b. errorExpr
@@ -1724,7 +1723,7 @@ PROCEDURE (b: Builder) NewIntConst16* (sym: Symbol): Expression;
     WHILE (sym.str[epos] # "H") DO
       INC(epos);
     END;
-    v := BigInt.NewRegion(sym.str^, 0, epos, 16);
+    v := BigInt.NewLatin1Region(sym.str^, 0, epos, 16);
     RETURN NewConst(sym, Predef.SmallestIntType (v), v)
   END NewIntConst16;
 
@@ -1999,7 +1998,7 @@ PROCEDURE (b : Builder) ValidSetElement(expr : Expression; set : Sym.Type) : Exp
         b. ErrSym (invalidIntegerConst, expr. sym);
         b. lastError. SetIntAttrib ("start", min.ToLongInt());
         b. lastError. SetIntAttrib ("end", max.ToLongInt()+1);
-	RETURN MinElement()
+        RETURN MinElement()
       END
     ELSE
     END;
@@ -2371,6 +2370,7 @@ PROCEDURE (b: Builder) NewConstructor* (sym: Symbol; type: Expression;
       RETURN b.ErrExpr(notRecordPointerType, type.sym);
     END;
     consType := type(TypeRef).qualType;
+    consType := Sym.Expand(consType);
     ptr := TR.PointerBaseType(consType);
     qualRecord := consType.Closure(ptr);
     ptr := ptr.Deparam();
@@ -2541,9 +2541,9 @@ PROCEDURE (b: Builder) NewIndex* (sym: Symbol; array, index: Expression): Expres
       index := b.AssertInteger(index);
       IF index IS Const THEN
         IF a.isOpenArray THEN
-	  (* FIXME: For open arrays, we simply need to verify that the
-	     constant index is not negative. MAX(LONGINT) should be a legal
-	     index. *)
+        (* FIXME: For open arrays, we simply need to verify that the
+        constant index is not negative. MAX(LONGINT) should be a legal
+        index. *)
           idx := b.AssertIntConst(index, 0, MAX(LONGINT));
         ELSE
           idx := b.AssertIntConst(index, 0, a.length);
@@ -3023,7 +3023,7 @@ PROCEDURE (shift: Shift) Accept* (v: Visitor);
    ------------------------------------------------------------------------ *)
 
 PROCEDURE InitTypeCast (cast: TypeCast; sym: Symbol; type: Sym.Type;
-                     expr: Expression);
+                        expr: Expression);
   BEGIN
     InitOperator (cast, sym, type);
     cast. expr := expr;
@@ -3035,7 +3035,7 @@ PROCEDURE (b: Builder) NewTypeCast (sym: Symbol;
     cast: TypeCast;
     type: Sym.Type;
   BEGIN
-    type := b.AssertType(typeExpr);
+    type := Sym.Expand(b.AssertType(typeExpr));
     IF (type.size < 0) OR (expr.type.size < 0) OR
        (type.size # expr.type.size) THEN
       b.ErrSym(objectSizeMismatch, expr.sym);
@@ -3149,7 +3149,7 @@ PROCEDURE (b: Builder) Widen (VAR expr: Expression; type: Sym.Type): BOOLEAN;
       (* Case 4: NIL < procedure value *)
       RETURN TRUE;
       
-    ELSIF TR.IsPointer(expr.type) & TR.IsPredefType(type, Predef.ptr) THEN
+    ELSIF TR.IsPredefType(type, Predef.ptr) & TR.IsPtrCompatible(expr.type) THEN
       (* Case 5: pointer value < SYSTEM.PTR *)
       RETURN TRUE;
       
@@ -3175,7 +3175,18 @@ PROCEDURE (b: Builder) Widen (VAR expr: Expression; type: Sym.Type): BOOLEAN;
       (* Case 8: char const and string const < Object.Object *)
       expr := b. NewTypeConv (b.stringType, expr);
       RETURN TRUE;
-      
+  
+    ELSIF (type IS Sym.Pointer) &
+          TR.IsArrayOfChar(TR.PointerBaseType(type), FALSE) &
+          type(Sym.Pointer).doCArrayAssignment &
+          (b.Widen(expr, TR.PointerBaseType(type)) OR
+           TR.IsArrayCompatible(expr.type, TR.PointerBaseType(type))) THEN
+      (* Case 9: For C arrays, assign address of expression to pointer
+        string const < POINTER [CSTRING] TO ARRAY OF CHAR
+        array of char < POINTER [CSTRING] TO ARRAY OF CHAR *)
+      expr := b. NewAdr(expr.sym, expr);
+      RETURN TRUE;
+
     ELSE
       RETURN FALSE;
     END;
@@ -4365,10 +4376,11 @@ PROCEDURE (b: Builder) NewCatchClause*(guardType: Expression;
   BEGIN
     NEW(catch);
     type := b.AssertType(guardType);
+    InitCatchClause(catch, guardType.sym, type, statmSeq);
     IF ~TR.IsException(type) THEN
       b.ErrSym(notException, guardType.sym);
+      catch.triggered := TRUE;  (* prevent further warnings on this clause *)
     END;
-    InitCatchClause(catch, guardType.sym, type, statmSeq);
     RETURN catch;
   END NewCatchClause;
 
@@ -4522,7 +4534,7 @@ PROCEDURE (b: Builder) CheckExit (procDecl: Sym.ProcDecl;
             try.catchList[i].triggered := TRUE;
             RETURN;
           END;
-	END;
+        END;
         try := try.enclosingTry;
       END;
       
@@ -5604,7 +5616,7 @@ PROCEDURE (b: Builder) NewOperator* (sym: Symbol; left, right: Expression): Expr
         NEW(exprList, 2);
         exprList[0] := left;
         exprList[1] := right;
-	result := b.NewConcat(sym, exprList);
+        result := b.NewConcat(sym, exprList);
 
       ELSIF (id IN {Id.eql, Id.neq, Id.lss, Id.leq, Id.gtr, Id.geq})
             & (isNumeric OR isChar) THEN
@@ -5656,7 +5668,7 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
     op: SHORTINT;
     type: Sym.Type;
     formalPars: Sym.VarDeclArray;
-    receiver, delta, code: Expression;
+    receiver, delta, code, expr: Expression;
     value: Boxed.Object;
  
   PROCEDURE MakeParameterCompatible (b: Builder; sym: Symbol;
@@ -5692,11 +5704,13 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
         IF TR.SameType (fparType, argType) OR
            IsPredefType (fparType, Predef.byte) &
              TR.IsByteCompatible (argType) OR
+           IsPredefType (fparType, Predef.ptr) &
+             TR.IsPtrCompatible (argType) OR
            TR.IsOpenArrayType (fparType) &
              IsPredefType (fparType(Sym.Array).elementType, Predef.byte) THEN
-          (* same type, or passing a CHAR or SHORTINT to a BYTE, or passing
-             anything to an ARRAY OF BYTE: argument is compatible to formal
-             parameter *)
+          (* same type, or passing a CHAR or SHORTINT to a BYTE, or passing a
+             pointer to a PTR, or passing anything to an ARRAY OF BYTE:
+             argument is compatible to formal parameter  *)
         ELSIF (fparType IS Sym.Record) THEN
           IF ~TR.IsExtensionOfNoParams(argType, fparType) THEN
             (* formal parameter is record, and the argument type is not
@@ -5881,30 +5895,23 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
       END;
     END CheckNumberOfArguments;
 
-  PROCEDURE StripFirst(exprList: ExpressionList): ExpressionList;
-    VAR
-      newList: ExpressionList;
-      i: LONGINT;
+  PROCEDURE TranslatePredef(design: PredefProc;
+                            id: Sym.PredefId): Expression;
+    
+    PROCEDURE StripFirst(exprList: ExpressionList): ExpressionList;
+      VAR
+        newList: ExpressionList;
+        i: LONGINT;
+      BEGIN
+        NEW(newList, LEN(exprList^)-1);
+        FOR i := 1 TO LEN(exprList^)-1 DO
+          newList[i-1] := exprList[i];
+        END;
+        RETURN newList;
+      END StripFirst;
+    
     BEGIN
-      NEW(newList, LEN(exprList^)-1);
-      FOR i := 1 TO LEN(exprList^)-1 DO
-        newList[i-1] := exprList[i];
-      END;
-      RETURN newList;
-    END StripFirst;
-  
-  BEGIN
-    WITH design: PredefProc DO
-      predefProc := design. decl(Sym.PredefProc);
-
-      IF ~CheckNumberOfArguments(predefProc. minArgs, predefProc. maxArgs) THEN
-        (* call does not have the required number of arguments; we bail out
-           early, to avoid running into run-time errors in the more fine
-           grained checks below *)
-        RETURN b. errorExpr;
-      END;
-      
-      CASE design. decl(Sym.PredefProc). id OF
+      CASE id OF
       (* predefined procedures *)
       | Predef.assert:
         IF (LEN (arguments^) > 1) THEN
@@ -5930,7 +5937,7 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
                                   context, endOfArgsSym);
         ELSIF (type IS Sym.Pointer) THEN
           b.AssertVar(arguments[0]);
-          type := type(Sym.Pointer).baseType;
+          type := type(Sym.Pointer).baseType.Deparam();
           IF (type IS Sym.Array) THEN
             dim := 1+type(Sym.Array).GetOpenDimensions();
             IF CheckNumberOfArguments (dim, dim) THEN
@@ -6160,6 +6167,32 @@ PROCEDURE (b: Builder) NewCall* (design: Expression;
       | Predef.rot:
         RETURN b. NewShift (design. sym, arguments[0], arguments[1], TRUE);
       END;
+    END TranslatePredef;
+
+  PROCEDURE IsStatement(expr: Expression): BOOLEAN;
+    BEGIN
+      (* we have an empty statement if `expr=NIL' *)
+      RETURN (expr = NIL) OR (expr.type = Predef.GetType(Predef.void));
+    END IsStatement;
+  
+  BEGIN
+    WITH design: PredefProc DO
+      predefProc := design. decl(Sym.PredefProc);
+
+      IF ~CheckNumberOfArguments(predefProc. minArgs, predefProc. maxArgs) THEN
+        (* call does not have the required number of arguments; we bail out
+           early, to avoid running into run-time errors in the more fine
+           grained checks below *)
+        RETURN b. errorExpr;
+      END;
+      expr := TranslatePredef(design, predefProc.id);
+      IF isFunctionCall & IsStatement(expr) THEN
+        RETURN b. ErrExpr (notFunctionProcedure, design. sym);
+      ELSIF ~isFunctionCall & ~IsStatement(expr) THEN
+        RETURN b. ErrExpr (isFunctionProcedure, design. sym);
+      END;
+      RETURN expr;
+      
     ELSE
       IF (design = b. errorExpr) THEN
         RETURN b. errorExpr;        (* fall through for errors in designator *)

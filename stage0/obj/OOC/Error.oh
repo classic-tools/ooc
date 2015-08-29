@@ -37,7 +37,7 @@ extern OOC_INT32 OOC_Error__minErrorDistance;
 #define OOC_Error__warningPrefix "Warning: "
 extern void OOC_Error__InitContext(OOC_Error__Context c, const Msg__String id__ref, OOC_LEN id_0d);
 extern Msg__Msg OOC_Error__New(OOC_Error__Context context, OOC_INT32 code);
-extern OOC_Error__List OOC_Error__NewList(const OOC_CHAR8 fileName__ref[], OOC_LEN fileName_0d);
+extern OOC_Error__List OOC_Error__NewList(Object__String fileName);
 extern void OOC_Error__ListDesc_AppendWarning(OOC_Error__List l, Msg__Msg msg);
 #define _TBN_OOC_Error__ListDesc_AppendWarning 2
 typedef void (*_TBP_OOC_Error__ListDesc_AppendWarning)(OOC_Error__List l, Msg__Msg msg);
@@ -64,11 +64,10 @@ extern RT0__StructDesc _td_OOC_Error__Context;
 extern RT0__StructDesc _td_OOC_Error__ContextDesc;
 extern RT0__StructDesc _td_OOC_Error__List;
 extern RT0__StructDesc _td_OOC_Error__ListDesc;
-extern RT0__StructDesc _td_OOC_Error__1360;
-extern RT0__StructDesc _td_OOC_Error__2887;
-extern RT0__StructDesc _td_OOC_Error__3272;
-extern RT0__StructDesc _td_OOC_Error__4918;
-extern RT0__StructDesc _td_OOC_Error__6504;
+extern RT0__StructDesc _td_OOC_Error__1377;
+extern RT0__StructDesc _td_OOC_Error__3352;
+extern RT0__StructDesc _td_OOC_Error__4998;
+extern RT0__StructDesc _td_OOC_Error__6584;
 #endif /* _MODULE_OOC_Error_ */
 
 /* --- */

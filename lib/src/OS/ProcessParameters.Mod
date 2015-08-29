@@ -1,4 +1,4 @@
-(* 	$Id: ProcessParameters.Mod,v 1.5 2003/04/16 01:44:48 sgreenhill Exp $	 *)
+(* 	$Id: ProcessParameters.Mod,v 1.6 2003/05/18 18:38:48 mva Exp $	 *)
 MODULE OS:ProcessParameters [FOREIGN "C"; LINK FILE "ProcessParameters.c" END];
 (*  Handles information of the current process and user.
     Copyright (C) 2000  Michael van Acken
@@ -21,41 +21,13 @@ MODULE OS:ProcessParameters [FOREIGN "C"; LINK FILE "ProcessParameters.c" END];
 
 (**This is a subset of the @samp{Process Parameters} section of Python's
    @samp{os} package.  If you want to add to this module, use the Python
-   function signature and add a parameter @samp{res} instead of raising
-   an exception.  *)
+   function signature where appropriate.  *)
 
 IMPORT
-  Msg, LongStrings, CharClass, C;
+  Object, OS:Path, IO, IO:StdChannels;
 
-TYPE
-  Result* = Msg.Msg;
-  Path* = ARRAY OF CHAR;
-  
-CONST
-  done* = NIL;
-  (**Value of parameter @samp{res} after successful completion.  *)
-
-CONST
-  invalidBuffer* = 1;
-  (**The character array passed to @oproc{getcwd} is empty.  *)
-  cwdTooLong* = 2;
-  (**The buffer passed to @oproc{getcwd} is too small to hold the string
-     representation of the current working directory.  *)
-  accessDenied* = 3;
-  (**Permission to read or search a component 
-     of the current working directory was denied.  *)
-    
-TYPE
-  ErrorContext = POINTER TO ErrorContextDesc;
-  ErrorContextDesc = RECORD
-    (Msg.ContextDesc)
-  END;
-
-VAR
-  errorContext: ErrorContext;
-  
-
-PROCEDURE getcwd* (VAR buffer: Path; VAR res: Result);
+PROCEDURE GetCwd*(): STRING
+RAISES IO.Error;
 (**Returns a string representing the current working directory.  *)
 
 END OS:ProcessParameters.

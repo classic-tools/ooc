@@ -3,26 +3,13 @@
 #include <setjmp.h>
 
 void ADT_Storable__RaiseTypeError(Object__String msg) {
-  register OOC_INT32 i0;
-  ADT_Storable__TypeError e;
+  register OOC_INT32 i0,i1;
 
   i0 = (OOC_INT32)RT0__NewObject(_td_ADT_Storable__TypeError.baseTypes[0]);
-  e = (ADT_Storable__TypeError)i0;
-  IO__InitError((IO__Error)i0, (Object__String)((OOC_INT32)_c0));
+  i1 = (OOC_INT32)msg;
+  IO__ErrorDesc_INIT((IO__Error)i0, (Object__String)i1);
   Exception__Raise((void*)i0);
   
-  ;
-}
-
-void ADT_Storable__Init(ADT_Storable__Object obj) {
-
-  return;
-  ;
-}
-
-void ADT_Storable__ObjectDesc_Destroy(ADT_Storable__Object obj) {
-
-  return;
   ;
 }
 
@@ -58,7 +45,7 @@ void ADT_Storable__InitReader(ADT_Storable__Reader r, IO__ByteChannel ch) {
   ;
 }
 
-void ADT_Storable__WriterDesc_WriteObject(ADT_Storable__Writer w, ADT_Storable__Object obj) {
+void ADT_Storable__WriterDesc_WriteObject(ADT_Storable__Writer w, Object__Object obj) {
 
   return;
   ;
@@ -70,7 +57,7 @@ void ADT_Storable__WriterDesc_Disconnect(ADT_Storable__Writer w) {
   ;
 }
 
-void ADT_Storable__ReaderDesc_ReadObject(ADT_Storable__Reader r, ADT_Storable__Object *obj) {
+void ADT_Storable__ReaderDesc_ReadObject(ADT_Storable__Reader r, Object__Object *obj) {
 
   return;
   ;
@@ -83,7 +70,6 @@ void ADT_Storable__ReaderDesc_Disconnect(ADT_Storable__Reader r) {
 }
 
 void OOC_ADT_Storable_init(void) {
-  _c0 = Object__NewLatin1Region("Unknown type", 13, 0, 12);
 
   return;
   ;

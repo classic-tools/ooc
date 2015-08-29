@@ -52,6 +52,36 @@ typedef struct IO__FileNotFoundDesc {
   OOC_PTR backtrace[21];
   OOC_INT32 backtraceSize;
 } IO__FileNotFoundDesc;
+typedef struct IO__AccessDeniedDesc *IO__AccessDenied;
+typedef struct IO__AccessDeniedDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__AccessDeniedDesc;
+typedef struct IO__FileExistsDesc *IO__FileExists;
+typedef struct IO__FileExistsDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__FileExistsDesc;
+typedef struct IO__FileBusyDesc *IO__FileBusy;
+typedef struct IO__FileBusyDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__FileBusyDesc;
+typedef struct IO__InvalidArgumentDesc *IO__InvalidArgument;
+typedef struct IO__InvalidArgumentDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__InvalidArgumentDesc;
+typedef struct IO__OutOfRangeDesc *IO__OutOfRange;
+typedef struct IO__OutOfRangeDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__OutOfRangeDesc;
 typedef struct IO__NotImplementedDesc *IO__NotImplemented;
 typedef struct IO__NotImplementedDesc {
   Object__String msg;
@@ -64,7 +94,21 @@ typedef struct IO__FormatErrorDesc {
   OOC_PTR backtrace[21];
   OOC_INT32 backtraceSize;
 } IO__FormatErrorDesc;
-extern void IO__InitError(IO__Error e, Object__String msg);
+typedef struct IO__ProtocolErrorDesc *IO__ProtocolError;
+typedef struct IO__ProtocolErrorDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__ProtocolErrorDesc;
+typedef struct IO__ErrorResponseDesc *IO__ErrorResponse;
+typedef struct IO__ErrorResponseDesc {
+  Object__String msg;
+  OOC_PTR backtrace[21];
+  OOC_INT32 backtraceSize;
+} IO__ErrorResponseDesc;
+extern void IO__ErrorDesc_INIT(IO__Error e, Object__String msg);
+#define _TBN_IO__ErrorDesc_INIT 1
+typedef void (*_TBP_IO__ErrorDesc_INIT)(IO__Error e, Object__String msg);
 extern IO__FormatError IO__NewFormatError(Object__String msg);
 extern void NORETURN IO__RaiseFormatError(Object__String msg) NORETURN2;
 extern void NORETURN IO__RaiseNotImplemented(void) NORETURN2;
@@ -138,7 +182,7 @@ extern void OOC_IO_init0(void);
 /* run-time meta data */
 extern RT0__StructDesc _td_IO__Channel;
 extern RT0__StructDesc _td_IO__SelectionKey;
-extern RT0__StructDesc _td_IO__2045;
+extern RT0__StructDesc _td_IO__2046;
 extern RT0__StructDesc _td_IO__SelectionKeyList;
 extern RT0__StructDesc _td_IO__ChannelDesc;
 extern RT0__StructDesc _td_IO__ByteChannel;
@@ -150,13 +194,27 @@ extern RT0__StructDesc _td_IO__Error;
 extern RT0__StructDesc _td_IO__ErrorDesc;
 extern RT0__StructDesc _td_IO__FileNotFound;
 extern RT0__StructDesc _td_IO__FileNotFoundDesc;
+extern RT0__StructDesc _td_IO__AccessDenied;
+extern RT0__StructDesc _td_IO__AccessDeniedDesc;
+extern RT0__StructDesc _td_IO__FileExists;
+extern RT0__StructDesc _td_IO__FileExistsDesc;
+extern RT0__StructDesc _td_IO__FileBusy;
+extern RT0__StructDesc _td_IO__FileBusyDesc;
+extern RT0__StructDesc _td_IO__InvalidArgument;
+extern RT0__StructDesc _td_IO__InvalidArgumentDesc;
+extern RT0__StructDesc _td_IO__OutOfRange;
+extern RT0__StructDesc _td_IO__OutOfRangeDesc;
 extern RT0__StructDesc _td_IO__NotImplemented;
 extern RT0__StructDesc _td_IO__NotImplementedDesc;
 extern RT0__StructDesc _td_IO__FormatError;
 extern RT0__StructDesc _td_IO__FormatErrorDesc;
-extern RT0__StructDesc _td_IO__14128;
-extern RT0__StructDesc _td_IO__15458;
-extern RT0__StructDesc _td_IO__16801;
+extern RT0__StructDesc _td_IO__ProtocolError;
+extern RT0__StructDesc _td_IO__ProtocolErrorDesc;
+extern RT0__StructDesc _td_IO__ErrorResponse;
+extern RT0__StructDesc _td_IO__ErrorResponseDesc;
+extern RT0__StructDesc _td_IO__15225;
+extern RT0__StructDesc _td_IO__16553;
+extern RT0__StructDesc _td_IO__17905;
 #endif /* _MODULE_IO_ */
 
 /* --- */

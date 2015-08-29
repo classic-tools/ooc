@@ -1317,7 +1317,7 @@ l86:
       i1 = (OOC_INT32)currentSourceContext;
       oldSourceContext = (OOC_SymbolTable__Item)i1;
       i2 = (OOC_INT32)procDecl;
-      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18320))+56);
+      i3 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i2, 18320))+60);
       currentNamespace = (OOC_SymbolTable__Namespace)i3;
       currentSourceContext = (OOC_SymbolTable__Item)i2;
       i3 = (OOC_INT32)procCode;
@@ -1395,7 +1395,7 @@ l16:
           register OOC_INT32 i0;
 
           i0 = (OOC_INT32)procDecl;
-          i0 = *(OOC_UINT8*)((_check_pointer(i0, 19363))+45);
+          i0 = *(OOC_UINT8*)((_check_pointer(i0, 19363))+49);
           return (!i0);
           ;
         }
@@ -1458,7 +1458,7 @@ l17:
           i1 = _check_pointer(i1, 20064);
           i2 = OOC_ARRAY_LENGTH(i1, 0);
           i3 = count;
-          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20095))+68);
+          i4 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 20095))+72);
           i4 = (OOC_INT32)OOC_AST_ExtTree_CreateIR__CreateIR_ProcDecl((OOC_SymbolTable__ProcDecl)i0, (OOC_AST_ExtTree__ProcDecl)(_type_guard(i4, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i4, 20112)))), &_td_OOC_AST_ExtTree__ProcDeclDesc, 20112)));
           i5 = count;
           *(OOC_INT32*)(i1+(_check_index(i3, i2, OOC_UINT32, 20064))*4) = i4;
@@ -1567,14 +1567,14 @@ l3:
       if (i1) goto l9;
       i1 = OOC_TYPE_TEST(((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i0, 22414)))), &_td_OOC_SymbolTable__ConstDeclDesc);
       if (!i1) goto l17;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22462))+52);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22462))+56);
       OOC_AST_ExtTree_CreateIR__CreateIR_ConstDecl((OOC_SymbolTable__ConstDecl)i0, (OOC_AST_ExtTree__Node)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22482)))), &_td_OOC_AST_ExtTree__NodeDesc, 22482)));
       goto l17;
 l9:
-      i1 = *(OOC_UINT8*)((_check_pointer(i0, 22103))+36);
+      i1 = *(OOC_UINT8*)((_check_pointer(i0, 22103))+40);
       i1 = !i1;
       if (!i1) goto l17;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22150))+52);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22150))+56);
       i1 = (OOC_INT32)OOC_AST_ExtTree_CreateIR__CreateIR_Expr((OOC_AST_ExtTree__Node)(_type_guard(i1, ((OOC_INT32)OOC_TYPE_TAG((_check_pointer(i1, 22171)))), &_td_OOC_AST_ExtTree__NodeDesc, 22171)));
       expr = (OOC_IR__Expression)i1;
       i2 = (OOC_INT32)b;
@@ -1605,7 +1605,7 @@ l29:
       oldNamespace = (OOC_SymbolTable__Namespace)i1;
       i1 = (OOC_INT32)currentSourceContext;
       oldSourceContext = (OOC_SymbolTable__Item)i1;
-      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22847))+56);
+      i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 22847))+60);
       currentNamespace = (OOC_SymbolTable__Namespace)i1;
       currentSourceContext = (OOC_SymbolTable__Item)i0;
       OOC_AST_ExtTree_CreateIR__CreateIR_TranslateEmbeddedExpr_TraverseNested((OOC_SymbolTable__Item)i0);
@@ -1621,7 +1621,7 @@ l30:
 
   i0 = (OOC_INT32)symTab;
   currentSourceContext = (OOC_SymbolTable__Item)i0;
-  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23246))+44);
+  i1 = (OOC_INT32)*(OOC_INT32*)((_check_pointer(i0, 23246))+48);
   currentNamespace = (OOC_SymbolTable__Namespace)i1;
   OOC_AST_ExtTree_CreateIR__CreateIR_TranslateEmbeddedExpr((OOC_SymbolTable__Item)i0);
   i0 = (OOC_INT32)module;

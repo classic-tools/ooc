@@ -1,4 +1,4 @@
-(* 	$Id: Parser.Mod,v 1.20 2003/05/11 13:56:33 mva Exp $	 *)
+(* 	$Id: Parser.Mod,v 1.21 2003/05/29 16:59:06 mva Exp $	 *)
 MODULE OOC:Parser;
 (*  Parses an Oberon-2 module and creates an abstract syntax tree.
     Copyright (C) 1999-2003  Michael van Acken
@@ -410,7 +410,7 @@ PROCEDURE Module* (sym: BasicList.Symbol; ast: AST.Builder;
             kw := CheckSym (Symbol.ident);
             string := CheckString();
             RETURN ast. LinkObjFlag (kw, string)
-          ELSIF Ident ("LIB") THEN
+          ELSIF Ident("LIB") OR Ident("FRAMEWORK") THEN
             kw := CheckSym (Symbol.ident);
             string := CheckString();
             IF (sym. id = Symbol.lParen) THEN
